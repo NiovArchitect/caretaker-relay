@@ -18,11 +18,12 @@ Post-crash inventory (2026-07-22) found both repositories already on branch `che
 | --- | --- |
 | Path | `/Users/genghishameha/dev/NIOV Labs/github/caretaker-relay` |
 | Branch | `checkpoint/caretaker-relay-track1-2026-07-22` |
-| Checkpoint commit SHA | `e87fc6fdbbe060d3d12d39d4514166b45b1f5314` |
+| Product checkpoint SHA | `e87fc6fdbbe060d3d12d39d4514166b45b1f5314` |
+| Recovery tip SHA | `9a47bf811a3da147b91d31015b18011f78353342` (docs verification) |
 | Remote | `https://github.com/NiovArchitect/caretaker-relay.git` (private) |
 | Remote branch | `origin/checkpoint/caretaker-relay-track1-2026-07-22` |
 | Push verified | **YES** (local HEAD == remote SHA after fetch) |
-| Working tree | Clean at recovery verification |
+| Working tree | Clean after recovery push |
 | Scope | Caregiver app UI, HTTP Foundation client, Playwright browser E2E, Phase 1 evidence/docs |
 
 ### 2. Caretaker Relay Foundation (working copy)
@@ -31,11 +32,12 @@ Post-crash inventory (2026-07-22) found both repositories already on branch `che
 | --- | --- |
 | Path | `/Users/genghishameha/dev/NIOV Labs/github/caretaker-relay-foundation` |
 | Branch | `checkpoint/caretaker-relay-track1-2026-07-22` |
-| Checkpoint commit SHA | `fed2f594f7a39c02961d3ecdbe8f60d26363c255` |
+| Product checkpoint SHA | `fed2f594f7a39c02961d3ecdbe8f60d26363c255` |
+| Recovery tip SHA | `434cd4ff8292f50199062047298387ec85bfeafc` (docs verification) |
 | Remote | `https://github.com/NiovArchitect/caretaker-relay-foundation.git` (private) |
 | Remote branch | `origin/checkpoint/caretaker-relay-track1-2026-07-22` |
 | Push verified | **YES** (local HEAD == remote SHA after fetch) |
-| Working tree | Clean at recovery verification |
+| Working tree | Clean after recovery push |
 | Scope | care-domain, Care API, Prisma store, stress harness, dose-units P1 fix, lifecycle scripts |
 | Note | **Independent** of original `niov-foundation` (untouched). |
 
@@ -135,9 +137,10 @@ The forthcoming **Track 1 Product Constitution has NOT yet been supplied.**
 ```bash
 git clone https://github.com/NiovArchitect/caretaker-relay.git
 cd caretaker-relay && git checkout checkpoint/caretaker-relay-track1-2026-07-22
-# verify: e87fc6fdbbe060d3d12d39d4514166b45b1f5314
+# tip should be on checkpoint branch (includes recovery doc verification)
 
 git clone https://github.com/NiovArchitect/caretaker-relay-foundation.git
 cd caretaker-relay-foundation && git checkout checkpoint/caretaker-relay-track1-2026-07-22
-# verify: fed2f594f7a39c02961d3ecdbe8f60d26363c255
+# tip should be on checkpoint branch (includes recovery doc verification)
 ```
+
