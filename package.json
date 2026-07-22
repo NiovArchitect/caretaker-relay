@@ -1,0 +1,30 @@
+{
+  "name": "caretaker-relay",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Caretaker Relay — voice-first care coordination companion for family and professional caregivers (ACL Track 1).",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit -p tsconfig.json && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@caretaker-relay/care-domain": "file:../caretaker-relay-foundation/packages/care-domain",
+    "@caretaker-relay/product-identity": "file:../caretaker-relay-foundation/packages/product-identity",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^25.0.1",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3",
+    "vitest": "^2.1.8"
+  }
+}
