@@ -1,0 +1,154 @@
+{
+  "document": "caretaker-relay/docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md",
+  "campaign_window": {
+    "primary_results_timestamp": "2026-07-22T17:01:09.221Z",
+    "live_model_attempt": "2026-07-22T15:44:42Z"
+  },
+  "headline_counts": {
+    "founder_smoke_vitest_cases": { "passed": 12, "failed": 0, "file": "tests/unit/care/founder-e2e-smoke.test.ts" },
+    "care_suite_vitest_cases": { "passed": 67, "failed": 0, "files": 8, "excludes": "dev-service-lifecycle.test.ts" },
+    "founder_result_sheet_rows_automated": { "passed": 36, "failed": 0, "manual_required": 1, "human_research": 1 },
+    "lifecycle_process_mgmt": { "passed": 3, "failed": 0, "note": "post-campaign; not part of 67" },
+    "app_unit_tests": { "passed": 9, "failed": 0 }
+  },
+  "count_integrity": {
+    "founder-e2e-smoke.test.ts": 12,
+    "care-loop.e2e.test.ts": 25,
+    "care-http.acceptance.test.ts": 8,
+    "care-prisma-auth.acceptance.test.ts": 4,
+    "idempotency-semantic.test.ts": 10,
+    "med-idempotency-unified.test.ts": 4,
+    "care-llm-fixtures.test.ts": 3,
+    "apt-debug.test.ts": 1,
+    "sum": 67
+  },
+  "store_backends_in_67": {
+    "real_prisma_5434": ["founder-e2e-smoke", "care-prisma-auth", "med-idempotency (partial)", "apt-debug"],
+    "file_store": ["care-http.acceptance"],
+    "in_memory": ["care-loop.e2e"],
+    "pure_unit": ["idempotency-semantic (most)", "FHIR map tests", "hash identity"]
+  },
+  "understand_mode": {
+    "founder_and_majority": "DETERMINISTIC_LOCAL_FIXTURE",
+    "also": ["RECORDED_CI_FIXTURE_IO", "SCRIPTED_LLM_PROVIDER"],
+    "live_remote": "NOT_YET_PROVEN",
+    "blocker_artifact": "caretaker-relay-foundation/tests/fixtures/care-llm/live-model-attempt.json"
+  },
+  "environment": {
+    "db": "caretaker_relay_dev",
+    "port": 5434,
+    "container": "cr-local-pg",
+    "care_api_port_exercised": 3100,
+    "vite_port_exercised": 5180,
+    "browser_e2e": "NOT_YET_AUTOMATED"
+  },
+  "founder_twelve": [
+    "health endpoint asserts product + prisma + durable",
+    "auth + authorization matrix",
+    "canonical DEMO loop understand → confirm → durable",
+    "Today projection + handoff derived",
+    "restart continuity",
+    "correction PT to 3:00",
+    "medication safety suite A-G",
+    "appointment idempotency + distinct change",
+    "export authorized and unauthorized",
+    "revoked Maya denied",
+    "voice injected STT converges on same pipeline",
+    "adversarial injection + app open marker"
+  ],
+  "canonical_demo_candidates_captured": [
+    { "eventType": "meal", "statement": "Meal around noon", "epistemicStatus": "REPORTED", "safetyClass": "low" },
+    { "eventType": "observation", "statement": "Caregiver reported: seemed more tired than usual", "epistemicStatus": "REPORTED", "safetyClass": "moderate" },
+    { "eventType": "appointment_change", "statement": "PT moved to Thursday at 2:30 PM", "epistemicStatus": "REPORTED", "safetyClass": "moderate" },
+    { "eventType": "medication_administration", "statement": "Lunch medication marked as given (as scheduled)", "epistemicStatus": "REPORTED", "safetyClass": "high" },
+    { "eventType": "communication_request", "statement": "Update ready for Maya", "epistemicStatus": "REPORTED", "safetyClass": "moderate" }
+  ],
+  "golden_dataset": {
+    "path": "packages/care-domain/src/datasets/golden.ts",
+    "version": "1.0.0",
+    "synthetic": true,
+    "case_count": 27,
+    "metrics_measured": false
+  },
+  "capability_matrix_summary": {
+    "STRONG_OR_MODERATE_LAB": [
+      "authentication",
+      "authorization_basic",
+      "fixture_understand_demo",
+      "med_safety_spot",
+      "med_idempotency",
+      "prisma_persistence_restart_reload",
+      "export_claim",
+      "handoff_derived"
+    ],
+    "WEAK": [
+      "appointment_correction_lineage",
+      "today_ux_semantics",
+      "voice_beyond_injection",
+      "fhir_validation"
+    ],
+    "UNPROVEN_OR_NOT_TESTED": [
+      "live_remote_model",
+      "physical_microphone",
+      "real_browser_e2e",
+      "timezone_dst",
+      "cross_household_http_adversarial",
+      "db_container_restart",
+      "caregiver_human_research",
+      "production_readiness",
+      "golden_precision_recall"
+    ]
+  },
+  "bugs_found": [
+    {
+      "id": "stale-idempotency-key-false-green",
+      "severity": "high",
+      "status": "fixed"
+    },
+    {
+      "id": "shallow-appointment-assertions",
+      "severity": "high",
+      "status": "fixed"
+    },
+    {
+      "id": "dual-med-hash",
+      "severity": "high",
+      "status": "fixed"
+    },
+    {
+      "id": "seed-wipe-appointments",
+      "severity": "medium",
+      "status": "fixed"
+    },
+    {
+      "id": "understand-time-regex",
+      "severity": "medium",
+      "status": "fixed"
+    },
+    {
+      "id": "stub-keys-false-live-model",
+      "severity": "low",
+      "status": "fixed"
+    },
+    {
+      "id": "agent-wait-on-persistent-servers",
+      "severity": "medium",
+      "status": "fixed"
+    },
+    {
+      "id": "apt-hash-voided",
+      "severity": "medium",
+      "status": "open"
+    },
+    {
+      "id": "apt-events-not-superseded-on-restate",
+      "severity": "medium",
+      "status": "open"
+    }
+  ],
+  "trl": {
+    "defensible_overall": "TRL_3",
+    "do_not_upgrade_solely_because_green": true
+  },
+  "evidence_dir": "caretaker-relay-foundation/docs/caretaker-relay/evidence/e2e-smoke/"
+}

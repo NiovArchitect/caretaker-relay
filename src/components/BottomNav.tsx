@@ -21,6 +21,7 @@ export function BottomNav({
           key={item.id}
           type="button"
           className="nav-btn"
+          data-testid={`nav-${item.id}`}
           aria-current={tab === item.id ? "page" : undefined}
           onClick={() => onChange(item.id)}
         >

@@ -152,6 +152,7 @@ export function Composer({
         </p>
       )}
       <textarea
+        data-testid="composer-input"
         value={value}
         onChange={(e) => {
           onChange(e.target.value);
@@ -181,7 +182,12 @@ export function Composer({
       >
         {listening ? "stop" : "mic"}
       </button>
-      <button type="submit" className="primary-btn" disabled={!value.trim()}>
+      <button
+        type="submit"
+        className="primary-btn"
+        data-testid="composer-send"
+        disabled={!value.trim()}
+      >
         Send
       </button>
     </form>

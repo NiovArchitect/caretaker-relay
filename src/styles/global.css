@@ -250,6 +250,11 @@ button {
   line-height: 1;
 }
 
+/* Leave room so sticky composer does not cover primary actions */
+.main {
+  padding-bottom: 120px;
+}
+
 .composer-dock {
   position: sticky;
   bottom: 64px;

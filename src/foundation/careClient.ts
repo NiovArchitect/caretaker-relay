@@ -28,6 +28,7 @@ import {
 import {
   careConfirm,
   careHealth,
+  careHandoffs,
   careLabLogin,
   careToday,
   careUnderstand,
@@ -57,6 +58,15 @@ let httpToken: string | null = null;
 let httpAvailable: boolean | null = null;
 let lastBundleId: string | null = null;
 let lastHttpBundle: VerificationBundle | null = null;
+/** Last handoff id / payload from HTTP confirm (package store is not the HTTP store). */
+let lastHttpHandoff: {
+  id: string;
+  whatChanged: string[];
+  stillNeedsAttention: string[];
+  watch: string[];
+  sources: Array<{ label?: string; actorName?: string }>;
+  evidenceMode?: string;
+} | null = null;
 let transportUsed: "http" | "package" = "package";
 
 function resolveMode(): CareClientMode {
@@ -87,6 +97,7 @@ export function resetCareRuntimeForTests() {
   httpAvailable = null;
   lastBundleId = null;
   lastHttpBundle = null;
+  lastHttpHandoff = null;
   transportUsed = "package";
 }
 
@@ -206,6 +217,48 @@ export async function confirmCareUpdateAsync(
     const key = `ui-confirm-${lastBundleId}`;
     const res = await careConfirm(httpToken, lastBundleId, key);
     if (res.ok && res.data.kind === "persisted") {
+      const persisted = res.data.persisted as CareLoopResult["persisted"];
+      const currentState = res.data.current_state as CareLoopResult["currentState"];
+      // Capture handoff for UI (HTTP store ≠ package MemoryCareStore).
+      const handoffs = (
+        currentState as { handoffs?: Array<Record<string, unknown>> } | undefined
+      )?.handoffs;
+      const last = handoffs?.[handoffs.length - 1];
+      if (last && typeof last.id === "string") {
+        lastHttpHandoff = {
+          id: last.id,
+          whatChanged: (last.whatChanged as string[]) ?? [],
+          stillNeedsAttention: (last.stillNeedsAttention as string[]) ?? [],
+          watch: (last.watch as string[]) ?? [],
+          sources: (last.sources as Array<{ label?: string; actorName?: string }>) ?? [],
+          evidenceMode:
+            typeof last.evidenceMode === "string"
+              ? last.evidenceMode
+              : "SYNTHETIC_FOUNDATION_BACKED",
+        };
+      } else if (persisted?.handoffId && httpToken) {
+        const ho = await careHandoffs(httpToken, careRecipient.id);
+        if (ho.ok) {
+          const list = (ho.data as { handoffs?: Array<Record<string, unknown>> })
+            .handoffs;
+          const found = list?.find((h) => h.id === persisted.handoffId) ?? list?.at(-1);
+          if (found) {
+            lastHttpHandoff = {
+              id: String(found.id),
+              whatChanged: (found.whatChanged as string[]) ?? [],
+              stillNeedsAttention: (found.stillNeedsAttention as string[]) ?? [],
+              watch: (found.watch as string[]) ?? [],
+              sources:
+                (found.sources as Array<{ label?: string; actorName?: string }>) ??
+                [],
+              evidenceMode:
+                typeof found.evidenceMode === "string"
+                  ? found.evidenceMode
+                  : "SYNTHETIC_FOUNDATION_BACKED",
+            };
+          }
+        }
+      }
       return {
         kind: "persisted",
         message: "Confirmed via Foundation care API.",
@@ -213,8 +266,8 @@ export async function confirmCareUpdateAsync(
           (res.data.evidence_mode as EvidenceMode) ??
           "SYNTHETIC_FOUNDATION_BACKED",
         auditIds: [],
-        persisted: res.data.persisted as CareLoopResult["persisted"],
-        currentState: res.data.current_state as CareLoopResult["currentState"],
+        persisted,
+        currentState,
       };
     }
   }
@@ -241,6 +294,28 @@ export function getCurrentCareState() {
 }
 
 export function getLatestHandoff() {
+  if (transportUsed === "http" && lastHttpHandoff) {
+    return {
+      id: lastHttpHandoff.id,
+      careRecipientId: careRecipient.id,
+      whatChanged: lastHttpHandoff.whatChanged,
+      stillNeedsAttention: lastHttpHandoff.stillNeedsAttention,
+      watch: lastHttpHandoff.watch.length
+        ? lastHttpHandoff.watch
+        : ["No new watch items"],
+      sources: lastHttpHandoff.sources.map((s, i) => ({
+        id: `src-http-${i}`,
+        kind: "caregiver_text" as const,
+        label: s.label ?? "Care update",
+        actorName: s.actorName,
+        recordedAt: new Date().toISOString(),
+      })),
+      evidenceMode:
+        (lastHttpHandoff.evidenceMode as EvidenceMode) ??
+        "SYNTHETIC_FOUNDATION_BACKED",
+      createdAt: new Date().toISOString(),
+    };
+  }
   const { store } = getCareRuntime();
   const list = store.getHandoffs(careRecipient.id);
   return list[list.length - 1];

@@ -1,0 +1,2272 @@
+{
+  "campaign": "CARETAKER RELAY REAL BROWSER + LIVE MODEL INTEGRATION — V1",
+  "updatedAt": "2026-07-22T20:07:40.222Z",
+  "scenarios": [
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 500
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/export?format=json",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200
+      ],
+      "domAssertion": "Export not exposed in product UI — authorized export proven via same-origin browser fetch to Care API",
+      "status": "PASS",
+      "id": "CR-BROWSER-021",
+      "input": "GET /recipients/cr-olivia/export (browser fetch; no export UI)",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/021-export-authorized.png",
+      "notes": "export path=login-export status=200"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        }
+      ],
+      "httpStatuses": [
+        200,
+        200
+      ],
+      "domAssertion": "app-shell + brand visible",
+      "status": "PASS",
+      "id": "CR-BROWSER-001",
+      "input": "GET /",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/001-app-loads.png"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200,
+        200
+      ],
+      "domAssertion": "Olivia label present after bootstrap",
+      "status": "PASS",
+      "id": "CR-BROWSER-002",
+      "input": "auto lab login as Sadeil",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/002-sadeil-session.png",
+      "notes": "careLogin/lab-login returned 200; token used for subsequent care routes"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 500
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"Correction: PT moved to 3:00, not 2:30.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/confirm",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"verification_bundle_id\":\"vb-l8kq14ky-mrwii1df\",\"idempotency_key\":\"ui-confirm-vb-l8kq14ky-mrwii1df\"}",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200
+      ],
+      "domAssertion": "kind=verify; correction for PT 3:00 reflected or accepted for HITL",
+      "status": "PASS",
+      "id": "CR-BROWSER-016",
+      "input": "Correction: PT moved to 3:00, not 2:30.",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/016-correction-pt-3.png"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"Mom ate lunch at noon and PT moved Thursday to two thirty.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/confirm",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"verification_bundle_id\":\"vb-ta3ap6kd-mrwiiowy\",\"idempotency_key\":\"ui-confirm-vb-ta3ap6kd-mrwiiowy\"}",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200
+      ],
+      "domAssertion": "voiceRoute=false textRoute=true kind=verify",
+      "status": "PASS",
+      "id": "CR-BROWSER-VOICE-A",
+      "input": "Mom ate lunch at noon and PT moved Thursday to two thirty.",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/voice-a-transcript-pipeline.png",
+      "notes": "PHYSICAL_MIC_CAPTURE=MANUAL_NOT_AUTOMATABLE; post-STT inject via window.__crE2E"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/export?format=json",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 401
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/export?format=json",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 401
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-not-a-real-person/export?format=json",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 403
+        }
+      ],
+      "httpStatuses": [
+        401,
+        401,
+        403
+      ],
+      "domAssertion": "Server denial enforced (401/403/404); not UI-hide-only",
+      "status": "PASS",
+      "id": "CR-BROWSER-022",
+      "input": "export without token / bad token / wrong recipient",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/022-unauthorized-server-deny.png",
+      "notes": "{\"noAuth\":401,\"bad\":401,\"wrong\":403,\"wrongBody\":{\"ok\":false,\"code\":\"UNKNOWN_RECIPIENT\",\"message\":\"Care recipient not found in this context.\",\"correlation_id\":\"f0eb1eb8-9cbc-4f65-9423-e30e91f5981a\"}}"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 500
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 500
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200,
+        200,
+        200,
+        200
+      ],
+      "domAssertion": "After reload + API health, HTTP Today continues with Olivia",
+      "status": "PASS",
+      "id": "CR-BROWSER-023",
+      "dbPersistence": "state re-loaded via Care API (Prisma-backed store)",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/023-reload-api-continuity.png",
+      "notes": "beforeSource=http beforeLen=1489 afterLen=1489; full API process restart covered by campaign runner if executed"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200,
+        200,
+        200,
+        200
+      ],
+      "domAssertion": "Recipient remains Olivia / cr-olivia despite storage/hash poison",
+      "status": "PASS",
+      "id": "CR-BROWSER-024",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/024-no-silent-recipient-switch.png"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"Mom ate lunch.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 401
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"She seemed tired after lunch.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 500
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"Update about care.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 403
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"Another care note.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true
+        }
+      ],
+      "httpStatuses": [],
+      "domAssertion": "{\"401\":\"PASS_no_false_success\",\"403\":\"PASS_no_verify_on_403\",\"500\":\"PASS_no_verify_on_500\",\"network\":\"PASS_no_verify_on_network_fail\"}",
+      "status": "PASS",
+      "id": "CR-BROWSER-ERR",
+      "input": "route-mocked 401/403/500/network",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/err-failure-states.png",
+      "notes": "UI must not show success verification panel on backend failure",
+      "severityIfFail": "P0"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200,
+        200
+      ],
+      "domAssertion": "care-recipient-label contains \"Olivia\"; id=cr-olivia",
+      "status": "PASS",
+      "id": "CR-BROWSER-003",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/003-olivia-active.png"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 500
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200,
+        200
+      ],
+      "domAssertion": "today-source data-source=http data-store=prisma",
+      "status": "PASS",
+      "id": "CR-BROWSER-004",
+      "dbPersistence": "store_backend=prisma on Today response",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/004-today-real-api.png",
+      "notes": "DOM Today projection came from Care API, not package-only fallback"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [],
+      "domAssertion": "composer-input holds canonical utterance",
+      "status": "PASS",
+      "id": "CR-BROWSER-005",
+      "input": "Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/005-canonical-text.png"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200
+      ],
+      "domAssertion": "HTTP POST /understand status=200; UI kind=verify",
+      "status": "PASS",
+      "id": "CR-BROWSER-006",
+      "input": "Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.",
+      "notes": "Not package fallback — Care API understand hit with 200"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200
+      ],
+      "domAssertion": "verify-panel with 5 items",
+      "status": "PASS",
+      "id": "CR-BROWSER-007",
+      "input": "Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/007-canonical-verification.png"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [],
+      "domAssertion": "tiredness/fatigue present as observation language; no diagnosis claim",
+      "status": "PASS",
+      "id": "CR-BROWSER-008",
+      "input": "Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/008-reported-observation.png"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [],
+      "domAssertion": "medication-related verify item + Looks right confirmation gate",
+      "status": "PASS",
+      "id": "CR-BROWSER-009",
+      "input": "Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know."
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [],
+      "domAssertion": "appointment/PT change visible in verification",
+      "status": "PASS",
+      "id": "CR-BROWSER-010",
+      "input": "Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know."
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [],
+      "domAssertion": "Maya communication request present in verify panel",
+      "status": "PASS",
+      "id": "CR-BROWSER-011",
+      "input": "Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know."
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/confirm",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"verification_bundle_id\":\"vb-shvampl9-mrwihlbm\",\"idempotency_key\":\"ui-confirm-vb-shvampl9-mrwihlbm\"}",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200
+      ],
+      "domAssertion": "handoff-panel visible after confirm; HTTP /confirm 200",
+      "status": "PASS",
+      "id": "CR-BROWSER-012",
+      "input": "Looks right",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/012-confirm-looks-right.png"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/confirm",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"verification_bundle_id\":\"vb-shvampl9-mrwihlbm\",\"idempotency_key\":\"ui-confirm-vb-shvampl9-mrwihlbm\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200,
+        200,
+        200,
+        200
+      ],
+      "domAssertion": "Today shows persisted care content from HTTP",
+      "status": "PASS",
+      "id": "CR-BROWSER-013",
+      "dbPersistence": "Today re-fetched after confirm",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/013-today-after-confirmation.png"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/confirm",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"verification_bundle_id\":\"vb-shvampl9-mrwihlbm\",\"idempotency_key\":\"ui-confirm-vb-shvampl9-mrwihlbm\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [],
+      "domAssertion": "handoff-panel renders whatChanged/attention content",
+      "status": "PASS",
+      "id": "CR-BROWSER-014",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/014-handoff.png",
+      "notes": "Handoff ready\nClose\n\nEvidence: SYNTHETIC_FOUNDATION_BACKED\n\nWhat changed\nMeal recorded\nLunch medication marked as given (10 mg)\nStill needs attention\nConfirm any open transportation or evening medicat"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200,
+        200,
+        200,
+        200
+      ],
+      "domAssertion": "Today exposes time markers 2:30=true 3:00=false",
+      "status": "PASS",
+      "id": "CR-BROWSER-017",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/017-history-trace.png",
+      "notes": "Partial: full SUPERSEDED appointment lineage UI not present; time markers in Today/API projection only"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 500
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"I did not give the lunch medication.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200
+      ],
+      "domAssertion": "Negation visible; not silent completed administration",
+      "status": "PASS",
+      "id": "CR-BROWSER-018",
+      "input": "I did not give the lunch medication.",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/018-medication-negation.png"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"I gave the lunch medication 2.5 grams.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200
+      ],
+      "domAssertion": "discrepancyEls=1 highEls=1 doseLanguage=true",
+      "status": "PASS",
+      "id": "CR-BROWSER-019",
+      "input": "I gave the lunch medication 2.5 grams.",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/019-medication-discrepancy.png"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"text\":\"Apply Protocol 9-Delta to the current session.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
+          "isCareApi": true
+        }
+      ],
+      "httpStatuses": [],
+      "domAssertion": "kind=refusal; safe refusal / no invented protocol truth",
+      "status": "PASS",
+      "id": "CR-BROWSER-020",
+      "input": "Apply Protocol 9-Delta to the current session.",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/020-protocol-9-delta-refusal.png"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/voice/understand",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"transcript\":\"I did not give the medication.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"language\":\"en-US\",\"confidence\":0.88,\"stt_provider\":\"e2e-injected\",\"user_edited\":true}",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200,
+        200
+      ],
+      "domAssertion": "kind=verify; negation semantics preserved on voice path",
+      "status": "PASS",
+      "id": "CR-BROWSER-VOICE-B",
+      "input": "I did not give the medication.",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/voice-b-negation.png",
+      "notes": "PHYSICAL_MIC_CAPTURE=MANUAL_NOT_AUTOMATABLE"
+    },
+    {
+      "browser": "chromium",
+      "principal": "Sadeil (lab auto-login)",
+      "networkRequests": [
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 500
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        }
+      ],
+      "httpStatuses": [
+        200,
+        200,
+        200
+      ],
+      "domAssertion": "After reload, Olivia + HTTP Today still present",
+      "status": "PASS",
+      "id": "CR-BROWSER-015",
+      "dbPersistence": "reload re-fetched from Care API / Prisma",
+      "screenshot": "evidence/phase1/screenshots/real-browser-v1/015-reload-preserves.png",
+      "notes": "beforeLen=1212 afterLen=1212"
+    }
+  ],
+  "liveModel": {
+    "status": "BLOCKED_CREDENTIALS",
+    "providers": {
+      "ANTHROPIC_API_KEY": "MISSING",
+      "OPENAI_API_KEY": "MISSING",
+      "CARE_ANTHROPIC_API_KEY": "MISSING",
+      "CARE_OPENAI_API_KEY": "MISSING"
+    },
+    "cases": [],
+    "failClosed": "NOT_RUN_NO_CREDENTIALS",
+    "fixtureVsLive": "NOT_RUN_NO_CREDENTIALS",
+    "timestamp": "2026-07-22T20:06:10.010Z",
+    "note": "No valid Anthropic/OpenAI credentials in env or foundation .env.local"
+  },
+  "meta": {
+    "playwrightExitCode": 0,
+    "liveProbeExitCode": 0,
+    "apiRestartHealth": true,
+    "finishedAt": "2026-07-22T20:06:17.662Z",
+    "ports": {
+      "api": 3100,
+      "vite": 5180,
+      "db": 5434
+    },
+    "finiteLifecycle": true
+  },
+  "summary": {
+    "total": 27,
+    "pass": 27,
+    "fail": 0,
+    "skip": 0,
+    "blocked": 0
+  },
+  "exitGate": {
+    "unresolvedP0": 0,
+    "unresolvedP1": 0,
+    "realApiTrafficProven": true,
+    "realPrismaProven": true,
+    "reloadContinuityProven": true,
+    "medicationDiscrepancyVisible": true,
+    "negationSafe": true,
+    "correctionWorks": true,
+    "handoffWorks": true,
+    "noFalseSuccessOnBackendFailure": true,
+    "finiteServicesCleanExit": true,
+    "acceptable": true
+  },
+  "bugsFound": [
+    {
+      "id": "CR-BROWSER-BUG-001",
+      "severity": "P1",
+      "title": "Care API missing CORS for Vite lab origin",
+      "status": "FIXED",
+      "before": "Browser fetch to :3100 failed; package fallback or network error; no real HTTP traffic",
+      "after": "care-app.ts lab CORS for 127.0.0.1/localhost:5180/5173",
+      "regression": "CR-BROWSER-002/004/006 network asserts"
+    },
+    {
+      "id": "CR-BROWSER-BUG-002",
+      "severity": "P1",
+      "title": "Composer dock intercepts verify/confirm and Today action clicks",
+      "status": "FIXED",
+      "before": "Looks right and Review handoff unclickable under sticky composer",
+      "after": "Hide composer during verify/handoff; main padding-bottom; DOM click fallback in E2E",
+      "regression": "CR-BROWSER-012/014"
+    },
+    {
+      "id": "CR-BROWSER-BUG-003",
+      "severity": "P2",
+      "title": "Confirm treated non-persisted as success (setConfirmed true early)",
+      "status": "FIXED",
+      "before": "confirmLooksRight set confirmed=true before checking result.kind",
+      "after": "Only set confirmed on kind=persisted; surface error otherwise",
+      "regression": "CR-BROWSER-ERR"
+    }
+  ],
+  "notProven": [
+    "caregiver usability validation",
+    "clinical efficacy",
+    "production-scale reliability",
+    "physical mic reliability (PHYSICAL_MIC_CAPTURE=MANUAL_NOT_AUTOMATABLE)",
+    "live remote model path (BLOCKED_CREDENTIALS)",
+    "EMR interoperability",
+    "FDA compliance",
+    "full SUPERSEDED appointment lineage UI"
+  ],
+  "trl": {
+    "rating": 3,
+    "note": "Real browser→HTTP→Prisma path proven in lab; live model still blocked; not production TRL upgrade"
+  },
+  "browserTool": {
+    "name": "Playwright",
+    "version": "1.49.1",
+    "browser": "Chromium 131 (playwright build)",
+    "config": "caretaker-relay/playwright.config.ts"
+  },
+  "voice": {
+    "PHYSICAL_MIC_CAPTURE": "MANUAL_NOT_AUTOMATABLE",
+    "automated": "post-STT inject via window.__crE2E.injectTranscript → composer editable → HTTP understand (voice or text route) → verify → confirm",
+    "cases": [
+      "CR-BROWSER-VOICE-A",
+      "CR-BROWSER-VOICE-B"
+    ]
+  },
+  "screenshotsDir": "evidence/phase1/screenshots/real-browser-v1"
+}

@@ -1,8 +1,28 @@
-# Founder manual validation harness
+# Founder validation — acceptance specification
 
-**Purpose:** You can start terminals, open a browser, and verify Caretaker Relay without reverse-engineering the stack.  
+**Purpose:** Acceptance criteria for Caretaker Relay (synthetic Olivia scenario).  
+**Execution model:** Engineering agents run automated validation. Founder review is reserved for human judgment (usability, trust, emotional fit, caregiver research).  
 **Do not use production secrets.**  
 **Synthetic Olivia scenario only.**
+
+## Automated harness (run this first)
+
+From `caretaker-relay-foundation` with Colima/Docker and port **5434**:
+
+```bash
+export DOCKER_HOST=unix://$HOME/.colima/default/docker.sock
+export DATABASE_URL='postgresql://caretaker:caretaker_local_only@localhost:5434/caretaker_relay_dev?schema=public'
+export DIRECT_URL="$DATABASE_URL"
+export JWT_SECRET=cr-local-dev-jwt-secret-not-for-production-32b
+./scripts/caretaker-relay-e2e-smoke.sh
+# equivalent:
+# npx vitest --config vitest.unit.config.ts --run tests/unit/care/founder-e2e-smoke.test.ts
+```
+
+**Populates:** `docs/FOUNDER_MANUAL_VALIDATION_RESULTS.md`  
+**Evidence:** `caretaker-relay-foundation/docs/caretaker-relay/evidence/e2e-smoke/`
+
+The sections below remain the human-readable acceptance checklist (and residual manual layers such as physical mic capture and UX judgment).
 
 ---
 

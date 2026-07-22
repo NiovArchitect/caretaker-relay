@@ -1,0 +1,717 @@
+{
+  "config": {
+    "configFile": "/Users/genghishameha/dev/NIOV Labs/github/caretaker-relay/playwright.config.ts",
+    "rootDir": "/Users/genghishameha/dev/NIOV Labs/github/caretaker-relay/e2e",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "apiUrl": "http://127.0.0.1:3100",
+      "campaign": "CARETAKER RELAY REAL BROWSER + LIVE MODEL INTEGRATION — V1",
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "evidence/phase1/validation/playwright-raw.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 15000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/genghishameha/dev/NIOV Labs/github/caretaker-relay/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "apiUrl": "http://127.0.0.1:3100",
+          "campaign": "CARETAKER RELAY REAL BROWSER + LIVE MODEL INTEGRATION — V1",
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/genghishameha/dev/NIOV Labs/github/caretaker-relay/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "version": "1.49.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "cr-browser-auth-errors.spec.ts",
+      "file": "cr-browser-auth-errors.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "CR-BROWSER auth + errors + continuity",
+          "file": "cr-browser-auth-errors.spec.ts",
+          "line": 37,
+          "column": 6,
+          "specs": [
+            {
+              "title": "CR-BROWSER-021 Authorized export works if UI exposes export",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 10307,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:04:02.334Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1325047aba3081f356d3-a4574b8c1e63bbadc4f7",
+              "file": "cr-browser-auth-errors.spec.ts",
+              "line": 44,
+              "column": 3
+            },
+            {
+              "title": "CR-BROWSER-022 Unauthorized/forbidden path server denial",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 7221,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:04:13.285Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1325047aba3081f356d3-a553b2003abec8fb995a",
+              "file": "cr-browser-auth-errors.spec.ts",
+              "line": 129,
+              "column": 3
+            },
+            {
+              "title": "CR-BROWSER-023 App reload after API restart preserves continuity",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 10095,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:04:20.511Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1325047aba3081f356d3-d48f66ce2b914605a90d",
+              "file": "cr-browser-auth-errors.spec.ts",
+              "line": 215,
+              "column": 3
+            },
+            {
+              "title": "CR-BROWSER-024 Care recipient cannot silently switch due to stale frontend state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 8239,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:04:30.615Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1325047aba3081f356d3-e6ce0d225d8697b86f01",
+              "file": "cr-browser-auth-errors.spec.ts",
+              "line": 276,
+              "column": 3
+            },
+            {
+              "title": "CR-BROWSER-ERR browser failure states do not false-success",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 7316,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:04:38.861Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1325047aba3081f356d3-4dbafb584f89894e05c5",
+              "file": "cr-browser-auth-errors.spec.ts",
+              "line": 333,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "cr-browser-core.spec.ts",
+      "file": "cr-browser-core.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "CR-BROWSER core real stack",
+          "file": "cr-browser-core.spec.ts",
+          "line": 38,
+          "column": 6,
+          "specs": [
+            {
+              "title": "CR-BROWSER-001 App loads successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 729,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:04:46.211Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0d3f5417a8a908326e80-6082629ef984ac45c3e0",
+              "file": "cr-browser-core.spec.ts",
+              "line": 45,
+              "column": 3
+            },
+            {
+              "title": "CR-BROWSER-002 Synthetic Sadeil session establishes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 4701,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:04:46.954Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0d3f5417a8a908326e80-72ac830b4d61164e7b44",
+              "file": "cr-browser-core.spec.ts",
+              "line": 77,
+              "column": 3
+            },
+            {
+              "title": "CR-BROWSER-003 Olivia is visibly the active care recipient",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 3588,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:04:51.673Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0d3f5417a8a908326e80-e8af20993b7b6dec51ed",
+              "file": "cr-browser-core.spec.ts",
+              "line": 118,
+              "column": 3
+            },
+            {
+              "title": "CR-BROWSER-004 Today renders from real API state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 5599,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:04:55.270Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0d3f5417a8a908326e80-0fdd21a19a831db0b006",
+              "file": "cr-browser-core.spec.ts",
+              "line": 153,
+              "column": 3
+            },
+            {
+              "title": "CR-BROWSER-005..014 Canonical understand → confirm → handoff",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 11006,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:05:00.875Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0d3f5417a8a908326e80-129d76239df974e38d27",
+              "file": "cr-browser-core.spec.ts",
+              "line": 194,
+              "column": 3
+            },
+            {
+              "title": "CR-BROWSER-015 Browser reload preserves state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 7941,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:05:11.887Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0d3f5417a8a908326e80-8e00c56f8b6b4a0dd72c",
+              "file": "cr-browser-core.spec.ts",
+              "line": 532,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "cr-browser-safety.spec.ts",
+      "file": "cr-browser-safety.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "CR-BROWSER safety flows",
+          "file": "cr-browser-safety.spec.ts",
+          "line": 39,
+          "column": 6,
+          "specs": [
+            {
+              "title": "CR-BROWSER-016 Correction to PT 3:00 works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 11531,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:05:19.862Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06ae281cca6cd4c6fbfe-0ad231416e231210b7d2",
+              "file": "cr-browser-safety.spec.ts",
+              "line": 46,
+              "column": 3
+            },
+            {
+              "title": "CR-BROWSER-017 2:30 historically traceable where UI exposes history",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 3706,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:05:31.398Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06ae281cca6cd4c6fbfe-5e2ac652d94cdf731a39",
+              "file": "cr-browser-safety.spec.ts",
+              "line": 90,
+              "column": 3
+            },
+            {
+              "title": "CR-BROWSER-018 Medication negation does not appear as completed administration",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 7761,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:05:35.108Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06ae281cca6cd4c6fbfe-99a48c0d68cf0706a14a",
+              "file": "cr-browser-safety.spec.ts",
+              "line": 146,
+              "column": 3
+            },
+            {
+              "title": "CR-BROWSER-019 Medication 2.5 g discrepancy produces high-review behavior",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 5712,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:05:42.874Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06ae281cca6cd4c6fbfe-db11bd86a29b8e6abb3c",
+              "file": "cr-browser-safety.spec.ts",
+              "line": 195,
+              "column": 3
+            },
+            {
+              "title": "CR-BROWSER-020 Protocol 9-Delta produces safe refusal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 3763,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:05:48.600Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06ae281cca6cd4c6fbfe-dfe2765d7e6e01b4b121",
+              "file": "cr-browser-safety.spec.ts",
+              "line": 245,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "cr-browser-voice.spec.ts",
+      "file": "cr-browser-voice.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "CR-BROWSER voice post-STT path",
+          "file": "cr-browser-voice.spec.ts",
+          "line": 36,
+          "column": 6,
+          "specs": [
+            {
+              "title": "CR-BROWSER-VOICE-A transcript inject → understand → verify → confirm",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 9616,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:05:52.386Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c27b532f0195cf22748-8692a3204dfd78d150f6",
+              "file": "cr-browser-voice.spec.ts",
+              "line": 43,
+              "column": 3
+            },
+            {
+              "title": "CR-BROWSER-VOICE-B negation via injected transcript",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 5362,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-22T20:06:02.012Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c27b532f0195cf22748-de0f1abf5344b9298e16",
+              "file": "cr-browser-voice.spec.ts",
+              "line": 98,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-07-22T20:04:01.459Z",
+    "duration": 126092.479,
+    "expected": 18,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

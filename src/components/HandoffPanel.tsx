@@ -18,7 +18,11 @@ export function HandoffPanel({
       : "Today's care activity";
 
   return (
-    <section className="section handoff-hero" aria-label="Care handoff">
+    <section
+      className="section handoff-hero"
+      aria-label="Care handoff"
+      data-testid="handoff-panel"
+    >
       <div
         style={{
           display: "flex",

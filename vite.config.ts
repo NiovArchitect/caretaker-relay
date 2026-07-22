@@ -19,6 +19,13 @@ export default defineConfig({
   server: {
     port: 5180,
     strictPort: true,
+    // Optional same-origin proxy; browser still uses VITE_CARE_API_URL when set.
+    proxy: {
+      "/api/v1/care": {
+        target: process.env.VITE_CARE_API_URL ?? "http://127.0.0.1:3100",
+        changeOrigin: true,
+      },
+    },
   },
   preview: {
     port: 5180,
@@ -26,5 +33,14 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     globals: true,
+    // Playwright E2E lives under e2e/ — do not collect with Vitest
+    exclude: [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/e2e/**",
+      "**/*.spec.ts",
+    ],
+    include: ["tests/**/*.{test,spec}.{ts,tsx}"],
   },
 });
+

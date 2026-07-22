@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { NavTab, RelayMessage, VerificationBundle } from "./domain/types";
 import {
   proposeCareUpdate,
@@ -26,6 +26,20 @@ function nowLabel() {
   });
 }
 
+declare global {
+  interface Window {
+    /** E2E-only: inject post-STT transcript into composer + voice meta (no physical mic). */
+    __crE2E?: {
+      injectTranscript: (
+        text: string,
+        meta?: TranscriptMeta,
+      ) => void;
+      setDraft: (text: string) => void;
+      getCareRecipientId: () => string;
+    };
+  }
+}
+
 export function App() {
   const [tab, setTab] = useState<NavTab>("today");
   const [draft, setDraft] = useState("");
@@ -33,6 +47,7 @@ export function App() {
   const [confirmed, setConfirmed] = useState(false);
   const [showHandoff, setShowHandoff] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [lastError, setLastError] = useState<string | null>(null);
   const [messages, setMessages] = useState<RelayMessage[]>([
     {
       id: "m0",
@@ -45,6 +60,32 @@ export function App() {
   const [voiceMeta, setVoiceMeta] = useState<TranscriptMeta | undefined>();
   const [todayRefresh, setTodayRefresh] = useState(0);
   const evidence = getEvidenceLabel();
+
+  useEffect(() => {
+    window.__crE2E = {
+      injectTranscript: (text, meta) => {
+        setDraft(text);
+        setVoiceMeta(
+          meta ?? {
+            source: "voice_stt",
+            confidence: 0.92,
+            language: "en-US",
+            stt_provider: "e2e-injected",
+            needsReview: true,
+          },
+        );
+        setTab("relay");
+      },
+      setDraft: (text) => {
+        setDraft(text);
+        setVoiceMeta({ source: "text" });
+      },
+      getCareRecipientId: () => careRecipient.id,
+    };
+    return () => {
+      delete window.__crE2E;
+    };
+  }, []);
 
   const pageTitle = useMemo(() => {
     switch (tab) {
@@ -69,6 +110,7 @@ export function App() {
     ]);
     setDraft("");
     setConfirmed(false);
+    setLastError(null);
     setBusy(true);
 
     try {
@@ -76,12 +118,14 @@ export function App() {
       const result = await proposeCareUpdate(trimmed, undefined, voiceMeta);
       if (result.kind === "access_denied") {
         setBundle(null);
+        const msg = result.message ?? "Access denied for this care context.";
+        setLastError(msg);
         setMessages((prev) => [
           ...prev,
           {
             id: `r-${Date.now()}`,
             role: "relay",
-            text: result.message ?? "Access denied for this care context.",
+            text: msg,
             at: nowLabel(),
           },
         ]);
@@ -90,12 +134,14 @@ export function App() {
       }
       if (result.kind === "refusal") {
         setBundle(null);
+        const msg = result.message ?? "I can't do that safely.";
+        setLastError(msg);
         setMessages((prev) => [
           ...prev,
           {
             id: `r-${Date.now()}`,
             role: "relay",
-            text: result.message ?? "I can't do that safely.",
+            text: msg,
             at: nowLabel(),
           },
         ]);
@@ -118,6 +164,21 @@ export function App() {
         ]);
         setTab("relay");
       }
+    } catch (err) {
+      const msg =
+        err instanceof Error ? err.message : "Request failed — nothing was saved.";
+      setLastError(msg);
+      setBundle(null);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `r-${Date.now()}`,
+          role: "relay",
+          text: `Could not reach care services. ${msg} Nothing was saved as care truth.`,
+          at: nowLabel(),
+        },
+      ]);
+      setTab("relay");
     } finally {
       setBusy(false);
     }
@@ -126,11 +187,12 @@ export function App() {
   async function confirmLooksRight() {
     if (!bundle || busy) return;
     setBusy(true);
+    setLastError(null);
     try {
       const result = await confirmCareUpdateAsync(bundle);
-      setConfirmed(true);
 
       if (result.kind === "persisted") {
+        setConfirmed(true);
         const updates = bundle.understood.communicationRequests;
         const nextHandled = [
           ...updates.map((u) => u.replace("Update ready for ", "Updated ")),
@@ -149,7 +211,37 @@ export function App() {
         ]);
         setShowHandoff(true);
         setTodayRefresh((n) => n + 1);
+      } else {
+        // Fail closed: do not mark confirmed / success on non-persist
+        const msg =
+          result.message ??
+          "Confirmation did not persist. Care state was not updated.";
+        setLastError(msg);
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `s-${Date.now()}`,
+            role: "system",
+            text: msg,
+            at: nowLabel(),
+          },
+        ]);
       }
+    } catch (err) {
+      const msg =
+        err instanceof Error
+          ? err.message
+          : "Confirm failed — care truth was not updated.";
+      setLastError(msg);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `s-${Date.now()}`,
+          role: "system",
+          text: `Confirm failed. ${msg}`,
+          at: nowLabel(),
+        },
+      ]);
     } finally {
       setBusy(false);
     }
@@ -164,7 +256,7 @@ export function App() {
   const liveHandoff = getLatestHandoff();
 
   return (
-    <div className="app-shell">
+    <div className="app-shell" data-testid="app-shell">
       <header className="app-header">
         <div className="brand" aria-label="Caretaker Relay">
           <span className="brand-mark" aria-hidden />
@@ -173,11 +265,23 @@ export function App() {
         <div className="header-right">
           <span
             className="evidence-badge"
+            data-testid="evidence-badge"
             title="How this session is backed"
             aria-label={evidence.label}
           >
             {evidence.mode === "LIVE_FOUNDATION_BACKED" ? "LIVE" : "SYNTHETIC"}
           </span>
+          {lastError && (
+            <span
+              className="muted"
+              data-testid="app-error"
+              role="alert"
+              style={{ fontSize: "0.7rem", maxWidth: 120 }}
+              title={lastError}
+            >
+              Error
+            </span>
+          )}
           <button
             type="button"
             className="avatar-btn"
@@ -233,8 +337,10 @@ export function App() {
           />
         )}
 
-        {(tab === "today" || tab === "relay") && (
-          <div className="composer-dock">
+        {(tab === "today" || tab === "relay") &&
+          !(bundle && !confirmed) &&
+          !showHandoff && (
+          <div className="composer-dock" data-testid="composer-dock">
             <Composer
               value={draft}
               onChange={setDraft}

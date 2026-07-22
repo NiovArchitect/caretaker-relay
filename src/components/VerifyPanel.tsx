@@ -10,11 +10,23 @@ export function VerifyPanel({
   onCorrect: () => void;
 }) {
   return (
-    <section className="section verify-card" aria-label="Verify what Relay understood">
-      <p className="for-person">For {bundle.understood.careRecipientName}</p>
+    <section
+      className="section verify-card"
+      aria-label="Verify what Relay understood"
+      data-testid="verify-panel"
+    >
+      <p className="for-person" data-testid="verify-recipient">
+        For {bundle.understood.careRecipientName}
+      </p>
       <h2>{bundle.title}</h2>
       {bundle.items.map((item) => (
-        <div key={item.id} className="verify-item">
+        <div
+          key={item.id}
+          className="verify-item"
+          data-testid="verify-item"
+          data-safety={item.safetyClass}
+          data-has-discrepancy={item.discrepancy ? "true" : "false"}
+        >
           <div className="item-title">{item.label}</div>
           {"epistemicStatus" in item && item.epistemicStatus && (
             <span className="badge badge-amber" role="status">
@@ -52,10 +64,20 @@ export function VerifyPanel({
         </div>
       ))}
       <div className="btn-row">
-        <button type="button" className="primary-btn" onClick={onConfirm}>
+        <button
+          type="button"
+          className="primary-btn"
+          data-testid="confirm-looks-right"
+          onClick={onConfirm}
+        >
           Looks right
         </button>
-        <button type="button" className="secondary-btn" onClick={onCorrect}>
+        <button
+          type="button"
+          className="secondary-btn"
+          data-testid="correct-something"
+          onClick={onCorrect}
+        >
           Correct something
         </button>
       </div>

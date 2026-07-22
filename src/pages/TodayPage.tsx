@@ -60,9 +60,17 @@ export function TodayPage({
         <h1>
           {today.greeting}, {today.caregiverName}
         </h1>
-        <p className="for-person">For {today.careRecipient.displayName}</p>
+        <p className="for-person" data-testid="care-recipient-label">
+          For {today.careRecipient.displayName}
+        </p>
         {proj && (
-          <p className="muted" style={{ fontSize: "0.75rem", marginTop: 4 }}>
+          <p
+            className="muted"
+            style={{ fontSize: "0.75rem", marginTop: 4 }}
+            data-testid="today-source"
+            data-source={proj.source}
+            data-store={proj.storeBackend ?? ""}
+          >
             Today data: {proj.source}
             {proj.storeBackend ? ` · ${proj.storeBackend}` : ""}
             {proj.source === "static" ? " (seed until first durable update)" : ""}
