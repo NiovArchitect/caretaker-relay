@@ -8,3 +8,4 @@ dist
 coverage
 test-results
 *.tsbuildinfo
+!.env.production.example
