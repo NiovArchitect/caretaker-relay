@@ -158,7 +158,7 @@
   ],
   "next_authorized_action": "FOUNDER_REWALKS_LIVE_PRODUCT_BEHAVIOR",
   "cold_context_online_recovery": "READY",
-  "updated_at": "2026-07-23T17:12:31Z",
+  "updated_at": "2026-07-23T17:42:53Z",
   "public_research_environment": "READY",
   "canonical_public_url": "https://care.niovlabs.com",
   "render_fallback_url": "https://caretaker-relay-web.onrender.com",
@@ -219,5 +219,15 @@
   "manifest_path": "docs/reviews/current-export/00_MANIFEST.md",
   "claimed_deployed_app_sha": "2858c2a",
   "product_modified_by_review_export": false,
-  "review_commit": "bbe102a15d7023fb6b1eda16d6f8893bb621e7f1"
+  "review_commit": "bbe102a15d7023fb6b1eda16d6f8893bb621e7f1",
+  "external_review_handoff": "GITHUB",
+  "chatgpt_handoff": {
+    "mechanism": "GITHUB",
+    "repository": "NiovArchitect/caretaker-relay",
+    "branch": "checkpoint/caretaker-relay-track1-2026-07-22",
+    "review_commit": "51d878fd4957e85791d82cac5006d4e5cc7c2e0b",
+    "handoff_json": "docs/reviews/CHATGPT_REVIEW_HANDOFF.json",
+    "handoff_md": "docs/reviews/CHATGPT_REVIEW_HANDOFF.md",
+    "primary_review": "docs/reviews/CARETAKER_RELAY_EXTERNAL_REVIEW_BUNDLE.md"
+  }
 }

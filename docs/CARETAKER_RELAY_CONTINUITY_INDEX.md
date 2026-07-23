@@ -58,3 +58,10 @@ Authoritative online detail: `docs/ONLINE_READINESS_CURRENT_STATE.md`
 ## Evidence honesty
 
 `CAREGIVER INPUT = NONE` · `CARE RECIPIENT INPUT = NONE` · `VALIDATED = NONE`
+
+
+## ChatGPT handoff (GitHub)
+
+- `docs/reviews/CHATGPT_REVIEW_HANDOFF.json`
+- `docs/reviews/CHATGPT_REVIEW_HANDOFF.md`
+- Primary: `docs/reviews/CARETAKER_RELAY_EXTERNAL_REVIEW_BUNDLE.md`

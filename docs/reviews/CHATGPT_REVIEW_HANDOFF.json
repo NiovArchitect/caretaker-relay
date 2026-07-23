@@ -1,0 +1,20 @@
+{
+  "project": "Caretaker Relay",
+  "repository": "NiovArchitect/caretaker-relay",
+  "repository_url": "https://github.com/NiovArchitect/caretaker-relay",
+  "branch": "checkpoint/caretaker-relay-track1-2026-07-22",
+  "review_commit": "51d878fd4957e85791d82cac5006d4e5cc7c2e0b",
+  "deployed_app_sha": "2858c2a",
+  "canonical_url": "https://care.niovlabs.com",
+  "foundation_repository": "NiovArchitect/caretaker-relay-foundation",
+  "primary_review": "docs/reviews/CARETAKER_RELAY_EXTERNAL_REVIEW_BUNDLE.md",
+  "behavior_audit": "docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md",
+  "action_matrix": "docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_ACTION_MATRIX.md",
+  "manifest": "docs/reviews/current-export/00_MANIFEST.md",
+  "raw_evidence_root": "docs/reviews/current-export/",
+  "recruitment": "PAUSED",
+  "founder_approval": "REQUIRED",
+  "product_modified_by_handoff": false,
+  "chatgpt_handoff_mechanism": "GITHUB",
+  "updated_at": "2026-07-23T17:42:53Z"
+}
