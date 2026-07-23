@@ -24,6 +24,7 @@ export function LoginGate({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [inviteToken, setInviteToken] = useState("");
+  const [showInvite, setShowInvite] = useState(false);
 
   useEffect(() => {
     void listLabPrincipals().then((rows) => {
@@ -68,38 +69,26 @@ export function LoginGate({
   }
 
   return (
-    <div className="app-shell cr-stage" data-testid="login-gate">
-      <div className="cr-ambient" aria-hidden />
-      <div className="login-scene">
-        <div className="login-brand-panel">
-          <div className="brand">
+    <div className="cr-login-viewport" data-testid="login-gate">
+      <div className="cr-login-ambient" aria-hidden />
+      <form
+        onSubmit={(ev) => void submit(ev)}
+        className="cr-login-panel"
+        aria-label="Sign in"
+      >
+        <div className="cr-login-panel-inner">
+          <div className="cr-login-brand">
             <span className="brand-mark" aria-hidden />
             <span>Caretaker Relay</span>
           </div>
-          <h1>Care without re-explaining</h1>
-          <p className="lead">
-            A quiet place for family and professional caregivers to keep one
-            shared picture of care — organized, sourced, and human-verified.
+          <h1 className="cr-login-title">Sign in</h1>
+          <p className="cr-login-sub">
+            Care without re-explaining — one shared picture for the people who
+            care for Evelyn.
           </p>
-          <div className="login-pill-row">
-            <span className="login-pill">Home &amp; community care</span>
-            <span className="login-pill">Human verifies truth</span>
-            <span className="login-pill">Intelligence with restraint</span>
-          </div>
-        </div>
 
-        <form
-          onSubmit={(ev) => void submit(ev)}
-          className="login-card"
-          aria-label="Sign in"
-        >
-          <h1>Sign in</h1>
-          <p className="muted">
-            Choose who you are. Identity is checked by the care service — not by
-            switching names on this device.
-          </p>
-          <label>
-            Choose caregiver
+          <label className="cr-field">
+            <span>Choose caregiver</span>
             <select
               data-testid="login-principal"
               value={selected}
@@ -112,8 +101,9 @@ export function LoginGate({
               ))}
             </select>
           </label>
-          <label>
-            Password
+
+          <label className="cr-field">
+            <span>Password</span>
             <input
               data-testid="login-password"
               type="password"
@@ -122,40 +112,52 @@ export function LoginGate({
               autoComplete="current-password"
             />
           </label>
+
           {error && (
             <p className="attention-limit" role="alert" data-testid="login-error">
               {error}
             </p>
           )}
-          <div className="btn-row" style={{ marginTop: 20 }}>
-            <button
-              type="submit"
-              className="primary-btn"
-              data-testid="login-submit"
-              disabled={busy}
-            >
-              {busy ? "Signing in…" : "Continue"}
-            </button>
-          </div>
-          <p className="muted" style={{ fontSize: "0.85rem", marginTop: 16 }}>
-            Evaluation household. Not production identity federation.
-          </p>
-          <label>
-            Invitation code (optional)
+
+          <button
+            type="submit"
+            className="primary-btn cr-login-submit"
+            data-testid="login-submit"
+            disabled={busy}
+          >
+            {busy ? "Signing in…" : "Continue"}
+          </button>
+
+          <button
+            type="button"
+            className="cr-login-invite-toggle"
+            onClick={() => setShowInvite((v) => !v)}
+          >
+            {showInvite ? "Hide invitation code" : "Have an invitation code?"}
+          </button>
+
+          {showInvite && (
+            <label className="cr-field">
+              <span>Invitation code</span>
+              <input
+                data-testid="login-invite-token"
+                value={inviteToken}
+                onChange={(e) => setInviteToken(e.target.value)}
+                placeholder="Paste code, then sign in"
+              />
+            </label>
+          )}
+          {/* Keep testid present for e2e when collapsed */}
+          {!showInvite && (
             <input
               data-testid="login-invite-token"
+              type="hidden"
               value={inviteToken}
-              onChange={(e) => setInviteToken(e.target.value)}
-              placeholder="If invited, paste the code"
+              readOnly
             />
-          </label>
-          {inviteToken.trim() && (
-            <p className="muted" style={{ fontSize: "0.82rem" }}>
-              After sign-in, open People to accept the invitation.
-            </p>
           )}
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 }

@@ -317,9 +317,11 @@ p {
     "top top top"
     "nav main relay"
     "status status status";
-  width: min(var(--cr-shell-max), calc(100% - 48px));
+  width: min(var(--cr-shell-max), calc(100vw - 48px));
+  max-width: calc(100vw - 48px);
   margin: 24px auto;
   min-height: calc(100dvh - 48px);
+  max-height: none;
   border-radius: var(--cr-r-xl);
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(var(--cr-blur-strong)) saturate(1.25);
@@ -327,152 +329,192 @@ p {
   border: 1px solid var(--cr-glass-edge);
   box-shadow: var(--cr-shadow-shell);
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* ==========================================================================
-   LOGIN — ambient stage + floating glass object
+   LOGIN — true viewport center, single floating glass panel
    ========================================================================== */
 
+.cr-login-viewport,
 .app-shell[data-testid="login-gate"],
 .app-shell[data-testid="auth-loading"] {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  max-width: none !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
   display: grid !important;
   grid-template-columns: 1fr !important;
   grid-template-rows: 1fr !important;
   grid-template-areas: none !important;
-  place-items: center;
-  width: 100% !important;
-  max-width: none !important;
-  min-height: 100dvh !important;
-  margin: 0 !important;
-  padding: var(--s-8) var(--s-5);
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  overflow: auto;
+  place-items: center !important;
+  justify-items: center !important;
+  align-items: center !important;
+  z-index: 100;
+  background:
+    radial-gradient(900px 620px at 50% 38%, rgba(160, 210, 235, 0.55), transparent 62%),
+    radial-gradient(700px 480px at 18% 80%, rgba(126, 184, 217, 0.28), transparent 55%),
+    radial-gradient(600px 400px at 85% 15%, rgba(255, 255, 255, 0.65), transparent 50%),
+    linear-gradient(165deg, #eef6fc 0%, #dcecf7 48%, #e8f2f8 100%) !important;
 }
 
-.login-scene {
+.cr-login-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.cr-login-ambient::before,
+.cr-login-ambient::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+}
+
+.cr-login-ambient::before {
+  width: min(520px, 70vw);
+  height: min(520px, 70vw);
+  top: 50%;
+  left: 50%;
+  transform: translate(-58%, -62%);
+  background: rgba(126, 184, 217, 0.5);
+}
+
+.cr-login-ambient::after {
+  width: min(420px, 55vw);
+  height: min(420px, 55vw);
+  top: 50%;
+  left: 50%;
+  transform: translate(12%, 8%);
+  background: rgba(15, 107, 124, 0.1);
+}
+
+/* Single centered glass object — never left rail */
+.cr-login-panel {
   position: relative;
   z-index: 1;
-  width: min(1080px, 100%);
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: var(--s-8);
-  align-items: center;
+  width: min(400px, calc(100vw - 40px));
+  max-height: min(640px, calc(100dvh - 40px));
+  margin: 0 auto;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(40px) saturate(1.35);
+  -webkit-backdrop-filter: blur(40px) saturate(1.35);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 2px 4px rgba(12, 40, 60, 0.04),
+    0 18px 40px rgba(20, 70, 100, 0.12),
+    0 40px 80px rgba(40, 100, 140, 0.1);
 }
 
-.login-brand-panel {
-  padding: var(--s-8);
+.cr-login-panel-inner {
+  padding: 36px 32px 28px;
+}
+
+.cr-login-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+  color: var(--cr-ink);
+  margin-bottom: 22px;
+}
+
+.cr-login-title {
+  text-align: center;
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 8px;
   color: var(--cr-ink);
 }
 
-.login-brand-panel .brand {
-  margin-bottom: var(--s-7);
+.cr-login-sub {
+  text-align: center;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--cr-ink-3);
+  margin: 0 0 22px;
 }
 
-.login-brand-panel h1 {
-  font-size: clamp(2.2rem, 3.5vw, 3rem);
-  line-height: 1.05;
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  max-width: 11ch;
-  margin-bottom: var(--s-5);
-}
-
-.login-brand-panel .lead {
-  font-size: 1.125rem;
-  line-height: 1.55;
-  color: var(--cr-ink-2);
-  max-width: 34ch;
-  margin-bottom: var(--s-6);
-}
-
-.login-pill-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-2);
-}
-
-.login-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-2);
-  padding: 8px 14px;
-  border-radius: var(--cr-r-pill);
-  background: var(--cr-glass-float);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--cr-glass-edge-soft);
-  box-shadow: var(--cr-shadow-card);
-  font-size: var(--t-meta);
-  font-weight: 600;
-  color: var(--cr-ink-2);
-}
-
-.login-card,
-.cr-login-glass {
-  width: min(420px, 100%);
-  justify-self: end;
-  padding: var(--s-8) var(--s-7);
-  border-radius: var(--cr-r-lg);
-  background: var(--cr-glass-strong);
-  backdrop-filter: blur(var(--cr-blur-strong)) saturate(1.3);
-  -webkit-backdrop-filter: blur(var(--cr-blur-strong)) saturate(1.3);
-  border: 1px solid var(--cr-glass-edge);
-  box-shadow: var(--cr-shadow-float);
-  position: relative;
-}
-
-.login-card::before,
-.cr-login-glass::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-
-.login-card h1,
-.cr-login-glass h1 {
-  font-size: 1.75rem;
-  margin-bottom: var(--s-3);
-}
-
-.login-card label,
-.cr-login-glass label {
+.cr-field {
   display: block;
-  margin-top: var(--s-5);
-  font-size: var(--t-support);
+  margin-bottom: 14px;
+}
+
+.cr-field > span {
+  display: block;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--cr-ink-3);
+  margin-bottom: 6px;
 }
 
-.login-card select,
-.login-card input[type="password"],
-.login-card input[type="text"],
-.cr-login-glass select,
-.cr-login-glass input {
+.cr-field select,
+.cr-field input {
   display: block;
   width: 100%;
-  margin-top: var(--s-2);
-  min-height: var(--cr-tap);
-  padding: 12px 16px;
-  border-radius: var(--cr-r-sm);
-  border: 1px solid var(--cr-line-strong);
-  background: rgba(255, 255, 255, 0.88);
+  min-height: 48px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 70, 90, 0.12);
+  background: rgba(255, 255, 255, 0.9);
   font-size: 1rem;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.login-card select:focus,
-.login-card input:focus,
-.cr-login-glass select:focus,
-.cr-login-glass input:focus {
+.cr-field select:focus,
+.cr-field input:focus {
   outline: none;
   border-color: var(--cr-accent);
   box-shadow: 0 0 0 4px var(--cr-accent-soft);
+}
+
+.cr-login-submit {
+  width: 100%;
+  margin-top: 8px;
+  justify-content: center;
+}
+
+.cr-login-invite-toggle {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  color: var(--cr-accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.cr-login-invite-toggle:hover {
+  text-decoration: underline;
+}
+
+/* Legacy class aliases (unused login-scene removed from composition) */
+.login-scene,
+.login-brand-panel,
+.login-card {
+  /* no-op leftovers avoided — new markup uses cr-login-* */
 }
 
 /* ==========================================================================
@@ -1575,27 +1617,13 @@ p {
     grid-template-columns: 1fr;
   }
 
-  .login-scene {
-    grid-template-columns: 1fr;
-    gap: var(--s-6);
+  .cr-login-panel {
+    width: min(400px, calc(100vw - 32px));
+    max-height: calc(100dvh - 32px);
   }
 
-  .login-brand-panel {
-    padding: var(--s-4);
-    text-align: center;
-  }
-
-  .login-brand-panel h1 {
-    max-width: none;
-  }
-
-  .login-pill-row {
-    justify-content: center;
-  }
-
-  .login-card,
-  .cr-login-glass {
-    justify-self: center;
+  .cr-login-panel-inner {
+    padding: 28px 22px 22px;
   }
 }
 
