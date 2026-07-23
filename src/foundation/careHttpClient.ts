@@ -79,6 +79,7 @@ export async function careLogin(
     session_id: string;
     care_person_id: string;
     display_name: string;
+    roles?: string[];
     auth_mode?: string;
     entity_id?: string;
   }>("/api/v1/care/auth/login", {
@@ -320,4 +321,109 @@ export async function careContext(
 
 export function getCareApiBaseUrl(): string {
   return DEFAULT_BASE;
+}
+
+export async function careMe(token: string, baseUrl?: string) {
+  return request<{
+    ok: boolean;
+    care_person_id: string;
+    display_name: string;
+    roles: string[];
+    session_id: string;
+    auth_mode?: string;
+  }>("/api/v1/care/me", { token, baseUrl });
+}
+
+export async function careLabPrincipals(baseUrl?: string) {
+  return request<{
+    ok: boolean;
+    principals: Array<{
+      care_person_id: string;
+      display_name: string;
+      role_label: string;
+    }>;
+  }>("/api/v1/care/auth/lab-principals", { baseUrl });
+}
+
+export async function careCreateInvitation(
+  token: string,
+  careRecipientId: string,
+  body: {
+    invitee_care_person_id: string;
+    invitee_display_name?: string;
+    role?: string;
+    role_label?: string;
+  },
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    invitation: {
+      id: string;
+      token: string;
+      invitee_care_person_id: string;
+      status: string;
+    };
+  }>(`/api/v1/care/recipients/${careRecipientId}/invitations`, {
+    method: "POST",
+    token,
+    body,
+    baseUrl,
+  });
+}
+
+export async function careAcceptInvitation(
+  token: string,
+  inviteToken: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    invitation: { id: string; status: string };
+    membership: { person_id: string; status: string };
+  }>(`/api/v1/care/invitations/${encodeURIComponent(inviteToken)}/accept`, {
+    method: "POST",
+    token,
+    body: {},
+    baseUrl,
+  });
+}
+
+export async function careListCoordination(
+  token: string,
+  careRecipientId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    messages: Array<{
+      id: string;
+      from_person_id: string;
+      from_display_name: string;
+      to_person_id?: string;
+      body: string;
+      created_at: string;
+    }>;
+  }>(`/api/v1/care/recipients/${careRecipientId}/coordination`, {
+    token,
+    baseUrl,
+  });
+}
+
+export async function carePostCoordination(
+  token: string,
+  careRecipientId: string,
+  body: string,
+  toPersonId?: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    message: { id: string; body: string; created_at: string };
+  }>(`/api/v1/care/recipients/${careRecipientId}/coordination`, {
+    method: "POST",
+    token,
+    body: { body, to_person_id: toPersonId },
+    baseUrl,
+  });
 }

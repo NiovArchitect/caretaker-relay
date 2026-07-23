@@ -6,6 +6,7 @@ import {
   applyCareCorrection,
   answerCareQuestion,
   fetchLatestHandoff,
+  getSessionIdentity,
   restoreSession,
   clearSession,
   careRecipient,

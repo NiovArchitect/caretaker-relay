@@ -23,8 +23,8 @@
     "app": "2858c2a2904e43cf6aea4b796e2c8f8ca0422330",
     "foundation": "abbea1f78b31f76889f45d76bcec43761b37e5d6"
   },
-  "current_phase": "real_product_behavior_reconstruction",
-  "current_gate": "FOUNDER_BEHAVIOR_APPROVAL_REQUIRED_AFTER_DEMO_SHELL_REJECTION",
+  "current_phase": "real_household_closure",
+  "current_gate": "THREE_PRINCIPAL_HOUSEHOLD_PARTIAL_TECHNICAL",
   "online_deployment_audit": "COMPLETED",
   "online_research_environment": "READY",
   "session1_status": "NOT_STARTED",
@@ -158,7 +158,7 @@
   ],
   "next_authorized_action": "FOUNDER_REWALKS_LIVE_PRODUCT_BEHAVIOR",
   "cold_context_online_recovery": "READY",
-  "updated_at": "2026-07-23T17:42:53Z",
+  "updated_at": "2026-07-23T19:30:42Z",
   "public_research_environment": "READY",
   "canonical_public_url": "https://care.niovlabs.com",
   "render_fallback_url": "https://caretaker-relay-web.onrender.com",
@@ -229,5 +229,6 @@
     "handoff_json": "docs/reviews/CHATGPT_REVIEW_HANDOFF.json",
     "handoff_md": "docs/reviews/CHATGPT_REVIEW_HANDOFF.md",
     "primary_review": "docs/reviews/CARETAKER_RELAY_EXTERNAL_REVIEW_BUNDLE.md"
-  }
+  },
+  "technical_multi_human_loop": "PARTIAL"
 }

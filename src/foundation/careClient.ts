@@ -31,12 +31,12 @@ import {
   careConfirm,
   careCorrect,
   careExport,
-  careHealth,
   careHandoffs,
-  careLabLogin,
+  careLogin,
   careState,
   careToday,
   careUnderstand,
+  getCareApiBaseUrl,
 } from "./careHttpClient";
 
 export type TranscriptMeta = {
@@ -199,32 +199,214 @@ export function getEvidenceLabel(): {
   };
 }
 
+const SESSION_KEY = "cr_care_session_v1";
+
+function roleLabelFromRoles(roles: string[]): string {
+  if (roles.includes("primary")) return "Primary family caregiver";
+  if (roles.includes("paid_caregiver") || roles.includes("professional"))
+    return "Professional caregiver";
+  if (roles.includes("adult_child") || roles.includes("family_caregiver"))
+    return "Family / friend caregiver";
+  return "Caregiver";
+}
+
+function persistSession(token: string, identity: SessionIdentity) {
+  try {
+    sessionStorage.setItem(
+      SESSION_KEY,
+      JSON.stringify({ token, identity }),
+    );
+  } catch {
+    /* ignore */
+  }
+}
+
+function loadPersistedSession(): {
+  token: string;
+  identity: SessionIdentity;
+} | null {
+  try {
+    const raw = sessionStorage.getItem(SESSION_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as {
+      token?: string;
+      identity?: SessionIdentity;
+    };
+    if (parsed.token && parsed.identity?.carePersonId) {
+      return { token: parsed.token, identity: parsed.identity };
+    }
+  } catch {
+    /* ignore */
+  }
+  return null;
+}
+
+export function clearSession() {
+  httpToken = null;
+  httpAvailable = null;
+  sessionIdentity = null;
+  try {
+    sessionStorage.removeItem(SESSION_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
+export type LabPrincipal = {
+  care_person_id: string;
+  display_name: string;
+  role_label: string;
+};
+
+export async function listLabPrincipals(): Promise<LabPrincipal[]> {
+  const base = getCareApiBaseUrl();
+  try {
+    const res = await fetch(`${base}/api/v1/care/auth/lab-principals`);
+    const json = (await res.json()) as {
+      ok?: boolean;
+      principals?: LabPrincipal[];
+    };
+    if (json.ok && Array.isArray(json.principals)) return json.principals;
+  } catch {
+    /* fall through */
+  }
+  return [];
+}
+
+/**
+ * Explicit multi-principal product entry — server establishes JWT.
+ * Does NOT auto-login as Marcus.
+ */
+export async function loginAsPrincipal(
+  carePersonId: string,
+  password: string,
+): Promise<{ ok: boolean; session?: SessionIdentity; message?: string }> {
+  const res = await careLogin(carePersonId, password);
+  if (!res.ok) {
+    return { ok: false, message: res.message };
+  }
+  httpToken = res.data.token;
+  httpAvailable = true;
+  transportUsed = "http";
+  const identity: SessionIdentity = {
+    carePersonId: res.data.care_person_id,
+    displayName: res.data.display_name,
+    roleLabel: roleLabelFromRoles(
+      (res.data as { roles?: string[] }).roles ?? [],
+    ),
+    authMode: res.data.auth_mode,
+  };
+  // Prefer roles from response when present
+  const roles = (res.data as { roles?: string[] }).roles;
+  if (roles?.length) {
+    identity.roleLabel = roleLabelFromRoles(roles);
+  }
+  sessionIdentity = identity;
+  persistSession(httpToken, identity);
+  return { ok: true, session: identity };
+}
+
+export async function restoreSession(): Promise<SessionIdentity | null> {
+  const persisted = loadPersistedSession();
+  if (!persisted) return null;
+  httpToken = persisted.token;
+  httpAvailable = true;
+  sessionIdentity = persisted.identity;
+  transportUsed = "http";
+  // Validate token still works
+  const { careMe } = await import("./careHttpClient");
+  const me = await careMe(persisted.token);
+  if (!me.ok) {
+    clearSession();
+    return null;
+  }
+  sessionIdentity = {
+    carePersonId: me.data.care_person_id,
+    displayName: me.data.display_name,
+    roleLabel: roleLabelFromRoles(me.data.roles ?? []),
+    authMode: me.data.auth_mode,
+  };
+  persistSession(persisted.token, sessionIdentity);
+  return sessionIdentity;
+}
+
+export async function createInvitation(inviteeCarePersonId: string) {
+  const ok = await ensureHttpSession();
+  if (!ok || !httpToken) return { ok: false as const, message: "Not signed in" };
+  const { careCreateInvitation } = await import("./careHttpClient");
+  const res = await careCreateInvitation(httpToken, careRecipient.id, {
+    invitee_care_person_id: inviteeCarePersonId,
+  });
+  if (!res.ok) return { ok: false as const, message: res.message };
+  return { ok: true as const, invitation: res.data.invitation };
+}
+
+export async function acceptInvitation(token: string) {
+  const ok = await ensureHttpSession();
+  if (!ok || !httpToken) return { ok: false as const, message: "Not signed in" };
+  const { careAcceptInvitation } = await import("./careHttpClient");
+  const res = await careAcceptInvitation(httpToken, token);
+  if (!res.ok) return { ok: false as const, message: res.message };
+  return { ok: true as const, data: res.data };
+}
+
+export async function fetchCoordination() {
+  const ok = await ensureHttpSession();
+  if (!ok || !httpToken)
+    return { ok: false as const, messages: [] as Array<Record<string, string>> };
+  const { careListCoordination } = await import("./careHttpClient");
+  const res = await careListCoordination(httpToken, careRecipient.id);
+  if (!res.ok) return { ok: false as const, messages: [] };
+  return {
+    ok: true as const,
+    messages: res.data.messages.map((m) => ({
+      id: m.id,
+      from: m.from_display_name,
+      body: m.body,
+      at: m.created_at,
+    })),
+  };
+}
+
+export async function postCoordination(body: string, toPersonId?: string) {
+  const ok = await ensureHttpSession();
+  if (!ok || !httpToken) return { ok: false as const, message: "Not signed in" };
+  const { carePostCoordination } = await import("./careHttpClient");
+  const res = await carePostCoordination(
+    httpToken,
+    careRecipient.id,
+    body,
+    toPersonId,
+  );
+  if (!res.ok) return { ok: false as const, message: res.message };
+  return { ok: true as const };
+}
+
+/**
+ * Requires an explicit login (or restored session). No silent auto-Marcus.
+ */
 async function ensureHttpSession(): Promise<boolean> {
   if (transportPref() === "package") {
     httpAvailable = false;
     return false;
   }
-  if (httpAvailable === false) return false;
-  if (httpToken) return true;
-  const health = await careHealth();
-  if (!health.ok) {
-    httpAvailable = transportPref() === "http" ? false : false;
-    return false;
+  if (httpToken) {
+    httpAvailable = true;
+    return true;
   }
-  const login = await careLabLogin(people.sadeil.id, "sadeil-lab-password");
-  if (!login.ok) {
-    httpAvailable = false;
-    return false;
-  }
-  httpToken = login.data.token;
-  httpAvailable = true;
-  sessionIdentity = {
-    carePersonId: login.data.care_person_id,
-    displayName: login.data.display_name,
-    roleLabel: "Family caregiver",
-    authMode: login.data.auth_mode,
-  };
-  return true;
+  const restored = await restoreSession();
+  if (restored && httpToken) return true;
+  httpAvailable = false;
+  return false;
+}
+
+export function isAuthenticated(): boolean {
+  return !!httpToken && !!sessionIdentity && httpAvailable !== false;
+}
+
+/** Test/debug: whether HTTP transport reported available. */
+export function getHttpAvailableFlag(): boolean | null {
+  return httpAvailable;
 }
 
 export async function proposeCareUpdate(

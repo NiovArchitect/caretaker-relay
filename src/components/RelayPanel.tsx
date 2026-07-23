@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { RelayMessage, VerificationBundle } from "../domain/types";
 import { Composer } from "./Composer";
 import { VerifyPanel } from "./VerifyPanel";
 import type { TranscriptMeta } from "../foundation/careClient";
-import { careRecipient } from "../scenario/olivia";
+import {
+  fetchCoordination,
+  postCoordination,
+} from "../foundation/careClient";
+import { careRecipient, people } from "../scenario/olivia";
 
 type RelayMode = "relay" | "messages";
 
@@ -37,6 +41,35 @@ export function RelayPanel({
   onCloseMobile?: () => void;
 }) {
   const [mode, setMode] = useState<RelayMode>("relay");
+  const [coord, setCoord] = useState<
+    Array<{ id: string; from: string; body: string; at: string }>
+  >([]);
+  const [coordDraft, setCoordDraft] = useState("");
+  const [coordBusy, setCoordBusy] = useState(false);
+  const [coordErr, setCoordErr] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (mode !== "messages") return;
+    void fetchCoordination().then((r) => {
+      if (r.ok) setCoord(r.messages);
+    });
+  }, [mode]);
+
+  async function sendCoord() {
+    const text = coordDraft.trim();
+    if (!text || coordBusy) return;
+    setCoordBusy(true);
+    setCoordErr(null);
+    const res = await postCoordination(text, people.maya.id);
+    setCoordBusy(false);
+    if (!res.ok) {
+      setCoordErr(res.message ?? "Failed to post");
+      return;
+    }
+    setCoordDraft("");
+    const r = await fetchCoordination();
+    if (r.ok) setCoord(r.messages);
+  }
 
   return (
     <aside
@@ -48,14 +81,14 @@ export function RelayPanel({
         <div>
           <div className="relay-panel-title">
             <span className="relay-pulse" aria-hidden />
-            {mode === "relay" ? "Relay" : "Messages"}
+            {mode === "relay" ? "Relay" : "Coordination"}
           </div>
           <div className="relay-panel-sub">
             {mode === "relay"
               ? correcting
                 ? "Correction mode — prior evidence stays on record"
                 : "AI · organizes updates · holds uncertainty · asks you to verify"
-              : "People messaging — only when real threads exist"}
+              : "Human coordination · principal-attributed · care-scoped"}
           </div>
         </div>
         {onCloseMobile && (
@@ -74,7 +107,7 @@ export function RelayPanel({
       <div
         className="relay-mode-tabs"
         role="tablist"
-        aria-label="Relay or human messages"
+        aria-label="Relay or human coordination"
       >
         <button
           type="button"
@@ -94,7 +127,7 @@ export function RelayPanel({
           data-testid="relay-mode-messages"
           onClick={() => setMode("messages")}
         >
-          Messages
+          Coordination
         </button>
       </div>
 
@@ -131,8 +164,7 @@ export function RelayPanel({
 
           <div className="relay-composer-wrap" data-testid="composer-dock">
             <p className="muted" style={{ fontSize: "0.75rem", margin: "0 0 8px" }}>
-              Type what happened in your own words. No prewritten care workflow
-              buttons.
+              Type what happened in your own words.
             </p>
             <Composer
               value={draft}
@@ -151,16 +183,44 @@ export function RelayPanel({
         </>
       ) : (
         <div className="relay-thread" data-testid="human-messages">
-          <div className="bubble bubble-system" data-testid="messages-not-available">
-            Human messaging is <strong>not available</strong> in this build.
-            {"\n\n"}
-            There is no message thread model (sender, recipient, care recipient,
-            body, status) wired end-to-end yet.
-            {"\n\n"}
-            For continuity today, use a <strong>real handoff</strong> derived
-            from confirmed care truth for {careRecipient.displayName}.
-            {"\n\n"}
-            We will not show fake chats or fake delivery states.
+          <div className="bubble bubble-system">
+            Human coordination for {careRecipient.displayName}. Not AI. Messages
+            are attributed to the signed-in principal and persisted server-side.
+          </div>
+          {coord.map((m) => (
+            <div key={m.id} className="bubble bubble-user" data-testid="coord-msg">
+              <strong>{m.from}</strong>
+              {"\n"}
+              {m.body}
+              {"\n"}
+              <span className="muted" style={{ fontSize: "0.75rem" }}>
+                {m.at}
+              </span>
+            </div>
+          ))}
+          {coordErr && (
+            <p className="attention-limit" role="alert">
+              {coordErr}
+            </p>
+          )}
+          <div className="relay-composer-wrap">
+            <textarea
+              data-testid="coord-input"
+              value={coordDraft}
+              onChange={(e) => setCoordDraft(e.target.value)}
+              rows={3}
+              placeholder="Write a coordination note for the care circle…"
+              style={{ width: "100%", fontFamily: "var(--cr-font)" }}
+            />
+            <button
+              type="button"
+              className="primary-btn"
+              data-testid="coord-send"
+              disabled={coordBusy || !coordDraft.trim()}
+              onClick={() => void sendCoord()}
+            >
+              {coordBusy ? "Posting…" : "Post coordination"}
+            </button>
           </div>
         </div>
       )}

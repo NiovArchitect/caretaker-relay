@@ -2,13 +2,20 @@ import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
 import { NetworkTracker } from "./evidence";
 
-/** Wait for HTTP session bootstrap (login + today). */
+/** Wait for HTTP session bootstrap (explicit login + today). */
 export async function waitForHttpBootstrap(
   page: Page,
   tracker: NetworkTracker,
   timeoutMs = 25_000,
 ) {
   await page.goto("/");
+  // Explicit multi-principal login (no auto-Marcus)
+  const login = page.getByTestId("login-gate");
+  if (await login.isVisible({ timeout: 8_000 }).catch(() => false)) {
+    await page.getByTestId("login-principal").selectOption("p-sadeil");
+    await page.getByTestId("login-password").fill("sadeil-lab-password");
+    await page.getByTestId("login-submit").click();
+  }
   await expect(page.getByTestId("app-shell")).toBeVisible({ timeout: 15_000 });
   // Lab login + today projection
   await expect
@@ -16,7 +23,8 @@ export async function waitForHttpBootstrap(
       () =>
         tracker.hasPath("/auth/") ||
         tracker.hasPath("/today") ||
-        tracker.hasPath("/health"),
+        tracker.hasPath("/health") ||
+        tracker.hasPath("/me"),
       { timeout: timeoutMs },
     )
     .toBeTruthy();

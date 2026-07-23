@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { careRecipient } from "../scenario/olivia";
 import {
+  acceptInvitation,
+  createInvitation,
   fetchCircleMembers,
+  getSessionIdentity,
   type CareCircleMemberRow,
 } from "../foundation/careClient";
 
@@ -10,19 +13,54 @@ export function PeoplePage() {
   const [source, setSource] = useState<string>("");
   const [selected, setSelected] = useState<CareCircleMemberRow | null>(null);
   const [loading, setLoading] = useState(true);
+  const [inviteeId, setInviteeId] = useState("p-maya");
+  const [inviteBusy, setInviteBusy] = useState(false);
+  const [inviteMsg, setInviteMsg] = useState<string | null>(null);
+  const [inviteToken, setInviteToken] = useState("");
+  const [acceptToken, setAcceptToken] = useState("");
+  const session = getSessionIdentity();
 
-  useEffect(() => {
-    let cancelled = false;
+  function reload() {
+    setLoading(true);
     void fetchCircleMembers().then((r) => {
-      if (cancelled) return;
       setMembers(r.members);
       setSource(r.source);
       setLoading(false);
     });
-    return () => {
-      cancelled = true;
-    };
+  }
+
+  useEffect(() => {
+    reload();
   }, []);
+
+  async function onInvite() {
+    setInviteBusy(true);
+    setInviteMsg(null);
+    const res = await createInvitation(inviteeId);
+    setInviteBusy(false);
+    if (!res.ok) {
+      setInviteMsg(res.message ?? "Invite failed");
+      return;
+    }
+    setInviteToken(res.invitation.token);
+    setInviteMsg(
+      `Invitation created for ${res.invitation.invitee_care_person_id}. Token ready for invitee to accept after their own sign-in.`,
+    );
+    reload();
+  }
+
+  async function onAccept() {
+    setInviteBusy(true);
+    setInviteMsg(null);
+    const res = await acceptInvitation(acceptToken.trim());
+    setInviteBusy(false);
+    if (!res.ok) {
+      setInviteMsg(res.message ?? "Accept failed");
+      return;
+    }
+    setInviteMsg("Invitation accepted — membership active.");
+    reload();
+  }
 
   return (
     <>
@@ -32,8 +70,8 @@ export function PeoplePage() {
           Who is authorized for {careRecipient.displayName}
         </p>
         <p className="muted" style={{ marginTop: 8, maxWidth: 560 }}>
-          Membership from the care space access model — not a static cast list
-          and not an agency roster.
+          Membership from the care space access model. Signed in as{" "}
+          <strong>{session.displayName}</strong>.
         </p>
         <p className="muted" data-testid="people-source" style={{ fontSize: "0.8rem" }}>
           Source: {source || "…"}
@@ -86,13 +124,65 @@ export function PeoplePage() {
         ))}
       </section>
 
-      <section className="section surface-verify" aria-label="Invitation status">
+      <section className="section surface-reported" aria-label="Invitations">
         <h2>Invitations</h2>
-        <p className="muted" data-testid="invite-not-available">
-          Caregiver invitation lifecycle is{" "}
-          <strong>not available in this build</strong>. No Invite button is
-          shown until create → token → accept → membership is real end-to-end.
+        <p className="muted">
+          Real invite lifecycle: create token → invitee signs in independently →
+          accept → membership. No fake Invite button.
         </p>
+        <label className="muted" style={{ display: "block", marginTop: 8 }}>
+          Invitee principal id
+          <select
+            data-testid="invite-person"
+            value={inviteeId}
+            onChange={(e) => setInviteeId(e.target.value)}
+            style={{ display: "block", width: "100%", marginTop: 4, minHeight: 36 }}
+          >
+            <option value="p-maya">p-maya · Maya Bennett</option>
+            <option value="p-walter">p-walter · Daniel Kim</option>
+          </select>
+        </label>
+        <div className="btn-row" style={{ marginTop: 10 }}>
+          <button
+            type="button"
+            className="primary-btn"
+            data-testid="invite-create"
+            disabled={inviteBusy}
+            onClick={() => void onInvite()}
+          >
+            Create invitation
+          </button>
+        </div>
+        {inviteToken && (
+          <p data-testid="invite-token" className="muted" style={{ wordBreak: "break-all" }}>
+            Token: {inviteToken}
+          </p>
+        )}
+        <label className="muted" style={{ display: "block", marginTop: 14 }}>
+          Accept invitation (as current signed-in principal)
+          <input
+            data-testid="invite-accept-token"
+            value={acceptToken}
+            onChange={(e) => setAcceptToken(e.target.value)}
+            style={{ display: "block", width: "100%", marginTop: 4, minHeight: 36 }}
+          />
+        </label>
+        <div className="btn-row" style={{ marginTop: 8 }}>
+          <button
+            type="button"
+            className="secondary-btn"
+            data-testid="invite-accept"
+            disabled={inviteBusy || !acceptToken.trim()}
+            onClick={() => void onAccept()}
+          >
+            Accept invitation
+          </button>
+        </div>
+        {inviteMsg && (
+          <p className="attention-limit" role="status" data-testid="invite-status">
+            {inviteMsg}
+          </p>
+        )}
       </section>
 
       {selected && (
