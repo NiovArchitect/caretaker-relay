@@ -1,0 +1,164 @@
+GENERATED_AT: 2026-07-23T17:08:35Z
+ROOT: /Users/genghishameha/dev/NIOV Labs/github/caretaker-relay
+
+=== find src (relative) ===
+src/App.tsx
+src/components/BottomNav.tsx
+src/components/Composer.tsx
+src/components/HandoffPanel.tsx
+src/components/RelayPanel.tsx
+src/components/SideNav.tsx
+src/components/VerifyPanel.tsx
+src/domain/foundationBridge.ts
+src/domain/types.ts
+src/domain/understand.ts
+src/foundation/careClient.ts
+src/foundation/careHttpClient.ts
+src/main.tsx
+src/pages/CarePage.tsx
+src/pages/CirclePage.tsx
+src/pages/DocumentsPage.tsx
+src/pages/PeoplePage.tsx
+src/pages/RelayPage.tsx
+src/pages/TodayPage.tsx
+src/scenario/olivia.ts
+src/styles/global.css
+src/vite-env.d.ts
+
+=== find tests e2e ===
+e2e/cr-browser-auth-errors.spec.ts
+e2e/cr-browser-core.spec.ts
+e2e/cr-browser-safety.spec.ts
+e2e/cr-browser-voice.spec.ts
+e2e/helpers/actions.ts
+e2e/helpers/evidence.ts
+tests/foundation-wiring.test.ts
+tests/product-isolation.test.ts
+tests/understand-loop.test.ts
+
+=== vendor/care-domain/src (top-level structure) ===
+vendor/care-domain/src/datasets/golden.ts
+vendor/care-domain/src/fhir/mapping.ts
+vendor/care-domain/src/index.ts
+vendor/care-domain/src/llm/provider.ts
+vendor/care-domain/src/scenario/olivia.ts
+vendor/care-domain/src/services/access.ts
+vendor/care-domain/src/services/care-auth.ts
+vendor/care-domain/src/services/dose-units.ts
+vendor/care-domain/src/services/export.ts
+vendor/care-domain/src/services/idempotency.ts
+vendor/care-domain/src/services/loop.ts
+vendor/care-domain/src/services/safety.ts
+vendor/care-domain/src/services/timezone.ts
+vendor/care-domain/src/services/understand.ts
+vendor/care-domain/src/store/file-store.ts
+vendor/care-domain/src/store/memory-store.ts
+vendor/care-domain/src/types.ts
+
+=== package.json scripts ===
+{
+  "dev": "vite",
+  "build": "tsc --noEmit -p tsconfig.json && vite build",
+  "preview": "vite preview",
+  "test": "vitest run",
+  "test:watch": "vitest",
+  "typecheck": "tsc --noEmit -p tsconfig.json",
+  "test:e2e": "playwright test --config=playwright.config.ts",
+  "test:browser-campaign": "npx tsx scripts/run-real-browser-campaign.mts",
+  "probe:live-model": "npx tsx scripts/live-model-probe.mts",
+  "vendor:care-packages": "bash scripts/vendor-care-packages.sh"
+}
+
+=== foundation care routes / packages (subset) ===
+packages/care-domain/src/datasets/golden.ts
+packages/care-domain/src/fhir/mapping.ts
+packages/care-domain/src/index.ts
+packages/care-domain/src/llm/provider.ts
+packages/care-domain/src/scenario/olivia.ts
+packages/care-domain/src/services/access.ts
+packages/care-domain/src/services/care-auth.ts
+packages/care-domain/src/services/dose-units.ts
+packages/care-domain/src/services/export.ts
+packages/care-domain/src/services/idempotency.ts
+packages/care-domain/src/services/loop.ts
+packages/care-domain/src/services/safety.ts
+packages/care-domain/src/services/timezone.ts
+packages/care-domain/src/services/understand.ts
+packages/care-domain/src/store/file-store.ts
+packages/care-domain/src/store/memory-store.ts
+packages/care-domain/src/types.ts
+---
+apps/api/src/routes/actions.routes.ts
+apps/api/src/routes/admin-llm-status.routes.ts
+apps/api/src/routes/analytics.routes.ts
+apps/api/src/routes/audit.routes.ts
+apps/api/src/routes/auth-admin.routes.ts
+apps/api/src/routes/auth.routes.ts
+apps/api/src/routes/break-glass.routes.ts
+apps/api/src/routes/calendar-event.routes.ts
+apps/api/src/routes/care.routes.ts
+apps/api/src/routes/coe.routes.ts
+apps/api/src/routes/cohort.routes.ts
+apps/api/src/routes/compliance-sharing.routes.ts
+apps/api/src/routes/compliance.routes.ts
+apps/api/src/routes/connector-adapter-status.routes.ts
+apps/api/src/routes/connector-data.routes.ts
+apps/api/src/routes/connector-oauth.routes.ts
+apps/api/src/routes/connector-rails.routes.ts
+apps/api/src/routes/connector.routes.ts
+apps/api/src/routes/console.routes.ts
+apps/api/src/routes/cosmp-capsule-management.routes.ts
+apps/api/src/routes/cosmp.routes.ts
+apps/api/src/routes/developer.routes.ts
+apps/api/src/routes/dmw-registry.routes.ts
+apps/api/src/routes/escalation.routes.ts
+apps/api/src/routes/foundation.routes.ts
+apps/api/src/routes/google-doc.routes.ts
+apps/api/src/routes/health.routes.ts
+apps/api/src/routes/hive-admin.routes.ts
+apps/api/src/routes/hive.routes.ts
+apps/api/src/routes/inbound-signal.routes.ts
+apps/api/src/routes/notification.routes.ts
+apps/api/src/routes/onboarding.routes.ts
+apps/api/src/routes/org-collaboration-policy.routes.ts
+apps/api/src/routes/org.routes.ts
+apps/api/src/routes/otzar-ai-employees.routes.ts
+apps/api/src/routes/otzar-authority-grants.routes.ts
+apps/api/src/routes/otzar-beam-status.routes.ts
+apps/api/src/routes/otzar-calendar-context.routes.ts
+apps/api/src/routes/otzar-collaboration-workspace.routes.ts
+apps/api/src/routes/otzar-collaboration.routes.ts
+apps/api/src/routes/otzar-correction-memory.routes.ts
+apps/api/src/routes/otzar-dandelion.routes.ts
+apps/api/src/routes/otzar-enterprise-tools.routes.ts
+apps/api/src/routes/otzar-external-collaborator.routes.ts
+apps/api/src/routes/otzar-meeting-capture.routes.ts
+apps/api/src/routes/otzar-my-day.routes.ts
+apps/api/src/routes/otzar-observation.routes.ts
+apps/api/src/routes/otzar-observe.routes.ts
+apps/api/src/routes/otzar-proposed-pattern.routes.ts
+apps/api/src/routes/otzar-relay.routes.ts
+apps/api/src/routes/otzar-settlement.routes.ts
+apps/api/src/routes/otzar-twin-work.routes.ts
+apps/api/src/routes/otzar-voice-capture.routes.ts
+apps/api/src/routes/otzar-voice-note.routes.ts
+apps/api/src/routes/otzar-voice-ready.routes.ts
+apps/api/src/routes/otzar-voice-transcribe.routes.ts
+apps/api/src/routes/otzar-voice-tts.routes.ts
+apps/api/src/routes/otzar-work-project.routes.ts
+apps/api/src/routes/otzar-work-style-learning.routes.ts
+apps/api/src/routes/otzar.routes.ts
+apps/api/src/routes/platform.routes.ts
+apps/api/src/routes/playground.routes.ts
+apps/api/src/routes/proposed-action.routes.ts
+apps/api/src/routes/regulator.routes.ts
+apps/api/src/routes/system-runtime.routes.ts
+apps/api/src/routes/voice.routes.ts
+apps/api/src/routes/wallet.routes.ts
+apps/api/src/routes/work-os-authority.routes.ts
+apps/api/src/routes/work-os-ledger.routes.ts
+apps/api/src/routes/working-set.routes.ts
+apps/api/src/care-app.ts
+apps/api/src/routes/care.routes.ts
+apps/api/src/services/care/care-runtime.service.ts
+apps/api/src/services/care/prisma-care-store.ts

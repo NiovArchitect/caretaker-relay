@@ -1,0 +1,33 @@
+GENERATED_AT: 2026-07-23T17:09:22Z
+COMMAND: npm run test:care
+
+
+> caretaker-relay-foundation@0.1.0 test:care
+> vitest --config vitest.unit.config.ts --run tests/unit/care/
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v2.1.9 /Users/genghishameha/dev/NIOV Labs/github/caretaker-relay-foundation
+
+ ↓ tests/unit/care/founder-e2e-smoke.test.ts (12 tests | 12 skipped)
+ ✓ tests/unit/care/care-loop.e2e.test.ts (25 tests) 57ms
+ ✓ tests/unit/care/care-http.acceptance.test.ts (8 tests) 574ms
+ ✓ tests/unit/care/med-idempotency-unified.test.ts (4 tests) 2888ms
+   ✓ Med idempotency across API restart (Prisma) > same logical med + different retry keys → one administration; survives restart 1824ms
+   ✓ Med idempotency across API restart (Prisma) > DEMO_UTTERANCE double confirm does not multiply meds 525ms
+ ✓ tests/unit/care/care-prisma-auth.acceptance.test.ts (4 tests) 3955ms
+   ✓ Prisma + Foundation Auth care acceptance > canonical loop via Foundation auth + prisma durability across reload 1779ms
+   ✓ Prisma + Foundation Auth care acceptance > voice understand converges on same pipeline 529ms
+   ✓ Prisma + Foundation Auth care acceptance > revocation blocks subsequent reads 1169ms
+ ✓ tests/unit/care/idempotency-semantic.test.ts (10 tests) 6ms
+ ✓ tests/unit/care/care-llm-fixtures.test.ts (3 tests) 9ms
+ ✓ tests/unit/care/dose-units.test.ts (12 tests) 9ms
+ ↓ tests/unit/care/dev-service-lifecycle.test.ts (3 tests | 3 skipped)
+ ↓ tests/unit/care/apt-debug.test.ts (1 test | 1 skipped)
+ ✓ tests/unit/care/judge-loop-extract.test.ts (1 test) 12ms
+
+ Test Files  8 passed | 3 skipped (11)
+      Tests  67 passed | 16 skipped (83)
+   Start at  10:09:24
+   Duration  10.29s (transform 775ms, setup 0ms, collect 2.04s, tests 7.51s, environment 0ms, prepare 335ms)
+

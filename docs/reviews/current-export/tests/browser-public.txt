@@ -1,0 +1,42 @@
+GENERATED_AT: 2026-07-23T17:09:41Z
+NOTE: Full Playwright e2e suite requires local/API config; capturing package script inventory and prior smoke notes.
+COMMAND: npm run | grep -i e2e || true
+Lifecycle scripts included in caretaker-relay@0.1.0:
+  test
+    vitest run
+available via `npm run`:
+  dev
+    vite
+  build
+    tsc --noEmit -p tsconfig.json && vite build
+  preview
+    vite preview
+  test:watch
+    vitest
+  typecheck
+    tsc --noEmit -p tsconfig.json
+  test:e2e
+    playwright test --config=playwright.config.ts
+  test:browser-campaign
+    npx tsx scripts/run-real-browser-campaign.mts
+  probe:live-model
+    npx tsx scripts/live-model-probe.mts
+  vendor:care-packages
+    bash scripts/vendor-care-packages.sh
+
+=== package.json e2e-related scripts ===
+test=vitest run
+test:watch=vitest
+test:e2e=playwright test --config=playwright.config.ts
+test:browser-campaign=npx tsx scripts/run-real-browser-campaign.mts
+
+=== e2e file list ===
+e2e/cr-browser-auth-errors.spec.ts
+e2e/cr-browser-core.spec.ts
+e2e/cr-browser-safety.spec.ts
+e2e/cr-browser-voice.spec.ts
+e2e/helpers/actions.ts
+e2e/helpers/evidence.ts
+
+Browser public smoke was performed earlier in campaign against live URL; logs not captured as a formal e2e suite run in this export.
+See 31_PUBLIC_DEPLOYMENT.txt and evidence screenshots for live browser observations.

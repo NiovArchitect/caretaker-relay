@@ -1,0 +1,12 @@
+GENERATED_AT: 2026-07-23T17:09:34Z
+COMMAND: npx vitest run tests/product-isolation.test.ts
+
+ RUN  v2.1.9 /Users/genghishameha/dev/NIOV Labs/github/caretaker-relay
+
+ ✓ tests/product-isolation.test.ts (1 test) 7ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  10:09:37
+   Duration  3.45s (transform 600ms, setup 0ms, collect 960ms, tests 7ms, environment 1.57s, prepare 225ms)
+

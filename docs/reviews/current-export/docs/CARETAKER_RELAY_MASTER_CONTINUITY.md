@@ -393,23 +393,3 @@ Lay→lay handoff is first-class. Documents: readable ≠ authoritative.
 ---
 
 **End of master continuity. Wait for founder instruction. After compaction: recover from disk, do not deploy until access blockers resolved.**
-
-## EXTERNAL REVIEW PIPELINE
-
-**Status:** ACTIVE  
-**Terminal output is NOT authoritative.**  
-**Review artifacts are file-based and committed to GitHub.**
-
-Primary ChatGPT handoff:
-
-- `docs/reviews/CARETAKER_RELAY_EXTERNAL_REVIEW_BUNDLE.md`
-
-Raw evidence:
-
-- `docs/reviews/current-export/`
-- Manifest: `docs/reviews/current-export/00_MANIFEST.md`
-
-Claimed deployed app SHA for campaign: `2858c2a`  
-Recruitment: PAUSED  
-Founder must not be required to copy terminal output or assemble ZIPs.
-

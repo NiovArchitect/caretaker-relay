@@ -1,0 +1,94 @@
+GENERATED_AT: 2026-07-23T17:08:36Z
+ROOT: /Users/genghishameha/dev/NIOV Labs/github/caretaker-relay
+
+=== setDraft / onDraftChange / JUDGE_DEMO / fill-judge / loadDemo / setPrompt ===
+src/App.tsx:45:      setDraft: (text: string) => void;
+src/App.tsx:53:  const [draft, setDraft] = useState("");
+src/App.tsx:85:        setDraft(text);
+src/App.tsx:98:      setDraft: (text) => {
+src/App.tsx:100:        setDraft(text);
+src/App.tsx:131:    setDraft("");
+src/App.tsx:158:    setDraft("");
+src/App.tsx:354:    setDraft("");
+src/App.tsx:358:    // Care objects open in Care — never inject a prewritten Relay prompt.
+src/App.tsx:491:        onDraftChange={setDraft}
+src/foundation/careClient.ts:15:  DEMO_UTTERANCE,
+src/foundation/careClient.ts:16:  JUDGE_LOOP_UTTERANCE,
+src/foundation/careClient.ts:62:  DEMO_UTTERANCE,
+src/foundation/careClient.ts:63:  JUDGE_LOOP_UTTERANCE,
+src/foundation/careClient.ts:74:export const JUDGE_DEMO_UTTERANCE = JUDGE_LOOP_UTTERANCE;
+src/foundation/careClient.ts:364:  return runCanonicalCareLoop(service, DEMO_UTTERANCE, sadeilContext());
+src/components/RelayPanel.tsx:14:  onDraftChange,
+src/components/RelayPanel.tsx:28:  onDraftChange: (v: string) => void;
+src/components/RelayPanel.tsx:134:              Type what happened in your own words. No prewritten care workflow
+src/components/RelayPanel.tsx:139:              onChange={onDraftChange}
+src/scenario/olivia.ts:23:  DEMO_UTTERANCE as FOUNDATION_DEMO,
+src/scenario/olivia.ts:211:export const DEMO_UTTERANCE = FOUNDATION_DEMO;
+src/pages/RelayPage.tsx:52:          data-testid="fill-judge-update"
+tests/understand-loop.test.ts:9:  DEMO_UTTERANCE,
+tests/understand-loop.test.ts:17:    const result = understandCareInput(DEMO_UTTERANCE);
+tests/understand-loop.test.ts:36:    const out = processCaregiverUtterance(DEMO_UTTERANCE);
+tests/understand-loop.test.ts:70:    const result = understandCareInput(DEMO_UTTERANCE);
+tests/foundation-wiring.test.ts:14:  DEMO_UTTERANCE,
+tests/foundation-wiring.test.ts:31:    const propose = await proposeCareUpdate(DEMO_UTTERANCE);
+
+=== context around setDraft assignments ===
+src/App.tsx-80-  const session = getSessionIdentity();
+src/App.tsx-81-
+src/App.tsx-82-  useEffect(() => {
+src/App.tsx-83-    window.__crE2E = {
+src/App.tsx-84-      injectTranscript: (text, meta) => {
+src/App.tsx:85:        setDraft(text);
+src/App.tsx-86-        setVoiceMeta(
+src/App.tsx-87-          meta ?? {
+src/App.tsx-88-            source: "voice_stt",
+src/App.tsx-89-            confidence: 0.92,
+src/App.tsx-90-            language: "en-US",
+--
+src/App.tsx-95-        setRelayOpen(true);
+src/App.tsx-96-        setTab("relay");
+src/App.tsx-97-      },
+src/App.tsx-98-      setDraft: (text) => {
+src/App.tsx-99-        // Test-only harness — not a product workflow control.
+src/App.tsx:100:        setDraft(text);
+src/App.tsx-101-        setVoiceMeta({ source: "text" });
+src/App.tsx-102-      },
+src/App.tsx-103-      getCareRecipientId: () => careRecipient.id,
+src/App.tsx-104-    };
+src/App.tsx-105-    return () => {
+--
+src/App.tsx-126-    setRelayOpen(true);
+src/App.tsx-127-  }
+src/App.tsx-128-
+src/App.tsx-129-  /** Product path: open Relay for natural language — never prefill a demo script. */
+src/App.tsx-130-  function openRelayForCareUpdate() {
+src/App.tsx:131:    setDraft("");
+src/App.tsx-132-    setVoiceMeta(undefined);
+src/App.tsx-133-    setCorrecting(false);
+src/App.tsx-134-    openRelay();
+src/App.tsx-135-  }
+src/App.tsx-136-
+--
+src/App.tsx-153-    openRelay();
+src/App.tsx-154-    setMessages((prev) => [
+src/App.tsx-155-      ...prev,
+src/App.tsx-156-      { id: `u-${Date.now()}`, role: "user", text: trimmed, at: nowLabel() },
+src/App.tsx-157-    ]);
+src/App.tsx:158:    setDraft("");
+src/App.tsx-159-    setConfirmed(false);
+src/App.tsx-160-    setLastError(null);
+src/App.tsx-161-    setBusy(true);
+src/App.tsx-162-
+src/App.tsx-163-    try {
+--
+src/App.tsx-349-            ? "Tell me the corrected care fact in plain language. The previous version stays in the record."
+src/App.tsx-350-            : "Tell me what should be different. I'll re-read your update and ask you to verify again — nothing was saved as care truth yet.",
+src/App.tsx-351-        at: nowLabel(),
+src/App.tsx-352-      },
+src/App.tsx-353-    ]);
+src/App.tsx:354:    setDraft("");
+src/App.tsx-355-  }
+src/App.tsx-356-
+src/App.tsx-357-  function onReviewAttention(item: TodayAttentionItem) {
+src/App.tsx-358-    // Care objects open in Care — never inject a prewritten Relay prompt.
+src/App.tsx-359-    if (item.kind === "medication") {

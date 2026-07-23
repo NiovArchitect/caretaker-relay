@@ -1,0 +1,81 @@
+GENERATED_AT: 2026-07-23T17:12:31Z
+ZIP_PATH: /Users/genghishameha/dev/NIOV Labs/github/caretaker-relay-review-current.zip
+PRIMARY_HANDOFF: GitHub (not ZIP)
+ZIP_BYTES: 11746453
+
+=== zip listing (first 80) ===
+Archive:  /Users/genghishameha/dev/NIOV Labs/github/caretaker-relay-review-current.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+        0  07-23-2026 10:11   docs/reviews/current-export/
+     6309  07-23-2026 10:08   docs/reviews/current-export/21_PRODUCT_FILE_INVENTORY.txt
+        0  07-23-2026 10:09   docs/reviews/current-export/screenshots/
+   562522  07-23-2026 09:34   docs/reviews/current-export/screenshots/today.png
+   346451  07-23-2026 09:34   docs/reviews/current-export/screenshots/care-med-detail.png
+   200485  07-23-2026 09:34   docs/reviews/current-export/screenshots/care.png
+        0  07-23-2026 10:09   docs/reviews/current-export/screenshots/redesign-2026-07-23/
+   234675  07-23-2026 06:54   docs/reviews/current-export/screenshots/redesign-2026-07-23/mobile-390-today.png
+   495678  07-23-2026 06:54   docs/reviews/current-export/screenshots/redesign-2026-07-23/desktop-1366-today.png
+   544842  07-23-2026 06:54   docs/reviews/current-export/screenshots/redesign-2026-07-23/tablet-768-today.png
+   573463  07-23-2026 06:54   docs/reviews/current-export/screenshots/redesign-2026-07-23/desktop-1440-today.png
+   762724  07-23-2026 06:54   docs/reviews/current-export/screenshots/redesign-2026-07-23/desktop-1920-today.png
+   194010  07-23-2026 06:54   docs/reviews/current-export/screenshots/redesign-2026-07-23/desktop-1440-verify.png
+   194010  07-23-2026 06:54   docs/reviews/current-export/screenshots/redesign-2026-07-23/desktop-1440-people.png
+   359358  07-23-2026 09:34   docs/reviews/current-export/screenshots/attention-to-care.png
+   562659  07-23-2026 09:34   docs/reviews/current-export/screenshots/relay-empty.png
+   577638  07-23-2026 09:34   docs/reviews/current-export/screenshots/messages-honest.png
+   390401  07-23-2026 09:33   docs/reviews/current-export/screenshots/documents.png
+        0  07-23-2026 10:09   docs/reviews/current-export/screenshots/master-e2e-2026-07-23/
+   336376  07-23-2026 08:03   docs/reviews/current-export/screenshots/master-e2e-2026-07-23/today-1920.png
+   600166  07-23-2026 08:04   docs/reviews/current-export/screenshots/master-e2e-2026-07-23/handoff-lay-lay-1440.png
+   256456  07-23-2026 08:04   docs/reviews/current-export/screenshots/master-e2e-2026-07-23/mobile-390.png
+   244065  07-23-2026 08:03   docs/reviews/current-export/screenshots/master-e2e-2026-07-23/today-1366.png
+   666745  07-23-2026 08:04   docs/reviews/current-export/screenshots/master-e2e-2026-07-23/tablet-820.png
+   606048  07-23-2026 08:04   docs/reviews/current-export/screenshots/master-e2e-2026-07-23/relay-messages-1440.png
+   662215  07-23-2026 08:04   docs/reviews/current-export/screenshots/master-e2e-2026-07-23/verify-magic-loop-1440.png
+   205754  07-23-2026 08:04   docs/reviews/current-export/screenshots/master-e2e-2026-07-23/people-1440.png
+   600457  07-23-2026 08:04   docs/reviews/current-export/screenshots/master-e2e-2026-07-23/today-1440.png
+   385684  07-23-2026 08:04   docs/reviews/current-export/screenshots/master-e2e-2026-07-23/documents-1440.png
+   561055  07-23-2026 09:34   docs/reviews/current-export/screenshots/handoff.png
+   400982  07-23-2026 09:34   docs/reviews/current-export/screenshots/documents-export.png
+   198975  07-23-2026 09:34   docs/reviews/current-export/screenshots/people.png
+     3735  07-23-2026 10:10   docs/reviews/current-export/25_CONTROL_REALITY_MATRIX.md
+    26785  07-23-2026 10:08   docs/reviews/current-export/20_GIT_STATE.txt
+      390  07-23-2026 10:11   docs/reviews/current-export/98_SECRETS_PHI_SCAN.txt
+     8894  07-23-2026 10:12   docs/reviews/current-export/00_MANIFEST.md
+        0  07-23-2026 10:09   docs/reviews/current-export/tests/
+      140  07-23-2026 10:09   docs/reviews/current-export/tests/message-invite-handoff-search.txt
+     1328  07-23-2026 10:09   docs/reviews/current-export/tests/browser-public.txt
+      398  07-23-2026 10:09   docs/reviews/current-export/tests/product-isolation.txt
+      719  07-23-2026 10:09   docs/reviews/current-export/tests/app-unit.txt
+     1910  07-23-2026 10:09   docs/reviews/current-export/tests/foundation-care.txt
+        0  07-23-2026 10:08   docs/reviews/current-export/docs/
+    15089  07-22-2026 17:48   docs/reviews/current-export/docs/ACL_TRACK1_TRACEABILITY.md
+     7544  07-23-2026 09:35   docs/reviews/current-export/docs/CARETAKER_RELAY_CURRENT_STATE.json
+     6962  07-23-2026 06:30   docs/reviews/current-export/docs/ONLINE_READINESS_CURRENT_STATE.md
+     1527  07-23-2026 07:47   docs/reviews/current-export/docs/CARETAKER_RELAY_A_TO_Z_EXPERIENCE.md
+     2892  07-23-2026 07:47   docs/reviews/current-export/docs/CARETAKER_RELAY_END_TO_END_OPERATING_MODEL.md
+    18250  07-23-2026 07:59   docs/reviews/current-export/docs/CARETAKER_RELAY_MASTER_CONTINUITY.md
+     1281  07-23-2026 07:47   docs/reviews/current-export/docs/CARETAKER_RELAY_TRACK1_ROLE_MATRIX.md
+     3367  07-23-2026 09:32   docs/reviews/current-export/12_REAL_PRODUCT_ACTION_MATRIX.md
+    74843  07-23-2026 10:08   docs/reviews/current-export/22_DEMO_FIXTURE_SEARCH.txt
+     4547  07-23-2026 10:08   docs/reviews/current-export/23_PROMPT_INJECTION_CONTROLS.txt
+     3010  07-23-2026 10:09   docs/reviews/current-export/31_PUBLIC_DEPLOYMENT.txt
+     6599  07-23-2026 09:35   docs/reviews/current-export/10_REAL_PRODUCT_REVIEW.md
+     8107  07-23-2026 10:10   docs/reviews/current-export/40_QUESTIONABLE_FLOW_SOURCE.md
+    24751  07-23-2026 10:08   docs/reviews/current-export/24_API_ROUTE_INVENTORY.txt
+    11661  07-23-2026 09:27   docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md
+        5  07-23-2026 10:11   docs/reviews/current-export/_INTEGRITY_STATUS.txt
+     6086  07-23-2026 10:09   docs/reviews/current-export/30_SCREENSHOT_INDEX.md
+     8153  07-23-2026 10:12   docs/reviews/CARETAKER_RELAY_EXTERNAL_REVIEW_BUNDLE.md
+    11661  07-23-2026 09:27   docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md
+     3367  07-23-2026 09:32   docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_ACTION_MATRIX.md
+     6599  07-23-2026 09:35   docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md
+---------                     -------
+ 12000803                     64 files
+
+=== forbidden in zip ===
+      390  07-23-2026 10:11   docs/reviews/current-export/98_SECRETS_PHI_SCAN.txt
+
+SECRETS_IN_ZIP: PASS (no forbidden names matched)
+NOTE: ZIP is backup only; founder must not be instructed to locate/upload it.

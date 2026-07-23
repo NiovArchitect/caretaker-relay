@@ -158,7 +158,7 @@
   ],
   "next_authorized_action": "FOUNDER_REWALKS_LIVE_PRODUCT_BEHAVIOR",
   "cold_context_online_recovery": "READY",
-  "updated_at": "2026-07-23T17:12:31Z",
+  "updated_at": "2026-07-23T16:40Z",
   "public_research_environment": "READY",
   "canonical_public_url": "https://care.niovlabs.com",
   "render_fallback_url": "https://caretaker-relay-web.onrender.com",
@@ -210,13 +210,5 @@
     "care_static_lists",
     "scripted_prompt_ctas",
     "ready_for_founder_a_to_z"
-  ],
-  "external_review_pipeline": "ACTIVE",
-  "terminal_output_authoritative": false,
-  "review_artifacts_file_based": true,
-  "primary_chatgpt_handoff": "docs/reviews/CARETAKER_RELAY_EXTERNAL_REVIEW_BUNDLE.md",
-  "raw_evidence_path": "docs/reviews/current-export/",
-  "manifest_path": "docs/reviews/current-export/00_MANIFEST.md",
-  "claimed_deployed_app_sha": "2858c2a",
-  "product_modified_by_review_export": false
+  ]
 }

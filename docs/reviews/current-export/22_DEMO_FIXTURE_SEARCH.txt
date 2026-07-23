@@ -1,0 +1,558 @@
+GENERATED_AT: 2026-07-23T17:08:36Z
+ROOT: /Users/genghishameha/dev/NIOV Labs/github/caretaker-relay
+NOTE: includes test-only matches; do not assume all are product deps
+
+src/App.tsx:61:  const [messages, setMessages] = useState<RelayMessage[]>([
+src/App.tsx:129:  /** Product path: open Relay for natural language — never prefill a demo script. */
+src/App.tsx:154:    setMessages((prev) => [
+src/App.tsx:172:          setMessages((prev) => [
+src/App.tsx:185:          setMessages((prev) => [
+src/App.tsx:202:        setMessages((prev) => [
+src/App.tsx:219:        setMessages((prev) => [
+src/App.tsx:229:        setMessages((prev) => [
+src/App.tsx:240:        setMessages((prev) => [
+src/App.tsx:255:      setMessages((prev) => [
+src/App.tsx:294:        setMessages((prev) => [
+src/App.tsx:312:        setMessages((prev) => [
+src/App.tsx:323:      setMessages((prev) => [
+src/App.tsx:342:    setMessages((prev) => [
+src/App.tsx:509:        <span>Not medical advice · synthetic household · human verifies truth</span>
+src/foundation/careClient.ts:76:export type CareClientMode = "fixture" | "llm";
+src/foundation/careClient.ts:130:  return "fixture";
+src/foundation/careClient.ts:145:      seedOlivia: true,
+src/foundation/careClient.ts:188:  if (mode === "fixture") {
+src/foundation/careClient.ts:409:/** Sync accessor — prefers last confirmed HTTP handoff, then package store. No static demo. */
+src/foundation/careClient.ts:638:/** Prefer HTTP Today projection; fall back to package store / static seeds. */
+src/foundation/careClient.ts:645:  source: "http" | "package" | "static";
+src/foundation/careClient.ts:701:  // No fabricated static day — empty until server or package has state.
+src/foundation/careClient.ts:708:    source: "static",
+src/foundation/careHttpClient.ts:119:    mode?: "fixture" | "llm";
+src/foundation/careHttpClient.ts:138:          mode: opts?.mode ?? "fixture",
+src/foundation/careHttpClient.ts:147:          mode: opts?.mode ?? "fixture",
+src/components/HandoffPanel.tsx:80:            `No persisted handoff for ${careRecipient.displayName}. Confirm a care update (with continuity for the next caregiver) to create one. Static demo handoffs are not used.`}
+src/components/Composer.tsx:133:      className="composer"
+src/components/Composer.tsx:155:        data-testid="composer-input"
+src/components/Composer.tsx:188:        data-testid="composer-send"
+src/components/RelayPanel.tsx:132:          <div className="relay-composer-wrap" data-testid="composer-dock">
+src/scenario/olivia.ts:4: * Substrate seed: @caretaker-relay/care-domain (technical IDs retained for API).
+src/scenario/olivia.ts:34:/** Technical keys map to stable lab IDs; display names are synthetic. */
+src/pages/PeoplePage.tsx:35:          Membership from the care space access model — not a static cast list
+src/pages/DocumentsPage.tsx:10: * not from hard-coded SEED_DOCS bodies.
+src/pages/DocumentsPage.tsx:78:          {session.displayName}. No hard-coded document body.
+src/pages/TodayPage.tsx:18:  /** Open Relay for natural language — empty composer, not a scripted prompt. */
+src/domain/foundationBridge.ts:3: * Uses foundation fixture extractor under authenticated Evelyn Carter lab context.
+src/domain/foundationBridge.ts:12:  fixtureExtract,
+src/domain/foundationBridge.ts:23:const runtime = createCareRuntime({ mode: "fixture", seedOlivia: true });
+src/domain/foundationBridge.ts:46:  return fixtureExtract(rawText, sadeilContext(), careRecipient.displayName, {
+tests/understand-loop.test.ts:16:  it("extracts meal, fatigue, PT move, med admin, Maya update from demo utterance", () => {
+e2e/cr-browser-voice.spec.ts:51:      await page.getByTestId("composer-input").fill(VOICE_A + " (reviewed)");
+e2e/cr-browser-voice.spec.ts:53:        .getByTestId("composer-input")
+e2e/cr-browser-voice.spec.ts:55:      await page.getByTestId("composer-send").click();
+e2e/cr-browser-voice.spec.ts:105:      await page.getByTestId("composer-send").click();
+e2e/cr-browser-auth-errors.spec.ts:439:          input: "route-mocked 401/403/500/network",
+e2e/cr-browser-core.spec.ts:203:      await page.getByTestId("composer-input").fill(CANONICAL);
+e2e/cr-browser-core.spec.ts:204:      await expect(page.getByTestId("composer-input")).toHaveValue(CANONICAL);
+e2e/cr-browser-core.spec.ts:212:          domAssertion: "composer-input holds canonical utterance",
+e2e/cr-browser-core.spec.ts:232:    await page.getByTestId("composer-send").click();
+e2e/helpers/actions.ts:23:  // Evelyn Carter (synthetic care recipient) label
+e2e/helpers/actions.ts:38:    .toMatch(/http|static|package/);
+e2e/helpers/actions.ts:50:  const input = page.getByTestId("composer-input");
+e2e/helpers/actions.ts:52:  await page.getByTestId("composer-send").click();
+e2e/helpers/actions.ts:102:  await expect(page.getByTestId("composer-input")).toHaveValue(text);
+docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md:88:| Try care update / Fill demo | Today / Relay | **ADAPT** | Lab demo | Hide/rename for competition demo packaging |
+docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md:98:| Header LIVE/SYNTHETIC badge | **HIDE** in judge demo / **ADAPT** to plain “Connected” or remove | |
+docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md:110:| Today | Family caregiver | Fragmented mental load | A, D | 5-second scan | High | Stale/static fallback vs durable | None | KEEP; remove lab source line; deepen Needs Attention | P0 product |
+docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md:111:| Care | Family caregiver | Finding current instructions | A, D | Living context | Medium | Meds not first-class; static seed | None | ADAPT progressive disclosure + med states | P1 |
+docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md:145:| What does AI do? | Not visible until they update | **Weak in first 10s** — composer on Today helps if noticed |
+docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md:157:| Natural speech → multi-event extract | Care-domain understand + demo utterance; fixture/live modes | Present after submit |
+docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md:184:**Verdict:** **Prevention is stronger in substrate than in progressive UI.** Medication discrepancy is the best product expression of §30–§31. Care page still risks collapsing meds into a static dose line (“DONE” risk if oversimplified later — currently not “DONE” but also not full state machine UX).
+docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md:195:| Duplicate Today content (static seed vs API) | **Confusion risk** when sources mix |
+docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md:240:7. **Natural multi-fact capture from one utterance** — fixture/canonical demo path.  
+docs/research/RESEARCH_BUILD_MANIFEST.md:34:2. Understand path is fixture-backed in the research stack (still multi-event + real verify/confirm/persist).  
+docs/research/FOUNDER_DECISIONS_SESSION_1.md:27:Sessions use **synthetic** scenario information only.  
+docs/research/FOUNDER_DECISIONS_SESSION_1.md:28:If a participant begins sharing real private health information, moderator **redirects** to the synthetic scenario.
+docs/research/FOUNDER_DECISIONS_SESSION_1.md:97:2. Explicit checkpoint covering: voluntary; evaluate product not person; stop anytime; decline any question; synthetic only; no real PHI in prototype; no medical advice; notes taken; Session 1 not A/V/screen recorded; quote permission separate; de-identified feedback may inform design and competition evidence.  
+docs/research/FIRST_CAREGIVER_RESEARCH_EXTERNAL_REVIEW.md:90:| **Moderator action** | Confirm SHAs; boot Care API + app; synthetic Olivia only; reset polluted lab state; timer; observation sheet; decide recording off by default |
+docs/research/FIRST_CAREGIVER_RESEARCH_EXTERNAL_REVIEW.md:95:| **Safety** | Stack uses synthetic data only |
+docs/research/FIRST_CAREGIVER_RESEARCH_EXTERNAL_REVIEW.md:102:| **Moderator action** | Opening script; consent; withdraw; synthetic only; no medical advice |
+docs/research/FIRST_CAREGIVER_RESEARCH_EXTERNAL_REVIEW.md:130:| **Moderator action** | Give synthetic situation; prompt natural update |
+docs/research/FIRST_CAREGIVER_RESEARCH_EXTERNAL_REVIEW.md:164:| **Moderator action** | Introduce synthetic error (e.g. meal time wrong; visit time wrong) |
+docs/research/FIRST_CAREGIVER_RESEARCH_EXTERNAL_REVIEW.md:209:| **Language** | Thanks; stop anytime already covered; no medical advice; synthetic only reminder |
+docs/research/FIRST_CAREGIVER_RESEARCH_EXTERNAL_REVIEW.md:227:| No real private health info in app | **Yes** (synthetic + PHI redirect table) | — |
+docs/research/FIRST_CAREGIVER_RESEARCH_EXTERNAL_REVIEW.md:255:### FACTS PROVIDED TO PARTICIPANT (situation seed)
+docs/research/FIRST_CAREGIVER_RESEARCH_EXTERNAL_REVIEW.md:431:| Real PHI disclosure → redirect synthetic | Yes |
+docs/research/FIRST_CAREGIVER_RESEARCH_EXTERNAL_REVIEW.md:579:- [ ] Thanks; stop; synthetic reminder  
+docs/research/MODERATOR_GUIDE.md:13:2. Boot stack with **synthetic** Olivia scenario only.  
+docs/research/MODERATOR_GUIDE.md:14:3. Clear or reset lab state if prior demos polluted data.  
+docs/research/MODERATOR_GUIDE.md:68:| Participant starts entering real PHI into the prototype | Gently redirect to synthetic Olivia scenario; do not encourage real data in lab |
+docs/research/SESSION_TASKS.md:25:**Setup:** Give a short synthetic situation (see scenario pack in `FIRST_CAREGIVER_RESEARCH_CYCLE` / demo script variants). Example seed (moderator may paraphrase, not force exact words):
+docs/research/SESSION_TASKS.md:67:**Setup:** Introduce a synthetic mistake or intentional change (e.g. meal time wrong, visit time wrong).
+docs/research/SESSION_1_ACTIVATION_EXTERNAL_REVIEW.md:287:Thanks · stop anytime · synthetic only · no medical advice.
+docs/research/SESSION_1_ACTIVATION_EXTERNAL_REVIEW.md:290:Say neutrally it’s a prototype glitch. Record PRODUCT FAILURE · task · what happened · participant response · continue Y/N. Do not coach around serious failures to finish a demo.
+docs/research/SESSION_1_ACTIVATION_EXTERNAL_REVIEW.md:371:8. Moderator has card + observation sheet + timer; stack boots with synthetic Olivia.  
+docs/research/SESSION_1_MODERATOR_CARD.md:94:Thanks · stop anytime · synthetic only · no medical advice.
+docs/research/SESSION_1_MODERATOR_CARD.md:98:Say neutrally it’s a prototype glitch. Record **PRODUCT FAILURE** · task · what happened · participant response · continue Y/N. Do not coach around serious failures to finish a demo.
+docs/research/PARTICIPANT_INFORMATION_AND_CONSENT_TEMPLATE.md:80:- I will use **synthetic** care information only  
+docs/research/FAMILY_CAREGIVER_RECRUITMENT_SCREENER.md:22:- Unable or unwilling to use a synthetic (not real-PHI) scenario  
+docs/research/OBSERVATION_SHEET.md:16:Care context type (synthetic framing only): _______________  
+docs/research/SESSION_1_EXECUTION_GATE.md:27:| SYNTHETIC SCENARIO CHECK | Olivia synthetic only; no real PHI in prototype |
+docs/CARETAKER_RELAY_CONTINUITY_INDEX.md:9:| 2a | `docs/CARETAKER_RELAY_END_TO_END_OPERATING_MODEL.md` | **Authoritative UX→code experience contract** (Evelyn/Marcus synthetic household) |
+docs/CARETAKER_RELAY_CONTINUITY_INDEX.md:12:| 2d | `docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md` | **Reality audit — real vs scripted controls** |
+docs/PUBLIC_JUDGE_AND_CAREGIVER_ENTRY.md:11:3. App auto-connects to the public Care API and signs in as **Sadeil** (primary caregiver for the synthetic Olivia household).
+docs/PUBLIC_JUDGE_AND_CAREGIVER_ENTRY.md:13:5. Click **Tell Relay what happened** (top of Today) or type a natural update in the composer.
+docs/PUBLIC_JUDGE_AND_CAREGIVER_ENTRY.md:25:4. Product interaction uses the **synthetic Olivia scenario** (no real PHI).
+docs/PUBLIC_JUDGE_AND_CAREGIVER_ENTRY.md:32:| Primary public path | Silent Foundation login as seeded Sadeil for evaluation household |
+docs/PUBLIC_JUDGE_AND_CAREGIVER_ENTRY.md:34:| Email (Resend) | **Not required** for current password/seeded path |
+docs/PHASE1_DEMO_SCRIPT.md:1:# Phase 1 demo script (implemented behavior only)
+docs/PHASE1_DEMO_SCRIPT.md:17:export CARE_UNDERSTAND_MODE=fixture
+docs/PHASE1_DEMO_SCRIPT.md:43:14. **Privacy** — Unauthorized / revoked cannot see Olivia’s state (API demo).  
+docs/PHASE1_DEMO_SCRIPT.md:46:## Not claimed in demo
+docs/PHASE1_DEMO_SCRIPT.md:51:- Remote model if keys unavailable (fixture path labeled honestly)
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:27:| `caretaker-relay-foundation/tests/unit/care/founder-e2e-smoke.test.ts` | Primary founder acceptance harness | `buildCareApp({ storeBackend: "prisma", understandMode: "fixture", seedOlivia, seedFoundationAuth })` then Fastify **`inject()`** HTTP over real route handlers against Prisma | Node process → Fastify routes → CareLoopService → PrismaCareStore → Postgres 5434 | API + database + authorization + durability + adversarial (partial) + fixture-understand |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:30:| `caretaker-relay-foundation/apps/api/src/care-app.ts` | Care app builder used by tests | Wires AuthService seed, Prisma store, routes | Foundation auth + care runtime construction | integration |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:34:| `caretaker-relay-foundation/packages/care-domain/src/services/{understand,loop,access,idempotency,export}.ts` | Domain care logic | Fixture extraction, confirm, access, hashes, export | Pure domain + store interface | unit/domain + fixture |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:35:| `caretaker-relay-foundation/packages/care-domain/src/scenario/olivia.ts` | Synthetic principals + DEMO_UTTERANCE | Seed Olivia household | Synthetic lab data only | fixture |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:48:| `tests/unit/care/founder-e2e-smoke.test.ts` | 12 | Founder E2E on 5434 | API inject + Prisma + auth | **REAL PRISMA** + fixture understand |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:49:| `tests/unit/care/care-loop.e2e.test.ts` | 25 | Domain loop slices A–I, golden, metamorphic, adversarial | In-process `createCareRuntime()` | **IN-MEMORY** + fixture / scripted LLM |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:50:| `tests/unit/care/care-http.acceptance.test.ts` | 8 | HTTP routes accept path | Fastify inject | **FILE store** (tmpdir) + fixture / scripted |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:54:| `tests/unit/care/care-llm-fixtures.test.ts` | 3 | Recorded fixture + scripted “live path” + fail-closed JSON | fixture IO + scripted provider | fixture / scripted (not remote) |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:63:| `tests/fixtures/care-llm/*` | Recorded CI fixtures + live-model-attempt blocker record |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:64:| `packages/care-domain/src/llm/*` | Provider abstraction + scripted provider |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:91:- `buildCareApp({ storeBackend: "prisma", seedOlivia: true, seedFoundationAuth: true, understandMode: "fixture" })`  
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:93:- Model mode: **deterministic local fixture** (`understandMode: "fixture"`) — **not live**, **not** recorded LLM JSON path for DEMO (fixture extractor in `understand.ts`)
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:132:| PRECONDITIONS | Foundation auth seed; relationships/consents seeded |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:158:| PRECONDITIONS | Sadeil token; fixture mode |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:163:| MODEL | **deterministic local fixture** |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:237:| MODEL | fixture |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:262:| MODEL | fixture |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:284:| MODEL | fixture |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:333:| MODEL | fixture via same understand |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:383:| 13 | creates foundation care runtime with Olivia seed | seed | seed missing | runtime create | memory |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:406:| 36 | uses injected LLMProvider (scripted) without parallel client | model wiring | bypass abstraction | scripted LLM | memory |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:421:| 44 | server understand via Foundation LLMProvider abstraction (scripted) | model wiring | bypass | file |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:461:| 63 | DEMO_UTTERANCE double confirm does not multiply meds | demo idemp | multi MAR |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:465:### 3.7 LLM fixtures (3) — fixture / scripted (NOT remote live)
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:469:| 64 | writes and loads recorded CI fixture with metadata | fixture IO | fixture broken |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:470:| 65 | LIVE MODEL LAB RUN (scripted provider exercising LLM path — not fixture extractor) | scripted LLM path | path dead |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:473:All **PASS**. Name of #65 is **misleading** if read as remote live — it is **scripted**.
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:489:| AUTHENTICATION | YES | login inject Foundation AuthService | multi | real AuthService + synthetic passwords | HTTP auth | results; prisma-auth | no MFA, no real IdP, no session expiry stress |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:495:| UNDERSTAND | YES | fixture extractor (+ scripted LLM path tests) | many | **fixture/scripted**, not remote | understand service | 03-verify | live remote **unproven** |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:496:| EPISTEMIC STATE | YES | REPORTED/UNCERTAIN/CONFIRMED checks | multi | fixture rules | candidates | verify JSON; loop metamorphic | incomplete speech epistemic depth limited |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:497:| NEGATION | YES | med negation no admin | multi | fixture | understand | med A; loop; http | broader clinical negation language not covered |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:498:| UNCERTAINTY | YES | Walter / might move | multi | fixture | understand | med C; metamorphic | graded confidence calibration **NOT MEASURED** |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:499:| TEMPORAL REASONING | PARTIAL | clock times, Thursday labels | multi | regex fixture | understand | apt tests | absolute calendar, relative “next Thursday”, DST **NOT** |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:501:| MEDICATION SAFETY | YES | A–G + loop H | multi | fixture + some prisma | understand+confirm | §7 | stale instruction, unknown units, multi-med **weak/absent** |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:507:| PROVENANCE | PARTIAL | source refs on candidates/events | multi | fixture source | types | verify JSON | correction lineage links weak on apt path |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:516:| VOICE TRANSCRIPT PIPELINE | PARTIAL | injected transcript route | multi | fixture | voice HTTP | founder #11 | mic/STT real **NOT** |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:519:| PROMPT INJECTION | YES | injection + protocol cases | multi | fixture | understand | founder #12; golden | red-team breadth limited |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:520:| UNKNOWN PROTOCOL | YES | Protocol 9-Delta | multi | fixture | refusal | 06-protocol | only one protocol string family |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:521:| MALFORMED INPUT | PARTIAL | invalid model JSON fail-closed | 1 | scripted | LLM parse | care-llm-fixtures | malformed HTTP JSON / oversized **NOT** systematically |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:540:| Model/fixture boundary | `understandMode: "fixture"` → deterministic extractor | `packages/care-domain/src/services/understand.ts` (`understandCareInput`) — **not** remote LLM |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:718:| Model schema violation | **TESTED** (fail-closed invalid JSON — scripted) |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:772:| What did 12/12 + 67/67 use for Understand? | **Primarily DETERMINISTIC LOCAL FIXTURE** (`understandMode: "fixture"` / fixture extractor). **Additionally:** recorded CI fixture load tests; **scripted** `CareScriptedLLMProvider` tests (not remote). |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:774:| Evidence of blocker | `tests/fixtures/care-llm/live-model-attempt.json` status `BLOCKED` (2026-07-22T15:44:42Z); results row `LIVE_MODEL_REMOTE_CALL = BLOCKED_MISSING_CREDENTIAL_OR_QUOTA`; `.env.test` only has `test-stub-not-real` keys |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:777:Do not treat scripted LLM path tests as live-model proof.
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:823:| Seed wiped appointments on every restart | **Medium** | continuity failures earlier | seed always upsert seed label | Seed appointment only if none | olivia seed guard | **Fixed** earlier in campaign |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:824:| Understand hard-coded limited times | **Medium** | apt 4:15/5:15 | regex incomplete | generic HH:MM capture | understand + founder apt | **Fixed** |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:854:## 18. Failure / skip / mock inventory
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:862:| MOCKED / SCRIPTED | Scripted LLM provider tests; fixture extractor |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:868:**Do not hide fixture-based as “live AI.”** Fixture pass ≠ model pass.
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:887:| `tests/fixtures/care-llm/live-model-attempt.json` | remote blocked | success |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:888:| `packages/care-domain/src/datasets/golden.ts` | synthetic cases exist | metrics |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:909:| auth | **MODERATE** | Foundation login works lab synthetic; no real IdP/MFA/session abuse suite |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:912:| care Understand | **MODERATE for fixture; UNPROVEN for live model** | Fixture strong for DEMO; remote **UNPROVEN** |
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:931:**Yes, partially.** Meaningful as **lab synthetic end-to-end API+domain+Prisma** proof that the care loop, basic authz, med gates, and durability reload work under fixture understand. **Not** meaningful as full caregiver-system validation or AI clinical quality.
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:934:- Understand is fixture, not live model  
+docs/AUTONOMOUS_VALIDATION_DEEP_REVIEW.md:985:care-llm-fixtures.test.ts      3
+docs/ACL_TRACK1_TRACEABILITY.md:18:| `[LAB RESULT]` | Controlled lab / synthetic scenario measurement |
+docs/ACL_TRACK1_TRACEABILITY.md:46:| Today hero | Mental load / what needs me | `[FOUNDER HYPOTHESIS]` | Organize day picture | Caregiver acts on lists | Clear hierarchy | Browser Today loads; founder smoke | Time-to-comprehension (lab target ≤5s) | UI `TodayPage`; demo script | Not caregiver-timed |
+docs/ACL_TRACK1_TRACEABILITY.md:47:| Multi-event extract | Repeated documentation | `[FOUNDER HYPOTHESIS]` | Parse one utterance → many candidates | Verify before truth | No silent fact promotion | Care loop e2e; browser | Steps to capture (lab) | Canonical demo utterance | Fixture often used |
+docs/ACL_TRACK1_TRACEABILITY.md:126:| Today | Fragmented day picture | `[FOUNDER HYPOTHESIS]` | A, D | Project needs/changed/handled/next | Act on items | Hierarchy clarity | Browser | Comprehension time | TodayPage + projection API | Lab chrome; static fallback |
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:22:| Foundation | `9182c7511c1ffae9dc79082297ae92d7a5079b1a` | `feat(care): judge-loop multi-event fixture extract + dose ambiguity` |
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:55:| Changed for this slice | **YES** (care-domain understand/dose/fixture + unit test) |
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:90:| **Files** | `TodayPage.tsx`, `careClient.ts` (`TodayAttentionItem`, `buildAttentionFromLines`, seed attention) |
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:101:| **Before** | Voice/text dock; demo fill for old DEMO_UTTERANCE |
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:102:| **After** | Same natural NL path; sample fill uses `JUDGE_LOOP_UTTERANCE` into real understand (not hard-coded fake results) |
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:212:| **Files** | `global.css` (`.sr-only`, attention cards); preserved composer/STT/edit path |
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:236:**Demo narration dependency:** **No.** The hierarchy is self-explanatory. Optional “Use sample care update” / “Tell Relay what happened” **fills the real judge utterance into the real loop** — it does **not** inject a hard-coded fake verify response.
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:255:| **HTTP** | Loading / “understanding” placeholder | `POST /api/v1/care/understand` (or package fixture in unit tests) | Playwright network track; API smoke during slice |
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:273:From judge utterance (fixture mode):
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:287:**YES** (lab — fixture/API + Verify “I found N things…”)
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:329:| Correct something not dead end | **IMPLEMENTED** | Opens correction mode + composer |
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:382:| fixture | Client mode default / API param | network/devtools if inspected | Not primary UI |
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:387:| “Fill demo care update” | **Renamed** → “Use sample care update” | RelayPage | Soft demo affordance (real utterance) |
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:432:| Foundation judge-loop-extract | unit | 1 | 1 | 0 | 0 | <1s | multi-event fixture |
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:439:**Fixture honesty:** Lab understand mode is **fixture** by default in this stack. That is still real HTTP + Prisma + auth + UI. Live remote LLM remains **BLOCKED_CREDENTIALS** (unchanged).
+docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md:513:| **[LAB RESULT]** | Judge loop UI; multi-event fixture; browser 18/18; unit suites; screenshots; this export |
+docs/ONLINE_READINESS_MATRIX.md:7:| Frontend | Vite SPA local 5180 | HTTPS static on Render | No live public URL | Deploy `render.yaml` + set `VITE_CARE_API_URL` | Fresh browser loads URL |
+docs/ONLINE_READINESS_MATRIX.md:14:| AI understand | Fixture default | Fixture or live LLM online | Live LLM optional | Keep fixture for research smoke | Multi-event verify |
+docs/ONLINE_READINESS_MATRIX.md:21:| Synthetic household | Olivia seed lab | Seeded online DB | Online seed | Care API seed on boot when configured | Today shows Olivia |
+docs/LIVE_MODEL_READINESS.md:49:| RECORDED_FIXTURE | CI JSON under tests/fixtures/care-llm |
+docs/LIVE_MODEL_READINESS.md:54:Artifact placeholder: `tests/fixtures/care-llm/live-model-attempt.json`
+docs/CARETAKER_RELAY_CURRENT_STATE.json:36:  "synthetic_household": {
+docs/CARETAKER_RELAY_CURRENT_STATE.json:88:    "understand_mode": "fixture",
+docs/CARETAKER_RELAY_CURRENT_STATE.json:157:    "use_personal_family_names_in_fixtures"
+docs/CARETAKER_RELAY_CURRENT_STATE.json:168:  "caregiver_entry": "same_public_url_synthetic_evelyn_research_admin_outside_app",
+docs/CARETAKER_RELAY_CURRENT_STATE.json:207:    "documents_static_seed",
+docs/CARETAKER_RELAY_CURRENT_STATE.json:209:    "handoff_static_fallback",
+docs/CARETAKER_RELAY_CURRENT_STATE.json:210:    "care_static_lists",
+docs/CARETAKER_RELAY_CURRENT_STATE.json:211:    "scripted_prompt_ctas",
+docs/PHASE1_VV_EVIDENCE.md:37:- Real-LLM live care extraction: **not run** (no care-specific recorded fixtures yet)  
+docs/PHASE1_VV_EVIDENCE.md:47:| DEMO_ONLY | Static UI seeds | Pre-loop Today seeds until refreshed from store |
+docs/PHASE1_VV_EVIDENCE.md:63:| Prototype-caliber code | **MET** | Not fixture-only architecture |
+docs/PHASE1_VV_EVIDENCE.md:68:| Extensibility | **MET** | Not Olivia-hardcoded store |
+docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md:31:| Deploy config (new) | `render.yaml` static site; optional `Dockerfile` nginx |
+docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md:64:| **Render** | **PARTIALLY CONFIGURED** (blueprint files exist; API key present but **Unauthorized**; CLI missing) | Host Care API + static UI |
+docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md:91:**Domain recommendation:** `care.niovlabs.com` (product) → Render static; API as `care-api.niovlabs.com` or `*.onrender.com` first.
+docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md:103:| Care-circle membership | **PARTIAL** | Domain + Circle UI (static-ish list) |
+docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md:106:| Synthetic Olivia household | **PROVEN** lab seed | Online seed when Care API has DB + seed flags |
+docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md:118:5. **VITE_CARE_API_URL** set at static build time  
+docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md:143:4. Blueprint app repo `render.yaml`; set `VITE_CARE_API_URL` to Care API public URL; deploy static.  
+docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md:144:5. Set Care API `CARETAKER_APP_URL` / `CARE_CORS_ORIGINS` to static site origin; redeploy API.  
+docs/CAREGIVER_RESEARCH_TRACEABILITY.md:20:| `[LAB RESULT]` | Measured in controlled lab/synthetic scenario |
+docs/CAREGIVER_RESEARCH_TRACEABILITY.md:31:| Voice while hands busy | `[CHALLENGE REQUIREMENT]` | Hands full in kitchen | Voice-first composer same as text | Composer mic affordance | Voice STT not live | Challenge framing |
+docs/MEMORY.md:66:export CARE_UNDERSTAND_MODE=fixture
+docs/MEMORY.md:74:Lab caregiver: Sadeil (`p-sadeil` / lab password per seed docs).
+docs/PARTNERSHIP_OUTREACH_PLAN.md:18:| Aging / AAA / community orgs | Home/community context | Introductions; session hosts | Transparent lab status; synthetic scenarios | Responsiveness to need; partnerships | **High** |
+docs/PARTNERSHIP_OUTREACH_PLAN.md:27:1. State prototype / synthetic data clearly.  
+docs/ONLINE_READINESS_CURRENT_STATE.md:22:| Auth | Foundation AuthService JWT + seeded lab principals |
+docs/ONLINE_READINESS_CURRENT_STATE.md:23:| Understand mode | **fixture-backed** (`CARE_UNDERSTAND_MODE=fixture`) |
+docs/ONLINE_READINESS_CURRENT_STATE.md:101:| Understand multi-event fixture | PASS |
+docs/ONLINE_READINESS_CURRENT_STATE.md:108:| Live remote LLM | **NOT RUN** — fixture mode |
+docs/ONLINE_READINESS_CURRENT_STATE.md:124:public HTTPS app · real Care API · durable Prisma · auth/session isolation · synthetic Olivia household · Judge Loop path · verify/confirm · correction · handoff · reload/restart continuity · unauthorized denial.
+docs/CARETAKER_RELAY_TRL_CARD.md:40:| Golden dataset | `1.0.0` (synthetic) |
+docs/CARETAKER_RELAY_TRL_CARD.md:50:| Understand (fixture) | Lab-ready | **3** (lab) | New | Golden + loop tests | Explicit FIXTURE mode — not production LLM |
+docs/CARETAKER_RELAY_TRL_CARD.md:58:| Four-surface UI shell | Prototype | **2–3** | New | Manual + build | Presentation still partly DEMO_ONLY seeds |
+docs/CARETAKER_RELAY_TRL_CARD.md:66:| Olivia controlled scenario | Synthetic lab | scenario seed | One household, English-primary | Lab-representative only | Not real PHI; not multi-site |
+docs/CARETAKER_RELAY_TRL_CARD.md:67:| Golden caregiver dataset | Synthetic | `1.0.0` | 20 cases; hidden oracle | Diverse **synthetic** speech patterns | Multilingual partial; no real accents/audio |
+docs/CARETAKER_RELAY_TRL_CARD.md:70:**All current care datasets are synthetic.** No caregiver-validated field data claimed.
+docs/CARETAKER_RELAY_TRL_CARD.md:128:| Manual messages avoided (canonical demo) | ≥1 (Maya update prepared) | LAB_MEASUREMENT |
+docs/CARETAKER_RELAY_TRL_CARD.md:132:| Golden cases | 20 synthetic | LAB |
+docs/CARETAKER_RELAY_TRL_CARD.md:142:- Multilingual inputs may be partial under fixture path  
+docs/CARETAKER_RELAY_TRL_CARD.md:165:| Real-LLM care fixtures | Not yet recorded for care extraction |
+docs/CARETAKER_RELAY_TRL_CARD.md:180:2. Representative (still synthetic or consented) multi-turn data  
+docs/BIAS_AND_REPRESENTATION.md:24:## What we can test synthetically now
+docs/BIAS_AND_REPRESENTATION.md:28:- Refusal behavior under adversarial prompts (not demographic fairness).  
+docs/BIAS_AND_REPRESENTATION.md:44:- Evidence-mode labels so demos are not mistaken for validated field performance  
+docs/ACL_TRACK1_EXTERNAL_REVIEW_BUNDLE.md:94:| Try care update / Fill demo | Today / Relay | **ADAPT** | Lab demo | Hide/rename for competition demo packaging |
+docs/ACL_TRACK1_EXTERNAL_REVIEW_BUNDLE.md:104:| Header LIVE/SYNTHETIC badge | **HIDE** in judge demo / **ADAPT** to plain “Connected” or remove | |
+docs/ACL_TRACK1_EXTERNAL_REVIEW_BUNDLE.md:116:| Today | Family caregiver | Fragmented mental load | A, D | 5-second scan | High | Stale/static fallback vs durable | None | KEEP; remove lab source line; deepen Needs Attention | P0 product |
+docs/ACL_TRACK1_EXTERNAL_REVIEW_BUNDLE.md:117:| Care | Family caregiver | Finding current instructions | A, D | Living context | Medium | Meds not first-class; static seed | None | ADAPT progressive disclosure + med states | P1 |
+docs/ACL_TRACK1_EXTERNAL_REVIEW_BUNDLE.md:151:| What does AI do? | Not visible until they update | **Weak in first 10s** — composer on Today helps if noticed |
+docs/ACL_TRACK1_EXTERNAL_REVIEW_BUNDLE.md:163:| Natural speech → multi-event extract | Care-domain understand + demo utterance; fixture/live modes | Present after submit |
+docs/ACL_TRACK1_EXTERNAL_REVIEW_BUNDLE.md:190:**Verdict:** **Prevention is stronger in substrate than in progressive UI.** Medication discrepancy is the best product expression of §30–§31. Care page still risks collapsing meds into a static dose line (“DONE” risk if oversimplified later — currently not “DONE” but also not full state machine UX).
+docs/ACL_TRACK1_EXTERNAL_REVIEW_BUNDLE.md:201:| Duplicate Today content (static seed vs API) | **Confusion risk** when sources mix |
+docs/ACL_TRACK1_EXTERNAL_REVIEW_BUNDLE.md:246:7. **Natural multi-fact capture from one utterance** — fixture/canonical demo path.  
+docs/ACL_TRACK1_EXTERNAL_REVIEW_BUNDLE.md:389:| `[LAB RESULT]` | Controlled lab / synthetic scenario measurement |
+docs/ACL_TRACK1_EXTERNAL_REVIEW_BUNDLE.md:417:| Today hero | Mental load / what needs me | `[FOUNDER HYPOTHESIS]` | Organize day picture | Caregiver acts on lists | Clear hierarchy | Browser Today loads; founder smoke | Time-to-comprehension (lab target ≤5s) | UI `TodayPage`; demo script | Not caregiver-timed |
+docs/ACL_TRACK1_EXTERNAL_REVIEW_BUNDLE.md:418:| Multi-event extract | Repeated documentation | `[FOUNDER HYPOTHESIS]` | Parse one utterance → many candidates | Verify before truth | No silent fact promotion | Care loop e2e; browser | Steps to capture (lab) | Canonical demo utterance | Fixture often used |
+docs/ACL_TRACK1_EXTERNAL_REVIEW_BUNDLE.md:497:| Today | Fragmented day picture | `[FOUNDER HYPOTHESIS]` | A, D | Project needs/changed/handled/next | Act on items | Hierarchy clarity | Browser | Comprehension time | TodayPage + projection API | Lab chrome; static fallback |
+docs/BRUTAL_REAL_STACK_STRESS_V1.md:58:| Not | Live model (fixture path) |
+docs/BRUTAL_REAL_STACK_STRESS_V1.md:115:| Fixture Understand | **41** tagged (all understand paths fixture) |
+docs/BRUTAL_REAL_STACK_STRESS_V1.md:127:| BUG-REVOKE-RESEED-ON-RESTART | P0 | Maya 200 after seed | seed no un-revoke | FIXED |
+docs/FOUNDER_MANUAL_VALIDATION.md:3:**Purpose:** Acceptance criteria for Caretaker Relay (synthetic Olivia scenario).  
+docs/FOUNDER_MANUAL_VALIDATION.md:77:export CARE_UNDERSTAND_MODE=fixture
+docs/FOUNDER_MANUAL_VALIDATION.md:101:## 2. Login (synthetic)
+docs/FOUNDER_MANUAL_VALIDATION.md:107:| Authority | Full family caregiver (`*` categories in lab seed); **not** prescribing authority |
+docs/FOUNDER_MANUAL_VALIDATION.md:115:**Evidence class:** SYNTHETIC seed identities · FOUNDATION-BACKED session.
+docs/FOUNDER_MANUAL_VALIDATION.md:136:| `static (seed…)` | Demo seed until first durable update |
+docs/FOUNDER_MANUAL_VALIDATION.md:246:Use API (curl or HTTP client) with seeded users:
+docs/AFFORDABILITY_ACCESS.md:50:1. Rough cost model for fixture vs live LLM modes (internal)  
+docs/CARETAKER_RELAY_END_TO_END_OPERATING_MODEL.md:41:Do **not** use Olivia, Olivia Lewis, or the founder’s family names in product, fixtures, docs, or screenshots.
+docs/CARETAKER_RELAY_MASTER_CONTINUITY.md:133:Care API · Prisma durability · server-authoritative auth/access · privacy isolation · audit · provenance · correction supersession · epistemic uncertainty · medication discrepancy / unit handling · **no autonomous dose selection/recommendation** · human verification · handoff · reload continuity · natural-language understand (fixture mode default in research stack) · semantic/idempotency where tested · FHIR/interop seams (mapped ≠ live EMR).
+docs/CARETAKER_RELAY_MASTER_CONTINUITY.md:144:### Canonical synthetic scenario
+docs/CARETAKER_RELAY_MASTER_CONTINUITY.md:146:- Care recipient: **Olivia** (synthetic)  
+docs/CARETAKER_RELAY_MASTER_CONTINUITY.md:150:Engineering utterance exists (`JUDGE_LOOP_UTTERANCE`) for fixture/E2E — **research participants get scenario facts and speak naturally**; product must not be hard-coded to that string alone.
+docs/CARETAKER_RELAY_MASTER_CONTINUITY.md:250:Test product not participant · do not sell · do not explain failures away · record misunderstanding first · synthetic only · no real PHI in prototype · no medical advice · product failure is evidence · observed ≠ statement ≠ interpretation.
+docs/CARETAKER_RELAY_MASTER_CONTINUITY.md:290:- Understand **fixture-backed** by default in research stack (still multi-event + real verify/confirm/Prisma path when stack up)  
+docs/CARETAKER_RELAY_MASTER_CONTINUITY.md:330:  FORBIDDEN in fixtures/UI: personal-family names (e.g. Olivia Lewis)
+docs/REAL_BROWSER_LIVE_MODEL_V1.md:28:| API env | `CARE_STORE_BACKEND=prisma` · `CARE_UNDERSTAND_MODE=fixture` · DB `caretaker_relay_dev` on **5434** |
+docs/REAL_BROWSER_LIVE_MODEL_V1.md:30:No Cypress. No package-only browser mock as success path.
+docs/REAL_BROWSER_LIVE_MODEL_V1.md:51:| CR-BROWSER-005 | **PASS** | Canonical text in composer |
+docs/REAL_BROWSER_LIVE_MODEL_V1.md:174:| Automated | Post-STT: `window.__crE2E.injectTranscript` → editable composer → Send → HTTP understand → verify → confirm |
+docs/REAL_BROWSER_LIVE_MODEL_V1.md:200:| CR-BROWSER-BUG-002 | **P1** | **FIXED** | Sticky composer dock intercepts “Looks right” / Today actions |
+docs/REAL_BROWSER_LIVE_MODEL_V1.md:208:| `caretaker-relay/src/App.tsx` | Hide composer during verify/handoff; fail-closed confirm; E2E voice hook; error surface |
+docs/REAL_BROWSER_LIVE_MODEL_V1.md:209:| `caretaker-relay/src/styles/global.css` | Main bottom padding for sticky composer |
+docs/PHASE1_EVIDENCE_INDEX.md:9:| Foundation AuthService login for care | `POST /care/auth/login` → AuthService + CarePrincipalLink | care-prisma-auth | entity_id in response | LAB | Lab-seeded entities |
+docs/PHASE1_EVIDENCE_INDEX.md:35:| 8–9 | Daily care / human connection | Olivia demo + doctrine |
+docs/CARETAKER_RELAY_RISK_REGISTER.md:75:| MITIGATION | Candidates only; human confirm; fixture/LLM uncertainty |
+docs/CARETAKER_RELAY_RISK_REGISTER.md:209:| TEST | scripted provider path |
+docs/CARETAKER_RELAY_RISK_REGISTER.md:290:| DETECTION | Bias doc; synthetic diversity limited |
+docs/reviews/CURRENT_REVIEW.md:3:**Campaign:** Real product reconstruction (demo-shell stop)  
+docs/reviews/CURRENT_REVIEW.md:16:- `docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md` — inventory of real vs scripted
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_ACTION_MATRIX.md:4:**Supersedes:** prior “PASS” labels that described demo/static shells  
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_ACTION_MATRIX.md:11:| App load / lab entry | Establish session for synthetic principal | PARTIAL (lab auto-login) | POST `/auth/login` | JWT session | foundation | unit + live smoke | Honest lab entry labeled in footer |
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_ACTION_MATRIX.md:12:| Top: Caring for Evelyn | Persistent care recipient identity | REAL (display) | seed + login context | n/a | session | browser | PASS display |
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_ACTION_MATRIX.md:16:| Relay Send | Understand multi-event update | REAL (fixture mode) | POST `/understand` | candidates | JWT | unit + API | PASS lab |
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_ACTION_MATRIX.md:21:| Review latest handoff | Load latest **persisted** handoff | REAL | GET `/handoffs` | Prisma | JWT | live API | Fixed: no static fallback |
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_ACTION_MATRIX.md:24:| People list | Authorized membership | REAL | GET `/circle` | relationships | JWT | live API | Fixed: was static scenario |
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_ACTION_MATRIX.md:27:| Documents Generate | Export from current truth | REAL | GET `/export` | export claim | JWT | live API | Fixed: no SEED_DOCS |
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_ACTION_MATRIX.md:36:| Static/scripted **visible product** controls remaining | **1** (lab auto-login — intentional, labeled) |
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_ACTION_MATRIX.md:38:| Removed scripted CTAs | Sample chip; attention→demo fill; Tell Relay→demo fill; SEED_DOCS list |
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_ACTION_MATRIX.md:42:`cr-olivia`, `hh-olivia`, `p-sadeil`, `p-maya`, `p-walter`, `seedOlivia` flag.
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:26:| **SCRIPTED** | Control inserts prewritten text / demo utterance instead of performing workflow |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:27:| **STATIC** | Renders hard-coded or seed data only; no live fetch for interaction result |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:32:## A. Synthetic seed vs fake function (policy)
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:36:| Seeded synthetic household (Evelyn/Marcus/Maya/Daniel) as **real DB principals** | UI that only **simulates** care workflows with composer fill |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:40:**Technical IDs (not user-visible):** `cr-olivia`, `hh-olivia`, `p-sadeil`, `p-maya`, `p-walter`, `seedOlivia` option flag.
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:53:| All | Care recipient chip | Active recipient context | local from package `careRecipient` | login establishes session for synthetic principal | seed recipient | n/a | session | display | **PARTIAL** — display real name after domain rename; identity always synthetic auto-login, no choice | YES seed | NO | YES auto-login | YES (lab) |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:54:| All | Session label Marcus | Current user | hard-wired `people.marcus` | login uses `p-sadeil` password | principal seed | n/a | JWT | display | **PARTIAL** — name from seed/API login response not bound into shell | YES | NO | YES auto-login | YES (lab) |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:61:| **Review handoff for Maya** | Open real continuity for next caregiver | `setShowHandoff(true)` + `getLatestHandoff()` | may use last HTTP handoff **or** **static `ho-demo-static`** | handoff store if live | yes if prior confirm | **PARTIAL** | NO (but static fallback) | borderline |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:70:| Composer Send | Organize natural language | `proposeCareUpdate` | POST `/understand` | fixture extract / loop | candidates only until confirm | **REAL** (lab fixture path) | NO (user text) | YES |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:71:| Voice mic | Dictate care update | STT → same understand | `/voice/understand` or text | same | same | **PARTIAL** (browser STT; mode often fixture) | NO | YES |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:76:| Mode **Messages (people)** | Human messaging | local mode toggle + **static member cards** | **none** | none | none | **STATIC / DEAD** | NO | **NO** as completed |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:82:| Section tabs | Browse care objects | local `setSection` | **none** | static scenario lists | none | **STATIC** | NO | weak |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:84:| Appointments / observations | Same | static `scenario/olivia` | unused | seed | n/a | **STATIC** | NO | weak |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:90:| Member cards | Real membership | expand local `circle` from **static scenario** | **GET `/circle` unused by UI** | whoCanSeeWhat exists | relationships | **STATIC** UI over **REAL** API | weak |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:98:| Prepared drafts list | Generated from care truth | **`SEED_DOCS` hard-coded bodies** | **export unused** | export service exists | no draft store | **STATIC** | **NO** as real engine |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:100:| Safety model copy | Policy education | static text | none | n/a | n/a | STATIC (policy) | YES |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:106:| Open handoff | Continuity for Maya | live handoff **or `demoHandoff`** | GET handoffs / last confirm | store | yes when confirmed | **PARTIAL** | only if no static path |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:117:## C. Demo / scripted catalog (source)
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:124:| `handoff` static `ho-demo-static` | `scenario/olivia.ts` | **VISIBLE FALLBACK** |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:125:| `SEED_DOCS` | `DocumentsPage.tsx` | **VISIBLE PRODUCT DEPENDENCY** |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:126:| `circle` static members | `scenario/olivia.ts` | UI seed; API unused |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:127:| `createCareRuntime({ mode: "fixture" })` | bridge/client | **Lab understand mode** — OK if labeled; not live LLM |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:130:| Unit/e2e fixtures | `tests/`, `e2e/` | **TEST-ONLY** — keep |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:138:| POST `/api/v1/care/auth/login` | Real JWT session for seeded principals |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:158:| Documents PASS | **DOWNGRADED → STATIC** (`SEED_DOCS`) |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:160:| Lay→lay handoff PASS | **DOWNGRADED → PARTIAL** (static demo fallback still present) |
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:165:Lab-only claims that remain valid: understand→confirm→persist via API; auth isolation; unauthorized 403; fixture extract multi-event.
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:171:1. Remove all **scripted-prompt-as-workflow** CTAs from product chrome.  
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:173:3. Wire **Handoff** to GET `/handoffs` only (no static fallback in UI).  
+docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md:175:5. Wire **Documents** to GET `/export` + generate draft from current state (not SEED_DOCS).  
+docs/reviews/current-export/docs/ACL_TRACK1_TRACEABILITY.md:18:| `[LAB RESULT]` | Controlled lab / synthetic scenario measurement |
+docs/reviews/current-export/docs/ACL_TRACK1_TRACEABILITY.md:46:| Today hero | Mental load / what needs me | `[FOUNDER HYPOTHESIS]` | Organize day picture | Caregiver acts on lists | Clear hierarchy | Browser Today loads; founder smoke | Time-to-comprehension (lab target ≤5s) | UI `TodayPage`; demo script | Not caregiver-timed |
+docs/reviews/current-export/docs/ACL_TRACK1_TRACEABILITY.md:47:| Multi-event extract | Repeated documentation | `[FOUNDER HYPOTHESIS]` | Parse one utterance → many candidates | Verify before truth | No silent fact promotion | Care loop e2e; browser | Steps to capture (lab) | Canonical demo utterance | Fixture often used |
+docs/reviews/current-export/docs/ACL_TRACK1_TRACEABILITY.md:126:| Today | Fragmented day picture | `[FOUNDER HYPOTHESIS]` | A, D | Project needs/changed/handled/next | Act on items | Hierarchy clarity | Browser | Comprehension time | TodayPage + projection API | Lab chrome; static fallback |
+docs/reviews/current-export/docs/CARETAKER_RELAY_CURRENT_STATE.json:36:  "synthetic_household": {
+docs/reviews/current-export/docs/CARETAKER_RELAY_CURRENT_STATE.json:88:    "understand_mode": "fixture",
+docs/reviews/current-export/docs/CARETAKER_RELAY_CURRENT_STATE.json:157:    "use_personal_family_names_in_fixtures"
+docs/reviews/current-export/docs/CARETAKER_RELAY_CURRENT_STATE.json:168:  "caregiver_entry": "same_public_url_synthetic_evelyn_research_admin_outside_app",
+docs/reviews/current-export/docs/CARETAKER_RELAY_CURRENT_STATE.json:207:    "documents_static_seed",
+docs/reviews/current-export/docs/CARETAKER_RELAY_CURRENT_STATE.json:209:    "handoff_static_fallback",
+docs/reviews/current-export/docs/CARETAKER_RELAY_CURRENT_STATE.json:210:    "care_static_lists",
+docs/reviews/current-export/docs/CARETAKER_RELAY_CURRENT_STATE.json:211:    "scripted_prompt_ctas",
+docs/reviews/current-export/docs/ONLINE_READINESS_CURRENT_STATE.md:22:| Auth | Foundation AuthService JWT + seeded lab principals |
+docs/reviews/current-export/docs/ONLINE_READINESS_CURRENT_STATE.md:23:| Understand mode | **fixture-backed** (`CARE_UNDERSTAND_MODE=fixture`) |
+docs/reviews/current-export/docs/ONLINE_READINESS_CURRENT_STATE.md:101:| Understand multi-event fixture | PASS |
+docs/reviews/current-export/docs/ONLINE_READINESS_CURRENT_STATE.md:108:| Live remote LLM | **NOT RUN** — fixture mode |
+docs/reviews/current-export/docs/ONLINE_READINESS_CURRENT_STATE.md:124:public HTTPS app · real Care API · durable Prisma · auth/session isolation · synthetic Olivia household · Judge Loop path · verify/confirm · correction · handoff · reload/restart continuity · unauthorized denial.
+docs/reviews/current-export/docs/CARETAKER_RELAY_END_TO_END_OPERATING_MODEL.md:41:Do **not** use Olivia, Olivia Lewis, or the founder’s family names in product, fixtures, docs, or screenshots.
+docs/reviews/current-export/docs/CARETAKER_RELAY_MASTER_CONTINUITY.md:133:Care API · Prisma durability · server-authoritative auth/access · privacy isolation · audit · provenance · correction supersession · epistemic uncertainty · medication discrepancy / unit handling · **no autonomous dose selection/recommendation** · human verification · handoff · reload continuity · natural-language understand (fixture mode default in research stack) · semantic/idempotency where tested · FHIR/interop seams (mapped ≠ live EMR).
+docs/reviews/current-export/docs/CARETAKER_RELAY_MASTER_CONTINUITY.md:144:### Canonical synthetic scenario
+docs/reviews/current-export/docs/CARETAKER_RELAY_MASTER_CONTINUITY.md:146:- Care recipient: **Olivia** (synthetic)  
+docs/reviews/current-export/docs/CARETAKER_RELAY_MASTER_CONTINUITY.md:150:Engineering utterance exists (`JUDGE_LOOP_UTTERANCE`) for fixture/E2E — **research participants get scenario facts and speak naturally**; product must not be hard-coded to that string alone.
+docs/reviews/current-export/docs/CARETAKER_RELAY_MASTER_CONTINUITY.md:250:Test product not participant · do not sell · do not explain failures away · record misunderstanding first · synthetic only · no real PHI in prototype · no medical advice · product failure is evidence · observed ≠ statement ≠ interpretation.
+docs/reviews/current-export/docs/CARETAKER_RELAY_MASTER_CONTINUITY.md:290:- Understand **fixture-backed** by default in research stack (still multi-event + real verify/confirm/Prisma path when stack up)  
+docs/reviews/current-export/docs/CARETAKER_RELAY_MASTER_CONTINUITY.md:330:  FORBIDDEN in fixtures/UI: personal-family names (e.g. Olivia Lewis)
+docs/reviews/current-export/12_REAL_PRODUCT_ACTION_MATRIX.md:4:**Supersedes:** prior “PASS” labels that described demo/static shells  
+docs/reviews/current-export/12_REAL_PRODUCT_ACTION_MATRIX.md:11:| App load / lab entry | Establish session for synthetic principal | PARTIAL (lab auto-login) | POST `/auth/login` | JWT session | foundation | unit + live smoke | Honest lab entry labeled in footer |
+docs/reviews/current-export/12_REAL_PRODUCT_ACTION_MATRIX.md:12:| Top: Caring for Evelyn | Persistent care recipient identity | REAL (display) | seed + login context | n/a | session | browser | PASS display |
+docs/reviews/current-export/12_REAL_PRODUCT_ACTION_MATRIX.md:16:| Relay Send | Understand multi-event update | REAL (fixture mode) | POST `/understand` | candidates | JWT | unit + API | PASS lab |
+docs/reviews/current-export/12_REAL_PRODUCT_ACTION_MATRIX.md:21:| Review latest handoff | Load latest **persisted** handoff | REAL | GET `/handoffs` | Prisma | JWT | live API | Fixed: no static fallback |
+docs/reviews/current-export/12_REAL_PRODUCT_ACTION_MATRIX.md:24:| People list | Authorized membership | REAL | GET `/circle` | relationships | JWT | live API | Fixed: was static scenario |
+docs/reviews/current-export/12_REAL_PRODUCT_ACTION_MATRIX.md:27:| Documents Generate | Export from current truth | REAL | GET `/export` | export claim | JWT | live API | Fixed: no SEED_DOCS |
+docs/reviews/current-export/12_REAL_PRODUCT_ACTION_MATRIX.md:36:| Static/scripted **visible product** controls remaining | **1** (lab auto-login — intentional, labeled) |
+docs/reviews/current-export/12_REAL_PRODUCT_ACTION_MATRIX.md:38:| Removed scripted CTAs | Sample chip; attention→demo fill; Tell Relay→demo fill; SEED_DOCS list |
+docs/reviews/current-export/12_REAL_PRODUCT_ACTION_MATRIX.md:42:`cr-olivia`, `hh-olivia`, `p-sadeil`, `p-maya`, `p-walter`, `seedOlivia` flag.
+docs/reviews/current-export/10_REAL_PRODUCT_REVIEW.md:5:**Founder status:** REJECTED prior A→Z as demo-shell; reconstruction required  
+docs/reviews/current-export/10_REAL_PRODUCT_REVIEW.md:20:| “Review with Relay” on attention | Same prewritten fill | Escape-hatch to scripted prompt |
+docs/reviews/current-export/10_REAL_PRODUCT_REVIEW.md:22:| Handoff | Fallback to `ho-demo-static` | Static demo as product path |
+docs/reviews/current-export/10_REAL_PRODUCT_REVIEW.md:23:| Documents | `SEED_DOCS` hard-coded bodies | Simulated document engine |
+docs/reviews/current-export/10_REAL_PRODUCT_REVIEW.md:25:| Care objects | Non-interactive static lists | No GET `/state` wiring |
+docs/reviews/current-export/10_REAL_PRODUCT_REVIEW.md:42:Not: fixture → button → prewritten prompt → simulated result.
+docs/reviews/current-export/10_REAL_PRODUCT_REVIEW.md:51:| Documents | Generates via GET `/export` (markdown); no SEED_DOCS |
+docs/reviews/current-export/10_REAL_PRODUCT_REVIEW.md:52:| Handoff | No static demo fallback; empty state if none persisted |
+docs/reviews/current-export/10_REAL_PRODUCT_REVIEW.md:60:Today attention: dedupe + cap 5. Removed fabricated static day fallback.
+docs/reviews/current-export/10_REAL_PRODUCT_REVIEW.md:129:1. **Lab auto-login** as Marcus — intentional for evaluator seed; not multi-identity product shell.  
+docs/reviews/current-export/10_REAL_PRODUCT_REVIEW.md:130:2. **Understand mode** still fixture-backed (honest) — not live remote LLM.  
+docs/reviews/current-export/10_REAL_PRODUCT_REVIEW.md:134:6. **Historical event raw excerpts** may still contain old names in **stored text** from prior demos; live principal display names are Evelyn/Marcus.  
+docs/reviews/current-export/10_REAL_PRODUCT_REVIEW.md:178:| Tell Relay opens empty composer | PASS |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:26:| **SCRIPTED** | Control inserts prewritten text / demo utterance instead of performing workflow |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:27:| **STATIC** | Renders hard-coded or seed data only; no live fetch for interaction result |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:32:## A. Synthetic seed vs fake function (policy)
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:36:| Seeded synthetic household (Evelyn/Marcus/Maya/Daniel) as **real DB principals** | UI that only **simulates** care workflows with composer fill |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:40:**Technical IDs (not user-visible):** `cr-olivia`, `hh-olivia`, `p-sadeil`, `p-maya`, `p-walter`, `seedOlivia` option flag.
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:53:| All | Care recipient chip | Active recipient context | local from package `careRecipient` | login establishes session for synthetic principal | seed recipient | n/a | session | display | **PARTIAL** — display real name after domain rename; identity always synthetic auto-login, no choice | YES seed | NO | YES auto-login | YES (lab) |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:54:| All | Session label Marcus | Current user | hard-wired `people.marcus` | login uses `p-sadeil` password | principal seed | n/a | JWT | display | **PARTIAL** — name from seed/API login response not bound into shell | YES | NO | YES auto-login | YES (lab) |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:61:| **Review handoff for Maya** | Open real continuity for next caregiver | `setShowHandoff(true)` + `getLatestHandoff()` | may use last HTTP handoff **or** **static `ho-demo-static`** | handoff store if live | yes if prior confirm | **PARTIAL** | NO (but static fallback) | borderline |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:70:| Composer Send | Organize natural language | `proposeCareUpdate` | POST `/understand` | fixture extract / loop | candidates only until confirm | **REAL** (lab fixture path) | NO (user text) | YES |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:71:| Voice mic | Dictate care update | STT → same understand | `/voice/understand` or text | same | same | **PARTIAL** (browser STT; mode often fixture) | NO | YES |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:76:| Mode **Messages (people)** | Human messaging | local mode toggle + **static member cards** | **none** | none | none | **STATIC / DEAD** | NO | **NO** as completed |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:82:| Section tabs | Browse care objects | local `setSection` | **none** | static scenario lists | none | **STATIC** | NO | weak |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:84:| Appointments / observations | Same | static `scenario/olivia` | unused | seed | n/a | **STATIC** | NO | weak |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:90:| Member cards | Real membership | expand local `circle` from **static scenario** | **GET `/circle` unused by UI** | whoCanSeeWhat exists | relationships | **STATIC** UI over **REAL** API | weak |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:98:| Prepared drafts list | Generated from care truth | **`SEED_DOCS` hard-coded bodies** | **export unused** | export service exists | no draft store | **STATIC** | **NO** as real engine |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:100:| Safety model copy | Policy education | static text | none | n/a | n/a | STATIC (policy) | YES |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:106:| Open handoff | Continuity for Maya | live handoff **or `demoHandoff`** | GET handoffs / last confirm | store | yes when confirmed | **PARTIAL** | only if no static path |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:117:## C. Demo / scripted catalog (source)
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:124:| `handoff` static `ho-demo-static` | `scenario/olivia.ts` | **VISIBLE FALLBACK** |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:125:| `SEED_DOCS` | `DocumentsPage.tsx` | **VISIBLE PRODUCT DEPENDENCY** |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:126:| `circle` static members | `scenario/olivia.ts` | UI seed; API unused |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:127:| `createCareRuntime({ mode: "fixture" })` | bridge/client | **Lab understand mode** — OK if labeled; not live LLM |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:130:| Unit/e2e fixtures | `tests/`, `e2e/` | **TEST-ONLY** — keep |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:138:| POST `/api/v1/care/auth/login` | Real JWT session for seeded principals |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:158:| Documents PASS | **DOWNGRADED → STATIC** (`SEED_DOCS`) |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:160:| Lay→lay handoff PASS | **DOWNGRADED → PARTIAL** (static demo fallback still present) |
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:165:Lab-only claims that remain valid: understand→confirm→persist via API; auth isolation; unauthorized 403; fixture extract multi-event.
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:171:1. Remove all **scripted-prompt-as-workflow** CTAs from product chrome.  
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:173:3. Wire **Handoff** to GET `/handoffs` only (no static fallback in UI).  
+docs/reviews/current-export/11_REAL_PRODUCT_BEHAVIOR_AUDIT.md:175:5. Wire **Documents** to GET `/export` + generate draft from current state (not SEED_DOCS).  
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md:5:**Founder status:** REJECTED prior A→Z as demo-shell; reconstruction required  
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md:20:| “Review with Relay” on attention | Same prewritten fill | Escape-hatch to scripted prompt |
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md:22:| Handoff | Fallback to `ho-demo-static` | Static demo as product path |
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md:23:| Documents | `SEED_DOCS` hard-coded bodies | Simulated document engine |
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md:25:| Care objects | Non-interactive static lists | No GET `/state` wiring |
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md:42:Not: fixture → button → prewritten prompt → simulated result.
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md:51:| Documents | Generates via GET `/export` (markdown); no SEED_DOCS |
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md:52:| Handoff | No static demo fallback; empty state if none persisted |
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md:60:Today attention: dedupe + cap 5. Removed fabricated static day fallback.
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md:129:1. **Lab auto-login** as Marcus — intentional for evaluator seed; not multi-identity product shell.  
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md:130:2. **Understand mode** still fixture-backed (honest) — not live remote LLM.  
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md:134:6. **Historical event raw excerpts** may still contain old names in **stored text** from prior demos; live principal display names are Evelyn/Marcus.  
+docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md:178:| Tell Relay opens empty composer | PASS |
+vendor/care-domain/src/llm/provider.ts:19:    opts?: { fixtureKey?: string },
+vendor/care-domain/src/llm/provider.ts:33:  readonly name = "care-scripted-fixture";
+vendor/care-domain/src/llm/provider.ts:55:          model: "fixture-script",
+vendor/care-domain/src/datasets/golden.ts:5: * Every case is documented as synthetic lab data — not caregiver interviews.
+vendor/care-domain/src/datasets/golden.ts:44:  synthetic: true;
+vendor/care-domain/src/datasets/golden.ts:63:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:74:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:84:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:94:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:105:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:115:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:125:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:134:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:143:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:152:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:162:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:171:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:179:      notes: "Multilingual; fixture path may be partial — localization-ready, not fully validated",
+vendor/care-domain/src/datasets/golden.ts:181:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:188:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:195:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:202:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:212:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:221:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:231:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:242:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:252:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:262:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:272:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:282:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:299:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:308:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:319:    synthetic: true,
+vendor/care-domain/src/datasets/golden.ts:334:    synthetic: GOLDEN_DATASET_SYNTHETIC,
+vendor/care-domain/src/types.ts:7: * Evidence modes (must be explicit — never present fixture as production):
+vendor/care-domain/src/scenario/olivia.ts:4: * Technical IDs retained for API continuity; display names are synthetic (Evelyn/Marcus/…).
+vendor/care-domain/src/scenario/olivia.ts:103:/** Track 1 judge-loop canonical messy caregiver update (fixture extract supported). */
+vendor/care-domain/src/scenario/olivia.ts:121:/** Seed Evelyn Carter scenario into a CareStore (synthetic). */
+vendor/care-domain/src/scenario/olivia.ts:122:export function seedOliviaScenario(store: CareStore): void {
+vendor/care-domain/src/scenario/olivia.ts:166:  // Care event history still survives restarts; access baseline resets for synthetic eval.
+vendor/care-domain/src/scenario/olivia.ts:262:      synthetic: true,
+vendor/care-domain/src/index.ts:31:import { seedOliviaScenario } from "./scenario/olivia.js";
+vendor/care-domain/src/index.ts:35:  /** fixture = deterministic lab; llm = Foundation LLMProvider required */
+vendor/care-domain/src/index.ts:36:  mode?: "fixture" | "llm";
+vendor/care-domain/src/index.ts:38:  seedOlivia?: boolean;
+vendor/care-domain/src/index.ts:44:  if (opts.seedOlivia !== false) {
+vendor/care-domain/src/index.ts:45:    seedOliviaScenario(store);
+vendor/care-domain/src/index.ts:49:    defaultMode: opts.mode ?? "fixture",
+vendor/care-domain/src/services/timezone.ts:136:/** DST / cross-zone lab checks (synthetic). */
+vendor/care-domain/src/services/care-auth.ts:37:/** Lab directory for Olivia scenario principals (synthetic). */
+vendor/care-domain/src/services/loop.ts:40:  defaultMode: "fixture" | "llm";
+vendor/care-domain/src/services/loop.ts:683:/** Full canonical demo path helper. */
+vendor/care-domain/src/services/understand.ts:9: * Regex/fixture extractor is NOT the production intelligence path.
+vendor/care-domain/src/services/understand.ts:40:   * fixture — deterministic lab extractor (EvidenceMode FIXTURE).
+vendor/care-domain/src/services/understand.ts:41:   * llm — call injected Foundation LLMProvider (live or scripted).
+vendor/care-domain/src/services/understand.ts:43:  mode: "fixture" | "llm";
+vendor/care-domain/src/services/understand.ts:140: * Deterministic fixture extractor for golden tests and demos.
+vendor/care-domain/src/services/understand.ts:143:export function fixtureExtract(
+vendor/care-domain/src/services/understand.ts:670:        evidenceMode: opts.mode === "fixture" ? "FIXTURE" : "LIVE_FOUNDATION_BACKED",
+vendor/care-domain/src/services/understand.ts:676:      evidenceMode: opts.mode === "fixture" ? "FIXTURE" : "LIVE_FOUNDATION_BACKED",
+vendor/care-domain/src/services/understand.ts:683:      evidenceMode: opts.mode === "fixture" ? "FIXTURE" : "LIVE_FOUNDATION_BACKED",
+vendor/care-domain/src/services/understand.ts:749:    slice: fixtureExtract(text, ctx, careRecipientName, {
+vendor/care-domain/src/store/memory-store.ts:6: * - SYNTHETIC_FOUNDATION_BACKED demos
+
+=== FOUNDATION care domain subset ===
+packages/care-domain/src/llm/provider.ts:19:    opts?: { fixtureKey?: string },
+packages/care-domain/src/llm/provider.ts:33:  readonly name = "care-scripted-fixture";
+packages/care-domain/src/llm/provider.ts:55:          model: "fixture-script",
+packages/care-domain/src/datasets/golden.ts:5: * Every case is documented as synthetic lab data — not caregiver interviews.
+packages/care-domain/src/datasets/golden.ts:44:  synthetic: true;
+packages/care-domain/src/datasets/golden.ts:63:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:74:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:84:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:94:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:105:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:115:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:125:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:134:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:143:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:152:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:162:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:171:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:179:      notes: "Multilingual; fixture path may be partial — localization-ready, not fully validated",
+packages/care-domain/src/datasets/golden.ts:181:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:188:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:195:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:202:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:212:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:221:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:231:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:242:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:252:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:262:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:272:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:282:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:299:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:308:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:319:    synthetic: true,
+packages/care-domain/src/datasets/golden.ts:334:    synthetic: GOLDEN_DATASET_SYNTHETIC,
+packages/care-domain/src/types.ts:7: * Evidence modes (must be explicit — never present fixture as production):
+packages/care-domain/src/scenario/olivia.ts:4: * Technical IDs retained for API continuity; display names are synthetic (Evelyn/Marcus/…).
+packages/care-domain/src/scenario/olivia.ts:103:/** Track 1 judge-loop canonical messy caregiver update (fixture extract supported). */
+packages/care-domain/src/scenario/olivia.ts:121:/** Seed Evelyn Carter scenario into a CareStore (synthetic). */
+packages/care-domain/src/scenario/olivia.ts:122:export function seedOliviaScenario(store: CareStore): void {
+packages/care-domain/src/scenario/olivia.ts:166:  // Care event history still survives restarts; access baseline resets for synthetic eval.
+packages/care-domain/src/scenario/olivia.ts:262:      synthetic: true,
+packages/care-domain/src/index.ts:31:import { seedOliviaScenario } from "./scenario/olivia.js";
+packages/care-domain/src/index.ts:35:  /** fixture = deterministic lab; llm = Foundation LLMProvider required */
+packages/care-domain/src/index.ts:36:  mode?: "fixture" | "llm";
+packages/care-domain/src/index.ts:38:  seedOlivia?: boolean;
+packages/care-domain/src/index.ts:44:  if (opts.seedOlivia !== false) {
+packages/care-domain/src/index.ts:45:    seedOliviaScenario(store);
+packages/care-domain/src/index.ts:49:    defaultMode: opts.mode ?? "fixture",
+packages/care-domain/src/services/timezone.ts:136:/** DST / cross-zone lab checks (synthetic). */
+packages/care-domain/src/services/care-auth.ts:37:/** Lab directory for Olivia scenario principals (synthetic). */
+packages/care-domain/src/services/loop.ts:40:  defaultMode: "fixture" | "llm";
+packages/care-domain/src/services/loop.ts:683:/** Full canonical demo path helper. */
+packages/care-domain/src/services/understand.ts:9: * Regex/fixture extractor is NOT the production intelligence path.
+packages/care-domain/src/services/understand.ts:40:   * fixture — deterministic lab extractor (EvidenceMode FIXTURE).
+packages/care-domain/src/services/understand.ts:41:   * llm — call injected Foundation LLMProvider (live or scripted).
+packages/care-domain/src/services/understand.ts:43:  mode: "fixture" | "llm";
+packages/care-domain/src/services/understand.ts:140: * Deterministic fixture extractor for golden tests and demos.
+packages/care-domain/src/services/understand.ts:143:export function fixtureExtract(
+packages/care-domain/src/services/understand.ts:670:        evidenceMode: opts.mode === "fixture" ? "FIXTURE" : "LIVE_FOUNDATION_BACKED",
+packages/care-domain/src/services/understand.ts:676:      evidenceMode: opts.mode === "fixture" ? "FIXTURE" : "LIVE_FOUNDATION_BACKED",
+packages/care-domain/src/services/understand.ts:683:      evidenceMode: opts.mode === "fixture" ? "FIXTURE" : "LIVE_FOUNDATION_BACKED",
+packages/care-domain/src/services/understand.ts:749:    slice: fixtureExtract(text, ctx, careRecipientName, {
+packages/care-domain/src/store/memory-store.ts:6: * - SYNTHETIC_FOUNDATION_BACKED demos
+apps/api/src/routes/care.routes.ts:95:   * Body: { email, password } OR { care_person_id, password } mapped to seed emails.
+apps/api/src/routes/care.routes.ts:142:    // Prefer foundation login when prisma backend seeded
+apps/api/src/routes/care.routes.ts:339:      mode?: "fixture" | "llm";
+apps/api/src/routes/care.routes.ts:464:      mode?: "fixture" | "llm";
+apps/api/src/services/care/prisma-care-store.ts:65:  static async create(opts?: { load?: boolean }): Promise<PrismaCareStore> {
+apps/api/src/services/care/care-runtime.service.ts:10:  seedOliviaScenario,
+apps/api/src/services/care/care-runtime.service.ts:39:  seedOlivia?: boolean;
+apps/api/src/services/care/care-runtime.service.ts:40:  understandMode?: "fixture" | "llm";
+apps/api/src/services/care/care-runtime.service.ts:44:  /** When true, seed Foundation Entity rows + CarePrincipalLink for Evelyn Carter cast */
+apps/api/src/services/care/care-runtime.service.ts:45:  seedFoundationAuth?: boolean;
+apps/api/src/services/care/care-runtime.service.ts:84:      defaultMode: config.understandMode ?? "fixture",
+apps/api/src/services/care/care-runtime.service.ts:89:  static async create(config: CareRuntimeConfig): Promise<CareRuntimeService> {
+apps/api/src/services/care/care-runtime.service.ts:112:    if (config.seedOlivia !== false) {
+apps/api/src/services/care/care-runtime.service.ts:115:      seedOliviaScenario(store);
+apps/api/src/services/care/care-runtime.service.ts:123:    if (config.seedFoundationAuth !== false && backend === "prisma") {
+apps/api/src/services/care/care-runtime.service.ts:208:            "[care] seed principal failed",
+apps/api/src/services/care/care-runtime.service.ts:510:  static defaultStorePath(): string {

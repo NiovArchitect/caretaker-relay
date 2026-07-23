@@ -1,0 +1,92 @@
+GENERATED_AT: 2026-07-23T17:09:01Z
+NOTE: no secrets; safe public probes only
+
+=== canonical URL ===
+https://care.niovlabs.com
+$ curl -sS -o /dev/null -w 'http_code=%{http_code} redirect=%{redirect_url} size=%{size_download}
+' https://care.niovlabs.com/
+http_code=200 size=555
+
+=== HTML asset refs (first 20 lines) ===
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Caretaker Relay — care coordination companion for caregivers"
+    />
+    <title>Caretaker Relay</title>
+    <script type="module" crossorigin src="/assets/index-BaLjxFWd.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Zh54GhIv.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+
+=== JS bundle SHA-related markers ===
+bundle=assets/index-BaLjxFWd.js
+bundle_bytes=239642
+has_Lab_entry=1
+has_Sample_care=0
+has_SEED_DOCS=0
+has_Evelyn=1
+has_generate-care-export=1
+
+=== API health ===
+{"ok":true,"product_id":"caretaker-relay","durable":true,"store_backend":"prisma","store_path":null,"foundation_auth":true,"timestamp":"2026-07-23T17:09:02.360Z"}
+http_code=200
+
+=== CORS preflight Origin care.niovlabs.com ===
+HTTP/2 204 
+access-control-allow-credentials: true
+access-control-allow-headers: authorization,content-type,x-request-id,x-correlation-id
+access-control-allow-methods: GET,POST,PUT,PATCH,DELETE,OPTIONS
+access-control-allow-origin: https://care.niovlabs.com
+
+=== Render fallback ===
+fallback_http=200
+
+=== DNS (dig/nslookup if available) ===
+caretaker-relay-web.onrender.com.
+
+=== Continuity JSON public fields (no secrets) ===
+public_application_url : https://care.niovlabs.com
+public_api_url : https://caretaker-relay-care-api.onrender.com
+canonical_public_url : https://care.niovlabs.com
+render_fallback_url : https://caretaker-relay-web.onrender.com
+deploy_shas : {
+  "app": "2858c2a2904e43cf6aea4b796e2c8f8ca0422330",
+  "foundation": "abbea1f78b31f76889f45d76bcec43761b37e5d6"
+}
+product_build_shas : {
+  "app": "2858c2a2904e43cf6aea4b796e2c8f8ca0422330",
+  "foundation": "abbea1f78b31f76889f45d76bcec43761b37e5d6"
+}
+recruitment_status : PAUSED
+current_gate : FOUNDER_BEHAVIOR_APPROVAL_REQUIRED_AFTER_DEMO_SHELL_REJECTION
+custom_domain : {
+  "hostname": "care.niovlabs.com",
+  "render_service": "caretaker-relay-web",
+  "render_service_id": "srv-d9h0l2n41pts73dksrmg",
+  "render_custom_domain_id": "cdm-d9h1233eo5us73d1jqrg",
+  "render_status": "verified",
+  "dns_provider": "godaddy_domaincontrol",
+  "dns_record": {
+    "type": "CNAME",
+    "name": "care",
+    "target": "caretaker-relay-web.onrender.com",
+    "ttl_observed_seconds": 3600
+  },
+  "dns_resolution": "PASS",
+  "https_status": "PASS",
+  "certificate_cn": "care.niovlabs.com",
+  "cors_origins": "https://care.niovlabs.com,https://caretaker-relay-web.onrender.com",
+  "custom_domain_smoke": "PASS",
+  "verified_at": "2026-07-23T13:30Z"
+}
