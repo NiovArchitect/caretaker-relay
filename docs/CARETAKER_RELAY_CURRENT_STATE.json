@@ -219,13 +219,13 @@
   "manifest_path": "docs/reviews/current-export/00_MANIFEST.md",
   "claimed_deployed_app_sha": "2858c2a",
   "product_modified_by_review_export": false,
-  "review_commit": "0ba5a08511031d10ac53f07a4881faabcad258ba",
+  "review_commit": "bfb77e801c45c307a1397eaa865c8de2205fe40e",
   "external_review_handoff": "GITHUB",
   "chatgpt_handoff": {
     "mechanism": "GITHUB",
     "repository": "NiovArchitect/caretaker-relay",
     "branch": "checkpoint/caretaker-relay-track1-2026-07-22",
-    "review_commit": "0ba5a08511031d10ac53f07a4881faabcad258ba",
+    "review_commit": "bfb77e801c45c307a1397eaa865c8de2205fe40e",
     "handoff_json": "docs/reviews/CHATGPT_REVIEW_HANDOFF.json",
     "handoff_md": "docs/reviews/CHATGPT_REVIEW_HANDOFF.md",
     "primary_review": "docs/reviews/CARETAKER_RELAY_EXTERNAL_REVIEW_BUNDLE.md"

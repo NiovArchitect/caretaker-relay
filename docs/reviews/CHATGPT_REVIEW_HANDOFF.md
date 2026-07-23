@@ -6,7 +6,7 @@
 | --- | --- |
 | Repository | `NiovArchitect/caretaker-relay` |
 | Branch | `checkpoint/caretaker-relay-track1-2026-07-22` |
-| Review commit | `0ba5a08511031d10ac53f07a4881faabcad258ba` |
+| Review commit | `bfb77e801c45c307a1397eaa865c8de2205fe40e` |
 | Deployed SHA | `2858c2a` |
 | Canonical URL | https://care.niovlabs.com |
 
