@@ -1,0 +1,109 @@
+{
+  "project": "Caretaker Relay",
+  "competition": "Administration for Community Living — Caregiver AI Challenge",
+  "track": "TRACK_1_AI_TOOLS_TO_SUPPORT_CAREGIVERS",
+  "phase": "TRACK_1_PHASE_1_DESIGN",
+  "hero_user": "family_home_community_caregiver",
+  "core_promise": "care_without_re_explaining",
+  "core_loop": [
+    "natural_caregiver_communication",
+    "multi_event_understand",
+    "preserve_consequential_uncertainty",
+    "human_verify_correct",
+    "durable_care_truth",
+    "handoff_continuity"
+  ],
+  "track_2_in_scope": false,
+  "workspace": "/Users/genghishameha/dev/NIOV Labs/github",
+  "app_repo": "/Users/genghishameha/dev/NIOV Labs/github/caretaker-relay",
+  "foundation_repo": "/Users/genghishameha/dev/NIOV Labs/github/caretaker-relay-foundation",
+  "protected_repos": [
+    "/Users/genghishameha/dev/NIOV Labs/github/niov-foundation",
+    "otzar-*"
+  ],
+  "branch": "checkpoint/caretaker-relay-track1-2026-07-22",
+  "product_build_shas": {
+    "app": "ff95159d8803feaca0e6e245d5a77ee28ee40c99",
+    "foundation": "9182c7511c1ffae9dc79082297ae92d7a5079b1a"
+  },
+  "documentation_shas": {
+    "research_package": "ccfdbeba91a11ffbbd3074ee35d74d4c0d314f10",
+    "session1_activation_pack": "f4a6c39c15815b5329c9e4f84f0b5e3043bc5e81"
+  },
+  "current_heads_note": "App HEAD may be above product_build after docs-only commits; foundation HEAD equals product_build when last verified.",
+  "remotes": {
+    "app_origin": "https://github.com/NiovArchitect/caretaker-relay.git",
+    "foundation_origin": "https://github.com/NiovArchitect/caretaker-relay-foundation.git"
+  },
+  "product_frozen": true,
+  "current_phase": "formative_caregiver_research_prep",
+  "current_gate": "SESSION_1_BLOCKED_FOUNDER_DECISIONS_AND_RECRUITMENT",
+  "session1_status": "NOT_STARTED",
+  "session1_readiness": "BLOCKED",
+  "caregiver_input_status": "NONE",
+  "care_recipient_input_status": "NONE",
+  "validated_status": "NONE",
+  "caregiver_validated_burden_metrics": "NONE",
+  "partnership_status": "NONE",
+  "outreach_sent": false,
+  "evidence_classes": {
+    "founder_hypothesis": true,
+    "lab_result": true,
+    "caregiver_input": false,
+    "care_recipient_input": false,
+    "validated": false
+  },
+  "known_limitations": [
+    "understand_fixture_default",
+    "physical_mic_not_validated",
+    "live_remote_llm_blocked_credentials",
+    "no_caregiver_validation",
+    "no_care_recipient_validation",
+    "thin_care_recipient_control_ux",
+    "no_committed_partnerships",
+    "maya_not_full_independent_user_product"
+  ],
+  "judge_loop_lab_verdict": "PASS",
+  "playwright_e2e_last_recorded": "18/18",
+  "authoritative_docs": [
+    "docs/CARETAKER_RELAY_MASTER_CONTINUITY.md",
+    "docs/CARETAKER_RELAY_CURRENT_STATE.json",
+    "docs/CARETAKER_RELAY_CONTINUITY_INDEX.md",
+    "docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md",
+    "docs/ACL_TRACK1_TRACEABILITY.md",
+    "docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md",
+    "docs/research/FIRST_CAREGIVER_RESEARCH_EXTERNAL_REVIEW.md",
+    "docs/research/SESSION_1_ACTIVATION_EXTERNAL_REVIEW.md",
+    "docs/research/RESEARCH_BUILD_MANIFEST.md",
+    "docs/research/SESSION_1_MODERATOR_CARD.md",
+    "docs/research/SESSION_1_READINESS_GATE.md"
+  ],
+  "do_not_do": [
+    "redesign_product_without_finding",
+    "start_substrate_campaign",
+    "track_2",
+    "workforce_ui",
+    "provider_portal",
+    "full_care_recipient_product",
+    "production_deploy",
+    "modify_original_niov_foundation",
+    "modify_otzar",
+    "claim_caregiver_validation",
+    "invent_interviews_or_metrics_or_partners",
+    "start_session_1_without_authorization",
+    "contact_participants_as_automation",
+    "send_partnership_outreach_as_automation"
+  ],
+  "next_human_decisions": [
+    "consent_approach",
+    "confirm_recording_off",
+    "private_storage_path",
+    "retention_fields",
+    "quote_permission_process",
+    "institutional_irb_check_if_applicable",
+    "recruit_schedule_caregiver_1"
+  ],
+  "next_authorized_action": "RESOLVE_SESSION_1_FOUNDER_DECISIONS_THEN_RECRUIT_THEN_SESSION_1_ON_FROZEN_BUILD",
+  "ia": ["today", "care", "circle", "relay"],
+  "updated_at": "2026-07-22"
+}

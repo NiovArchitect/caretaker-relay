@@ -1,6 +1,7 @@
 # Caretaker Relay — Project Memory
 
-**Last updated:** 2026-07-22 (Judge Loop slice implemented)  
+**Last updated:** 2026-07-22 (context continuity checkpoint)  
+**New session:** read `docs/CARETAKER_RELAY_MASTER_CONTINUITY.md` first  
 **Long-term Grok memory also at:** `~/.grok/memory/caretaker-relay-acl-track1.md`
 
 ## Strategic status
