@@ -278,7 +278,7 @@ Test product not participant · do not sell · do not explain failures away · r
 - Consent: info sheet + private acknowledgment before product use  
 - Quotes only with permission  
 
-**Still human-only:** valid Render access + isolated DB secrets; then recruit/screen/schedule Caregiver #1; confirm institutional/IRB policy if applicable; founder authorize outreach.
+**Still human-only:** founder sends recruitment message; screen/schedule Caregiver #1; private consent log; confirm institutional/IRB policy if applicable.
 
 **Execution checklist:** `docs/research/SESSION_1_EXECUTION_GATE.md`  
 **After online env ready + founder allows:** RECRUIT / SCREEN first real family caregiver — **do not automate contact**.
@@ -307,7 +307,7 @@ Do **not** automatically:
 - DNS changes without founder · duplicate infrastructure · resume deploy from chat memory after compaction  
 - modify original `niov-foundation` · modify Otzar  
 - claim caregiver validation · invent interviews/metrics/partners  
-- recruit / start Session 1 while online env blocked · contact participants · send partnership outreach  
+- contact participants as automation · start Session 1 without scheduled consented participant · put identifying data in Git · send partnership outreach as automation  
 
 First: recover state from disk (including `ONLINE_READINESS_CURRENT_STATE.md`); report gate; wait for founder instruction.
 
@@ -378,9 +378,9 @@ Public smoke: PASS (auth isolation, multi-event, med uncertainty, confirm, corre
 | Online env ready? | **NO** |
 | Top online blockers? | Render 401 (access); no isolated DB; no public app/API URLs |
 | Render 401 class? | ACCESS/AUTHORIZATION — not architecture failure |
-| Research begun? | NO sessions; recruitment PAUSED |
-| Forbidden? | See §13 + no deploy-from-chat-memory |
-| Next action? | Founder Render auth + isolated DB → public smoke → then recruit |
+| Research begun? | NO sessions completed; recruitment ACTIVE (0 invited) |
+| Forbidden? | See §13 + no automate contact + no PHI in Git |
+| Next action? | Founder sends recruitment message → screen → schedule Session 1 |
 
 ---
 
