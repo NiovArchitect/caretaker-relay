@@ -1,6 +1,6 @@
 {
   "project": "Caretaker Relay",
-  "competition": "Administration for Community Living — Caregiver AI Challenge",
+  "competition": "Administration for Community Living \u2014 Caregiver AI Challenge",
   "track": "TRACK_1_AI_TOOLS_TO_SUPPORT_CAREGIVERS",
   "phase": "TRACK_1_PHASE_1_DESIGN",
   "hero_user": "family_home_community_caregiver",
@@ -15,13 +15,13 @@
   ],
   "branch": "checkpoint/caretaker-relay-track1-2026-07-22",
   "product_build_shas": {
-    "app": "pending_commit",
-    "foundation": "pending_commit"
+    "app": "135f5dfc258fb3db9155f80e5f64679fdf33196b",
+    "foundation": "abbea1f78b31f76889f45d76bcec43761b37e5d6"
   },
   "product_frozen": false,
   "deploy_shas": {
-    "app": "pending_deploy",
-    "foundation": "pending_deploy"
+    "app": "135f5dfc258fb3db9155f80e5f64679fdf33196b",
+    "foundation": "abbea1f78b31f76889f45d76bcec43761b37e5d6"
   },
   "current_phase": "master_e2e_care_experience_contract",
   "current_gate": "MASTER_E2E_CONTRACT_AWAITING_FOUNDER_A_TO_Z_REVIEW",
@@ -39,8 +39,16 @@
     "additional_lay_caregiver": "Maya Bennett",
     "professional_caregiver": "Daniel Kim",
     "health_professional": "Dr. Priya Shah",
-    "technical_ids_retained": ["cr-olivia", "p-sadeil", "p-maya", "p-walter"],
-    "forbidden_names": ["Olivia Lewis", "founder daughter personal names"]
+    "technical_ids_retained": [
+      "cr-olivia",
+      "p-sadeil",
+      "p-maya",
+      "p-walter"
+    ],
+    "forbidden_names": [
+      "Olivia Lewis",
+      "founder daughter personal names"
+    ]
   },
   "render_services": {
     "web": {
@@ -68,21 +76,20 @@
     "otzar-postgres/dpg-d9chaemcjfls73dei7ug-a"
   ],
   "public_smoke": {
-    "health": "PENDING_REDEPLOY",
-    "auth_sadeil": "PENDING_REDEPLOY",
-    "auth_maya": "PENDING_REDEPLOY",
+    "health": "PASS",
+    "auth_sadeil": "PASS",
+    "auth_maya": "PASS",
     "unauthorized_denied": "PASS",
-    "other_hh_denied": "PASS",
     "understand_multi_event": "PASS",
     "medication_ambiguity_uncertain": "PASS",
     "confirm": "PASS",
-    "correction": "PASS",
     "handoff": "PASS",
-    "reload_relogin": "PASS",
-    "restart_persistence": "PASS",
-    "web_bakes_public_api": "PASS",
     "cors": "PASS",
-    "understand_mode": "fixture"
+    "understand_mode": "fixture",
+    "web_evelyn_display": "PASS",
+    "login_display_marcus": "PASS",
+    "login_display_maya": "PASS",
+    "login_display_daniel": "PASS"
   },
   "secrets_configured_names_only": [
     "DATABASE_URL",
@@ -122,7 +129,7 @@
   "care_recipient_input_status": "NONE",
   "validated_status": "NONE",
   "judge_loop_lab_verdict": "PASS",
-  "public_judge_loop_smoke": "PENDING_REDEPLOY",
+  "public_judge_loop_smoke": "PASS",
   "authoritative_docs": [
     "docs/CARETAKER_RELAY_MASTER_CONTINUITY.md",
     "docs/CARETAKER_RELAY_CURRENT_STATE.json",
@@ -148,7 +155,7 @@
   ],
   "next_authorized_action": "FOUNDER_A_TO_Z_REVIEW_THEN_MAY_AUTHORIZE_RECRUITMENT",
   "cold_context_online_recovery": "READY",
-  "updated_at": "2026-07-23",
+  "updated_at": "2026-07-23T15:05Z",
   "public_research_environment": "READY",
   "canonical_public_url": "https://care.niovlabs.com",
   "render_fallback_url": "https://caretaker-relay-web.onrender.com",
@@ -183,8 +190,14 @@
   },
   "next_human_action": "FOUNDER_APPROVES_FULL_A_TO_Z_LIVE_EXPERIENCE_BEFORE_RECRUITMENT",
   "presentation_redesign": "MASTER_CONTRACT_IMPLEMENTATION",
-  "public_screenshots": "evidence/redesign-2026-07-23/",
-  "ia_surfaces": ["today", "care", "people", "documents", "relay"],
+  "public_screenshots": "evidence/master-e2e-2026-07-23/",
+  "ia_surfaces": [
+    "today",
+    "care",
+    "people",
+    "documents",
+    "relay"
+  ],
   "lay_to_lay_handoff": "FIRST_CLASS",
   "documents_safety": "readable_not_authoritative"
 }
