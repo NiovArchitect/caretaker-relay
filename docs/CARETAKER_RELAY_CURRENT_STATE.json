@@ -15,17 +15,17 @@
   ],
   "branch": "checkpoint/caretaker-relay-track1-2026-07-22",
   "product_build_shas": {
-    "app": "0ee6d3b7b68df16ee225789785927b5a5fd19311",
+    "app": "23e2ae0d70e61453e3d50cdf0b6471f7cd45adfa",
     "foundation": "28a72b3eaa310069bafba80091269d18d2e929bc"
   },
   "product_frozen": false,
   "deploy_shas": {
-    "app": "44dc0116838c3ffb97b96a3e0daf61a02bdc78c8",
-    "foundation": "08f42d41dae187c2d3dbcb63c3c27c3ffd44d049",
-    "note": "Render pipeline_minutes_exhausted blocked deploy of app 0ee6d3b / foundation 28a72b3 (P2002 fix + React #310 fix). Live web still has post-login React #310. API live 08f42d4 still has invite-accept relationship id P2002 until 6e1e28a+ deploys."
+    "app": "23e2ae0d70e61453e3d50cdf0b6471f7cd45adfa",
+    "foundation": "28a72b3eaa310069bafba80091269d18d2e929bc",
+    "note": "API 28a72b3 live with CARE_UNDERSTAND_MODE=llm LLM_PROVIDER=openai OPENAI_MODEL=gpt-5.6 OPENAI_API_KEY present. OpenAI returns 429 quota; fail-closed proven. App 23e2ae0 MedixWeb live on care.niovlabs.com."
   },
-  "current_phase": "final_technical_closure",
-  "current_gate": "PARTIAL_LIVE_LLM_KEYS_MISSING_AND_RENDER_PIPELINE_MINUTES_EXHAUSTED",
+  "current_phase": "live_openai_configured_partial_due_to_provider_quota",
+  "current_gate": "LIVE_OPENAI_PATH_PROVEN_QUOTA_429_BLOCKS_SUCCESSFUL_COMPLETIONS",
   "online_deployment_audit": "COMPLETED",
   "online_research_environment": "READY",
   "session1_status": "NOT_STARTED",
@@ -86,9 +86,9 @@
     "confirm": "PASS",
     "handoff": "PASS",
     "cors": "PASS",
-    "understand_mode": "fixture",
-    "llm_keys_present": false,
-    "llm_provider_ready": false,
+    "understand_mode": "llm",
+    "llm_keys_present": true,
+    "llm_provider_ready": true,
     "web_evelyn_display": "PASS",
     "login_display_marcus": "PASS_API",
     "login_display_maya": "PASS_API",
@@ -96,7 +96,8 @@
     "public_web_post_login": "FAIL_REACT_310_ON_DEPLOYED_44dc011",
     "multi_browser_local_ui_prod_api": "PASS",
     "maya_correction_marcus_reobserve_prod_api": "PASS",
-    "invite_accept_live": "FAIL_P2002_UNTIL_6e1e28a_DEPLOYS"
+    "invite_accept_live": "FAIL_P2002_UNTIL_6e1e28a_DEPLOYS",
+    "web_medixweb": "DEPLOYED_23e2ae0"
   },
   "secrets_configured_names_only": [
     "DATABASE_URL",
@@ -238,5 +239,19 @@
     "handoff_md": "docs/reviews/CHATGPT_REVIEW_HANDOFF.md",
     "primary_review": "docs/reviews/CARETAKER_RELAY_EXTERNAL_REVIEW_BUNDLE.md"
   },
-  "technical_multi_human_loop": "PARTIAL"
+  "technical_multi_human_loop": "PARTIAL",
+  "live_intelligence": {
+    "CARE_UNDERSTAND_MODE": "llm",
+    "LLM_PROVIDER": "openai",
+    "OPENAI_MODEL": "gpt-5.6",
+    "OPENAI_API_KEY": "PRESENT",
+    "health_understand_mode": "llm",
+    "health_llm_keys_present": true,
+    "health_llm_provider_ready": true,
+    "live_request_evidence_mode": "LIVE_FOUNDATION_BACKED",
+    "modelProvider": "openai",
+    "openai_runtime_error": "429 quota exceeded",
+    "ten_utterance_gate": "PARTIAL_PATH_PROVEN_FAIL_CLOSED_ON_QUOTA",
+    "prisma_confirm_after_fail_closed": "PASS"
+  }
 }
