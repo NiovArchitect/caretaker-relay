@@ -15,16 +15,17 @@
   ],
   "branch": "checkpoint/caretaker-relay-track1-2026-07-22",
   "product_build_shas": {
-    "app": "2858c2a2904e43cf6aea4b796e2c8f8ca0422330",
-    "foundation": "abbea1f78b31f76889f45d76bcec43761b37e5d6"
+    "app": "0ee6d3b7b68df16ee225789785927b5a5fd19311",
+    "foundation": "28a72b3eaa310069bafba80091269d18d2e929bc"
   },
   "product_frozen": false,
   "deploy_shas": {
-    "app": "2858c2a2904e43cf6aea4b796e2c8f8ca0422330",
-    "foundation": "abbea1f78b31f76889f45d76bcec43761b37e5d6"
+    "app": "44dc0116838c3ffb97b96a3e0daf61a02bdc78c8",
+    "foundation": "08f42d41dae187c2d3dbcb63c3c27c3ffd44d049",
+    "note": "Render pipeline_minutes_exhausted blocked deploy of app 0ee6d3b / foundation 28a72b3 (P2002 fix + React #310 fix). Live web still has post-login React #310. API live 08f42d4 still has invite-accept relationship id P2002 until 6e1e28a+ deploys."
   },
   "current_phase": "final_technical_closure",
-  "current_gate": "THREE_PRINCIPAL_TECHNICAL_PARTIAL_PENDING_LIVE_LLM_AND_BROWSER",
+  "current_gate": "PARTIAL_LIVE_LLM_KEYS_MISSING_AND_RENDER_PIPELINE_MINUTES_EXHAUSTED",
   "online_deployment_audit": "COMPLETED",
   "online_research_environment": "READY",
   "session1_status": "NOT_STARTED",
@@ -86,10 +87,16 @@
     "handoff": "PASS",
     "cors": "PASS",
     "understand_mode": "fixture",
+    "llm_keys_present": false,
+    "llm_provider_ready": false,
     "web_evelyn_display": "PASS",
-    "login_display_marcus": "PASS",
-    "login_display_maya": "PASS",
-    "login_display_daniel": "PASS"
+    "login_display_marcus": "PASS_API",
+    "login_display_maya": "PASS_API",
+    "login_display_daniel": "PASS_API",
+    "public_web_post_login": "FAIL_REACT_310_ON_DEPLOYED_44dc011",
+    "multi_browser_local_ui_prod_api": "PASS",
+    "maya_correction_marcus_reobserve_prod_api": "PASS",
+    "invite_accept_live": "FAIL_P2002_UNTIL_6e1e28a_DEPLOYS"
   },
   "secrets_configured_names_only": [
     "DATABASE_URL",
@@ -97,6 +104,7 @@
     "JWT_SECRET",
     "CARETAKER_APP_URL",
     "CARE_CORS_ORIGINS",
+    "CARE_UNDERSTAND_MODE",
     "VITE_CARE_API_URL"
   ],
   "render_cli_auth": "oauth_cli_yaml",
