@@ -322,17 +322,24 @@ button {
   line-height: 1;
 }
 
-/* Leave room so sticky composer does not cover primary actions */
+/* Leave room so sticky composer does not cover primary actions (public judge/caregiver path). */
 .main {
-  padding-bottom: 120px;
+  padding-bottom: 200px;
 }
 
 .composer-dock {
   position: sticky;
   bottom: 64px;
+  z-index: 4;
   margin: 0 -16px;
   padding: 10px 16px;
   background: linear-gradient(180deg, transparent, var(--cr-offwhite) 30%);
+  /* Gradient overlay must not steal clicks from content underneath */
+  pointer-events: none;
+}
+
+.composer-dock .composer {
+  pointer-events: auto;
 }
 
 .composer {
@@ -359,6 +366,15 @@ button {
 
 .composer textarea:focus {
   outline: none;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+  /* Keep primary CTAs clear of sticky composer/nav on public viewports */
+  scroll-margin-bottom: 180px;
 }
 
 .icon-btn,
@@ -391,13 +407,6 @@ button {
   background: var(--cr-white);
   color: var(--cr-teal-deep);
   border: 1px solid var(--cr-border);
-}
-
-.btn-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
 }
 
 .badge {
