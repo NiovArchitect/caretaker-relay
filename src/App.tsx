@@ -121,6 +121,23 @@ export function App() {
     };
   }, []);
 
+  // Hooks must run on every render path (including LoginGate) — never after
+  // conditional returns, or authenticated shells crash with React #310.
+  const pageTitle = useMemo(() => {
+    switch (tab) {
+      case "today":
+        return "Today";
+      case "care":
+        return "Care";
+      case "people":
+        return "People";
+      case "documents":
+        return "Documents";
+      case "relay":
+        return "Relay";
+    }
+  }, [tab]);
+
   if (!authReady) {
     return (
       <div className="app-shell" data-testid="auth-loading">
@@ -157,21 +174,6 @@ export function App() {
     setBundle(null);
     setShowHandoff(false);
   }
-
-  const pageTitle = useMemo(() => {
-    switch (tab) {
-      case "today":
-        return "Today";
-      case "care":
-        return "Care";
-      case "people":
-        return "People";
-      case "documents":
-        return "Documents";
-      case "relay":
-        return "Relay";
-    }
-  }, [tab]);
 
   function openRelay() {
     setRelayOpen(true);
