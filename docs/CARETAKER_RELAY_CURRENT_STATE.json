@@ -20,7 +20,7 @@
   },
   "product_frozen": false,
   "deploy_shas": {
-    "app": "2be3183f1845a48d3b8b3034be5c8f0a5e66591c",
+    "app": "147da9fdc946e5225e4c6430a8655646e4f5303b",
     "foundation": "ccd887b240902bd7ad21c068cd11b60cfa878e85"
   },
   "current_phase": "web_first_2050_clinical_redesign",
@@ -132,7 +132,7 @@
     "modify_product_during_session_1",
     "claim_validated_from_one_session"
   ],
-  "next_authorized_action": "FOUNDER_VISUAL_REVIEW_OF_LIVE_WEB_REDESIGN",
+  "next_authorized_action": "FOUNDER_VISUAL_REVIEW_THEN_MAY_AUTHORIZE_RECRUITMENT",
   "cold_context_online_recovery": "READY",
   "updated_at": "2026-07-23",
   "public_research_environment": "READY",
@@ -168,5 +168,6 @@
     "retested": 0
   },
   "next_human_action": "FOUNDER_APPROVES_LIVE_WEB_DESIGN_BEFORE_RECRUITMENT",
-  "presentation_redesign": "IN_PROGRESS_WEB_FIRST_2050"
+  "presentation_redesign": "DEPLOYED_AWAITING_FOUNDER_APPROVAL",
+  "public_screenshots": "evidence/redesign-2026-07-23/"
 }
