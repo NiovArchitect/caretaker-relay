@@ -14,7 +14,9 @@
 | Constitution audit | `docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md` |
 | Traceability | `docs/ACL_TRACK1_TRACEABILITY.md` |
 | Latest product slice | **Track 1 Judge Loop — Care Without Re-Explaining** (`docs/JUDGE_LOOP_SLICE_2026-07-22.md`) |
-| **Next action** | **WAIT FOR REVIEW** — then real caregiver sessions (not more substrate) |
+| Research freeze | App `ff95159…` · Foundation `9182c75…` — **do not silent-change during sessions** |
+| Research package | `docs/research/*` first cycle ready; **sessions = 0** |
+| **Next action** | **Human Session 1** (real caregivers) — not more engineering redesign |
 
 ## Remote checkpoint (SAFE REMOTELY)
 

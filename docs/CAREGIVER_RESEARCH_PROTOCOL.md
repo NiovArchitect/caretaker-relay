@@ -1,69 +1,72 @@
-# Caregiver Research Protocol (PREPARE ONLY)
+# Caregiver Research Protocol
 
-**Status:** Infrastructure / protocol draft  
+**Status:** First-cycle package ready · **Sessions conducted: 0**  
 **Last updated:** 2026-07-22  
-**Hard rule:** Do **not** invent caregiver validation results.  
-**Slice Q:** Prepare real research — do not claim sessions occurred.
+**Hard rule:** Do **not** invent caregiver validation results.
 
-## Purpose
+## Frozen research build
 
-Support ACL Track 1 requirement for active caregiver involvement and real-world usability evidence **when real participants consent**.
+See `docs/research/RESEARCH_BUILD_MANIFEST.md`.
 
-## What is prepared (done)
+| Component | SHA |
+| --- | --- |
+| App | `ff95159d8803feaca0e6e245d5a77ee28ee40c99` |
+| Foundation | `9182c7511c1ffae9dc79082297ae92d7a5079b1a` |
 
-| Artifact | Location | Status |
-| --- | --- | --- |
-| Traceability tags | `docs/CAREGIVER_RESEARCH_TRACEABILITY.md` | Ready |
-| Lab vs validated metric labels | TRL card + BurdenMetrics | Ready |
-| Synthetic golden dataset | care-domain golden v1.0.0+ | Ready |
-| Protocol document | this file | Ready |
-| Recruitment materials | Below templates | Draft |
+**Do not silently modify the caregiver experience while sessions run.**
 
-## What has NOT been done
+## Evidence state (current)
 
-- No caregiver interviews conducted by this system  
-- No care-recipient interviews  
-- No usability sessions with humans  
-- No `[CAREGIVER INPUT]` or `[VALIDATED]` evidence rows with real participants  
+| Tag | Status |
+| --- | --- |
+| `[CAREGIVER INPUT]` | **NONE** |
+| `[CARE RECIPIENT INPUT]` | **NONE** |
+| `[VALIDATED]` | **NONE** |
 
-## Planned session types (future)
+## Research package (use these)
 
-1. **Kitchen comprehension (15 min)** — Today surface understanding while multitasking  
-2. **Care update dictation (20 min)** — speak/type update → verify → handoff  
-3. **Access/privacy walkthrough (15 min)** — who can see what  
-4. **Correction flow (10 min)** — “that’s wrong”  
+| Artifact | Path |
+| --- | --- |
+| Cycle overview | `docs/research/FIRST_CAREGIVER_RESEARCH_CYCLE.md` |
+| Moderator guide | `docs/research/MODERATOR_GUIDE.md` |
+| Session tasks | `docs/research/SESSION_TASKS.md` |
+| Observation sheet | `docs/research/OBSERVATION_SHEET.md` |
+| Post-session questions | `docs/research/POST_SESSION_QUESTIONS.md` |
+| Findings register | `docs/research/FINDINGS_REGISTER.md` |
+| Design decision log | `docs/research/DESIGN_DECISION_LOG.md` |
+| Metrics template | `docs/research/METRICS_TEMPLATE.md` |
+| Build manifest | `docs/research/RESEARCH_BUILD_MANIFEST.md` |
+| Traceability tags | `docs/CAREGIVER_RESEARCH_TRACEABILITY.md` |
+| Partnership prep (nothing sent) | `docs/PARTNERSHIP_OUTREACH_PLAN.md` |
+| Dementia fit hypothesis | `docs/DEMENTIA_CAREGIVER_FIT_HYPOTHESIS.md` |
 
-## Consent principles (draft)
+## Objective
 
-- Informed consent; voluntary  
-- No real PHI in lab builds; use synthetic care recipient names  
-- Participants may withdraw  
-- Record only with explicit permission  
-- Separate founder hypotheses from participant statements in traceability log  
+Test whether Caretaker Relay reduces cognitive/coordination burden and whether caregivers understand, trust, and control the AI — on the Judge Loop lab product.
 
-## Recruitment note (template — not sent)
+## Participants (first cycle)
 
-> We are evaluating a care coordination prototype for family and professional caregivers. Sessions last ~45 minutes. You will use synthetic scenarios (not your real care data). Feedback improves design. Participation is voluntary.
+- **Primary:** 5–8 family caregivers  
+- **Secondary (feasible):** 2–3 secondary caregivers; 2–3 professional home caregivers (not workforce managers); 2–4 care recipients if appropriate  
 
-## Metrics collected in lab vs human sessions
+## Consent & PHI
 
-| Metric | Lab now | Human later |
-| --- | --- | --- |
-| Steps to record update | Yes `[LAB RESULT]` | Yes → may become `[VALIDATED]` |
-| Time to handoff | Yes lab | Yes with caregivers |
-| Comprehension of verify panel | Not measured | Required |
-| Trust / over-reliance | Not measured | Required |
-| Accessibility feedback | Not measured | Required |
+- Voluntary; withdraw anytime  
+- **Synthetic scenarios only** in the prototype (Olivia)  
+- No real PHI into lab app  
+- Quotes only with consent; no fabrication  
 
-## Owner actions before first real session
+## Moderator bias
 
-1. Finalize IRB/ethics or equivalent as applicable  
-2. Recruit ≥N caregivers (family + professional mix)  
-3. Run sessions; store notes with participant IDs (not in public repo if sensitive)  
-4. Update traceability with `[CAREGIVER INPUT]` only from real notes  
-5. Never backfill fictional quotes  
+See `MODERATOR_GUIDE.md` — prohibit leading praise language.
 
-## System cannot do this alone
+## After real sessions only
 
-Grok / automated agents prepare infrastructure only.  
-Human founders run participant research and feed results back.
+1. Add rows to `FINDINGS_REGISTER.md`  
+2. Optionally `DESIGN_DECISION_LOG.md`  
+3. Update `CAREGIVER_RESEARCH_TRACEABILITY.md` / `ACL_TRACK1_TRACEABILITY.md` with real tags  
+4. Plan product slice **after** freeze cycle — not mid-session polish  
+
+## System / agents cannot run Session 1 alone
+
+Human founders recruit and moderate. Automation prepares infrastructure only.

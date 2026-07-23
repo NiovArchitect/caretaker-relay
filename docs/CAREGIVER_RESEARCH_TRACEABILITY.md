@@ -3,7 +3,10 @@
 ACL judging assesses whether design decisions trace to caregiver needs.  
 **Hard rule: Do not claim caregiver validation unless a real caregiver produced it.**
 
-**Last updated:** 2026-07-22
+**Last updated:** 2026-07-22 (research package prepared; **still zero real sessions**)
+
+**Research freeze build:** app `ff95159…` · foundation `9182c75…` — see `docs/research/RESEARCH_BUILD_MANIFEST.md`.  
+**Findings register (empty until real data):** `docs/research/FINDINGS_REGISTER.md`.
 
 ## Status tags (required)
 
