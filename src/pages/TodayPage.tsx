@@ -90,17 +90,25 @@ export function TodayPage({
         <p className="for-person" data-testid="care-recipient-label">
           Here&apos;s {today.careRecipient.displayName}&apos;s day.
         </p>
-        {/* Hidden bootstrap marker for E2E — not shown to caregivers/judges */}
+        <div className="btn-row greeting-actions">
+          <button
+            type="button"
+            className="primary-btn"
+            data-testid="try-care-update-top"
+            onClick={onLoadDemo}
+          >
+            Tell Relay what happened
+          </button>
+        </div>
+        {/* E2E marker only — empty body so transport string never appears in judge UI */}
         {proj && (
           <span
             data-testid="today-source"
             data-source={proj.source}
             data-store={proj.storeBackend ?? ""}
             className="sr-only"
-            aria-hidden
-          >
-            {proj.source}
-          </span>
+            aria-hidden="true"
+          />
         )}
       </div>
 

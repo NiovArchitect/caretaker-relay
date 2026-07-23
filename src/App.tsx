@@ -367,11 +367,19 @@ export function App() {
               Error
             </span>
           )}
+          <span
+            className="muted"
+            data-testid="session-caregiver"
+            style={{ fontSize: "0.75rem", fontWeight: 600 }}
+            title="Signed in as primary caregiver for this evaluation household"
+          >
+            Sadeil
+          </span>
           <button
             type="button"
             className="avatar-btn"
-            aria-label="Profile and settings"
-            title="Profile"
+            aria-label="Signed in as Sadeil, primary caregiver for Olivia"
+            title="Sadeil · primary caregiver"
           >
             S
           </button>
