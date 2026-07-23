@@ -181,20 +181,30 @@ p {
 .app-shell[data-testid="login-gate"],
 .app-shell[data-testid="auth-loading"] {
   margin: 0;
-  min-height: 100%;
+  min-height: 100vh;
   max-width: none;
+  width: 100%;
   border-radius: 0;
   border: none;
   box-shadow: none;
-  background: transparent;
+  /* Reset app chrome grid so login is truly viewport-centered (not column 1). */
   display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: none;
   place-items: center;
-  padding: 24px 20px;
+  justify-items: center;
+  align-items: center;
+  padding: 32px 20px;
   overflow: auto;
+  background: transparent;
 }
 
 .app-shell[data-testid="login-gate"] .login-card {
-  margin: auto;
+  margin: 0 auto;
+  justify-self: center;
+  align-self: center;
+  width: min(440px, 100%);
 }
 
 /* Top bar — glass strip */

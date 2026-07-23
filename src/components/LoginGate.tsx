@@ -84,7 +84,7 @@ export function LoginGate({
           care API — not by client-side switching.
         </p>
         <label>
-          Principal
+          Choose caregiver
           <select
             data-testid="login-principal"
             value={selected}
@@ -123,21 +123,20 @@ export function LoginGate({
           </button>
         </div>
         <p className="muted" style={{ fontSize: "0.85rem", marginTop: 14 }}>
-          Synthetic lab household for evaluation. Not production identity
-          federation.
+          Evaluation household for Caretaker Relay. Sign-in is server-checked.
         </p>
         <label>
-          Invitation token (optional — paste after invite)
+          Invitation code (optional)
           <input
             data-testid="login-invite-token"
             value={inviteToken}
             onChange={(e) => setInviteToken(e.target.value)}
-            placeholder="Accept after sign-in via People"
+            placeholder="If you were invited, paste the code here"
           />
         </label>
         {inviteToken.trim() && (
           <p className="muted" style={{ fontSize: "0.82rem" }}>
-            After sign-in as the invitee, open People → Accept invitation.
+            After you sign in, open People and accept the invitation.
           </p>
         )}
       </form>
