@@ -23,8 +23,8 @@
     "app": "135f5dfc258fb3db9155f80e5f64679fdf33196b",
     "foundation": "abbea1f78b31f76889f45d76bcec43761b37e5d6"
   },
-  "current_phase": "master_e2e_care_experience_contract",
-  "current_gate": "MASTER_E2E_CONTRACT_AWAITING_FOUNDER_A_TO_Z_REVIEW",
+  "current_phase": "real_product_behavior_reconstruction",
+  "current_gate": "FOUNDER_BEHAVIOR_APPROVAL_REQUIRED_AFTER_DEMO_SHELL_REJECTION",
   "online_deployment_audit": "COMPLETED",
   "online_research_environment": "READY",
   "session1_status": "NOT_STARTED",
@@ -137,7 +137,10 @@
     "docs/CARETAKER_RELAY_END_TO_END_OPERATING_MODEL.md",
     "docs/CARETAKER_RELAY_A_TO_Z_EXPERIENCE.md",
     "docs/CARETAKER_RELAY_TRACK1_ROLE_MATRIX.md",
-    "docs/ONLINE_READINESS_CURRENT_STATE.md"
+    "docs/ONLINE_READINESS_CURRENT_STATE.md",
+    "docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md",
+    "docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md",
+    "docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_ACTION_MATRIX.md"
   ],
   "do_not_do": [
     "modify_otzar_or_original_foundation",
@@ -153,9 +156,9 @@
     "recruit_before_founder_a_to_z_approval",
     "use_personal_family_names_in_fixtures"
   ],
-  "next_authorized_action": "FOUNDER_A_TO_Z_REVIEW_THEN_MAY_AUTHORIZE_RECRUITMENT",
+  "next_authorized_action": "FOUNDER_REWALKS_LIVE_PRODUCT_BEHAVIOR",
   "cold_context_online_recovery": "READY",
-  "updated_at": "2026-07-23T15:05Z",
+  "updated_at": "2026-07-23T16:35Z",
   "public_research_environment": "READY",
   "canonical_public_url": "https://care.niovlabs.com",
   "render_fallback_url": "https://caretaker-relay-web.onrender.com",
@@ -173,7 +176,7 @@
     "mobile_viewport": "PASS",
     "top_cta": "PASS"
   },
-  "founder_recruitment_authorization": "REVOKED_PENDING_MASTER_E2E_A_TO_Z_APPROVAL",
+  "founder_recruitment_authorization": "REVOKED_DEMO_SHELL_REJECTED",
   "founder_recruitment_authorized_at": null,
   "participant_pipeline": {
     "identified": 0,
@@ -188,8 +191,8 @@
     "synthesized": 0,
     "retested": 0
   },
-  "next_human_action": "FOUNDER_APPROVES_FULL_A_TO_Z_LIVE_EXPERIENCE_BEFORE_RECRUITMENT",
-  "presentation_redesign": "MASTER_CONTRACT_IMPLEMENTATION",
+  "next_human_action": "FOUNDER_APPROVES_REAL_WORKFLOWS_OR_REQUESTS_FURTHER_FIXES",
+  "presentation_redesign": "SUPERSEDED_BY_REAL_PRODUCT_RECONSTRUCTION",
   "public_screenshots": "evidence/master-e2e-2026-07-23/",
   "ia_surfaces": [
     "today",
@@ -199,5 +202,13 @@
     "relay"
   ],
   "lay_to_lay_handoff": "FIRST_CLASS",
-  "documents_safety": "readable_not_authoritative"
+  "documents_safety": "readable_not_authoritative",
+  "prior_pass_claims_superseded": [
+    "documents_static_seed",
+    "human_messaging_shell",
+    "handoff_static_fallback",
+    "care_static_lists",
+    "scripted_prompt_ctas",
+    "ready_for_founder_a_to_z"
+  ]
 }

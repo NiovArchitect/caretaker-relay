@@ -103,6 +103,7 @@ export async function careLabLogin(
     session_id: string;
     care_person_id: string;
     display_name: string;
+    auth_mode?: string;
   }>("/api/v1/care/auth/lab-login", {
     method: "POST",
     body: { care_person_id: carePersonId, password },
@@ -239,6 +240,80 @@ export async function careHandoffs(
 ) {
   return request<{ ok: boolean; handoffs: unknown[] }>(
     `/api/v1/care/recipients/${careRecipientId}/handoffs`,
+    { token, baseUrl },
+  );
+}
+
+export async function careState(
+  token: string,
+  careRecipientId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    state: Record<string, unknown> | null;
+    durable?: boolean;
+    store_backend?: string;
+  }>(`/api/v1/care/recipients/${careRecipientId}/state`, { token, baseUrl });
+}
+
+export async function careCircle(
+  token: string,
+  careRecipientId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    care_recipient_id: string;
+    who_can_see_what: Array<{
+      personId: string;
+      displayName: string;
+      roleLabel: string;
+      status: string;
+      canSee: string[];
+      canDo: string[];
+      limits: string[];
+    }>;
+  }>(`/api/v1/care/recipients/${careRecipientId}/circle`, { token, baseUrl });
+}
+
+export async function careExport(
+  token: string,
+  careRecipientId: string,
+  format: "json" | "markdown" = "markdown",
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    format: string;
+    careRecipientId: string;
+    exportedAt: string;
+    evidenceMode?: string;
+    claim?: string;
+    humanReadable?: string;
+    structured?: unknown;
+  }>(`/api/v1/care/recipients/${careRecipientId}/export?format=${format}`, {
+    token,
+    baseUrl,
+  });
+}
+
+export async function careContext(
+  token: string,
+  careRecipientId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    context: {
+      actorPersonId: string;
+      actorDisplayName: string;
+      careRecipientId: string;
+      roles: string[];
+    };
+    access: { allowed: boolean };
+  }>(
+    `/api/v1/care/context?care_recipient_id=${encodeURIComponent(careRecipientId)}`,
     { token, baseUrl },
   );
 }

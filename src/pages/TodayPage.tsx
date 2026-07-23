@@ -2,22 +2,25 @@ import { useEffect, useState } from "react";
 import { today } from "../scenario/olivia";
 import {
   fetchTodayProjection,
+  getSessionIdentity,
   type TodayAttentionItem,
 } from "../foundation/careClient";
 
 export function TodayPage({
   relayHandled,
   onOpenHandoff,
-  onLoadDemo,
+  onOpenRelay,
   refreshKey,
   onReviewAttention,
 }: {
   relayHandled: string[];
   onOpenHandoff: () => void;
-  onLoadDemo: () => void;
+  /** Open Relay for natural language — empty composer, not a scripted prompt. */
+  onOpenRelay: () => void;
   refreshKey?: number;
   onReviewAttention?: (item: TodayAttentionItem) => void;
 }) {
+  const session = getSessionIdentity();
   const [proj, setProj] = useState<{
     needsYou: string[];
     attention: TodayAttentionItem[];
@@ -43,48 +46,37 @@ export function TodayPage({
     proj && proj.attention.length > 0
       ? proj.attention
       : proj && proj.needsYou.length > 0
-        ? proj.needsYou.map((line, i) => ({
+        ? proj.needsYou.slice(0, 5).map((line, i) => ({
             id: `need-${i}`,
             title: line,
             whatHappened: line,
             whySurfaced: "This still needs your judgment or action.",
-            relayKnows: "Listed on Evelyn's day.",
+            relayKnows: "Listed on the current care day.",
             relayDoesNotKnow: "Whether it is fully resolved.",
-            nextStep: "Review and update when ready.",
-            kind: "task" as const,
+            nextStep: "Review",
+            kind: /medication|dose|pill/i.test(line)
+              ? ("medication" as const)
+              : ("task" as const),
           }))
-        : today.needsYou.map((t) => ({
-            id: t.id,
-            title: t.dueLabel ? `${t.dueLabel} — ${t.title}` : t.title,
-            whatHappened: t.title,
-            whySurfaced: "Still open on Evelyn's day.",
-            relayKnows: t.dueLabel ? `Due ${t.dueLabel}` : "On today's list",
-            relayDoesNotKnow: "Whether it is already handled off-app.",
-            nextStep: "Review when you can.",
-            kind: "task" as const,
-          }));
+        : [];
 
-  const whatChanged =
-    proj && proj.whatChanged.length > 0
-      ? proj.whatChanged
-      : today.sinceYesterday;
+  const whatChanged = proj?.whatChanged?.length
+    ? proj.whatChanged
+    : today.sinceYesterday;
   const handled =
     proj && proj.handled.length > 0
       ? proj.handled
       : relayHandled.length > 0
         ? relayHandled
         : today.relayHandled;
-  const next =
-    proj && proj.next.length > 0
-      ? proj.next
-      : ["Confirm transportation", "Evening medication at 7 PM"];
+  const next = proj && proj.next.length > 0 ? proj.next : [];
   const organizedCount = proj?.organizedCount ?? whatChanged.length;
 
   return (
     <>
       <div className="greeting">
         <h1 data-testid="today-greeting">
-          {today.greeting}, {today.caregiverName}
+          {today.greeting}, {session.displayName}
         </h1>
         <p className="for-person">
           Here&apos;s what matters for{" "}
@@ -107,7 +99,7 @@ export function TodayPage({
             type="button"
             className="primary-btn"
             data-testid="try-care-update-top"
-            onClick={onLoadDemo}
+            onClick={onOpenRelay}
           >
             Tell Relay what happened
           </button>
@@ -117,7 +109,7 @@ export function TodayPage({
             data-testid="review-handoff"
             onClick={onOpenHandoff}
           >
-            Review handoff for Maya
+            Review latest handoff
           </button>
         </div>
       </div>
@@ -166,7 +158,9 @@ export function TodayPage({
                   data-testid="attention-review"
                   onClick={() => onReviewAttention?.(item)}
                 >
-                  Review with Relay
+                  {item.kind === "medication"
+                    ? "Open medication in Care"
+                    : "Open in Care"}
                 </button>
               </div>
             </article>
@@ -178,16 +172,20 @@ export function TodayPage({
         <h2 id="since">What changed</h2>
         {organizedCount > 0 && (
           <p className="muted" data-testid="organized-count">
-            {organizedCount} update{organizedCount === 1 ? "" : "s"} organized
-            for {today.careRecipient.displayName}
+            {organizedCount} update{organizedCount === 1 ? "" : "s"} in recent
+            care activity for {today.careRecipient.displayName}
           </p>
         )}
         <div className="timeline" data-testid="what-changed-list">
-          {whatChanged.map((line) => (
-            <div key={line} className="timeline-item">
-              {line}
-            </div>
-          ))}
+          {whatChanged.length === 0 ? (
+            <p className="muted">No recent changes recorded yet.</p>
+          ) : (
+            whatChanged.map((line) => (
+              <div key={line} className="timeline-item">
+                {line}
+              </div>
+            ))
+          )}
         </div>
       </section>
 
@@ -201,25 +199,29 @@ export function TodayPage({
         <section className="section surface-known" aria-labelledby="handled">
           <h2 id="handled">Already handled</h2>
           <ul className="list-plain" data-testid="already-handled-list">
-            {handled.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
+            {handled.length === 0 ? (
+              <li className="muted">Nothing listed yet</li>
+            ) : (
+              handled.map((line) => <li key={line}>{line}</li>)
+            )}
           </ul>
         </section>
 
         <section className="section surface-known" aria-labelledby="next">
           <h2 id="next">What&apos;s next</h2>
           <ul className="list-plain" data-testid="next-list">
-            {next.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
+            {next.length === 0 ? (
+              <li className="muted">Nothing listed yet</li>
+            ) : (
+              next.map((line) => <li key={line}>{line}</li>)
+            )}
           </ul>
           <div className="btn-row">
             <button
               type="button"
               className="primary-btn"
               data-testid="try-care-update"
-              onClick={onLoadDemo}
+              onClick={onOpenRelay}
             >
               Tell Relay what happened
             </button>

@@ -3,7 +3,7 @@ import type { RelayMessage, VerificationBundle } from "../domain/types";
 import { Composer } from "./Composer";
 import { VerifyPanel } from "./VerifyPanel";
 import type { TranscriptMeta } from "../foundation/careClient";
-import { careRecipient, people } from "../scenario/olivia";
+import { careRecipient } from "../scenario/olivia";
 
 type RelayMode = "relay" | "messages";
 
@@ -20,7 +20,6 @@ export function RelayPanel({
   confirmed,
   onConfirm,
   onCorrect,
-  onUseSample,
   onCloseMobile,
 }: {
   open: boolean;
@@ -35,7 +34,6 @@ export function RelayPanel({
   confirmed: boolean;
   onConfirm: () => void;
   onCorrect: () => void;
-  onUseSample: () => void;
   onCloseMobile?: () => void;
 }) {
   const [mode, setMode] = useState<RelayMode>("relay");
@@ -57,7 +55,7 @@ export function RelayPanel({
               ? correcting
                 ? "Correction mode — prior evidence stays on record"
                 : "AI · organizes updates · holds uncertainty · asks you to verify"
-              : "People · human-to-human only (not AI)"}
+              : "People messaging — only when real threads exist"}
           </div>
         </div>
         {onCloseMobile && (
@@ -73,7 +71,11 @@ export function RelayPanel({
         )}
       </div>
 
-      <div className="relay-mode-tabs" role="tablist" aria-label="Relay or human messages">
+      <div
+        className="relay-mode-tabs"
+        role="tablist"
+        aria-label="Relay or human messages"
+      >
         <button
           type="button"
           role="tab"
@@ -92,13 +94,17 @@ export function RelayPanel({
           data-testid="relay-mode-messages"
           onClick={() => setMode("messages")}
         >
-          Messages (people)
+          Messages
         </button>
       </div>
 
       {mode === "relay" ? (
         <>
-          <div className="relay-thread" data-testid="relay-thread" aria-live="polite">
+          <div
+            className="relay-thread"
+            data-testid="relay-thread"
+            aria-live="polite"
+          >
             {messages.map((m) => (
               <div
                 key={m.id}
@@ -124,23 +130,10 @@ export function RelayPanel({
           </div>
 
           <div className="relay-composer-wrap" data-testid="composer-dock">
-            <div className="relay-hints">
-              <button
-                type="button"
-                className="chip-btn"
-                onClick={onUseSample}
-                data-testid="fill-judge-update"
-              >
-                Sample care update
-              </button>
-              <button
-                type="button"
-                className="chip-btn"
-                onClick={() => onDraftChange("What still needs attention?")}
-              >
-                What still needs me?
-              </button>
-            </div>
+            <p className="muted" style={{ fontSize: "0.75rem", margin: "0 0 8px" }}>
+              Type what happened in your own words. No prewritten care workflow
+              buttons.
+            </p>
             <Composer
               value={draft}
               onChange={onDraftChange}
@@ -158,29 +151,17 @@ export function RelayPanel({
         </>
       ) : (
         <div className="relay-thread" data-testid="human-messages">
-          <div className="bubble bubble-system">
-            Human messages are separate from Relay (AI).
-            {"\n"}
-            You ↔ another authorized person about {careRecipient.displayName}.
+          <div className="bubble bubble-system" data-testid="messages-not-available">
+            Human messaging is <strong>not available</strong> in this build.
+            {"\n\n"}
+            There is no message thread model (sender, recipient, care recipient,
+            body, status) wired end-to-end yet.
+            {"\n\n"}
+            For continuity today, use a <strong>real handoff</strong> derived
+            from confirmed care truth for {careRecipient.displayName}.
+            {"\n\n"}
+            We will not show fake chats or fake delivery states.
           </div>
-          <div className="member-card" style={{ cursor: "default" }}>
-            <strong>{people.maya.displayName}</strong>
-            <span className="muted">Family / friend caregiver</span>
-            <span className="muted">
-              Continuity / handoff available — not an AI chat
-            </span>
-          </div>
-          <div className="member-card" style={{ cursor: "default" }}>
-            <strong>{people.daniel.displayName}</strong>
-            <span className="muted">Professional caregiver</span>
-            <span className="muted">
-              Recipient-specific updates — not agency workforce chat
-            </span>
-          </div>
-          <p className="muted" style={{ fontSize: "0.8rem", padding: "0 4px" }}>
-            Full threaded messaging ships when invitation + identity lifecycle
-            is live. Handoffs already prepare lay→lay continuity.
-          </p>
         </div>
       )}
     </aside>

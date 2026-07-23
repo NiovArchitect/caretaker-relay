@@ -189,22 +189,18 @@ export const today: TodayModel = {
   ],
 };
 
-/** Static demo handoff — lay→lay continuity (Marcus → Maya). */
+/**
+ * @deprecated Not used by product UI. Handoffs must come from API/store.
+ * Kept only if a unit test imports it; do not wire into visible surfaces.
+ */
 export const handoff: CareHandoff = {
-  id: "ho-demo-static",
+  id: "ho-test-only-unused",
   careRecipientId: careRecipient.id,
   fromPersonId: people.marcus.id,
   toPersonId: people.maya.id,
-  whatChanged: [
-    "PT moved to Thursday at 2:30 PM",
-    "More fatigue was noted after lunch",
-    "Lunch medication was recorded",
-  ],
-  stillNeedsAttention: [
-    "Confirm transportation",
-    "Evening medication at 7 PM",
-  ],
-  watch: ["Fatigue was mentioned twice today"],
+  whatChanged: [],
+  stillNeedsAttention: [],
+  watch: [],
   sources: [],
   createdAt: "2026-07-22T12:00:00Z",
   evidenceMode: "DEMO_ONLY",

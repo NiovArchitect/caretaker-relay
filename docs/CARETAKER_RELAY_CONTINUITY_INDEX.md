@@ -9,6 +9,9 @@
 | 2a | `docs/CARETAKER_RELAY_END_TO_END_OPERATING_MODEL.md` | **Authoritative UX→code experience contract** (Evelyn/Marcus synthetic household) |
 | 2b | `docs/CARETAKER_RELAY_A_TO_Z_EXPERIENCE.md` | A→Z journey (define before auth redesign) |
 | 2c | `docs/CARETAKER_RELAY_TRACK1_ROLE_MATRIX.md` | Lay→lay / pro continuity roles |
+| 2d | `docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md` | **Reality audit — real vs scripted controls** |
+| 2e | `docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_REVIEW.md` | Full reconstruction review |
+| 2f | `docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_ACTION_MATRIX.md` | Control → backend matrix |
 | 3 | `docs/ONLINE_READINESS_CURRENT_STATE.md` | **Authoritative online-readiness audit boundary** (read before any deploy) |
 | 4 | `docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md` | Track 1 constitution audit vs product |
 | 5 | `docs/ACL_TRACK1_TRACEABILITY.md` | Judging criteria ↔ capabilities |

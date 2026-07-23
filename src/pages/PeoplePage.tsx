@@ -1,18 +1,42 @@
-import { useState } from "react";
-import { careRecipient, circle } from "../scenario/olivia";
-import type { CareCircleMember } from "../domain/types";
+import { useEffect, useState } from "react";
+import { careRecipient } from "../scenario/olivia";
+import {
+  fetchCircleMembers,
+  type CareCircleMemberRow,
+} from "../foundation/careClient";
 
 export function PeoplePage() {
-  const [selected, setSelected] = useState<CareCircleMember | null>(null);
+  const [members, setMembers] = useState<CareCircleMemberRow[]>([]);
+  const [source, setSource] = useState<string>("");
+  const [selected, setSelected] = useState<CareCircleMemberRow | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    void fetchCircleMembers().then((r) => {
+      if (cancelled) return;
+      setMembers(r.members);
+      setSource(r.source);
+      setLoading(false);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <>
       <div className="greeting">
         <h1>People</h1>
-        <p className="for-person">Who supports {careRecipient.displayName}</p>
-        <p className="muted" style={{ marginTop: 8, maxWidth: 520 }}>
-          Family, friends, and professionals connected to this person — not a
-          workforce roster. Access is explicit.
+        <p className="for-person">
+          Who is authorized for {careRecipient.displayName}
+        </p>
+        <p className="muted" style={{ marginTop: 8, maxWidth: 560 }}>
+          Membership from the care space access model — not a static cast list
+          and not an agency roster.
+        </p>
+        <p className="muted" data-testid="people-source" style={{ fontSize: "0.8rem" }}>
+          Source: {source || "…"}
         </p>
       </div>
 
@@ -25,57 +49,90 @@ export function PeoplePage() {
           <div>
             <strong>{careRecipient.displayName}</strong>
             <div className="muted" style={{ fontSize: "0.85rem", fontWeight: 500 }}>
-              Home / community care
+              Care recipient · home / community
             </div>
           </div>
         </div>
       </section>
 
       <section className="section" aria-label="Care circle">
-        <h2>Care circle</h2>
-        {circle.map((member) => (
+        <h2>Authorized people</h2>
+        {loading && <p className="muted">Loading membership…</p>}
+        {!loading && members.length === 0 && (
+          <p className="muted">No authorized members returned.</p>
+        )}
+        {members.map((member) => (
           <button
-            key={member.id}
+            key={member.personId}
             type="button"
             className="member-card"
+            data-testid={`person-${member.personId}`}
             onClick={() =>
-              setSelected((cur) => (cur?.id === member.id ? null : member))
+              setSelected((cur) =>
+                cur?.personId === member.personId ? null : member,
+              )
             }
           >
-            <strong>{member.person.displayName}</strong>
+            <strong>{member.displayName}</strong>
             <span className="muted">{member.roleLabel}</span>
-            {member.nextInvolvement && <span>{member.nextInvolvement}</span>}
-            {member.lastUpdate && (
-              <span className="muted">{member.lastUpdate}</span>
-            )}
+            <span
+              className={
+                member.status === "active" ? "badge badge-teal" : "badge badge-amber"
+              }
+            >
+              {member.status}
+            </span>
           </button>
         ))}
+      </section>
+
+      <section className="section surface-verify" aria-label="Invitation status">
+        <h2>Invitations</h2>
+        <p className="muted" data-testid="invite-not-available">
+          Caregiver invitation lifecycle is{" "}
+          <strong>not available in this build</strong>. No Invite button is
+          shown until create → token → accept → membership is real end-to-end.
+        </p>
       </section>
 
       {selected && (
         <section
           className="section surface-reported"
-          aria-label={`${selected.person.displayName} details`}
+          aria-label={`${selected.displayName} details`}
+          data-testid="person-detail"
         >
-          <h2 style={{ textTransform: "none", letterSpacing: "-0.02em", fontSize: "1.1rem", color: "var(--cr-graphite)" }}>
-            {selected.person.displayName} · {selected.roleLabel}
+          <h2
+            style={{
+              textTransform: "none",
+              letterSpacing: "-0.02em",
+              fontSize: "1.1rem",
+              color: "var(--cr-graphite)",
+            }}
+          >
+            {selected.displayName} · {selected.roleLabel}
           </h2>
           <p>
-            <strong>Helps with:</strong> {selected.helpsWith.join(", ")}
+            <strong>Membership:</strong> {selected.status}
           </p>
           <p>
-            <strong>Who can see what</strong>
+            <strong>Can see</strong>
           </p>
           <ul className="list-plain">
-            {selected.access.informationCategories.map((c) => (
+            {selected.canSee.map((c) => (
+              <li key={c}>{c}</li>
+            ))}
+          </ul>
+          <p>
+            <strong>Can do</strong>
+          </p>
+          <ul className="list-plain">
+            {selected.canDo.map((c) => (
               <li key={c}>{c}</li>
             ))}
           </ul>
           <p className="muted">
-            Authority limits: {selected.access.authorityLimits.join("; ")}
-          </p>
-          <p className="muted">
-            Family hierarchy is not the same as authority. Access is explicit.
+            Authority limits:{" "}
+            {selected.limits.length ? selected.limits.join("; ") : "None listed"}
           </p>
           <button
             type="button"

@@ -5,12 +5,13 @@ import {
   confirmCareUpdateAsync,
   applyCareCorrection,
   answerCareQuestion,
-  getLatestHandoff,
-  JUDGE_DEMO_UTTERANCE,
+  fetchLatestHandoff,
+  getSessionIdentity,
   careRecipient,
   type TranscriptMeta,
   type TodayAttentionItem,
 } from "./foundation/careClient";
+import type { CareHandoff } from "./domain/types";
 import { today } from "./scenario/olivia";
 import { BottomNav } from "./components/BottomNav";
 import { SideNav } from "./components/SideNav";
@@ -69,6 +70,14 @@ export function App() {
   const [voiceMeta, setVoiceMeta] = useState<TranscriptMeta | undefined>();
   const [todayRefresh, setTodayRefresh] = useState(0);
   const [relayOpen, setRelayOpen] = useState(false);
+  const [liveHandoff, setLiveHandoff] = useState<CareHandoff | null | undefined>(
+    undefined,
+  );
+  const [handoffLoading, setHandoffLoading] = useState(false);
+  const [careFocus, setCareFocus] = useState<
+    "medication" | "task" | "general" | null
+  >(null);
+  const session = getSessionIdentity();
 
   useEffect(() => {
     window.__crE2E = {
@@ -87,6 +96,7 @@ export function App() {
         setTab("relay");
       },
       setDraft: (text) => {
+        // Test-only harness — not a product workflow control.
         setDraft(text);
         setVoiceMeta({ source: "text" });
       },
@@ -114,6 +124,26 @@ export function App() {
 
   function openRelay() {
     setRelayOpen(true);
+  }
+
+  /** Product path: open Relay for natural language — never prefill a demo script. */
+  function openRelayForCareUpdate() {
+    setDraft("");
+    setVoiceMeta(undefined);
+    setCorrecting(false);
+    openRelay();
+  }
+
+  async function openLatestHandoff() {
+    setShowHandoff(true);
+    setHandoffLoading(true);
+    setLiveHandoff(undefined);
+    try {
+      const h = await fetchLatestHandoff();
+      setLiveHandoff(h);
+    } finally {
+      setHandoffLoading(false);
+    }
   }
 
   async function submitText(text: string) {
@@ -149,8 +179,8 @@ export function App() {
             },
           ]);
           setTodayRefresh((n) => n + 1);
-          setShowHandoff(true);
           setTab("today");
+          void openLatestHandoff();
         } else {
           setMessages((prev) => [
             ...prev,
@@ -271,9 +301,9 @@ export function App() {
           },
         ]);
         setBundle(null);
-        setShowHandoff(true);
         setTodayRefresh((n) => n + 1);
         setTab("today");
+        void openLatestHandoff();
       } else {
         const msg =
           result.message ??
@@ -324,23 +354,23 @@ export function App() {
     setDraft("");
   }
 
-  function loadDemo() {
-    setDraft(JUDGE_DEMO_UTTERANCE);
-    setVoiceMeta(undefined);
-    openRelay();
-  }
-
-  function onReviewAttention(_item: TodayAttentionItem) {
-    openRelay();
-    setDraft(JUDGE_DEMO_UTTERANCE);
+  function onReviewAttention(item: TodayAttentionItem) {
+    // Care objects open in Care — never inject a prewritten Relay prompt.
+    if (item.kind === "medication") {
+      setCareFocus("medication");
+      setTab("care");
+      return;
+    }
+    setCareFocus(item.kind === "task" ? "task" : "general");
+    setTab("care");
   }
 
   function onNavChange(t: NavTab) {
     setTab(t);
-    if (t === "relay") openRelay();
+    if (t === "relay") openRelayForCareUpdate();
+    if (t !== "care") setCareFocus(null);
   }
 
-  const liveHandoff = getLatestHandoff();
   const workspaceTab = tab === "relay" ? "today" : tab;
 
   return (
@@ -393,21 +423,21 @@ export function App() {
           <span
             className="session-label"
             data-testid="session-caregiver"
-            title="Current user · primary family caregiver"
+            title="Current user · lab session principal"
           >
-            {people.marcus.displayName}
+            {session.displayName}
             <span className="muted" style={{ fontWeight: 500 }}>
               {" "}
-              · Family caregiver
+              · {session.roleLabel}
             </span>
           </span>
           <button
             type="button"
             className="avatar-btn"
-                  aria-label={`Signed in as ${people.marcus.displayName}, primary family caregiver for ${careRecipient.displayName}`}
-            title={`${people.marcus.displayName} · family caregiver`}
+            aria-label={`Signed in as ${session.displayName}, ${session.roleLabel} for ${careRecipient.displayName}`}
+            title={`${session.displayName} · ${session.roleLabel}`}
           >
-            M
+            {(session.displayName[0] ?? "U").toUpperCase()}
           </button>
           <span className="live-dot" title="Connected" aria-hidden />
         </div>
@@ -420,21 +450,27 @@ export function App() {
           {workspaceTab === "today" && (
             <TodayPage
               relayHandled={relayHandled}
-              onOpenHandoff={() => setShowHandoff(true)}
-              onLoadDemo={loadDemo}
+              onOpenHandoff={() => void openLatestHandoff()}
+              onOpenRelay={openRelayForCareUpdate}
               refreshKey={todayRefresh}
               onReviewAttention={onReviewAttention}
             />
           )}
-          {workspaceTab === "care" && <CarePage />}
+          {workspaceTab === "care" && <CarePage focusKind={careFocus} />}
           {workspaceTab === "people" && <PeoplePage />}
           {workspaceTab === "documents" && <DocumentsPage />}
 
           {showHandoff && (
             <HandoffPanel
               onClose={() => setShowHandoff(false)}
-              liveHandoff={liveHandoff}
+              liveHandoff={liveHandoff ?? null}
               status="prepared"
+              loading={handoffLoading}
+              emptyReason={
+                liveHandoff === null
+                  ? "No handoff has been persisted for this care recipient yet."
+                  : null
+              }
             />
           )}
         </div>
@@ -461,15 +497,16 @@ export function App() {
         confirmed={confirmed}
         onConfirm={() => void confirmLooksRight()}
         onCorrect={startCorrection}
-        onUseSample={loadDemo}
         onCloseMobile={() => setRelayOpen(false)}
       />
 
       <BottomNav tab={tab === "relay" ? "relay" : workspaceTab} onChange={onNavChange} />
 
       <footer className="status-bar">
-        <span>Care workspace · human verifies consequential truth</span>
-        <span>Not medical advice · synthetic evaluation household</span>
+        <span>
+          Lab entry · {session.displayName} caring for {careRecipient.displayName}
+        </span>
+        <span>Not medical advice · synthetic household · human verifies truth</span>
       </footer>
     </div>
   );

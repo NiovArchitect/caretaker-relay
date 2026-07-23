@@ -27,11 +27,14 @@ import {
   type AuthCareContext,
 } from "@caretaker-relay/care-domain";
 import {
+  careCircle,
   careConfirm,
   careCorrect,
+  careExport,
   careHealth,
   careHandoffs,
   careLabLogin,
+  careState,
   careToday,
   careUnderstand,
 } from "./careHttpClient";
@@ -64,10 +67,45 @@ export {
   sadeilContext,
 };
 
-/** Canonical messy update for Track 1 judge loop demo affordance. */
+/**
+ * Evaluator-only sample utterance (tests / cold-start).
+ * Must NOT be bound to product chrome as a care workflow.
+ */
 export const JUDGE_DEMO_UTTERANCE = JUDGE_LOOP_UTTERANCE;
 
 export type CareClientMode = "fixture" | "llm";
+
+export type SessionIdentity = {
+  carePersonId: string;
+  displayName: string;
+  roleLabel: string;
+  authMode?: string;
+};
+
+export type CareCircleMemberRow = {
+  personId: string;
+  displayName: string;
+  roleLabel: string;
+  status: string;
+  canSee: string[];
+  canDo: string[];
+  limits: string[];
+};
+
+export type CareStateSnapshot = {
+  careRecipientId: string;
+  householdId?: string;
+  medicationSchedules: Array<Record<string, unknown>>;
+  medicationRecords: Array<Record<string, unknown>>;
+  appointments: Array<Record<string, unknown>>;
+  observations: Array<Record<string, unknown>>;
+  tasks: Array<Record<string, unknown>>;
+  events: Array<Record<string, unknown>>;
+  openSafetyReviews: Array<Record<string, unknown>>;
+  handoffs: Array<Record<string, unknown>>;
+  lastUpdatedAt?: string;
+  source: "http" | "package" | "empty";
+};
 
 let runtime: { store: CareStore; service: CareLoopService } | null = null;
 let httpToken: string | null = null;
@@ -84,6 +122,7 @@ let lastHttpHandoff: {
   evidenceMode?: string;
 } | null = null;
 let transportUsed: "http" | "package" = "package";
+let sessionIdentity: SessionIdentity | null = null;
 
 function resolveMode(): CareClientMode {
   const env = import.meta.env?.VITE_CARE_MODE as string | undefined;
@@ -117,6 +156,17 @@ export function resetCareRuntimeForTests() {
   lastHttpBundle = null;
   lastHttpHandoff = null;
   transportUsed = "package";
+  sessionIdentity = null;
+}
+
+export function getSessionIdentity(): SessionIdentity {
+  return (
+    sessionIdentity ?? {
+      carePersonId: people.sadeil.id,
+      displayName: people.sadeil.displayName,
+      roleLabel: "Family caregiver",
+    }
+  );
 }
 
 /**
@@ -168,6 +218,12 @@ async function ensureHttpSession(): Promise<boolean> {
   }
   httpToken = login.data.token;
   httpAvailable = true;
+  sessionIdentity = {
+    carePersonId: login.data.care_person_id,
+    displayName: login.data.display_name,
+    roleLabel: "Family caregiver",
+    authMode: login.data.auth_mode,
+  };
   return true;
 }
 
@@ -318,38 +374,99 @@ export function getCurrentCareState() {
   return store.getCurrentState(careRecipient.id);
 }
 
+function mapHandoffRecord(h: Record<string, unknown>) {
+  const sources = Array.isArray(h.sources) ? h.sources : [];
+  return {
+    id: String(h.id ?? "ho-unknown"),
+    careRecipientId: String(h.careRecipientId ?? careRecipient.id),
+    fromPersonId: h.fromPersonId ? String(h.fromPersonId) : undefined,
+    toPersonId: h.toPersonId ? String(h.toPersonId) : undefined,
+    whatChanged: Array.isArray(h.whatChanged)
+      ? (h.whatChanged as string[])
+      : [],
+    stillNeedsAttention: Array.isArray(h.stillNeedsAttention)
+      ? (h.stillNeedsAttention as string[])
+      : [],
+    watch: Array.isArray(h.watch) ? (h.watch as string[]) : [],
+    sources: sources.map((s, i) => {
+      const src = s as Record<string, unknown>;
+      return {
+        id: String(src.id ?? `src-ho-${i}`),
+        kind: (src.kind as "caregiver_text") ?? "caregiver_text",
+        label: String(src.label ?? "Care update"),
+        actorName: src.actorName ? String(src.actorName) : undefined,
+        recordedAt: String(src.recordedAt ?? new Date().toISOString()),
+        whyVisible: String(
+          src.whyVisible ?? "Included in care continuity for this recipient.",
+        ),
+      };
+    }),
+    evidenceMode: (h.evidenceMode as EvidenceMode) ?? "SYNTHETIC_FOUNDATION_BACKED",
+    createdAt: String(h.createdAt ?? new Date().toISOString()),
+  };
+}
+
+/** Sync accessor — prefers last confirmed HTTP handoff, then package store. No static demo. */
 export function getLatestHandoff() {
   if (transportUsed === "http" && lastHttpHandoff) {
-    return {
+    return mapHandoffRecord({
       id: lastHttpHandoff.id,
       careRecipientId: careRecipient.id,
       whatChanged: lastHttpHandoff.whatChanged,
       stillNeedsAttention: lastHttpHandoff.stillNeedsAttention,
-      watch: lastHttpHandoff.watch.length
-        ? lastHttpHandoff.watch
-        : ["No new watch items"],
-      sources: lastHttpHandoff.sources.map((s, i) => ({
-        id: `src-http-${i}`,
-        kind: "caregiver_text" as const,
-        label: s.label ?? "Care update",
-        actorName: s.actorName,
-        recordedAt: new Date().toISOString(),
-        whyVisible: "Shared in today's care continuity picture.",
-      })),
-      evidenceMode:
-        (lastHttpHandoff.evidenceMode as EvidenceMode) ??
-        "SYNTHETIC_FOUNDATION_BACKED",
-      createdAt: new Date().toISOString(),
-    };
+      watch: lastHttpHandoff.watch,
+      sources: lastHttpHandoff.sources,
+      evidenceMode: lastHttpHandoff.evidenceMode,
+    });
   }
   const { store } = getCareRuntime();
   const list = store.getHandoffs(careRecipient.id);
   return list[list.length - 1];
 }
 
+/** Fetch latest persisted handoff from server (authoritative). */
+export async function fetchLatestHandoff() {
+  const useHttp = await ensureHttpSession();
+  if (useHttp && httpToken) {
+    const res = await careHandoffs(httpToken, careRecipient.id);
+    if (res.ok) {
+      const list = (res.data.handoffs ?? []) as Record<string, unknown>[];
+      if (list.length === 0) return null;
+      const latest = list[list.length - 1]!;
+      lastHttpHandoff = {
+        id: String(latest.id),
+        whatChanged: Array.isArray(latest.whatChanged)
+          ? (latest.whatChanged as string[])
+          : [],
+        stillNeedsAttention: Array.isArray(latest.stillNeedsAttention)
+          ? (latest.stillNeedsAttention as string[])
+          : [],
+        watch: Array.isArray(latest.watch) ? (latest.watch as string[]) : [],
+        sources: Array.isArray(latest.sources)
+          ? (latest.sources as Array<{ label?: string; actorName?: string }>)
+          : [],
+        evidenceMode: latest.evidenceMode
+          ? String(latest.evidenceMode)
+          : undefined,
+      };
+      return mapHandoffRecord(latest);
+    }
+  }
+  return getLatestHandoff() ?? null;
+}
+
 function buildAttentionFromLines(lines: string[]): TodayAttentionItem[] {
-  return lines.map((line, i) => {
-    const med = /medication|dose|pill|mg|med\b/i.test(line);
+  // Signal filter: dedupe identical reasons; keep sparse attention.
+  const seen = new Set<string>();
+  const unique: string[] = [];
+  for (const line of lines) {
+    const key = line.trim().toLowerCase();
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    unique.push(line);
+  }
+  return unique.slice(0, 5).map((line, i) => {
+    const med = /medication|dose|pill|mg|med\b|incompatible/i.test(line);
     return {
       id: `att-${i}-${line.slice(0, 24)}`,
       title: med ? "Medication needs verification" : line,
@@ -363,10 +480,159 @@ function buildAttentionFromLines(lines: string[]): TodayAttentionItem[] {
       relayDoesNotKnow: med
         ? "Relay will not invent or choose a dose."
         : "Whether it is already fully resolved off-app.",
-      nextStep: "Review",
+      nextStep: med ? "Open medication in Care" : "Review",
       kind: med ? "medication" : "task",
     };
   });
+}
+
+export async function fetchCareState(): Promise<CareStateSnapshot> {
+  const useHttp = await ensureHttpSession();
+  if (useHttp && httpToken) {
+    const res = await careState(httpToken, careRecipient.id);
+    if (res.ok && res.data.state) {
+      const s = res.data.state as Record<string, unknown>;
+      return {
+        careRecipientId: String(s.careRecipientId ?? careRecipient.id),
+        householdId: s.householdId ? String(s.householdId) : undefined,
+        medicationSchedules: Array.isArray(s.medicationSchedules)
+          ? (s.medicationSchedules as Array<Record<string, unknown>>)
+          : [],
+        medicationRecords: Array.isArray(s.medicationRecords)
+          ? (s.medicationRecords as Array<Record<string, unknown>>)
+          : [],
+        appointments: Array.isArray(s.appointments)
+          ? (s.appointments as Array<Record<string, unknown>>)
+          : [],
+        observations: Array.isArray(s.observations)
+          ? (s.observations as Array<Record<string, unknown>>)
+          : [],
+        tasks: Array.isArray(s.tasks)
+          ? (s.tasks as Array<Record<string, unknown>>)
+          : [],
+        events: Array.isArray(s.events)
+          ? (s.events as Array<Record<string, unknown>>)
+          : [],
+        openSafetyReviews: Array.isArray(s.openSafetyReviews)
+          ? (s.openSafetyReviews as Array<Record<string, unknown>>)
+          : [],
+        handoffs: Array.isArray(s.handoffs)
+          ? (s.handoffs as Array<Record<string, unknown>>)
+          : [],
+        lastUpdatedAt: s.lastUpdatedAt ? String(s.lastUpdatedAt) : undefined,
+        source: "http",
+      };
+    }
+  }
+  const state = getCurrentCareState();
+  if (!state) {
+    return {
+      careRecipientId: careRecipient.id,
+      medicationSchedules: [],
+      medicationRecords: [],
+      appointments: [],
+      observations: [],
+      tasks: [],
+      events: [],
+      openSafetyReviews: [],
+      handoffs: [],
+      source: "empty",
+    };
+  }
+  return {
+    careRecipientId: state.careRecipientId,
+    householdId: state.householdId,
+    medicationSchedules: state.medicationSchedules as unknown as Array<
+      Record<string, unknown>
+    >,
+    medicationRecords: state.medicationRecords as unknown as Array<
+      Record<string, unknown>
+    >,
+    appointments: state.appointments as unknown as Array<Record<string, unknown>>,
+    observations: state.observations as unknown as Array<Record<string, unknown>>,
+    tasks: state.tasks as unknown as Array<Record<string, unknown>>,
+    events: state.events as unknown as Array<Record<string, unknown>>,
+    openSafetyReviews: state.openSafetyReviews as unknown as Array<
+      Record<string, unknown>
+    >,
+    handoffs: state.handoffs as unknown as Array<Record<string, unknown>>,
+    lastUpdatedAt: state.lastUpdatedAt,
+    source: "package",
+  };
+}
+
+export async function fetchCircleMembers(): Promise<{
+  members: CareCircleMemberRow[];
+  source: "http" | "package";
+}> {
+  const useHttp = await ensureHttpSession();
+  if (useHttp && httpToken) {
+    const res = await careCircle(httpToken, careRecipient.id);
+    if (res.ok) {
+      return {
+        members: res.data.who_can_see_what.map((r) => ({
+          personId: r.personId,
+          displayName: r.displayName,
+          roleLabel: r.roleLabel,
+          status: r.status,
+          canSee: r.canSee,
+          canDo: r.canDo,
+          limits: r.limits,
+        })),
+        source: "http",
+      };
+    }
+  }
+  const rows = getWhoCanSeeWhat();
+  return {
+    members: rows.map((r) => ({
+      personId: r.personId,
+      displayName: r.displayName,
+      roleLabel: r.roleLabel,
+      status: r.status,
+      canSee: r.canSee,
+      canDo: r.canDo,
+      limits: r.limits,
+    })),
+    source: "package",
+  };
+}
+
+export async function fetchCareExportMarkdown(): Promise<{
+  ok: boolean;
+  markdown: string;
+  exportedAt?: string;
+  evidenceMode?: string;
+  source: "http" | "package" | "none";
+  message?: string;
+}> {
+  const useHttp = await ensureHttpSession();
+  if (useHttp && httpToken) {
+    const res = await careExport(httpToken, careRecipient.id, "markdown");
+    if (res.ok) {
+      return {
+        ok: true,
+        markdown:
+          res.data.humanReadable ??
+          `# Care export — ${careRecipient.displayName}\n(No humanReadable body returned.)`,
+        exportedAt: res.data.exportedAt,
+        evidenceMode: res.data.evidenceMode,
+        source: "http",
+      };
+    }
+    return {
+      ok: false,
+      markdown: "",
+      source: "http",
+      message: res.message,
+    };
+  }
+  return {
+    ok: false,
+    markdown: "",
+    source: "none",
+    message: "Care API not available — cannot generate a live export.",
+  };
 }
 
 /** Prefer HTTP Today projection; fall back to package store / static seeds. */
@@ -408,14 +674,10 @@ export async function fetchTodayProjection(): Promise<{
         needsYou,
         attention: buildAttentionFromLines(needsYou),
         whatChanged,
-        handled:
-          handled.length > 0
-            ? handled
-            : ["Maya can be kept in the loop when you confirm updates"],
-        next:
-          t.latest_handoff?.stillNeedsAttention?.length
-            ? t.latest_handoff.stillNeedsAttention
-            : ["Evening medication at 7 PM", "Confirm transportation if needed"],
+        handled: handled.length > 0 ? handled : [],
+        next: t.latest_handoff?.stillNeedsAttention?.length
+          ? t.latest_handoff.stillNeedsAttention
+          : [],
         source: "http",
         storeBackend: res.data.store_backend,
         organizedCount: whatChanged.length,
@@ -436,49 +698,15 @@ export async function fetchTodayProjection(): Promise<{
       organizedCount: whatChanged.length,
     };
   }
-  const seedNeeds = [
-    "Medication needs verification — morning report may not match care instructions",
-    "Confirm transportation for therapy",
-  ];
+  // No fabricated static day — empty until server or package has state.
   return {
-    needsYou: seedNeeds,
-    attention: [
-      {
-        id: "seed-med",
-        title: "Medication needs verification",
-        whatHappened:
-          "A medication report is on Evelyn's day that may not safely match current care instructions.",
-        whySurfaced:
-          "Medication amounts must be checked by a person. Relay does not choose doses.",
-        relayKnows: "There is an authorized lunch medication on file from Dr. Shah.",
-        relayDoesNotKnow:
-          "Whether a reported amount matches that instruction until you review.",
-        nextStep: "Review",
-        kind: "medication",
-      },
-      {
-        id: "seed-transport",
-        title: "Confirm transportation",
-        whatHappened: "Transportation for therapy is still open.",
-        whySurfaced: "It still needs a decision or update from you.",
-        relayKnows: "It is on today's list.",
-        relayDoesNotKnow: "Whether someone already arranged it off-app.",
-        nextStep: "Review when you can.",
-        kind: "task",
-      },
-    ],
-    whatChanged: [
-      "Evelyn slept poorly and reported dizziness this morning",
-      "Physical therapy was moved to 2:30 PM",
-      "Maya confirmed she can help later",
-    ],
-    handled: [
-      "Maya knows about the appointment change (prepared update)",
-      "Breakfast and morning notes can be logged when you confirm",
-    ],
-    next: ["Confirm transportation", "Evening medication at 7 PM"],
+    needsYou: [],
+    attention: [],
+    whatChanged: [],
+    handled: [],
+    next: [],
     source: "static",
-    organizedCount: 3,
+    organizedCount: 0,
   };
 }
 
