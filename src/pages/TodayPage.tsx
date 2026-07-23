@@ -48,7 +48,7 @@ export function TodayPage({
             title: line,
             whatHappened: line,
             whySurfaced: "This still needs your judgment or action.",
-            relayKnows: "Listed on Olivia's day.",
+            relayKnows: "Listed on Evelyn's day.",
             relayDoesNotKnow: "Whether it is fully resolved.",
             nextStep: "Review and update when ready.",
             kind: "task" as const,
@@ -57,7 +57,7 @@ export function TodayPage({
             id: t.id,
             title: t.dueLabel ? `${t.dueLabel} — ${t.title}` : t.title,
             whatHappened: t.title,
-            whySurfaced: "Still open on Olivia's day.",
+            whySurfaced: "Still open on Evelyn's day.",
             relayKnows: t.dueLabel ? `Due ${t.dueLabel}` : "On today's list",
             relayDoesNotKnow: "Whether it is already handled off-app.",
             nextStep: "Review when you can.",
@@ -86,8 +86,12 @@ export function TodayPage({
         <h1 data-testid="today-greeting">
           {today.greeting}, {today.caregiverName}
         </h1>
-        <p className="for-person" data-testid="care-recipient-label">
-          Here&apos;s what matters for {today.careRecipient.displayName} today.
+        <p className="for-person">
+          Here&apos;s what matters for{" "}
+          <span data-testid="care-recipient-label">
+            {today.careRecipient.displayName}
+          </span>{" "}
+          today.
         </p>
         {proj && (
           <span

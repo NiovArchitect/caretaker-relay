@@ -69,7 +69,7 @@ describe("Care loop: input → understand → verify", () => {
   it("never assigns a different care recipient in scenario path", () => {
     const result = understandCareInput(DEMO_UTTERANCE);
     if ("refusal" in result) throw new Error("unexpected refusal");
-    expect(result.careRecipientName).toBe("Olivia");
+    expect(result.careRecipientName).toBe("Evelyn Carter");
     expect(result.careRecipientId).toBe(oracle.careRecipientId);
   });
 });

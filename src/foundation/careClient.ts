@@ -359,7 +359,7 @@ function buildAttentionFromLines(lines: string[]): TodayAttentionItem[] {
         : "This still needs your judgment or action.",
       relayKnows: med
         ? "A medication-related report was captured from a caregiver update."
-        : "Listed as open on Olivia's day.",
+        : "Listed as open on Evelyn's day.",
       relayDoesNotKnow: med
         ? "Relay will not invent or choose a dose."
         : "Whether it is already fully resolved off-app.",
@@ -447,7 +447,7 @@ export async function fetchTodayProjection(): Promise<{
         id: "seed-med",
         title: "Medication needs verification",
         whatHappened:
-          "A medication report is on Olivia's day that may not safely match current care instructions.",
+          "A medication report is on Evelyn's day that may not safely match current care instructions.",
         whySurfaced:
           "Medication amounts must be checked by a person. Relay does not choose doses.",
         relayKnows: "There is an authorized lunch medication on file from Dr. Shah.",
@@ -468,7 +468,7 @@ export async function fetchTodayProjection(): Promise<{
       },
     ],
     whatChanged: [
-      "Olivia slept poorly and reported dizziness this morning",
+      "Evelyn slept poorly and reported dizziness this morning",
       "Physical therapy was moved to 2:30 PM",
       "Maya confirmed she can help later",
     ],

@@ -4,6 +4,7 @@ const items: { id: NavTab; label: string; icon: string }[] = [
   { id: "today", label: "Today", icon: "◉" },
   { id: "care", label: "Care", icon: "♡" },
   { id: "people", label: "People", icon: "◎" },
+  { id: "documents", label: "Docs", icon: "▤" },
   { id: "relay", label: "Relay", icon: "↝" },
 ];
 

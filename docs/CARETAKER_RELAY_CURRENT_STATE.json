@@ -1,6 +1,6 @@
 {
   "project": "Caretaker Relay",
-  "competition": "Administration for Community Living \u2014 Caregiver AI Challenge",
+  "competition": "Administration for Community Living — Caregiver AI Challenge",
   "track": "TRACK_1_AI_TOOLS_TO_SUPPORT_CAREGIVERS",
   "phase": "TRACK_1_PHASE_1_DESIGN",
   "hero_user": "family_home_community_caregiver",
@@ -15,24 +15,33 @@
   ],
   "branch": "checkpoint/caretaker-relay-track1-2026-07-22",
   "product_build_shas": {
-    "app": "ff95159d8803feaca0e6e245d5a77ee28ee40c99",
-    "foundation": "9182c7511c1ffae9dc79082297ae92d7a5079b1a"
+    "app": "pending_commit",
+    "foundation": "pending_commit"
   },
   "product_frozen": false,
   "deploy_shas": {
-    "app": "147da9fdc946e5225e4c6430a8655646e4f5303b",
-    "foundation": "ccd887b240902bd7ad21c068cd11b60cfa878e85"
+    "app": "pending_deploy",
+    "foundation": "pending_deploy"
   },
-  "current_phase": "web_first_2050_clinical_redesign",
-  "current_gate": "WEB_DESIGN_AWAITING_FOUNDER_VISUAL_APPROVAL",
+  "current_phase": "master_e2e_care_experience_contract",
+  "current_gate": "MASTER_E2E_CONTRACT_AWAITING_FOUNDER_A_TO_Z_REVIEW",
   "online_deployment_audit": "COMPLETED",
   "online_research_environment": "READY",
   "session1_status": "NOT_STARTED",
-  "session1_readiness": "RECRUITMENT_ACTIVE_AWAITING_FIRST_PARTICIPANT",
+  "session1_readiness": "RECRUITMENT_PAUSED_AWAITING_FOUNDER_A_TO_Z",
   "research_infrastructure": "READY",
   "recruitment_status": "PAUSED",
   "public_application_url": "https://care.niovlabs.com",
   "public_api_url": "https://caretaker-relay-care-api.onrender.com",
+  "synthetic_household": {
+    "care_recipient": "Evelyn Carter",
+    "primary_family_caregiver": "Marcus Carter",
+    "additional_lay_caregiver": "Maya Bennett",
+    "professional_caregiver": "Daniel Kim",
+    "health_professional": "Dr. Priya Shah",
+    "technical_ids_retained": ["cr-olivia", "p-sadeil", "p-maya", "p-walter"],
+    "forbidden_names": ["Olivia Lewis", "founder daughter personal names"]
+  },
   "render_services": {
     "web": {
       "name": "caretaker-relay-web",
@@ -59,9 +68,9 @@
     "otzar-postgres/dpg-d9chaemcjfls73dei7ug-a"
   ],
   "public_smoke": {
-    "health": "PASS",
-    "auth_sadeil": "PASS",
-    "auth_maya": "PASS",
+    "health": "PENDING_REDEPLOY",
+    "auth_sadeil": "PENDING_REDEPLOY",
+    "auth_maya": "PENDING_REDEPLOY",
     "unauthorized_denied": "PASS",
     "other_hh_denied": "PASS",
     "understand_multi_event": "PASS",
@@ -113,11 +122,14 @@
   "care_recipient_input_status": "NONE",
   "validated_status": "NONE",
   "judge_loop_lab_verdict": "PASS",
-  "public_judge_loop_smoke": "PASS",
+  "public_judge_loop_smoke": "PENDING_REDEPLOY",
   "authoritative_docs": [
     "docs/CARETAKER_RELAY_MASTER_CONTINUITY.md",
     "docs/CARETAKER_RELAY_CURRENT_STATE.json",
     "docs/CARETAKER_RELAY_CONTINUITY_INDEX.md",
+    "docs/CARETAKER_RELAY_END_TO_END_OPERATING_MODEL.md",
+    "docs/CARETAKER_RELAY_A_TO_Z_EXPERIENCE.md",
+    "docs/CARETAKER_RELAY_TRACK1_ROLE_MATRIX.md",
     "docs/ONLINE_READINESS_CURRENT_STATE.md"
   ],
   "do_not_do": [
@@ -130,9 +142,11 @@
     "advance_participant_state_without_real_event",
     "put_identifying_participant_data_in_git",
     "modify_product_during_session_1",
-    "claim_validated_from_one_session"
+    "claim_validated_from_one_session",
+    "recruit_before_founder_a_to_z_approval",
+    "use_personal_family_names_in_fixtures"
   ],
-  "next_authorized_action": "FOUNDER_VISUAL_REVIEW_THEN_MAY_AUTHORIZE_RECRUITMENT",
+  "next_authorized_action": "FOUNDER_A_TO_Z_REVIEW_THEN_MAY_AUTHORIZE_RECRUITMENT",
   "cold_context_online_recovery": "READY",
   "updated_at": "2026-07-23",
   "public_research_environment": "READY",
@@ -140,8 +154,8 @@
   "render_fallback_url": "https://caretaker-relay-web.onrender.com",
   "api_domain_decision": "onrender_api_hostname_sufficient_for_research_spa_hides_it",
   "resend": "NOT_REQUIRED",
-  "judge_entry": "open_public_url_auto_sadeil_today_tell_relay_verify_confirm",
-  "caregiver_entry": "same_public_url_synthetic_olivia_research_admin_outside_app",
+  "judge_entry": "open_public_url_auto_marcus_today_tell_relay_verify_confirm",
+  "caregiver_entry": "same_public_url_synthetic_evelyn_research_admin_outside_app",
   "public_browser_acceptance": {
     "verify_panel": "PASS",
     "multi_event": "PASS",
@@ -152,8 +166,8 @@
     "mobile_viewport": "PASS",
     "top_cta": "PASS"
   },
-  "founder_recruitment_authorization": "REVOKED_PENDING_WEB_DESIGN_APPROVAL",
-  "founder_recruitment_authorized_at": "2026-07-23",
+  "founder_recruitment_authorization": "REVOKED_PENDING_MASTER_E2E_A_TO_Z_APPROVAL",
+  "founder_recruitment_authorized_at": null,
   "participant_pipeline": {
     "identified": 0,
     "invited": 0,
@@ -167,7 +181,10 @@
     "synthesized": 0,
     "retested": 0
   },
-  "next_human_action": "FOUNDER_APPROVES_LIVE_WEB_DESIGN_BEFORE_RECRUITMENT",
-  "presentation_redesign": "DEPLOYED_AWAITING_FOUNDER_APPROVAL",
-  "public_screenshots": "evidence/redesign-2026-07-23/"
+  "next_human_action": "FOUNDER_APPROVES_FULL_A_TO_Z_LIVE_EXPERIENCE_BEFORE_RECRUITMENT",
+  "presentation_redesign": "MASTER_CONTRACT_IMPLEMENTATION",
+  "public_screenshots": "evidence/redesign-2026-07-23/",
+  "ia_surfaces": ["today", "care", "people", "documents", "relay"],
+  "lay_to_lay_handoff": "FIRST_CLASS",
+  "documents_safety": "readable_not_authoritative"
 }

@@ -70,9 +70,9 @@ export function CarePage() {
           <>
             <h2>Care plan</h2>
             <p>
-              Support Olivia at home with medication reminders, mobility support,
-              and coordinated family updates. Progressive disclosure keeps this
-              calm — not an EHR dump.
+              Support {careRecipient.displayName} at home with medication
+              reminders, mobility support, and coordinated family updates.
+              Progressive disclosure keeps this calm — not an EHR dump.
             </p>
           </>
         )}

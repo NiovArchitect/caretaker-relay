@@ -4,6 +4,7 @@ const items: { id: Exclude<NavTab, "relay">; label: string; icon: string }[] = [
   { id: "today", label: "Today", icon: "◉" },
   { id: "care", label: "Care", icon: "♡" },
   { id: "people", label: "People", icon: "◎" },
+  { id: "documents", label: "Documents", icon: "▤" },
 ];
 
 export function SideNav({
@@ -15,7 +16,7 @@ export function SideNav({
 }) {
   return (
     <nav className="sidenav" aria-label="Primary">
-      <div className="sidenav-label">Workspace</div>
+      <div className="sidenav-label">Care space</div>
       {items.map((item) => (
         <button
           key={item.id}
@@ -32,7 +33,7 @@ export function SideNav({
         </button>
       ))}
       <div className="sidenav-foot">
-        Care for this person — not workforce scheduling.
+        One care recipient · authorized people · not workforce ops.
       </div>
     </nav>
   );

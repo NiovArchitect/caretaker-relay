@@ -20,9 +20,9 @@ export async function waitForHttpBootstrap(
       { timeout: timeoutMs },
     )
     .toBeTruthy();
-  // Olivia label
+  // Evelyn Carter (synthetic care recipient) label
   await expect(page.getByTestId("care-recipient-label")).toContainText(
-    "Olivia",
+    "Evelyn",
     { timeout: 15_000 },
   );
   // Prefer durable http source when API is up

@@ -1,5 +1,5 @@
 import type { CareHandoff } from "../domain/types";
-import { handoff as demoHandoff, people } from "../scenario/olivia";
+import { careRecipient, handoff as demoHandoff, people } from "../scenario/olivia";
 
 export function HandoffPanel({
   onClose,
@@ -9,10 +9,11 @@ export function HandoffPanel({
   onClose: () => void;
   liveHandoff?: CareHandoff | null;
   /** Honest delivery state — never claim sent unless system actually sent. */
-  status?: "prepared" | "reviewed";
+  status?: "prepared" | "reviewed" | "ready" | "shared";
 }) {
   const h = liveHandoff ?? demoHandoff;
-  const mayaName = people.maya.displayName;
+  const fromName = people.marcus.displayName;
+  const toName = people.maya.displayName;
   const sourceLine =
     h.sources.length > 0
       ? h.sources
@@ -20,6 +21,15 @@ export function HandoffPanel({
           .filter(Boolean)
           .join(" · ")
       : "Today's care activity";
+
+  const statusLabel =
+    status === "reviewed"
+      ? "You reviewed this continuity summary."
+      : status === "ready"
+        ? "Ready for the next caregiver — still under your control."
+        : status === "shared"
+          ? "Available to the authorized next caregiver in this care space."
+          : "Prepared for another caregiver (family, friend, or professional) — not automatically sent as a message.";
 
   return (
     <section
@@ -31,29 +41,37 @@ export function HandoffPanel({
         style={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center",
+          alignItems: "flex-start",
           gap: 8,
         }}
       >
-        <h2
-          style={{
-            margin: 0,
-            color: "var(--cr-teal-deep)",
-            fontSize: "1.25rem",
-          }}
-          data-testid="handoff-title"
-        >
-          {mayaName} can stay caught up
-        </h2>
+        <div>
+          <p className="muted" style={{ margin: 0, fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+            Lay → lay continuity · {careRecipient.displayName}
+          </p>
+          <h2
+            style={{
+              margin: "4px 0 0",
+              color: "var(--cr-teal)",
+              fontSize: "1.2rem",
+              textTransform: "none",
+              letterSpacing: "-0.02em",
+            }}
+            data-testid="handoff-title"
+          >
+            {toName} — here&apos;s what changed
+          </h2>
+          <p className="muted" style={{ margin: "4px 0 0", fontSize: "0.85rem" }}>
+            From {fromName} (family caregiver) for the next family/friend caregiver
+          </p>
+        </div>
         <button type="button" className="secondary-btn" onClick={onClose}>
           Close
         </button>
       </div>
 
-      <p className="muted" style={{ marginTop: 4, fontSize: "0.85rem" }} data-testid="handoff-status">
-        {status === "reviewed"
-          ? "You reviewed this continuity summary."
-          : "Prepared for the next caregiver — not automatically sent as a message."}
+      <p className="muted" style={{ marginTop: 10, fontSize: "0.85rem" }} data-testid="handoff-status">
+        {statusLabel}
       </p>
 
       <h3 className="muted" style={{ marginBottom: 6 }}>
@@ -94,17 +112,16 @@ export function HandoffPanel({
           data-testid="handoff-caught-up"
           onClick={onClose}
         >
-          I&apos;m caught up
+          Continuity looks right
         </button>
-        <button
-          type="button"
-          className="secondary-btn"
-          data-testid="handoff-share-maya"
-          onClick={onClose}
-        >
-          Review before {mayaName} takes over
+        <button type="button" className="secondary-btn" onClick={onClose}>
+          Keep reviewing
         </button>
       </div>
+      <p className="muted" style={{ fontSize: "0.78rem", marginTop: 8 }}>
+        Family → family handoff is first-class. This is not limited to professional
+        caregivers.
+      </p>
     </section>
   );
 }

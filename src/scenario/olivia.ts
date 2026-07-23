@@ -1,6 +1,7 @@
 /**
  * Canonical controlled lab scenario — UI presentation layer.
- * Substrate seed lives in @caretaker-relay/care-domain scenario module.
+ * Synthetic household: Evelyn Carter (care recipient) + Marcus Carter (primary).
+ * Substrate seed: @caretaker-relay/care-domain (technical IDs retained for API).
  */
 
 import type {
@@ -30,10 +31,13 @@ export const PRODUCT = {
 
 export const careRecipient: CareRecipient = foundationRecipient;
 
+/** Technical keys map to stable lab IDs; display names are synthetic. */
 export const people: Record<string, Person> = {
-  sadeil: foundationPeople.sadeil,
+  marcus: foundationPeople.sadeil,
+  sadeil: foundationPeople.sadeil, // alias for lab login path
   maya: foundationPeople.maya,
-  walter: foundationPeople.walter,
+  daniel: foundationPeople.walter,
+  walter: foundationPeople.walter, // alias
   drShah: foundationPeople.drShah,
   pt: foundationPeople.pt,
 };
@@ -42,10 +46,10 @@ export const circle: CareCircleMember[] = [
   {
     id: "m-maya",
     person: people.maya,
-    roleLabel: "Daughter",
+    roleLabel: "Family / friend caregiver",
     relationshipRole: "adult_child",
-    nextInvolvement: "Next visit tomorrow",
-    lastUpdate: "Confirmed tomorrow's visit",
+    nextInvolvement: "Arriving later today",
+    lastUpdate: "Will cover the afternoon",
     helpsWith: ["Daily updates", "Appointments", "Care plan"],
     access: {
       informationCategories: ["Daily updates", "Appointments", "Care plan"],
@@ -55,11 +59,11 @@ export const circle: CareCircleMember[] = [
     },
   },
   {
-    id: "m-walter",
-    person: people.walter,
-    roleLabel: "Home caregiver",
+    id: "m-daniel",
+    person: people.daniel,
+    roleLabel: "Professional caregiver",
     relationshipRole: "paid_caregiver",
-    nextInvolvement: "Visit today at 4 PM",
+    nextInvolvement: "In-home visit today",
     lastUpdate: "Noted fatigue after lunch",
     helpsWith: ["Care tasks", "Care instructions", "Appointments"],
     access: {
@@ -76,9 +80,9 @@ export const circle: CareCircleMember[] = [
   {
     id: "m-dr-shah",
     person: people.drShah,
-    roleLabel: "Primary care",
+    roleLabel: "Health professional",
     relationshipRole: "physician",
-    lastUpdate: "Last update July 19",
+    lastUpdate: "Last instruction update July 19",
     helpsWith: ["Health observations", "Medication record"],
     access: {
       informationCategories: ["Health observations", "Medication record"],
@@ -122,8 +126,8 @@ export const appointments: Appointment[] = [
   },
   {
     id: "apt-maya",
-    title: "Maya visit",
-    whenLabel: "Tomorrow",
+    title: "Maya Bennett visit",
+    whenLabel: "Later today (~4 PM)",
     status: "scheduled",
   },
 ];
@@ -134,13 +138,13 @@ export const observations: ObservationItem[] = [
     summary: "More fatigue after lunch",
     whenLabel: "Today",
     source: {
-      id: "src-walter-fatigue",
+      id: "src-daniel-fatigue",
       kind: "professional_note",
-      label: "Walter visit note",
-      actorName: "Walter",
+      label: "Daniel Kim visit note",
+      actorName: "Daniel Kim",
       recordedAt: "2026-07-22T13:30:00Z",
       whyVisible:
-        "Walter mentioned increased fatigue during today's visit.",
+        "Daniel mentioned increased fatigue during today's visit.",
     },
   },
 ];
@@ -170,25 +174,27 @@ export const needsYou: CareTask[] = [
 
 export const today: TodayModel = {
   greeting: "Good morning",
-  caregiverName: people.sadeil.displayName,
+  caregiverName: people.marcus.displayName,
   careRecipient,
   needsYou,
   sinceYesterday: [
-    "Walter noticed more fatigue after lunch",
+    "Daniel noticed more fatigue after lunch",
     "PT moved to 2:30 PM",
-    "Maya confirmed tomorrow's visit",
+    "Maya confirmed she can cover later today",
   ],
   relayHandled: [
-    "Updated Maya",
+    "Prepared continuity for Maya",
     "Updated the schedule",
     "Saved yesterday's care summary",
   ],
 };
 
-/** Static demo handoff — DEMO_ONLY until a live foundation handoff exists. */
+/** Static demo handoff — lay→lay continuity (Marcus → Maya). */
 export const handoff: CareHandoff = {
   id: "ho-demo-static",
   careRecipientId: careRecipient.id,
+  fromPersonId: people.marcus.id,
+  toPersonId: people.maya.id,
   whatChanged: [
     "PT moved to Thursday at 2:30 PM",
     "More fatigue was noted after lunch",

@@ -20,7 +20,7 @@ export function PeoplePage() {
         <h2>Care recipient</h2>
         <div className="recipient-chip" style={{ marginBottom: 8 }}>
           <span className="avatar-3d" aria-hidden>
-            O
+            E
           </span>
           <div>
             <strong>{careRecipient.displayName}</strong>

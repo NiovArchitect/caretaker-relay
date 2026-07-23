@@ -33,10 +33,10 @@ npm run dev    # http://localhost:5180
 npm test
 ```
 
-## Demo path (Olivia scenario)
+## Demo path (Evelyn Carter synthetic household)
 
-1. Open **Today** — Sadeil caring for Olivia  
-2. **Try care update** or speak/type:
+1. Open **Today** — Marcus Carter caring for Evelyn Carter  
+2. **Tell Relay what happened** or speak/type:
 
    > Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.
 

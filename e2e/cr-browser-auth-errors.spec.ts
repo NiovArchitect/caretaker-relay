@@ -236,7 +236,7 @@ test.describe("CR-BROWSER auth + errors + continuity", () => {
       await page.reload();
       await waitForHttpBootstrap(page, tracker);
       await expect(page.getByTestId("care-recipient-label")).toContainText(
-        "Olivia",
+        "Evelyn",
       );
       await expect(page.getByTestId("today-source")).toHaveAttribute(
         "data-source",
@@ -252,7 +252,7 @@ test.describe("CR-BROWSER auth + errors + continuity", () => {
           networkRequests: tracker.snapshot(),
           httpStatuses: tracker.statusesFor("/today"),
           domAssertion:
-            "After reload + API health, HTTP Today continues with Olivia",
+            "After reload + API health, HTTP Today continues with Evelyn",
           dbPersistence: "state re-loaded via Care API (Prisma-backed store)",
           screenshot: path,
           status: "PASS",
@@ -285,7 +285,7 @@ test.describe("CR-BROWSER auth + errors + continuity", () => {
       await page.getByTestId("nav-people").click();
       await page.getByTestId("nav-today").click();
       await expect(page.getByTestId("care-recipient-label")).toContainText(
-        "Olivia",
+        "Evelyn",
       );
       // Try to poison localStorage / hash
       await page.evaluate(() => {
@@ -298,7 +298,7 @@ test.describe("CR-BROWSER auth + errors + continuity", () => {
       const id2 = await page.evaluate(() => window.__crE2E?.getCareRecipientId());
       expect(id2).toBe("cr-olivia");
       await expect(page.getByTestId("care-recipient-label")).toContainText(
-        "Olivia",
+        "Evelyn",
       );
       await expect(page.getByTestId("care-recipient-label")).not.toContainText(
         "attacker",
@@ -311,7 +311,7 @@ test.describe("CR-BROWSER auth + errors + continuity", () => {
           networkRequests: tracker.snapshot(),
           httpStatuses: tracker.statusesFor("/today"),
           domAssertion:
-            "Recipient remains Olivia / cr-olivia despite storage/hash poison",
+            "Recipient remains Evelyn / cr-olivia despite storage/hash poison",
           screenshot: path,
           status: "PASS",
         }),

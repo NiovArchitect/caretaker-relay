@@ -19,6 +19,8 @@ import { HandoffPanel } from "./components/HandoffPanel";
 import { TodayPage } from "./pages/TodayPage";
 import { CarePage } from "./pages/CarePage";
 import { PeoplePage } from "./pages/PeoplePage";
+import { DocumentsPage } from "./pages/DocumentsPage";
+import { people } from "./scenario/olivia";
 
 function nowLabel() {
   return new Date().toLocaleTimeString([], {
@@ -60,7 +62,7 @@ export function App() {
       id: "m0",
       role: "relay",
       at: nowLabel(),
-      text: `Good morning. I'm here for ${careRecipient.displayName}'s care today.\n\nTell me what happened in plain language — I'll organize it and ask you to verify anything consequential.`,
+      text: `Good morning. I'm here for ${careRecipient.displayName}'s care today.\n\nTell me what happened in plain language — I'll organize it and ask you to verify anything consequential.\n\nWhen you're ready, I can also prepare continuity for ${people.maya.displayName} (family/friend caregiver) — not only professionals.`,
     },
   ]);
   const [relayHandled, setRelayHandled] = useState(today.relayHandled);
@@ -103,6 +105,8 @@ export function App() {
         return "Care";
       case "people":
         return "People";
+      case "documents":
+        return "Documents";
       case "relay":
         return "Relay";
     }
@@ -262,7 +266,7 @@ export function App() {
           {
             id: `s-${Date.now()}`,
             role: "system",
-            text: "Saved. Olivia's day is updated, and Maya's continuity picture can include this.",
+            text: `Saved. ${careRecipient.displayName}'s care picture is updated, and ${people.maya.displayName} can receive lay→lay continuity from this.`,
             at: nowLabel(),
           },
         ]);
@@ -349,9 +353,19 @@ export function App() {
         <div className="topbar-center">
           <div className="recipient-chip" data-testid="care-recipient-chip">
             <span className="avatar-3d" aria-hidden>
-              O
+              E
             </span>
-            {careRecipient.displayName}
+            <div style={{ minWidth: 0 }}>
+              <div style={{ fontSize: "0.72rem", fontWeight: 600, color: "var(--cr-muted)" }}>
+                Caring for
+              </div>
+              <div data-testid="care-recipient-label" style={{ lineHeight: 1.2 }}>
+                {careRecipient.displayName}
+              </div>
+              <div className="muted" style={{ fontSize: "0.7rem", fontWeight: 500 }}>
+                Care recipient
+              </div>
+            </div>
           </div>
           <span className="topbar-date">{todayDateLabel()}</span>
         </div>
@@ -379,17 +393,21 @@ export function App() {
           <span
             className="session-label"
             data-testid="session-caregiver"
-            title="Signed in as primary caregiver for this evaluation household"
+            title="Current user · primary family caregiver"
           >
-            Sadeil
+            {people.marcus.displayName}
+            <span className="muted" style={{ fontWeight: 500 }}>
+              {" "}
+              · Family caregiver
+            </span>
           </span>
           <button
             type="button"
             className="avatar-btn"
-            aria-label="Signed in as Sadeil, primary caregiver for Olivia"
-            title="Sadeil · primary caregiver"
+                  aria-label={`Signed in as ${people.marcus.displayName}, primary family caregiver for ${careRecipient.displayName}`}
+            title={`${people.marcus.displayName} · family caregiver`}
           >
-            S
+            M
           </button>
           <span className="live-dot" title="Connected" aria-hidden />
         </div>
@@ -410,6 +428,7 @@ export function App() {
           )}
           {workspaceTab === "care" && <CarePage />}
           {workspaceTab === "people" && <PeoplePage />}
+          {workspaceTab === "documents" && <DocumentsPage />}
 
           {showHandoff && (
             <HandoffPanel

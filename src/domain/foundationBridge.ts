@@ -1,6 +1,6 @@
 /**
  * Synchronous bridge for existing unit tests.
- * Uses foundation fixture extractor under authenticated Olivia context.
+ * Uses foundation fixture extractor under authenticated Evelyn Carter lab context.
  * EvidenceMode: FIXTURE (explicit).
  */
 

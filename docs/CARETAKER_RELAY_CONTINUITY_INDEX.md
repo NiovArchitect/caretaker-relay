@@ -6,6 +6,9 @@
 | --- | --- | --- |
 | 1 | `docs/CARETAKER_RELAY_MASTER_CONTINUITY.md` | Full handoff: what/why/where/SHAs/gate/do-nots |
 | 2 | `docs/CARETAKER_RELAY_CURRENT_STATE.json` | Machine-readable recovery state |
+| 2a | `docs/CARETAKER_RELAY_END_TO_END_OPERATING_MODEL.md` | **Authoritative UX→code experience contract** (Evelyn/Marcus synthetic household) |
+| 2b | `docs/CARETAKER_RELAY_A_TO_Z_EXPERIENCE.md` | A→Z journey (define before auth redesign) |
+| 2c | `docs/CARETAKER_RELAY_TRACK1_ROLE_MATRIX.md` | Lay→lay / pro continuity roles |
 | 3 | `docs/ONLINE_READINESS_CURRENT_STATE.md` | **Authoritative online-readiness audit boundary** (read before any deploy) |
 | 4 | `docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md` | Track 1 constitution audit vs product |
 | 5 | `docs/ACL_TRACK1_TRACEABILITY.md` | Judging criteria ↔ capabilities |
@@ -39,9 +42,9 @@ git rev-parse HEAD
 
 **ONLINE RESEARCH ENVIRONMENT: READY**  
 **Canonical app:** https://care.niovlabs.com  
-**Recruitment:** **PAUSED** (web-first redesign — founder visual approval required)  
-**Session 1:** NOT STARTED · gate: WEB_DESIGN_AWAITING_FOUNDER_VISUAL_APPROVAL  
-**Product:** FROZEN during Session 1  
+**Recruitment:** **PAUSED** — do not recruit until founder personally approves full A→Z live experience  
+**Session 1:** NOT STARTED · gate: `MASTER_E2E_CONTRACT_AWAITING_FOUNDER_A_TO_Z_REVIEW`  
+**Synthetic household:** Evelyn Carter / Marcus Carter / Maya Bennett / Daniel Kim / Dr. Priya Shah (no personal-family names)  
 **Do not** automate participant contact · **Do not** put identifying data in Git  
 **Do not touch Otzar Render resources** on the same workspace.
 

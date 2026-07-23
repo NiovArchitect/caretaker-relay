@@ -95,7 +95,7 @@ test.describe("CR-BROWSER core real stack", () => {
           input: "auto lab login as Sadeil",
           networkRequests: tracker.snapshot(),
           httpStatuses: statuses,
-          domAssertion: "Olivia label present after bootstrap",
+          domAssertion: "Evelyn label present after bootstrap",
           screenshot: path,
           status: "PASS",
           notes: "careLogin/lab-login returned 200; token used for subsequent care routes",
@@ -115,14 +115,14 @@ test.describe("CR-BROWSER core real stack", () => {
     }
   });
 
-  test("CR-BROWSER-003 Olivia is visibly the active care recipient", async ({
+  test("CR-BROWSER-003 Evelyn is visibly the active care recipient", async ({
     page,
   }) => {
     const id = "CR-BROWSER-003";
     try {
       await waitForHttpBootstrap(page, tracker);
       const label = page.getByTestId("care-recipient-label");
-      await expect(label).toContainText("Olivia");
+      await expect(label).toContainText("Evelyn");
       const crId = await page.evaluate(() => window.__crE2E?.getCareRecipientId());
       expect(crId).toBe("cr-olivia");
       const path = await shot(page, "003-olivia-active");
@@ -131,7 +131,7 @@ test.describe("CR-BROWSER core real stack", () => {
           id,
           networkRequests: tracker.snapshot(),
           httpStatuses: tracker.statusesFor("/today"),
-          domAssertion: 'care-recipient-label contains "Olivia"; id=cr-olivia',
+          domAssertion: 'care-recipient-label contains "Evelyn"; id=cr-olivia',
           screenshot: path,
           status: "PASS",
         }),
@@ -538,7 +538,7 @@ test.describe("CR-BROWSER core real stack", () => {
       await page.reload();
       await waitForHttpBootstrap(page, tracker);
       await expect(page.getByTestId("care-recipient-label")).toContainText(
-        "Olivia",
+        "Evelyn",
       );
       const source = page.getByTestId("today-source");
       await expect(source).toHaveAttribute("data-source", "http");
@@ -555,7 +555,7 @@ test.describe("CR-BROWSER core real stack", () => {
           id,
           networkRequests: tracker.snapshot(),
           httpStatuses: tracker.statusesFor("/today"),
-          domAssertion: "After reload, Olivia + HTTP Today still present",
+          domAssertion: "After reload, Evelyn + HTTP Today still present",
           dbPersistence: "reload re-fetched from Care API / Prisma",
           screenshot: path,
           status: "PASS",

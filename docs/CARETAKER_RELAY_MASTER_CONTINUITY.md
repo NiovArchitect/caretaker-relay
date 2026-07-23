@@ -317,24 +317,32 @@ First: recover state from disk (including `ONLINE_READINESS_CURRENT_STATE.md`); 
 
 ```text
 ONLINE RESEARCH ENVIRONMENT: READY
-RECRUITMENT: PAUSED — founder rejected mobile-stretched UI; web-first 2050 redesign in progress
+RECRUITMENT: PAUSED — founder must personally approve full A→Z live experience first
+GATE: MASTER_E2E_CONTRACT_AWAITING_FOUNDER_A_TO_Z_REVIEW
+
+Authoritative contract docs:
+  docs/CARETAKER_RELAY_END_TO_END_OPERATING_MODEL.md
+  docs/CARETAKER_RELAY_A_TO_Z_EXPERIENCE.md
+  docs/CARETAKER_RELAY_TRACK1_ROLE_MATRIX.md
+
+Synthetic household (display only; technical IDs retained):
+  Evelyn Carter · Marcus Carter · Maya Bennett · Daniel Kim · Dr. Priya Shah
+  FORBIDDEN in fixtures/UI: personal-family names (e.g. Olivia Lewis)
 
 Public app (canonical): https://care.niovlabs.com
 Public app (Render fallback): https://caretaker-relay-web.onrender.com
 Public API: https://caretaker-relay-care-api.onrender.com
-Health:     GET /api/v1/health → 200 (prisma durable)
 
 Render (Caretaker only — do not touch Otzar):
   caretaker-relay-web      srv-d9h0l2n41pts73dksrmg
   caretaker-relay-care-api srv-d9h0ku3bc2fs739eo660
   caretaker-relay-db       dpg-d9h0ifjeo5us73d0l0eg-a (db: caretaker_relay)
 
-Auth: CLI OAuth (~/.render/cli.yaml). Shell RENDER_API_KEY may be stale 401 — unset for CLI.
-Understand mode: fixture-backed (honest; not live remote LLM).
-Public smoke: PASS (auth isolation, multi-event, med uncertainty, confirm, correction, handoff, restart persistence).
+IA: Today · Care · People · Documents · Relay (AI) | Messages (people)
+Lay→lay handoff is first-class. Documents: readable ≠ authoritative.
 
-0. FOUNDER VISUAL REVIEW of live web redesign at care.niovlabs.com
-1. Only after approval: resume Caregiver #1 recruitment
+0. FOUNDER A→Z REVIEW of live product at care.niovlabs.com
+1. Only after personal approval: resume Caregiver #1 recruitment
 2. RUN Session 1 against ONLINE product URL
 3. CAPTURE real [CAREGIVER INPUT]
 4. SYNTHESIZE findings → only then product behavior changes
