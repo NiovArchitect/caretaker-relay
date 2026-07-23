@@ -336,6 +336,37 @@ p {
    LOGIN — true viewport center, single floating glass panel
    ========================================================================== */
 
+@keyframes cr-login-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cr-login-orb-a {
+  0%,
+  100% {
+    transform: translate(-58%, -62%) scale(1);
+  }
+  50% {
+    transform: translate(-52%, -58%) scale(1.06);
+  }
+}
+
+@keyframes cr-login-orb-b {
+  0%,
+  100% {
+    transform: translate(12%, 8%) scale(1);
+  }
+  50% {
+    transform: translate(6%, 14%) scale(1.08);
+  }
+}
+
 .cr-login-viewport,
 .app-shell[data-testid="login-gate"],
 .app-shell[data-testid="auth-loading"] {
@@ -346,7 +377,8 @@ p {
   height: 100dvh !important;
   min-height: 100dvh !important;
   margin: 0 !important;
-  padding: 0 !important;
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+    max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)) !important;
   border: none !important;
   border-radius: 0 !important;
   box-shadow: none !important;
@@ -359,11 +391,12 @@ p {
   justify-items: center !important;
   align-items: center !important;
   z-index: 100;
+  isolation: isolate;
   background:
-    radial-gradient(900px 620px at 50% 38%, rgba(160, 210, 235, 0.55), transparent 62%),
-    radial-gradient(700px 480px at 18% 80%, rgba(126, 184, 217, 0.28), transparent 55%),
-    radial-gradient(600px 400px at 85% 15%, rgba(255, 255, 255, 0.65), transparent 50%),
-    linear-gradient(165deg, #eef6fc 0%, #dcecf7 48%, #e8f2f8 100%) !important;
+    radial-gradient(1100px 720px at 50% 42%, rgba(180, 220, 245, 0.55), transparent 58%),
+    radial-gradient(780px 520px at 12% 88%, rgba(126, 184, 217, 0.32), transparent 55%),
+    radial-gradient(640px 420px at 90% 8%, rgba(255, 255, 255, 0.78), transparent 48%),
+    linear-gradient(168deg, #f2f8fd 0%, #e0eef8 42%, #d4e8f4 100%) !important;
 }
 
 .cr-login-ambient {
@@ -379,50 +412,78 @@ p {
   content: "";
   position: absolute;
   border-radius: 50%;
-  filter: blur(72px);
+  filter: blur(80px);
+  will-change: transform;
 }
 
 .cr-login-ambient::before {
-  width: min(520px, 70vw);
-  height: min(520px, 70vw);
+  width: min(560px, 72vw);
+  height: min(560px, 72vw);
   top: 50%;
   left: 50%;
-  transform: translate(-58%, -62%);
-  background: rgba(126, 184, 217, 0.5);
+  background: rgba(126, 184, 217, 0.55);
+  animation: cr-login-orb-a 14s ease-in-out infinite;
 }
 
 .cr-login-ambient::after {
-  width: min(420px, 55vw);
-  height: min(420px, 55vw);
+  width: min(440px, 58vw);
+  height: min(440px, 58vw);
   top: 50%;
   left: 50%;
-  transform: translate(12%, 8%);
-  background: rgba(15, 107, 124, 0.1);
+  background: rgba(15, 107, 124, 0.12);
+  animation: cr-login-orb-b 18s ease-in-out infinite;
 }
 
 /* Single centered glass object — never left rail */
 .cr-login-panel {
   position: relative;
   z-index: 1;
-  width: min(400px, calc(100vw - 40px));
-  max-height: min(640px, calc(100dvh - 40px));
-  margin: 0 auto;
+  width: min(420px, calc(100vw - 40px));
+  max-width: 100%;
+  max-height: min(680px, calc(100dvh - 40px));
+  margin: 0;
   overflow: auto;
   overscroll-behavior: contain;
-  border-radius: 28px;
-  background: rgba(255, 255, 255, 0.62);
-  backdrop-filter: blur(40px) saturate(1.35);
-  -webkit-backdrop-filter: blur(40px) saturate(1.35);
-  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 32px;
+  background:
+    linear-gradient(
+      165deg,
+      rgba(255, 255, 255, 0.78) 0%,
+      rgba(255, 255, 255, 0.52) 48%,
+      rgba(255, 255, 255, 0.44) 100%
+    );
+  backdrop-filter: blur(48px) saturate(1.45);
+  -webkit-backdrop-filter: blur(48px) saturate(1.45);
+  border: 1px solid rgba(255, 255, 255, 0.86);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.95) inset,
-    0 2px 4px rgba(12, 40, 60, 0.04),
-    0 18px 40px rgba(20, 70, 100, 0.12),
-    0 40px 80px rgba(40, 100, 140, 0.1);
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 -1px 0 rgba(255, 255, 255, 0.35) inset,
+    0 2px 6px rgba(12, 40, 60, 0.04),
+    0 16px 36px rgba(20, 70, 100, 0.1),
+    0 36px 72px rgba(30, 90, 130, 0.12),
+    0 0 0 1px rgba(15, 70, 90, 0.04);
+  animation: cr-login-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cr-login-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.08) 28%,
+    transparent 55%
+  );
+  opacity: 0.9;
 }
 
 .cr-login-panel-inner {
-  padding: 36px 32px 28px;
+  position: relative;
+  z-index: 1;
+  padding: 40px 36px 30px;
 }
 
 .cr-login-brand {
@@ -434,24 +495,28 @@ p {
   font-size: 0.95rem;
   letter-spacing: -0.02em;
   color: var(--cr-ink);
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 
 .cr-login-title {
   text-align: center;
-  font-size: 1.65rem;
+  font-size: 1.7rem;
   font-weight: 700;
-  letter-spacing: -0.03em;
-  margin: 0 0 8px;
+  letter-spacing: -0.035em;
+  margin: 0 0 10px;
   color: var(--cr-ink);
 }
 
 .cr-login-sub {
   text-align: center;
   font-size: 0.92rem;
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--cr-ink-3);
-  margin: 0 0 22px;
+  margin: 0 0 26px;
+  max-width: 32ch;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 26px;
 }
 
 .cr-field {
@@ -461,53 +526,97 @@ p {
 
 .cr-field > span {
   display: block;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
+  letter-spacing: 0.01em;
   color: var(--cr-ink-3);
-  margin-bottom: 6px;
+  margin-bottom: 7px;
 }
 
 .cr-field select,
 .cr-field input {
   display: block;
   width: 100%;
-  min-height: 48px;
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(15, 70, 90, 0.12);
-  background: rgba(255, 255, 255, 0.9);
+  min-height: 50px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 70, 90, 0.1);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 1px 2px rgba(12, 40, 60, 0.04);
   font-size: 1rem;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  color: var(--cr-ink);
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.cr-field select:hover,
+.cr-field input:hover {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(15, 70, 90, 0.14);
 }
 
 .cr-field select:focus,
 .cr-field input:focus {
   outline: none;
-  border-color: var(--cr-accent);
-  box-shadow: 0 0 0 4px var(--cr-accent-soft);
+  border-color: rgba(15, 107, 124, 0.45);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 0 0 4px var(--cr-accent-soft),
+    0 1px 0 rgba(255, 255, 255, 0.95) inset;
 }
 
 .cr-login-submit {
   width: 100%;
-  margin-top: 8px;
+  margin-top: 10px;
   justify-content: center;
+  min-height: 52px;
+  border-radius: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.22) inset,
+    0 8px 20px rgba(15, 107, 124, 0.22);
+  transition:
+    transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+.cr-login-submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.28) inset,
+    0 12px 28px rgba(15, 107, 124, 0.28);
+  filter: brightness(1.03);
+}
+
+.cr-login-submit:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .cr-login-invite-toggle {
   display: block;
   width: 100%;
-  margin-top: 14px;
-  padding: 8px;
+  margin-top: 16px;
+  padding: 10px;
   border: none;
   background: transparent;
   color: var(--cr-accent);
   font-size: 0.82rem;
   font-weight: 600;
   text-align: center;
+  border-radius: 12px;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .cr-login-invite-toggle:hover {
-  text-decoration: underline;
+  background: rgba(15, 107, 124, 0.06);
+  text-decoration: none;
 }
 
 /* Legacy class aliases (unused login-scene removed from composition) */
@@ -1618,12 +1727,17 @@ p {
   }
 
   .cr-login-panel {
-    width: min(400px, calc(100vw - 32px));
+    width: min(420px, calc(100vw - 32px));
     max-height: calc(100dvh - 32px);
+    border-radius: 28px;
   }
 
   .cr-login-panel-inner {
-    padding: 28px 22px 22px;
+    padding: 30px 22px 22px;
+  }
+
+  .cr-login-sub {
+    max-width: none;
   }
 }
 
