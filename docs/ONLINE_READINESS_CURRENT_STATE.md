@@ -2,8 +2,9 @@
 
 **Updated:** 2026-07-23  
 **Status:** **PUBLIC JUDGE / CAREGIVER RESEARCH ENVIRONMENT READY**
-**Canonical URL:** https://caretaker-relay-web.onrender.com
-**Custom domain:** care.niovlabs.com (Render registered; DNS CNAME pending at GoDaddy Domain Control)  
+**Canonical URL:** https://care.niovlabs.com
+**Render fallback:** https://caretaker-relay-web.onrender.com
+**Custom domain:** care.niovlabs.com — DNS verified, HTTPS PASS, browser smoke PASS  
 **Recruitment:** **PAUSED** (founder must authorize Caregiver #1)  
 **Do not resume from chat memory.** Resume from this file + continuity docs + Git.
 
@@ -162,20 +163,16 @@ Evidence honesty: CAREGIVER INPUT = NONE · VALIDATED = NONE
 
 ## Custom domain DNS finish (2026-07-23)
 
-**Hostname prepared in Render:** `care.niovlabs.com`  
-**Render verification:** `unverified` (awaiting DNS)  
-**Existing DNS for hostname:** NONE (safe to create)  
-**DNS provider:** GoDaddy Domain Control (`ns33/ns34.domaincontrol.com`)  
-**Agent GoDaddy write access:** NOT available (no API key; no safe non-brittle browser DNS write)
-
-| Field | Value |
-| --- | --- |
-| Type | CNAME |
-| Name/Host | `care` |
-| Value/Target | `caretaker-relay-web.onrender.com` |
-| TTL | 1 Hour / GoDaddy default |
-
-**Do not change** MX/SPF/DKIM/nameservers/other hosts.  
-**Research/judge on Render URL:** still READY (domain not a research blocker).  
-**Recruitment:** PAUSED.
+**Hostname:** `care.niovlabs.com`  
+**Canonical public URL:** https://care.niovlabs.com  
+**Render fallback:** https://caretaker-relay-web.onrender.com  
+**DNS provider:** GoDaddy Domain Control  
+**Record:** CNAME `care` → `caretaker-relay-web.onrender.com` (TTL 3600)  
+**DNS resolution:** PASS  
+**Render verification:** verified  
+**HTTPS:** PASS (CN=care.niovlabs.com)  
+**CORS:** `CARE_CORS_ORIGINS` includes custom + Render origins  
+**Custom-domain smoke:** PASS (Today, multi-event verify, med safety, confirm, refresh, real API calls)  
+**Resend:** NOT REQUIRED  
+**Recruitment:** PAUSED  
 

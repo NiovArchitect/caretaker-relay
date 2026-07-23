@@ -1,12 +1,12 @@
 # Public Judge & Caregiver Entry Paths
 
 **Updated:** 2026-07-23  
-**Product URL (live):** https://caretaker-relay-web.onrender.com  
-**Custom domain (DNS pending):** care.niovlabs.com → Render web service (unverified until CNAME)
+**Canonical product URL:** https://care.niovlabs.com  
+**Render fallback:** https://caretaker-relay-web.onrender.com
 
 ## Judge entry (one URL)
 
-1. Open **https://caretaker-relay-web.onrender.com** (or `https://care.niovlabs.com` once DNS is live).
+1. Open **https://care.niovlabs.com** (fallback: https://caretaker-relay-web.onrender.com).
 2. No GitHub, terminal, or dashboard required.
 3. App auto-connects to the public Care API and signs in as **Sadeil** (primary caregiver for the synthetic Olivia household).
 4. Land on **Today** — Olivia’s day, needs attention, what changed, next steps.

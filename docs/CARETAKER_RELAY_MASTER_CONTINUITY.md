@@ -318,7 +318,8 @@ First: recover state from disk (including `ONLINE_READINESS_CURRENT_STATE.md`); 
 ONLINE RESEARCH ENVIRONMENT: READY
 RECRUITMENT: PAUSED (await founder authorization)
 
-Public app: https://caretaker-relay-web.onrender.com
+Public app (canonical): https://care.niovlabs.com
+Public app (Render fallback): https://caretaker-relay-web.onrender.com
 Public API: https://caretaker-relay-care-api.onrender.com
 Health:     GET /api/v1/health → 200 (prisma durable)
 

@@ -24,14 +24,14 @@
     "foundation": "ccd887b240902bd7ad21c068cd11b60cfa878e85"
   },
   "current_phase": "public_judge_environment_ready_recruitment_paused",
-  "current_gate": "PUBLIC_RESEARCH_ENV_READY_FOUNDER_MAY_AUTHORIZE_RECRUITMENT",
+  "current_gate": "PUBLIC_RESEARCH_ENVIRONMENT_READY_FOR_RECRUITMENT",
   "online_deployment_audit": "COMPLETED",
   "online_research_environment": "READY",
   "session1_status": "NOT_STARTED",
   "session1_readiness": "ONLINE_ENV_READY_AWAITING_FOUNDER_RECRUITMENT_AUTH",
   "research_infrastructure": "READY",
   "recruitment_status": "PAUSED",
-  "public_application_url": "https://caretaker-relay-web.onrender.com",
+  "public_application_url": "https://care.niovlabs.com",
   "public_api_url": "https://caretaker-relay-care-api.onrender.com",
   "render_services": {
     "web": {
@@ -90,26 +90,20 @@
     "render_service": "caretaker-relay-web",
     "render_service_id": "srv-d9h0l2n41pts73dksrmg",
     "render_custom_domain_id": "cdm-d9h1233eo5us73d1jqrg",
-    "render_status": "unverified",
+    "render_status": "verified",
     "dns_provider": "godaddy_domaincontrol",
-    "dns_nameservers": [
-      "ns33.domaincontrol.com",
-      "ns34.domaincontrol.com"
-    ],
-    "existing_record_for_hostname": "NONE",
-    "safe_to_create": true,
-    "required_record": {
+    "dns_record": {
       "type": "CNAME",
-      "name_host": "care",
-      "value_target": "caretaker-relay-web.onrender.com",
-      "ttl": "1 Hour / default (GoDaddy)"
+      "name": "care",
+      "target": "caretaker-relay-web.onrender.com",
+      "ttl_observed_seconds": 3600
     },
-    "dns_status": "PENDING_FOUNDER_OR_GODADDY_API",
-    "https_status": "PENDING_DNS",
-    "canonical_until_dns": "https://caretaker-relay-web.onrender.com",
-    "agent_cannot_write_godaddy": true,
-    "reason": "No GODADDY_API_KEY/SECRET in environment; browser session cookies present but not a safe write path without brittle automation",
-    "updated_at": "2026-07-23T13:18Z"
+    "dns_resolution": "PASS",
+    "https_status": "PASS",
+    "certificate_cn": "care.niovlabs.com",
+    "cors_origins": "https://care.niovlabs.com,https://caretaker-relay-web.onrender.com",
+    "custom_domain_smoke": "PASS",
+    "verified_at": "2026-07-23T13:30Z"
   },
   "recruited_count": 0,
   "scheduled_count": 0,
@@ -134,11 +128,11 @@
     "claim_caregiver_validation",
     "redesign_product_without_finding"
   ],
-  "next_authorized_action": "FOUNDER_MAY_AUTHORIZE_RECRUITMENT_OR_ADD_CARE_CNAME",
+  "next_authorized_action": "FOUNDER_MAY_AUTHORIZE_RECRUITMENT_OF_CAREGIVER_1",
   "cold_context_online_recovery": "READY",
   "updated_at": "2026-07-23",
   "public_research_environment": "READY",
-  "canonical_public_url": "https://caretaker-relay-web.onrender.com",
+  "canonical_public_url": "https://care.niovlabs.com",
   "render_fallback_url": "https://caretaker-relay-web.onrender.com",
   "api_domain_decision": "onrender_api_hostname_sufficient_for_research_spa_hides_it",
   "resend": "NOT_REQUIRED",
