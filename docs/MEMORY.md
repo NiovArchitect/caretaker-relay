@@ -16,8 +16,9 @@
 | Traceability | `docs/ACL_TRACK1_TRACEABILITY.md` |
 | Latest product slice | **Track 1 Judge Loop — Care Without Re-Explaining** (`docs/JUDGE_LOOP_SLICE_2026-07-22.md`) |
 | Research freeze | App `ff95159…` · Foundation `9182c75…` — **do not silent-change during sessions** |
-| Research package | `docs/research/*` first cycle ready; **sessions = 0** |
-| **Next action** | **Human Session 1** (real caregivers) — not more engineering redesign |
+| Research infrastructure | **READY** — founder decisions recorded; private path `~/CaretakerRelayResearch` |
+| Sessions | recruited **0** · scheduled **0** · completed **0** |
+| **Next action** | Founder-authorized **recruit/screen** first family caregiver — then Session 1 (not automated) |
 
 ## Remote checkpoint (SAFE REMOTELY)
 

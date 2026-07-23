@@ -13,9 +13,9 @@ You facilitate. You do **not** sell. You do **not** lead participants to praise 
 2. Boot stack with **synthetic** Olivia scenario only.  
 3. Clear or reset lab state if prior demos polluted data.  
 4. Prepare observation sheet + timer.  
-5. Consent: use `PARTICIPANT_INFORMATION_AND_CONSENT_TEMPLATE.md` (draft for founder review).  
-6. **Cycle 1 recording default: OFF** (audio/video/screen). Notes only unless founder changes policy later.  
-7. Confirm private note storage location is set (`RESEARCH_DATA_HANDLING_PROTOCOL.md`).
+5. Consent: `PARTICIPANT_INFORMATION_AND_CONSENT_TEMPLATE.md` + private log (see `FOUNDER_DECISIONS_SESSION_1.md`).  
+6. **Recording: OFF** (audio/video/screen). Notes + timing + counts only.  
+7. Private notes path: `/Users/genghishameha/CaretakerRelayResearch/` (outside Git).
 
 ## Opening script (non-leading) — say aloud
 

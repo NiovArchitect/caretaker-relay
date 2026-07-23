@@ -61,15 +61,17 @@ Typical lab ports: Care API **3100**, app **5180**, Postgres **5434**.
 
 If a blocking bug is fixed mid-cycle, record the new SHA in this manifest as **Research build amendment** with reason and date — never silently.
 
-## Session 1 operational defaults (activation pack)
+## Session 1 operational decisions (resolved 2026-07-22)
 
-| Item | Default |
+| Item | Decision |
 | --- | --- |
 | Audio / video / screen recording | **OFF** |
-| Notes | Moderator observation + timings + counts |
-| Quotes | Only with separate permission |
-| Private notes storage | **Founder must select** — see `RESEARCH_DATA_HANDLING_PROTOCOL.md` |
-| Consent | Draft template for founder review — see `PARTICIPANT_INFORMATION_AND_CONSENT_TEMPLATE.md` |
+| Notes | Moderator observation + timings + counts + success/failure + confusion |
+| Quotes | Only with separate explicit permission |
+| Private notes storage | `/Users/genghishameha/CaretakerRelayResearch` (outside Git) |
+| Consent | Info template + private acknowledgment log before product use |
 | Outreach | Templates ready; **not sent** by automation |
+| Product change mid-research | Prohibited without FINDING → DECISION |
 
-Session 1 remains **not authorized** until founder decisions in `SESSION_1_READINESS_GATE.md` are closed and a participant is scheduled.
+**Research infrastructure:** READY · **Recruited/scheduled/completed:** 0 · **Session 1 run:** not authorized until founder authorizes recruitment and schedules a participant.  
+See `SESSION_1_EXECUTION_GATE.md` and `FOUNDER_DECISIONS_SESSION_1.md`.

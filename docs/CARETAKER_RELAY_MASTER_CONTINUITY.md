@@ -260,22 +260,23 @@ Test product not participant · do not sell · do not explain failures away · r
 
 ## 11. Session 1 gate (current)
 
-**Status: BLOCKED** — methodology ready; founder decisions + recruitment incomplete.
+**Research infrastructure:** **READY** (founder operational decisions recorded 2026-07-22).  
+**Recruitment / Session 1 run:** **NOT STARTED** (0 recruited, 0 scheduled, 0 completed).
 
-**Remaining founder decisions** (from activation review):
+**Resolved founder decisions** — see `docs/research/FOUNDER_DECISIONS_SESSION_1.md`:
 
-1. Consent approach (written/verbal; review draft template)  
-2. Confirm recording OFF (default already OFF)  
-3. Select private storage path (A/B/C)  
-4. Fill retention fields  
-5. Quote permission process confirm  
-6. Recruit/schedule Caregiver #1  
-7. Institutional/IRB check if applicable  
+- Recording OFF (A/V/screen)  
+- PHI in prototype prohibited  
+- Identifying data out of Git  
+- Private path: `/Users/genghishameha/CaretakerRelayResearch`  
+- Formative retention / data minimization  
+- Consent: info sheet + private acknowledgment before product use  
+- Quotes only with permission  
 
-**Defaults prepared (not auto-“decided” until founder fills storage/retention):**  
-Recording all OFF · notes + timing + counts · quotes with permission · Git-safe codes only · PHI prohibited.
+**Still human-only:** recruit/screen/schedule Caregiver #1; confirm institutional/IRB policy if applicable; founder authorize outreach.
 
-**Authoritative gate doc:** `docs/research/SESSION_1_ACTIVATION_EXTERNAL_REVIEW.md`
+**Execution checklist:** `docs/research/SESSION_1_EXECUTION_GATE.md`  
+**Next authorized action (when founder allows):** RECRUIT / SCREEN first real family caregiver — **do not automate contact**.
 
 ---
 

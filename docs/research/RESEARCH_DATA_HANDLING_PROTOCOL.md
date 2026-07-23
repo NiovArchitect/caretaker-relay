@@ -1,20 +1,20 @@
 # Research Data Handling Protocol
 
 **Type:** Operational project policy (not a legal compliance certification)  
-**Date:** 2026-07-22  
+**Updated:** 2026-07-22 (founder gate resolution)  
 **Applies to:** First caregiver research cycle / Session 1+
 
-## Cycle 1 recording policy (default)
+See also: `FOUNDER_DECISIONS_SESSION_1.md`
 
-| Medium | Default |
+## Cycle 1 recording policy (RESOLVED)
+
+| Medium | Decision |
 | --- | --- |
 | Audio | **OFF** |
 | Video | **OFF** |
 | Screen | **OFF** |
 
-Session 1 uses: **moderator observation notes**, **task timing**, **task counts**, **optional quotes with permission**.
-
-Founders may change this only explicitly for later sessions with updated consent.
+Capture: moderator observation notes · task timing · interaction counts · task success/failure · navigation/confusion · optional short quotes **only with explicit quote permission**.
 
 ## What MAY go in Git
 
@@ -23,13 +23,14 @@ Founders may change this only explicitly for later sessions with updated consent
 - Design decisions  
 - Aggregate / non-identifying metrics  
 - Participant **codes** (e.g. CG-001)  
+- Research traceability / retest evidence  
 - Recruitment **templates** (not filled with contacts)
 
 ## What MUST NOT go in Git
 
 - Real names  
 - Phone numbers / emails  
-- Real PHI / health details of real people  
+- Real PHI  
 - Raw identifying moderator notes  
 - Recordings  
 - Signed consent forms  
@@ -37,73 +38,58 @@ Founders may change this only explicitly for later sessions with updated consent
 
 ## Participant codes
 
-Use sequential codes such as:
+`CG-001`, `CG-002`, … (family) · `SC-00N` · `PC-00N` · `CR-00N`  
+**Do not** encode identity into codes.
 
-- `CG-001`, `CG-002` — family caregivers  
-- `SC-001` — secondary caregivers  
-- `PC-001` — professional home caregivers  
-- `CR-001` — care recipients  
+## Private research storage (RESOLVED for Cycle 1)
 
-**Do not** encode identity, clinic, or location into codes.
-
-## PRIVATE RESEARCH STORAGE — MUST BE SELECTED BEFORE SESSION 1
-
-**FOUNDER / ORGANIZATIONAL DECISION REQUIRED.**  
-Do not invent a cloud provider or claim one exists.
-
-### Choose one (or describe equivalent)
-
-| Option | Description |
+| Field | Value |
 | --- | --- |
-| **A** | Encrypted local folder **outside** this Git repository |
-| **B** | Access-controlled organizational drive (org-managed) |
-| **C** | Approved research repository (if your organization provides one) |
+| Decision | **A — local storage outside Git** |
+| Path | `/Users/genghishameha/CaretakerRelayResearch` |
+| Subfolders | `consent/` · `session-notes/` · `recruitment-private/` · `archive/` |
+| Description | **PRIVATE LOCAL RESEARCH STORAGE OUTSIDE GIT** |
+| OS note at setup | macOS **FileVault: On** (full-disk encryption reported by OS) |
+| Not claimed | HIPAA · certified vault · institutional approval · legal sufficiency |
 
-### Minimum requirements for the chosen location
+**Founder still should confirm:** FileVault remains enabled; account access limited to research personnel.
 
-- Not public  
-- Not the Caretaker Relay Git repo  
-- Access limited to research personnel only  
-- Device/account protection (login, encryption where feasible)  
-- Deletion/retention procedure documented (see below)
-
-### Founder decision record (fill before Session 1)
-
-```text
-SELECTED OPTION: A / B / C / OTHER: ________
-PATH OR SYSTEM NAME (private, not for public docs if sensitive): ________
-ACCESS LIMITED TO: ________
-ENCRYPTION / PROTECTION NOTES: ________
-DATE DECIDED: ________
-DECIDED BY: ________
-```
-
-### After Session 1 — where the observation sheet goes
+### After Session 1 — where notes go
 
 1. Complete observation sheet during/immediately after session.  
-2. Store the **completed** sheet (and any paper consent) in the **private storage location above**.  
-3. In Git-tracked `PARTICIPANT_TRACKING_TEMPLATE` / findings, store only **codes** and de-identified content.  
-4. Reference private storage with a non-identifying pointer if needed (e.g. “notes in private research folder CG-001”).
+2. Store completed sheet + consent record under the private path (by participant code folders if useful).  
+3. Git may later hold **de-identified** findings only under codes.  
+4. Never commit private folder contents into any NIOV repo.
 
-## Retention decisions — FOUNDER / ORGANIZATIONAL DECISION REQUIRED
+## Retention (RESOLVED formative project policy)
 
-Do **not** invent legal retention periods. Fill before Session 1:
+| Data | Policy |
+| --- | --- |
+| Identifying recruitment contact | Keep only while needed for recruitment/follow-up; delete when no longer operationally necessary |
+| Raw moderator notes | Through Cycle 1 synthesis/clarification; then de-identify/synthesize and remove identifying raw material when no longer necessary |
+| Consent record | Outside Git for duration needed to support research record; no invented statutory period |
+| De-identified findings | May remain durable project evidence |
+| Aggregate metrics | May remain durable project evidence |
+| Design decisions / traceability | Remain durable project artifacts |
 
-```text
-RAW MODERATOR NOTES RETENTION: ________ (e.g. keep until cycle synthesis complete / date TBD)
-CONSENT RECORD RETENTION: ________
-DE-IDENTIFIED FINDINGS RETENTION: ________ (often longer; design history)
-PARTICIPANT CONTACT INFORMATION RETENTION: ________ (minimize; store outside Git only)
-DELETION METHOD WHEN RETENTION ENDS: ________
-```
+If an organization later imposes calendar statutory retention: **FOUNDER / ORGANIZATIONAL POLICY REVIEW REQUIRED** for override.
+
+## Consent operational record (outside Git)
+
+Capture privately:
+
+- participant code  
+- information reviewed  
+- participation consent YES/NO  
+- quote permission YES/NO  
+- date  
+- moderator/founder acknowledgment  
 
 ## Ethics / IRB honesty
 
-If this work is under an institution, health system, university, funded program, or organization with human-research review requirements, **confirm applicable policy before beginning**.  
-
-- Do **not** claim regulatory exemption without that confirmation.  
-- Do **not** claim IRB approval unless granted.
+If under institution, university, health system, funded program, or organization with human-research review requirements, **confirm applicable policy before beginning**.  
+Do **not** claim exemption or IRB approval without that confirmation.
 
 ## Product failure notes
 
-Prototype failures are research data. Record under participant code in private notes; de-identified summary may enter findings register.
+Record as research data under participant code in private notes; de-identified summary may enter findings register.

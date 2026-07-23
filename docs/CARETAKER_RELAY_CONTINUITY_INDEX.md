@@ -13,7 +13,9 @@
 | 7 | `docs/research/SESSION_1_ACTIVATION_EXTERNAL_REVIEW.md` | Founder decisions / Session 1 blockers |
 | 8 | `docs/research/RESEARCH_BUILD_MANIFEST.md` | Frozen product SHAs for research |
 | 9 | `docs/research/SESSION_1_MODERATOR_CARD.md` | One-page session runtime (when authorized) |
-| 10 | `docs/research/SESSION_1_READINESS_GATE.md` | READY / FOUNDER DECISION / BLOCKED table |
+| 10 | `docs/research/SESSION_1_EXECUTION_GATE.md` | Go/no-go checklist for Session 1 |
+| 11 | `docs/research/FOUNDER_DECISIONS_SESSION_1.md` | Resolved founder operational decisions |
+| 12 | `docs/research/SESSION_1_READINESS_GATE.md` | Infrastructure vs recruitment status |
 
 ## Quick Git checks
 

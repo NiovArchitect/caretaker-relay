@@ -26,20 +26,27 @@
     "app": "ff95159d8803feaca0e6e245d5a77ee28ee40c99",
     "foundation": "9182c7511c1ffae9dc79082297ae92d7a5079b1a"
   },
-  "documentation_shas": {
-    "research_package": "ccfdbeba91a11ffbbd3074ee35d74d4c0d314f10",
-    "session1_activation_pack": "f4a6c39c15815b5329c9e4f84f0b5e3043bc5e81"
-  },
-  "current_heads_note": "App HEAD may be above product_build after docs-only commits; foundation HEAD equals product_build when last verified.",
-  "remotes": {
-    "app_origin": "https://github.com/NiovArchitect/caretaker-relay.git",
-    "foundation_origin": "https://github.com/NiovArchitect/caretaker-relay-foundation.git"
-  },
   "product_frozen": true,
-  "current_phase": "formative_caregiver_research_prep",
-  "current_gate": "SESSION_1_BLOCKED_FOUNDER_DECISIONS_AND_RECRUITMENT",
+  "current_phase": "formative_caregiver_research_ready_to_recruit",
+  "current_gate": "RESEARCH_INFRASTRUCTURE_READY_AWAITING_FOUNDER_AUTHORIZATION_TO_RECRUIT",
   "session1_status": "NOT_STARTED",
-  "session1_readiness": "BLOCKED",
+  "session1_readiness": "INFRASTRUCTURE_READY_RECRUITMENT_NOT_STARTED",
+  "research_infrastructure": "READY",
+  "recruited_count": 0,
+  "scheduled_count": 0,
+  "completed_count": 0,
+  "founder_decisions": {
+    "recording": "OFF_ALL_MEDIA",
+    "private_storage": "/Users/genghishameha/CaretakerRelayResearch",
+    "phi_in_prototype": "PROHIBITED",
+    "identifying_data_in_git": "PROHIBITED",
+    "quote_permission": "REQUIRED_FOR_DIRECT_QUOTES",
+    "consent_approach": "INFO_SHEET_PLUS_PRIVATE_ACKNOWLEDGMENT_BEFORE_PRODUCT",
+    "retention": "FORMATIVE_MINIMIZATION_POLICY_SEE_FOUNDER_DECISIONS_DOC"
+  },
+  "private_research_path": "/Users/genghishameha/CaretakerRelayResearch",
+  "filevault_status_at_setup": "On",
+  "security_claims": "private_local_outside_git_filevault_on_not_hipaa_not_irb",
   "caregiver_input_status": "NONE",
   "care_recipient_input_status": "NONE",
   "validated_status": "NONE",
@@ -61,7 +68,8 @@
     "no_care_recipient_validation",
     "thin_care_recipient_control_ux",
     "no_committed_partnerships",
-    "maya_not_full_independent_user_product"
+    "maya_not_full_independent_user_product",
+    "institutional_irb_policy_confirm_if_applicable"
   ],
   "judge_loop_lab_verdict": "PASS",
   "playwright_e2e_last_recorded": "18/18",
@@ -69,14 +77,14 @@
     "docs/CARETAKER_RELAY_MASTER_CONTINUITY.md",
     "docs/CARETAKER_RELAY_CURRENT_STATE.json",
     "docs/CARETAKER_RELAY_CONTINUITY_INDEX.md",
-    "docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md",
-    "docs/ACL_TRACK1_TRACEABILITY.md",
-    "docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md",
-    "docs/research/FIRST_CAREGIVER_RESEARCH_EXTERNAL_REVIEW.md",
-    "docs/research/SESSION_1_ACTIVATION_EXTERNAL_REVIEW.md",
+    "docs/research/FOUNDER_DECISIONS_SESSION_1.md",
+    "docs/research/SESSION_1_EXECUTION_GATE.md",
+    "docs/research/SESSION_1_READINESS_GATE.md",
     "docs/research/RESEARCH_BUILD_MANIFEST.md",
     "docs/research/SESSION_1_MODERATOR_CARD.md",
-    "docs/research/SESSION_1_READINESS_GATE.md"
+    "docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md",
+    "docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md",
+    "docs/ACL_TRACK1_TRACEABILITY.md"
   ],
   "do_not_do": [
     "redesign_product_without_finding",
@@ -92,18 +100,15 @@
     "invent_interviews_or_metrics_or_partners",
     "start_session_1_without_authorization",
     "contact_participants_as_automation",
-    "send_partnership_outreach_as_automation"
+    "send_partnership_outreach_as_automation",
+    "convert_lab_result_to_validated"
   ],
   "next_human_decisions": [
-    "consent_approach",
-    "confirm_recording_off",
-    "private_storage_path",
-    "retention_fields",
-    "quote_permission_process",
-    "institutional_irb_check_if_applicable",
-    "recruit_schedule_caregiver_1"
+    "authorize_recruitment_outreach",
+    "confirm_institutional_irb_if_applicable",
+    "recruit_screen_schedule_caregiver_1"
   ],
-  "next_authorized_action": "RESOLVE_SESSION_1_FOUNDER_DECISIONS_THEN_RECRUIT_THEN_SESSION_1_ON_FROZEN_BUILD",
+  "next_authorized_action": "RECRUIT_SCREEN_FIRST_REAL_FAMILY_CAREGIVER_FOR_FORMATIVE_SESSION_1_WHEN_FOUNDER_AUTHORIZES",
   "ia": ["today", "care", "circle", "relay"],
   "updated_at": "2026-07-22"
 }

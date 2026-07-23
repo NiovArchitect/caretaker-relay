@@ -1,42 +1,37 @@
 # Session 1 Readiness Gate
 
-**Date of gate update:** 2026-07-22 (activation pack)  
-**Product freeze:** App `ff95159…` · Foundation `9182c75…`
+**Date of gate update:** 2026-07-22 (founder decisions resolved)  
+**Product freeze:** App `ff95159…` · Foundation `9182c75…`  
+**Decisions:** `FOUNDER_DECISIONS_SESSION_1.md` · **Execution:** `SESSION_1_EXECUTION_GATE.md`
 
 | Item | Status |
 | --- | --- |
 | PRODUCT BUILD FROZEN | **READY** |
 | SYNTHETIC SCENARIO | **READY** |
-| PARTICIPANT INFORMATION | **READY** (draft template; founder review) |
-| CONSENT TEMPLATE | **READY** as draft · **FOUNDER DECISION REQUIRED** to use after review |
-| NO-RECORDING POLICY | **READY** (OFF default Cycle 1) |
-| PRIVATE DATA STORAGE DECISION | **FOUNDER DECISION REQUIRED** |
-| RETENTION DECISION | **FOUNDER DECISION REQUIRED** |
+| PARTICIPANT INFORMATION | **READY** |
+| CONSENT PROCESS | **READY** (template + private log method; not IRB-approved) |
+| NO-RECORDING POLICY | **READY** (OFF) |
+| PRIVATE DATA STORAGE | **READY** (`/Users/genghishameha/CaretakerRelayResearch`) |
+| RETENTION POLICY | **READY** (formative project policy) |
 | RECRUITMENT SCREENER | **READY** (not sent) |
 | INVITATION | **READY** (not sent) |
-| MODERATOR GUIDE | **READY** |
-| MODERATOR CARD | **READY** |
-| OBSERVATION SHEET | **READY** |
-| METRICS | **READY** |
+| MODERATOR GUIDE / CARD | **READY** |
+| OBSERVATION / METRICS / POST-SESSION | **READY** |
 | PHI REDIRECT | **READY** |
-| MEDICATION SAFETY TASK | **READY** |
-| CORRECTION TASK | **READY** |
-| HANDOFF TASK | **READY** |
-| PRIVACY TASK | **READY** |
-| POST-SESSION FLOW | **READY** |
-| PARTICIPANT RECRUITED | **BLOCKED** (0) |
-| IRB/INSTITUTIONAL POLICY CHECK | **FOUNDER DECISION REQUIRED** if applicable |
+| TASKS T1–T8 | **READY** |
+| PARTICIPANT RECRUITED | **0 — BLOCKED for execution** |
+| SESSION SCHEDULED | **0** |
+| SESSION COMPLETED | **0** |
+| IRB/INSTITUTIONAL CHECK | **FOUNDER CONFIRM IF APPLICABLE** (not auto-resolved) |
 
 ## Overall
 
-**SESSION 1 AUTHORIZATION:** **BLOCKED** until founder decisions below are filled and a participant is scheduled.
+| Layer | Status |
+| --- | --- |
+| **RESEARCH INFRASTRUCTURE** | **READY** |
+| **RECRUITMENT / SESSION RUN** | **NOT STARTED** (0 recruited) |
 
-### Remaining founder decisions
+**Next authorized action (not executed by automation):**  
+**RECRUIT / SCREEN THE FIRST REAL FAMILY CAREGIVER FOR FORMATIVE SESSION 1** — only when founder authorizes outreach.
 
-1. Review/adapt consent template; choose written vs verbal for Session 1  
-2. Select private storage option A/B/C and path  
-3. Fill retention fields  
-4. Confirm institutional/IRB policy if any applies  
-5. Recruit/schedule Caregiver #1 (human outreach — not automated)  
-
-Methodology and materials: **READY enough to use after those decisions.**
+**Session 1 itself** remains blocked until a participant is scheduled and founder authorizes the session.

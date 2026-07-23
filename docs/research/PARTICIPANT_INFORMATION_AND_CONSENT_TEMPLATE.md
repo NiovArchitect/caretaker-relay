@@ -1,12 +1,11 @@
 # Participant Information and Consent Template
 
-**DRAFT FOR FOUNDER / ORGANIZATIONAL REVIEW BEFORE USE.**
-
-**This is not IRB-approved.**  
-**This is not a legal determination of sufficiency.**  
-**This is not institutional ethics approval.**
+**Session 1 operational basis:** Founder gate decisions recorded in `FOUNDER_DECISIONS_SESSION_1.md`.  
+**Still not:** IRB-approved · legal advice · medical/clinical consent · institutional ethics approval claim.
 
 If research is conducted under a university, health system, funded program, or other organization with human-research review requirements, **confirm that organization’s policy before Session 1**. Do not claim exemption or approval unless your organization has actually granted it.
+
+**Session 1 consent method:** Review this information **before product interaction**. Record privately (outside Git): participant code · information reviewed · participation YES/NO · quote permission YES/NO · date · moderator acknowledgment. Written acknowledgment preferred; verbal acknowledgment acceptable if written is impractical.
 
 ---
 
