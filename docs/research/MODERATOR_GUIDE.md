@@ -13,12 +13,23 @@ You facilitate. You do **not** sell. You do **not** lead participants to praise 
 2. Boot stack with **synthetic** Olivia scenario only.  
 3. Clear or reset lab state if prior demos polluted data.  
 4. Prepare observation sheet + timer.  
-5. Consent: voluntary, withdraw anytime, synthetic data only.  
-6. Disable recording unless explicit permission.
+5. Consent: use `PARTICIPANT_INFORMATION_AND_CONSENT_TEMPLATE.md` (draft for founder review).  
+6. **Cycle 1 recording default: OFF** (audio/video/screen). Notes only unless founder changes policy later.  
+7. Confirm private note storage location is set (`RESEARCH_DATA_HANDLING_PROTOCOL.md`).
 
-## Opening script (non-leading)
+## Opening script (non-leading) — say aloud
 
-> “We’re testing a prototype that helps people coordinate care for someone at home. You’ll use **made-up** care information about a person named Olivia — not your real records. There are no right answers. I’m interested in what makes sense, what confuses you, and how this compares to what you already do.”
+> “We’re evaluating a prototype that helps people coordinate care for someone at home. **We’re evaluating the software, not you.** There are no right answers, and anything that is confusing is useful for us to learn.  
+>  
+> You’ll use **made-up** care information about a person named Olivia — not your real records. Please **do not enter real private health information** into the prototype. We **do not provide medical advice**.  
+>  
+> Participation is voluntary. You may **stop at any time** or skip any question.  
+>  
+> For this session there is **no audio or video recording**. I will take written notes. If I’d like to use a short quote later, I’ll ask your permission separately.  
+>  
+> I’m interested in what makes sense, what does not, and how this compares with how you currently coordinate care.”
+
+One-page runtime aid: `SESSION_1_MODERATOR_CARD.md`.
 
 ## Bias controls — PROHIBITED leading lines
 

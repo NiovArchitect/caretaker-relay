@@ -57,6 +57,19 @@ Typical lab ports: Care API **3100**, app **5180**, Postgres **5434**.
 | --- | --- |
 | Research docs, notes, findings register | Silent UI polish |
 | Partnership prep (no false claims) | Track 2 features |
-| Bugfix that **blocks** sessions (document as P0 ops) | “While we’re here” redesign |
+| Bug fix that **blocks** sessions (document as P0 ops) | “While we’re here” redesign |
 
 If a blocking bug is fixed mid-cycle, record the new SHA in this manifest as **Research build amendment** with reason and date — never silently.
+
+## Session 1 operational defaults (activation pack)
+
+| Item | Default |
+| --- | --- |
+| Audio / video / screen recording | **OFF** |
+| Notes | Moderator observation + timings + counts |
+| Quotes | Only with separate permission |
+| Private notes storage | **Founder must select** — see `RESEARCH_DATA_HANDLING_PROTOCOL.md` |
+| Consent | Draft template for founder review — see `PARTICIPANT_INFORMATION_AND_CONSENT_TEMPLATE.md` |
+| Outreach | Templates ready; **not sent** by automation |
+
+Session 1 remains **not authorized** until founder decisions in `SESSION_1_READINESS_GATE.md` are closed and a participant is scheduled.
