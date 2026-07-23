@@ -36,11 +36,11 @@ git rev-parse HEAD
 
 ## Current gate (summary)
 
-**ONLINE RESEARCH ENVIRONMENT: NOT READY** — audit complete to current boundary.  
-**Top blockers:** Render API **401 Unauthorized**; no isolated online Postgres; no public app/API URLs.  
-**Research infrastructure (docs/private path):** READY.  
-**Recruitment / Session 1:** **PAUSED** until online environment proven.  
-**Render 401 is ACCESS, not architecture** — do not redesign or switch providers solely for the 401.
+**ONLINE RESEARCH ENVIRONMENT: READY**  
+**Public app:** https://caretaker-relay-web.onrender.com  
+**Public API:** https://caretaker-relay-care-api.onrender.com  
+**Recruitment / Session 1:** **PAUSED** until founder authorizes Caregiver #1.  
+**Do not touch Otzar Render resources** on the same workspace.
 
 Authoritative online detail: `docs/ONLINE_READINESS_CURRENT_STATE.md`
 

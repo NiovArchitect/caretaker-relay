@@ -5,14 +5,6 @@
   "phase": "TRACK_1_PHASE_1_DESIGN",
   "hero_user": "family_home_community_caregiver",
   "core_promise": "care_without_re_explaining",
-  "core_loop": [
-    "natural_caregiver_communication",
-    "multi_event_understand",
-    "preserve_consequential_uncertainty",
-    "human_verify_correct",
-    "durable_care_truth",
-    "handoff_continuity"
-  ],
   "track_2_in_scope": false,
   "workspace": "/Users/genghishameha/dev/NIOV Labs/github",
   "app_repo": "/Users/genghishameha/dev/NIOV Labs/github/caretaker-relay",
@@ -27,189 +19,97 @@
     "foundation": "9182c7511c1ffae9dc79082297ae92d7a5079b1a"
   },
   "product_frozen": true,
-  "research_product_build_shas": {
-    "app": "ff95159d8803feaca0e6e245d5a77ee28ee40c99",
-    "foundation": "9182c7511c1ffae9dc79082297ae92d7a5079b1a",
-    "note": "Judge Loop semantics freeze for research. Online deploy may add deployment-layer commits on top without redesigning caregiver loop."
+  "deploy_shas": {
+    "app": "b9f9b3e6710545a46954f0d65d58d3b69dce3c0c",
+    "foundation": "ccd887b240902bd7ad21c068cd11b60cfa878e85"
   },
-  "deploy_scaffold_shas_at_checkpoint": {
-    "app": "0bbdb0c892097cc2baf0528062cd68bc47676dcd",
-    "foundation": "855c391ffe2dd69c08c92843943b842935f99494",
-    "note": "Pre-online-readiness-checkpoint HEADs; new continuity commit will supersede app tip."
-  },
-  "current_phase": "online_readiness_audit_checkpoint_before_compaction",
-  "current_gate": "ONLINE_RESEARCH_ENVIRONMENT_BLOCKED_FOUNDER_RENDER_DB_SECRETS",
-  "online_deployment_audit": "COMPLETED_TO_CURRENT_BOUNDARY",
-  "online_research_environment": "NOT_READY",
+  "current_phase": "online_research_environment_ready_recruitment_paused",
+  "current_gate": "ONLINE_RESEARCH_ENVIRONMENT_READY_RECRUITMENT_PAUSED",
+  "online_deployment_audit": "COMPLETED",
+  "online_research_environment": "READY",
   "session1_status": "NOT_STARTED",
-  "session1_readiness": "INFRASTRUCTURE_READY_RECRUITMENT_BLOCKED_UNTIL_ONLINE_ENV",
+  "session1_readiness": "ONLINE_ENV_READY_AWAITING_FOUNDER_RECRUITMENT_AUTH",
   "research_infrastructure": "READY",
   "recruitment_status": "PAUSED",
-  "public_application_url": null,
-  "public_api_url": null,
-  "deployment_blockers": [
-    {
-      "id": "B1",
-      "component": "render_api_auth",
-      "condition": "RENDER_API_KEY_present_but_HTTP_401_Unauthorized",
-      "severity": "P0",
-      "class": "ACCESS_AUTHORIZATION_NOT_ARCHITECTURE"
+  "public_application_url": "https://caretaker-relay-web.onrender.com",
+  "public_api_url": "https://caretaker-relay-care-api.onrender.com",
+  "render_services": {
+    "web": {
+      "name": "caretaker-relay-web",
+      "id": "srv-d9h0l2n41pts73dksrmg",
+      "url": "https://caretaker-relay-web.onrender.com"
     },
-    {
-      "id": "B2",
-      "component": "online_postgres",
-      "condition": "no_isolated_caretaker_DATABASE_URL",
-      "severity": "P0"
+    "care_api": {
+      "name": "caretaker-relay-care-api",
+      "id": "srv-d9h0ku3bc2fs739eo660",
+      "url": "https://caretaker-relay-care-api.onrender.com"
     },
-    {
-      "id": "B3",
-      "component": "care_api_live_service",
-      "condition": "blueprint_exists_service_not_confirmed_live",
-      "severity": "P0"
-    },
-    {
-      "id": "B4",
-      "component": "web_static_live_service",
-      "condition": "blueprint_exists_no_public_ui_url",
-      "severity": "P0"
-    },
-    {
-      "id": "B5",
-      "component": "cors_app_origin_secrets",
-      "condition": "CARETAKER_APP_URL_and_CARE_CORS_ORIGINS_unknown_until_ui_url",
-      "severity": "P0"
-    },
-    {
-      "id": "B6",
-      "component": "jwt_secret_online",
-      "condition": "not_set_on_live_service",
-      "severity": "P0"
+    "postgres": {
+      "name": "caretaker-relay-db",
+      "id": "dpg-d9h0ifjeo5us73d0l0eg-a",
+      "database_name": "caretaker_relay",
+      "provider": "render_postgres",
+      "status": "available"
     }
+  },
+  "do_not_touch_other_apps": [
+    "otzar-api/srv-d8t17sm7r5hc73ed5h6g",
+    "otzar-app/srv-d8t1qpj7uimc73db2il0",
+    "otzar-redis/red-d8t1pce8bjmc73e6msag",
+    "otzar-postgres/dpg-d9chaemcjfls73dei7ug-a"
   ],
-  "deployment_notes": {
-    "private_research_path_not_product": "/Users/genghishameha/CaretakerRelayResearch",
-    "render_api": "key_present_but_401_unauthorized",
-    "render_cli": "not_installed",
-    "render_401_class": "ACCESS_AUTHORIZATION_NOT_ARCHITECTURE",
-    "care_api_blueprint": "caretaker-relay-foundation/render.caretaker-care.yaml",
-    "care_dockerfile": "caretaker-relay-foundation/Dockerfile.care",
-    "web_blueprint": "caretaker-relay/render.yaml",
-    "supabase_caretaker_project": "not_configured",
-    "resend": "not_required_for_initial_online_research",
-    "domain_apex": "niovlabs.com_public_on_vercel",
-    "dns_nameservers": "domaincontrol_godaddy_ns33_ns34",
-    "cloudflare": "not_observed_for_apex",
-    "recommended_hostnames": ["care.niovlabs.com", "relay.niovlabs.com"],
-    "custom_domain_required_for_first_smoke": false,
-    "authoritative_online_state_doc": "docs/ONLINE_READINESS_CURRENT_STATE.md"
+  "public_smoke": {
+    "health": "PASS",
+    "auth_sadeil": "PASS",
+    "auth_maya": "PASS",
+    "unauthorized_denied": "PASS",
+    "other_hh_denied": "PASS",
+    "understand_multi_event": "PASS",
+    "medication_ambiguity_uncertain": "PASS",
+    "confirm": "PASS",
+    "correction": "PASS",
+    "handoff": "PASS",
+    "reload_relogin": "PASS",
+    "restart_persistence": "PASS",
+    "web_bakes_public_api": "PASS",
+    "cors": "PASS",
+    "understand_mode": "fixture"
   },
-  "component_readiness": {
-    "render": "ACCESS_BLOCKED",
-    "supabase": "NOT_CONFIGURED",
-    "resend": "NOT_CONFIGURED",
-    "domain_dns": "PARTIAL",
-    "cloudflare": "NOT_NEEDED",
-    "database_local": "READY",
-    "database_online": "NOT_CONFIGURED",
-    "auth": "PARTIAL",
-    "frontend_deploy": "SCAFFOLDED_NOT_LIVE",
-    "care_api_deploy": "SCAFFOLDED_NOT_LIVE",
-    "ai_understand": "FIXTURE_DEFAULT",
-    "judge_remote": "NOT_READY",
-    "caregiver_remote": "NOT_READY",
-    "synthetic_household_online": "PARTIAL"
-  },
+  "secrets_configured_names_only": [
+    "DATABASE_URL",
+    "DIRECT_URL",
+    "JWT_SECRET",
+    "CARETAKER_APP_URL",
+    "CARE_CORS_ORIGINS",
+    "VITE_CARE_API_URL"
+  ],
+  "render_cli_auth": "oauth_cli_yaml",
+  "render_api_key_shell": "stale_401_if_set_unset_for_cli",
+  "custom_domain": "not_required_yet",
   "recruited_count": 0,
   "scheduled_count": 0,
   "completed_count": 0,
-  "founder_decisions": {
-    "recording": "OFF_ALL_MEDIA",
-    "private_storage": "/Users/genghishameha/CaretakerRelayResearch",
-    "phi_in_prototype": "PROHIBITED",
-    "identifying_data_in_git": "PROHIBITED",
-    "quote_permission": "REQUIRED_FOR_DIRECT_QUOTES",
-    "consent_approach": "INFO_SHEET_PLUS_PRIVATE_ACKNOWLEDGMENT_BEFORE_PRODUCT",
-    "retention": "FORMATIVE_MINIMIZATION_POLICY_SEE_FOUNDER_DECISIONS_DOC"
-  },
   "private_research_path": "/Users/genghishameha/CaretakerRelayResearch",
-  "filevault_status_at_setup": "On",
-  "security_claims": "private_local_outside_git_filevault_on_not_hipaa_not_irb",
   "caregiver_input_status": "NONE",
   "care_recipient_input_status": "NONE",
   "validated_status": "NONE",
-  "caregiver_validated_burden_metrics": "NONE",
-  "partnership_status": "NONE",
-  "outreach_sent": false,
-  "evidence_classes": {
-    "founder_hypothesis": true,
-    "lab_result": true,
-    "caregiver_input": false,
-    "care_recipient_input": false,
-    "validated": false
-  },
-  "known_limitations": [
-    "understand_fixture_default",
-    "physical_mic_not_validated",
-    "live_remote_llm_blocked_credentials",
-    "no_caregiver_validation",
-    "no_care_recipient_validation",
-    "thin_care_recipient_control_ux",
-    "no_committed_partnerships",
-    "maya_not_full_independent_user_product",
-    "institutional_irb_policy_confirm_if_applicable",
-    "online_research_environment_not_ready",
-    "render_api_401_access_blocker"
-  ],
   "judge_loop_lab_verdict": "PASS",
-  "playwright_e2e_last_recorded": "18/18",
+  "public_judge_loop_smoke": "PASS",
   "authoritative_docs": [
     "docs/CARETAKER_RELAY_MASTER_CONTINUITY.md",
     "docs/CARETAKER_RELAY_CURRENT_STATE.json",
     "docs/CARETAKER_RELAY_CONTINUITY_INDEX.md",
-    "docs/ONLINE_READINESS_CURRENT_STATE.md",
-    "docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md",
-    "docs/ONLINE_READINESS_MATRIX.md",
-    "docs/research/FOUNDER_DECISIONS_SESSION_1.md",
-    "docs/research/SESSION_1_EXECUTION_GATE.md",
-    "docs/research/SESSION_1_READINESS_GATE.md",
-    "docs/research/RESEARCH_BUILD_MANIFEST.md",
-    "docs/research/SESSION_1_MODERATOR_CARD.md",
-    "docs/TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md",
-    "docs/PRODUCT_CONSTITUTION_GAP_AUDIT.md",
-    "docs/ACL_TRACK1_TRACEABILITY.md"
+    "docs/ONLINE_READINESS_CURRENT_STATE.md"
   ],
   "do_not_do": [
-    "redesign_product_without_finding",
-    "redesign_stack_because_of_render_401",
-    "switch_cloud_provider_to_avoid_auth_fix",
-    "start_substrate_campaign",
-    "track_2",
-    "workforce_ui",
-    "provider_portal",
-    "full_care_recipient_product",
-    "production_deploy",
-    "dns_changes_without_founder",
-    "duplicate_infrastructure",
-    "modify_original_niov_foundation",
-    "modify_otzar",
+    "recruit_without_founder_authorization",
+    "modify_otzar_or_original_foundation",
+    "point_at_otzar_postgres",
+    "print_or_commit_secrets",
     "claim_caregiver_validation",
-    "invent_interviews_or_metrics_or_partners",
-    "start_session_1_without_authorization",
-    "recruit_while_online_env_blocked",
-    "contact_participants_as_automation",
-    "send_partnership_outreach_as_automation",
-    "convert_lab_result_to_validated",
-    "resume_deploy_from_chat_memory_after_compaction"
+    "redesign_product_without_finding"
   ],
-  "next_human_decisions": [
-    "replace_or_reissue_valid_render_api_key_or_apply_blueprints_in_dashboard",
-    "provision_isolated_caretaker_postgres",
-    "set_jwt_database_cors_and_vite_public_urls_as_secrets",
-    "optional_custom_domain_dns",
-    "authorize_public_judge_loop_smoke_then_recruitment"
-  ],
-  "next_authorized_action": "STOP_DEPLOY_UNTIL_CONTEXT_RECOVERY_AND_FOUNDER_RESOLVES_RENDER_AUTH_PLUS_ISOLATED_DB",
+  "next_authorized_action": "FOUNDER_MAY_AUTHORIZE_CAREGIVER_RECRUITMENT",
   "cold_context_online_recovery": "READY",
-  "ia": ["today", "care", "circle", "relay"],
   "updated_at": "2026-07-23"
 }

@@ -263,9 +263,9 @@ Test product not participant · do not sell · do not explain failures away · r
 ## 11. Session 1 gate (current)
 
 **Research infrastructure:** **READY** (founder operational decisions recorded 2026-07-22).  
-**Online research environment:** **NOT READY** (audit complete to current boundary — see §14 and `ONLINE_READINESS_CURRENT_STATE.md`).  
+**Online research environment:** **READY** (public HTTPS app + Care API + isolated Postgres; public smoke PASS — see §14 and `ONLINE_READINESS_CURRENT_STATE.md`).  
 **Recruitment / Session 1 run:** **PAUSED / NOT STARTED** (0 recruited, 0 scheduled, 0 completed).  
-**Do not recruit** until public HTTPS product environment is proven.
+**Do not recruit** until founder explicitly authorizes Caregiver #1 outreach.
 
 **Resolved founder decisions** — see `docs/research/FOUNDER_DECISIONS_SESSION_1.md`:
 
@@ -312,42 +312,33 @@ First: recover state from disk (including `ONLINE_READINESS_CURRENT_STATE.md`); 
 
 ---
 
-## 14. Current next action — ONLINE READINESS CHECKPOINT
+## 14. Current next action — ONLINE ENVIRONMENT READY
 
 ```text
-ONLINE DEPLOYMENT AUDIT: COMPLETED TO CURRENT BOUNDARY
-ONLINE RESEARCH ENVIRONMENT: NOT READY
-RECRUITMENT: PAUSED
+ONLINE RESEARCH ENVIRONMENT: READY
+RECRUITMENT: PAUSED (await founder authorization)
 
-Authoritative audit: docs/ONLINE_READINESS_CURRENT_STATE.md
+Public app: https://caretaker-relay-web.onrender.com
+Public API: https://caretaker-relay-care-api.onrender.com
+Health:     GET /api/v1/health → 200 (prisma durable)
 
-Exact deployment blockers (do not hide):
-  B1  Render API 401 Unauthorized (ACCESS — not architecture failure)
-  B2  No isolated online Postgres / DATABASE_URL for Caretaker
-  B3  Care API service not confirmed live
-  B4  Web static service — no public UI URL
-  B5  CORS / CARETAKER_APP_URL not set to real UI origin
-  B6  JWT_SECRET not set on live service
+Render (Caretaker only — do not touch Otzar):
+  caretaker-relay-web      srv-d9h0l2n41pts73dksrmg
+  caretaker-relay-care-api srv-d9h0ku3bc2fs739eo660
+  caretaker-relay-db       dpg-d9h0ifjeo5us73d0l0eg-a (db: caretaker_relay)
 
-Scaffold already in Git (do not rebuild for 401):
-  - caretaker-relay/render.yaml
-  - caretaker-relay-foundation/render.caretaker-care.yaml + Dockerfile.care
-  - Care CORS production env support
-  - vendor/ packages for standalone UI build
+Auth: CLI OAuth (~/.render/cli.yaml). Shell RENDER_API_KEY may be stale 401 — unset for CLI.
+Understand mode: fixture-backed (honest; not live remote LLM).
+Public smoke: PASS (auth isolation, multi-event, med uncertainty, confirm, correction, handoff, restart persistence).
 
-0. FOUNDER: valid Render access (new API key or Dashboard apply) + isolated DB secrets
-1. Agent (after recovery from disk): apply/verify blueprints → public health + Judge Loop smoke
-2. Then: FOUNDER AUTHORIZES RECRUITMENT
-3. RECRUIT / SCREEN first family caregiver
-4. RUN Session 1 against ONLINE product URL (same semantics as Judge Loop freeze)
-5. CAPTURE real [CAREGIVER INPUT]
-6. SYNTHESIZE findings → only then product behavior changes
+0. FOUNDER AUTHORIZES RECRUITMENT
+1. RECRUIT / SCREEN first family caregiver
+2. RUN Session 1 against ONLINE product URL
+3. CAPTURE real [CAREGIVER INPUT]
+4. SYNTHESIZE findings → only then product behavior changes
 ```
 
-**Do not** redesign stack or switch providers solely because Render API returns 401.  
-**Do not** change DNS or deploy production until founder resolves access blockers after cold recovery.
-
-**Docs:** `docs/ONLINE_READINESS_CURRENT_STATE.md`, `docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md`, `docs/ONLINE_READINESS_MATRIX.md`
+**Docs:** `docs/ONLINE_READINESS_CURRENT_STATE.md`, `docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md`
 
 ---
 
