@@ -15,17 +15,16 @@
   ],
   "branch": "checkpoint/caretaker-relay-track1-2026-07-22",
   "product_build_shas": {
-    "app": "23e2ae0d70e61453e3d50cdf0b6471f7cd45adfa",
-    "foundation": "28a72b3eaa310069bafba80091269d18d2e929bc"
+    "app": "9b598df58e33359cbe3d12ca91a5cfe05bdb1194",
+    "foundation": "8f4935e9e2a929793f4d33fb7048486e8d82ac24"
   },
   "product_frozen": false,
   "deploy_shas": {
-    "app": "23e2ae0d70e61453e3d50cdf0b6471f7cd45adfa",
-    "foundation": "28a72b3eaa310069bafba80091269d18d2e929bc",
-    "note": "API 28a72b3 live with CARE_UNDERSTAND_MODE=llm LLM_PROVIDER=openai OPENAI_MODEL=gpt-5.6 OPENAI_API_KEY present. OpenAI returns 429 quota; fail-closed proven. App 23e2ae0 MedixWeb live on care.niovlabs.com."
+    "app": "9b598df58e33359cbe3d12ca91a5cfe05bdb1194",
+    "foundation": "8f4935e9e2a929793f4d33fb7048486e8d82ac24"
   },
-  "current_phase": "live_openai_configured_partial_due_to_provider_quota",
-  "current_gate": "LIVE_OPENAI_PATH_PROVEN_QUOTA_429_BLOCKS_SUCCESSFUL_COMPLETIONS",
+  "current_phase": "closure_public_gates_openai_quota_external",
+  "current_gate": "PUBLIC_SUBSTRATE_PASS_OPENAI_QUOTA_BLOCKS_LIVE_COMPLETIONS",
   "online_deployment_audit": "COMPLETED",
   "online_research_environment": "READY",
   "session1_status": "NOT_STARTED",
@@ -97,7 +96,11 @@
     "multi_browser_local_ui_prod_api": "PASS",
     "maya_correction_marcus_reobserve_prod_api": "PASS",
     "invite_accept_live": "FAIL_P2002_UNTIL_6e1e28a_DEPLOYS",
-    "web_medixweb": "DEPLOYED_23e2ae0"
+    "web_medixweb": "DEPLOYED_23e2ae0",
+    "login_centered_1440": "PASS_dx0_dy0",
+    "invite_create_accept": "PASS",
+    "invite_replay": "PASS_404",
+    "maya_correction_marcus": "PASS"
   },
   "secrets_configured_names_only": [
     "DATABASE_URL",
@@ -245,13 +248,8 @@
     "LLM_PROVIDER": "openai",
     "OPENAI_MODEL": "gpt-5.6",
     "OPENAI_API_KEY": "PRESENT",
-    "health_understand_mode": "llm",
-    "health_llm_keys_present": true,
-    "health_llm_provider_ready": true,
-    "live_request_evidence_mode": "LIVE_FOUNDATION_BACKED",
-    "modelProvider": "openai",
-    "openai_runtime_error": "429 quota exceeded",
-    "ten_utterance_gate": "PARTIAL_PATH_PROVEN_FAIL_CLOSED_ON_QUOTA",
-    "prisma_confirm_after_fail_closed": "PASS"
+    "completion": "BLOCKED_QUOTA_429",
+    "fail_closed": "PASS",
+    "ten_utterance_generalization": "BLOCKED_QUOTA"
   }
 }
