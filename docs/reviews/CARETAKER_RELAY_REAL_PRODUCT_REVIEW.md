@@ -116,7 +116,7 @@ No new routes required for this slice — **used existing real API** that UI had
 
 | Item | Value |
 | --- | --- |
-| App product commit | *(filled at ship)* |
+| App product commit | `2858c2a` |
 | Foundation | `abbea1f` (Evelyn display names; no API shape change required) |
 | Web service | `srv-d9h0l2n41pts73dksrmg` |
 | Care API | `srv-d9h0ku3bc2fs739eo660` |
@@ -139,7 +139,7 @@ No new routes required for this slice — **used existing real API** that UI had
 
 ## 8. Screenshots index
 
-Post-deploy evidence directory (when captured):
+Post-deploy evidence directory:
 
 `evidence/real-product-2026-07-23/`
 
@@ -167,3 +167,18 @@ FOUNDER VISUAL/BEHAVIOR APPROVAL = REQUIRED
 - `docs/reviews/REAL_PRODUCT_BEHAVIOR_AUDIT.md`
 - `docs/reviews/CARETAKER_RELAY_REAL_PRODUCT_ACTION_MATRIX.md`
 - Continuity: `docs/CARETAKER_RELAY_CURRENT_STATE.json` (updated at ship)
+
+
+## 11. Public acceptance smoke (2858c2a live)
+
+| Check | Result |
+| --- | --- |
+| Lab entry footer | PASS |
+| Sample care chip absent | PASS |
+| Tell Relay opens empty composer | PASS |
+| Care medication object opens | PASS |
+| People source http | PASS |
+| Documents export generate | PASS |
+| Messages honest not-available | PASS |
+| Attention → Care (not script fill) | PASS |
+| Handoff panel loads content | PASS |

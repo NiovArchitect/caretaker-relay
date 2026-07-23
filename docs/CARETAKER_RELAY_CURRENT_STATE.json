@@ -15,12 +15,12 @@
   ],
   "branch": "checkpoint/caretaker-relay-track1-2026-07-22",
   "product_build_shas": {
-    "app": "135f5dfc258fb3db9155f80e5f64679fdf33196b",
+    "app": "2858c2a2904e43cf6aea4b796e2c8f8ca0422330",
     "foundation": "abbea1f78b31f76889f45d76bcec43761b37e5d6"
   },
   "product_frozen": false,
   "deploy_shas": {
-    "app": "135f5dfc258fb3db9155f80e5f64679fdf33196b",
+    "app": "2858c2a2904e43cf6aea4b796e2c8f8ca0422330",
     "foundation": "abbea1f78b31f76889f45d76bcec43761b37e5d6"
   },
   "current_phase": "real_product_behavior_reconstruction",
@@ -129,7 +129,7 @@
   "care_recipient_input_status": "NONE",
   "validated_status": "NONE",
   "judge_loop_lab_verdict": "PASS",
-  "public_judge_loop_smoke": "PASS",
+  "public_judge_loop_smoke": "PARTIAL_REAL_WORKFLOWS_NOT_FULL_JUDGE_SCRIPT",
   "authoritative_docs": [
     "docs/CARETAKER_RELAY_MASTER_CONTINUITY.md",
     "docs/CARETAKER_RELAY_CURRENT_STATE.json",
@@ -158,7 +158,7 @@
   ],
   "next_authorized_action": "FOUNDER_REWALKS_LIVE_PRODUCT_BEHAVIOR",
   "cold_context_online_recovery": "READY",
-  "updated_at": "2026-07-23T16:35Z",
+  "updated_at": "2026-07-23T16:40Z",
   "public_research_environment": "READY",
   "canonical_public_url": "https://care.niovlabs.com",
   "render_fallback_url": "https://caretaker-relay-web.onrender.com",
@@ -193,7 +193,7 @@
   },
   "next_human_action": "FOUNDER_APPROVES_REAL_WORKFLOWS_OR_REQUESTS_FURTHER_FIXES",
   "presentation_redesign": "SUPERSEDED_BY_REAL_PRODUCT_RECONSTRUCTION",
-  "public_screenshots": "evidence/master-e2e-2026-07-23/",
+  "public_screenshots": "evidence/real-product-2026-07-23/",
   "ia_surfaces": [
     "today",
     "care",
