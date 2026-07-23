@@ -13,11 +13,13 @@
 2. Verify repos exist: `caretaker-relay`, `caretaker-relay-foundation`, `niov-foundation`.  
 3. Read **this file** completely.  
 4. Read `docs/CARETAKER_RELAY_CURRENT_STATE.json`.  
-5. Read `docs/CARETAKER_RELAY_CONTINUITY_INDEX.md` and open the gate-specific docs it lists.  
-6. Run Git: branches, HEADs, remotes, `git status`, confirm product freeze SHAs.  
-7. Reconcile docs vs Git; **Git wins** on commits.  
-8. Report: recovered state, current gate, unresolved decisions, next authorized action.  
-9. **Do not** execute the next action until the founder instructs.  
+5. Read `docs/CARETAKER_RELAY_CONTINUITY_INDEX.md`.  
+6. **If online deploy / research env is the gate:** read `docs/ONLINE_READINESS_CURRENT_STATE.md` **before any deploy action**.  
+7. Run Git: branches, HEADs, remotes, `git status`, confirm product freeze SHAs.  
+8. Reconcile docs vs Git; **Git wins** on commits.  
+9. Report: recovered state, current gate, exact blockers, next authorized action.  
+10. **Do not** resume deployment from chat memory. Resume from disk blockers.  
+11. **Do not** execute deploy/recruit until founder has resolved true external access blockers and instructs.  
 
 ---
 
@@ -261,7 +263,9 @@ Test product not participant · do not sell · do not explain failures away · r
 ## 11. Session 1 gate (current)
 
 **Research infrastructure:** **READY** (founder operational decisions recorded 2026-07-22).  
-**Recruitment / Session 1 run:** **NOT STARTED** (0 recruited, 0 scheduled, 0 completed).
+**Online research environment:** **NOT READY** (audit complete to current boundary — see §14 and `ONLINE_READINESS_CURRENT_STATE.md`).  
+**Recruitment / Session 1 run:** **PAUSED / NOT STARTED** (0 recruited, 0 scheduled, 0 completed).  
+**Do not recruit** until public HTTPS product environment is proven.
 
 **Resolved founder decisions** — see `docs/research/FOUNDER_DECISIONS_SESSION_1.md`:
 
@@ -273,10 +277,10 @@ Test product not participant · do not sell · do not explain failures away · r
 - Consent: info sheet + private acknowledgment before product use  
 - Quotes only with permission  
 
-**Still human-only:** recruit/screen/schedule Caregiver #1; confirm institutional/IRB policy if applicable; founder authorize outreach.
+**Still human-only:** valid Render access + isolated DB secrets; then recruit/screen/schedule Caregiver #1; confirm institutional/IRB policy if applicable; founder authorize outreach.
 
 **Execution checklist:** `docs/research/SESSION_1_EXECUTION_GATE.md`  
-**Next authorized action (when founder allows):** RECRUIT / SCREEN first real family caregiver — **do not automate contact**.
+**After online env ready + founder allows:** RECRUIT / SCREEN first real family caregiver — **do not automate contact**.
 
 ---
 
@@ -297,32 +301,53 @@ Test product not participant · do not sell · do not explain failures away · r
 
 Do **not** automatically:
 
-- redesign product · new substrate phase · Track 2 · workforce features · provider portal · full care-recipient product · production deploy  
+- redesign product · redesign stack because of Render 401 · switch cloud providers solely to avoid auth fix  
+- new substrate phase · Track 2 · workforce features · provider portal · full care-recipient product · production deploy  
+- DNS changes without founder · duplicate infrastructure · resume deploy from chat memory after compaction  
 - modify original `niov-foundation` · modify Otzar  
 - claim caregiver validation · invent interviews/metrics/partners  
-- start Session 1 · contact participants · send partnership outreach  
+- recruit / start Session 1 while online env blocked · contact participants · send partnership outreach  
 
-First: recover state and report gate; wait for founder instruction.
+First: recover state from disk (including `ONLINE_READINESS_CURRENT_STATE.md`); report gate; wait for founder instruction.
 
 ---
 
-## 14. Current next action
+## 14. Current next action — ONLINE READINESS CHECKPOINT
 
 ```text
-0. ONLINE ENVIRONMENT (CURRENT GATE)
-   - Research admin path ~/CaretakerRelayResearch is NOT the product
-   - Deploy Care API + Web via Render blueprints + isolated Postgres
-   - Founder must supply valid Render credentials + DATABASE_URL (agent: Render API 401)
-   - Prove public HTTPS Judge Loop smoke before recruitment
+ONLINE DEPLOYMENT AUDIT: COMPLETED TO CURRENT BOUNDARY
+ONLINE RESEARCH ENVIRONMENT: NOT READY
+RECRUITMENT: PAUSED
 
-1. Then: FOUNDER AUTHORIZES RECRUITMENT
-2. RECRUIT / SCREEN first family caregiver
-3. RUN Session 1 against ONLINE product URL (same semantics as Judge Loop freeze)
-4. CAPTURE real [CAREGIVER INPUT]
-5. SYNTHESIZE findings → only then product behavior changes
+Authoritative audit: docs/ONLINE_READINESS_CURRENT_STATE.md
+
+Exact deployment blockers (do not hide):
+  B1  Render API 401 Unauthorized (ACCESS — not architecture failure)
+  B2  No isolated online Postgres / DATABASE_URL for Caretaker
+  B3  Care API service not confirmed live
+  B4  Web static service — no public UI URL
+  B5  CORS / CARETAKER_APP_URL not set to real UI origin
+  B6  JWT_SECRET not set on live service
+
+Scaffold already in Git (do not rebuild for 401):
+  - caretaker-relay/render.yaml
+  - caretaker-relay-foundation/render.caretaker-care.yaml + Dockerfile.care
+  - Care CORS production env support
+  - vendor/ packages for standalone UI build
+
+0. FOUNDER: valid Render access (new API key or Dashboard apply) + isolated DB secrets
+1. Agent (after recovery from disk): apply/verify blueprints → public health + Judge Loop smoke
+2. Then: FOUNDER AUTHORIZES RECRUITMENT
+3. RECRUIT / SCREEN first family caregiver
+4. RUN Session 1 against ONLINE product URL (same semantics as Judge Loop freeze)
+5. CAPTURE real [CAREGIVER INPUT]
+6. SYNTHESIZE findings → only then product behavior changes
 ```
 
-**Docs:** `docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md`, `docs/ONLINE_READINESS_MATRIX.md`
+**Do not** redesign stack or switch providers solely because Render API returns 401.  
+**Do not** change DNS or deploy production until founder resolves access blockers after cold recovery.
+
+**Docs:** `docs/ONLINE_READINESS_CURRENT_STATE.md`, `docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md`, `docs/ONLINE_READINESS_MATRIX.md`
 
 ---
 
@@ -332,6 +357,9 @@ First: recover state and report gate; wait for founder instruction.
 | --- | --- |
 | Full recovery | **This file** + `CARETAKER_RELAY_CURRENT_STATE.json` |
 | Reading order | `CARETAKER_RELAY_CONTINUITY_INDEX.md` |
+| **Online readiness audit** | **`ONLINE_READINESS_CURRENT_STATE.md`** |
+| Online architecture | `ONLINE_DEPLOYMENT_ARCHITECTURE.md` |
+| Online gap matrix | `ONLINE_READINESS_MATRIX.md` |
 | Constitution gaps | `PRODUCT_CONSTITUTION_GAP_AUDIT.md` |
 | Judging traceability | `ACL_TRACK1_TRACEABILITY.md` |
 | Judge Loop proof | `TRACK1_JUDGE_LOOP_EXTERNAL_REVIEW.md` |
@@ -350,14 +378,17 @@ First: recover state and report gate; wait for founder instruction.
 | ACL track? | Track 1 Phase 1 Design |
 | Hero user? | Family/home caregiver |
 | Built/proven? | Judge Loop lab PASS; real HTTP/Prisma/auth/med safety |
-| Unproven? | Caregiver input, validated burden, partnerships, live model, physical mic |
+| Unproven? | Caregiver input, validated burden, partnerships, live model, physical mic, **online public URLs** |
 | Product SHAs? | ff95159… / 9182c75… |
 | Product frozen? | YES |
-| Research begun? | NO sessions |
-| Session 1 gate? | BLOCKED on founder decisions + recruitment |
-| Forbidden? | See §13 |
-| Next action? | Founder decisions → recruit → Session 1 |
+| Online audit? | COMPLETED TO BOUNDARY — see ONLINE_READINESS_CURRENT_STATE.md |
+| Online env ready? | **NO** |
+| Top online blockers? | Render 401 (access); no isolated DB; no public app/API URLs |
+| Render 401 class? | ACCESS/AUTHORIZATION — not architecture failure |
+| Research begun? | NO sessions; recruitment PAUSED |
+| Forbidden? | See §13 + no deploy-from-chat-memory |
+| Next action? | Founder Render auth + isolated DB → public smoke → then recruit |
 
 ---
 
-**End of master continuity. Wait for founder instruction.**
+**End of master continuity. Wait for founder instruction. After compaction: recover from disk, do not deploy until access blockers resolved.**

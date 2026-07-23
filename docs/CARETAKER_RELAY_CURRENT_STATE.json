@@ -32,21 +32,92 @@
     "foundation": "9182c7511c1ffae9dc79082297ae92d7a5079b1a",
     "note": "Judge Loop semantics freeze for research. Online deploy may add deployment-layer commits on top without redesigning caregiver loop."
   },
-  "current_phase": "online_deployment_scaffolding_before_caregiver_recruitment",
+  "deploy_scaffold_shas_at_checkpoint": {
+    "app": "0bbdb0c892097cc2baf0528062cd68bc47676dcd",
+    "foundation": "855c391ffe2dd69c08c92843943b842935f99494",
+    "note": "Pre-online-readiness-checkpoint HEADs; new continuity commit will supersede app tip."
+  },
+  "current_phase": "online_readiness_audit_checkpoint_before_compaction",
   "current_gate": "ONLINE_RESEARCH_ENVIRONMENT_BLOCKED_FOUNDER_RENDER_DB_SECRETS",
+  "online_deployment_audit": "COMPLETED_TO_CURRENT_BOUNDARY",
+  "online_research_environment": "NOT_READY",
   "session1_status": "NOT_STARTED",
   "session1_readiness": "INFRASTRUCTURE_READY_RECRUITMENT_BLOCKED_UNTIL_ONLINE_ENV",
   "research_infrastructure": "READY",
-  "online_research_environment": "BLOCKED",
+  "recruitment_status": "PAUSED",
   "public_application_url": null,
   "public_api_url": null,
+  "deployment_blockers": [
+    {
+      "id": "B1",
+      "component": "render_api_auth",
+      "condition": "RENDER_API_KEY_present_but_HTTP_401_Unauthorized",
+      "severity": "P0",
+      "class": "ACCESS_AUTHORIZATION_NOT_ARCHITECTURE"
+    },
+    {
+      "id": "B2",
+      "component": "online_postgres",
+      "condition": "no_isolated_caretaker_DATABASE_URL",
+      "severity": "P0"
+    },
+    {
+      "id": "B3",
+      "component": "care_api_live_service",
+      "condition": "blueprint_exists_service_not_confirmed_live",
+      "severity": "P0"
+    },
+    {
+      "id": "B4",
+      "component": "web_static_live_service",
+      "condition": "blueprint_exists_no_public_ui_url",
+      "severity": "P0"
+    },
+    {
+      "id": "B5",
+      "component": "cors_app_origin_secrets",
+      "condition": "CARETAKER_APP_URL_and_CARE_CORS_ORIGINS_unknown_until_ui_url",
+      "severity": "P0"
+    },
+    {
+      "id": "B6",
+      "component": "jwt_secret_online",
+      "condition": "not_set_on_live_service",
+      "severity": "P0"
+    }
+  ],
   "deployment_notes": {
     "private_research_path_not_product": "/Users/genghishameha/CaretakerRelayResearch",
     "render_api": "key_present_but_401_unauthorized",
     "render_cli": "not_installed",
+    "render_401_class": "ACCESS_AUTHORIZATION_NOT_ARCHITECTURE",
     "care_api_blueprint": "caretaker-relay-foundation/render.caretaker-care.yaml",
+    "care_dockerfile": "caretaker-relay-foundation/Dockerfile.care",
     "web_blueprint": "caretaker-relay/render.yaml",
-    "recommended_hostnames": ["care.niovlabs.com", "relay.niovlabs.com"]
+    "supabase_caretaker_project": "not_configured",
+    "resend": "not_required_for_initial_online_research",
+    "domain_apex": "niovlabs.com_public_on_vercel",
+    "dns_nameservers": "domaincontrol_godaddy_ns33_ns34",
+    "cloudflare": "not_observed_for_apex",
+    "recommended_hostnames": ["care.niovlabs.com", "relay.niovlabs.com"],
+    "custom_domain_required_for_first_smoke": false,
+    "authoritative_online_state_doc": "docs/ONLINE_READINESS_CURRENT_STATE.md"
+  },
+  "component_readiness": {
+    "render": "ACCESS_BLOCKED",
+    "supabase": "NOT_CONFIGURED",
+    "resend": "NOT_CONFIGURED",
+    "domain_dns": "PARTIAL",
+    "cloudflare": "NOT_NEEDED",
+    "database_local": "READY",
+    "database_online": "NOT_CONFIGURED",
+    "auth": "PARTIAL",
+    "frontend_deploy": "SCAFFOLDED_NOT_LIVE",
+    "care_api_deploy": "SCAFFOLDED_NOT_LIVE",
+    "ai_understand": "FIXTURE_DEFAULT",
+    "judge_remote": "NOT_READY",
+    "caregiver_remote": "NOT_READY",
+    "synthetic_household_online": "PARTIAL"
   },
   "recruited_count": 0,
   "scheduled_count": 0,
@@ -85,7 +156,9 @@
     "thin_care_recipient_control_ux",
     "no_committed_partnerships",
     "maya_not_full_independent_user_product",
-    "institutional_irb_policy_confirm_if_applicable"
+    "institutional_irb_policy_confirm_if_applicable",
+    "online_research_environment_not_ready",
+    "render_api_401_access_blocker"
   ],
   "judge_loop_lab_verdict": "PASS",
   "playwright_e2e_last_recorded": "18/18",
@@ -93,6 +166,9 @@
     "docs/CARETAKER_RELAY_MASTER_CONTINUITY.md",
     "docs/CARETAKER_RELAY_CURRENT_STATE.json",
     "docs/CARETAKER_RELAY_CONTINUITY_INDEX.md",
+    "docs/ONLINE_READINESS_CURRENT_STATE.md",
+    "docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md",
+    "docs/ONLINE_READINESS_MATRIX.md",
     "docs/research/FOUNDER_DECISIONS_SESSION_1.md",
     "docs/research/SESSION_1_EXECUTION_GATE.md",
     "docs/research/SESSION_1_READINESS_GATE.md",
@@ -104,31 +180,36 @@
   ],
   "do_not_do": [
     "redesign_product_without_finding",
+    "redesign_stack_because_of_render_401",
+    "switch_cloud_provider_to_avoid_auth_fix",
     "start_substrate_campaign",
     "track_2",
     "workforce_ui",
     "provider_portal",
     "full_care_recipient_product",
     "production_deploy",
+    "dns_changes_without_founder",
+    "duplicate_infrastructure",
     "modify_original_niov_foundation",
     "modify_otzar",
     "claim_caregiver_validation",
     "invent_interviews_or_metrics_or_partners",
     "start_session_1_without_authorization",
+    "recruit_while_online_env_blocked",
     "contact_participants_as_automation",
     "send_partnership_outreach_as_automation",
-    "convert_lab_result_to_validated"
+    "convert_lab_result_to_validated",
+    "resume_deploy_from_chat_memory_after_compaction"
   ],
   "next_human_decisions": [
+    "replace_or_reissue_valid_render_api_key_or_apply_blueprints_in_dashboard",
     "provision_isolated_caretaker_postgres",
-    "apply_render_care_api_and_web_blueprints_with_valid_credentials",
-    "set_cors_and_vite_public_urls",
+    "set_jwt_database_cors_and_vite_public_urls_as_secrets",
     "optional_custom_domain_dns",
-    "run_public_judge_loop_smoke",
-    "then_authorize_recruitment"
+    "authorize_public_judge_loop_smoke_then_recruitment"
   ],
-  "next_authorized_action": "FOUNDER_APPLY_RENDER_DB_AND_DEPLOY_SECRETS_THEN_PUBLIC_SMOKE_BEFORE_RECRUITMENT",
+  "next_authorized_action": "STOP_DEPLOY_UNTIL_CONTEXT_RECOVERY_AND_FOUNDER_RESOLVES_RENDER_AUTH_PLUS_ISOLATED_DB",
+  "cold_context_online_recovery": "READY",
   "ia": ["today", "care", "circle", "relay"],
   "updated_at": "2026-07-23"
 }
-
