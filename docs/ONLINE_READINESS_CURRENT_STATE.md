@@ -1,7 +1,9 @@
 # Caretaker Relay — Online Readiness Current State
 
 **Updated:** 2026-07-23  
-**Status:** **ONLINE RESEARCH ENVIRONMENT READY** (public smoke proven)  
+**Status:** **PUBLIC JUDGE / CAREGIVER RESEARCH ENVIRONMENT READY**
+**Canonical URL:** https://caretaker-relay-web.onrender.com
+**Custom domain:** care.niovlabs.com (Render registered; DNS CNAME pending at GoDaddy Domain Control)  
 **Recruitment:** **PAUSED** (founder must authorize Caregiver #1)  
 **Do not resume from chat memory.** Resume from this file + continuity docs + Git.
 
@@ -132,3 +134,28 @@ Research admin path `~/CaretakerRelayResearch` is **not** product hosting.
 ---
 
 **End of online readiness current state.**
+
+
+---
+
+## Public browser acceptance (2026-07-23)
+
+Playwright against live Render URL (not localhost):
+
+| Check | Result |
+| --- | --- |
+| Landing / Today / Olivia | PASS |
+| No localhost / workforce chrome | PASS |
+| Public Care API calls from SPA | PASS |
+| Multi-event understand + verify panel | PASS (6 items) |
+| Medication safety block | PASS |
+| Confirm + handoff | PASS |
+| Refresh | PASS |
+| Top CTA "Tell Relay what happened" | PASS |
+| Mobile viewport | PASS |
+| Resend | NOT REQUIRED |
+| care.niovlabs.com DNS | PENDING founder CNAME |
+
+Entry doc: `docs/PUBLIC_JUDGE_AND_CAREGIVER_ENTRY.md`
+
+Evidence honesty: CAREGIVER INPUT = NONE · VALIDATED = NONE

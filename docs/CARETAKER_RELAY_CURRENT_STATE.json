@@ -1,6 +1,6 @@
 {
   "project": "Caretaker Relay",
-  "competition": "Administration for Community Living — Caregiver AI Challenge",
+  "competition": "Administration for Community Living \u2014 Caregiver AI Challenge",
   "track": "TRACK_1_AI_TOOLS_TO_SUPPORT_CAREGIVERS",
   "phase": "TRACK_1_PHASE_1_DESIGN",
   "hero_user": "family_home_community_caregiver",
@@ -20,11 +20,11 @@
   },
   "product_frozen": true,
   "deploy_shas": {
-    "app": "b9f9b3e6710545a46954f0d65d58d3b69dce3c0c",
+    "app": "2be3183f1845a48d3b8b3034be5c8f0a5e66591c",
     "foundation": "ccd887b240902bd7ad21c068cd11b60cfa878e85"
   },
-  "current_phase": "online_research_environment_ready_recruitment_paused",
-  "current_gate": "ONLINE_RESEARCH_ENVIRONMENT_READY_RECRUITMENT_PAUSED",
+  "current_phase": "public_judge_environment_ready_recruitment_paused",
+  "current_gate": "PUBLIC_RESEARCH_ENV_READY_FOUNDER_MAY_AUTHORIZE_RECRUITMENT",
   "online_deployment_audit": "COMPLETED",
   "online_research_environment": "READY",
   "session1_status": "NOT_STARTED",
@@ -85,7 +85,14 @@
   ],
   "render_cli_auth": "oauth_cli_yaml",
   "render_api_key_shell": "stale_401_if_set_unset_for_cli",
-  "custom_domain": "not_required_yet",
+  "custom_domain": {
+    "hostname": "care.niovlabs.com",
+    "render_status": "created_unverified",
+    "dns_status": "PENDING_CNAME_AT_GODADDY_DOMAINCONTROL",
+    "https_status": "PENDING_DNS",
+    "cname_target": "caretaker-relay-web.onrender.com",
+    "note": "Do not overwrite existing DNS. Leave onrender fallback."
+  },
   "recruited_count": 0,
   "scheduled_count": 0,
   "completed_count": 0,
@@ -109,7 +116,24 @@
     "claim_caregiver_validation",
     "redesign_product_without_finding"
   ],
-  "next_authorized_action": "FOUNDER_MAY_AUTHORIZE_CAREGIVER_RECRUITMENT",
+  "next_authorized_action": "FOUNDER_MAY_AUTHORIZE_RECRUITMENT_OF_CAREGIVER_1",
   "cold_context_online_recovery": "READY",
-  "updated_at": "2026-07-23"
+  "updated_at": "2026-07-23",
+  "public_research_environment": "READY",
+  "canonical_public_url": "https://caretaker-relay-web.onrender.com",
+  "render_fallback_url": "https://caretaker-relay-web.onrender.com",
+  "api_domain_decision": "onrender_api_hostname_sufficient_for_research_spa_hides_it",
+  "resend": "NOT_REQUIRED",
+  "judge_entry": "open_public_url_auto_sadeil_today_tell_relay_verify_confirm",
+  "caregiver_entry": "same_public_url_synthetic_olivia_research_admin_outside_app",
+  "public_browser_acceptance": {
+    "verify_panel": "PASS",
+    "multi_event": "PASS",
+    "med_safety_block": "PASS",
+    "confirm_handoff": "PASS",
+    "api_http_path": "PASS",
+    "track2_firewall": "PASS",
+    "mobile_viewport": "PASS",
+    "top_cta": "PASS"
+  }
 }

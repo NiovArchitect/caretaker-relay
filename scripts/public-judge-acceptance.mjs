@@ -144,9 +144,19 @@ async function run() {
   await page.goto(BASE + "/", { waitUntil: "domcontentloaded" });
   await page.waitForTimeout(3000);
   try {
-    await page.locator('[data-testid="try-care-update"]').scrollIntoViewIfNeeded();
-    await page.locator('[data-testid="try-care-update"]').click({ timeout: 8000 });
-    results.cta_clickable = true;
+    const top = page.locator('[data-testid="try-care-update-top"]');
+    if (await top.count()) {
+      await top.click({ timeout: 8000 });
+      results.cta_clickable = true;
+      results.cta_which = "top";
+    } else {
+      await page.locator('[data-testid="try-care-update"]').scrollIntoViewIfNeeded();
+      await page
+        .locator('[data-testid="try-care-update"]')
+        .click({ timeout: 8000, force: true });
+      results.cta_clickable = true;
+      results.cta_which = "bottom-force";
+    }
     results.cta_filled_len = (
       await page.locator('[data-testid="composer-input"]').inputValue()
     ).length;

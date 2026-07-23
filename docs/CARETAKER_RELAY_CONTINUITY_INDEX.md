@@ -19,6 +19,7 @@
 | 13 | `docs/research/SESSION_1_READINESS_GATE.md` | Infrastructure vs recruitment status |
 | 14 | `docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md` | Internet product architecture (not Mac-local) |
 | 15 | `docs/ONLINE_READINESS_MATRIX.md` | Online component gap matrix |
+| 16 | `docs/PUBLIC_JUDGE_AND_CAREGIVER_ENTRY.md` | Judge + caregiver one-URL entry flows |
 
 ## Quick Git checks
 
