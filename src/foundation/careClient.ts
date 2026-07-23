@@ -930,22 +930,47 @@ export async function applyCareCorrection(
   return service.applyCorrection(targetEventId, correctedValue, auth);
 }
 
-/** Simple care-context Q&A over current projection (no chat bot fiction). */
+/** Grounded care Q&A — prefer server /answer from durable truth. */
 export async function answerCareQuestion(question: string): Promise<string> {
   const raw = question.trim();
   const q = raw.toLowerCase();
-  // Only clear interrogatives — never intercept multi-fact care updates
-  // (e.g. "Let Maya know" inside a care statement must still hit understand).
   const looksLikeQuestion =
     /\?$/.test(raw) ||
     /^(what|when|where|why|who|how|summarize|summary)\b/i.test(raw) ||
     /^(can you )?(tell me |show me )?(what|when|where|why|who|how)\b/i.test(
       raw,
-    );
+    ) ||
+    /what happened since|since i was last|caught up/.test(q);
   if (!looksLikeQuestion) return "";
 
+  // Prefer server-grounded answer when authenticated over HTTP
+  const httpOk = await ensureHttpSession();
+  if (httpOk && httpToken) {
+    try {
+      const base = getCareApiBaseUrl();
+      const res = await fetch(`${base}/api/v1/care/answer`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${httpToken}`,
+        },
+        body: JSON.stringify({
+          question: raw,
+          care_recipient_id: careRecipient.id,
+        }),
+      });
+      const json = (await res.json()) as {
+        ok?: boolean;
+        answer?: string;
+      };
+      if (res.ok && json.answer) return json.answer;
+    } catch {
+      /* fall through to local projection */
+    }
+  }
+
   const proj = await fetchTodayProjection();
-  if (/what changed|since this morning|since yesterday/.test(q)) {
+  if (/what changed|since this morning|since yesterday|what happened|since i was last|caught up|going on/.test(q)) {
     if (proj.whatChanged.length === 0) {
       return `I don't have new confirmed changes for ${careRecipient.displayName} yet. Tell me what happened and I'll organize it.`;
     }

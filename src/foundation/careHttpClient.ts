@@ -131,12 +131,14 @@ export async function careUnderstand(
     opts?.transcriptMeta?.source === "voice_stt"
       ? "/api/v1/care/voice/understand"
       : "/api/v1/care/understand";
+  // Omit mode unless caller forces it — server chooses llm when keys present.
+  const mode = opts?.mode;
   const body =
     path.includes("voice")
       ? {
           transcript: text,
           care_recipient_id: careRecipientId,
-          mode: opts?.mode ?? "fixture",
+          ...(mode ? { mode } : {}),
           language: opts?.transcriptMeta?.language,
           confidence: opts?.transcriptMeta?.confidence,
           stt_provider: opts?.transcriptMeta?.stt_provider,
@@ -145,7 +147,7 @@ export async function careUnderstand(
       : {
           text,
           care_recipient_id: careRecipientId,
-          mode: opts?.mode ?? "fixture",
+          ...(mode ? { mode } : {}),
           transcript_meta: opts?.transcriptMeta,
         };
   return request<{
