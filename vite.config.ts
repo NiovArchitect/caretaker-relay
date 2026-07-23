@@ -24,7 +24,7 @@ export default defineConfig({
     // Optional same-origin proxy; browser still uses VITE_CARE_API_URL when set.
     proxy: {
       "/api/v1/care": {
-        target: process.env.VITE_CARE_API_URL ?? "http://127.0.0.1:3100",
+        target: process.env.CARE_PROXY_TARGET ?? process.env.VITE_CARE_API_URL ?? "http://127.0.0.1:3100",
         changeOrigin: true,
       },
     },
