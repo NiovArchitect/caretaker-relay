@@ -149,8 +149,14 @@ export function TodayPage({
               )}
               {item.relayDoesNotKnow && (
                 <p className="attention-limit" role="status">
-                  <strong>Relay did not choose or invent a dose.</strong>{" "}
-                  {item.relayDoesNotKnow}
+                  {item.kind === "medication" ? (
+                    <>
+                      <strong>Relay did not choose or invent a dose.</strong>{" "}
+                      {item.relayDoesNotKnow}
+                    </>
+                  ) : (
+                    item.relayDoesNotKnow
+                  )}
                 </p>
               )}
               <div className="btn-row">
