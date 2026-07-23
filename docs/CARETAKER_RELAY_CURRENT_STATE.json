@@ -23,14 +23,14 @@
     "app": "2be3183f1845a48d3b8b3034be5c8f0a5e66591c",
     "foundation": "ccd887b240902bd7ad21c068cd11b60cfa878e85"
   },
-  "current_phase": "public_judge_environment_ready_recruitment_paused",
-  "current_gate": "PUBLIC_RESEARCH_ENVIRONMENT_READY_FOR_RECRUITMENT",
+  "current_phase": "caregiver_1_recruitment_active",
+  "current_gate": "CAREGIVER_1_RECRUITMENT_ACTIVE",
   "online_deployment_audit": "COMPLETED",
   "online_research_environment": "READY",
   "session1_status": "NOT_STARTED",
-  "session1_readiness": "ONLINE_ENV_READY_AWAITING_FOUNDER_RECRUITMENT_AUTH",
+  "session1_readiness": "RECRUITMENT_ACTIVE_AWAITING_FIRST_PARTICIPANT",
   "research_infrastructure": "READY",
-  "recruitment_status": "PAUSED",
+  "recruitment_status": "ACTIVE",
   "public_application_url": "https://care.niovlabs.com",
   "public_api_url": "https://caretaker-relay-care-api.onrender.com",
   "render_services": {
@@ -121,14 +121,18 @@
     "docs/ONLINE_READINESS_CURRENT_STATE.md"
   ],
   "do_not_do": [
-    "recruit_without_founder_authorization",
     "modify_otzar_or_original_foundation",
     "point_at_otzar_postgres",
     "print_or_commit_secrets",
     "claim_caregiver_validation",
-    "redesign_product_without_finding"
+    "redesign_product_without_finding",
+    "contact_participants_as_automation",
+    "advance_participant_state_without_real_event",
+    "put_identifying_participant_data_in_git",
+    "modify_product_during_session_1",
+    "claim_validated_from_one_session"
   ],
-  "next_authorized_action": "FOUNDER_MAY_AUTHORIZE_RECRUITMENT_OF_CAREGIVER_1",
+  "next_authorized_action": "FOUNDER_SENDS_RECRUITMENT_MESSAGE_TO_REAL_FAMILY_CAREGIVER",
   "cold_context_online_recovery": "READY",
   "updated_at": "2026-07-23",
   "public_research_environment": "READY",
@@ -147,5 +151,21 @@
     "track2_firewall": "PASS",
     "mobile_viewport": "PASS",
     "top_cta": "PASS"
-  }
+  },
+  "founder_recruitment_authorization": "YES",
+  "founder_recruitment_authorized_at": "2026-07-23",
+  "participant_pipeline": {
+    "identified": 0,
+    "invited": 0,
+    "interested": 0,
+    "screened": 0,
+    "qualified": 0,
+    "scheduled": 0,
+    "consented": 0,
+    "session_started": 0,
+    "session_completed": 0,
+    "synthesized": 0,
+    "retested": 0
+  },
+  "next_human_action": "FOUNDER_SENDS_RECRUITMENT_MESSAGE_TO_REAL_FAMILY_CAREGIVER"
 }

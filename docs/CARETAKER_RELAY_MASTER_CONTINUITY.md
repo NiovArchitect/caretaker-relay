@@ -264,8 +264,9 @@ Test product not participant · do not sell · do not explain failures away · r
 
 **Research infrastructure:** **READY** (founder operational decisions recorded 2026-07-22).  
 **Online research environment:** **READY** (public HTTPS app + Care API + isolated Postgres; public smoke PASS — see §14 and `ONLINE_READINESS_CURRENT_STATE.md`).  
-**Recruitment / Session 1 run:** **PAUSED / NOT STARTED** (0 recruited, 0 scheduled, 0 completed).  
-**Do not recruit** until founder explicitly authorizes Caregiver #1 outreach.
+**Recruitment:** **ACTIVE** (founder authorized Caregiver #1, 2026-07-23).  
+**Counts:** 0 invited · 0 interested · 0 screened · 0 qualified · 0 scheduled · 0 completed.  
+**Do not** automate contact; founder sends invitation. Session 1 not started until scheduled + consented.
 
 **Resolved founder decisions** — see `docs/research/FOUNDER_DECISIONS_SESSION_1.md`:
 
@@ -316,7 +317,7 @@ First: recover state from disk (including `ONLINE_READINESS_CURRENT_STATE.md`); 
 
 ```text
 ONLINE RESEARCH ENVIRONMENT: READY
-RECRUITMENT: PAUSED (await founder authorization)
+RECRUITMENT: ACTIVE (Caregiver #1) — 0 invited, 0 scheduled, 0 completed
 
 Public app (canonical): https://care.niovlabs.com
 Public app (Render fallback): https://caretaker-relay-web.onrender.com
@@ -332,8 +333,8 @@ Auth: CLI OAuth (~/.render/cli.yaml). Shell RENDER_API_KEY may be stale 401 — 
 Understand mode: fixture-backed (honest; not live remote LLM).
 Public smoke: PASS (auth isolation, multi-event, med uncertainty, confirm, correction, handoff, restart persistence).
 
-0. FOUNDER AUTHORIZES RECRUITMENT
-1. RECRUIT / SCREEN first family caregiver
+0. FOUNDER SENDS RECRUITMENT MESSAGE (authorized)
+1. SCREEN / QUALIFY first real family caregiver
 2. RUN Session 1 against ONLINE product URL
 3. CAPTURE real [CAREGIVER INPUT]
 4. SYNTHESIZE findings → only then product behavior changes

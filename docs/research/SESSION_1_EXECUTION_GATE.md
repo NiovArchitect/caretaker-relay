@@ -51,11 +51,15 @@
 
 | Layer | Status |
 | --- | --- |
-| RESEARCH INFRASTRUCTURE | **READY** (after founder-decision commit) |
+| RESEARCH INFRASTRUCTURE | **READY** |
+| ONLINE RESEARCH ENVIRONMENT | **READY** (`https://care.niovlabs.com`) |
+| FOUNDER RECRUITMENT AUTHORIZATION | **YES** (2026-07-23) |
+| RECRUITMENT STATUS | **ACTIVE** (Caregiver #1) |
+| IDENTIFIED / INVITED / INTERESTED / SCREENED / QUALIFIED | **0** (no real events yet) |
 | RECRUITED | **0** |
 | SCHEDULED | **0** |
 | COMPLETED | **0** |
-| SESSION 1 RUN | **NOT AUTHORIZED until founder authorizes recruitment and a participant is scheduled** |
+| SESSION 1 RUN | **NOT STARTED** — blocked until a real participant is scheduled + session authorized |
 
 ---
 

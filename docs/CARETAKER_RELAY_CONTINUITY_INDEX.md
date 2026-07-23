@@ -38,9 +38,11 @@ git rev-parse HEAD
 ## Current gate (summary)
 
 **ONLINE RESEARCH ENVIRONMENT: READY**  
-**Public app:** https://caretaker-relay-web.onrender.com  
-**Public API:** https://caretaker-relay-care-api.onrender.com  
-**Recruitment / Session 1:** **PAUSED** until founder authorizes Caregiver #1.  
+**Canonical app:** https://care.niovlabs.com  
+**Recruitment:** **ACTIVE** (Caregiver #1 authorized) — 0 invited / 0 scheduled / 0 completed  
+**Session 1:** NOT STARTED  
+**Product:** FROZEN during Session 1  
+**Do not** automate participant contact · **Do not** put identifying data in Git  
 **Do not touch Otzar Render resources** on the same workspace.
 
 Authoritative online detail: `docs/ONLINE_READINESS_CURRENT_STATE.md`
