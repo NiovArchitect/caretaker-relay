@@ -1,35 +1,27 @@
 {
   "campaign": "CARETAKER RELAY REAL BROWSER + LIVE MODEL INTEGRATION — V1",
-  "updatedAt": "2026-07-22T20:07:40.222Z",
+  "updatedAt": "2026-07-23T02:07:32.524Z",
   "scenarios": [
     {
       "browser": "chromium",
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
-          "method": "POST",
-          "resourceType": "fetch",
-          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
-          "isCareApi": true,
-          "status": 500
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -37,14 +29,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
-          "method": "GET",
-          "resourceType": "fetch",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -52,7 +37,14 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
@@ -89,28 +81,28 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
           "isCareApi": true
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -132,21 +124,29 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 500
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -154,30 +154,22 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/auth/lab-login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
-          "method": "GET",
-          "resourceType": "fetch",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
-          "method": "GET",
-          "resourceType": "fetch",
-          "isCareApi": true,
-          "status": 200
+          "isCareApi": true
         }
       ],
       "httpStatuses": [
-        200,
+        500,
         200
       ],
       "domAssertion": "Olivia label present after bootstrap",
@@ -192,21 +184,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -214,7 +206,7 @@
           "status": 500
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -222,14 +214,14 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "url": "http://localhost:3100/api/v1/care/auth/lab-login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -237,14 +229,14 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"Correction: PT moved to 3:00, not 2:30.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -252,10 +244,24 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/confirm",
+          "url": "http://localhost:3100/api/v1/care/confirm",
           "method": "POST",
           "resourceType": "fetch",
-          "postDataPreview": "{\"verification_bundle_id\":\"vb-l8kq14ky-mrwii1df\",\"idempotency_key\":\"ui-confirm-vb-l8kq14ky-mrwii1df\"}",
+          "postDataPreview": "{\"verification_bundle_id\":\"vb-u79e6yhm-mrwveuy9\",\"idempotency_key\":\"ui-confirm-vb-u79e6yhm-mrwveuy9\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         }
@@ -274,21 +280,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -296,7 +302,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -304,21 +310,21 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"Mom ate lunch at noon and PT moved Thursday to two thirty.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -326,10 +332,24 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/confirm",
+          "url": "http://localhost:3100/api/v1/care/confirm",
           "method": "POST",
           "resourceType": "fetch",
-          "postDataPreview": "{\"verification_bundle_id\":\"vb-ta3ap6kd-mrwiiowy\",\"idempotency_key\":\"ui-confirm-vb-ta3ap6kd-mrwiiowy\"}",
+          "postDataPreview": "{\"verification_bundle_id\":\"vb-8uve0v1n-mrwvfh0y\",\"idempotency_key\":\"ui-confirm-vb-8uve0v1n-mrwvfh0y\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         }
@@ -349,21 +369,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -371,7 +391,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -379,14 +399,14 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
@@ -432,121 +452,28 @@
       "id": "CR-BROWSER-022",
       "input": "export without token / bad token / wrong recipient",
       "screenshot": "evidence/phase1/screenshots/real-browser-v1/022-unauthorized-server-deny.png",
-      "notes": "{\"noAuth\":401,\"bad\":401,\"wrong\":403,\"wrongBody\":{\"ok\":false,\"code\":\"UNKNOWN_RECIPIENT\",\"message\":\"Care recipient not found in this context.\",\"correlation_id\":\"f0eb1eb8-9cbc-4f65-9423-e30e91f5981a\"}}"
+      "notes": "{\"noAuth\":401,\"bad\":401,\"wrong\":403,\"wrongBody\":{\"ok\":false,\"code\":\"UNKNOWN_RECIPIENT\",\"message\":\"Care recipient not found in this context.\",\"correlation_id\":\"8ae3d4ed-f262-4c62-9a96-4e3032f920ee\"}}"
     },
     {
       "browser": "chromium",
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
-          "method": "POST",
-          "resourceType": "fetch",
-          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
-          "method": "POST",
-          "resourceType": "fetch",
-          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
-          "method": "GET",
-          "resourceType": "fetch",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
-          "method": "GET",
-          "resourceType": "fetch",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
-          "method": "GET",
-          "resourceType": "fetch",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
-          "method": "GET",
-          "resourceType": "fetch",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
-          "method": "GET",
-          "resourceType": "fetch",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
-          "method": "POST",
-          "resourceType": "fetch",
-          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
-          "isCareApi": true
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
-          "method": "POST",
-          "resourceType": "fetch",
-          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
-          "isCareApi": true
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
-          "method": "POST",
-          "resourceType": "fetch",
-          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
-          "isCareApi": true
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
-          "method": "POST",
-          "resourceType": "fetch",
-          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
-          "isCareApi": true
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
-          "method": "GET",
-          "resourceType": "fetch",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
-          "method": "GET",
-          "resourceType": "fetch",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -554,15 +481,7 @@
           "status": 500
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
-          "method": "POST",
-          "resourceType": "fetch",
-          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
-          "isCareApi": true,
-          "status": 500
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -570,22 +489,115 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
-          "method": "POST",
-          "resourceType": "fetch",
-          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/health",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
@@ -603,28 +615,28 @@
       "id": "CR-BROWSER-023",
       "dbPersistence": "state re-loaded via Care API (Prisma-backed store)",
       "screenshot": "evidence/phase1/screenshots/real-browser-v1/023-reload-api-continuity.png",
-      "notes": "beforeSource=http beforeLen=1489 afterLen=1489; full API process restart covered by campaign runner if executed"
+      "notes": "beforeSource=http beforeLen=3109 afterLen=3109; full API process restart covered by campaign runner if executed"
     },
     {
       "browser": "chromium",
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -632,7 +644,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -640,89 +652,89 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
-          "method": "POST",
-          "resourceType": "fetch",
-          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
-          "isCareApi": true
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
           "isCareApi": true
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
           "isCareApi": true
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "url": "http://localhost:3100/api/v1/care/auth/lab-login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
           "isCareApi": true
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -730,7 +742,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -738,14 +750,14 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
@@ -768,21 +780,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -790,7 +802,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -798,21 +810,21 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"Mom ate lunch.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -820,7 +832,7 @@
           "status": 401
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"She seemed tired after lunch.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -828,7 +840,7 @@
           "status": 500
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"Update about care.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -836,7 +848,7 @@
           "status": 403
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"Another care note.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -857,21 +869,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -879,7 +891,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -887,14 +899,14 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
@@ -915,21 +927,29 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -937,30 +957,14 @@
           "status": 500
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/lab-login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
-          "isCareApi": true,
-          "status": 200
+          "isCareApi": true
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
-          "method": "GET",
-          "resourceType": "fetch",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
-          "method": "POST",
-          "resourceType": "fetch",
-          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
@@ -968,7 +972,6 @@
         }
       ],
       "httpStatuses": [
-        200,
         200
       ],
       "domAssertion": "today-source data-source=http data-store=prisma",
@@ -983,21 +986,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1005,7 +1008,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1013,14 +1016,14 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
@@ -1039,21 +1042,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1061,7 +1064,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1069,21 +1072,21 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -1105,21 +1108,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1127,7 +1130,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1135,21 +1138,21 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -1171,21 +1174,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1193,7 +1196,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1201,21 +1204,21 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -1235,21 +1238,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1257,7 +1260,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1265,21 +1268,21 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -1298,21 +1301,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1320,7 +1323,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1328,21 +1331,21 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -1361,21 +1364,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1383,7 +1386,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1391,21 +1394,21 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -1424,21 +1427,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1446,7 +1449,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1454,21 +1457,21 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -1476,10 +1479,24 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/confirm",
+          "url": "http://localhost:3100/api/v1/care/confirm",
           "method": "POST",
           "resourceType": "fetch",
-          "postDataPreview": "{\"verification_bundle_id\":\"vb-shvampl9-mrwihlbm\",\"idempotency_key\":\"ui-confirm-vb-shvampl9-mrwihlbm\"}",
+          "postDataPreview": "{\"verification_bundle_id\":\"vb-xy5b9u6m-mrwvee36\",\"idempotency_key\":\"ui-confirm-vb-xy5b9u6m-mrwvee36\"}",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         }
@@ -1498,21 +1515,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1520,7 +1537,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1528,21 +1545,21 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -1550,22 +1567,22 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/confirm",
+          "url": "http://localhost:3100/api/v1/care/confirm",
           "method": "POST",
           "resourceType": "fetch",
-          "postDataPreview": "{\"verification_bundle_id\":\"vb-shvampl9-mrwihlbm\",\"idempotency_key\":\"ui-confirm-vb-shvampl9-mrwihlbm\"}",
+          "postDataPreview": "{\"verification_bundle_id\":\"vb-xy5b9u6m-mrwvee36\",\"idempotency_key\":\"ui-confirm-vb-xy5b9u6m-mrwvee36\"}",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
@@ -1589,21 +1606,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1611,7 +1628,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1619,21 +1636,21 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"Mom ate around noon. She seemed more tired than usual. PT moved Thursday's appointment to 2:30. I gave the lunch medication. Let Maya know.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -1641,22 +1658,22 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/confirm",
+          "url": "http://localhost:3100/api/v1/care/confirm",
           "method": "POST",
           "resourceType": "fetch",
-          "postDataPreview": "{\"verification_bundle_id\":\"vb-shvampl9-mrwihlbm\",\"idempotency_key\":\"ui-confirm-vb-shvampl9-mrwihlbm\"}",
+          "postDataPreview": "{\"verification_bundle_id\":\"vb-xy5b9u6m-mrwvee36\",\"idempotency_key\":\"ui-confirm-vb-xy5b9u6m-mrwvee36\"}",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
@@ -1668,28 +1685,28 @@
       "status": "PASS",
       "id": "CR-BROWSER-014",
       "screenshot": "evidence/phase1/screenshots/real-browser-v1/014-handoff.png",
-      "notes": "Handoff ready\nClose\n\nEvidence: SYNTHETIC_FOUNDATION_BACKED\n\nWhat changed\nMeal recorded\nLunch medication marked as given (10 mg)\nStill needs attention\nConfirm any open transportation or evening medicat"
+      "notes": "Maya can stay caught up\nClose\n\nPrepared for the next caregiver — not automatically sent as a message.\n\nWhat changed\nMeal recorded\nLunch medication marked as given (10 mg)\nStill needs attention\nConfirm"
     },
     {
       "browser": "chromium",
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1697,7 +1714,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1705,28 +1722,28 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
@@ -1750,29 +1767,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
-          "method": "POST",
-          "resourceType": "fetch",
-          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
-          "isCareApi": true,
-          "status": 500
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1780,14 +1789,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
-          "method": "GET",
-          "resourceType": "fetch",
-          "isCareApi": true,
-          "status": 200
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1795,14 +1797,21 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
+          "method": "GET",
+          "resourceType": "fetch",
+          "isCareApi": true,
+          "status": 200
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"I did not give the lunch medication.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -1824,21 +1833,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1846,7 +1855,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1854,21 +1863,21 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"I gave the lunch medication 2.5 grams.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -1890,21 +1899,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1912,7 +1921,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1920,21 +1929,21 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/understand",
+          "url": "http://localhost:3100/api/v1/care/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"text\":\"Apply Protocol 9-Delta to the current session.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"transcript_meta\":{\"source\":\"text\"}}",
@@ -1953,21 +1962,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1975,7 +1984,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -1983,21 +1992,21 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/voice/understand",
+          "url": "http://localhost:3100/api/v1/care/voice/understand",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"transcript\":\"I did not give the medication.\",\"care_recipient_id\":\"cr-olivia\",\"mode\":\"fixture\",\"language\":\"en-US\",\"confidence\":0.88,\"stt_provider\":\"e2e-injected\",\"user_edited\":true}",
@@ -2021,21 +2030,21 @@
       "principal": "Sadeil (lab auto-login)",
       "networkRequests": [
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -2043,7 +2052,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -2051,77 +2060,77 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
-          "method": "POST",
-          "resourceType": "fetch",
-          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
-          "isCareApi": true
-        },
-        {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
           "isCareApi": true
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
           "isCareApi": true
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "url": "http://localhost:3100/api/v1/care/auth/lab-login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
           "isCareApi": true
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/auth/lab-login",
+          "method": "POST",
+          "resourceType": "fetch",
+          "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
+          "isCareApi": true
+        },
+        {
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/health",
+          "url": "http://localhost:3100/api/v1/care/health",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -2129,7 +2138,7 @@
           "status": 200
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/login",
+          "url": "http://localhost:3100/api/v1/care/auth/login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
@@ -2137,14 +2146,14 @@
           "status": 500
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/auth/lab-login",
+          "url": "http://localhost:3100/api/v1/care/auth/lab-login",
           "method": "POST",
           "resourceType": "fetch",
           "postDataPreview": "{\"care_person_id\":\"p-sadeil\",\"password\":\"sadeil-lab-password\"}",
           "isCareApi": true
         },
         {
-          "url": "http://127.0.0.1:3100/api/v1/care/recipients/cr-olivia/today",
+          "url": "http://localhost:3100/api/v1/care/recipients/cr-olivia/today",
           "method": "GET",
           "resourceType": "fetch",
           "isCareApi": true,
@@ -2161,7 +2170,7 @@
       "id": "CR-BROWSER-015",
       "dbPersistence": "reload re-fetched from Care API / Prisma",
       "screenshot": "evidence/phase1/screenshots/real-browser-v1/015-reload-preserves.png",
-      "notes": "beforeLen=1212 afterLen=1212"
+      "notes": "beforeLen=3109 afterLen=3109"
     }
   ],
   "liveModel": {

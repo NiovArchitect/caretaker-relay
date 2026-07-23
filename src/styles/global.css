@@ -94,6 +94,78 @@ button {
   border: 1px solid var(--cr-border);
 }
 
+/* Screen-reader / E2E-only markers — not shown in judge path */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.attention-section .attention-card {
+  background: var(--cr-white);
+  border: 1px solid var(--cr-border);
+  border-radius: var(--cr-radius);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+
+.attention-card-med {
+  border-color: #e8b4a8;
+  background: linear-gradient(180deg, #fff8f6, var(--cr-white));
+}
+
+.attention-body {
+  margin: 6px 0;
+}
+
+.attention-why {
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+
+.attention-limit {
+  margin: 8px 0 4px;
+  font-size: 0.9rem;
+  color: var(--cr-teal-deep);
+}
+
+.verify-kind {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.verify-meta {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0;
+  font-size: 0.85rem;
+}
+
+.verify-meta dt {
+  font-weight: 600;
+  color: var(--cr-slate-muted);
+  display: inline;
+  margin-right: 6px;
+}
+
+.verify-meta dd {
+  display: inline;
+  margin: 0;
+}
+
+.verify-meta > div {
+  margin: 0;
+}
+
 .brand {
   display: flex;
   align-items: center;

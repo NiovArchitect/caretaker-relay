@@ -207,6 +207,31 @@ export async function careConfirm(
   });
 }
 
+export async function careCorrect(
+  token: string,
+  targetEventId: string,
+  correctedValue: string,
+  careRecipientId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    kind: string;
+    message?: string;
+    persisted?: unknown;
+    evidence_mode?: string;
+  }>("/api/v1/care/corrections", {
+    method: "POST",
+    token,
+    body: {
+      target_event_id: targetEventId,
+      corrected_value: correctedValue,
+      care_recipient_id: careRecipientId,
+    },
+    baseUrl,
+  });
+}
+
 export async function careHandoffs(
   token: string,
   careRecipientId: string,

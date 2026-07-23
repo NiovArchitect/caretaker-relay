@@ -3,11 +3,13 @@ import type { NavTab, RelayMessage, VerificationBundle } from "./domain/types";
 import {
   proposeCareUpdate,
   confirmCareUpdateAsync,
-  getEvidenceLabel,
+  applyCareCorrection,
+  answerCareQuestion,
   getLatestHandoff,
-  DEMO_UTTERANCE,
+  JUDGE_DEMO_UTTERANCE,
   careRecipient,
   type TranscriptMeta,
+  type TodayAttentionItem,
 } from "./foundation/careClient";
 import { today } from "./scenario/olivia";
 import { BottomNav } from "./components/BottomNav";
@@ -48,18 +50,20 @@ export function App() {
   const [showHandoff, setShowHandoff] = useState(false);
   const [busy, setBusy] = useState(false);
   const [lastError, setLastError] = useState<string | null>(null);
+  const [correcting, setCorrecting] = useState(false);
+  /** Persisted event ids from last confirm — used for real correction lineage. */
+  const [lastEventIds, setLastEventIds] = useState<string[]>([]);
   const [messages, setMessages] = useState<RelayMessage[]>([
     {
       id: "m0",
       role: "relay",
       at: nowLabel(),
-      text: "I'm here. Tell me what happened with Olivia, or ask what still needs to happen.",
+      text: `I'm here for ${careRecipient.displayName}'s day. Tell me what happened, or ask what still needs attention.`,
     },
   ]);
   const [relayHandled, setRelayHandled] = useState(today.relayHandled);
   const [voiceMeta, setVoiceMeta] = useState<TranscriptMeta | undefined>();
   const [todayRefresh, setTodayRefresh] = useState(0);
-  const evidence = getEvidenceLabel();
 
   useEffect(() => {
     window.__crE2E = {
@@ -114,7 +118,61 @@ export function App() {
     setBusy(true);
 
     try {
-      // Same pipeline for voice (edited transcript) and text
+      // Correction path after a confirmed event exists (domain supersession).
+      if (correcting && lastEventIds.length > 0) {
+        const targetId = lastEventIds[0]!;
+        const result = await applyCareCorrection(targetId, trimmed);
+        setCorrecting(false);
+        if (result.kind === "persisted") {
+          if (result.persisted?.eventIds?.length) {
+            setLastEventIds(result.persisted.eventIds);
+          }
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: `r-${Date.now()}`,
+              role: "relay",
+              text: "Correction saved. The previous version stays in the record so nothing is silently erased.",
+              at: nowLabel(),
+            },
+          ]);
+          setTodayRefresh((n) => n + 1);
+          setShowHandoff(true);
+          setTab("today");
+        } else {
+          // Fall through: re-run understand on the corrected statement
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: `r-${Date.now()}`,
+              role: "relay",
+              text: "I'll treat that as a new care update and ask you to verify it.",
+              at: nowLabel(),
+            },
+          ]);
+        }
+        if (result.kind === "persisted") return;
+      } else if (correcting) {
+        // Pre-confirm correct: treat as a fresh natural update (no silent overwrite).
+        setCorrecting(false);
+      }
+
+      // Care-context questions first (no fake chatbot)
+      const answer = await answerCareQuestion(trimmed);
+      if (answer) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `r-${Date.now()}`,
+            role: "relay",
+            text: answer,
+            at: nowLabel(),
+          },
+        ]);
+        setTab("relay");
+        return;
+      }
+
       const result = await proposeCareUpdate(trimmed, undefined, voiceMeta);
       if (result.kind === "access_denied") {
         setBundle(null);
@@ -151,14 +209,16 @@ export function App() {
 
       if (result.kind === "verify" && result.bundle) {
         setBundle(result.bundle);
-        const lines = result.bundle.items.map((i) => `• ${i.label}`).join("\n");
-        const modeNote = `Evidence: ${result.evidenceMode}`;
+        const n = result.bundle.items.length;
+        const lines = result.bundle.items
+          .map((i) => `• ${i.label}`)
+          .join("\n");
         setMessages((prev) => [
           ...prev,
           {
             id: `r-${Date.now()}`,
             role: "relay",
-            text: `For ${careRecipient.displayName}\n\nI got this:\n${lines}\n\nPlease confirm or correct before I relay.\n(${modeNote})`,
+            text: `For ${careRecipient.displayName}\n\nI found ${n} thing${n === 1 ? "" : "s"} in that update:\n${lines}\n\nPlease confirm or correct the consequential parts before I save them.`,
             at: nowLabel(),
           },
         ]);
@@ -181,6 +241,7 @@ export function App() {
       setTab("relay");
     } finally {
       setBusy(false);
+      setVoiceMeta(undefined);
     }
   }
 
@@ -193,11 +254,17 @@ export function App() {
 
       if (result.kind === "persisted") {
         setConfirmed(true);
+        if (result.persisted?.eventIds?.length) {
+          setLastEventIds(result.persisted.eventIds);
+        }
         const updates = bundle.understood.communicationRequests;
         const nextHandled = [
-          ...updates.map((u) => u.replace("Update ready for ", "Updated ")),
-          "Saved today's care notes (Foundation care runtime)",
+          ...updates.map((u) => u.replace("Update ready for ", "Update prepared for ")),
           ...bundle.understood.appointmentChanges.map((a) => `Schedule: ${a}`),
+          ...bundle.items
+            .filter((i) => !i.discrepancy)
+            .slice(0, 3)
+            .map((i) => i.label),
         ];
         setRelayHandled((prev) => [...nextHandled, ...prev].slice(0, 8));
         setMessages((prev) => [
@@ -205,14 +272,15 @@ export function App() {
           {
             id: `s-${Date.now()}`,
             role: "system",
-            text: `${result.message ?? "Confirmed."} Events: ${result.persisted?.eventIds.length ?? 0}. Handoff: ${result.persisted?.handoffId ?? "n/a"}. Mode: ${result.evidenceMode}.`,
+            text: "Saved. Olivia's day and Maya's continuity picture are updated.",
             at: nowLabel(),
           },
         ]);
+        setBundle(null);
         setShowHandoff(true);
         setTodayRefresh((n) => n + 1);
+        setTab("today");
       } else {
-        // Fail closed: do not mark confirmed / success on non-persist
         const msg =
           result.message ??
           "Confirmation did not persist. Care state was not updated.";
@@ -247,10 +315,35 @@ export function App() {
     }
   }
 
+  function startCorrection() {
+    setCorrecting(true);
+    setBundle(null);
+    setConfirmed(false);
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `s-${Date.now()}`,
+        role: "system",
+        text:
+          lastEventIds.length > 0
+            ? "Tell me the corrected care fact in plain language. The previous version stays in the record."
+            : "Tell me what should be different. I'll re-read your update and ask you to verify again — nothing was saved as care truth yet.",
+        at: nowLabel(),
+      },
+    ]);
+    setTab("relay");
+    setDraft("");
+  }
+
   function loadDemo() {
-    setDraft(DEMO_UTTERANCE);
+    setDraft(JUDGE_DEMO_UTTERANCE);
     setVoiceMeta(undefined);
     setTab("relay");
+  }
+
+  function onReviewAttention(_item: TodayAttentionItem) {
+    setTab("relay");
+    setDraft(JUDGE_DEMO_UTTERANCE);
   }
 
   const liveHandoff = getLatestHandoff();
@@ -263,14 +356,6 @@ export function App() {
           <span>Caretaker Relay</span>
         </div>
         <div className="header-right">
-          <span
-            className="evidence-badge"
-            data-testid="evidence-badge"
-            title="How this session is backed"
-            aria-label={evidence.label}
-          >
-            {evidence.mode === "LIVE_FOUNDATION_BACKED" ? "LIVE" : "SYNTHETIC"}
-          </span>
           {lastError && (
             <span
               className="muted"
@@ -300,6 +385,7 @@ export function App() {
             onOpenHandoff={() => setShowHandoff(true)}
             onLoadDemo={loadDemo}
             refreshKey={todayRefresh}
+            onReviewAttention={onReviewAttention}
           />
         )}
         {tab === "care" && <CarePage />}
@@ -307,7 +393,8 @@ export function App() {
         {tab === "relay" && (
           <RelayPage
             messages={messages}
-            onUseDemo={() => setDraft(DEMO_UTTERANCE)}
+            onUseDemo={() => setDraft(JUDGE_DEMO_UTTERANCE)}
+            correcting={correcting}
           />
         )}
 
@@ -315,18 +402,7 @@ export function App() {
           <VerifyPanel
             bundle={bundle}
             onConfirm={() => void confirmLooksRight()}
-            onCorrect={() => {
-              setMessages((prev) => [
-                ...prev,
-                {
-                  id: `s-${Date.now()}`,
-                  role: "system",
-                  text: "Tell me what to correct. Previous notes stay in the record (foundation correction path).",
-                  at: nowLabel(),
-                },
-              ]);
-              setTab("relay");
-            }}
+            onCorrect={startCorrection}
           />
         )}
 
@@ -334,6 +410,7 @@ export function App() {
           <HandoffPanel
             onClose={() => setShowHandoff(false)}
             liveHandoff={liveHandoff}
+            status="prepared"
           />
         )}
 
@@ -347,7 +424,11 @@ export function App() {
               onSubmit={() => void submitText(draft)}
               onVoiceMeta={setVoiceMeta}
               placeholder={
-                busy ? "Relay is understanding…" : "Tell Relay what happened…"
+                busy
+                  ? "Relay is understanding…"
+                  : correcting
+                    ? "Type the correction…"
+                    : "Tell Relay what happened…"
               }
             />
           </div>
