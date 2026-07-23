@@ -16,6 +16,8 @@
 | 10 | `docs/research/SESSION_1_EXECUTION_GATE.md` | Go/no-go checklist for Session 1 |
 | 11 | `docs/research/FOUNDER_DECISIONS_SESSION_1.md` | Resolved founder operational decisions |
 | 12 | `docs/research/SESSION_1_READINESS_GATE.md` | Infrastructure vs recruitment status |
+| 13 | `docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md` | Internet product architecture (not Mac-local) |
+| 14 | `docs/ONLINE_READINESS_MATRIX.md` | Online component gap matrix |
 
 ## Quick Git checks
 

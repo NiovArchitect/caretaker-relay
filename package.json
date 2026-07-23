@@ -13,11 +13,12 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test:e2e": "playwright test --config=playwright.config.ts",
     "test:browser-campaign": "npx tsx scripts/run-real-browser-campaign.mts",
-    "probe:live-model": "npx tsx scripts/live-model-probe.mts"
+    "probe:live-model": "npx tsx scripts/live-model-probe.mts",
+    "vendor:care-packages": "bash scripts/vendor-care-packages.sh"
   },
   "dependencies": {
-    "@caretaker-relay/care-domain": "file:../caretaker-relay-foundation/packages/care-domain",
-    "@caretaker-relay/product-identity": "file:../caretaker-relay-foundation/packages/product-identity",
+    "@caretaker-relay/care-domain": "file:./vendor/care-domain",
+    "@caretaker-relay/product-identity": "file:./vendor/product-identity",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

@@ -6,13 +6,15 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      // Prefer vendored packages (standalone Render/static deploy). Local monorepo
+      // re-sync via `npm run vendor:care-packages`.
       "@caretaker-relay/care-domain": resolve(
         __dirname,
-        "../caretaker-relay-foundation/packages/care-domain/src/index.ts",
+        "vendor/care-domain/src/index.ts",
       ),
       "@caretaker-relay/product-identity": resolve(
         __dirname,
-        "../caretaker-relay-foundation/packages/product-identity/src/index.ts",
+        "vendor/product-identity/src/index.ts",
       ),
     },
   },

@@ -309,15 +309,20 @@ First: recover state and report gate; wait for founder instruction.
 ## 14. Current next action
 
 ```text
-1. RESOLVE SESSION 1 FOUNDER DECISIONS
-2. RECRUIT a real family caregiver (human)
-3. RUN formative Session 1 against FROZEN product build
+0. ONLINE ENVIRONMENT (CURRENT GATE)
+   - Research admin path ~/CaretakerRelayResearch is NOT the product
+   - Deploy Care API + Web via Render blueprints + isolated Postgres
+   - Founder must supply valid Render credentials + DATABASE_URL (agent: Render API 401)
+   - Prove public HTTPS Judge Loop smoke before recruitment
+
+1. Then: FOUNDER AUTHORIZES RECRUITMENT
+2. RECRUIT / SCREEN first family caregiver
+3. RUN Session 1 against ONLINE product URL (same semantics as Judge Loop freeze)
 4. CAPTURE real [CAREGIVER INPUT]
-5. SYNTHESIZE findings
-6. ONLY THEN consider product changes with FINDING → DECISION → CHANGE → RETEST
+5. SYNTHESIZE findings → only then product behavior changes
 ```
 
-**Not** another engineering campaign.
+**Docs:** `docs/ONLINE_DEPLOYMENT_ARCHITECTURE.md`, `docs/ONLINE_READINESS_MATRIX.md`
 
 ---
 

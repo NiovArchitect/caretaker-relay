@@ -27,11 +27,27 @@
     "foundation": "9182c7511c1ffae9dc79082297ae92d7a5079b1a"
   },
   "product_frozen": true,
-  "current_phase": "formative_caregiver_research_ready_to_recruit",
-  "current_gate": "RESEARCH_INFRASTRUCTURE_READY_AWAITING_FOUNDER_AUTHORIZATION_TO_RECRUIT",
+  "research_product_build_shas": {
+    "app": "ff95159d8803feaca0e6e245d5a77ee28ee40c99",
+    "foundation": "9182c7511c1ffae9dc79082297ae92d7a5079b1a",
+    "note": "Judge Loop semantics freeze for research. Online deploy may add deployment-layer commits on top without redesigning caregiver loop."
+  },
+  "current_phase": "online_deployment_scaffolding_before_caregiver_recruitment",
+  "current_gate": "ONLINE_RESEARCH_ENVIRONMENT_BLOCKED_FOUNDER_RENDER_DB_SECRETS",
   "session1_status": "NOT_STARTED",
-  "session1_readiness": "INFRASTRUCTURE_READY_RECRUITMENT_NOT_STARTED",
+  "session1_readiness": "INFRASTRUCTURE_READY_RECRUITMENT_BLOCKED_UNTIL_ONLINE_ENV",
   "research_infrastructure": "READY",
+  "online_research_environment": "BLOCKED",
+  "public_application_url": null,
+  "public_api_url": null,
+  "deployment_notes": {
+    "private_research_path_not_product": "/Users/genghishameha/CaretakerRelayResearch",
+    "render_api": "key_present_but_401_unauthorized",
+    "render_cli": "not_installed",
+    "care_api_blueprint": "caretaker-relay-foundation/render.caretaker-care.yaml",
+    "web_blueprint": "caretaker-relay/render.yaml",
+    "recommended_hostnames": ["care.niovlabs.com", "relay.niovlabs.com"]
+  },
   "recruited_count": 0,
   "scheduled_count": 0,
   "completed_count": 0,
@@ -104,11 +120,15 @@
     "convert_lab_result_to_validated"
   ],
   "next_human_decisions": [
-    "authorize_recruitment_outreach",
-    "confirm_institutional_irb_if_applicable",
-    "recruit_screen_schedule_caregiver_1"
+    "provision_isolated_caretaker_postgres",
+    "apply_render_care_api_and_web_blueprints_with_valid_credentials",
+    "set_cors_and_vite_public_urls",
+    "optional_custom_domain_dns",
+    "run_public_judge_loop_smoke",
+    "then_authorize_recruitment"
   ],
-  "next_authorized_action": "RECRUIT_SCREEN_FIRST_REAL_FAMILY_CAREGIVER_FOR_FORMATIVE_SESSION_1_WHEN_FOUNDER_AUTHORIZES",
+  "next_authorized_action": "FOUNDER_APPLY_RENDER_DB_AND_DEPLOY_SECRETS_THEN_PUBLIC_SMOKE_BEFORE_RECRUITMENT",
   "ia": ["today", "care", "circle", "relay"],
-  "updated_at": "2026-07-22"
+  "updated_at": "2026-07-23"
 }
+
