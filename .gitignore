@@ -9,3 +9,6 @@ coverage
 test-results
 *.tsbuildinfo
 !.env.production.example
+
+# Local MedixWeb full-res reference PNGs (download via docs/design/medixweb-refs/README.md)
+docs/design/medixweb-refs/*.png

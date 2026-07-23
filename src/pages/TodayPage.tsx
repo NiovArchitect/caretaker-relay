@@ -74,17 +74,32 @@ export function TodayPage({
 
   return (
     <>
-      <div className="greeting">
-        <h1 data-testid="today-greeting">
-          {today.greeting}, {session.displayName}
-        </h1>
-        <p className="for-person">
-          Here&apos;s what matters for{" "}
+      {/* MedixWeb-style dominant hero: one context, not 12 equal cards */}
+      <section className="today-hero" aria-label="Care context for today">
+        <div className="today-hero-kicker">Today · care without re-explaining</div>
+        <h1 data-testid="today-greeting" className="today-hero-recipient">
+          Caring for{" "}
           <span data-testid="care-recipient-label">
             {today.careRecipient.displayName}
-          </span>{" "}
-          today.
-        </p>
+          </span>
+        </h1>
+        <div className="today-hero-caregiver">
+          <span>
+            Current caregiver{" "}
+            <strong data-testid="today-caregiver-name">{session.displayName}</strong>
+          </span>
+          <span className="badge badge-teal">{session.roleLabel}</span>
+        </div>
+        <div className="today-hero-glass-row">
+          <div className="today-hero-glass">
+            <div className="label">What this is</div>
+            <div className="value">Home &amp; community care picture</div>
+          </div>
+          <div className="today-hero-glass">
+            <div className="label">Relay role</div>
+            <div className="value">Organizes · holds uncertainty · asks you</div>
+          </div>
+        </div>
         {proj && (
           <span
             data-testid="today-source"
@@ -112,7 +127,7 @@ export function TodayPage({
             Review latest handoff
           </button>
         </div>
-      </div>
+      </section>
 
       <section
         className="section section-hero surface-verify"
@@ -189,15 +204,9 @@ export function TodayPage({
         </div>
       </section>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-          gap: 14,
-        }}
-      >
+      <div className="pair-grid">
         <section className="section surface-known" aria-labelledby="handled">
-          <h2 id="handled">Already handled</h2>
+          <h2 id="handled">What Relay handled</h2>
           <ul className="list-plain" data-testid="already-handled-list">
             {handled.length === 0 ? (
               <li className="muted">Nothing listed yet</li>
@@ -208,7 +217,7 @@ export function TodayPage({
         </section>
 
         <section className="section surface-known" aria-labelledby="next">
-          <h2 id="next">What&apos;s next</h2>
+          <h2 id="next">What happens next</h2>
           <ul className="list-plain" data-testid="next-list">
             {next.length === 0 ? (
               <li className="muted">Nothing listed yet</li>

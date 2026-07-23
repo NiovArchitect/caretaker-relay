@@ -43,8 +43,14 @@ export function PeoplePage() {
       return;
     }
     setInviteToken(res.invitation.token);
+    const inviteeLabel =
+      inviteeId === "p-maya"
+        ? "Maya Bennett"
+        : inviteeId === "p-walter"
+          ? "Daniel Kim"
+          : "Invitee";
     setInviteMsg(
-      `Invitation created for ${res.invitation.invitee_care_person_id}. Token ready for invitee to accept after their own sign-in.`,
+      `Invitation created for ${inviteeLabel}. Token ready for them to accept after their own sign-in.`,
     );
     reload();
   }
@@ -67,13 +73,14 @@ export function PeoplePage() {
       <div className="greeting">
         <h1>People</h1>
         <p className="for-person">
-          Who is authorized for {careRecipient.displayName}
+          Who is helping with {careRecipient.displayName}&apos;s care
         </p>
         <p className="muted" style={{ marginTop: 8, maxWidth: 560 }}>
-          Membership from the care space access model. Signed in as{" "}
-          <strong>{session.displayName}</strong>.
+          Human-first circle · names and roles only. Signed in as{" "}
+          <strong>{session.displayName}</strong>
+          {session.roleLabel ? ` · ${session.roleLabel}` : ""}.
         </p>
-        <p className="muted" data-testid="people-source" style={{ fontSize: "0.8rem" }}>
+        <p className="muted sr-only" data-testid="people-source">
           Source: {source || "…"}
         </p>
       </div>
@@ -131,15 +138,15 @@ export function PeoplePage() {
           accept → membership. No fake Invite button.
         </p>
         <label className="muted" style={{ display: "block", marginTop: 8 }}>
-          Invitee principal id
+          Invitee
           <select
             data-testid="invite-person"
             value={inviteeId}
             onChange={(e) => setInviteeId(e.target.value)}
-            style={{ display: "block", width: "100%", marginTop: 4, minHeight: 36 }}
+            style={{ display: "block", width: "100%", marginTop: 4, minHeight: 48 }}
           >
-            <option value="p-maya">p-maya · Maya Bennett</option>
-            <option value="p-walter">p-walter · Daniel Kim</option>
+            <option value="p-maya">Maya Bennett · Family / friend caregiver</option>
+            <option value="p-walter">Daniel Kim · Professional caregiver</option>
           </select>
         </label>
         <div className="btn-row" style={{ marginTop: 10 }}>

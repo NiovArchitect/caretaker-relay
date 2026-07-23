@@ -68,25 +68,27 @@ export function LoginGate({
   }
 
   return (
-    <div className="app-shell" data-testid="login-gate" style={{ display: "grid", placeItems: "center", minHeight: "100vh", padding: 24 }}>
+    <div className="app-shell" data-testid="login-gate">
       <form
         onSubmit={(ev) => void submit(ev)}
-        className="section surface-known"
-        style={{ maxWidth: 420, width: "100%" }}
+        className="login-card"
         aria-label="Sign in"
       >
-        <h1 style={{ marginTop: 0 }}>Caretaker Relay</h1>
+        <div className="brand" style={{ marginBottom: 12 }}>
+          <span className="brand-mark" aria-hidden />
+          <span>Caretaker Relay</span>
+        </div>
+        <h1>Sign in</h1>
         <p className="muted">
           Sign in as an authorized caregiver. Identity is established by the
           care API — not by client-side switching.
         </p>
-        <label className="muted" style={{ display: "block", marginTop: 12 }}>
+        <label>
           Principal
           <select
             data-testid="login-principal"
             value={selected}
             onChange={(e) => setSelected(e.target.value)}
-            style={{ display: "block", width: "100%", marginTop: 6, minHeight: 40 }}
           >
             {principals.map((p) => (
               <option key={p.care_person_id} value={p.care_person_id}>
@@ -95,14 +97,13 @@ export function LoginGate({
             ))}
           </select>
         </label>
-        <label className="muted" style={{ display: "block", marginTop: 12 }}>
+        <label>
           Password
           <input
             data-testid="login-password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ display: "block", width: "100%", marginTop: 6, minHeight: 40 }}
             autoComplete="current-password"
           />
         </label>
@@ -111,7 +112,7 @@ export function LoginGate({
             {error}
           </p>
         )}
-        <div className="btn-row" style={{ marginTop: 16 }}>
+        <div className="btn-row" style={{ marginTop: 18 }}>
           <button
             type="submit"
             className="primary-btn"
@@ -121,22 +122,21 @@ export function LoginGate({
             {busy ? "Signing in…" : "Sign in"}
           </button>
         </div>
-        <p className="muted" style={{ fontSize: "0.78rem", marginTop: 12 }}>
+        <p className="muted" style={{ fontSize: "0.85rem", marginTop: 14 }}>
           Synthetic lab household for evaluation. Not production identity
           federation.
         </p>
-        <label className="muted" style={{ display: "block", marginTop: 16 }}>
+        <label>
           Invitation token (optional — paste after invite)
           <input
             data-testid="login-invite-token"
             value={inviteToken}
             onChange={(e) => setInviteToken(e.target.value)}
             placeholder="Accept after sign-in via People"
-            style={{ display: "block", width: "100%", marginTop: 6, minHeight: 36 }}
           />
         </label>
         {inviteToken.trim() && (
-          <p className="muted" style={{ fontSize: "0.75rem" }}>
+          <p className="muted" style={{ fontSize: "0.82rem" }}>
             After sign-in as the invitee, open People → Accept invitation.
           </p>
         )}
