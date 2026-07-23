@@ -87,11 +87,29 @@
   "render_api_key_shell": "stale_401_if_set_unset_for_cli",
   "custom_domain": {
     "hostname": "care.niovlabs.com",
-    "render_status": "created_unverified",
-    "dns_status": "PENDING_CNAME_AT_GODADDY_DOMAINCONTROL",
+    "render_service": "caretaker-relay-web",
+    "render_service_id": "srv-d9h0l2n41pts73dksrmg",
+    "render_custom_domain_id": "cdm-d9h1233eo5us73d1jqrg",
+    "render_status": "unverified",
+    "dns_provider": "godaddy_domaincontrol",
+    "dns_nameservers": [
+      "ns33.domaincontrol.com",
+      "ns34.domaincontrol.com"
+    ],
+    "existing_record_for_hostname": "NONE",
+    "safe_to_create": true,
+    "required_record": {
+      "type": "CNAME",
+      "name_host": "care",
+      "value_target": "caretaker-relay-web.onrender.com",
+      "ttl": "1 Hour / default (GoDaddy)"
+    },
+    "dns_status": "PENDING_FOUNDER_OR_GODADDY_API",
     "https_status": "PENDING_DNS",
-    "cname_target": "caretaker-relay-web.onrender.com",
-    "note": "Do not overwrite existing DNS. Leave onrender fallback."
+    "canonical_until_dns": "https://caretaker-relay-web.onrender.com",
+    "agent_cannot_write_godaddy": true,
+    "reason": "No GODADDY_API_KEY/SECRET in environment; browser session cookies present but not a safe write path without brittle automation",
+    "updated_at": "2026-07-23T13:18Z"
   },
   "recruited_count": 0,
   "scheduled_count": 0,
@@ -116,7 +134,7 @@
     "claim_caregiver_validation",
     "redesign_product_without_finding"
   ],
-  "next_authorized_action": "FOUNDER_MAY_AUTHORIZE_RECRUITMENT_OF_CAREGIVER_1",
+  "next_authorized_action": "FOUNDER_MAY_AUTHORIZE_RECRUITMENT_OR_ADD_CARE_CNAME",
   "cold_context_online_recovery": "READY",
   "updated_at": "2026-07-23",
   "public_research_environment": "READY",

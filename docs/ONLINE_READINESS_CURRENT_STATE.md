@@ -159,3 +159,23 @@ Playwright against live Render URL (not localhost):
 Entry doc: `docs/PUBLIC_JUDGE_AND_CAREGIVER_ENTRY.md`
 
 Evidence honesty: CAREGIVER INPUT = NONE · VALIDATED = NONE
+
+## Custom domain DNS finish (2026-07-23)
+
+**Hostname prepared in Render:** `care.niovlabs.com`  
+**Render verification:** `unverified` (awaiting DNS)  
+**Existing DNS for hostname:** NONE (safe to create)  
+**DNS provider:** GoDaddy Domain Control (`ns33/ns34.domaincontrol.com`)  
+**Agent GoDaddy write access:** NOT available (no API key; no safe non-brittle browser DNS write)
+
+| Field | Value |
+| --- | --- |
+| Type | CNAME |
+| Name/Host | `care` |
+| Value/Target | `caretaker-relay-web.onrender.com` |
+| TTL | 1 Hour / GoDaddy default |
+
+**Do not change** MX/SPF/DKIM/nameservers/other hosts.  
+**Research/judge on Render URL:** still READY (domain not a research blocker).  
+**Recruitment:** PAUSED.
+
