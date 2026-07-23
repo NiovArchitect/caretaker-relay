@@ -15,16 +15,16 @@
   ],
   "branch": "checkpoint/caretaker-relay-track1-2026-07-22",
   "product_build_shas": {
-    "app": "9b598df58e33359cbe3d12ca91a5cfe05bdb1194",
+    "app": "f97ad857e2f02af879866ffd9b8b75e11b423d9e",
     "foundation": "8f4935e9e2a929793f4d33fb7048486e8d82ac24"
   },
   "product_frozen": false,
   "deploy_shas": {
-    "app": "9b598df58e33359cbe3d12ca91a5cfe05bdb1194",
+    "app": "f97ad857e2f02af879866ffd9b8b75e11b423d9e",
     "foundation": "8f4935e9e2a929793f4d33fb7048486e8d82ac24"
   },
-  "current_phase": "closure_public_gates_openai_quota_external",
-  "current_gate": "PUBLIC_SUBSTRATE_PASS_OPENAI_QUOTA_BLOCKS_LIVE_COMPLETIONS",
+  "current_phase": "premium_visual_reconstruction_v2_public",
+  "current_gate": "VISUAL_V2_PUBLIC_OPENAI_QUOTA_EXTERNAL",
   "online_deployment_audit": "COMPLETED",
   "online_research_environment": "READY",
   "session1_status": "NOT_STARTED",
