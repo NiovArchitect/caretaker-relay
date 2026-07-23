@@ -16,7 +16,7 @@ export function SideNav({
 }) {
   return (
     <nav className="sidenav" aria-label="Primary">
-      <div className="sidenav-label">Care space</div>
+      <div className="sidenav-label">Navigate</div>
       {items.map((item) => (
         <button
           key={item.id}
@@ -32,9 +32,7 @@ export function SideNav({
           <span>{item.label}</span>
         </button>
       ))}
-      <div className="sidenav-foot">
-        One care recipient · authorized people · not workforce ops.
-      </div>
+      <div className="sidenav-foot">One person at the center of care.</div>
     </nav>
   );
 }

@@ -140,8 +140,9 @@ export function App() {
 
   if (!authReady) {
     return (
-      <div className="app-shell" data-testid="auth-loading">
-        <p className="muted" style={{ padding: 24 }}>
+      <div className="app-shell cr-stage" data-testid="auth-loading">
+        <div className="cr-ambient" aria-hidden />
+        <p className="muted" style={{ padding: 24, position: "relative", zIndex: 1 }}>
           Checking session…
         </p>
       </div>
@@ -427,7 +428,8 @@ export function App() {
   const workspaceTab = tab === "relay" ? "today" : tab;
 
   return (
-    <div className="app-shell" data-testid="app-shell">
+    <div className="app-shell cr-stage" data-testid="app-shell">
+      <div className="cr-ambient" aria-hidden />
       <header className="topbar">
         <div className="brand" aria-label="Caretaker Relay">
           <span className="brand-mark" aria-hidden />
@@ -439,13 +441,21 @@ export function App() {
               E
             </span>
             <div style={{ minWidth: 0 }}>
-              <div style={{ fontSize: "0.72rem", fontWeight: 600, color: "var(--cr-muted)" }}>
+              <div
+                style={{
+                  fontSize: "0.72rem",
+                  fontWeight: 600,
+                  color: "var(--cr-ink-3)",
+                  letterSpacing: "0.04em",
+                  textTransform: "uppercase",
+                }}
+              >
                 Caring for
               </div>
-              <div data-testid="care-recipient-label" style={{ lineHeight: 1.2 }}>
+              <div data-testid="care-recipient-label" style={{ lineHeight: 1.2, fontWeight: 700 }}>
                 {careRecipient.displayName}
               </div>
-              <div className="muted" style={{ fontSize: "0.7rem", fontWeight: 500 }}>
+              <div className="muted" style={{ fontSize: "0.75rem", fontWeight: 500 }}>
                 Care recipient
               </div>
             </div>
@@ -459,7 +469,7 @@ export function App() {
               data-testid="app-error"
               role="alert"
               title={lastError}
-              style={{ fontSize: "0.72rem", maxWidth: 140 }}
+              style={{ fontSize: "0.75rem", maxWidth: 140 }}
             >
               Connection issue
             </span>
@@ -476,7 +486,7 @@ export function App() {
           <span
             className="session-label"
             data-testid="session-caregiver"
-            title="Server-authenticated principal"
+            title="Signed-in caregiver"
           >
             {session.displayName}
             <span className="muted" style={{ fontWeight: 500 }}>
@@ -489,7 +499,7 @@ export function App() {
             className="secondary-btn"
             data-testid="sign-out"
             onClick={signOut}
-            style={{ minHeight: 36, fontSize: "0.75rem" }}
+            style={{ minHeight: 40, fontSize: "0.8rem", padding: "0 16px" }}
           >
             Sign out
           </button>
@@ -568,7 +578,7 @@ export function App() {
         <span>
           {session.displayName} · caring for {careRecipient.displayName}
         </span>
-        <span>Not medical advice · synthetic household · human verifies truth</span>
+        <span>Not medical advice · human verifies care truth</span>
       </footer>
     </div>
   );

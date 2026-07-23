@@ -68,78 +68,94 @@ export function LoginGate({
   }
 
   return (
-    <div className="app-shell" data-testid="login-gate">
-      <form
-        onSubmit={(ev) => void submit(ev)}
-        className="login-card"
-        aria-label="Sign in"
-      >
-        <div className="brand" style={{ marginBottom: 12 }}>
-          <span className="brand-mark" aria-hidden />
-          <span>Caretaker Relay</span>
-        </div>
-        <h1>Sign in</h1>
-        <p className="muted">
-          Sign in as an authorized caregiver. Identity is established by the
-          care API — not by client-side switching.
-        </p>
-        <label>
-          Choose caregiver
-          <select
-            data-testid="login-principal"
-            value={selected}
-            onChange={(e) => setSelected(e.target.value)}
-          >
-            {principals.map((p) => (
-              <option key={p.care_person_id} value={p.care_person_id}>
-                {p.display_name} · {p.role_label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Password
-          <input
-            data-testid="login-password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-          />
-        </label>
-        {error && (
-          <p className="attention-limit" role="alert" data-testid="login-error">
-            {error}
+    <div className="app-shell cr-stage" data-testid="login-gate">
+      <div className="cr-ambient" aria-hidden />
+      <div className="login-scene">
+        <div className="login-brand-panel">
+          <div className="brand">
+            <span className="brand-mark" aria-hidden />
+            <span>Caretaker Relay</span>
+          </div>
+          <h1>Care without re-explaining</h1>
+          <p className="lead">
+            A quiet place for family and professional caregivers to keep one
+            shared picture of care — organized, sourced, and human-verified.
           </p>
-        )}
-        <div className="btn-row" style={{ marginTop: 18 }}>
-          <button
-            type="submit"
-            className="primary-btn"
-            data-testid="login-submit"
-            disabled={busy}
-          >
-            {busy ? "Signing in…" : "Sign in"}
-          </button>
+          <div className="login-pill-row">
+            <span className="login-pill">Home &amp; community care</span>
+            <span className="login-pill">Human verifies truth</span>
+            <span className="login-pill">Intelligence with restraint</span>
+          </div>
         </div>
-        <p className="muted" style={{ fontSize: "0.85rem", marginTop: 14 }}>
-          Evaluation household for Caretaker Relay. Sign-in is server-checked.
-        </p>
-        <label>
-          Invitation code (optional)
-          <input
-            data-testid="login-invite-token"
-            value={inviteToken}
-            onChange={(e) => setInviteToken(e.target.value)}
-            placeholder="If you were invited, paste the code here"
-          />
-        </label>
-        {inviteToken.trim() && (
-          <p className="muted" style={{ fontSize: "0.82rem" }}>
-            After you sign in, open People and accept the invitation.
+
+        <form
+          onSubmit={(ev) => void submit(ev)}
+          className="login-card"
+          aria-label="Sign in"
+        >
+          <h1>Sign in</h1>
+          <p className="muted">
+            Choose who you are. Identity is checked by the care service — not by
+            switching names on this device.
           </p>
-        )}
-      </form>
+          <label>
+            Choose caregiver
+            <select
+              data-testid="login-principal"
+              value={selected}
+              onChange={(e) => setSelected(e.target.value)}
+            >
+              {principals.map((p) => (
+                <option key={p.care_person_id} value={p.care_person_id}>
+                  {p.display_name} · {p.role_label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Password
+            <input
+              data-testid="login-password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
+            />
+          </label>
+          {error && (
+            <p className="attention-limit" role="alert" data-testid="login-error">
+              {error}
+            </p>
+          )}
+          <div className="btn-row" style={{ marginTop: 20 }}>
+            <button
+              type="submit"
+              className="primary-btn"
+              data-testid="login-submit"
+              disabled={busy}
+            >
+              {busy ? "Signing in…" : "Continue"}
+            </button>
+          </div>
+          <p className="muted" style={{ fontSize: "0.85rem", marginTop: 16 }}>
+            Evaluation household. Not production identity federation.
+          </p>
+          <label>
+            Invitation code (optional)
+            <input
+              data-testid="login-invite-token"
+              value={inviteToken}
+              onChange={(e) => setInviteToken(e.target.value)}
+              placeholder="If invited, paste the code"
+            />
+          </label>
+          {inviteToken.trim() && (
+            <p className="muted" style={{ fontSize: "0.82rem" }}>
+              After sign-in, open People to accept the invitation.
+            </p>
+          )}
+        </form>
+      </div>
     </div>
   );
 }

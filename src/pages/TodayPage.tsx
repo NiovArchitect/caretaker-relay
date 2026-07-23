@@ -74,30 +74,29 @@ export function TodayPage({
 
   return (
     <>
-      {/* MedixWeb-style dominant hero: one context, not 12 equal cards */}
+      {/* Dominant care environment — not a dashboard tile stack */}
       <section className="today-hero" aria-label="Care context for today">
-        <div className="today-hero-kicker">Today · care without re-explaining</div>
+        <div className="today-hero-kicker">Today</div>
         <h1 data-testid="today-greeting" className="today-hero-recipient">
-          Caring for{" "}
           <span data-testid="care-recipient-label">
             {today.careRecipient.displayName}
           </span>
         </h1>
         <div className="today-hero-caregiver">
           <span>
-            Current caregiver{" "}
+            You are{" "}
             <strong data-testid="today-caregiver-name">{session.displayName}</strong>
           </span>
           <span className="badge badge-teal">{session.roleLabel}</span>
         </div>
         <div className="today-hero-glass-row">
           <div className="today-hero-glass">
-            <div className="label">What this is</div>
-            <div className="value">Home &amp; community care picture</div>
+            <div className="label">Focus</div>
+            <div className="value">One shared care picture at home</div>
           </div>
           <div className="today-hero-glass">
-            <div className="label">Relay role</div>
-            <div className="value">Organizes · holds uncertainty · asks you</div>
+            <div className="label">Relay</div>
+            <div className="value">Understands · holds uncertainty · asks you</div>
           </div>
         </div>
         {proj && (
