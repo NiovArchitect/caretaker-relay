@@ -218,5 +218,6 @@
   "raw_evidence_path": "docs/reviews/current-export/",
   "manifest_path": "docs/reviews/current-export/00_MANIFEST.md",
   "claimed_deployed_app_sha": "2858c2a",
-  "product_modified_by_review_export": false
+  "product_modified_by_review_export": false,
+  "review_commit": "bbe102a15d7023fb6b1eda16d6f8893bb621e7f1"
 }
