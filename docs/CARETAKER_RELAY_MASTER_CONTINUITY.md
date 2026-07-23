@@ -317,7 +317,7 @@ First: recover state from disk (including `ONLINE_READINESS_CURRENT_STATE.md`); 
 
 ```text
 ONLINE RESEARCH ENVIRONMENT: READY
-RECRUITMENT: ACTIVE (Caregiver #1) — 0 invited, 0 scheduled, 0 completed
+RECRUITMENT: PAUSED — founder rejected mobile-stretched UI; web-first 2050 redesign in progress
 
 Public app (canonical): https://care.niovlabs.com
 Public app (Render fallback): https://caretaker-relay-web.onrender.com
@@ -333,8 +333,8 @@ Auth: CLI OAuth (~/.render/cli.yaml). Shell RENDER_API_KEY may be stale 401 — 
 Understand mode: fixture-backed (honest; not live remote LLM).
 Public smoke: PASS (auth isolation, multi-event, med uncertainty, confirm, correction, handoff, restart persistence).
 
-0. FOUNDER SENDS RECRUITMENT MESSAGE (authorized)
-1. SCREEN / QUALIFY first real family caregiver
+0. FOUNDER VISUAL REVIEW of live web redesign at care.niovlabs.com
+1. Only after approval: resume Caregiver #1 recruitment
 2. RUN Session 1 against ONLINE product URL
 3. CAPTURE real [CAREGIVER INPUT]
 4. SYNTHESIZE findings → only then product behavior changes

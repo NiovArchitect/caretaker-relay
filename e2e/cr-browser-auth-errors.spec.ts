@@ -282,7 +282,7 @@ test.describe("CR-BROWSER auth + errors + continuity", () => {
       const id1 = await page.evaluate(() => window.__crE2E?.getCareRecipientId());
       expect(id1).toBe("cr-olivia");
       await page.getByTestId("nav-care").click();
-      await page.getByTestId("nav-circle").click();
+      await page.getByTestId("nav-people").click();
       await page.getByTestId("nav-today").click();
       await expect(page.getByTestId("care-recipient-label")).toContainText(
         "Olivia",

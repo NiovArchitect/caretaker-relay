@@ -24,9 +24,10 @@ export function CarePage() {
   return (
     <>
       <div className="greeting">
-        <h1>{careRecipient.displayName}</h1>
-        <p className="muted" style={{ marginTop: 0 }}>
-          Living care context — only what you need now
+        <h1>{careRecipient.displayName}&apos;s care</h1>
+        <p className="muted" style={{ marginTop: 0, maxWidth: 520 }}>
+          Living care context for this person — medications, appointments,
+          routines, and observations. Not an EHR dump.
         </p>
       </div>
 

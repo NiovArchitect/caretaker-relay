@@ -1,13 +1,12 @@
 import type { NavTab } from "../domain/types";
 
-const items: { id: NavTab; label: string; icon: string }[] = [
+const items: { id: Exclude<NavTab, "relay">; label: string; icon: string }[] = [
   { id: "today", label: "Today", icon: "◉" },
   { id: "care", label: "Care", icon: "♡" },
   { id: "people", label: "People", icon: "◎" },
-  { id: "relay", label: "Relay", icon: "↝" },
 ];
 
-export function BottomNav({
+export function SideNav({
   tab,
   onChange,
 }: {
@@ -15,22 +14,26 @@ export function BottomNav({
   onChange: (t: NavTab) => void;
 }) {
   return (
-    <nav className="bottom-nav" aria-label="Main">
+    <nav className="sidenav" aria-label="Primary">
+      <div className="sidenav-label">Workspace</div>
       {items.map((item) => (
         <button
           key={item.id}
           type="button"
-          className="nav-btn"
+          className="sidenav-btn"
           data-testid={`nav-${item.id}`}
           aria-current={tab === item.id ? "page" : undefined}
           onClick={() => onChange(item.id)}
         >
-          <span className="nav-icon" aria-hidden>
+          <span className="sidenav-icon" aria-hidden>
             {item.icon}
           </span>
-          {item.label}
+          <span>{item.label}</span>
         </button>
       ))}
+      <div className="sidenav-foot">
+        Care for this person — not workforce scheduling.
+      </div>
     </nav>
   );
 }

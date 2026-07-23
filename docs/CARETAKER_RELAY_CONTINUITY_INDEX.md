@@ -39,8 +39,8 @@ git rev-parse HEAD
 
 **ONLINE RESEARCH ENVIRONMENT: READY**  
 **Canonical app:** https://care.niovlabs.com  
-**Recruitment:** **ACTIVE** (Caregiver #1 authorized) — 0 invited / 0 scheduled / 0 completed  
-**Session 1:** NOT STARTED  
+**Recruitment:** **PAUSED** (web-first redesign — founder visual approval required)  
+**Session 1:** NOT STARTED · gate: WEB_DESIGN_AWAITING_FOUNDER_VISUAL_APPROVAL  
 **Product:** FROZEN during Session 1  
 **Do not** automate participant contact · **Do not** put identifying data in Git  
 **Do not touch Otzar Render resources** on the same workspace.

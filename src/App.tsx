@@ -13,13 +13,12 @@ import {
 } from "./foundation/careClient";
 import { today } from "./scenario/olivia";
 import { BottomNav } from "./components/BottomNav";
-import { Composer } from "./components/Composer";
+import { SideNav } from "./components/SideNav";
+import { RelayPanel } from "./components/RelayPanel";
+import { HandoffPanel } from "./components/HandoffPanel";
 import { TodayPage } from "./pages/TodayPage";
 import { CarePage } from "./pages/CarePage";
-import { CirclePage } from "./pages/CirclePage";
-import { RelayPage } from "./pages/RelayPage";
-import { VerifyPanel } from "./components/VerifyPanel";
-import { HandoffPanel } from "./components/HandoffPanel";
+import { PeoplePage } from "./pages/PeoplePage";
 
 function nowLabel() {
   return new Date().toLocaleTimeString([], {
@@ -28,14 +27,18 @@ function nowLabel() {
   });
 }
 
+function todayDateLabel() {
+  return new Date().toLocaleDateString(undefined, {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+}
+
 declare global {
   interface Window {
-    /** E2E-only: inject post-STT transcript into composer + voice meta (no physical mic). */
     __crE2E?: {
-      injectTranscript: (
-        text: string,
-        meta?: TranscriptMeta,
-      ) => void;
+      injectTranscript: (text: string, meta?: TranscriptMeta) => void;
       setDraft: (text: string) => void;
       getCareRecipientId: () => string;
     };
@@ -51,19 +54,19 @@ export function App() {
   const [busy, setBusy] = useState(false);
   const [lastError, setLastError] = useState<string | null>(null);
   const [correcting, setCorrecting] = useState(false);
-  /** Persisted event ids from last confirm — used for real correction lineage. */
   const [lastEventIds, setLastEventIds] = useState<string[]>([]);
   const [messages, setMessages] = useState<RelayMessage[]>([
     {
       id: "m0",
       role: "relay",
       at: nowLabel(),
-      text: `I'm here for ${careRecipient.displayName}'s day. Tell me what happened, or ask what still needs attention.`,
+      text: `Good morning. I'm here for ${careRecipient.displayName}'s care today.\n\nTell me what happened in plain language — I'll organize it and ask you to verify anything consequential.`,
     },
   ]);
   const [relayHandled, setRelayHandled] = useState(today.relayHandled);
   const [voiceMeta, setVoiceMeta] = useState<TranscriptMeta | undefined>();
   const [todayRefresh, setTodayRefresh] = useState(0);
+  const [relayOpen, setRelayOpen] = useState(false);
 
   useEffect(() => {
     window.__crE2E = {
@@ -78,6 +81,7 @@ export function App() {
             needsReview: true,
           },
         );
+        setRelayOpen(true);
         setTab("relay");
       },
       setDraft: (text) => {
@@ -97,17 +101,22 @@ export function App() {
         return "Today";
       case "care":
         return "Care";
-      case "circle":
-        return "Care Circle";
+      case "people":
+        return "People";
       case "relay":
         return "Relay";
     }
   }, [tab]);
 
+  function openRelay() {
+    setRelayOpen(true);
+  }
+
   async function submitText(text: string) {
     const trimmed = text.trim();
     if (!trimmed || busy) return;
 
+    openRelay();
     setMessages((prev) => [
       ...prev,
       { id: `u-${Date.now()}`, role: "user", text: trimmed, at: nowLabel() },
@@ -118,7 +127,6 @@ export function App() {
     setBusy(true);
 
     try {
-      // Correction path after a confirmed event exists (domain supersession).
       if (correcting && lastEventIds.length > 0) {
         const targetId = lastEventIds[0]!;
         const result = await applyCareCorrection(targetId, trimmed);
@@ -140,7 +148,6 @@ export function App() {
           setShowHandoff(true);
           setTab("today");
         } else {
-          // Fall through: re-run understand on the corrected statement
           setMessages((prev) => [
             ...prev,
             {
@@ -153,11 +160,9 @@ export function App() {
         }
         if (result.kind === "persisted") return;
       } else if (correcting) {
-        // Pre-confirm correct: treat as a fresh natural update (no silent overwrite).
         setCorrecting(false);
       }
 
-      // Care-context questions first (no fake chatbot)
       const answer = await answerCareQuestion(trimmed);
       if (answer) {
         setMessages((prev) => [
@@ -169,7 +174,6 @@ export function App() {
             at: nowLabel(),
           },
         ]);
-        setTab("relay");
         return;
       }
 
@@ -180,14 +184,8 @@ export function App() {
         setLastError(msg);
         setMessages((prev) => [
           ...prev,
-          {
-            id: `r-${Date.now()}`,
-            role: "relay",
-            text: msg,
-            at: nowLabel(),
-          },
+          { id: `r-${Date.now()}`, role: "relay", text: msg, at: nowLabel() },
         ]);
-        setTab("relay");
         return;
       }
       if (result.kind === "refusal") {
@@ -196,33 +194,24 @@ export function App() {
         setLastError(msg);
         setMessages((prev) => [
           ...prev,
-          {
-            id: `r-${Date.now()}`,
-            role: "relay",
-            text: msg,
-            at: nowLabel(),
-          },
+          { id: `r-${Date.now()}`, role: "relay", text: msg, at: nowLabel() },
         ]);
-        setTab("relay");
         return;
       }
 
       if (result.kind === "verify" && result.bundle) {
         setBundle(result.bundle);
         const n = result.bundle.items.length;
-        const lines = result.bundle.items
-          .map((i) => `• ${i.label}`)
-          .join("\n");
+        const lines = result.bundle.items.map((i) => `• ${i.label}`).join("\n");
         setMessages((prev) => [
           ...prev,
           {
             id: `r-${Date.now()}`,
             role: "relay",
-            text: `For ${careRecipient.displayName}\n\nI found ${n} thing${n === 1 ? "" : "s"} in that update:\n${lines}\n\nPlease confirm or correct the consequential parts before I save them.`,
+            text: `I organized that into ${n} care item${n === 1 ? "" : "s"} for ${careRecipient.displayName}:\n${lines}\n\nPlease verify the consequential parts before I save them as care truth.`,
             at: nowLabel(),
           },
         ]);
-        setTab("relay");
       }
     } catch (err) {
       const msg =
@@ -238,7 +227,6 @@ export function App() {
           at: nowLabel(),
         },
       ]);
-      setTab("relay");
     } finally {
       setBusy(false);
       setVoiceMeta(undefined);
@@ -259,7 +247,9 @@ export function App() {
         }
         const updates = bundle.understood.communicationRequests;
         const nextHandled = [
-          ...updates.map((u) => u.replace("Update ready for ", "Update prepared for ")),
+          ...updates.map((u) =>
+            u.replace("Update ready for ", "Update prepared for "),
+          ),
           ...bundle.understood.appointmentChanges.map((a) => `Schedule: ${a}`),
           ...bundle.items
             .filter((i) => !i.discrepancy)
@@ -272,7 +262,7 @@ export function App() {
           {
             id: `s-${Date.now()}`,
             role: "system",
-            text: "Saved. Olivia's day and Maya's continuity picture are updated.",
+            text: "Saved. Olivia's day is updated, and Maya's continuity picture can include this.",
             at: nowLabel(),
           },
         ]);
@@ -287,12 +277,7 @@ export function App() {
         setLastError(msg);
         setMessages((prev) => [
           ...prev,
-          {
-            id: `s-${Date.now()}`,
-            role: "system",
-            text: msg,
-            at: nowLabel(),
-          },
+          { id: `s-${Date.now()}`, role: "system", text: msg, at: nowLabel() },
         ]);
       }
     } catch (err) {
@@ -319,6 +304,7 @@ export function App() {
     setCorrecting(true);
     setBundle(null);
     setConfirmed(false);
+    openRelay();
     setMessages((prev) => [
       ...prev,
       {
@@ -331,46 +317,68 @@ export function App() {
         at: nowLabel(),
       },
     ]);
-    setTab("relay");
     setDraft("");
   }
 
   function loadDemo() {
     setDraft(JUDGE_DEMO_UTTERANCE);
     setVoiceMeta(undefined);
-    setTab("relay");
+    openRelay();
   }
 
   function onReviewAttention(_item: TodayAttentionItem) {
-    setTab("relay");
+    openRelay();
     setDraft(JUDGE_DEMO_UTTERANCE);
   }
 
+  function onNavChange(t: NavTab) {
+    setTab(t);
+    if (t === "relay") openRelay();
+  }
+
   const liveHandoff = getLatestHandoff();
+  const workspaceTab = tab === "relay" ? "today" : tab;
 
   return (
     <div className="app-shell" data-testid="app-shell">
-      <header className="app-header">
+      <header className="topbar">
         <div className="brand" aria-label="Caretaker Relay">
           <span className="brand-mark" aria-hidden />
           <span>Caretaker Relay</span>
         </div>
-        <div className="header-right">
+        <div className="topbar-center">
+          <div className="recipient-chip" data-testid="care-recipient-chip">
+            <span className="avatar-3d" aria-hidden>
+              O
+            </span>
+            {careRecipient.displayName}
+          </div>
+          <span className="topbar-date">{todayDateLabel()}</span>
+        </div>
+        <div className="topbar-right">
           {lastError && (
             <span
               className="muted"
               data-testid="app-error"
               role="alert"
-              style={{ fontSize: "0.7rem", maxWidth: 120 }}
               title={lastError}
+              style={{ fontSize: "0.72rem", maxWidth: 140 }}
             >
-              Error
+              Connection issue
             </span>
           )}
+          <button
+            type="button"
+            className="relay-drawer-toggle"
+            data-testid="relay-open-mobile"
+            onClick={() => setRelayOpen(true)}
+          >
+            <span className="relay-pulse" aria-hidden />
+            Relay
+          </button>
           <span
-            className="muted"
+            className="session-label"
             data-testid="session-caregiver"
-            style={{ fontSize: "0.75rem", fontWeight: 600 }}
             title="Signed in as primary caregiver for this evaluation household"
           >
             Sadeil
@@ -383,67 +391,67 @@ export function App() {
           >
             S
           </button>
+          <span className="live-dot" title="Connected" aria-hidden />
         </div>
       </header>
 
-      <main className="main" aria-label={pageTitle}>
-        {tab === "today" && (
-          <TodayPage
-            relayHandled={relayHandled}
-            onOpenHandoff={() => setShowHandoff(true)}
-            onLoadDemo={loadDemo}
-            refreshKey={todayRefresh}
-            onReviewAttention={onReviewAttention}
-          />
-        )}
-        {tab === "care" && <CarePage />}
-        {tab === "circle" && <CirclePage />}
-        {tab === "relay" && (
-          <RelayPage
-            messages={messages}
-            onUseDemo={() => setDraft(JUDGE_DEMO_UTTERANCE)}
-            correcting={correcting}
-          />
-        )}
+      <SideNav tab={workspaceTab} onChange={onNavChange} />
 
-        {bundle && !confirmed && (
-          <VerifyPanel
-            bundle={bundle}
-            onConfirm={() => void confirmLooksRight()}
-            onCorrect={startCorrection}
-          />
-        )}
-
-        {showHandoff && (
-          <HandoffPanel
-            onClose={() => setShowHandoff(false)}
-            liveHandoff={liveHandoff}
-            status="prepared"
-          />
-        )}
-
-        {(tab === "today" || tab === "relay") &&
-          !(bundle && !confirmed) &&
-          !showHandoff && (
-          <div className="composer-dock" data-testid="composer-dock">
-            <Composer
-              value={draft}
-              onChange={setDraft}
-              onSubmit={() => void submitText(draft)}
-              onVoiceMeta={setVoiceMeta}
-              placeholder={
-                busy
-                  ? "Relay is understanding…"
-                  : correcting
-                    ? "Type the correction…"
-                    : "Tell Relay what happened…"
-              }
+      <main className="workspace" aria-label={pageTitle}>
+        <div className="workspace-inner">
+          {workspaceTab === "today" && (
+            <TodayPage
+              relayHandled={relayHandled}
+              onOpenHandoff={() => setShowHandoff(true)}
+              onLoadDemo={loadDemo}
+              refreshKey={todayRefresh}
+              onReviewAttention={onReviewAttention}
             />
-          </div>
-        )}
+          )}
+          {workspaceTab === "care" && <CarePage />}
+          {workspaceTab === "people" && <PeoplePage />}
+
+          {showHandoff && (
+            <HandoffPanel
+              onClose={() => setShowHandoff(false)}
+              liveHandoff={liveHandoff}
+              status="prepared"
+            />
+          )}
+        </div>
       </main>
 
-      <BottomNav tab={tab} onChange={setTab} />
+      {relayOpen && (
+        <div
+          className="overlay-scrim"
+          aria-hidden
+          onClick={() => setRelayOpen(false)}
+        />
+      )}
+
+      <RelayPanel
+        open={relayOpen}
+        messages={messages}
+        draft={draft}
+        onDraftChange={setDraft}
+        onSubmit={() => void submitText(draft)}
+        onVoiceMeta={setVoiceMeta}
+        busy={busy}
+        correcting={correcting}
+        bundle={bundle}
+        confirmed={confirmed}
+        onConfirm={() => void confirmLooksRight()}
+        onCorrect={startCorrection}
+        onUseSample={loadDemo}
+        onCloseMobile={() => setRelayOpen(false)}
+      />
+
+      <BottomNav tab={tab === "relay" ? "relay" : workspaceTab} onChange={onNavChange} />
+
+      <footer className="status-bar">
+        <span>Care workspace · human verifies consequential truth</span>
+        <span>Not medical advice · synthetic evaluation household</span>
+      </footer>
     </div>
   );
 }

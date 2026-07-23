@@ -15,7 +15,6 @@ export function TodayPage({
   relayHandled: string[];
   onOpenHandoff: () => void;
   onLoadDemo: () => void;
-  /** Bump after confirm to re-fetch durable Today. */
   refreshKey?: number;
   onReviewAttention?: (item: TodayAttentionItem) => void;
 }) {
@@ -88,19 +87,8 @@ export function TodayPage({
           {today.greeting}, {today.caregiverName}
         </h1>
         <p className="for-person" data-testid="care-recipient-label">
-          Here&apos;s {today.careRecipient.displayName}&apos;s day.
+          Here&apos;s what matters for {today.careRecipient.displayName} today.
         </p>
-        <div className="btn-row greeting-actions">
-          <button
-            type="button"
-            className="primary-btn"
-            data-testid="try-care-update-top"
-            onClick={onLoadDemo}
-          >
-            Tell Relay what happened
-          </button>
-        </div>
-        {/* E2E marker only — empty body so transport string never appears in judge UI */}
         {proj && (
           <span
             data-testid="today-source"
@@ -110,24 +98,46 @@ export function TodayPage({
             aria-hidden="true"
           />
         )}
+        <div className="btn-row greeting-actions">
+          <button
+            type="button"
+            className="primary-btn"
+            data-testid="try-care-update-top"
+            onClick={onLoadDemo}
+          >
+            Tell Relay what happened
+          </button>
+          <button
+            type="button"
+            className="secondary-btn"
+            data-testid="review-handoff"
+            onClick={onOpenHandoff}
+          >
+            Review handoff for Maya
+          </button>
+        </div>
       </div>
 
       <section
-        className="section attention-section"
+        className="section section-hero surface-verify"
         aria-labelledby="needs-you"
         data-testid="needs-attention-section"
       >
-        <h2 id="needs-you">Needs your attention</h2>
+        <h2 id="needs-you">Needs attention</h2>
         {attention.length === 0 ? (
           <p className="muted">Nothing urgent right now.</p>
         ) : (
-          attention.map((item) => (
+          attention.map((item, idx) => (
             <article
               key={item.id}
               className={`attention-card${item.kind === "medication" ? " attention-card-med" : ""}`}
               data-testid="attention-card"
               data-kind={item.kind}
+              style={idx === 0 ? { transform: "translateZ(0)" } : undefined}
             >
+              <div className="badge badge-orange" style={{ marginBottom: 8 }}>
+                Needs your judgment
+              </div>
               <h3 className="item-title">{item.title}</h3>
               <p className="attention-body">{item.whatHappened}</p>
               {item.whySurfaced && (
@@ -146,7 +156,7 @@ export function TodayPage({
                   data-testid="attention-review"
                   onClick={() => onReviewAttention?.(item)}
                 >
-                  Review
+                  Review with Relay
                 </button>
               </div>
             </article>
@@ -154,7 +164,7 @@ export function TodayPage({
         )}
       </section>
 
-      <section className="section" aria-labelledby="since">
+      <section className="section surface-reported" aria-labelledby="since">
         <h2 id="since">What changed</h2>
         {organizedCount > 0 && (
           <p className="muted" data-testid="organized-count">
@@ -162,48 +172,50 @@ export function TodayPage({
             for {today.careRecipient.displayName}
           </p>
         )}
-        <ul className="list-plain" data-testid="what-changed-list">
+        <div className="timeline" data-testid="what-changed-list">
           {whatChanged.map((line) => (
-            <li key={line}>{line}</li>
+            <div key={line} className="timeline-item">
+              {line}
+            </div>
           ))}
-        </ul>
-      </section>
-
-      <section className="section" aria-labelledby="handled">
-        <h2 id="handled">Already handled</h2>
-        <ul className="list-plain" data-testid="already-handled-list">
-          {handled.map((line) => (
-            <li key={line}>{line}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="section" aria-labelledby="next">
-        <h2 id="next">What happens next</h2>
-        <ul className="list-plain" data-testid="next-list">
-          {next.map((line) => (
-            <li key={line}>{line}</li>
-          ))}
-        </ul>
-        <div className="btn-row">
-          <button
-            type="button"
-            className="secondary-btn"
-            data-testid="review-handoff"
-            onClick={onOpenHandoff}
-          >
-            Review handoff for Maya
-          </button>
-          <button
-            type="button"
-            className="primary-btn"
-            data-testid="try-care-update"
-            onClick={onLoadDemo}
-          >
-            Tell Relay what happened
-          </button>
         </div>
       </section>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+          gap: 14,
+        }}
+      >
+        <section className="section surface-known" aria-labelledby="handled">
+          <h2 id="handled">Already handled</h2>
+          <ul className="list-plain" data-testid="already-handled-list">
+            {handled.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="section surface-known" aria-labelledby="next">
+          <h2 id="next">What&apos;s next</h2>
+          <ul className="list-plain" data-testid="next-list">
+            {next.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+          <div className="btn-row">
+            <button
+              type="button"
+              className="primary-btn"
+              data-testid="try-care-update"
+              onClick={onLoadDemo}
+            >
+              Tell Relay what happened
+            </button>
+          </div>
+        </section>
+      </div>
     </>
   );
 }

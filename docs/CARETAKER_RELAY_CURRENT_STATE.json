@@ -18,19 +18,19 @@
     "app": "ff95159d8803feaca0e6e245d5a77ee28ee40c99",
     "foundation": "9182c7511c1ffae9dc79082297ae92d7a5079b1a"
   },
-  "product_frozen": true,
+  "product_frozen": false,
   "deploy_shas": {
     "app": "2be3183f1845a48d3b8b3034be5c8f0a5e66591c",
     "foundation": "ccd887b240902bd7ad21c068cd11b60cfa878e85"
   },
-  "current_phase": "caregiver_1_recruitment_active",
-  "current_gate": "CAREGIVER_1_RECRUITMENT_ACTIVE",
+  "current_phase": "web_first_2050_clinical_redesign",
+  "current_gate": "WEB_DESIGN_AWAITING_FOUNDER_VISUAL_APPROVAL",
   "online_deployment_audit": "COMPLETED",
   "online_research_environment": "READY",
   "session1_status": "NOT_STARTED",
   "session1_readiness": "RECRUITMENT_ACTIVE_AWAITING_FIRST_PARTICIPANT",
   "research_infrastructure": "READY",
-  "recruitment_status": "ACTIVE",
+  "recruitment_status": "PAUSED",
   "public_application_url": "https://care.niovlabs.com",
   "public_api_url": "https://caretaker-relay-care-api.onrender.com",
   "render_services": {
@@ -132,7 +132,7 @@
     "modify_product_during_session_1",
     "claim_validated_from_one_session"
   ],
-  "next_authorized_action": "FOUNDER_SENDS_RECRUITMENT_MESSAGE_TO_REAL_FAMILY_CAREGIVER",
+  "next_authorized_action": "FOUNDER_VISUAL_REVIEW_OF_LIVE_WEB_REDESIGN",
   "cold_context_online_recovery": "READY",
   "updated_at": "2026-07-23",
   "public_research_environment": "READY",
@@ -152,7 +152,7 @@
     "mobile_viewport": "PASS",
     "top_cta": "PASS"
   },
-  "founder_recruitment_authorization": "YES",
+  "founder_recruitment_authorization": "REVOKED_PENDING_WEB_DESIGN_APPROVAL",
   "founder_recruitment_authorized_at": "2026-07-23",
   "participant_pipeline": {
     "identified": 0,
@@ -167,5 +167,6 @@
     "synthesized": 0,
     "retested": 0
   },
-  "next_human_action": "FOUNDER_SENDS_RECRUITMENT_MESSAGE_TO_REAL_FAMILY_CAREGIVER"
+  "next_human_action": "FOUNDER_APPROVES_LIVE_WEB_DESIGN_BEFORE_RECRUITMENT",
+  "presentation_redesign": "IN_PROGRESS_WEB_FIRST_2050"
 }
