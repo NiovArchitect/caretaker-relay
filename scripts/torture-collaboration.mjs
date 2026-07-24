@@ -17,13 +17,21 @@ function assert(name, cond, detail = "") {
 }
 
 async function apiLogin(carePersonId, password) {
-  const res = await fetch(`${API}/api/v1/care/lab/login`, {
+  let res = await fetch(`${API}/api/v1/care/auth/login`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ care_person_id: carePersonId, password }),
   });
-  const j = await res.json();
-  return { ok: res.ok, token: j.token || j.access_token, body: j };
+  let j = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    res = await fetch(`${API}/api/v1/care/auth/lab-login`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ care_person_id: carePersonId, password }),
+    });
+    j = await res.json().catch(() => ({}));
+  }
+  return { ok: res.ok, token: j.token || j.access_token, body: j, status: res.status };
 }
 
 async function api(path, token, opts = {}) {
