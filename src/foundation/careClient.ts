@@ -953,117 +953,79 @@ export async function applyCareCorrection(
 }
 
 /**
- * Grounded care Q&A via Relay intelligence layer:
- * identity → recipient → intent → authorized projections → persona answer → memory.
- * Conversation memory is NOT durable care truth.
+ * Grounded care Q&A — SERVER AUTHORITATIVE only.
+ * Client does not own intent/projection/persona engines.
+ * Conversation continuity is durable on the API (CareUpdate-backed turns).
  */
 export async function answerCareQuestion(question: string): Promise<string> {
   const raw = question.trim();
   if (!raw) return "";
 
-  const { classifyIntent } = await import("../lib/relay/intents");
-  const classified = classifyIntent(raw);
-  // Observation/tell path: let understand loop handle (return empty)
-  if (classified.isObservationUpdate && !classified.isQuestion) return "";
-  if (
-    !classified.isQuestion &&
-    classified.primary === "CARE_UPDATE" &&
-    !classified.intents.some((i) => i !== "CARE_UPDATE" && i !== "UNKNOWN_QUESTION")
-  ) {
+  // Lightweight question gate only (not a competing intelligence engine)
+  const looksLikeQuestion =
+    /\?$/.test(raw) ||
+    /^(what|when|where|why|who|how|did|does|do|is|are|can|should|has|have|was|were|prepare|show|tell me|summarize|summary)\b/i.test(
+      raw,
+    ) ||
+    /what happened|since i was last|caught up|going on|need to deal|still need/.test(
+      raw.toLowerCase(),
+    );
+  if (!looksLikeQuestion) return "";
+
+  const { loadActiveCareRecipientId, resolveCareSpace } = await import(
+    "../lib/careContext"
+  );
+  const space = resolveCareSpace(loadActiveCareRecipientId());
+
+  const httpOk = await ensureHttpSession();
+  if (httpOk && httpToken) {
+    try {
+      const base = getCareApiBaseUrl();
+      const res = await fetch(`${base}/api/v1/care/answer`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${httpToken}`,
+        },
+        body: JSON.stringify({
+          question: raw,
+          care_recipient_id: space.careRecipientId,
+        }),
+      });
+      const json = (await res.json()) as {
+        ok?: boolean;
+        answer?: string;
+        not_question?: boolean;
+        authority?: string;
+      };
+      if (res.ok && json.not_question) return "";
+      if (res.ok && typeof json.answer === "string" && json.answer.length > 0) {
+        return json.answer;
+      }
+    } catch {
+      /* fall through to package path */
+    }
+  }
+
+  // Package-path: same care-domain module as Foundation (shared process store).
+  // Not a second intelligence implementation — one domain service, two transports.
+  try {
+    const { answerRelayQuestion } = await import("@caretaker-relay/care-domain");
+    const identity = getSessionIdentity();
+    const { store } = getCareRuntime();
+    const result = answerRelayQuestion({
+      question: raw,
+      principalId: identity.carePersonId,
+      principalDisplayName: identity.displayName,
+      roleLabel: identity.roleLabel,
+      careRecipientId: space.careRecipientId,
+      recipientDisplayName: space.displayName,
+      store,
+    });
+    return result.answer || "";
+  } catch {
     return "";
   }
-  // Still allow broad question-like intents without "?"
-  const questionish =
-    classified.isQuestion ||
-    classified.primary !== "UNKNOWN_QUESTION" ||
-    /\?$|^(what|when|where|who|how|did|does|is|are|can|should|prepare|show|tell me|summarize)\b/i.test(
-      raw,
-    );
-  if (!questionish) return "";
-
-  const { runAnswerEngine } = await import("../lib/relay/answerEngine");
-  const {
-    loadActiveCareRecipientId,
-    resolveCareSpace,
-  } = await import("../lib/careContext");
-
-  const space = resolveCareSpace(loadActiveCareRecipientId());
-  const identity = getSessionIdentity();
-  const state = await fetchCareStateForRecipient(space.careRecipientId);
-  const today = await fetchTodayProjection();
-  const handoff = getLatestHandoff();
-
-  const result = runAnswerEngine({
-    question: raw,
-    principalId: identity.carePersonId,
-    principalName: identity.displayName,
-    roleLabel: identity.roleLabel,
-    recipientId: space.careRecipientId,
-    recipientName: space.displayName,
-    state,
-    attentionLines: today.needsYou,
-    handoff: handoff
-      ? {
-          whatChanged: handoff.whatChanged ?? [],
-          stillNeedsAttention: handoff.stillNeedsAttention ?? [],
-          toPersonId: handoff.toPersonId,
-        }
-      : null,
-  });
-
-  // Also try server answer as enrichment when Evelyn primary and server returns denser med detail
-  // Client engine remains authoritative for persona + multi-turn memory.
-  return result.answer;
-}
-
-/** Fetch state scoped to active recipient — Robert must not use Evelyn depth. */
-async function fetchCareStateForRecipient(
-  recipientId: string,
-): Promise<CareStateSnapshot> {
-  if (recipientId === "cr-robert") {
-    // Lightweight second space — no Evelyn leakage
-    return {
-      careRecipientId: "cr-robert",
-      medicationSchedules: [
-        {
-          id: "med-robert-am",
-          name: "Lisinopril",
-          dose: "10 mg",
-          scheduleLabel: "Morning",
-          scheduleTime: "8:00 AM",
-          authorizedBy: "Dr. Amara Cole",
-          mealRelation: "With or without food",
-        },
-      ],
-      medicationRecords: [],
-      appointments: [
-        {
-          id: "apt-robert-pcp",
-          title: "Primary care follow-up",
-          startsAt: "2026-07-28T17:00:00Z",
-          startsAtLabel: "Monday, July 28 · 10:00 AM PDT",
-          location: "Coastal Family Medicine (synthetic evaluation location)",
-          status: "scheduled",
-        },
-      ],
-      observations: [],
-      tasks: [],
-      events: [
-        {
-          id: "ev-robert-1",
-          title: "Check-in",
-          statement: "Robert reported feeling steady on his morning walk.",
-          occurredAt: "2026-07-22T16:00:00Z",
-          epistemicStatus: "REPORTED",
-          source: { actorName: "Marcus Carter" },
-        },
-      ],
-      openSafetyReviews: [],
-      handoffs: [],
-      source: "package",
-    };
-  }
-  return fetchCareState();
 }
 
 export function getAuditTrail() {
