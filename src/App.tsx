@@ -5,6 +5,7 @@ import {
   confirmCareUpdateAsync,
   applyCareCorrection,
   answerCareQuestion,
+  askCaregiverClarification,
   fetchLatestHandoff,
   restoreSession,
   clearSession,
@@ -93,7 +94,34 @@ export function App() {
     null,
   );
   const [recipientSwitching, setRecipientSwitching] = useState(false);
+  const [notifConnected, setNotifConnected] = useState(true);
+  const [unreadCount, setUnreadCount] = useState(0);
   const activeSpace = resolveCareSpace(activeRecipientId);
+
+  // Server notification transport health (poll — EventSource cannot send Bearer)
+  useEffect(() => {
+    if (!session) return;
+    let stopped = false;
+    const tick = () => {
+      void import("./foundation/careClient").then(({ fetchServerNotifications }) =>
+        fetchServerNotifications().then((r) => {
+          if (stopped) return;
+          setNotifConnected(r.ok);
+          if (r.ok) {
+            setUnreadCount(
+              r.notifications.filter((n) => !n.seen_at && !n.resolved_at).length,
+            );
+          }
+        }),
+      );
+    };
+    tick();
+    const iv = window.setInterval(tick, 5000);
+    return () => {
+      stopped = true;
+      window.clearInterval(iv);
+    };
+  }, [session, activeRecipientId]);
 
   useEffect(() => {
     setActiveCareRecipientId(activeRecipientId);
@@ -315,6 +343,35 @@ export function App() {
         setCorrecting(false);
       }
 
+      // Collaboration confirm (next turn after Relay offers "Want me to ask …")
+      if (
+        /^yes[,.]?\s*(please\s*)?ask/i.test(trimmed) ||
+        (/^yes$/i.test(trimmed.trim()) &&
+          (window as unknown as { __crPendingAsk?: string }).__crPendingAsk)
+      ) {
+        const target =
+          (window as unknown as { __crPendingAsk?: string }).__crPendingAsk ??
+          "p-maya";
+        const r = await askCaregiverClarification({
+          targetPersonId: target,
+          question:
+            "Can you confirm whether you gave Evelyn her lunch medication yesterday?",
+          contextSummary: "Requested via Relay collaboration offer",
+        });
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `sys-sent-${Date.now()}`,
+            role: "system",
+            text: r.ok
+              ? "Request sent. They will get a notification on their account."
+              : `Could not send request: ${r.message ?? "error"}`,
+            at: nowLabel(),
+          },
+        ]);
+        return;
+      }
+
       const answer = await answerCareQuestion(trimmed);
       if (answer) {
         setMessages((prev) => [
@@ -326,6 +383,23 @@ export function App() {
             at: nowLabel(),
           },
         ]);
+        const askMaya = /Want me to ask Maya/i.test(answer);
+        const askDaniel = /Want me to ask Daniel/i.test(answer);
+        if (askMaya || askDaniel) {
+          const target = askMaya ? "p-maya" : "p-walter";
+          const name = askMaya ? "Maya" : "Daniel";
+          (window as unknown as { __crPendingAsk?: string }).__crPendingAsk =
+            target;
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: `sys-collab-${Date.now()}`,
+              role: "system",
+              text: `Reply "Yes, please ask ${name}" to send a real request to their account.`,
+              at: nowLabel(),
+            },
+          ]);
+        }
         return;
       }
 
@@ -622,13 +696,29 @@ export function App() {
               </div>
             )}
           </div>
+          {unreadCount > 0 && (
+            <span
+              className="badge badge-coral"
+              data-testid="unread-count"
+              title="Unread care notifications"
+            >
+              {unreadCount} new
+            </span>
+          )}
           <span
-            className="connection-status"
-            title="System connection"
+            className={`connection-status${notifConnected ? "" : " is-offline"}`}
+            title={
+              notifConnected
+                ? "Notification service reachable"
+                : "Notification service reconnecting"
+            }
             data-testid="connection-status"
+            data-connected={notifConnected ? "true" : "false"}
           >
             <span className="connection-dot" aria-hidden />
-            <span className="connection-label">Connected</span>
+            <span className="connection-label">
+              {notifConnected ? "Connected" : "Reconnecting"}
+            </span>
           </span>
         </div>
       </header>

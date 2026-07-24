@@ -395,57 +395,90 @@ export async function postCoordination(body: string, toPersonId?: string) {
     toPersonId,
   );
   if (!res.ok) return { ok: false as const, message: res.message };
-  // Durable in-app notification for the message recipient (judge-facing coordination)
+  // Server creates durable notification for recipient; client only signals UI refresh
   try {
-    const identity = getSessionIdentity();
-    const toId = toPersonId ?? "p-maya";
-    const notif = {
-      id: `coord-${Date.now()}`,
-      careRecipientId: rid(),
-      forPersonId: toId,
-      fromPersonId: identity.carePersonId,
-      fromName: identity.displayName,
-      title: `Message from ${identity.displayName}`,
-      body: body.slice(0, 180),
-      kind: "care_update",
-      createdAt: new Date().toISOString(),
-      read: false,
-    };
-    const key = `cr.notifications.${toId}`;
-    const prev = JSON.parse(localStorage.getItem(key) || "[]") as unknown[];
-    prev.unshift(notif);
-    localStorage.setItem(key, JSON.stringify(prev.slice(0, 40)));
-    // Also mirror for current principal inbox when messaging self-circle
-    window.dispatchEvent(new CustomEvent("cr-notification", { detail: notif }));
+    window.dispatchEvent(new CustomEvent("cr-notification", { detail: { source: "coordination" } }));
   } catch {
     /* non-fatal */
   }
   return { ok: true as const };
 }
 
-export function listLocalNotifications(forPersonId?: string): Array<Record<string, unknown>> {
-  try {
-    const id = forPersonId ?? getSessionIdentity().carePersonId;
-    return JSON.parse(localStorage.getItem(`cr.notifications.${id}`) || "[]") as Array<
-      Record<string, unknown>
-    >;
-  } catch {
-    return [];
-  }
+/** Server-backed notifications (authority=server). localStorage is never system of record. */
+export async function fetchServerNotifications(): Promise<{
+  ok: boolean;
+  notifications: Array<Record<string, unknown>>;
+  authority?: string;
+  message?: string;
+}> {
+  const ok = await ensureHttpSession();
+  if (!ok || !httpToken) return { ok: false, notifications: [], message: "Not signed in" };
+  const { careListNotifications } = await import("./careHttpClient");
+  const res = await careListNotifications(httpToken, rid());
+  if (!res.ok) return { ok: false, notifications: [], message: res.message };
+  return {
+    ok: true,
+    notifications: res.data.notifications ?? [],
+    authority: res.data.authority,
+  };
 }
 
-export function markLocalNotificationRead(id: string, forPersonId?: string): void {
-  try {
-    const pid = forPersonId ?? getSessionIdentity().carePersonId;
-    const key = `cr.notifications.${pid}`;
-    const rows = JSON.parse(localStorage.getItem(key) || "[]") as Array<
-      Record<string, unknown>
-    >;
-    for (const r of rows) if (r.id === id) r.read = true;
-    localStorage.setItem(key, JSON.stringify(rows));
-  } catch {
-    /* ignore */
-  }
+export async function notificationAction(
+  id: string,
+  action: "seen" | "ack" | "resolve",
+): Promise<boolean> {
+  const ok = await ensureHttpSession();
+  if (!ok || !httpToken) return false;
+  const { careNotificationAction } = await import("./careHttpClient");
+  const res = await careNotificationAction(httpToken, id, action);
+  return res.ok;
+}
+
+export async function askCaregiverClarification(input: {
+  targetPersonId: string;
+  question: string;
+  contextSummary?: string;
+}): Promise<{ ok: boolean; message?: string; requestId?: string }> {
+  const ok = await ensureHttpSession();
+  if (!ok || !httpToken) return { ok: false, message: "Not signed in" };
+  const { careCreateClarification } = await import("./careHttpClient");
+  const res = await careCreateClarification(httpToken, {
+    care_recipient_id: rid(),
+    target_person_id: input.targetPersonId,
+    question: input.question,
+    context_summary: input.contextSummary,
+  });
+  if (!res.ok) return { ok: false, message: res.message };
+  return {
+    ok: true,
+    requestId: String(res.data.request?.id ?? ""),
+  };
+}
+
+export async function respondCaregiverClarification(input: {
+  requestId: string;
+  body: string;
+}): Promise<{ ok: boolean; message?: string }> {
+  const ok = await ensureHttpSession();
+  if (!ok || !httpToken) return { ok: false, message: "Not signed in" };
+  const { careRespondClarification } = await import("./careHttpClient");
+  const res = await careRespondClarification(httpToken, {
+    request_id: input.requestId,
+    care_recipient_id: rid(),
+    body: input.body,
+  });
+  if (!res.ok) return { ok: false, message: res.message };
+  return { ok: true };
+}
+
+/** @deprecated localStorage is not authority — prefer fetchServerNotifications */
+export function listLocalNotifications(_forPersonId?: string): Array<Record<string, unknown>> {
+  return [];
+}
+
+/** @deprecated */
+export function markLocalNotificationRead(_id: string, _forPersonId?: string): void {
+  /* no-op: use notificationAction */
 }
 
 /**

@@ -3,8 +3,8 @@ import { today } from "../scenario/olivia";
 import {
   fetchTodayProjection,
   getSessionIdentity,
-  listLocalNotifications,
-  markLocalNotificationRead,
+  fetchServerNotifications,
+  notificationAction,
   type TodayAttentionItem,
 } from "../foundation/careClient";
 import {
@@ -51,12 +51,27 @@ export function TodayPage({
     void fetchTodayProjection().then((p) => {
       if (!cancelled) setProj(p);
     });
-    setInbox(listLocalNotifications(session.carePersonId));
-    const onNote = () => setInbox(listLocalNotifications(session.carePersonId));
-    window.addEventListener("cr-notification", onNote);
+    const loadInbox = () => {
+      void fetchServerNotifications().then((r) => {
+        if (!cancelled && r.ok) {
+          setInbox(
+            r.notifications.filter(
+              (n) =>
+                !n.resolved_at &&
+                String(n.care_recipient_id ?? "") === space.careRecipientId,
+            ),
+          );
+        }
+      });
+    };
+    loadInbox();
+    window.addEventListener("cr-notification", loadInbox);
+    // Lightweight poll as SSE backup (4s) for multi-tab coherence
+    const iv = window.setInterval(loadInbox, 4000);
     return () => {
       cancelled = true;
-      window.removeEventListener("cr-notification", onNote);
+      window.removeEventListener("cr-notification", loadInbox);
+      window.clearInterval(iv);
     };
   }, [refreshKey, session.carePersonId, space.careRecipientId]);
 
@@ -173,36 +188,63 @@ export function TodayPage({
         </div>
       </section>
 
-      {inbox.filter((n) => !n.read).length > 0 && (
+      {inbox.filter((n) => !n.seen_at).length > 0 && (
         <section
           className="section surface-verify"
           aria-labelledby="messages-inbox"
           data-testid="coordination-inbox"
         >
-          <h2 id="messages-inbox">Messages</h2>
+          <h2 id="messages-inbox">Notifications</h2>
           {inbox
-            .filter((n) => !n.read)
-            .slice(0, 5)
-            .map((n) => (
-              <article
-                key={String(n.id)}
-                className="attention-card cr-notify-attention cr-notify-pulse"
-                data-testid="coord-notification"
-              >
-                <h3 className="item-title">{String(n.title)}</h3>
-                <p className="attention-body">{String(n.body)}</p>
-                <button
-                  type="button"
-                  className="secondary-btn"
-                  onClick={() => {
-                    markLocalNotificationRead(String(n.id));
-                    setInbox(listLocalNotifications(session.carePersonId));
-                  }}
+            .filter((n) => !n.seen_at)
+            .slice(0, 8)
+            .map((n) => {
+              const urgent =
+                n.priority === "urgent" || n.priority === "important";
+              return (
+                <article
+                  key={String(n.id)}
+                  className={`attention-card cr-notify-attention${urgent ? " cr-notify-pulse" : ""}`}
+                  data-testid="server-notification"
+                  data-type={String(n.type ?? "")}
                 >
-                  Mark seen
-                </button>
-              </article>
-            ))}
+                  <div className="cr-notify-meta">
+                    <span className="badge badge-coral">
+                      {String(n.type ?? "update").replace(/_/g, " ")}
+                    </span>
+                  </div>
+                  <h3 className="item-title">{String(n.title)}</h3>
+                  <p className="attention-body">{String(n.body)}</p>
+                  <div className="btn-row">
+                    <button
+                      type="button"
+                      className="secondary-btn"
+                      data-testid="notification-seen"
+                      onClick={() => {
+                        void notificationAction(String(n.id), "seen").then(
+                          () => {
+                            void fetchServerNotifications().then((r) => {
+                              if (r.ok) {
+                                setInbox(
+                                  r.notifications.filter(
+                                    (x) =>
+                                      !x.resolved_at &&
+                                      String(x.care_recipient_id ?? "") ===
+                                        space.careRecipientId,
+                                  ),
+                                );
+                              }
+                            });
+                          },
+                        );
+                      }}
+                    >
+                      Mark seen
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
         </section>
       )}
 

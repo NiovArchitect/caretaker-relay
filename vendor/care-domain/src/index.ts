@@ -57,3 +57,4 @@ export function createCareRuntime(opts: CreateCareRuntimeOptions = {}) {
   });
   return { store, service };
 }
+export * from "./services/notifications.js";

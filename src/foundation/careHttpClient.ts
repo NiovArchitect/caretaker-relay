@@ -429,3 +429,68 @@ export async function carePostCoordination(
     baseUrl,
   });
 }
+
+export async function careListNotifications(
+  token: string,
+  careRecipientId?: string,
+  baseUrl?: string,
+) {
+  const q = careRecipientId
+    ? `?care_recipient_id=${encodeURIComponent(careRecipientId)}`
+    : "";
+  return request<{
+    ok: boolean;
+    notifications: Array<Record<string, unknown>>;
+    authority?: string;
+  }>(`/api/v1/care/notifications${q}`, { token, baseUrl });
+}
+
+export async function careNotificationAction(
+  token: string,
+  id: string,
+  action: "seen" | "ack" | "resolve",
+  baseUrl?: string,
+) {
+  return request<{ ok: boolean; notification?: Record<string, unknown> }>(
+    `/api/v1/care/notifications/${encodeURIComponent(id)}/${action}`,
+    { method: "POST", token, baseUrl, body: {} },
+  );
+}
+
+export async function careCreateClarification(
+  token: string,
+  body: {
+    care_recipient_id: string;
+    target_person_id: string;
+    question: string;
+    context_summary?: string;
+  },
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    request?: Record<string, unknown>;
+    notification_id?: string;
+    message?: string;
+  }>(`/api/v1/care/clarifications`, {
+    method: "POST",
+    token,
+    baseUrl,
+    body,
+  });
+}
+
+export async function careRespondClarification(
+  token: string,
+  body: {
+    request_id: string;
+    care_recipient_id: string;
+    body: string;
+  },
+  baseUrl?: string,
+) {
+  return request<{ ok: boolean; response?: Record<string, unknown> }>(
+    `/api/v1/care/clarifications/respond`,
+    { method: "POST", token, baseUrl, body },
+  );
+}
