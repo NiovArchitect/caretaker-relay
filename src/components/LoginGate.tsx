@@ -83,8 +83,8 @@ export function LoginGate({
           </div>
           <h1 className="cr-login-title">Sign in</h1>
           <p className="cr-login-sub">
-            Care without re-explaining — one shared picture for the people who
-            care for Evelyn.
+            Shared care context for the people helping Evelyn. Ask or update
+            without re-explaining.
           </p>
 
           <label className="cr-field">

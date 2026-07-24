@@ -7,9 +7,24 @@ import {
   fetchCoordination,
   postCoordination,
 } from "../foundation/careClient";
-import { careRecipient, people } from "../scenario/olivia";
+import { people } from "../scenario/olivia";
+import { resolvePersonName } from "../lib/identity";
+import { loadActiveCareRecipientId, resolveCareSpace } from "../lib/careContext";
 
 type RelayMode = "relay" | "messages";
+
+const SENDER_ACCENT: Record<string, string> = {
+  "Marcus Carter": "coord-accent-marcus",
+  "Maya Bennett": "coord-accent-maya",
+  "Daniel Kim": "coord-accent-daniel",
+  "Dr. Priya Shah": "coord-accent-provider",
+};
+
+function isTestPollution(body: string): boolean {
+  return /chaos note|smoke test|fixture|debug copy|test note [ab]/i.test(
+    body,
+  );
+}
 
 export function RelayPanel({
   open,
@@ -25,6 +40,7 @@ export function RelayPanel({
   onConfirm,
   onCorrect,
   onCloseMobile,
+  coordFocusPersonId,
 }: {
   open: boolean;
   messages: RelayMessage[];
@@ -39,7 +55,10 @@ export function RelayPanel({
   onConfirm: () => void;
   onCorrect: () => void;
   onCloseMobile?: () => void;
+  /** When messaging from People, target this person. */
+  coordFocusPersonId?: string | null;
 }) {
+  const space = resolveCareSpace(loadActiveCareRecipientId());
   const [mode, setMode] = useState<RelayMode>("relay");
   const [coord, setCoord] = useState<
     Array<{ id: string; from: string; body: string; at: string }>
@@ -47,29 +66,51 @@ export function RelayPanel({
   const [coordDraft, setCoordDraft] = useState("");
   const [coordBusy, setCoordBusy] = useState(false);
   const [coordErr, setCoordErr] = useState<string | null>(null);
+  const [coordTo, setCoordTo] = useState(coordFocusPersonId ?? people.maya.id);
+
+  useEffect(() => {
+    if (coordFocusPersonId) {
+      setCoordTo(coordFocusPersonId);
+      setMode("messages");
+    }
+  }, [coordFocusPersonId]);
 
   useEffect(() => {
     if (mode !== "messages") return;
     void fetchCoordination().then((r) => {
-      if (r.ok) setCoord(r.messages);
+      if (r.ok) {
+        setCoord(r.messages.filter((m) => !isTestPollution(m.body)));
+      }
     });
   }, [mode]);
 
   async function sendCoord() {
     const text = coordDraft.trim();
     if (!text || coordBusy) return;
+    if (isTestPollution(text)) {
+      setCoordErr("Please write a real care note for the circle.");
+      return;
+    }
     setCoordBusy(true);
     setCoordErr(null);
-    const res = await postCoordination(text, people.maya.id);
+    const res = await postCoordination(text, coordTo);
     setCoordBusy(false);
     if (!res.ok) {
-      setCoordErr(res.message ?? "Failed to post");
+      setCoordErr(res.message ?? "Could not send");
       return;
     }
     setCoordDraft("");
     const r = await fetchCoordination();
-    if (r.ok) setCoord(r.messages);
+    if (r.ok) {
+      setCoord(r.messages.filter((m) => !isTestPollution(m.body)));
+    }
   }
+
+  const placeholder = busy
+    ? "Relay is working…"
+    : correcting
+      ? "Describe the correction…"
+      : `Ask about ${space.preferredName} or share an update…`;
 
   return (
     <aside
@@ -86,9 +127,9 @@ export function RelayPanel({
           <div className="relay-panel-sub">
             {mode === "relay"
               ? correcting
-                ? "Correction mode — prior evidence stays on record"
-                : "AI · organizes updates · holds uncertainty · asks you to verify"
-              : "Human coordination · principal-attributed · care-scoped"}
+                ? "Correction mode. Prior evidence stays on record."
+                : `Ask or update about ${space.displayName}`
+              : `Messages with ${space.displayName}'s care circle`}
           </div>
         </div>
         {onCloseMobile && (
@@ -117,7 +158,7 @@ export function RelayPanel({
           data-testid="relay-mode-ai"
           onClick={() => setMode("relay")}
         >
-          Relay (AI)
+          Relay
         </button>
         <button
           type="button"
@@ -163,54 +204,85 @@ export function RelayPanel({
           </div>
 
           <div className="relay-composer-wrap" data-testid="composer-dock">
-            <p className="muted" style={{ fontSize: "0.75rem", margin: "0 0 8px" }}>
-              Type what happened in your own words.
+            <p
+              className="muted"
+              style={{ fontSize: "0.75rem", margin: "0 0 8px" }}
+            >
+              Ask a question or share what you observed. Relay organizes and asks
+              you to verify anything consequential.
             </p>
             <Composer
               value={draft}
               onChange={onDraftChange}
               onSubmit={onSubmit}
               onVoiceMeta={onVoiceMeta}
-              placeholder={
-                busy
-                  ? "Relay is organizing what you said…"
-                  : correcting
-                    ? "Type the correction…"
-                    : "Tell Relay what happened…"
-              }
+              placeholder={placeholder}
             />
           </div>
         </>
       ) : (
         <div className="relay-thread" data-testid="human-messages">
           <div className="bubble bubble-system">
-            Human coordination for {careRecipient.displayName}. Not AI. Messages
-            are attributed to the signed-in principal and persisted server-side.
+            Human coordination for {space.displayName}. Messages are from people
+            in the care circle, not AI.
           </div>
-          {coord.map((m) => (
-            <div key={m.id} className="bubble bubble-user" data-testid="coord-msg">
-              <strong>{m.from}</strong>
-              {"\n"}
-              {m.body}
-              {"\n"}
-              <span className="muted" style={{ fontSize: "0.75rem" }}>
-                {m.at}
-              </span>
-            </div>
-          ))}
-          {coordErr && (
-            <p className="attention-limit" role="alert">
-              {coordErr}
+          {coord.length === 0 && (
+            <p className="muted" style={{ padding: "8px 4px" }}>
+              No messages yet. Share a practical update for the next person on
+              duty.
             </p>
           )}
+          {coord.map((m) => {
+            const fromName = resolvePersonName(undefined, m.from) || m.from;
+            const accent = SENDER_ACCENT[fromName] ?? "coord-accent-default";
+            return (
+              <div
+                key={m.id}
+                className={`bubble bubble-coord ${accent}`}
+                data-testid="coord-msg"
+              >
+                <div className="coord-meta">
+                  <strong>{fromName}</strong>
+                  <span className="muted" style={{ fontSize: "0.75rem" }}>
+                    {m.at}
+                  </span>
+                </div>
+                <div>{m.body}</div>
+              </div>
+            );
+          })}
           <div className="relay-composer-wrap">
+            <label className="muted" style={{ fontSize: "0.75rem" }}>
+              To
+              <select
+                value={coordTo}
+                onChange={(e) => setCoordTo(e.target.value)}
+                style={{
+                  display: "block",
+                  width: "100%",
+                  marginTop: 4,
+                  marginBottom: 8,
+                  minHeight: 40,
+                }}
+                data-testid="coord-to"
+              >
+                <option value={people.maya.id}>Maya Bennett</option>
+                <option value={people.daniel.id}>Daniel Kim</option>
+                <option value={people.marcus.id}>Marcus Carter</option>
+              </select>
+            </label>
+            {coordErr && (
+              <p className="attention-limit" role="alert">
+                {coordErr}
+              </p>
+            )}
             <textarea
               data-testid="coord-input"
               value={coordDraft}
               onChange={(e) => setCoordDraft(e.target.value)}
+              placeholder={`Write to ${resolvePersonName(coordTo)} about ${space.preferredName}…`}
               rows={3}
-              placeholder="Write a coordination note for the care circle…"
-              style={{ width: "100%", fontFamily: "var(--cr-font)" }}
+              style={{ width: "100%", marginBottom: 8 }}
             />
             <button
               type="button"
@@ -219,7 +291,7 @@ export function RelayPanel({
               disabled={coordBusy || !coordDraft.trim()}
               onClick={() => void sendCoord()}
             >
-              {coordBusy ? "Posting…" : "Post coordination"}
+              {coordBusy ? "Sending…" : "Send message"}
             </button>
           </div>
         </div>

@@ -26,6 +26,12 @@ import { CarePage } from "./pages/CarePage";
 import { PeoplePage } from "./pages/PeoplePage";
 import { DocumentsPage } from "./pages/DocumentsPage";
 import { people } from "./scenario/olivia";
+import {
+  listAuthorizedCareSpaces,
+  loadActiveCareRecipientId,
+  resolveCareSpace,
+  saveActiveCareRecipientId,
+} from "./lib/careContext";
 
 function nowLabel() {
   return new Date().toLocaleTimeString([], {
@@ -76,18 +82,27 @@ export function App() {
   const [careFocus, setCareFocus] = useState<
     "medication" | "task" | "general" | null
   >(null);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [activeRecipientId, setActiveRecipientId] = useState(
+    loadActiveCareRecipientId(),
+  );
+  const [coordFocusPersonId, setCoordFocusPersonId] = useState<string | null>(
+    null,
+  );
+  const activeSpace = resolveCareSpace(activeRecipientId);
 
   useEffect(() => {
     void restoreSession().then((s) => {
       setSession(s);
       setAuthReady(true);
       if (s) {
+        const space = resolveCareSpace(loadActiveCareRecipientId());
         setMessages([
           {
             id: "m0",
             role: "relay",
             at: nowLabel(),
-            text: `Signed in as ${s.displayName} (${s.roleLabel}).\n\nI'm here for ${careRecipient.displayName}'s care. Tell me what happened in plain language — I'll organize it and ask you to verify anything consequential.`,
+            text: `Signed in as ${s.displayName} (${s.roleLabel}).\n\nI'm here for ${space.displayName}'s care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.`,
           },
         ]);
       }
@@ -154,12 +169,13 @@ export function App() {
       <LoginGate
         onAuthenticated={(s) => {
           setSession(s);
+          const space = resolveCareSpace(loadActiveCareRecipientId());
           setMessages([
             {
               id: "m0",
               role: "relay",
               at: nowLabel(),
-              text: `Signed in as ${s.displayName} (${s.roleLabel}).\n\nI'm here for ${careRecipient.displayName}'s care. Tell me what happened in plain language — I'll organize it and ask you to verify anything consequential.`,
+              text: `Signed in as ${s.displayName} (${s.roleLabel}).\n\nI'm here for ${space.displayName}'s care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.`,
             },
           ]);
           setTodayRefresh((n) => n + 1);
@@ -174,18 +190,44 @@ export function App() {
     setMessages([]);
     setBundle(null);
     setShowHandoff(false);
+    setProfileOpen(false);
   }
 
   function openRelay() {
     setRelayOpen(true);
+    // Focus composer after panel opens
+    window.setTimeout(() => {
+      const el = document.querySelector(
+        '[data-testid="composer-input"]',
+      ) as HTMLTextAreaElement | null;
+      el?.focus();
+    }, 80);
   }
 
-  /** Product path: open Relay for natural language — never prefill a demo script. */
+  /** Product path: open Relay for ask/tell — never prefill a demo script. */
   function openRelayForCareUpdate() {
     setDraft("");
     setVoiceMeta(undefined);
     setCorrecting(false);
+    setCoordFocusPersonId(null);
     openRelay();
+  }
+
+  function switchRecipient(id: string) {
+    saveActiveCareRecipientId(id);
+    setActiveRecipientId(id);
+    setProfileOpen(false);
+    setTodayRefresh((n) => n + 1);
+    const space = resolveCareSpace(id);
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `sys-switch-${Date.now()}`,
+        role: "system",
+        at: nowLabel(),
+        text: `Switched care context to ${space.displayName}. Questions and updates now use this recipient.`,
+      },
+    ]);
   }
 
   async function openLatestHandoff() {
@@ -350,7 +392,7 @@ export function App() {
           {
             id: `s-${Date.now()}`,
             role: "system",
-            text: `Saved. ${careRecipient.displayName}'s care picture is updated, and ${people.maya.displayName} can receive lay→lay continuity from this.`,
+            text: `Saved. ${activeSpace.displayName}'s care picture is updated. A care handoff is ready for ${people.maya.displayName} to review.`,
             at: nowLabel(),
           },
         ]);
@@ -438,7 +480,7 @@ export function App() {
         <div className="topbar-center">
           <div className="recipient-chip" data-testid="care-recipient-chip">
             <span className="avatar-3d" aria-hidden>
-              E
+              {activeSpace.preferredName.charAt(0)}
             </span>
             <div style={{ minWidth: 0 }}>
               <div
@@ -452,10 +494,16 @@ export function App() {
               >
                 Caring for
               </div>
-              <div data-testid="care-recipient-label" style={{ lineHeight: 1.2, fontWeight: 700 }}>
-                {careRecipient.displayName}
+              <div
+                data-testid="care-recipient-label"
+                style={{ lineHeight: 1.2, fontWeight: 700 }}
+              >
+                {activeSpace.displayName}
               </div>
-              <div className="muted" style={{ fontSize: "0.75rem", fontWeight: 500 }}>
+              <div
+                className="muted"
+                style={{ fontSize: "0.75rem", fontWeight: 500 }}
+              >
                 Care recipient
               </div>
             </div>
@@ -478,7 +526,7 @@ export function App() {
             type="button"
             className="relay-drawer-toggle"
             data-testid="relay-open-mobile"
-            onClick={() => setRelayOpen(true)}
+            onClick={() => openRelayForCareUpdate()}
           >
             <span className="relay-pulse" aria-hidden />
             Relay
@@ -494,24 +542,72 @@ export function App() {
               · {session.roleLabel}
             </span>
           </span>
-          <button
-            type="button"
-            className="secondary-btn"
-            data-testid="sign-out"
-            onClick={signOut}
-            style={{ minHeight: 40, fontSize: "0.8rem", padding: "0 16px" }}
+          <div className="profile-menu-wrap">
+            <button
+              type="button"
+              className="avatar-btn"
+              data-testid="profile-menu-btn"
+              aria-haspopup="menu"
+              aria-expanded={profileOpen}
+              aria-label={`Account menu for ${session.displayName}`}
+              title={`${session.displayName} · ${session.roleLabel}`}
+              onClick={() => setProfileOpen((v) => !v)}
+            >
+              {(session.displayName[0] ?? "U").toUpperCase()}
+            </button>
+            {profileOpen && (
+              <div
+                className="profile-menu"
+                role="menu"
+                data-testid="profile-menu"
+              >
+                <div className="profile-menu-head">
+                  <strong>{session.displayName}</strong>
+                  <span className="muted">{session.roleLabel}</span>
+                  <span className="muted">
+                    Caring for {activeSpace.displayName}
+                  </span>
+                </div>
+                <div className="profile-menu-section">
+                  <div className="profile-menu-label">Switch care recipient</div>
+                  {listAuthorizedCareSpaces(session.carePersonId).map((s) => (
+                    <button
+                      key={s.careRecipientId}
+                      type="button"
+                      role="menuitem"
+                      className={
+                        s.careRecipientId === activeRecipientId
+                          ? "profile-menu-item is-active"
+                          : "profile-menu-item"
+                      }
+                      data-testid={`switch-recipient-${s.careRecipientId}`}
+                      onClick={() => switchRecipient(s.careRecipientId)}
+                    >
+                      {s.displayName}
+                      {s.depth === "lightweight" ? " (demo)" : ""}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  role="menuitem"
+                  className="profile-menu-item"
+                  data-testid="sign-out"
+                  onClick={signOut}
+                >
+                  Sign out
+                </button>
+              </div>
+            )}
+          </div>
+          <span
+            className="connection-status"
+            title="System connection"
+            data-testid="connection-status"
           >
-            Sign out
-          </button>
-          <button
-            type="button"
-            className="avatar-btn"
-            aria-label={`Signed in as ${session.displayName}, ${session.roleLabel} for ${careRecipient.displayName}`}
-            title={`${session.displayName} · ${session.roleLabel}`}
-          >
-            {(session.displayName[0] ?? "U").toUpperCase()}
-          </button>
-          <span className="live-dot" title="Connected" aria-hidden />
+            <span className="connection-dot" aria-hidden />
+            <span className="connection-label">Connected</span>
+          </span>
         </div>
       </header>
 
@@ -529,7 +625,28 @@ export function App() {
             />
           )}
           {workspaceTab === "care" && <CarePage focusKind={careFocus} />}
-          {workspaceTab === "people" && <PeoplePage />}
+          {workspaceTab === "people" && (
+            <PeoplePage
+              onMessagePerson={(personId) => {
+                setCoordFocusPersonId(personId);
+                setRelayOpen(true);
+              }}
+              onPrepareHandoff={() => void openLatestHandoff()}
+              onOpenRelayForProvider={() => {
+                setDraft("");
+                setMessages((prev) => [
+                  ...prev,
+                  {
+                    id: `sys-provider-${Date.now()}`,
+                    role: "system",
+                    at: nowLabel(),
+                    text: `Ask Relay to prepare a clinic update for Dr. Shah, or type what you want included about ${activeSpace.displayName}.`,
+                  },
+                ]);
+                openRelay();
+              }}
+            />
+          )}
           {workspaceTab === "documents" && <DocumentsPage />}
 
           {showHandoff && (
@@ -540,7 +657,7 @@ export function App() {
               loading={handoffLoading}
               emptyReason={
                 liveHandoff === null
-                  ? "No handoff has been persisted for this care recipient yet."
+                  ? `No care handoff has been saved for ${activeSpace.displayName} yet.`
                   : null
               }
             />
@@ -553,6 +670,13 @@ export function App() {
           className="overlay-scrim"
           aria-hidden
           onClick={() => setRelayOpen(false)}
+        />
+      )}
+      {profileOpen && (
+        <div
+          className="overlay-scrim profile-scrim"
+          aria-hidden
+          onClick={() => setProfileOpen(false)}
         />
       )}
 
@@ -570,15 +694,19 @@ export function App() {
         onConfirm={() => void confirmLooksRight()}
         onCorrect={startCorrection}
         onCloseMobile={() => setRelayOpen(false)}
+        coordFocusPersonId={coordFocusPersonId}
       />
 
-      <BottomNav tab={tab === "relay" ? "relay" : workspaceTab} onChange={onNavChange} />
+      <BottomNav
+        tab={tab === "relay" ? "relay" : workspaceTab}
+        onChange={onNavChange}
+      />
 
       <footer className="status-bar">
         <span>
-          {session.displayName} · caring for {careRecipient.displayName}
+          {session.displayName} · caring for {activeSpace.displayName}
         </span>
-        <span>Not medical advice · human verifies care truth</span>
+        <span>Not medical advice · you verify care truth</span>
       </footer>
     </div>
   );

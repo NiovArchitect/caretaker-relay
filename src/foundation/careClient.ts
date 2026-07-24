@@ -970,13 +970,16 @@ export async function answerCareQuestion(question: string): Promise<string> {
   }
 
   const proj = await fetchTodayProjection();
-  if (/what changed|since this morning|since yesterday|what happened|since i was last|caught up|going on/.test(q)) {
+  const name = careRecipient.displayName;
+  const state = await fetchCareState();
+
+  if (/what changed|since this morning|since yesterday|what happened|since i was last|caught up|going on|changed this week|since maya/.test(q)) {
     if (proj.whatChanged.length === 0) {
-      return `I don't have new confirmed changes for ${careRecipient.displayName} yet. Tell me what happened and I'll organize it.`;
+      return `I don't have new confirmed changes for ${name} yet. Share an update and I'll organize it.`;
     }
-    return `Here's what changed for ${careRecipient.displayName}:\n${proj.whatChanged.map((l) => `• ${l}`).join("\n")}`;
+    return `Here's what changed for ${name}:\n${proj.whatChanged.map((l) => `• ${l}`).join("\n")}`;
   }
-  if (/still need|outstanding|left to do|needs me|need to happen/.test(q)) {
+  if (/still need|outstanding|left to do|needs me|need to happen|waiting for me|need to verify/.test(q)) {
     const lines =
       proj.attention.length > 0
         ? proj.attention.map((a) => a.title)
@@ -986,24 +989,87 @@ export async function answerCareQuestion(question: string): Promise<string> {
     }
     return `Still needs attention:\n${lines.map((l) => `• ${l}`).join("\n")}`;
   }
-  if (/what should maya|tell maya|for maya|maya know/.test(q)) {
+  if (/what should (i )?(tell )?daniel|for daniel|daniel before/.test(q)) {
+    const handoff = getLatestHandoff();
+    const bits = [
+      ...(handoff?.whatChanged ?? []).slice(0, 3),
+      ...proj.whatChanged.slice(0, 2),
+    ];
+    if (bits.length === 0) {
+      return `I don't have a prepared brief for Daniel yet. Share what happened during your time with ${name}, and I can organize it.`;
+    }
+    return `What to tell Daniel before he arrives:\n${bits.map((l) => `• ${l}`).join("\n")}\n\nThis is for your review, not automatically sent.`;
+  }
+  if (/what should maya|tell maya|for maya|maya know|prepare.*handoff|update for maya/.test(q)) {
     const handoff = getLatestHandoff();
     if (handoff?.whatChanged?.length) {
-      return `For Maya, here's the continuity picture:\n${handoff.whatChanged.map((l) => `• ${l}`).join("\n")}\n\nThis is prepared for review — not automatically sent as a message.`;
+      return `Update for Maya (care handoff):\n${handoff.whatChanged.map((l) => `• ${l}`).join("\n")}\n\nPrepared for review, not automatically sent as a message.`;
     }
-    return "I can prepare an update for Maya after you confirm a care update. Tell me what happened today.";
+    return "I can prepare an update for Maya after you confirm a care update. Share what happened today.";
+  }
+  if (/dr\.?\s*shah|provider|clinic update|prepare an update for dr/.test(q)) {
+    const meds = state.medicationSchedules
+      .map((m) => `${String(m.name ?? "Medication")}: ${String(m.dose ?? "")} ${String(m.scheduleLabel ?? "")}`.trim())
+      .filter(Boolean);
+    const open = proj.attention.map((a) => a.title);
+    return [
+      `Clinic-oriented picture for ${name} (for Dr. Shah):`,
+      meds.length ? `Medications on file:\n${meds.map((m) => `• ${m}`).join("\n")}` : "• No medication schedule on file",
+      open.length ? `Open items needing human check:\n${open.map((l) => `• ${l}`).join("\n")}` : "• No open attention items",
+      `Recent changes:\n${(proj.whatChanged.slice(0, 4).map((l) => `• ${l}`).join("\n") || "• none listed")}`,
+      "This is a caregiver-prepared summary, not a clinical order. Review before sharing.",
+    ].join("\n");
+  }
+  if (/medication|meds|metformin|dose|lunch medication|already give|gave her/.test(q)) {
+    const schedules = state.medicationSchedules;
+    if (!schedules.length) {
+      return `I don't have a medication schedule on file for ${name} yet.`;
+    }
+    const lines = schedules.map((m) => {
+      const nameMed = String(m.name ?? "Medication");
+      const dose = String(m.dose ?? "");
+      const when =
+        String(m.scheduleTime ?? m.nextDueLabel ?? m.scheduleLabel ?? "");
+      const window =
+        m.windowStart && m.windowEnd
+          ? ` Window ${String(m.windowStart)} – ${String(m.windowEnd)}.`
+          : "";
+      const meal = m.mealRelation ? ` ${String(m.mealRelation)}.` : "";
+      const by = m.authorizedBy ? ` Authorized by ${String(m.authorizedBy)}.` : "";
+      return `• ${nameMed}${dose ? ` ${dose}` : ""}${when ? ` · ${when}` : ""}.${meal}${window}${by}`;
+    });
+    const last = state.medicationRecords.slice(-1)[0];
+    const lastLine = last
+      ? `\nLast reported administration: ${String(last.recordedDose ?? last.doseRecorded ?? "recorded")} at ${String(last.occurredAt ?? last.administeredAt ?? "unknown time")}.`
+      : "";
+    return `Medications for ${name} today:\n${lines.join("\n")}${lastLine}`;
   }
   if (/appointment|pt|physical therapy|next appointment/.test(q)) {
+    const apts = state.appointments;
+    if (apts.length) {
+      return apts
+        .map((a) => {
+          const title = String(a.title ?? "Appointment");
+          const when = String(a.startsAtLabel ?? a.startsAt ?? "");
+          const loc = a.location ? ` · ${String(a.location)}` : "";
+          const st = a.status ? ` · ${String(a.status)}` : "";
+          const prev = a.previousStartsAtLabel
+            ? `\n  Changed from: ${String(a.previousStartsAtLabel)}`
+            : "";
+          return `• ${title}\n  ${when}${loc}${st}${prev}`;
+        })
+        .join("\n");
+    }
     const hit = proj.whatChanged.find((l) =>
       /pt|therapy|appointment|maya visit|2:30|3:00/i.test(l),
     );
     return hit
       ? `Schedule note: ${hit}`
-      : "I don't have a confirmed appointment change on file yet. You can tell me if something moved.";
+      : "I don't have a confirmed appointment on file yet. You can tell me if something moved.";
   }
-  if (/summarize|summary|the day/.test(q)) {
+  if (/summarize|summary|the day|prepare an update/.test(q)) {
     return [
-      `Day picture for ${careRecipient.displayName}:`,
+      `Day picture for ${name}:`,
       proj.attention[0]
         ? `Needs you: ${proj.attention[0].title}`
         : "Needs you: nothing urgent flagged",
@@ -1012,7 +1078,7 @@ export async function answerCareQuestion(question: string): Promise<string> {
     ].join("\n");
   }
   if (/why.*(confirm|check|verify)|where did this/.test(q)) {
-    return "I ask you to confirm when something is consequential — especially medication — so we don't turn a guess into care truth. Sources stay attached to what we save.";
+    return "I ask you to confirm when something is consequential, especially medication, so we don't turn a guess into care truth. Sources stay attached to what we save.";
   }
   // Not a known question shape — return empty so caller can run understand path
   return "";

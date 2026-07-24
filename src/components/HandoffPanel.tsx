@@ -1,5 +1,6 @@
 import type { CareHandoff } from "../domain/types";
-import { careRecipient, people } from "../scenario/olivia";
+import { resolvePersonName } from "../lib/identity";
+import { loadActiveCareRecipientId, resolveCareSpace } from "../lib/careContext";
 
 export function HandoffPanel({
   onClose,
@@ -16,19 +17,10 @@ export function HandoffPanel({
   /** When no server handoff exists. */
   emptyReason?: string | null;
 }) {
+  const space = resolveCareSpace(loadActiveCareRecipientId());
   const h = liveHandoff ?? null;
-  const fromName =
-    h?.fromPersonId === people.maya.id
-      ? people.maya.displayName
-      : h?.fromPersonId === people.daniel.id
-        ? people.daniel.displayName
-        : people.marcus.displayName;
-  const toName =
-    h?.toPersonId === people.marcus.id
-      ? people.marcus.displayName
-      : h?.toPersonId === people.daniel.id
-        ? people.daniel.displayName
-        : people.maya.displayName;
+  const fromName = resolvePersonName(h?.fromPersonId, "Marcus Carter");
+  const toName = resolvePersonName(h?.toPersonId, "Maya Bennett");
   const sourceLine =
     h && h.sources.length > 0
       ? h.sources
@@ -39,17 +31,17 @@ export function HandoffPanel({
 
   const statusLabel =
     status === "reviewed"
-      ? "You reviewed this continuity summary."
+      ? "You reviewed this care handoff."
       : status === "ready"
-        ? "Ready for the next caregiver — still under your control."
+        ? "Ready for the next caregiver. Still under your control."
         : status === "shared"
           ? "Available to the authorized next caregiver in this care space."
-          : "Prepared from current care context — not automatically sent as a message.";
+          : "Prepared from current care context. Not automatically sent as a message.";
 
   if (loading) {
     return (
       <section className="section handoff-hero" data-testid="handoff-panel">
-        <p className="muted">Loading latest handoff from care API…</p>
+        <p className="muted">Loading latest care handoff…</p>
         <button type="button" className="secondary-btn" onClick={onClose}>
           Close
         </button>
@@ -73,11 +65,11 @@ export function HandoffPanel({
             letterSpacing: "-0.02em",
           }}
         >
-          No handoff yet
+          No care handoff yet
         </h2>
         <p className="muted" data-testid="handoff-empty">
           {emptyReason ??
-            `No persisted handoff for ${careRecipient.displayName}. Confirm a care update (with continuity for the next caregiver) to create one. Static demo handoffs are not used.`}
+            `No handoff is saved for ${space.displayName} yet. Confirm a care update (with continuity for the next caregiver) to create one.`}
         </p>
         <button type="button" className="secondary-btn" onClick={onClose}>
           Close
@@ -111,7 +103,7 @@ export function HandoffPanel({
               textTransform: "uppercase",
             }}
           >
-            Lay → lay continuity · {careRecipient.displayName}
+            Care handoff · {space.displayName}
           </p>
           <h2
             style={{
@@ -123,10 +115,10 @@ export function HandoffPanel({
             }}
             data-testid="handoff-title"
           >
-            {toName} — here&apos;s what changed
+            Update for {toName}
           </h2>
           <p className="muted" style={{ margin: "4px 0 0", fontSize: "0.85rem" }}>
-            From {fromName} · handoff id {h.id}
+            From {fromName} · what {toName} needs to know
           </p>
         </div>
         <button type="button" className="secondary-btn" onClick={onClose}>
@@ -178,22 +170,10 @@ export function HandoffPanel({
       </p>
 
       <div className="btn-row">
-        <button
-          type="button"
-          className="primary-btn"
-          data-testid="handoff-caught-up"
-          onClick={onClose}
-        >
-          Continuity looks right
-        </button>
         <button type="button" className="secondary-btn" onClick={onClose}>
-          Keep reviewing
+          Close
         </button>
       </div>
-      <p className="muted" style={{ fontSize: "0.78rem", marginTop: 8 }}>
-        Family → family handoff is first-class. This panel only shows handoffs
-        that were persisted for this care recipient.
-      </p>
     </section>
   );
 }

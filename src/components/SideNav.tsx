@@ -32,7 +32,7 @@ export function SideNav({
           <span>{item.label}</span>
         </button>
       ))}
-      <div className="sidenav-foot">One person at the center of care.</div>
+      <div className="sidenav-foot">Care for who needs you today.</div>
     </nav>
   );
 }

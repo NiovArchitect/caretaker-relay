@@ -1,10 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { today } from "../scenario/olivia";
 import {
   fetchTodayProjection,
   getSessionIdentity,
   type TodayAttentionItem,
 } from "../foundation/careClient";
+import {
+  buildAttentionNotifications,
+  kindIcon,
+  kindLabel,
+  severityClass,
+} from "../lib/notifications";
+import { resolveCareSpace, loadActiveCareRecipientId } from "../lib/careContext";
 
 export function TodayPage({
   relayHandled,
@@ -15,12 +22,14 @@ export function TodayPage({
 }: {
   relayHandled: string[];
   onOpenHandoff: () => void;
-  /** Open Relay for natural language — empty composer, not a scripted prompt. */
+  /** Focus Relay composer for ask or tell — never prefill scripted text. */
   onOpenRelay: () => void;
   refreshKey?: number;
   onReviewAttention?: (item: TodayAttentionItem) => void;
 }) {
   const session = getSessionIdentity();
+  const space = resolveCareSpace(loadActiveCareRecipientId());
+  const recipientName = space.displayName;
   const [proj, setProj] = useState<{
     needsYou: string[];
     attention: TodayAttentionItem[];
@@ -31,6 +40,7 @@ export function TodayPage({
     storeBackend?: string;
     organizedCount?: number;
   } | null>(null);
+  const [acked, setAcked] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     let cancelled = false;
@@ -72,33 +82,55 @@ export function TodayPage({
   const next = proj && proj.next.length > 0 ? proj.next : [];
   const organizedCount = proj?.organizedCount ?? whatChanged.length;
 
+  const notifications = useMemo(
+    () =>
+      buildAttentionNotifications({
+        careRecipientId: space.careRecipientId,
+        careRecipientName: recipientName,
+        attention,
+        next,
+      }).filter((n) => !acked.has(n.id)),
+    [attention, next, space.careRecipientId, recipientName, acked],
+  );
+
   return (
     <>
-      {/* Dominant care environment — not a dashboard tile stack */}
       <section className="today-hero" aria-label="Care context for today">
         <div className="today-hero-kicker">Today</div>
         <h1 data-testid="today-greeting" className="today-hero-recipient">
-          <span data-testid="care-recipient-label">
-            {today.careRecipient.displayName}
-          </span>
+          <span data-testid="care-recipient-label">{recipientName}</span>
         </h1>
         <div className="today-hero-caregiver">
           <span>
             You are{" "}
-            <strong data-testid="today-caregiver-name">{session.displayName}</strong>
+            <strong data-testid="today-caregiver-name">
+              {session.displayName}
+            </strong>
           </span>
           <span className="badge badge-teal">{session.roleLabel}</span>
         </div>
-        <div className="today-hero-glass-row">
-          <div className="today-hero-glass">
-            <div className="label">Focus</div>
-            <div className="value">One shared care picture at home</div>
+
+        <div className="today-command-strip" data-testid="today-command-strip">
+          <div className="today-command-cell">
+            <div className="label">Who</div>
+            <div className="value">{recipientName}</div>
           </div>
-          <div className="today-hero-glass">
-            <div className="label">Relay</div>
-            <div className="value">Understands · holds uncertainty · asks you</div>
+          <div className="today-command-cell">
+            <div className="label">Attention</div>
+            <div className="value">
+              {notifications.length === 0
+                ? "Nothing urgent"
+                : `${notifications.length} item${notifications.length === 1 ? "" : "s"}`}
+            </div>
+          </div>
+          <div className="today-command-cell">
+            <div className="label">Coming up</div>
+            <div className="value">
+              {next[0] ?? "See schedule in Care"}
+            </div>
           </div>
         </div>
+
         {proj && (
           <span
             data-testid="today-source"
@@ -115,7 +147,7 @@ export function TodayPage({
             data-testid="try-care-update-top"
             onClick={onOpenRelay}
           >
-            Tell Relay what happened
+            Ask or update Relay
           </button>
           <button
             type="button"
@@ -123,7 +155,7 @@ export function TodayPage({
             data-testid="review-handoff"
             onClick={onOpenHandoff}
           >
-            Review latest handoff
+            Review care handoff
           </button>
         </div>
       </section>
@@ -134,52 +166,105 @@ export function TodayPage({
         data-testid="needs-attention-section"
       >
         <h2 id="needs-you">Needs attention</h2>
-        {attention.length === 0 ? (
+        {notifications.length === 0 ? (
           <p className="muted">Nothing urgent right now.</p>
         ) : (
-          attention.map((item, idx) => (
-            <article
-              key={item.id}
-              className={`attention-card${item.kind === "medication" ? " attention-card-med" : ""}`}
-              data-testid="attention-card"
-              data-kind={item.kind}
-              style={idx === 0 ? { transform: "translateZ(0)" } : undefined}
-            >
-              <div className="badge badge-orange" style={{ marginBottom: 8 }}>
-                Needs your judgment
-              </div>
-              <h3 className="item-title">{item.title}</h3>
-              <p className="attention-body">{item.whatHappened}</p>
-              {item.whySurfaced && (
-                <p className="muted attention-why">{item.whySurfaced}</p>
-              )}
-              {item.relayDoesNotKnow && (
-                <p className="attention-limit" role="status">
-                  {item.kind === "medication" ? (
-                    <>
-                      <strong>Relay did not choose or invent a dose.</strong>{" "}
-                      {item.relayDoesNotKnow}
-                    </>
-                  ) : (
-                    item.relayDoesNotKnow
-                  )}
-                </p>
-              )}
-              <div className="btn-row">
-                <button
-                  type="button"
-                  className="secondary-btn"
-                  data-testid="attention-review"
-                  onClick={() => onReviewAttention?.(item)}
-                >
-                  {item.kind === "medication"
-                    ? "Open medication in Care"
-                    : "Open in Care"}
-                </button>
-              </div>
-            </article>
-          ))
+          notifications.map((n, idx) => {
+            const item = attention.find((a) => a.id === n.id);
+            return (
+              <article
+                key={n.id}
+                className={`attention-card ${severityClass(n.severity)}${
+                  n.severity === "urgent" && !n.acknowledged
+                    ? " cr-notify-pulse"
+                    : ""
+                }`}
+                data-testid="attention-card"
+                data-kind={n.kind}
+                data-severity={n.severity}
+                style={idx === 0 ? { transform: "translateZ(0)" } : undefined}
+              >
+                <div className="cr-notify-meta">
+                  <span className="cr-notify-icon" aria-hidden>
+                    {kindIcon(n.kind)}
+                  </span>
+                  <span className={`badge ${n.severity === "urgent" ? "badge-rose" : "badge-coral"}`}>
+                    {kindLabel(n.kind)}
+                  </span>
+                  <span className="sr-only">
+                    {n.severity === "urgent"
+                      ? "Urgent care attention"
+                      : "Needs attention"}
+                  </span>
+                </div>
+                <h3 className="item-title">{n.title}</h3>
+                <p className="attention-body">{n.description}</p>
+                {item?.whySurfaced && (
+                  <p className="muted attention-why">{item.whySurfaced}</p>
+                )}
+                {item?.relayDoesNotKnow && (
+                  <p className="attention-limit" role="status">
+                    {item.kind === "medication" ? (
+                      <>
+                        <strong>Relay did not choose a dose.</strong>{" "}
+                        {item.relayDoesNotKnow}
+                      </>
+                    ) : (
+                      item.relayDoesNotKnow
+                    )}
+                  </p>
+                )}
+                <div className="btn-row">
+                  <button
+                    type="button"
+                    className="secondary-btn"
+                    data-testid="attention-review"
+                    onClick={() => {
+                      setAcked((prev) => new Set(prev).add(n.id));
+                      if (item) onReviewAttention?.(item);
+                      else onReviewAttention?.({
+                        id: n.id,
+                        title: n.title,
+                        whatHappened: n.description,
+                        whySurfaced: "",
+                        relayKnows: "",
+                        relayDoesNotKnow: "",
+                        nextStep: n.actionLabel,
+                        kind:
+                          n.kind === "medication_due" ? "medication" : "general",
+                      });
+                    }}
+                  >
+                    {n.actionLabel}
+                  </button>
+                  <button
+                    type="button"
+                    className="ghost-btn"
+                    data-testid="attention-ack"
+                    onClick={() =>
+                      setAcked((prev) => new Set(prev).add(n.id))
+                    }
+                  >
+                    Mark seen
+                  </button>
+                </div>
+              </article>
+            );
+          })
         )}
+      </section>
+
+      <section className="section surface-reported" aria-labelledby="coming-up">
+        <h2 id="coming-up">Coming up</h2>
+        <ul className="list-plain" data-testid="next-list">
+          {next.length === 0 ? (
+            <li className="muted">
+              Open Care for medications and appointments, or ask Relay.
+            </li>
+          ) : (
+            next.map((line) => <li key={line}>{line}</li>)
+          )}
+        </ul>
       </section>
 
       <section className="section surface-reported" aria-labelledby="since">
@@ -187,7 +272,7 @@ export function TodayPage({
         {organizedCount > 0 && (
           <p className="muted" data-testid="organized-count">
             {organizedCount} update{organizedCount === 1 ? "" : "s"} in recent
-            care activity for {today.careRecipient.displayName}
+            care activity for {recipientName}
           </p>
         )}
         <div className="timeline" data-testid="what-changed-list">
@@ -205,7 +290,7 @@ export function TodayPage({
 
       <div className="pair-grid">
         <section className="section surface-known" aria-labelledby="handled">
-          <h2 id="handled">What Relay handled</h2>
+          <h2 id="handled">What Relay organized</h2>
           <ul className="list-plain" data-testid="already-handled-list">
             {handled.length === 0 ? (
               <li className="muted">Nothing listed yet</li>
@@ -215,15 +300,11 @@ export function TodayPage({
           </ul>
         </section>
 
-        <section className="section surface-known" aria-labelledby="next">
-          <h2 id="next">What happens next</h2>
-          <ul className="list-plain" data-testid="next-list">
-            {next.length === 0 ? (
-              <li className="muted">Nothing listed yet</li>
-            ) : (
-              next.map((line) => <li key={line}>{line}</li>)
-            )}
-          </ul>
+        <section className="section surface-known" aria-labelledby="relay-cta">
+          <h2 id="relay-cta">Need help?</h2>
+          <p className="muted" style={{ marginBottom: 12 }}>
+            Ask about {recipientName}&apos;s care or share what you observed.
+          </p>
           <div className="btn-row">
             <button
               type="button"
@@ -231,7 +312,14 @@ export function TodayPage({
               data-testid="try-care-update"
               onClick={onOpenRelay}
             >
-              Tell Relay what happened
+              Ask or update Relay
+            </button>
+            <button
+              type="button"
+              className="secondary-btn"
+              onClick={onOpenHandoff}
+            >
+              Care handoff
             </button>
           </div>
         </section>
