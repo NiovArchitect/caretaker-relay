@@ -32,6 +32,7 @@ import {
   resolveCareSpace,
   saveActiveCareRecipientId,
 } from "./lib/careContext";
+import { setActiveCareRecipientId } from "./foundation/careClient";
 
 function nowLabel() {
   return new Date().toLocaleTimeString([], {
@@ -83,20 +84,30 @@ export function App() {
     "medication" | "task" | "general" | null
   >(null);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [activeRecipientId, setActiveRecipientId] = useState(
-    loadActiveCareRecipientId(),
-  );
+  const [activeRecipientId, setActiveRecipientId] = useState(() => {
+    const id = loadActiveCareRecipientId();
+    setActiveCareRecipientId(id);
+    return id;
+  });
   const [coordFocusPersonId, setCoordFocusPersonId] = useState<string | null>(
     null,
   );
+  const [recipientSwitching, setRecipientSwitching] = useState(false);
   const activeSpace = resolveCareSpace(activeRecipientId);
+
+  useEffect(() => {
+    setActiveCareRecipientId(activeRecipientId);
+  }, [activeRecipientId]);
 
   useEffect(() => {
     void restoreSession().then((s) => {
       setSession(s);
       setAuthReady(true);
       if (s) {
-        const space = resolveCareSpace(loadActiveCareRecipientId());
+        const id = loadActiveCareRecipientId();
+        setActiveCareRecipientId(id);
+        setActiveRecipientId(id);
+        const space = resolveCareSpace(id);
         setMessages([
           {
             id: "m0",
@@ -129,7 +140,7 @@ export function App() {
         setDraft(text);
         setVoiceMeta({ source: "text" });
       },
-      getCareRecipientId: () => careRecipient.id,
+      getCareRecipientId: () => activeRecipientId,
     };
     return () => {
       delete window.__crE2E;
@@ -214,27 +225,31 @@ export function App() {
   }
 
   function switchRecipient(id: string) {
+    if (id === activeRecipientId) {
+      setProfileOpen(false);
+      return;
+    }
+    setRecipientSwitching(true);
+    setProfileOpen(false);
+    setShowHandoff(false);
+    setBundle(null);
+    setDraft("");
+    setCoordFocusPersonId(null);
+    // Atomic: bind API client, persist, then React state so every surface reloads
+    setActiveCareRecipientId(id);
     saveActiveCareRecipientId(id);
     setActiveRecipientId(id);
-    setProfileOpen(false);
-    setTodayRefresh((n) => n + 1);
     const space = resolveCareSpace(id);
-    // Multi-recipient safety: do not carry Evelyn conversation focus into Robert
-    const principalId = session?.carePersonId ?? "p-sadeil";
-    void import("./lib/relay/conversationMemory").then((m) => {
-      // Isolation is by recipient key; ensure new space starts clean if empty
-      m.getOrCreateConversation(principalId, id);
-    });
+    setTodayRefresh((n) => n + 1);
     setMessages([
       {
         id: `sys-switch-${Date.now()}`,
         role: "system",
         at: nowLabel(),
-        text: `Switched care context to ${space.displayName}. I will not use the previous recipient's conversation as truth here.`,
+        text: `Now caring for ${space.displayName}. Everything on this screen is for them only.`,
       },
     ]);
-    setBundle(null);
-    setDraft("");
+    window.setTimeout(() => setRecipientSwitching(false), 350);
   }
 
   async function openLatestHandoff() {
@@ -621,7 +636,12 @@ export function App() {
       <SideNav tab={workspaceTab} onChange={onNavChange} />
 
       <main className="workspace" aria-label={pageTitle}>
-        <div className="workspace-inner">
+        <div className="workspace-inner" key={activeRecipientId} data-testid="active-recipient-surface" data-recipient={activeRecipientId}>
+          {recipientSwitching && (
+            <p className="muted" role="status" data-testid="recipient-switching">
+              Switching care context to {activeSpace.displayName}…
+            </p>
+          )}
           {workspaceTab === "today" && (
             <TodayPage
               relayHandled={relayHandled}

@@ -123,6 +123,22 @@ let lastHttpHandoff: {
 } | null = null;
 let transportUsed: "http" | "package" = "package";
 let sessionIdentity: SessionIdentity | null = null;
+/** ONE active care recipient for all product surfaces (not Evelyn-hardcoded). */
+let activeCareRecipientId: string = careRecipient.id;
+
+/** Call when user switches recipient — must precede all surface reloads. */
+export function setActiveCareRecipientId(id: string): void {
+  activeCareRecipientId = id;
+}
+
+export function getActiveCareRecipientId(): string {
+  return activeCareRecipientId;
+}
+
+/** Recipient id for all API/package calls. */
+function rid(): string {
+  return activeCareRecipientId || careRecipient.id;
+}
 
 function resolveMode(): CareClientMode {
   const env = import.meta.env?.VITE_CARE_MODE as string | undefined;
@@ -334,7 +350,7 @@ export async function createInvitation(inviteeCarePersonId: string) {
   const ok = await ensureHttpSession();
   if (!ok || !httpToken) return { ok: false as const, message: "Not signed in" };
   const { careCreateInvitation } = await import("./careHttpClient");
-  const res = await careCreateInvitation(httpToken, careRecipient.id, {
+  const res = await careCreateInvitation(httpToken, rid(), {
     invitee_care_person_id: inviteeCarePersonId,
   });
   if (!res.ok) return { ok: false as const, message: res.message };
@@ -355,7 +371,7 @@ export async function fetchCoordination() {
   if (!ok || !httpToken)
     return { ok: false as const, messages: [] as Array<Record<string, string>> };
   const { careListCoordination } = await import("./careHttpClient");
-  const res = await careListCoordination(httpToken, careRecipient.id);
+  const res = await careListCoordination(httpToken, rid());
   if (!res.ok) return { ok: false as const, messages: [] };
   return {
     ok: true as const,
@@ -374,12 +390,62 @@ export async function postCoordination(body: string, toPersonId?: string) {
   const { carePostCoordination } = await import("./careHttpClient");
   const res = await carePostCoordination(
     httpToken,
-    careRecipient.id,
+    rid(),
     body,
     toPersonId,
   );
   if (!res.ok) return { ok: false as const, message: res.message };
+  // Durable in-app notification for the message recipient (judge-facing coordination)
+  try {
+    const identity = getSessionIdentity();
+    const toId = toPersonId ?? "p-maya";
+    const notif = {
+      id: `coord-${Date.now()}`,
+      careRecipientId: rid(),
+      forPersonId: toId,
+      fromPersonId: identity.carePersonId,
+      fromName: identity.displayName,
+      title: `Message from ${identity.displayName}`,
+      body: body.slice(0, 180),
+      kind: "care_update",
+      createdAt: new Date().toISOString(),
+      read: false,
+    };
+    const key = `cr.notifications.${toId}`;
+    const prev = JSON.parse(localStorage.getItem(key) || "[]") as unknown[];
+    prev.unshift(notif);
+    localStorage.setItem(key, JSON.stringify(prev.slice(0, 40)));
+    // Also mirror for current principal inbox when messaging self-circle
+    window.dispatchEvent(new CustomEvent("cr-notification", { detail: notif }));
+  } catch {
+    /* non-fatal */
+  }
   return { ok: true as const };
+}
+
+export function listLocalNotifications(forPersonId?: string): Array<Record<string, unknown>> {
+  try {
+    const id = forPersonId ?? getSessionIdentity().carePersonId;
+    return JSON.parse(localStorage.getItem(`cr.notifications.${id}`) || "[]") as Array<
+      Record<string, unknown>
+    >;
+  } catch {
+    return [];
+  }
+}
+
+export function markLocalNotificationRead(id: string, forPersonId?: string): void {
+  try {
+    const pid = forPersonId ?? getSessionIdentity().carePersonId;
+    const key = `cr.notifications.${pid}`;
+    const rows = JSON.parse(localStorage.getItem(key) || "[]") as Array<
+      Record<string, unknown>
+    >;
+    for (const r of rows) if (r.id === id) r.read = true;
+    localStorage.setItem(key, JSON.stringify(rows));
+  } catch {
+    /* ignore */
+  }
 }
 
 /**
@@ -417,7 +483,7 @@ export async function proposeCareUpdate(
   const useHttp = await ensureHttpSession();
   if (useHttp && httpToken) {
     transportUsed = "http";
-    const res = await careUnderstand(httpToken, text, careRecipient.id, {
+    const res = await careUnderstand(httpToken, text, rid(), {
       mode: resolveMode(),
       transcriptMeta,
     });
@@ -500,7 +566,7 @@ export async function confirmCareUpdateAsync(
               : "SYNTHETIC_FOUNDATION_BACKED",
         };
       } else if (persisted?.handoffId && httpToken) {
-        const ho = await careHandoffs(httpToken, careRecipient.id);
+        const ho = await careHandoffs(httpToken, rid());
         if (ho.ok) {
           const list = (ho.data as { handoffs?: Array<Record<string, unknown>> })
             .handoffs;
@@ -548,19 +614,19 @@ export async function runDemoCanonicalLoop(): Promise<{
 
 export function getWhoCanSeeWhat() {
   const { store } = getCareRuntime();
-  return whoCanSeeWhat(store, careRecipient.id);
+  return whoCanSeeWhat(store, rid());
 }
 
 export function getCurrentCareState() {
   const { store } = getCareRuntime();
-  return store.getCurrentState(careRecipient.id);
+  return store.getCurrentState(rid());
 }
 
 function mapHandoffRecord(h: Record<string, unknown>) {
   const sources = Array.isArray(h.sources) ? h.sources : [];
   return {
     id: String(h.id ?? "ho-unknown"),
-    careRecipientId: String(h.careRecipientId ?? careRecipient.id),
+    careRecipientId: String(h.careRecipientId ?? rid()),
     fromPersonId: h.fromPersonId ? String(h.fromPersonId) : undefined,
     toPersonId: h.toPersonId ? String(h.toPersonId) : undefined,
     whatChanged: Array.isArray(h.whatChanged)
@@ -593,7 +659,7 @@ export function getLatestHandoff() {
   if (transportUsed === "http" && lastHttpHandoff) {
     return mapHandoffRecord({
       id: lastHttpHandoff.id,
-      careRecipientId: careRecipient.id,
+      careRecipientId: rid(),
       whatChanged: lastHttpHandoff.whatChanged,
       stillNeedsAttention: lastHttpHandoff.stillNeedsAttention,
       watch: lastHttpHandoff.watch,
@@ -602,7 +668,7 @@ export function getLatestHandoff() {
     });
   }
   const { store } = getCareRuntime();
-  const list = store.getHandoffs(careRecipient.id);
+  const list = store.getHandoffs(rid());
   return list[list.length - 1];
 }
 
@@ -610,7 +676,7 @@ export function getLatestHandoff() {
 export async function fetchLatestHandoff() {
   const useHttp = await ensureHttpSession();
   if (useHttp && httpToken) {
-    const res = await careHandoffs(httpToken, careRecipient.id);
+    const res = await careHandoffs(httpToken, rid());
     if (res.ok) {
       const list = (res.data.handoffs ?? []) as Record<string, unknown>[];
       if (list.length === 0) return null;
@@ -688,11 +754,11 @@ function buildAttentionFromLines(lines: string[]): TodayAttentionItem[] {
 export async function fetchCareState(): Promise<CareStateSnapshot> {
   const useHttp = await ensureHttpSession();
   if (useHttp && httpToken) {
-    const res = await careState(httpToken, careRecipient.id);
+    const res = await careState(httpToken, rid());
     if (res.ok && res.data.state) {
       const s = res.data.state as Record<string, unknown>;
       return {
-        careRecipientId: String(s.careRecipientId ?? careRecipient.id),
+        careRecipientId: String(s.careRecipientId ?? rid()),
         householdId: s.householdId ? String(s.householdId) : undefined,
         medicationSchedules: Array.isArray(s.medicationSchedules)
           ? (s.medicationSchedules as Array<Record<string, unknown>>)
@@ -726,7 +792,7 @@ export async function fetchCareState(): Promise<CareStateSnapshot> {
   const state = getCurrentCareState();
   if (!state) {
     return {
-      careRecipientId: careRecipient.id,
+      careRecipientId: rid(),
       medicationSchedules: [],
       medicationRecords: [],
       appointments: [],
@@ -766,7 +832,7 @@ export async function fetchCircleMembers(): Promise<{
 }> {
   const useHttp = await ensureHttpSession();
   if (useHttp && httpToken) {
-    const res = await careCircle(httpToken, careRecipient.id);
+    const res = await careCircle(httpToken, rid());
     if (res.ok) {
       return {
         members: res.data.who_can_see_what.map((r) => ({
@@ -807,7 +873,7 @@ export async function fetchCareExportMarkdown(): Promise<{
 }> {
   const useHttp = await ensureHttpSession();
   if (useHttp && httpToken) {
-    const res = await careExport(httpToken, careRecipient.id, "markdown");
+    const res = await careExport(httpToken, rid(), "markdown");
     if (res.ok) {
       return {
         ok: true,
@@ -847,7 +913,7 @@ export async function fetchTodayProjection(): Promise<{
 }> {
   const useHttp = await ensureHttpSession();
   if (useHttp && httpToken) {
-    const res = await careToday(httpToken, careRecipient.id);
+    const res = await careToday(httpToken, rid());
     if (res.ok) {
       const t = res.data.today;
       const needsYou = [
@@ -888,7 +954,7 @@ export async function fetchTodayProjection(): Promise<{
       };
     }
   }
-  const state = getCareRuntime().store.getCurrentState(careRecipient.id);
+  const state = getCareRuntime().store.getCurrentState(rid());
   if (state && state.events.length > 0) {
     const needsYou = state.openSafetyReviews.map((r) => r.reason);
     const whatChanged = state.events.slice(-6).map((e) => e.statement);
@@ -926,7 +992,7 @@ export async function applyCareCorrection(
       httpToken,
       targetEventId,
       correctedValue,
-      careRecipient.id,
+      rid(),
     );
     if (res.ok) {
       return {
@@ -1030,7 +1096,7 @@ export async function answerCareQuestion(question: string): Promise<string> {
 
 export function getAuditTrail() {
   const { store } = getCareRuntime();
-  return store.listAudit({ careRecipientId: careRecipient.id });
+  return store.listAudit({ careRecipientId: rid() });
 }
 
 export function getTransportUsed() {

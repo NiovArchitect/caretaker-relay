@@ -3,6 +3,8 @@ import { today } from "../scenario/olivia";
 import {
   fetchTodayProjection,
   getSessionIdentity,
+  listLocalNotifications,
+  markLocalNotificationRead,
   type TodayAttentionItem,
 } from "../foundation/careClient";
 import {
@@ -12,6 +14,7 @@ import {
   severityClass,
 } from "../lib/notifications";
 import { resolveCareSpace, loadActiveCareRecipientId } from "../lib/careContext";
+
 
 export function TodayPage({
   relayHandled,
@@ -41,16 +44,21 @@ export function TodayPage({
     organizedCount?: number;
   } | null>(null);
   const [acked, setAcked] = useState<Set<string>>(new Set());
+  const [inbox, setInbox] = useState<Array<Record<string, unknown>>>([]);
 
   useEffect(() => {
     let cancelled = false;
     void fetchTodayProjection().then((p) => {
       if (!cancelled) setProj(p);
     });
+    setInbox(listLocalNotifications(session.carePersonId));
+    const onNote = () => setInbox(listLocalNotifications(session.carePersonId));
+    window.addEventListener("cr-notification", onNote);
     return () => {
       cancelled = true;
+      window.removeEventListener("cr-notification", onNote);
     };
-  }, [refreshKey]);
+  }, [refreshKey, session.carePersonId, space.careRecipientId]);
 
   const attention: TodayAttentionItem[] =
     proj && proj.attention.length > 0
@@ -70,15 +78,20 @@ export function TodayPage({
           }))
         : [];
 
+  // Never fall back to Evelyn static seed when another recipient is active
   const whatChanged = proj?.whatChanged?.length
     ? proj.whatChanged
-    : today.sinceYesterday;
+    : space.careRecipientId === "cr-olivia"
+      ? today.sinceYesterday
+      : [];
   const handled =
     proj && proj.handled.length > 0
       ? proj.handled
       : relayHandled.length > 0
         ? relayHandled
-        : today.relayHandled;
+        : space.careRecipientId === "cr-olivia"
+          ? today.relayHandled
+          : [];
   const next = proj && proj.next.length > 0 ? proj.next : [];
   const organizedCount = proj?.organizedCount ?? whatChanged.length;
 
@@ -159,6 +172,39 @@ export function TodayPage({
           </button>
         </div>
       </section>
+
+      {inbox.filter((n) => !n.read).length > 0 && (
+        <section
+          className="section surface-verify"
+          aria-labelledby="messages-inbox"
+          data-testid="coordination-inbox"
+        >
+          <h2 id="messages-inbox">Messages</h2>
+          {inbox
+            .filter((n) => !n.read)
+            .slice(0, 5)
+            .map((n) => (
+              <article
+                key={String(n.id)}
+                className="attention-card cr-notify-attention cr-notify-pulse"
+                data-testid="coord-notification"
+              >
+                <h3 className="item-title">{String(n.title)}</h3>
+                <p className="attention-body">{String(n.body)}</p>
+                <button
+                  type="button"
+                  className="secondary-btn"
+                  onClick={() => {
+                    markLocalNotificationRead(String(n.id));
+                    setInbox(listLocalNotifications(session.carePersonId));
+                  }}
+                >
+                  Mark seen
+                </button>
+              </article>
+            ))}
+        </section>
+      )}
 
       <section
         className="section section-hero surface-verify"
