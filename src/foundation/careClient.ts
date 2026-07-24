@@ -637,24 +637,41 @@ export async function fetchLatestHandoff() {
   return getLatestHandoff() ?? null;
 }
 
+function plainCaregiverLine(line: string): string {
+  const t = line.trim();
+  if (/incompatible dimensions|not comparable|compatible dimensions/i.test(t)) {
+    return "The reported amount doesn't clearly match Evelyn's current medication instructions. Please check the medication label or confirm with the prescribing team before marking this complete.";
+  }
+  if (/missing units/i.test(t)) {
+    return "The reported dose is missing units. Check the bottle or packaging before marking this complete.";
+  }
+  // Prefer unambiguous clock language when stored labels are vague
+  return t
+    .replace(/around\s+3:00(?!\s*(AM|PM))/gi, "around 3:00 PM")
+    .replace(/around\s+2:00(?!\s*(AM|PM))/gi, "around 2:00 PM")
+    .replace(/around three/gi, "around 3:00 PM");
+}
+
 function buildAttentionFromLines(lines: string[]): TodayAttentionItem[] {
   // Signal filter: dedupe identical reasons; keep sparse attention.
   const seen = new Set<string>();
   const unique: string[] = [];
   for (const line of lines) {
-    const key = line.trim().toLowerCase();
+    const key = plainCaregiverLine(line).toLowerCase();
     if (!key || seen.has(key)) continue;
     seen.add(key);
-    unique.push(line);
+    unique.push(plainCaregiverLine(line));
   }
   return unique.slice(0, 5).map((line, i) => {
-    const med = /medication|dose|pill|mg|med\b|incompatible/i.test(line);
+    const med = /medication|dose|pill|mg|med\b|amount|label|prescribing/i.test(
+      line,
+    );
     return {
       id: `att-${i}-${line.slice(0, 24)}`,
       title: med ? "Medication needs verification" : line,
       whatHappened: line,
       whySurfaced: med
-        ? "What was reported does not safely match the current care information — or is too ambiguous to confirm."
+        ? "What was reported does not safely match the current care information, or is too ambiguous to confirm."
         : "This still needs your judgment or action.",
       relayKnows: med
         ? "A medication-related report was captured from a caregiver update."
@@ -840,10 +857,15 @@ export async function fetchTodayProjection(): Promise<{
           .map((x) => x.title) ?? []),
       ];
       const whatChanged = [
-        ...(t.events?.slice(-6).map((e) => e.statement) ?? []),
+        ...(t.events?.slice(-6).map((e) => plainCaregiverLine(e.statement)) ??
+          []),
         ...(t.appointments
           ?.filter((a) => a.status === "moved")
-          .map((a) => `${a.title}: ${a.startsAtLabel ?? a.status}`) ?? []),
+          .map((a) =>
+            plainCaregiverLine(
+              `${a.title}: ${a.startsAtLabel ?? a.status}`,
+            ),
+          ) ?? []),
       ];
       const handled =
         t.latest_handoff?.whatChanged ??
