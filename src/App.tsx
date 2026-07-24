@@ -391,16 +391,18 @@ export function App() {
             at: nowLabel(),
           },
         ]);
-        const askMaya = /Want me to ask Maya/i.test(answer);
-        const askDaniel = /Want me to ask Daniel/i.test(answer);
-        const askShah = /Want me to ask Dr\.?\s*Shah/i.test(answer);
-        if (askMaya || askDaniel || askShah) {
-          const target = askShah
-            ? "p-dr-shah"
-            : askMaya
-              ? "p-maya"
-              : "p-walter";
-          const name = askShah ? "Dr. Shah" : askMaya ? "Maya" : "Daniel";
+        // Collaboration offer — parse display name; map known lab principals by data id when possible
+        const askMatch = answer.match(
+          /Want me to ask ([^?]+)\?/i,
+        );
+        if (askMatch) {
+          const askedName = askMatch[1]!.trim();
+          const lower = askedName.toLowerCase();
+          let target = "p-maya";
+          if (/shah|priya|physician|dr\./i.test(lower)) target = "p-dr-shah";
+          else if (/daniel|walter|dsp|professional/i.test(lower))
+            target = "p-walter";
+          else if (/maya/i.test(lower)) target = "p-maya";
           (window as unknown as { __crPendingAsk?: string }).__crPendingAsk =
             target;
           setMessages((prev) => [
@@ -408,7 +410,7 @@ export function App() {
             {
               id: `sys-collab-${Date.now()}`,
               role: "system",
-              text: `Reply "Yes, please ask ${name}" to send a real request to their account.`,
+              text: `Reply "Yes, please ask ${askedName}" to send a real request to their account.`,
               at: nowLabel(),
             },
           ]);
