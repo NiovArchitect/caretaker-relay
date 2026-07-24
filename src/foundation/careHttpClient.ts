@@ -489,8 +489,55 @@ export async function careRespondClarification(
   },
   baseUrl?: string,
 ) {
-  return request<{ ok: boolean; response?: Record<string, unknown> }>(
-    `/api/v1/care/clarifications/respond`,
+  return request<{
+    ok: boolean;
+    response?: Record<string, unknown>;
+    candidate_id?: string;
+    orchestration_id?: string;
+    requires_verification?: boolean;
+    coordinator_message?: string;
+  }>(`/api/v1/care/clarifications/respond`, {
+    method: "POST",
+    token,
+    baseUrl,
+    body,
+  });
+}
+
+export async function careListOrchestration(
+  token: string,
+  careRecipientId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    open?: Array<Record<string, unknown>>;
+    lines?: string[];
+    waiting_on?: string[];
+  }>(`/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/orchestration`, {
+    token,
+    baseUrl,
+  });
+}
+
+export async function careCandidateAction(
+  token: string,
+  candidateId: string,
+  body: {
+    care_recipient_id: string;
+    action: "confirm" | "reject";
+    reason?: string;
+  },
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    mar_id?: string;
+    handoff_id?: string;
+    state?: string;
+    orchestration_id?: string;
+  }>(
+    `/api/v1/care/orchestration/candidates/${encodeURIComponent(candidateId)}/action`,
     { method: "POST", token, baseUrl, body },
   );
 }

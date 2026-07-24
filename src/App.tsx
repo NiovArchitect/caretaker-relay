@@ -352,19 +352,27 @@ export function App() {
         const target =
           (window as unknown as { __crPendingAsk?: string }).__crPendingAsk ??
           "p-maya";
+        const isProvider = target === "p-dr-shah";
         const r = await askCaregiverClarification({
           targetPersonId: target,
-          question:
-            "Can you confirm whether you gave Evelyn her lunch medication yesterday?",
-          contextSummary: "Requested via Relay collaboration offer",
+          question: isProvider
+            ? "Could the recent dizziness require a medication review? Please provide guidance for the care team."
+            : "Can you confirm whether you gave Evelyn her lunch medication yesterday?",
+          contextSummary: isProvider
+            ? "Provider collaboration — high-signal timeline only (in-app)"
+            : "Requested via Relay collaboration offer",
         });
+        (window as unknown as { __crPendingAsk?: string }).__crPendingAsk =
+          undefined;
         setMessages((prev) => [
           ...prev,
           {
             id: `sys-sent-${Date.now()}`,
             role: "system",
             text: r.ok
-              ? "Request sent. They will get a notification on their account."
+              ? isProvider
+                ? "Question prepared for Dr. Shah. They will see it as an in-app notification."
+                : "Request sent. They will get a notification on their account. I'll help you verify anything consequential when they reply."
               : `Could not send request: ${r.message ?? "error"}`,
             at: nowLabel(),
           },
@@ -385,9 +393,14 @@ export function App() {
         ]);
         const askMaya = /Want me to ask Maya/i.test(answer);
         const askDaniel = /Want me to ask Daniel/i.test(answer);
-        if (askMaya || askDaniel) {
-          const target = askMaya ? "p-maya" : "p-walter";
-          const name = askMaya ? "Maya" : "Daniel";
+        const askShah = /Want me to ask Dr\.?\s*Shah/i.test(answer);
+        if (askMaya || askDaniel || askShah) {
+          const target = askShah
+            ? "p-dr-shah"
+            : askMaya
+              ? "p-maya"
+              : "p-walter";
+          const name = askShah ? "Dr. Shah" : askMaya ? "Maya" : "Daniel";
           (window as unknown as { __crPendingAsk?: string }).__crPendingAsk =
             target;
           setMessages((prev) => [

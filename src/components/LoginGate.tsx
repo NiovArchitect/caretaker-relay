@@ -11,6 +11,7 @@ const LAB_PASSWORDS: Record<string, string> = {
   "p-sadeil": "sadeil-lab-password",
   "p-maya": "maya-lab-password",
   "p-walter": "walter-lab-password",
+  "p-dr-shah": "drshah-lab-password",
 };
 
 export function LoginGate({
@@ -45,6 +46,11 @@ export function LoginGate({
             care_person_id: "p-walter",
             display_name: "Daniel Kim",
             role_label: "Professional caregiver",
+          },
+          {
+            care_person_id: "p-dr-shah",
+            display_name: "Dr. Priya Shah",
+            role_label: "Primary care physician",
           },
         ]);
       }
