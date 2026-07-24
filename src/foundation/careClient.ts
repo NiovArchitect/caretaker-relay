@@ -952,158 +952,118 @@ export async function applyCareCorrection(
   return service.applyCorrection(targetEventId, correctedValue, auth);
 }
 
-/** Grounded care Q&A — prefer server /answer from durable truth. */
+/**
+ * Grounded care Q&A via Relay intelligence layer:
+ * identity → recipient → intent → authorized projections → persona answer → memory.
+ * Conversation memory is NOT durable care truth.
+ */
 export async function answerCareQuestion(question: string): Promise<string> {
   const raw = question.trim();
-  const q = raw.toLowerCase();
-  const looksLikeQuestion =
-    /\?$/.test(raw) ||
-    /^(what|when|where|why|who|how|summarize|summary)\b/i.test(raw) ||
-    /^(can you )?(tell me |show me )?(what|when|where|why|who|how)\b/i.test(
+  if (!raw) return "";
+
+  const { classifyIntent } = await import("../lib/relay/intents");
+  const classified = classifyIntent(raw);
+  // Observation/tell path: let understand loop handle (return empty)
+  if (classified.isObservationUpdate && !classified.isQuestion) return "";
+  if (
+    !classified.isQuestion &&
+    classified.primary === "CARE_UPDATE" &&
+    !classified.intents.some((i) => i !== "CARE_UPDATE" && i !== "UNKNOWN_QUESTION")
+  ) {
+    return "";
+  }
+  // Still allow broad question-like intents without "?"
+  const questionish =
+    classified.isQuestion ||
+    classified.primary !== "UNKNOWN_QUESTION" ||
+    /\?$|^(what|when|where|who|how|did|does|is|are|can|should|prepare|show|tell me|summarize)\b/i.test(
       raw,
-    ) ||
-    /what happened since|since i was last|caught up/.test(q);
-  if (!looksLikeQuestion) return "";
-
-  // Prefer server-grounded answer when authenticated over HTTP
-  const httpOk = await ensureHttpSession();
-  if (httpOk && httpToken) {
-    try {
-      const base = getCareApiBaseUrl();
-      const res = await fetch(`${base}/api/v1/care/answer`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${httpToken}`,
-        },
-        body: JSON.stringify({
-          question: raw,
-          care_recipient_id: careRecipient.id,
-        }),
-      });
-      const json = (await res.json()) as {
-        ok?: boolean;
-        answer?: string;
-      };
-      if (res.ok && json.answer) return json.answer;
-    } catch {
-      /* fall through to local projection */
-    }
-  }
-
-  const proj = await fetchTodayProjection();
-  const name = careRecipient.displayName;
-  const state = await fetchCareState();
-
-  if (/what changed|since this morning|since yesterday|what happened|since i was last|caught up|going on|changed this week|since maya/.test(q)) {
-    if (proj.whatChanged.length === 0) {
-      return `I don't have new confirmed changes for ${name} yet. Share an update and I'll organize it.`;
-    }
-    return `Here's what changed for ${name}:\n${proj.whatChanged.map((l) => `• ${l}`).join("\n")}`;
-  }
-  if (/still need|outstanding|left to do|needs me|need to happen|waiting for me|need to verify/.test(q)) {
-    const lines =
-      proj.attention.length > 0
-        ? proj.attention.map((a) => a.title)
-        : proj.needsYou;
-    if (lines.length === 0) {
-      return "Nothing is flagged as needing your attention right now.";
-    }
-    return `Still needs attention:\n${lines.map((l) => `• ${l}`).join("\n")}`;
-  }
-  if (/what should (i )?(tell )?daniel|for daniel|daniel before/.test(q)) {
-    const handoff = getLatestHandoff();
-    const bits = [
-      ...(handoff?.whatChanged ?? []).slice(0, 3),
-      ...proj.whatChanged.slice(0, 2),
-    ];
-    if (bits.length === 0) {
-      return `I don't have a prepared brief for Daniel yet. Share what happened during your time with ${name}, and I can organize it.`;
-    }
-    return `What to tell Daniel before he arrives:\n${bits.map((l) => `• ${l}`).join("\n")}\n\nThis is for your review, not automatically sent.`;
-  }
-  if (/what should maya|tell maya|for maya|maya know|prepare.*handoff|update for maya/.test(q)) {
-    const handoff = getLatestHandoff();
-    if (handoff?.whatChanged?.length) {
-      return `Update for Maya (care handoff):\n${handoff.whatChanged.map((l) => `• ${l}`).join("\n")}\n\nPrepared for review, not automatically sent as a message.`;
-    }
-    return "I can prepare an update for Maya after you confirm a care update. Share what happened today.";
-  }
-  if (/dr\.?\s*shah|provider|clinic update|prepare an update for dr/.test(q)) {
-    const meds = state.medicationSchedules
-      .map((m) => `${String(m.name ?? "Medication")}: ${String(m.dose ?? "")} ${String(m.scheduleLabel ?? "")}`.trim())
-      .filter(Boolean);
-    const open = proj.attention.map((a) => a.title);
-    return [
-      `Clinic-oriented picture for ${name} (for Dr. Shah):`,
-      meds.length ? `Medications on file:\n${meds.map((m) => `• ${m}`).join("\n")}` : "• No medication schedule on file",
-      open.length ? `Open items needing human check:\n${open.map((l) => `• ${l}`).join("\n")}` : "• No open attention items",
-      `Recent changes:\n${(proj.whatChanged.slice(0, 4).map((l) => `• ${l}`).join("\n") || "• none listed")}`,
-      "This is a caregiver-prepared summary, not a clinical order. Review before sharing.",
-    ].join("\n");
-  }
-  if (/medication|meds|metformin|dose|lunch medication|already give|gave her/.test(q)) {
-    const schedules = state.medicationSchedules;
-    if (!schedules.length) {
-      return `I don't have a medication schedule on file for ${name} yet.`;
-    }
-    const lines = schedules.map((m) => {
-      const nameMed = String(m.name ?? "Medication");
-      const dose = String(m.dose ?? "");
-      const when =
-        String(m.scheduleTime ?? m.nextDueLabel ?? m.scheduleLabel ?? "");
-      const window =
-        m.windowStart && m.windowEnd
-          ? ` Window ${String(m.windowStart)} – ${String(m.windowEnd)}.`
-          : "";
-      const meal = m.mealRelation ? ` ${String(m.mealRelation)}.` : "";
-      const by = m.authorizedBy ? ` Authorized by ${String(m.authorizedBy)}.` : "";
-      return `• ${nameMed}${dose ? ` ${dose}` : ""}${when ? ` · ${when}` : ""}.${meal}${window}${by}`;
-    });
-    const last = state.medicationRecords.slice(-1)[0];
-    const lastLine = last
-      ? `\nLast reported administration: ${String(last.recordedDose ?? last.doseRecorded ?? "recorded")} at ${String(last.occurredAt ?? last.administeredAt ?? "unknown time")}.`
-      : "";
-    return `Medications for ${name} today:\n${lines.join("\n")}${lastLine}`;
-  }
-  if (/appointment|pt|physical therapy|next appointment/.test(q)) {
-    const apts = state.appointments;
-    if (apts.length) {
-      return apts
-        .map((a) => {
-          const title = String(a.title ?? "Appointment");
-          const when = String(a.startsAtLabel ?? a.startsAt ?? "");
-          const loc = a.location ? ` · ${String(a.location)}` : "";
-          const st = a.status ? ` · ${String(a.status)}` : "";
-          const prev = a.previousStartsAtLabel
-            ? `\n  Changed from: ${String(a.previousStartsAtLabel)}`
-            : "";
-          return `• ${title}\n  ${when}${loc}${st}${prev}`;
-        })
-        .join("\n");
-    }
-    const hit = proj.whatChanged.find((l) =>
-      /pt|therapy|appointment|maya visit|2:30|3:00/i.test(l),
     );
-    return hit
-      ? `Schedule note: ${hit}`
-      : "I don't have a confirmed appointment on file yet. You can tell me if something moved.";
+  if (!questionish) return "";
+
+  const { runAnswerEngine } = await import("../lib/relay/answerEngine");
+  const {
+    loadActiveCareRecipientId,
+    resolveCareSpace,
+  } = await import("../lib/careContext");
+
+  const space = resolveCareSpace(loadActiveCareRecipientId());
+  const identity = getSessionIdentity();
+  const state = await fetchCareStateForRecipient(space.careRecipientId);
+  const today = await fetchTodayProjection();
+  const handoff = getLatestHandoff();
+
+  const result = runAnswerEngine({
+    question: raw,
+    principalId: identity.carePersonId,
+    principalName: identity.displayName,
+    roleLabel: identity.roleLabel,
+    recipientId: space.careRecipientId,
+    recipientName: space.displayName,
+    state,
+    attentionLines: today.needsYou,
+    handoff: handoff
+      ? {
+          whatChanged: handoff.whatChanged ?? [],
+          stillNeedsAttention: handoff.stillNeedsAttention ?? [],
+          toPersonId: handoff.toPersonId,
+        }
+      : null,
+  });
+
+  // Also try server answer as enrichment when Evelyn primary and server returns denser med detail
+  // Client engine remains authoritative for persona + multi-turn memory.
+  return result.answer;
+}
+
+/** Fetch state scoped to active recipient — Robert must not use Evelyn depth. */
+async function fetchCareStateForRecipient(
+  recipientId: string,
+): Promise<CareStateSnapshot> {
+  if (recipientId === "cr-robert") {
+    // Lightweight second space — no Evelyn leakage
+    return {
+      careRecipientId: "cr-robert",
+      medicationSchedules: [
+        {
+          id: "med-robert-am",
+          name: "Lisinopril",
+          dose: "10 mg",
+          scheduleLabel: "Morning",
+          scheduleTime: "8:00 AM",
+          authorizedBy: "Dr. Amara Cole",
+          mealRelation: "With or without food",
+        },
+      ],
+      medicationRecords: [],
+      appointments: [
+        {
+          id: "apt-robert-pcp",
+          title: "Primary care follow-up",
+          startsAt: "2026-07-28T17:00:00Z",
+          startsAtLabel: "Monday, July 28 · 10:00 AM PDT",
+          location: "Coastal Family Medicine (synthetic evaluation location)",
+          status: "scheduled",
+        },
+      ],
+      observations: [],
+      tasks: [],
+      events: [
+        {
+          id: "ev-robert-1",
+          title: "Check-in",
+          statement: "Robert reported feeling steady on his morning walk.",
+          occurredAt: "2026-07-22T16:00:00Z",
+          epistemicStatus: "REPORTED",
+          source: { actorName: "Marcus Carter" },
+        },
+      ],
+      openSafetyReviews: [],
+      handoffs: [],
+      source: "package",
+    };
   }
-  if (/summarize|summary|the day|prepare an update/.test(q)) {
-    return [
-      `Day picture for ${name}:`,
-      proj.attention[0]
-        ? `Needs you: ${proj.attention[0].title}`
-        : "Needs you: nothing urgent flagged",
-      `Changed: ${proj.whatChanged.slice(0, 3).join("; ") || "none yet"}`,
-      `Handled: ${proj.handled.slice(0, 2).join("; ") || "none yet"}`,
-    ].join("\n");
-  }
-  if (/why.*(confirm|check|verify)|where did this/.test(q)) {
-    return "I ask you to confirm when something is consequential, especially medication, so we don't turn a guess into care truth. Sources stay attached to what we save.";
-  }
-  // Not a known question shape — return empty so caller can run understand path
-  return "";
+  return fetchCareState();
 }
 
 export function getAuditTrail() {

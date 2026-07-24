@@ -219,15 +219,22 @@ export function App() {
     setProfileOpen(false);
     setTodayRefresh((n) => n + 1);
     const space = resolveCareSpace(id);
-    setMessages((prev) => [
-      ...prev,
+    // Multi-recipient safety: do not carry Evelyn conversation focus into Robert
+    const principalId = session?.carePersonId ?? "p-sadeil";
+    void import("./lib/relay/conversationMemory").then((m) => {
+      // Isolation is by recipient key; ensure new space starts clean if empty
+      m.getOrCreateConversation(principalId, id);
+    });
+    setMessages([
       {
         id: `sys-switch-${Date.now()}`,
         role: "system",
         at: nowLabel(),
-        text: `Switched care context to ${space.displayName}. Questions and updates now use this recipient.`,
+        text: `Switched care context to ${space.displayName}. I will not use the previous recipient's conversation as truth here.`,
       },
     ]);
+    setBundle(null);
+    setDraft("");
   }
 
   async function openLatestHandoff() {
