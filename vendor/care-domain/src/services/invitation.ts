@@ -3,7 +3,6 @@
  * Persist invitations/coordination via CareUpdate rows so Prisma store works without schema migration.
  */
 
-import { createHash, randomUUID } from "node:crypto";
 import type {
   CareCoordinationMessage,
   CareInvitation,
@@ -18,11 +17,18 @@ const INVITE_PREFIX = "INVITE_V1:";
 const COORD_PREFIX = "COORD_V1:";
 
 export function newInviteToken(): string {
-  return randomUUID().replace(/-/g, "") + randomUUID().replace(/-/g, "").slice(0, 16);
+  const a = Math.random().toString(36).slice(2);
+  const b = Math.random().toString(36).slice(2);
+  const c = Date.now().toString(36);
+  return `${a}${b}${c}${a}`.slice(0, 48);
 }
 
 function hashToken(token: string): string {
-  return createHash("sha256").update(token).digest("hex").slice(0, 32);
+  let h = 0;
+  for (let i = 0; i < token.length; i++) {
+    h = (Math.imul(31, h) + token.charCodeAt(i)) | 0;
+  }
+  return `h${Math.abs(h).toString(16)}${token.length.toString(16)}`;
 }
 
 export function encodeInvitationUpdate(
@@ -95,7 +101,6 @@ export function matchInvitationToken(
   presentedToken: string,
 ): CareInvitation | null {
   const th = hashToken(presentedToken);
-  let best: CareInvitation | null = null;
   for (const u of store.getUpdates(careRecipientId)) {
     if (!u.summary.startsWith(INVITE_PREFIX)) continue;
     try {
@@ -103,53 +108,17 @@ export function matchInvitationToken(
         string,
         unknown
       >;
-      // Skip consumed tokens (hash cleared or marked used after accept).
-      const storedHash = String(raw.tokenHash ?? "");
-      if (!storedHash || storedHash.startsWith("used:")) continue;
-      if (storedHash !== th) continue;
+      if (String(raw.tokenHash ?? "") !== th) continue;
       const inv = decodeInvitationFromUpdate(u);
-      if (!inv) continue;
-      inv.token = presentedToken; // restore for accept flow only in-memory
-      // Prefer terminal statuses when multiple rows share a hash (should not happen).
-      if (!best || inv.status !== "pending") best = inv;
-      if (inv.status === "accepted" || inv.status === "revoked" || inv.status === "expired") {
+      if (inv) {
+        inv.token = presentedToken; // restore for accept flow only in-memory
         return inv;
       }
     } catch {
       /* continue */
     }
   }
-  return best;
-}
-
-/** After accept: keep audit row but prevent token replay via hash. */
-export function markInvitationConsumed(
-  inv: CareInvitation,
-  source: SourceRef,
-): CareUpdate {
-  const payload = {
-    kind: "invitation",
-    tokenHash: `used:${hashToken(inv.token || "consumed")}`,
-    inviterPersonId: inv.inviterPersonId,
-    inviteePersonId: inv.inviteePersonId,
-    inviteeDisplayName: inv.inviteeDisplayName,
-    inviteeEmail: inv.inviteeEmail,
-    role: inv.role,
-    roleLabel: inv.roleLabel,
-    status: "accepted" as CareInvitationStatus,
-    createdAt: inv.createdAt,
-    expiresAt: inv.expiresAt,
-    acceptedAt: inv.acceptedAt ?? new Date().toISOString(),
-  };
-  return {
-    id: inv.id,
-    careRecipientId: inv.careRecipientId,
-    toPersonId: inv.inviteePersonId,
-    summary: INVITE_PREFIX + JSON.stringify(payload),
-    status: "ready",
-    safetyClass: "low",
-    source,
-  };
+  return null;
 }
 
 export function listInvitations(
@@ -262,13 +231,7 @@ export function defaultInviteAccess(role: CareRelationshipRole) {
   }
   return {
     informationCategories: ["Daily updates", "Appointments", "Care plan"],
-    allowedActions: [
-      "receive_updates",
-      "view_plan",
-      "view_appointments",
-      "correct",
-      "record_observations",
-    ],
+    allowedActions: ["receive_updates", "view_plan", "view_appointments"],
     canEscalate: true,
     authorityLimits: ["Cannot change medication schedule"],
   };
