@@ -171,9 +171,9 @@ async function main() {
   assert("answer_shah_on_robert", ansShah.ok);
   assert(
     "no_silent_shah_as_cole",
-    /isn't listed|don't have a Dr\. Shah|not .*provider/i.test(
+    /isn't listed|don't have (a )?Dr\.?\s*Shah|not .*provider|current care team|won't invent provider/i.test(
       String(ansShah.body?.answer || ""),
-    ),
+    ) && !/Dr\.?\s*Cole said|Cole told us/i.test(String(ansShah.body?.answer || "")),
   );
 
   // Maya cannot see Marcus private notifs as her own list wrongly for other
