@@ -150,18 +150,26 @@ export function VerifyPanel({
       <div className="btn-row">
         <button
           type="button"
-          className="primary-btn"
+          className="btn-verify btn-with-icon"
           data-testid="confirm-looks-right"
+          data-action-kind="verify"
           onClick={onConfirm}
         >
+          <span className="btn-glyph" aria-hidden>
+            ✓
+          </span>
           Looks right
         </button>
         <button
           type="button"
-          className="secondary-btn"
+          className="secondary-btn btn-with-icon"
           data-testid="correct-something"
+          data-action-kind="secondary"
           onClick={onCorrect}
         >
+          <span className="btn-glyph" aria-hidden>
+            ✎
+          </span>
           Correct something
         </button>
       </div>

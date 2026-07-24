@@ -287,11 +287,15 @@ export function RelayPanel({
             />
             <button
               type="button"
-              className="primary-btn"
+              className="btn-comm btn-with-icon"
               data-testid="coord-send"
+              data-action-kind="communication"
               disabled={coordBusy || !coordDraft.trim()}
               onClick={() => void sendCoord()}
             >
+              <span className="btn-glyph" aria-hidden>
+                ✉
+              </span>
               {coordBusy ? "Sending…" : "Send message"}
             </button>
           </div>

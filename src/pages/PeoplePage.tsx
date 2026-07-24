@@ -191,11 +191,15 @@ export function PeoplePage({
         <div className="btn-row" style={{ marginTop: 10 }}>
           <button
             type="button"
-            className="primary-btn"
+            className="btn-comm btn-with-icon"
             data-testid="invite-create"
+            data-action-kind="communication"
             disabled={inviteBusy}
             onClick={() => void onInvite()}
           >
+            <span className="btn-glyph" aria-hidden>
+              ✉
+            </span>
             Send invitation
           </button>
         </div>
@@ -320,45 +324,62 @@ export function PeoplePage({
           <div className="btn-row person-actions">
             {contact?.phone && (
               <a
-                className="primary-btn"
+                className="btn-comm btn-with-icon"
                 href={`tel:${contact.phone}`}
                 data-testid="person-call"
+                data-action-kind="communication"
               >
+                <span className="btn-glyph" aria-hidden>
+                  ☎
+                </span>
                 Call
               </a>
             )}
             <button
               type="button"
-              className="secondary-btn"
+              className="btn-comm-quiet btn-with-icon"
               data-testid="person-message"
+              data-action-kind="communication"
               onClick={() =>
                 onMessagePerson?.(selected.personId, selected.displayName)
               }
             >
+              <span className="btn-glyph" aria-hidden>
+                ✉
+              </span>
               Message
             </button>
             {selected.personId === "p-dr-shah" ? (
               <button
                 type="button"
-                className="secondary-btn"
+                className="btn-verify btn-with-icon"
                 data-testid="person-provider-update"
+                data-action-kind="verify"
                 onClick={() => onOpenRelayForProvider?.()}
               >
+                <span className="btn-glyph" aria-hidden>
+                  ◈
+                </span>
                 Prepare update for clinic
               </button>
             ) : (
               <button
                 type="button"
-                className="secondary-btn"
+                className="secondary-btn btn-with-icon"
                 data-testid="person-handoff"
+                data-action-kind="secondary"
                 onClick={() => onPrepareHandoff?.()}
               >
+                <span className="btn-glyph" aria-hidden>
+                  ⇄
+                </span>
                 Prepare handoff
               </button>
             )}
             <button
               type="button"
-              className="secondary-btn"
+              className="ghost-btn btn-with-icon"
+              data-action-kind="quiet"
               onClick={() => setSelected(null)}
             >
               Close

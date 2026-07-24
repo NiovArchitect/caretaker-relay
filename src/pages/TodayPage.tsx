@@ -171,18 +171,26 @@ export function TodayPage({
         <div className="btn-row greeting-actions">
           <button
             type="button"
-            className="primary-btn"
+            className="primary-btn btn-with-icon"
             data-testid="try-care-update-top"
+            data-action-kind="primary"
             onClick={onOpenRelay}
           >
+            <span className="btn-glyph" aria-hidden>
+              ✦
+            </span>
             Ask or update Relay
           </button>
           <button
             type="button"
-            className="secondary-btn"
+            className="secondary-btn btn-with-icon"
             data-testid="review-handoff"
+            data-action-kind="secondary"
             onClick={onOpenHandoff}
           >
+            <span className="btn-glyph" aria-hidden>
+              ☰
+            </span>
             Review care handoff
           </button>
         </div>
@@ -218,8 +226,9 @@ export function TodayPage({
                   <div className="btn-row">
                     <button
                       type="button"
-                      className="secondary-btn"
+                      className="btn-success btn-with-icon"
                       data-testid="notification-seen"
+                      data-action-kind="success"
                       onClick={() => {
                         void notificationAction(String(n.id), "seen").then(
                           () => {
@@ -239,6 +248,9 @@ export function TodayPage({
                         );
                       }}
                     >
+                      <span className="btn-glyph" aria-hidden>
+                        ✓
+                      </span>
                       Mark seen
                     </button>
                   </div>
@@ -305,8 +317,9 @@ export function TodayPage({
                 <div className="btn-row">
                   <button
                     type="button"
-                    className="secondary-btn"
+                    className="btn-verify btn-with-icon"
                     data-testid="attention-review"
+                    data-action-kind="verify"
                     onClick={() => {
                       setAcked((prev) => new Set(prev).add(n.id));
                       if (item) onReviewAttention?.(item);
@@ -323,16 +336,23 @@ export function TodayPage({
                       });
                     }}
                   >
+                    <span className="btn-glyph" aria-hidden>
+                      ◎
+                    </span>
                     {n.actionLabel}
                   </button>
                   <button
                     type="button"
-                    className="ghost-btn"
+                    className="btn-success btn-with-icon"
                     data-testid="attention-ack"
+                    data-action-kind="success"
                     onClick={() =>
                       setAcked((prev) => new Set(prev).add(n.id))
                     }
                   >
+                    <span className="btn-glyph" aria-hidden>
+                      ✓
+                    </span>
                     Mark seen
                   </button>
                 </div>
@@ -396,17 +416,25 @@ export function TodayPage({
           <div className="btn-row">
             <button
               type="button"
-              className="primary-btn"
+              className="primary-btn btn-with-icon"
               data-testid="try-care-update"
+              data-action-kind="primary"
               onClick={onOpenRelay}
             >
+              <span className="btn-glyph" aria-hidden>
+                ✦
+              </span>
               Ask or update Relay
             </button>
             <button
               type="button"
-              className="secondary-btn"
+              className="secondary-btn btn-with-icon"
+              data-action-kind="secondary"
               onClick={onOpenHandoff}
             >
+              <span className="btn-glyph" aria-hidden>
+                ⇄
+              </span>
               Care handoff
             </button>
           </div>

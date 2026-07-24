@@ -187,11 +187,15 @@ export function Composer({
       </button>
       <button
         type="submit"
-        className="primary-btn"
+        className="primary-btn btn-with-icon"
         data-testid="composer-send"
+        data-action-kind="primary"
         disabled={!value.trim() || busy}
         aria-busy={busy || undefined}
       >
+        <span className="btn-glyph" aria-hidden>
+          {busy ? "…" : "↑"}
+        </span>
         {busy ? "Working…" : "Send"}
       </button>
     </form>

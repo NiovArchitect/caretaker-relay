@@ -39,7 +39,13 @@
   --cr-warn: #c47b1a;
   --cr-warn-soft: rgba(196, 123, 26, 0.12);
   --cr-danger: #b42318;
+  --cr-danger-soft: rgba(180, 35, 24, 0.1);
   --cr-ok: #1a7a68;
+  --cr-ok-soft: rgba(26, 122, 104, 0.12);
+  /* Communication: restrained clinical blue-teal — not decorative rainbow */
+  --cr-comm: #1a6a8a;
+  --cr-comm-2: #2a7a9a;
+  --cr-comm-soft: rgba(26, 106, 138, 0.12);
 
   /* —— Borders —— */
   --cr-line: rgba(15, 70, 90, 0.1);
@@ -1300,8 +1306,15 @@ p {
   margin-top: var(--s-4);
 }
 
+/* Semantic action system (MedixWeb palette — no decorative color drift)
+   PRIMARY | SECONDARY | VERIFY/ATTENTION | SUCCESS | COMM | DESTRUCTIVE
+   Every state also uses icon + label + shape/border — never color alone. */
 .primary-btn,
 .secondary-btn,
+.btn-verify,
+.btn-success,
+.btn-comm,
+.btn-danger,
 .icon-btn {
   min-height: var(--cr-tap);
   min-width: var(--cr-tap);
@@ -1311,12 +1324,33 @@ p {
   padding: 0 22px;
   font-size: 0.95rem;
   transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.16s ease,
-    background 0.16s ease;
+    background 0.16s ease, border-color 0.16s ease;
 }
 
+.btn-with-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1em;
+  font-size: 1.05em;
+  line-height: 1;
+  font-weight: 700;
+  opacity: 0.95;
+  flex-shrink: 0;
+}
+
+/* PRIMARY ACTION — strongest approved teal treatment */
 .primary-btn {
   background: linear-gradient(145deg, var(--cr-accent-2), var(--cr-accent));
   color: white;
+  border: 1px solid transparent;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.25) inset,
     0 10px 24px rgba(15, 107, 124, 0.28);
@@ -1330,17 +1364,43 @@ p {
 }
 
 .primary-btn:focus-visible,
-.secondary-btn:focus-visible {
+.secondary-btn:focus-visible,
+.btn-verify:focus-visible,
+.btn-success:focus-visible,
+.btn-comm:focus-visible,
+.btn-danger:focus-visible {
   outline: 2px solid var(--cr-accent);
   outline-offset: 3px;
 }
 
-.primary-btn:disabled {
+.btn-verify:focus-visible {
+  outline-color: var(--cr-warn);
+}
+
+.btn-success:focus-visible {
+  outline-color: var(--cr-ok);
+}
+
+.btn-comm:focus-visible {
+  outline-color: var(--cr-comm);
+}
+
+.btn-danger:focus-visible {
+  outline-color: var(--cr-danger);
+}
+
+.primary-btn:disabled,
+.secondary-btn:disabled,
+.btn-verify:disabled,
+.btn-success:disabled,
+.btn-comm:disabled,
+.btn-danger:disabled {
   opacity: 0.45;
   cursor: not-allowed;
   transform: none;
 }
 
+/* SECONDARY ACTION — quiet glass / light */
 .secondary-btn {
   background: rgba(255, 255, 255, 0.85);
   color: var(--cr-accent);
@@ -1351,6 +1411,88 @@ p {
 .secondary-btn:hover {
   background: var(--cr-solid);
   border-color: var(--cr-accent);
+}
+
+/* ATTENTION / VERIFY — warm amber, distinct from primary teal */
+.btn-verify {
+  background: linear-gradient(160deg, #fffdf8, var(--cr-warn-soft));
+  color: #8a5a12;
+  border: 1.5px solid rgba(196, 123, 26, 0.42);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+    0 0 0 4px rgba(196, 123, 26, 0.08),
+    0 10px 24px rgba(196, 123, 26, 0.14);
+}
+
+.btn-verify:hover {
+  transform: translateY(-1px);
+  border-color: rgba(196, 123, 26, 0.55);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.7) inset,
+    0 0 0 5px rgba(196, 123, 26, 0.12),
+    0 14px 28px rgba(196, 123, 26, 0.18);
+}
+
+/* SUCCESS / RESOLVED — calm clinical green */
+.btn-success {
+  background: linear-gradient(160deg, #f7fcfa, var(--cr-ok-soft));
+  color: #0f5c4e;
+  border: 1.5px solid rgba(26, 122, 104, 0.38);
+  box-shadow: var(--cr-shadow-card);
+}
+
+.btn-success:hover {
+  transform: translateY(-1px);
+  border-color: rgba(26, 122, 104, 0.55);
+  background: linear-gradient(160deg, #fff, var(--cr-ok-soft));
+}
+
+/* COMMUNICATION — restrained person-interaction treatment */
+.btn-comm {
+  background: linear-gradient(145deg, var(--cr-comm-2), var(--cr-comm));
+  color: white;
+  border: 1px solid transparent;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.2) inset,
+    0 10px 22px rgba(26, 106, 138, 0.22);
+}
+
+.btn-comm:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.28) inset,
+    0 14px 26px rgba(26, 106, 138, 0.28);
+}
+
+/* Quiet communication (message / non-call) */
+.btn-comm-quiet {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--cr-comm);
+  border: 1.5px solid rgba(26, 106, 138, 0.28);
+  box-shadow: var(--cr-shadow-card);
+  font-weight: 700;
+  min-height: var(--cr-tap);
+  border-radius: var(--cr-r-pill);
+  padding: 0 22px;
+}
+
+.btn-comm-quiet:hover {
+  background: var(--cr-comm-soft);
+  border-color: rgba(26, 106, 138, 0.45);
+}
+
+/* DESTRUCTIVE / REMOVE — reserved caution only */
+.btn-danger {
+  background: linear-gradient(160deg, #fff8f7, var(--cr-danger-soft));
+  color: var(--cr-danger);
+  border: 1.5px solid rgba(180, 35, 24, 0.35);
+  box-shadow: var(--cr-shadow-card);
+}
+
+.btn-danger:hover {
+  transform: translateY(-1px);
+  border-color: rgba(180, 35, 24, 0.5);
+  background: linear-gradient(160deg, #fff, var(--cr-danger-soft));
 }
 
 .icon-btn {
@@ -1833,6 +1975,31 @@ p {
   color: var(--cr-accent);
 }
 
+/* Active recipient — shape + border + label, not color alone */
+.profile-menu-item.is-active {
+  border: 1px solid rgba(15, 107, 124, 0.28);
+  font-weight: 700;
+}
+
+.profile-menu-item.is-active::before {
+  content: "● ";
+  color: var(--cr-accent);
+  font-size: 0.7em;
+}
+
+/* Sign out — reserved destructive treatment in menu */
+.profile-menu-item-danger {
+  color: var(--cr-danger);
+  margin-top: 4px;
+  border-top: 1px solid var(--cr-line);
+  border-radius: 0 0 12px 12px;
+}
+
+.profile-menu-item-danger:hover {
+  background: var(--cr-danger-soft);
+  color: var(--cr-danger);
+}
+
 .profile-scrim {
   z-index: 50 !important;
   background: transparent !important;
@@ -2076,11 +2243,16 @@ p {
 }
 
 .person-actions .primary-btn,
-.person-actions a.primary-btn {
+.person-actions a.primary-btn,
+.person-actions .btn-comm,
+.person-actions a.btn-comm,
+.person-actions .btn-comm-quiet,
+.person-actions a.btn-comm-quiet {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
 }
 
 @media (max-width: 900px) {

@@ -702,8 +702,9 @@ export function App() {
                 <button
                   type="button"
                   role="menuitem"
-                  className="profile-menu-item"
+                  className="profile-menu-item profile-menu-item-danger"
                   data-testid="sign-out"
+                  data-action-kind="destructive"
                   onClick={signOut}
                 >
                   Sign out

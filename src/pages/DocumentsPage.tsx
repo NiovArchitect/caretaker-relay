@@ -69,11 +69,15 @@ export function DocumentsPage() {
         <div className="btn-row">
           <button
             type="button"
-            className="primary-btn"
+            className="primary-btn btn-with-icon"
             data-testid="generate-care-export"
+            data-action-kind="primary"
             disabled={busy}
             onClick={() => void generate()}
           >
+            <span className="btn-glyph" aria-hidden>
+              ☰
+            </span>
             {busy ? "Preparing…" : "Prepare care summary"}
           </button>
         </div>
@@ -110,20 +114,28 @@ export function DocumentsPage() {
           <div className="btn-row" style={{ marginTop: 16 }}>
             <button
               type="button"
-              className="secondary-btn"
+              className="secondary-btn btn-with-icon"
+              data-action-kind="secondary"
               disabled
               title="External share is not enabled in this build"
             >
+              <span className="btn-glyph" aria-hidden>
+                ↗
+              </span>
               Share (not enabled)
             </button>
             <button
               type="button"
-              className="secondary-btn"
+              className="btn-danger btn-with-icon"
+              data-action-kind="destructive"
               onClick={() => {
                 setMarkdown(null);
                 setMeta(null);
               }}
             >
+              <span className="btn-glyph" aria-hidden>
+                ×
+              </span>
               Clear
             </button>
           </div>
