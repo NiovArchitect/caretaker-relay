@@ -217,6 +217,7 @@ export function RelayPanel({
               onSubmit={onSubmit}
               onVoiceMeta={onVoiceMeta}
               placeholder={placeholder}
+              busy={busy}
             />
           </div>
         </>

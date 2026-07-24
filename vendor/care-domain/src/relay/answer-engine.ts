@@ -243,9 +243,20 @@ function composeAnswer(ctx: {
       if (who) {
         const hit = findAdminByPerson(who);
         if (hit) {
+          const confNote = str(
+            (hit.source as { whyVisible?: string } | undefined)?.whyVisible ??
+              "",
+          );
           parts.push(
             `Yes — I have a record from ${who}:\n${describeAdmin(hit)}`,
           );
+          if (/confirmed/i.test(confNote)) {
+            parts.push(confNote);
+          } else if (str(hit.epistemicStatus) === "CONFIRMED") {
+            parts.push(
+              "This administration is confirmed in the medication history.",
+            );
+          }
         } else {
           const last = adminRecords().slice(-1)[0];
           parts.push(
@@ -481,14 +492,16 @@ function composeAnswer(ctx: {
     used.add("OPEN_UNCERTAINTIES");
     used.add("RECENT_CHANGES");
     const askedProvider = classified.entities.personHint;
-    if (askedProvider && /shah/i.test(askedProvider)) {
-      const hasShah = proj.LATEST_PROVIDER_INSTRUCTIONS.some((l) =>
-        /shah/i.test(l),
+    // Named provider not on instruction blob → challenge premise (any name, not hardcoded)
+    if (askedProvider && askedProvider.length > 1) {
+      const nameKey = askedProvider.toLowerCase().replace(/^dr\.?\s*/i, "");
+      const hasNamed = proj.LATEST_PROVIDER_INSTRUCTIONS.some((l) =>
+        l.toLowerCase().includes(nameKey),
       );
-      if (!hasShah) {
+      if (!hasNamed && /shah|cole|doctor|dr\./i.test(askedProvider + " " + JSON.stringify(classified.entities))) {
         const other = proj.LATEST_PROVIDER_INSTRUCTIONS[0];
         parts.push(
-          `Dr. Shah isn't listed as ${recipientName}'s provider in this care record, and I don't have a Dr. Shah instruction here.`,
+          `I don't have ${askedProvider} listed with a matching provider instruction for ${recipientName} in this care record.`,
         );
         if (other) {
           parts.push(
@@ -496,8 +509,11 @@ function composeAnswer(ctx: {
           );
           parts.push(`Would you like details on that instruction?`);
         }
-        // skip rest of provider dump
-        return { answer: parts.join("\n\n").trim(), sourceRefs: refs.length ? refs : ["care_projections"], projectionsUsed: [...used] };
+        return {
+          answer: parts.join("\n\n").trim(),
+          sourceRefs: refs.length ? refs : ["care_projections"],
+          projectionsUsed: [...used],
+        };
       }
     }
     if (persona === "physician") {

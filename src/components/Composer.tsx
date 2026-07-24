@@ -38,11 +38,14 @@ export function Composer({
   onSubmit,
   placeholder,
   onVoiceMeta,
+  busy = false,
 }: {
   value: string;
   onChange: (v: string) => void;
   onSubmit: () => void;
   placeholder: string;
+  /** When true, Send is disabled so in-flight answers are not silently dropped. */
+  busy?: boolean;
   onVoiceMeta?: (meta: {
     source: "voice_stt" | "text";
     confidence?: number;
@@ -186,9 +189,10 @@ export function Composer({
         type="submit"
         className="primary-btn"
         data-testid="composer-send"
-        disabled={!value.trim()}
+        disabled={!value.trim() || busy}
+        aria-busy={busy || undefined}
       >
-        Send
+        {busy ? "Working…" : "Send"}
       </button>
     </form>
   );

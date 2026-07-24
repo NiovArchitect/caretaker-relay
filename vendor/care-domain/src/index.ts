@@ -31,6 +31,14 @@ export * from "./relay/projections.js";
 export * from "./relay/conversation-memory.js";
 export * from "./relay/answer-engine.js";
 export * from "./services/relay-answer.js";
+export * from "./services/notifications.js";
+export * from "./services/orchestration.js";
+export * from "./services/care-team.js";
+export * from "./services/adversarial-guard.js";
+export * from "./services/documents.js";
+export * from "./scenario/agency-scale.js";
+export * from "./services/reminders.js";
+export * from "./scenario/multi-tenant.js";
 
 import { MemoryCareStore } from "./store/memory-store.js";
 import { CareLoopService } from "./services/loop.js";
@@ -57,4 +65,3 @@ export function createCareRuntime(opts: CreateCareRuntimeOptions = {}) {
   });
   return { store, service };
 }
-export * from "./services/notifications.js";
