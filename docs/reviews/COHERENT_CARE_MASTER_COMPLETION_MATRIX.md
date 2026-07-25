@@ -2,8 +2,9 @@
 
 **Authoritative inventory for FULL COHERENT-CARE COMPLETION.**  
 **Updated:** 2026-07-25 (post crash recovery — evidence-based)  
-**APP:** `dcadd81` source = live deploy  
-**API:** `327d543` source = live deploy  
+**APP:** `e2595b6` source = live deploy  
+**API:** `b39fbb5` source = live deploy  
+**PRODUCT FREEZE:** RESTORED  
 
 **Status values:** IMPLEMENTED + PUBLICLY PROVEN | IMPLEMENTED + TEST PROVEN | IMPLEMENTED NOT PROVEN | PARTIALLY IMPLEMENTED | NOT IMPLEMENTED | BLOCKED EXTERNALLY | NOT APPLICABLE + JUSTIFICATION | FAILED
 

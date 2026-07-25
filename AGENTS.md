@@ -1,5 +1,24 @@
 # Caretaker Relay — agent instructions
 
+## PRODUCT FREEZE — RESTORED (2026-07-25)
+
+**READ FIRST:** `docs/judge-defense/AGENTS_FREEZE.md`
+
+| Item | Value |
+|------|--------|
+| APP SHA | `e2595b63e3341ac62b4cefe57213c7b48b721a60` |
+| API SHA | `b39fbb5868bac4b80ad19f7cedd9ae2a7a1cd0fe` |
+| Branch | `checkpoint/caretaker-relay-track1-2026-07-22` |
+| Public | https://care.niovlabs.com |
+| Product code changes | **FORBIDDEN** unless reproducible **P0/P1** |
+| OpenAI | Do not solve — `BLOCKED_EXTERNAL_QUOTA` |
+
+Allowed: docs under `docs/judge-defense/`, evidence scripts, Q&A.  
+Forbidden: features, refactors, redesign, schema, deploys “just in case.”
+
+Full protections: `docs/judge-defense/PRODUCT_FREEZE_PROTECTIONS.md`
+
+---
 ## CARETAKER RELAY UI VISUAL AUTHORITY
 
 MedixWeb reference analysis under `docs/design/`.
