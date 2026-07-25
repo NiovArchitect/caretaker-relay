@@ -39,9 +39,10 @@ export function PeoplePage({
     });
   }
 
+  // Rebind when recipient context changes
   useEffect(() => {
     reload();
-  }, []);
+  }, [space.careRecipientId]);
 
   async function onInvite() {
     setInviteBusy(true);

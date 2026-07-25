@@ -587,9 +587,14 @@ export function App() {
 
   function startCorrection() {
     setCorrecting(true);
-    setBundle(null);
     setConfirmed(false);
     openRelay();
+    const currentItems =
+      bundle?.items
+        ?.map((i) => i.label)
+        .filter(Boolean)
+        .join("; ") ?? "";
+    const priorRaw = bundle?.understood?.rawText?.trim() ?? "";
     setMessages((prev) => [
       ...prev,
       {
@@ -597,12 +602,14 @@ export function App() {
         role: "system",
         text:
           lastEventIds.length > 0
-            ? "Tell me the corrected care fact in plain language. The previous version stays in the record."
-            : "Tell me what should be different. I'll re-read your update and ask you to verify again — nothing was saved as care truth yet.",
+            ? `Correction mode. Current items on the pending/saved update:\n${currentItems || "(prior care fact)"}\n\nType what should be different in plain language. The previous version stays in the record with provenance.`
+            : `Correction mode — nothing was saved as care truth yet.\n\nCurrent interpretation:\n${currentItems || priorRaw || "(none)"}\n\nEdit the draft below or type a full correction. I'll re-interpret and ask you to verify again.`,
         at: nowLabel(),
       },
     ]);
-    setDraft("");
+    // Prefill draft with prior wording so user can edit (not a dead button)
+    setDraft(priorRaw || currentItems || "");
+    setBundle(null);
   }
 
   function onReviewAttention(item: TodayAttentionItem) {
@@ -724,6 +731,16 @@ export function App() {
               aria-label={`Account menu for ${session.displayName}`}
               title={`${session.displayName} · ${session.roleLabel}`}
               onClick={() => setProfileOpen((v) => !v)}
+              onBlur={(e) => {
+                // Dismiss when focus leaves menu
+                if (
+                  !e.currentTarget.parentElement?.contains(
+                    e.relatedTarget as Node,
+                  )
+                ) {
+                  window.setTimeout(() => setProfileOpen(false), 120);
+                }
+              }}
             >
               {(session.displayName[0] ?? "U").toUpperCase()}
             </button>
@@ -732,6 +749,9 @@ export function App() {
                 className="profile-menu"
                 role="menu"
                 data-testid="profile-menu"
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") setProfileOpen(false);
+                }}
               >
                 <div className="profile-menu-head">
                   <strong>{session.displayName}</strong>

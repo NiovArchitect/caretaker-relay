@@ -3,6 +3,9 @@ import {
   fetchCareState,
   fetchRecipientProfile,
   fetchCareHistory,
+  proposeCareUpdate,
+  confirmCareUpdateAsync,
+  getSessionIdentity,
   type CareStateSnapshot,
   type RecipientProfilePayload,
 } from "../foundation/careClient";
@@ -186,6 +189,140 @@ function DetailRows({
   );
 }
 
+/** Manual documentation path — same understand→confirm care record model as Relay. */
+function ManualCareNotePanel({ recipientName }: { recipientName: string }) {
+  const session = getSessionIdentity();
+  const [text, setText] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState<string | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
+  const [bundle, setBundle] = useState<
+    import("../domain/types").VerificationBundle | null
+  >(null);
+
+  const roleHint = /physician|provider|doctor|np|nurse|clinician/i.test(
+    session.roleLabel,
+  )
+    ? "Provider update"
+    : /professional|dsp|paid/i.test(session.roleLabel)
+      ? "Support note"
+      : "Care update";
+
+  async function onPreview() {
+    const t = text.trim();
+    if (!t || busy) return;
+    setBusy(true);
+    setMsg(null);
+    try {
+      const result = await proposeCareUpdate(t);
+      if (result.kind === "verify" && result.bundle) {
+        setBundle(result.bundle);
+        setPreview(
+          result.bundle.items.map((i) => `• ${i.label}`).join("\n") ||
+            "No structured items extracted",
+        );
+        setMsg(
+          `Preview (${roleHint}) — review, edit text if needed, then Save. Same care-record path as Relay.`,
+        );
+      } else if (result.kind === "refusal") {
+        setBundle(null);
+        setPreview(null);
+        setMsg(result.message ?? "Could not structure that update.");
+      } else {
+        setMsg(result.message ?? "Could not prepare documentation.");
+      }
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function onSave() {
+    if (!bundle || busy) return;
+    setBusy(true);
+    setMsg(null);
+    try {
+      const result = await confirmCareUpdateAsync(bundle);
+      if (result.kind === "persisted") {
+        setMsg(
+          result.message ??
+            `Saved ${roleHint.toLowerCase()} for ${recipientName}. History and handoff updated.`,
+        );
+        setText("");
+        setPreview(null);
+        setBundle(null);
+      } else {
+        setMsg(result.message ?? "Save did not persist.");
+      }
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <section
+      className="section surface-known"
+      style={{ marginTop: 16 }}
+      data-testid="manual-care-note"
+      aria-label="Manual documentation"
+    >
+      <h3 style={{ marginTop: 0 }}>Document care (manual path)</h3>
+      <p className="muted">
+        Type a structured care note without using Relay chat. Preview and save
+        use the <strong>same governed care record model</strong> as
+        Relay-assisted documentation. Role: {session.roleLabel} → {roleHint}.
+      </p>
+      <textarea
+        data-testid="manual-note-input"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        rows={4}
+        placeholder={`Manual ${roleHint.toLowerCase()} for ${recipientName}…`}
+        style={{ width: "100%", marginBottom: 8 }}
+      />
+      <div className="btn-row">
+        <button
+          type="button"
+          className="secondary-btn"
+          data-testid="manual-note-preview"
+          disabled={busy || !text.trim()}
+          onClick={() => void onPreview()}
+        >
+          {busy ? "Working…" : "Preview structure"}
+        </button>
+        <button
+          type="button"
+          className="primary-btn"
+          data-testid="manual-note-save"
+          disabled={busy || !bundle}
+          onClick={() => void onSave()}
+        >
+          Save care record
+        </button>
+      </div>
+      {preview && (
+        <pre
+          data-testid="manual-note-preview-body"
+          style={{
+            marginTop: 12,
+            whiteSpace: "pre-wrap",
+            fontSize: "0.9rem",
+            background: "var(--cr-glass, rgba(0,0,0,0.04))",
+            padding: 12,
+            borderRadius: 8,
+          }}
+        >
+          {preview}
+        </pre>
+      )}
+      {msg && (
+        <p className="muted" role="status" style={{ marginTop: 8 }}>
+          {msg}
+        </p>
+      )}
+    </section>
+  );
+}
+
 function AboutRecipientPanel({
   recipientName,
   profile,
@@ -249,8 +386,14 @@ function AboutRecipientPanel({
             <li>Language: {String(p.primaryLanguage)}</li>
           ) : null}
           {p.primaryProviderName ? (
-            <li>Primary provider: {String(p.primaryProviderName)}</li>
-          ) : null}
+            <li data-testid="care-about-primary-provider">
+              Primary provider: {String(p.primaryProviderName)}
+            </li>
+          ) : (
+            <li className="muted" data-testid="care-about-primary-provider">
+              Primary provider: not on file
+            </li>
+          )}
           {p.careLocationSummary ? (
             <li>{String(p.careLocationSummary)}</li>
           ) : null}
@@ -524,10 +667,13 @@ export function CarePage({
         data-testid={section === "about" ? "care-about-profile" : undefined}
       >
         {section === "about" && (
-          <AboutRecipientPanel
-            recipientName={recipientName}
-            profile={profile}
-          />
+          <>
+            <AboutRecipientPanel
+              recipientName={recipientName}
+              profile={profile}
+            />
+            <ManualCareNotePanel recipientName={recipientName} />
+          </>
         )}
         {section === "history" && (
           <div data-testid="care-history-panel">

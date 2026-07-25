@@ -36,11 +36,23 @@ export function getDefaultCareSpace(): CareSpace {
   return CARE_SPACES[0]!;
 }
 
+/**
+ * Lab membership: Marcus (p-sadeil) may access Evelyn + Robert.
+ * Maya (p-maya) may access Evelyn only — not Robert.
+ * Daniel (p-walter) Evelyn only.
+ * Dr Shah Evelyn only. Dr Cole is Robert's physician (server-side).
+ */
 export function listAuthorizedCareSpaces(
-  _carePersonId?: string | null,
+  carePersonId?: string | null,
 ): CareSpace[] {
-  // Lab principals can see both spaces for architecture proof.
-  // Production would filter by real membership.
+  const id = carePersonId ?? "";
+  if (id === "p-maya" || id === "p-walter" || id === "p-dr-shah") {
+    return CARE_SPACES.filter((s) => s.careRecipientId === "cr-olivia");
+  }
+  if (id === "p-dr-cole") {
+    return CARE_SPACES.filter((s) => s.careRecipientId === "cr-robert");
+  }
+  // Marcus and lab default: both spaces for multi-recipient proof
   return CARE_SPACES;
 }
 

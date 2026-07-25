@@ -60,12 +60,62 @@ export function DocumentsPage() {
         </p>
       </div>
 
+      {space.depth === "lightweight" && (
+        <section
+          className="section surface-reported"
+          aria-label="Recipient onboarding"
+          data-testid="care-packet-request"
+        >
+          <h2>Initial care context</h2>
+          <p className="muted">
+            {space.displayName}&apos;s space is a lightweight demo context. Relay
+            does not silently pull a live EHR chart. An authorized personal
+            representative may request a provider care summary (packet) so the
+            care team can map verified source material into this recipient
+            context.
+          </p>
+          <button
+            type="button"
+            className="secondary-btn"
+            data-testid="request-care-packet"
+            onClick={() => {
+              setError(null);
+              setMeta({
+                exportedAt: new Date().toISOString(),
+                evidenceMode: "LAB_REQUEST",
+                source: "provider_care_packet_request",
+              });
+              setMarkdown(
+                `# Care packet request — ${space.displayName}\n\n` +
+                  `Requested by: ${session.displayName}\n` +
+                  `Status: Request prepared (lab) — not a live clinic transmission.\n\n` +
+                  `Requested items (authorized source material):\n` +
+                  `• Active problems / conditions\n` +
+                  `• Current medications and allergies\n` +
+                  `• Primary provider contact\n` +
+                  `• Recent visit summary if available\n\n` +
+                  `Next step: authorized provider organization supplies the packet; Relay maps it into recipient profile and care truth with provenance.`,
+              );
+            }}
+          >
+            Prepare provider care-packet request
+          </button>
+        </section>
+      )}
+
       <section className="section" aria-label="Generate from care truth">
         <h2>Care summary</h2>
         <p className="muted">
           Built from live care truth for {space.displayName}, prepared as{" "}
           {session.displayName}.
         </p>
+        {!markdown && !error && (
+          <p className="muted" data-testid="documents-empty-state">
+            No document prepared yet for {space.displayName}. Generate a care
+            summary from current care truth when you are ready — empty is honest,
+            not broken.
+          </p>
+        )}
         <div className="btn-row">
           <button
             type="button"
