@@ -72,11 +72,10 @@ export function RelayPanel({
   const [coordErr, setCoordErr] = useState<string | null>(null);
   const [coordTo, setCoordTo] = useState(coordFocusPersonId ?? people.maya.id);
   const [coordLoading, setCoordLoading] = useState(false);
-  const [coordPinnedBottom, setCoordPinnedBottom] = useState(true);
   const [coordHasNewWhileUp, setCoordHasNewWhileUp] = useState(false);
   const coordThreadRef = useRef<HTMLDivElement | null>(null);
   const coordLenRef = useRef(0);
-  /** Ref mirror so poll/new-msg path never sees stale pinned state. */
+  /** Ref so poll/new-msg path never sees stale pinned state. */
   const coordPinnedBottomRef = useRef(true);
 
   function scrollCoordToLatest(smooth = true) {
@@ -93,7 +92,6 @@ export function RelayPanel({
       }
     }
     coordPinnedBottomRef.current = true;
-    setCoordPinnedBottom(true);
     setCoordHasNewWhileUp(false);
   }
 
@@ -126,6 +124,7 @@ export function RelayPanel({
     setCoordDraft("");
     setCoordErr(null);
     setCoordTo(coordFocusPersonId ?? people.maya.id);
+    coordPinnedBottomRef.current = true;
   }, [rid, coordFocusPersonId]);
 
   useEffect(() => {
@@ -133,7 +132,7 @@ export function RelayPanel({
     let cancelled = false;
     setCoordLoading(true);
     setCoord([]); // never show previous recipient while loading
-    setCoordPinnedBottom(true);
+    coordPinnedBottomRef.current = true;
     setCoordHasNewWhileUp(false);
     coordLenRef.current = 0;
     void fetchCoordination().then((r) => {
@@ -214,7 +213,7 @@ export function RelayPanel({
       const r = await fetchCoordination();
       if (r.ok) {
         setCoord(r.messages.filter((m) => !isTestPollution(m.body)));
-        setCoordPinnedBottom(true);
+        coordPinnedBottomRef.current = true;
         window.requestAnimationFrame(() => scrollCoordToLatest(true));
       }
     } finally {
@@ -353,7 +352,6 @@ export function RelayPanel({
               const dist = el.scrollHeight - el.scrollTop - el.clientHeight;
               const atBottom = dist < 48;
               coordPinnedBottomRef.current = atBottom;
-              setCoordPinnedBottom(atBottom);
               if (atBottom) setCoordHasNewWhileUp(false);
             }}
           >
