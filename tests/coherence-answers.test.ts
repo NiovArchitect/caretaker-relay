@@ -47,7 +47,7 @@ describe("coherence answer quality", () => {
       recipientDisplayName: "Robert Hale",
       store,
     });
-    expect(r.answer).toMatch(/isn't listed|don't have a Dr\. Shah|not .*provider/i);
+    expect(r.answer).toMatch(/isn't listed|don't have (a )?Dr\. Shah|not .*provider/i);
     // May mention Cole as alternative but not as if she is Shah
     if (/Dr\. Shah.*Lisinopril|Shah's current medication instruction is from Dr\. Amara/i.test(r.answer)) {
       throw new Error("Silent provider substitution");
