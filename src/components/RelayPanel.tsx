@@ -76,6 +76,8 @@ export function RelayPanel({
   const [coordHasNewWhileUp, setCoordHasNewWhileUp] = useState(false);
   const coordThreadRef = useRef<HTMLDivElement | null>(null);
   const coordLenRef = useRef(0);
+  /** Ref mirror so poll/new-msg path never sees stale pinned state. */
+  const coordPinnedBottomRef = useRef(true);
 
   function scrollCoordToLatest(smooth = true) {
     const el = coordThreadRef.current;
@@ -90,8 +92,15 @@ export function RelayPanel({
         /* scrollTop already set */
       }
     }
+    coordPinnedBottomRef.current = true;
     setCoordPinnedBottom(true);
     setCoordHasNewWhileUp(false);
+  }
+
+  function isCoordNearBottom(): boolean {
+    const el = coordThreadRef.current;
+    if (!el) return true;
+    return el.scrollHeight - el.scrollTop - el.clientHeight < 48;
   }
 
   // When a verification bundle arrives, bring it into the visible Relay dock.
@@ -175,14 +184,16 @@ export function RelayPanel({
   useEffect(() => {
     if (mode !== "messages") return;
     if (coord.length > coordLenRef.current) {
-      if (coordPinnedBottom) {
-        window.requestAnimationFrame(() => scrollCoordToLatest(true));
+      // Prefer live DOM distance over React state (avoids stale pinned flag).
+      const nearBottom = isCoordNearBottom() || coordPinnedBottomRef.current;
+      if (nearBottom) {
+        window.requestAnimationFrame(() => scrollCoordToLatest(false));
       } else {
         setCoordHasNewWhileUp(true);
       }
     }
     coordLenRef.current = coord.length;
-  }, [coord, mode, coordPinnedBottom]);
+  }, [coord, mode]);
 
   async function sendCoord() {
     const text = coordDraft.trim();
@@ -341,6 +352,7 @@ export function RelayPanel({
               if (!el) return;
               const dist = el.scrollHeight - el.scrollTop - el.clientHeight;
               const atBottom = dist < 48;
+              coordPinnedBottomRef.current = atBottom;
               setCoordPinnedBottom(atBottom);
               if (atBottom) setCoordHasNewWhileUp(false);
             }}
