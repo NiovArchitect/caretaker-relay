@@ -1,53 +1,63 @@
-# Coherent Care Master Completion Matrix
+# Coherent Care Master Completion Matrix — PROOF AUDIT
 
-**Authoritative inventory for FULL COHERENT-CARE COMPLETION.**  
-**Updated:** 2026-07-25 (post crash recovery — evidence-based)  
-**APP:** `e2595b6` source = live deploy  
-**API:** `b39fbb5` source = live deploy  
-**PRODUCT FREEZE:** RESTORED  
+**Updated:** 2026-07-25 (FINAL PROOF AUDIT — evidence-based, not summary)  
+**APP SOURCE/DEPLOY:** `64d23471126286fdb461304a8938c5110890e462`  
+**API SOURCE/DEPLOY:** `b39fbb5868bac4b80ad19f7cedd9ae2a7a1cd0fe`  
+**PRODUCT FREEZE:** **NOT RESTORED** (unproven hard gates remain)
 
-**Status values:** IMPLEMENTED + PUBLICLY PROVEN | IMPLEMENTED + TEST PROVEN | IMPLEMENTED NOT PROVEN | PARTIALLY IMPLEMENTED | NOT IMPLEMENTED | BLOCKED EXTERNALLY | NOT APPLICABLE + JUSTIFICATION | FAILED
+Allowed statuses: IMPLEMENTED + PUBLICLY PROVEN | IMPLEMENTED + TEST PROVEN | UNPROVEN | BLOCKED EXTERNALLY | NOT APPLICABLE + JUSTIFIED | FAILED | PARTIAL
 
-| # | Requirement | Source | Status | Location / notes |
-|---|-------------|--------|--------|------------------|
-| 1 | Recipient context transaction boundary | Coherent-care §1 | IMPLEMENTED + TEST PROVEN | App.tsx `switchRecipient`; care-experience tests |
-| 2 | Coordination recipient bleed | Coherent-care §2 | IMPLEMENTED + TEST PROVEN | RelayPanel rid rebind |
-| 3 | Switch → Today landing | Coherent-care §3 | IMPLEMENTED + TEST PROVEN | switchRecipient → today |
-| 4 | Nav scroll rules | Coherent-care §4 | IMPLEMENTED + TEST PROVEN | NAVIGATION_STATE_AND_CONTEXT_RULES.md |
-| 5 | Wellbeing observation extract | Coherent-care §5 | IMPLEMENTED + PUBLICLY PROVEN | Live understand 327d543: REPORTED + recordedAt/effectiveAt (LLM fallback) |
-| 6 | Caregiver report = REPORTED value | Coherent-care §6–7 | IMPLEMENTED + PUBLICLY PROVEN | soft obs REPORTED/low; not clinical NEEDS CHECKING |
-| 7 | recorded_at / effective_at | Coherent-care time | IMPLEMENTED + PUBLICLY PROVEN | care-time.ts; live candidates carry both |
-| 8 | Recipient timezone display | Coherent-care time | IMPLEMENTED + TEST PROVEN | America/Los_Angeles; formatInCareTimezone |
-| 9 | Looks right commits | Coherent-care | IMPLEMENTED + TEST PROVEN | confirmCareUpdateAsync; household-closure E2E |
-| 10 | Correct something E2E | Coherent-care | IMPLEMENTED + TEST PROVEN | startCorrection + corrections API + re-verify |
-| 11 | Dual documentation paths | Doc addendum | IMPLEMENTED + TEST PROVEN | ManualCareNotePanel + Relay propose/confirm |
-| 12 | Manual/Relay same record model | Doc addendum | IMPLEMENTED + TEST PROVEN | CARE_NOTE_V1 |
-| 13 | Role-aware note kinds | Doc addendum | IMPLEMENTED + TEST PROVEN | noteKindForRole |
-| 14 | Status synthesis “how is…” | Intelligence | IMPLEMENTED + PUBLICLY PROVEN | Family vs Shah distinct public answers |
-| 15 | Role-aware Relay framing | Intelligence | IMPLEMENTED + PUBLICLY PROVEN | Clinical-facing vs plain-language |
-| 16 | Authority matrix doc | Architecture | IMPLEMENTED + TEST PROVEN | CARE_INFORMATION_AUTHORITY_MATRIX.md |
-| 17 | Relay retrieval map | Architecture | IMPLEMENTED + TEST PROVEN | RELAY_INFORMATION_RETRIEVAL_MAP.md |
-| 18 | Robert provider consistency | Walkthrough | IMPLEMENTED + PUBLICLY PROVEN | Public: Dr. Amara Cole on Robert |
-| 19 | Maya/Robert authorization | Walkthrough | IMPLEMENTED + PUBLICLY PROVEN | Public: Maya NO_RELATIONSHIP on cr-robert |
-| 20 | Sticky coordination composer | Coherent-care | IMPLEMENTED + TEST PROVEN | coord-composer-sticky CSS |
-| 21 | Notification counter clickable | Coherent-care | IMPLEMENTED + TEST PROVEN | openNotifications → Today inbox |
-| 22 | Notification center list | Coherent-care | IMPLEMENTED + TEST PROVEN | Today inbox surface |
-| 23 | Avatar menu dismiss | Coherent-care | IMPLEMENTED + TEST PROVEN | click-outside + Escape |
-| 24 | New recipient onboarding packet | Coherent-care | IMPLEMENTED + TEST PROVEN | request care packet UI (honest) |
-| 25 | Document empty state | Walkthrough | IMPLEMENTED + TEST PROVEN | honest empty copy |
-| 26 | Cross-surface invariants | Coherent-care | IMPLEMENTED + TEST PROVEN | switch clears state |
-| 27 | Physician/NP hands-on readiness | Addendum | IMPLEMENTED + TEST PROVEN | PHYSICIAN_NP_HANDS_ON_READINESS.md + role framing |
-| 28 | Privacy multi-recipient | Safety | IMPLEMENTED + PUBLICLY PROVEN | isolation + Maya/Robert; judge safety 110/110 pre-crash |
-| 29 | Live OpenAI synthesis | External | BLOCKED EXTERNALLY | quota 429; structured fallback in use |
-| 30 | Live EHR import | N/A | NOT APPLICABLE + JUSTIFICATION | honest care packet request only |
+| # | Requirement | Status | Evidence this audit |
+|---|-------------|--------|---------------------|
+| 1 | Recipient context transaction boundary | IMPLEMENTED + TEST PROVEN | App `switchRecipient`; care-experience tests |
+| 2 | Coordination recipient bleed | IMPLEMENTED + TEST PROVEN | RelayPanel rid rebind; S10 isolation in scenarios partial |
+| 3 | Switch → Today landing | IMPLEMENTED + TEST PROVEN | code path `setTab("today")` |
+| 4 | Nav scroll rules | IMPLEMENTED + TEST PROVEN | NAVIGATION_STATE_AND_CONTEXT_RULES.md + code |
+| 5 | Wellbeing observation extract | IMPLEMENTED + PUBLICLY PROVEN | Live understand → REPORTED observation; fallback when OpenAI 429 |
+| 6 | Caregiver report = REPORTED | IMPLEMENTED + PUBLICLY PROVEN | epistemicStatus REPORTED; not clinical diagnosis |
+| 7 | recorded_at / effective_at | PARTIAL | Fields present; `resolveEffectiveAt` unit cases pass; live “yesterday morning” did not always shift effective_at |
+| 8 | Recipient timezone display | IMPLEMENTED + TEST PROVEN | America/Los_Angeles + formatInCareTimezone |
+| 9 | Looks right commits | IMPLEMENTED + PUBLICLY PROVEN | Public confirm → `kind:persisted` + eventIds |
+| 10 | Correct something / post-submit correction | IMPLEMENTED + PUBLICLY PROVEN | Public `/corrections` → `kind:persisted` after confirm; household-closure unit |
+| 11 | Dual documentation paths | PARTIAL | Code ManualCareNotePanel + Relay; unit care-notes; **browser manual path not re-proven this audit** |
+| 12 | Manual/Relay same model | IMPLEMENTED + TEST PROVEN | CARE_NOTE_V1 / noteKindForRole unit |
+| 13 | Role-aware note kinds | IMPLEMENTED + TEST PROVEN | family/dsp/provider(+np/nurse) mapping unit |
+| 14 | Status synthesis | IMPLEMENTED + PUBLICLY PROVEN | Family vs Shah distinct public answers |
+| 15 | Role-aware Relay framing | IMPLEMENTED + PUBLICLY PROVEN | Clinical-facing vs plain-language |
+| 16 | Authority matrix doc | IMPLEMENTED + TEST PROVEN | CARE_INFORMATION_AUTHORITY_MATRIX.md |
+| 17 | Relay retrieval map | IMPLEMENTED + TEST PROVEN | RELAY_INFORMATION_RETRIEVAL_MAP.md |
+| 18 | Robert provider consistency | IMPLEMENTED + PUBLICLY PROVEN | Public answer: Dr. Amara Cole |
+| 19 | Maya/Robert authorization UX | IMPLEMENTED + PUBLICLY PROVEN | UI: Maya switcher **only Evelyn** (no Robert); API 403 NO_RELATIONSHIP on cr-robert |
+| 20 | Sticky coordination composer | PARTIAL | CSS `coord-composer-sticky` present; **scroll seed browser proof not run this audit** |
+| 21 | Notification counter clickable | PARTIAL | Badge opens Today; public shows **99+ new** with **792** server notifications (accumulation) |
+| 22 | Notification center list | IMPLEMENTED + TEST PROVEN | API list has recipient/reason/time; notifications-server tests |
+| 23 | Avatar menu dismiss | IMPLEMENTED + PUBLICLY PROVEN | Outside click PASS; Escape PASS after 64d2347 document-level handler |
+| 24 | New recipient onboarding packet | PARTIAL | UI care-packet request exists; **full provider response loop not public-proven this audit** |
+| 25 | Document empty state | IMPLEMENTED + TEST PROVEN | honest empty copy in DocumentsPage |
+| 26 | Cross-surface invariants | PARTIAL | switch clears state (code+unit); full multi-surface browser matrix not re-run |
+| 27 | Physician/NP readiness | PARTIAL | Role framing public PASS; provider docs unit PASS; **physician manual UI browser not re-run** |
+| 28 | Privacy multi-recipient | IMPLEMENTED + PUBLICLY PROVEN | Maya 403 Robert; judge safety 110/110; multi-tenant unit |
+| 29 | Live OpenAI synthesis | BLOCKED EXTERNALLY | quota 429; structured fallback |
+| 30 | Live EHR import | NOT APPLICABLE + JUSTIFIED | honest care packet request only |
 
-## Crash recovery notes
+## Regression counts (this audit, final SHAs)
 
-- Pre-crash matrix over-claimed some PUBLICLY PROVEN rows before 327d543 landed.
-- After recovery: APP/API source **match** live Render deploys.
-- Judge torture 309/309, red team 121/121, button 25/25 proven pre-crash on prior API SHA; re-run required on 327d543 before freeze.
-- human-experience-proof and browser public E2E interrupted by crash — re-run before freeze.
+| Suite | Result | Notes |
+|-------|--------|-------|
+| App unit | 48/48 | |
+| Care unit (memory) | 135 pass / 22 skip | 2 files FAIL: local Prisma `localhost:5433` unavailable (env, not product) |
+| Targeted care | 40/40 | household-closure includes correction |
+| Judge torture | 309/309 | API b39fbb5 live (pre-audit same SHA) |
+| Red team | 121/121 | prior on live API |
+| Button audit | 25/25 | prior on live web |
+| Brutal collab | 105/105 | this audit |
+| Orientation | 20/20 | this audit |
+| Human proof | 95/95 | prior post-recovery |
+| Public E2E | PASS | prior post-recovery multi-event verify |
+| Scenarios-30+ | **12+/32 PARTIAL** | S01–S12 PASS observed; full 32 hung mid-run on long provider loops |
 
 ## Closure rule
 
-Campaign may restore PRODUCT FREEZE only when rows 1–28 are IMPLEMENTED + (PUBLICLY|TEST) PROVEN, final regression green on live SHAs, and P0/P1 = 0.
+PRODUCT FREEZE may be RESTORED only when every hard internal row is PUBLICLY or TEST PROVEN and scenarios/orientation/brutal/monorepo gates are complete with **zero unproven internal hard requirements**.
+
+**Current freeze decision: NOT RESTORED.**
