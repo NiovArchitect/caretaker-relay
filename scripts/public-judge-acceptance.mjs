@@ -116,7 +116,15 @@ async function run() {
   await page.waitForTimeout(1500);
 
   try {
-    await page.locator('[data-testid="verify-panel"]').waitFor({ timeout: 90000 });
+    // Understand may wait on LLM then structured fallback (~20–60s).
+    // Panel can attach off-screen in the Relay dock — wait attached, then scroll.
+    await page
+      .locator('[data-testid="verify-panel"]')
+      .waitFor({ state: "attached", timeout: 120000 });
+    await page.locator('[data-testid="verify-panel"]').scrollIntoViewIfNeeded();
+    await page
+      .locator('[data-testid="verify-panel"]')
+      .waitFor({ state: "visible", timeout: 15000 });
     results.verify_panel = true;
     results.verify_items = await page.locator('[data-testid="verify-item"]').count();
     results.med_block = await page

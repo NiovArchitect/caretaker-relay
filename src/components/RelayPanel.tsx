@@ -73,6 +73,16 @@ export function RelayPanel({
   const [coordTo, setCoordTo] = useState(coordFocusPersonId ?? people.maya.id);
   const [coordLoading, setCoordLoading] = useState(false);
 
+  // When a verification bundle arrives, bring it into the visible Relay dock.
+  useEffect(() => {
+    if (!bundle || confirmed) return;
+    window.requestAnimationFrame(() => {
+      document
+        .querySelector('[data-testid="verify-panel"]')
+        ?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    });
+  }, [bundle, confirmed]);
+
   useEffect(() => {
     if (coordFocusPersonId) {
       setCoordTo(coordFocusPersonId);
