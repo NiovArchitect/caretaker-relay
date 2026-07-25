@@ -36,6 +36,7 @@ import {
   careState,
   careToday,
   careUnderstand,
+  careRecipientProfile,
   getCareApiBaseUrl,
 } from "./careHttpClient";
 
@@ -782,6 +783,58 @@ function buildAttentionFromLines(lines: string[]): TodayAttentionItem[] {
       kind: med ? "medication" : "task",
     };
   });
+}
+
+export type RecipientProfilePayload = {
+  id: string;
+  displayName: string;
+  preferredName?: string;
+  profile: Record<string, unknown> | null;
+  medications: Array<Record<string, unknown>>;
+  source: "http" | "package";
+};
+
+export async function fetchRecipientProfile(): Promise<RecipientProfilePayload> {
+  const useHttp = await ensureHttpSession();
+  if (useHttp && httpToken) {
+    const res = await careRecipientProfile(httpToken, rid());
+    if (res.ok && res.data.recipient) {
+      return {
+        id: res.data.recipient.id,
+        displayName: res.data.recipient.displayName,
+        preferredName: res.data.recipient.preferredName,
+        profile: res.data.recipient.profile,
+        medications: res.data.medications ?? [],
+        source: "http",
+      };
+    }
+  }
+  // Package path: seed recipient profile
+  try {
+    const { store } = getCareRuntime();
+    const r = store.getRecipient(rid());
+    return {
+      id: r?.id ?? rid(),
+      displayName: r?.displayName ?? "Care recipient",
+      preferredName: r?.preferredName,
+      profile: (r?.profile as Record<string, unknown> | undefined) ?? null,
+      medications: store.getMedSchedules(rid()).map((m) => ({
+        name: m.name,
+        dose: m.dose,
+        scheduleLabel: m.scheduleLabel,
+        authorizedBy: m.authorizedBy,
+      })),
+      source: "package",
+    };
+  } catch {
+    return {
+      id: rid(),
+      displayName: "Care recipient",
+      profile: null,
+      medications: [],
+      source: "package",
+    };
+  }
 }
 
 export async function fetchCareState(): Promise<CareStateSnapshot> {

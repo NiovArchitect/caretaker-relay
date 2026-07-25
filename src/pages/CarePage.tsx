@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   fetchCareState,
+  fetchRecipientProfile,
   type CareStateSnapshot,
+  type RecipientProfilePayload,
 } from "../foundation/careClient";
 import {
   HIDDEN_TECHNICAL_KEYS,
@@ -24,6 +26,7 @@ import {
 import { loadActiveCareRecipientId, resolveCareSpace } from "../lib/careContext";
 
 type CareSection =
+  | "about"
   | "medications"
   | "appointments"
   | "observations"
@@ -31,6 +34,7 @@ type CareSection =
   | "reviews";
 
 const sections: { id: CareSection; label: string }[] = [
+  { id: "about", label: "About" },
   { id: "medications", label: "Medications" },
   { id: "appointments", label: "Appointments" },
   { id: "observations", label: "Observations" },
@@ -179,6 +183,213 @@ function DetailRows({
   );
 }
 
+function AboutRecipientPanel({
+  recipientName,
+  profile,
+}: {
+  recipientName: string;
+  profile: RecipientProfilePayload | null;
+}) {
+  const p = (profile?.profile ?? {}) as Record<string, unknown>;
+  const conditions = Array.isArray(p.confirmedConditions)
+    ? (p.confirmedConditions as Array<Record<string, unknown>>)
+    : [];
+  const allergies = Array.isArray(p.allergies)
+    ? (p.allergies as Array<Record<string, unknown>>)
+    : [];
+  const emergency = Array.isArray(p.emergencyContacts)
+    ? (p.emergencyContacts as Array<Record<string, unknown>>)
+    : [];
+  const goals = Array.isArray(p.careGoals) ? (p.careGoals as string[]) : [];
+  const prefs = Array.isArray(p.carePreferences)
+    ? (p.carePreferences as string[])
+    : [];
+  const concerns = Array.isArray(p.healthConcerns)
+    ? (p.healthConcerns as string[])
+    : [];
+
+  function ageLine(): string {
+    const dob = typeof p.dateOfBirth === "string" ? p.dateOfBirth : "";
+    if (!dob) return "Age: not on file";
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dob);
+    if (!m) return `Date of birth on file: ${dob}`;
+    const y = Number(m[1]);
+    const mo = Number(m[2]) - 1;
+    const d = Number(m[3]);
+    const now = new Date();
+    let age = now.getFullYear() - y;
+    if (now.getMonth() < mo || (now.getMonth() === mo && now.getDate() < d))
+      age -= 1;
+    return `${age} years old · DOB ${dob}`;
+  }
+
+  return (
+    <>
+      <h2>About {recipientName}</h2>
+      <p className="muted">
+        Person-first care context. Confirmed fields only — missing items are not
+        invented.
+      </p>
+
+      <div className="surface-known" style={{ padding: 16, marginTop: 12 }}>
+        <h3 style={{ margin: "0 0 8px", fontSize: "1rem" }}>Overview</h3>
+        <ul className="list-plain">
+          <li>
+            <strong>{profile?.displayName ?? recipientName}</strong>
+            {profile?.preferredName
+              ? ` · prefers ${profile.preferredName}`
+              : ""}
+          </li>
+          <li>{ageLine()}</li>
+          {p.pronouns ? <li>Pronouns: {String(p.pronouns)}</li> : null}
+          {p.primaryLanguage ? (
+            <li>Language: {String(p.primaryLanguage)}</li>
+          ) : null}
+          {p.primaryProviderName ? (
+            <li>Primary provider: {String(p.primaryProviderName)}</li>
+          ) : null}
+          {p.careLocationSummary ? (
+            <li>{String(p.careLocationSummary)}</li>
+          ) : null}
+        </ul>
+      </div>
+
+      <div className="surface-reported" style={{ padding: 16, marginTop: 12 }}>
+        <h3 style={{ margin: "0 0 8px", fontSize: "1rem" }}>Health</h3>
+        <p className="muted" style={{ marginTop: 0 }}>
+          Confirmed conditions vs caregiver-reported concerns are separate.
+        </p>
+        {conditions.length === 0 ? (
+          <p className="muted">No confirmed diagnoses on file.</p>
+        ) : (
+          <ul className="list-plain">
+            {conditions.map((c) => (
+              <li key={String(c.id ?? c.label)}>
+                <strong>{String(c.label)}</strong>
+                {c.sourceLabel ? (
+                  <span className="muted"> · {String(c.sourceLabel)}</span>
+                ) : null}
+                <span className="badge badge-teal" style={{ marginLeft: 8 }}>
+                  {String(c.verification ?? "CONFIRMED")}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+        {concerns.length > 0 && (
+          <>
+            <p style={{ marginBottom: 4 }}>
+              <strong>Concerns / observations (not diagnoses)</strong>
+            </p>
+            <ul className="list-plain">
+              {concerns.map((c) => (
+                <li key={c}>{c}</li>
+              ))}
+            </ul>
+          </>
+        )}
+        <p style={{ marginBottom: 4 }}>
+          <strong>Allergies</strong>
+        </p>
+        <ul className="list-plain">
+          {allergies.length === 0 ? (
+            <li className="muted">Not on file</li>
+          ) : (
+            allergies.map((a) => (
+              <li key={String(a.label)}>{String(a.label)}</li>
+            ))
+          )}
+        </ul>
+        <p style={{ marginBottom: 4 }}>
+          <strong>Medications on file</strong>
+        </p>
+        <ul className="list-plain">
+          {(profile?.medications ?? []).length === 0 ? (
+            <li className="muted">None listed</li>
+          ) : (
+            profile!.medications.map((m, i) => (
+              <li key={i}>
+                {String(m.name)} {String(m.dose ?? "")} —{" "}
+                {String(m.scheduleLabel ?? "")}
+              </li>
+            ))
+          )}
+        </ul>
+      </div>
+
+      <div className="surface-known" style={{ padding: 16, marginTop: 12 }}>
+        <h3 style={{ margin: "0 0 8px", fontSize: "1rem" }}>Daily support</h3>
+        <ul className="list-plain">
+          {p.mobilityBaseline ? (
+            <li>Mobility: {String(p.mobilityBaseline)}</li>
+          ) : (
+            <li className="muted">Mobility: not on file</li>
+          )}
+          {p.dailyRoutineSummary ? (
+            <li>{String(p.dailyRoutineSummary)}</li>
+          ) : null}
+          {p.transportationNotes ? (
+            <li>Transport: {String(p.transportationNotes)}</li>
+          ) : null}
+        </ul>
+      </div>
+
+      <div className="surface-reported" style={{ padding: 16, marginTop: 12 }}>
+        <h3 style={{ margin: "0 0 8px", fontSize: "1rem" }}>
+          Preferences & goals
+        </h3>
+        <ul className="list-plain">
+          {prefs.map((x) => (
+            <li key={x}>{x}</li>
+          ))}
+          {goals.map((x) => (
+            <li key={x}>Goal: {x}</li>
+          ))}
+          {prefs.length === 0 && goals.length === 0 && (
+            <li className="muted">Not on file</li>
+          )}
+        </ul>
+      </div>
+
+      <div
+        className="surface-verify"
+        style={{ padding: 16, marginTop: 12 }}
+        data-testid="emergency-snapshot-card"
+      >
+        <h3 style={{ margin: "0 0 8px", fontSize: "1rem" }}>
+          Essential / emergency
+        </h3>
+        <ul className="list-plain">
+          <li>{ageLine()}</li>
+          <li>
+            Allergies:{" "}
+            {allergies.map((a) => String(a.label)).join("; ") || "not on file"}
+          </li>
+          <li>
+            Conditions:{" "}
+            {conditions.map((c) => String(c.label)).join("; ") || "none on file"}
+          </li>
+          {p.primaryProviderName ? (
+            <li>Provider: {String(p.primaryProviderName)}</li>
+          ) : null}
+          {emergency.map((c) => (
+            <li key={String(c.name)}>
+              Contact: {String(c.name)}
+              {c.relationship ? ` · ${String(c.relationship)}` : ""}
+              {c.phone ? ` · ${String(c.phone)}` : ""}
+            </li>
+          ))}
+        </ul>
+        {p.profileSourceSummary ? (
+          <p className="muted" style={{ fontSize: "0.8rem", marginBottom: 0 }}>
+            {String(p.profileSourceSummary)}
+          </p>
+        ) : null}
+      </div>
+    </>
+  );
+}
+
 export function CarePage({
   focusKind,
 }: {
@@ -187,9 +398,10 @@ export function CarePage({
   const space = resolveCareSpace(loadActiveCareRecipientId());
   const recipientName = space.displayName;
   const [section, setSection] = useState<CareSection>(
-    focusKind === "medication" ? "medications" : "medications",
+    focusKind === "medication" ? "medications" : "about",
   );
   const [state, setState] = useState<CareStateSnapshot | null>(null);
+  const [profile, setProfile] = useState<RecipientProfilePayload | null>(null);
   const [selected, setSelected] = useState<Record<string, unknown> | null>(
     null,
   );
@@ -209,6 +421,9 @@ export function CarePage({
       if (s.source === "empty") {
         setError("No care state available yet for this recipient.");
       }
+    });
+    void fetchRecipientProfile().then((p) => {
+      if (!cancelled) setProfile(p);
     });
     return () => {
       cancelled = true;
@@ -286,7 +501,17 @@ export function CarePage({
         ))}
       </div>
 
-      <section className="section" aria-label={section}>
+      <section
+        className="section"
+        aria-label={section}
+        data-testid={section === "about" ? "care-about-profile" : undefined}
+      >
+        {section === "about" && (
+          <AboutRecipientPanel
+            recipientName={recipientName}
+            profile={profile}
+          />
+        )}
         {section === "medications" && (
           <>
             <h2>Medications</h2>

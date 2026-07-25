@@ -89,8 +89,8 @@ export function LoginGate({
           </div>
           <h1 className="cr-login-title">Sign in</h1>
           <p className="cr-login-sub">
-            Shared care context for the people helping Evelyn. Ask or update
-            without re-explaining.
+            Shared care context for everyone helping someone. Ask, coordinate,
+            and stay current without re-explaining.
           </p>
 
           <label className="cr-field">

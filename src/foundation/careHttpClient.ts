@@ -260,6 +260,24 @@ export async function careState(
   }>(`/api/v1/care/recipients/${careRecipientId}/state`, { token, baseUrl });
 }
 
+export async function careRecipientProfile(
+  token: string,
+  careRecipientId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    recipient: {
+      id: string;
+      displayName: string;
+      preferredName?: string;
+      householdId: string;
+      profile: Record<string, unknown> | null;
+    };
+    medications: Array<Record<string, unknown>>;
+  }>(`/api/v1/care/recipients/${careRecipientId}/profile`, { token, baseUrl });
+}
+
 export async function careCircle(
   token: string,
   careRecipientId: string,

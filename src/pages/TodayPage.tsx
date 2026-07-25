@@ -128,6 +128,10 @@ export function TodayPage({
         <h1 data-testid="today-greeting" className="today-hero-recipient">
           <span data-testid="care-recipient-label">{recipientName}</span>
         </h1>
+        <p className="muted" style={{ margin: "4px 0 0", fontSize: "0.9rem" }}>
+          Open <strong>Care → About</strong> for age, conditions, and essential
+          care context — not only today&apos;s tasks.
+        </p>
         <div className="today-hero-caregiver">
           <span>
             You are{" "}
