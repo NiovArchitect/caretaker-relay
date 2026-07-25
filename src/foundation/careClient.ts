@@ -412,6 +412,8 @@ export async function postCoordination(body: string, toPersonId?: string) {
 export async function fetchServerNotifications(): Promise<{
   ok: boolean;
   notifications: Array<Record<string, unknown>>;
+  unreadCount?: number;
+  totalCount?: number;
   authority?: string;
   message?: string;
 }> {
@@ -423,6 +425,16 @@ export async function fetchServerNotifications(): Promise<{
   return {
     ok: true,
     notifications: res.data.notifications ?? [],
+    unreadCount:
+      typeof res.data.unread_count === "number"
+        ? res.data.unread_count
+        : (res.data.notifications ?? []).filter(
+            (n) => !n.seen_at && !n.resolved_at,
+          ).length,
+    totalCount:
+      typeof res.data.total_count === "number"
+        ? res.data.total_count
+        : (res.data.notifications ?? []).length,
     authority: res.data.authority,
   };
 }
@@ -436,6 +448,26 @@ export async function notificationAction(
   const { careNotificationAction } = await import("./careHttpClient");
   const res = await careNotificationAction(httpToken, id, action);
   return res.ok;
+}
+
+export async function notificationBulk(
+  action: "mark_all_seen" | "resolve_stale",
+  opts?: { olderThanMs?: number },
+): Promise<{ ok: boolean; changed?: number; unreadCount?: number; message?: string }> {
+  const ok = await ensureHttpSession();
+  if (!ok || !httpToken) return { ok: false, message: "Not signed in" };
+  const { careNotificationBulk } = await import("./careHttpClient");
+  const res = await careNotificationBulk(httpToken, {
+    action,
+    care_recipient_id: rid(),
+    older_than_ms: opts?.olderThanMs,
+  });
+  if (!res.ok) return { ok: false, message: res.message };
+  return {
+    ok: true,
+    changed: res.data.changed,
+    unreadCount: res.data.unread_count,
+  };
 }
 
 export async function askCaregiverClarification(input: {

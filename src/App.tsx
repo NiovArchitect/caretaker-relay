@@ -108,13 +108,12 @@ export function App() {
           if (stopped) return;
           setNotifConnected(r.ok);
           if (r.ok) {
+            // Unread model: not viewed and not resolved; scoped to active recipient
             const scoped = r.notifications.filter((n) => {
               const rid = String(n.care_recipient_id ?? "");
-              // If notification is recipient-tagged, only count active recipient
               if (rid && rid !== activeRecipientId) return false;
               return !n.seen_at && !n.resolved_at;
             });
-            // Cap display noise: historical lab pollution should not look like 726 new
             setUnreadCount(Math.min(scoped.length, 99));
           }
         }),
@@ -649,9 +648,17 @@ export function App() {
     // Notifications live on Today as the care attention inbox
     setTab("today");
     setProfileOpen(false);
+    // Opening the inbox marks active-recipient items seen (unread → read)
+    void import("./foundation/careClient").then(({ notificationBulk }) =>
+      notificationBulk("mark_all_seen").then((r) => {
+        if (r.ok) setUnreadCount(r.unreadCount ?? 0);
+      }),
+    );
     window.requestAnimationFrame(() => {
       document
-        .querySelector('[data-testid="coordination-inbox"], [data-testid="today-notifications"]')
+        .querySelector(
+          '[data-testid="server-notifications"], [data-testid="today-notifications"], [data-testid="coordination-inbox"]',
+        )
         ?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }

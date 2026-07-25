@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { RelayMessage, VerificationBundle } from "../domain/types";
 import { Composer } from "./Composer";
 import { VerifyPanel } from "./VerifyPanel";
@@ -72,6 +72,21 @@ export function RelayPanel({
   const [coordErr, setCoordErr] = useState<string | null>(null);
   const [coordTo, setCoordTo] = useState(coordFocusPersonId ?? people.maya.id);
   const [coordLoading, setCoordLoading] = useState(false);
+  const [coordPinnedBottom, setCoordPinnedBottom] = useState(true);
+  const [coordHasNewWhileUp, setCoordHasNewWhileUp] = useState(false);
+  const coordThreadRef = useRef<HTMLDivElement | null>(null);
+  const coordLenRef = useRef(0);
+
+  function scrollCoordToLatest(smooth = true) {
+    const el = coordThreadRef.current;
+    if (!el) return;
+    el.scrollTo({
+      top: el.scrollHeight,
+      behavior: smooth ? "smooth" : "auto",
+    });
+    setCoordPinnedBottom(true);
+    setCoordHasNewWhileUp(false);
+  }
 
   // When a verification bundle arrives, bring it into the visible Relay dock.
   useEffect(() => {
@@ -103,11 +118,17 @@ export function RelayPanel({
     let cancelled = false;
     setCoordLoading(true);
     setCoord([]); // never show previous recipient while loading
+    setCoordPinnedBottom(true);
+    setCoordHasNewWhileUp(false);
+    coordLenRef.current = 0;
     void fetchCoordination().then((r) => {
       if (cancelled) return;
       setCoordLoading(false);
       if (r.ok) {
-        setCoord(r.messages.filter((m) => !isTestPollution(m.body)));
+        const msgs = r.messages.filter((m) => !isTestPollution(m.body));
+        setCoord(msgs);
+        coordLenRef.current = msgs.length;
+        window.requestAnimationFrame(() => scrollCoordToLatest(false));
       } else {
         setCoord([]);
       }
@@ -116,6 +137,19 @@ export function RelayPanel({
       cancelled = true;
     };
   }, [mode, rid]);
+
+  // New messages while user is reading history → indicator, no force-scroll
+  useEffect(() => {
+    if (mode !== "messages") return;
+    if (coord.length > coordLenRef.current) {
+      if (coordPinnedBottom) {
+        window.requestAnimationFrame(() => scrollCoordToLatest(true));
+      } else {
+        setCoordHasNewWhileUp(true);
+      }
+    }
+    coordLenRef.current = coord.length;
+  }, [coord, mode, coordPinnedBottom]);
 
   async function sendCoord() {
     const text = coordDraft.trim();
@@ -136,6 +170,8 @@ export function RelayPanel({
     const r = await fetchCoordination();
     if (r.ok) {
       setCoord(r.messages.filter((m) => !isTestPollution(m.body)));
+      setCoordPinnedBottom(true);
+      window.requestAnimationFrame(() => scrollCoordToLatest(true));
     }
   }
 
@@ -260,7 +296,19 @@ export function RelayPanel({
           data-testid="human-messages"
           data-recipient-id={rid}
         >
-          <div className="relay-thread coord-thread">
+          <div
+            className="relay-thread coord-thread"
+            ref={coordThreadRef}
+            data-testid="coord-thread"
+            onScroll={() => {
+              const el = coordThreadRef.current;
+              if (!el) return;
+              const dist = el.scrollHeight - el.scrollTop - el.clientHeight;
+              const atBottom = dist < 48;
+              setCoordPinnedBottom(atBottom);
+              if (atBottom) setCoordHasNewWhileUp(false);
+            }}
+          >
             <div className="bubble bubble-system" data-testid="coord-context-banner">
               Human coordination for <strong>{space.displayName}</strong> only.
               Messages are from people in their care circle — not AI, and not
@@ -298,7 +346,27 @@ export function RelayPanel({
               );
             })}
           </div>
-          <div className="relay-composer-wrap coord-composer-sticky">
+          {coordHasNewWhileUp && (
+            <button
+              type="button"
+              className="primary-btn"
+              data-testid="coord-jump-latest"
+              style={{
+                position: "sticky",
+                bottom: 8,
+                margin: "0 auto 8px",
+                display: "block",
+                zIndex: 2,
+              }}
+              onClick={() => scrollCoordToLatest(true)}
+            >
+              New messages ↓
+            </button>
+          )}
+          <div
+            className="relay-composer-wrap coord-composer-sticky"
+            data-testid="coord-composer-sticky"
+          >
             <label className="muted" style={{ fontSize: "0.75rem" }}>
               To (in {space.preferredName}&apos;s circle)
               <select

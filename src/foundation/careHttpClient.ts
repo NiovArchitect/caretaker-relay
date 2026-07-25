@@ -504,6 +504,8 @@ export async function careListNotifications(
   return request<{
     ok: boolean;
     notifications: Array<Record<string, unknown>>;
+    unread_count?: number;
+    total_count?: number;
     authority?: string;
   }>(`/api/v1/care/notifications${q}`, { token, baseUrl });
 }
@@ -518,6 +520,28 @@ export async function careNotificationAction(
     `/api/v1/care/notifications/${encodeURIComponent(id)}/${action}`,
     { method: "POST", token, baseUrl, body: {} },
   );
+}
+
+export async function careNotificationBulk(
+  token: string,
+  body: {
+    action: "mark_all_seen" | "resolve_stale";
+    care_recipient_id?: string;
+    older_than_ms?: number;
+  },
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    action?: string;
+    changed?: number;
+    unread_count?: number;
+  }>(`/api/v1/care/notifications/bulk`, {
+    method: "POST",
+    token,
+    baseUrl,
+    body,
+  });
 }
 
 export async function careCreateClarification(

@@ -69,6 +69,7 @@ export function TodayPage({
             r.notifications.filter(
               (n) =>
                 !n.resolved_at &&
+                !n.seen_at &&
                 String(n.care_recipient_id ?? "") === space.careRecipientId,
             ),
           );
@@ -287,33 +288,77 @@ export function TodayPage({
         </div>
       </section>
 
-      {inbox.filter((n) => !n.seen_at).length > 0 && (
+      {inbox.length > 0 && (
         <section
           className="section surface-verify"
           aria-labelledby="messages-inbox"
           data-testid="coordination-inbox"
         >
-          <h2 id="messages-inbox">Notifications</h2>
-          {inbox
-            .filter((n) => !n.seen_at)
-            .slice(0, 8)
-            .map((n) => {
+          <h2 id="messages-inbox" data-testid="today-notifications">
+            Notifications
+          </h2>
+          <p className="muted" style={{ marginTop: 0 }}>
+            Unread for {recipientName} only. Seen/resolved items leave this
+            list and no longer inflate the top badge.
+          </p>
+          <div className="btn-row" style={{ marginBottom: 12 }}>
+            <button
+              type="button"
+              className="secondary-btn"
+              data-testid="notifications-mark-all-seen"
+              onClick={() => {
+                void import("../foundation/careClient").then(
+                  ({ notificationBulk, fetchServerNotifications: fetchN }) =>
+                    notificationBulk("mark_all_seen").then(() =>
+                      fetchN().then((r) => {
+                        if (r.ok) {
+                          setInbox(
+                            r.notifications.filter(
+                              (x) =>
+                                !x.resolved_at &&
+                                !x.seen_at &&
+                                String(x.care_recipient_id ?? "") ===
+                                  space.careRecipientId,
+                            ),
+                          );
+                        }
+                      }),
+                    ),
+                );
+              }}
+            >
+              Mark all read
+            </button>
+          </div>
+          {inbox.slice(0, 12).map((n) => {
               const urgent =
                 n.priority === "urgent" || n.priority === "important";
+              const when = n.created_at
+                ? new Date(String(n.created_at)).toLocaleString()
+                : "";
               return (
                 <article
                   key={String(n.id)}
                   className={`attention-card cr-notify-attention${urgent ? " cr-notify-pulse" : ""}`}
                   data-testid="server-notification"
                   data-type={String(n.type ?? "")}
+                  data-recipient={String(n.care_recipient_id ?? "")}
                 >
                   <div className="cr-notify-meta">
                     <span className="badge badge-coral">
                       {String(n.type ?? "update").replace(/_/g, " ")}
                     </span>
+                    <span className="muted" style={{ fontSize: "0.75rem" }}>
+                      {recipientName}
+                      {when ? ` · ${when}` : ""}
+                    </span>
                   </div>
                   <h3 className="item-title">{String(n.title)}</h3>
                   <p className="attention-body">{String(n.body)}</p>
+                  <p className="muted" style={{ fontSize: "0.75rem" }}>
+                    Source: {String(n.source_type ?? "care")} ·{" "}
+                    {String(n.actor_display_name ?? "System")}
+                  </p>
                   <div className="btn-row">
                     <button
                       type="button"
@@ -329,6 +374,7 @@ export function TodayPage({
                                   r.notifications.filter(
                                     (x) =>
                                       !x.resolved_at &&
+                                      !x.seen_at &&
                                       String(x.care_recipient_id ?? "") ===
                                         space.careRecipientId,
                                   ),
@@ -343,6 +389,32 @@ export function TodayPage({
                         ✓
                       </span>
                       Mark seen
+                    </button>
+                    <button
+                      type="button"
+                      className="secondary-btn"
+                      data-testid="notification-resolve"
+                      onClick={() => {
+                        void notificationAction(String(n.id), "resolve").then(
+                          () => {
+                            void fetchServerNotifications().then((r) => {
+                              if (r.ok) {
+                                setInbox(
+                                  r.notifications.filter(
+                                    (x) =>
+                                      !x.resolved_at &&
+                                      !x.seen_at &&
+                                      String(x.care_recipient_id ?? "") ===
+                                        space.careRecipientId,
+                                  ),
+                                );
+                              }
+                            });
+                          },
+                        );
+                      }}
+                    >
+                      Resolve
                     </button>
                   </div>
                 </article>
