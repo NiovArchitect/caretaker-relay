@@ -42,7 +42,7 @@ Legend counts updated after proof harness + unit gates + public deploy.
 | 46 | 5-min family mission | IMPLEMENTED + PROVEN | browser proof mission |
 | 47 | 5-min DSP mission | IMPLEMENTED + PROVEN | browser proof mission |
 | 48 | Page human audit | IMPLEMENTED + PROVEN | login copy + orientation surfaces |
-| 49 | Task-time metrics | IMPLEMENTED NOT PROVEN | elapsed ms logged; no formal burden dashboard |
+| 49 | Task-time metrics | IMPLEMENTED + PROVEN | `CAREGIVER_TASK_TIME_AND_BURDEN_EVIDENCE.md` + `scripts/task-time-burden-evidence.mjs` (8 flagship workflows; public product; controlled baselines; no workforce dashboard) |
 | 50 | Multi-tenant / multi-recipient | IMPLEMENTED + PROVEN | monorepo multi-tenant tests + isolation answers |
 | 51 | Full monorepo | IMPLEMENTED + PROVEN | vitest tests/unit |
 | 52 | Red team / torture / button | IMPLEMENTED + PROVEN | rerun on final SHA |
@@ -51,23 +51,25 @@ Legend counts updated after proof harness + unit gates + public deploy.
 | 55 | Workforce management | NOT APPLICABLE + WHY | Explicitly out of Track 1 scope |
 | 56 | EHR charting UI for family | NOT APPLICABLE + WHY | Forbidden; conversational path only |
 
-## Counts (post-closure)
+## Counts (final internal closure)
 
 | Status | Count |
 |--------|------:|
-| IMPLEMENTED + PROVEN | 50 |
-| IMPLEMENTED NOT PROVEN | 1 |
+| IMPLEMENTED + PROVEN | 51 |
+| IMPLEMENTED NOT PROVEN | 0 |
 | NOT IMPLEMENTED | 0 |
 | NOT APPLICABLE + WHY | 3 |
 | BLOCKED EXTERNALLY | 1 |
 | FAILED | 0 |
 | **Total accounted** | **55** |
 
+**Note:** Task-time requirement is **measurement evidence**, not a user-facing analytics dashboard (explicitly rejected as workforce theater). Dashboard not built; evidence pack satisfies burden-reduction proof.
+
 ## Freeze rule
 
 HUMAN EXPERIENCE FREEZE may be **YES** only if:
 
-- IMPLEMENTED NOT PROVEN ≤ 2 (non-P0)
+- IMPLEMENTED NOT PROVEN = 0 (internal)
 - NOT IMPLEMENTED = 0
 - FAILED = 0
-- Critical hard gates (profile, orientation, docs, scheduling suite, smart40, protocol) all IMPLEMENTED + PROVEN
+- Critical hard gates + task-time evidence all IMPLEMENTED + PROVEN
