@@ -41,7 +41,25 @@ async function run() {
   });
 
   await page.goto(BASE + "/", { waitUntil: "domcontentloaded", timeout: 90000 });
-  await page.waitForTimeout(5000);
+  await page.waitForTimeout(3000);
+
+  // Public product requires lab sign-in before Relay surfaces exist.
+  if ((await page.locator('[data-testid="login-gate"]').count()) > 0) {
+    await page.locator('[data-testid="login-principal"]').selectOption({
+      label: /Marcus/i,
+    }).catch(async () => {
+      await page.locator('[data-testid="login-principal"]').selectOption({ index: 0 });
+    });
+    await page
+      .locator('[data-testid="login-password"]')
+      .fill(process.env.LAB_PASSWORD || "sadeil-lab-password");
+    await page.locator('[data-testid="login-submit"]').click();
+    await page
+      .locator('[data-testid="composer-input"], [data-testid="today-greeting"]')
+      .first()
+      .waitFor({ timeout: 90000 });
+    await page.waitForTimeout(1500);
+  }
 
   results.landing_title = await page.title();
   results.brand = await page.locator(".brand").innerText().catch(() => null);
@@ -68,6 +86,24 @@ async function run() {
   results.has_workforce_text =
     /payroll|workforce schedule|HR portal|employee retention/i.test(bodyText);
   results.body_snippet = bodyText.slice(0, 350);
+
+  // Open Relay if composer is docked/hidden behind Today-only layout
+  if ((await page.locator('[data-testid="composer-input"]').count()) === 0) {
+    const openers = [
+      '[data-testid="try-care-update"]',
+      '[data-testid="try-care-update-top"]',
+      'button:has-text("Ask or update Relay")',
+      'button:has-text("Relay")',
+    ];
+    for (const sel of openers) {
+      if (await page.locator(sel).count()) {
+        await page.locator(sel).first().click().catch(() => {});
+        await page.waitForTimeout(800);
+        if ((await page.locator('[data-testid="composer-input"]').count()) > 0)
+          break;
+      }
+    }
+  }
 
   // Prefer explicit fill of natural multi-event update (judge path without depending on CTA geometry)
   await page.locator('[data-testid="composer-input"]').fill(loadJudgeUtt());

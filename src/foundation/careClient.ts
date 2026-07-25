@@ -1175,7 +1175,14 @@ export async function answerCareQuestion(question: string): Promise<string> {
     /what happened|since i was last|caught up|going on|need to deal|still need/.test(
       raw.toLowerCase(),
     );
-  if (!looksLikeQuestion) return "";
+  // Multi-clause caregiver narratives (even if they end with "can you tell Maya?")
+  // must file through understand/verify — not answer-only Q&A.
+  const looksLikeCareNarrative =
+    ((raw.match(/[.!?]/g) || []).length >= 2 || raw.length > 100) &&
+    /\b(ate|eaten|meal|lunch|breakfast|dinner|dizzy|dizziness|took|pills|tablet|slept|tired|fatigue|feels|seemed|moved|reschedul|medication|blood pressure|helped|said she|said he|PT|physical therapy|bottle still)\b/i.test(
+      raw,
+    );
+  if (!looksLikeQuestion || looksLikeCareNarrative) return "";
 
   const { loadActiveCareRecipientId, resolveCareSpace } = await import(
     "../lib/careContext"
