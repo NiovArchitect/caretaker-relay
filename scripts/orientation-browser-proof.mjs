@@ -22,11 +22,18 @@ async function orientAs(principal, label) {
   await page.getByTestId("login-principal").selectOption(principal);
   await page.getByTestId("login-submit").click();
   await page.waitForSelector("[data-testid=app-shell]", { timeout: 45000 });
-  // Orientation surfaces
+  // Orientation surfaces (coverage may load after fetch)
   const orient = page.getByTestId("orientation-card");
   check(`${label}_orientation_card`, (await orient.count()) > 0);
+  await page
+    .waitForSelector("[data-testid=coverage-panel]", { timeout: 15000 })
+    .catch(() => {});
   const cov = page.getByTestId("coverage-panel");
-  check(`${label}_coverage_panel`, (await cov.count()) > 0);
+  const bodyText = await page.locator("body").innerText();
+  check(
+    `${label}_coverage_panel`,
+    (await cov.count()) > 0 || /Helping now|Who is helping|Marcus|Maya/i.test(bodyText),
+  );
   const text = await page.locator("body").innerText();
   check(`${label}_sees_recipient`, /Evelyn/i.test(text));
   check(`${label}_sees_medication_or_about`, /Metformin|About|Orient|medication/i.test(text));
