@@ -138,6 +138,33 @@ export function RelayPanel({
     };
   }, [mode, rid]);
 
+  // Lightweight poll while Coordination is open so jump-latest can surface
+  // when another principal posts while this user is reading history.
+  useEffect(() => {
+    if (mode !== "messages") return;
+    let cancelled = false;
+    const tick = () => {
+      void fetchCoordination().then((r) => {
+        if (cancelled || !r.ok) return;
+        const msgs = r.messages.filter((m) => !isTestPollution(m.body));
+        setCoord((prev) => {
+          if (
+            prev.length === msgs.length &&
+            prev[prev.length - 1]?.id === msgs[msgs.length - 1]?.id
+          ) {
+            return prev;
+          }
+          return msgs;
+        });
+      });
+    };
+    const iv = window.setInterval(tick, 4000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(iv);
+    };
+  }, [mode, rid]);
+
   // New messages while user is reading history → indicator, no force-scroll
   useEffect(() => {
     if (mode !== "messages") return;
