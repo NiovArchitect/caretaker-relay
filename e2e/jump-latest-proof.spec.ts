@@ -11,7 +11,7 @@ test("jump-latest: new message while reading history", async ({ browser }) => {
   const d = await daniel.newPage();
 
   async function login(page: import("@playwright/test").Page, id: string, pw: string) {
-    await page.goto(BASE, { waitUntil: "domcontentloaded", timeout: 120_000 });
+    await page.goto(BASE + `?v=${Date.now()}`, { waitUntil: "domcontentloaded", timeout: 120_000 });
     await page.getByTestId("login-principal").selectOption(id);
     await page.getByTestId("login-password").fill(pw);
     await page.getByTestId("login-submit").click();
@@ -21,7 +21,21 @@ test("jump-latest: new message while reading history", async ({ browser }) => {
   await login(m, "p-sadeil", "sadeil-lab-password");
   await login(d, "p-walter", "walter-lab-password");
 
-  // Marcus opens coordination and scrolls up
+  // Confirm poll code is in the live bundle
+  const hasPoll = await m.evaluate(async () => {
+    const scripts = [...document.querySelectorAll("script[src]")].map(
+      (s) => (s as HTMLScriptElement).src,
+    );
+    for (const src of scripts) {
+      if (!src.includes("assets/")) continue;
+      const t = await fetch(src).then((r) => r.text());
+      if (t.includes("coord-jump-latest") && t.includes("4000")) return true;
+      if (t.includes("coordHasNewWhileUp") && /setInterval/.test(t)) return true;
+    }
+    return false;
+  });
+
+  // Marcus opens coordination ONCE and scrolls up — do not remount
   await m.locator('.sidenav [data-testid="nav-today"]').click().catch(async () => {
     await m.getByTestId("nav-today").first().click();
   });
@@ -32,14 +46,23 @@ test("jump-latest: new message while reading history", async ({ browser }) => {
   if (await mMode.count()) await mMode.first().click();
   const thread = m.getByTestId("coord-thread");
   await expect(thread).toBeVisible({ timeout: 30_000 });
+  await m.waitForTimeout(2500); // let initial load + rAF pin finish
+  // Real user scroll (React onScroll) to unpin — not only programmatic Event
+  await thread.hover();
+  await m.mouse.wheel(0, -8000);
+  await m.waitForTimeout(300);
   await thread.evaluate((el) => {
     el.scrollTop = 0;
   });
-  // fire scroll so pinned-bottom becomes false
-  await thread.dispatchEvent("scroll");
-  await m.waitForTimeout(500);
+  await m.waitForTimeout(400);
+  const metricsBefore = await thread.evaluate((el) => ({
+    scrollTop: el.scrollTop,
+    scrollHeight: el.scrollHeight,
+    clientHeight: el.clientHeight,
+    dist: el.scrollHeight - el.scrollTop - el.clientHeight,
+  }));
 
-  // Daniel sends coordination message via UI
+  // Daniel opens coordination and sends to Marcus if possible
   await d.locator('.sidenav [data-testid="nav-today"]').click().catch(async () => {
     await d.getByTestId("nav-today").first().click();
   });
@@ -48,7 +71,16 @@ test("jump-latest: new message while reading history", async ({ browser }) => {
   }
   const dMode = d.locator('button:has-text("Coordination"), button:has-text("Messages")');
   if (await dMode.count()) await dMode.first().click();
-  await d.waitForTimeout(2000);
+  await d.waitForTimeout(2500);
+  // Prefer Marcus as recipient if select exists
+  const toSelect = d.locator(
+    'select[data-testid="coord-to"], select.coord-to, [data-testid="coord-to-person"]',
+  );
+  if (await toSelect.count()) {
+    await toSelect.first().selectOption({ label: /Marcus/i }).catch(async () => {
+      await toSelect.first().selectOption("p-sadeil").catch(() => {});
+    });
+  }
   const draft = d
     .locator(
       '[data-testid="coord-draft"], [data-testid="coord-input"], .coord-composer-sticky textarea, textarea',
@@ -58,73 +90,75 @@ test("jump-latest: new message while reading history", async ({ browser }) => {
   await draft.fill(msg);
   const send = d
     .getByTestId("coord-send")
-    .or(d.locator('.coord-composer-sticky button, button:has-text("Send")'))
+    .or(d.locator('button:has-text("Send")'))
     .first();
   await send.click();
-  await d.waitForTimeout(3000);
+  await d.waitForTimeout(4000);
+  // Confirm Daniel sees own message
+  const danielHas = await d.getByTestId("coord-thread").innerText().catch(() => "");
+  const danielSent = danielHas.includes(msg.slice(0, 20));
 
-  // Marcus: wait for jump indicator (requires poll/refresh of messages while scrolled)
-  // Force a soft client refresh without full mode remount that re-pins:
-  // dispatch cr-notification event if app listens, else periodic fetch by reopening carefully.
-  await m.evaluate(() => {
-    window.dispatchEvent(new CustomEvent("cr-notification", { detail: { source: "coordination" } }));
-  });
-  await m.waitForTimeout(2000);
-
-  // If no live poll, re-fetch by re-entering messages after ensuring scroll handler set pinned false
-  // Strategy: click Coordination again may remount and pin bottom — instead call fetch via UI refresh if any
-  // Use page route: scroll up, then Marcus himself shouldn't force-scroll when Daniel's message arrives via poll.
-
-  // Wait up to 45s for jump control
+  // Marcus waits for poll (4s interval) — keep scrolled up, no remount
   const jump = m.getByTestId("coord-jump-latest");
   let visible = false;
   for (let i = 0; i < 20; i++) {
-    // nudge: fetchCoordination may only run on mode mount — remount while preserving scroll is hard
-    // Alternate: inject message into DOM length by Marcus reloading messages:
-    // open Relay then Coordination, then immediately scrollTop=0 before paint settles
+    await thread.evaluate((el) => {
+      el.scrollTop = 0;
+      el.dispatchEvent(new Event("scroll"));
+    });
     if (await jump.isVisible().catch(() => false)) {
       visible = true;
       break;
     }
-    if (i % 4 === 3) {
-      await m.locator('button:has-text("Relay")').first().click().catch(() => {});
-      await m.waitForTimeout(300);
-      if (await mMode.count()) await mMode.first().click();
-      await m.waitForTimeout(600);
+    // check if message appeared (might have force-scrolled if still pinned)
+    const t = await thread.innerText();
+    if (t.includes(msg.slice(0, 20)) && !(await jump.isVisible().catch(() => false))) {
+      // message arrived but jump not shown — re-scroll and wait one more poll
       await thread.evaluate((el) => {
         el.scrollTop = 0;
+        el.dispatchEvent(new Event("scroll"));
       });
-      await thread.dispatchEvent("scroll");
     }
-    await m.waitForTimeout(1500);
+    await m.waitForTimeout(2000);
   }
 
   let jumpWorks: boolean | string = false;
   if (visible) {
     await jump.click();
-    await m.waitForTimeout(400);
-    jumpWorks = await thread.evaluate(
-      (el) => el.scrollHeight - el.scrollTop - el.clientHeight < 120,
-    );
-  } else {
-    // Prove control exists in source and sticky/latest already proven; document poll gap
-    jumpWorks = "INDICATOR_NOT_SHOWN_NO_LIVE_POLL";
+    // smooth scroll on a long thread needs >600ms
+    for (let i = 0; i < 15; i++) {
+      await m.waitForTimeout(400);
+      const atBottom = await thread.evaluate(
+        (el) => el.scrollHeight - el.scrollTop - el.clientHeight < 120,
+      );
+      if (atBottom) {
+        jumpWorks = true;
+        break;
+      }
+    }
+    if (jumpWorks !== true) {
+      jumpWorks = await thread.evaluate((el) => ({
+        dist: el.scrollHeight - el.scrollTop - el.clientHeight,
+        scrollTop: el.scrollTop,
+        scrollHeight: el.scrollHeight,
+      })) as unknown as string;
+    }
   }
 
-  const out = { visible, jumpWorks, msg };
+  const out = {
+    hasPoll,
+    metricsBefore,
+    danielSent,
+    visible,
+    jumpWorks,
+    msg,
+    marcusThread: (await thread.innerText()).slice(0, 300),
+  };
   fs.writeFileSync("/tmp/cr_jump_latest.json", JSON.stringify(out, null, 2));
-  console.log("JUMP", out);
+  console.log("JUMP", JSON.stringify(out, null, 2));
 
-  // Accept PASS only if jump control shown and click works
-  if (visible) {
-    expect(jumpWorks).toBe(true);
-  } else {
-    // Still record — suite soft-passes with documented gap only if sticky+latest proven elsewhere
-    test.info().annotations.push({
-      type: "note",
-      description: "Jump indicator requires live poll while viewing; dual-browser did not surface control",
-    });
-  }
+  expect(visible, "New messages jump control should appear while scrolled up").toBe(true);
+  expect(jumpWorks).toBe(true);
 
   await marcus.close();
   await daniel.close();

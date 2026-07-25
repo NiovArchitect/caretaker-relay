@@ -80,10 +80,16 @@ export function RelayPanel({
   function scrollCoordToLatest(smooth = true) {
     const el = coordThreadRef.current;
     if (!el) return;
-    el.scrollTo({
-      top: el.scrollHeight,
-      behavior: smooth ? "smooth" : "auto",
-    });
+    // Prefer auto for jump-latest reliability (headless + long threads);
+    // smooth remains optional for soft follow while already pinned.
+    el.scrollTop = el.scrollHeight;
+    if (smooth) {
+      try {
+        el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+      } catch {
+        /* scrollTop already set */
+      }
+    }
     setCoordPinnedBottom(true);
     setCoordHasNewWhileUp(false);
   }
