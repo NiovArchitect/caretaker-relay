@@ -1270,6 +1270,30 @@ p {
   backdrop-filter: blur(16px);
   position: relative;
   z-index: 2;
+  flex-shrink: 0;
+}
+
+/* Coordination: message history scrolls; composer stays reachable */
+.coord-layout {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.coord-thread {
+  flex: 1;
+  min-height: 0;
+}
+
+.coord-composer-sticky {
+  flex-shrink: 0;
+  position: sticky;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 -8px 24px rgba(20, 60, 90, 0.06);
 }
 
 .relay-hints {

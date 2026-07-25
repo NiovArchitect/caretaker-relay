@@ -9,7 +9,6 @@ import {
   fetchLatestHandoff,
   restoreSession,
   clearSession,
-  careRecipient,
   type TranscriptMeta,
   type TodayAttentionItem,
   type SessionIdentity,
@@ -99,6 +98,7 @@ export function App() {
   const activeSpace = resolveCareSpace(activeRecipientId);
 
   // Server notification transport health (poll — EventSource cannot send Bearer)
+  // Count is recipient-scoped when possible to avoid cross-person "726 new" noise.
   useEffect(() => {
     if (!session) return;
     let stopped = false;
@@ -108,9 +108,14 @@ export function App() {
           if (stopped) return;
           setNotifConnected(r.ok);
           if (r.ok) {
-            setUnreadCount(
-              r.notifications.filter((n) => !n.seen_at && !n.resolved_at).length,
-            );
+            const scoped = r.notifications.filter((n) => {
+              const rid = String(n.care_recipient_id ?? "");
+              // If notification is recipient-tagged, only count active recipient
+              if (rid && rid !== activeRecipientId) return false;
+              return !n.seen_at && !n.resolved_at;
+            });
+            // Cap display noise: historical lab pollution should not look like 726 new
+            setUnreadCount(Math.min(scoped.length, 99));
           }
         }),
       );
@@ -261,14 +266,23 @@ export function App() {
     setProfileOpen(false);
     setShowHandoff(false);
     setBundle(null);
+    setConfirmed(false);
+    setCorrecting(false);
+    setLastEventIds([]);
     setDraft("");
     setCoordFocusPersonId(null);
+    setLiveHandoff(undefined);
+    setCareFocus(null);
+    // Default UX: NEW PERSON → ORIENT ME (Today, not stale subpage)
+    setTab("today");
+    setRelayOpen(false);
     // Atomic: bind API client, persist, then React state so every surface reloads
     setActiveCareRecipientId(id);
     saveActiveCareRecipientId(id);
     setActiveRecipientId(id);
     const space = resolveCareSpace(id);
     setTodayRefresh((n) => n + 1);
+    setUnreadCount(0);
     setMessages([
       {
         id: `sys-switch-${Date.now()}`,
@@ -277,6 +291,13 @@ export function App() {
         text: `Now caring for ${space.displayName}. Everything on this screen is for them only.`,
       },
     ]);
+    // Canonical top of orientation surface
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      document
+        .querySelector("[data-testid=app-shell] main, .main-stage, .workspace")
+        ?.scrollTo?.({ top: 0 });
+    });
     window.setTimeout(() => setRecipientSwitching(false), 350);
   }
 
@@ -444,12 +465,20 @@ export function App() {
         setBundle(result.bundle);
         const n = result.bundle.items.length;
         const lines = result.bundle.items.map((i) => `• ${i.label}`).join("\n");
+        const allSoftObs = result.bundle.items.every(
+          (i) =>
+            /observation|wellbeing|feels|tired|ate|slept/i.test(i.label) &&
+            !i.discrepancy &&
+            i.safetyClass !== "high",
+        );
         setMessages((prev) => [
           ...prev,
           {
             id: `r-${Date.now()}`,
             role: "relay",
-            text: `I organized that into ${n} care item${n === 1 ? "" : "s"} for ${careRecipient.displayName}:\n${lines}\n\nPlease verify the consequential parts before I save them as care truth.`,
+            text: allSoftObs
+              ? `I captured ${n} caregiver-reported observation${n === 1 ? "" : "s"} for ${activeSpace.displayName}:\n${lines}\n\nSource: you (caregiver-reported). Confirm with Looks right to save on their care timeline — this is observation evidence, not a clinical diagnosis.`
+              : `I organized that into ${n} care item${n === 1 ? "" : "s"} for ${activeSpace.displayName}:\n${lines}\n\nPlease verify the consequential parts before I save them as care truth.`,
             at: nowLabel(),
           },
         ]);
@@ -591,6 +620,23 @@ export function App() {
     setTab(t);
     if (t === "relay") openRelayForCareUpdate();
     if (t !== "care") setCareFocus(null);
+    // Canonical entry for primary surfaces (not stale deep-scroll)
+    if (t === "today" || t === "care" || t === "people" || t === "documents") {
+      window.requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+      });
+    }
+  }
+
+  function openNotifications() {
+    // Notifications live on Today as the care attention inbox
+    setTab("today");
+    setProfileOpen(false);
+    window.requestAnimationFrame(() => {
+      document
+        .querySelector('[data-testid="coordination-inbox"], [data-testid="today-notifications"]')
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
 
   const workspaceTab = tab === "relay" ? "today" : tab;
@@ -728,13 +774,20 @@ export function App() {
             )}
           </div>
           {unreadCount > 0 && (
-            <span
+            <button
+              type="button"
               className="badge badge-coral"
               data-testid="unread-count"
-              title="Unread care notifications"
+              title="Open unread care notifications for this recipient"
+              onClick={openNotifications}
+              style={{
+                border: "none",
+                cursor: "pointer",
+                font: "inherit",
+              }}
             >
-              {unreadCount} new
-            </span>
+              {unreadCount >= 99 ? "99+" : unreadCount} new
+            </button>
           )}
           <span
             className={`connection-status${notifConnected ? "" : " is-offline"}`}
@@ -843,6 +896,7 @@ export function App() {
         onCorrect={startCorrection}
         onCloseMobile={() => setRelayOpen(false)}
         coordFocusPersonId={coordFocusPersonId}
+        activeRecipientId={activeRecipientId}
       />
 
       <BottomNav

@@ -57,7 +57,9 @@ export function VerifyPanel({
         I found {count} thing{count === 1 ? "" : "s"} in that update
       </h2>
       <p className="muted" style={{ marginTop: 0 }}>
-        Please check the consequential parts before I save this as care truth.
+        Caregiver observations can be saved as reported evidence. Only
+        consequential clinical or medication items need extra scrutiny before
+        care truth updates.
       </p>
 
       {bundle.items.map((item) => (

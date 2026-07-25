@@ -41,6 +41,7 @@ export function RelayPanel({
   onCorrect,
   onCloseMobile,
   coordFocusPersonId,
+  activeRecipientId,
 }: {
   open: boolean;
   messages: RelayMessage[];
@@ -57,8 +58,11 @@ export function RelayPanel({
   onCloseMobile?: () => void;
   /** When messaging from People, target this person. */
   coordFocusPersonId?: string | null;
+  /** Active care recipient — rebinds coordination when switched. */
+  activeRecipientId?: string;
 }) {
-  const space = resolveCareSpace(loadActiveCareRecipientId());
+  const rid = activeRecipientId ?? loadActiveCareRecipientId();
+  const space = resolveCareSpace(rid);
   const [mode, setMode] = useState<RelayMode>("relay");
   const [coord, setCoord] = useState<
     Array<{ id: string; from: string; body: string; at: string }>
@@ -67,6 +71,7 @@ export function RelayPanel({
   const [coordBusy, setCoordBusy] = useState(false);
   const [coordErr, setCoordErr] = useState<string | null>(null);
   const [coordTo, setCoordTo] = useState(coordFocusPersonId ?? people.maya.id);
+  const [coordLoading, setCoordLoading] = useState(false);
 
   useEffect(() => {
     if (coordFocusPersonId) {
@@ -75,14 +80,32 @@ export function RelayPanel({
     }
   }, [coordFocusPersonId]);
 
+  // Recipient switch is a transaction boundary: clear immediately, then reload
+  useEffect(() => {
+    setCoord([]);
+    setCoordDraft("");
+    setCoordErr(null);
+    setCoordTo(coordFocusPersonId ?? people.maya.id);
+  }, [rid, coordFocusPersonId]);
+
   useEffect(() => {
     if (mode !== "messages") return;
+    let cancelled = false;
+    setCoordLoading(true);
+    setCoord([]); // never show previous recipient while loading
     void fetchCoordination().then((r) => {
+      if (cancelled) return;
+      setCoordLoading(false);
       if (r.ok) {
         setCoord(r.messages.filter((m) => !isTestPollution(m.body)));
+      } else {
+        setCoord([]);
       }
     });
-  }, [mode]);
+    return () => {
+      cancelled = true;
+    };
+  }, [mode, rid]);
 
   async function sendCoord() {
     const text = coordDraft.trim();
@@ -222,39 +245,52 @@ export function RelayPanel({
           </div>
         </>
       ) : (
-        <div className="relay-thread" data-testid="human-messages">
-          <div className="bubble bubble-system">
-            Human coordination for {space.displayName}. Messages are from people
-            in the care circle, not AI.
-          </div>
-          {coord.length === 0 && (
-            <p className="muted" style={{ padding: "8px 4px" }}>
-              No messages yet. Share a practical update for the next person on
-              duty.
-            </p>
-          )}
-          {coord.map((m) => {
-            const fromName = resolvePersonName(undefined, m.from) || m.from;
-            const accent = SENDER_ACCENT[fromName] ?? "coord-accent-default";
-            return (
-              <div
-                key={m.id}
-                className={`bubble bubble-coord ${accent}`}
-                data-testid="coord-msg"
-              >
-                <div className="coord-meta">
-                  <strong>{fromName}</strong>
-                  <span className="muted" style={{ fontSize: "0.75rem" }}>
-                    {m.at}
-                  </span>
+        <div
+          className="coord-layout"
+          data-testid="human-messages"
+          data-recipient-id={rid}
+        >
+          <div className="relay-thread coord-thread">
+            <div className="bubble bubble-system" data-testid="coord-context-banner">
+              Human coordination for <strong>{space.displayName}</strong> only.
+              Messages are from people in their care circle — not AI, and not
+              about another care recipient.
+            </div>
+            {coordLoading && (
+              <p className="muted" style={{ padding: "8px 4px" }}>
+                Loading messages for {space.displayName}…
+              </p>
+            )}
+            {!coordLoading && coord.length === 0 && (
+              <p className="muted" style={{ padding: "8px 4px" }}>
+                No messages yet for {space.displayName}. Share a practical update
+                for the next person helping them.
+              </p>
+            )}
+            {coord.map((m) => {
+              const fromName = resolvePersonName(undefined, m.from) || m.from;
+              const accent = SENDER_ACCENT[fromName] ?? "coord-accent-default";
+              return (
+                <div
+                  key={m.id}
+                  className={`bubble bubble-coord ${accent}`}
+                  data-testid="coord-msg"
+                  data-recipient-id={rid}
+                >
+                  <div className="coord-meta">
+                    <strong>{fromName}</strong>
+                    <span className="muted" style={{ fontSize: "0.75rem" }}>
+                      {m.at}
+                    </span>
+                  </div>
+                  <div>{m.body}</div>
                 </div>
-                <div>{m.body}</div>
-              </div>
-            );
-          })}
-          <div className="relay-composer-wrap">
+              );
+            })}
+          </div>
+          <div className="relay-composer-wrap coord-composer-sticky">
             <label className="muted" style={{ fontSize: "0.75rem" }}>
-              To
+              To (in {space.preferredName}&apos;s circle)
               <select
                 value={coordTo}
                 onChange={(e) => setCoordTo(e.target.value)}
