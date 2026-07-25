@@ -168,11 +168,15 @@ export function RelayPanel({
     if (mode !== "messages") return;
     let cancelled = false;
     const tick = () => {
-      // Re-measure pin from DOM every tick (scroll may not have updated the ref).
-      syncCoordPinnedFromDom();
       void fetchCoordination().then((r) => {
         if (cancelled || !r.ok) return;
         const msgs = r.messages.filter((m) => !isTestPollution(m.body));
+        // Measure scroll BEFORE setState (old scrollHeight). Growth after paint
+        // would make an at-bottom user look "up" and is not used for the decision.
+        const el = coordThreadRef.current;
+        const nearBottom =
+          !el ||
+          el.scrollHeight - el.scrollTop - el.clientHeight < NEAR_BOTTOM_PX;
         setCoord((prev) => {
           if (
             prev.length === msgs.length &&
@@ -180,38 +184,28 @@ export function RelayPanel({
           ) {
             return prev;
           }
-          // Measure again immediately before accepting growth (scroll may have changed).
-          syncCoordPinnedFromDom();
+          const growth = prev.length > 0 && msgs.length > prev.length;
+          if (growth) {
+            coordPinnedBottomRef.current = nearBottom;
+            if (nearBottom) {
+              queueMicrotask(() => scrollCoordToLatest(false));
+            } else {
+              queueMicrotask(() => setCoordHasNewWhileUp(true));
+            }
+          }
+          coordLenRef.current = msgs.length;
           return msgs;
         });
       });
     };
     const iv = window.setInterval(tick, 2000);
-    // First tick soon so dual-browser tests are not stuck on a 4s boundary.
-    const t0 = window.setTimeout(tick, 500);
+    const t0 = window.setTimeout(tick, 400);
     return () => {
       cancelled = true;
       window.clearInterval(iv);
       window.clearTimeout(t0);
     };
   }, [mode, rid]);
-
-  // New messages while user is reading history → indicator, no force-scroll
-  useEffect(() => {
-    if (mode !== "messages") return;
-    if (coord.length > coordLenRef.current) {
-      // Only auto-follow if we were already following (pin true after DOM sync).
-      // Do NOT OR with a live measure after paint: new DOM height can make a
-      // previously-at-bottom user look "up" and flip behavior nondeterministically.
-      const wasPinned = coordPinnedBottomRef.current;
-      if (wasPinned) {
-        window.requestAnimationFrame(() => scrollCoordToLatest(false));
-      } else {
-        setCoordHasNewWhileUp(true);
-      }
-    }
-    coordLenRef.current = coord.length;
-  }, [coord, mode]);
 
   async function sendCoord() {
     const text = coordDraft.trim();
