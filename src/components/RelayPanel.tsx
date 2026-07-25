@@ -95,10 +95,20 @@ export function RelayPanel({
     setCoordHasNewWhileUp(false);
   }
 
-  function isCoordNearBottom(): boolean {
+  /** Stable threshold — not single-pixel sensitive. */
+  const NEAR_BOTTOM_PX = 100;
+
+  function measureCoordNearBottom(): boolean {
     const el = coordThreadRef.current;
     if (!el) return true;
-    return el.scrollHeight - el.scrollTop - el.clientHeight < 48;
+    return el.scrollHeight - el.scrollTop - el.clientHeight < NEAR_BOTTOM_PX;
+  }
+
+  /** Sync pin from live DOM so poll/growth never trusts a stale true. */
+  function syncCoordPinnedFromDom(): boolean {
+    const near = measureCoordNearBottom();
+    coordPinnedBottomRef.current = near;
+    return near;
   }
 
   // When a verification bundle arrives, bring it into the visible Relay dock.
@@ -158,6 +168,8 @@ export function RelayPanel({
     if (mode !== "messages") return;
     let cancelled = false;
     const tick = () => {
+      // Re-measure pin from DOM every tick (scroll may not have updated the ref).
+      syncCoordPinnedFromDom();
       void fetchCoordination().then((r) => {
         if (cancelled || !r.ok) return;
         const msgs = r.messages.filter((m) => !isTestPollution(m.body));
@@ -168,14 +180,19 @@ export function RelayPanel({
           ) {
             return prev;
           }
+          // Measure again immediately before accepting growth (scroll may have changed).
+          syncCoordPinnedFromDom();
           return msgs;
         });
       });
     };
-    const iv = window.setInterval(tick, 4000);
+    const iv = window.setInterval(tick, 2000);
+    // First tick soon so dual-browser tests are not stuck on a 4s boundary.
+    const t0 = window.setTimeout(tick, 500);
     return () => {
       cancelled = true;
       window.clearInterval(iv);
+      window.clearTimeout(t0);
     };
   }, [mode, rid]);
 
@@ -183,9 +200,11 @@ export function RelayPanel({
   useEffect(() => {
     if (mode !== "messages") return;
     if (coord.length > coordLenRef.current) {
-      // Prefer live DOM distance over React state (avoids stale pinned flag).
-      const nearBottom = isCoordNearBottom() || coordPinnedBottomRef.current;
-      if (nearBottom) {
+      // Only auto-follow if we were already following (pin true after DOM sync).
+      // Do NOT OR with a live measure after paint: new DOM height can make a
+      // previously-at-bottom user look "up" and flip behavior nondeterministically.
+      const wasPinned = coordPinnedBottomRef.current;
+      if (wasPinned) {
         window.requestAnimationFrame(() => scrollCoordToLatest(false));
       } else {
         setCoordHasNewWhileUp(true);
@@ -347,11 +366,7 @@ export function RelayPanel({
             ref={coordThreadRef}
             data-testid="coord-thread"
             onScroll={() => {
-              const el = coordThreadRef.current;
-              if (!el) return;
-              const dist = el.scrollHeight - el.scrollTop - el.clientHeight;
-              const atBottom = dist < 48;
-              coordPinnedBottomRef.current = atBottom;
+              const atBottom = syncCoordPinnedFromDom();
               if (atBottom) setCoordHasNewWhileUp(false);
             }}
           >
