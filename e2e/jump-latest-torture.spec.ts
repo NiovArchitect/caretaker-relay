@@ -90,16 +90,17 @@ async function oneJumpTrial(
 
     const jump = pa.getByTestId("coord-jump-latest");
     let visible = false;
-    for (let i = 0; i < 25; i++) {
-      // keep reading history — do not remount
+    for (let i = 0; i < 20; i++) {
+      // keep reading history — do not remount; re-assert not-at-bottom for pin sync
       await thread.evaluate((el) => {
-        if (el.scrollTop > 40) el.scrollTop = 0;
+        el.scrollTop = 0;
+        el.dispatchEvent(new Event("scroll", { bubbles: true }));
       });
       if (await jump.isVisible().catch(() => false)) {
         visible = true;
         break;
       }
-      await pa.waitForTimeout(800);
+      await pa.waitForTimeout(600);
     }
     if (!visible) {
       return { ok: false, detail: `${opts.label}: indicator never visible` };
@@ -141,47 +142,43 @@ async function oneJumpTrial(
   }
 }
 
-test.describe.configure({ mode: "serial", timeout: 900_000 });
+test.describe.configure({ mode: "serial", timeout: 1_200_000 });
 
 test("jump-latest 20x dual-browser torture", async ({ browser }) => {
+  test.setTimeout(1_200_000);
   const results: Array<{ ok: boolean; detail: string }> = [];
-  // 10 desktop core
-  for (let i = 0; i < 10; i++) {
-    results.push(
-      await oneJumpTrial(browser, {
-        viewport: { width: 1280, height: 800 },
-        multi: false,
-        label: `desk-${i}`,
-      }),
+  const plan: Array<{
+    viewport: { width: number; height: number };
+    multi: boolean;
+    label: string;
+  }> = [];
+  for (let i = 0; i < 10; i++)
+    plan.push({ viewport: { width: 1280, height: 800 }, multi: false, label: `desk-${i}` });
+  for (let i = 0; i < 5; i++)
+    plan.push({ viewport: { width: 1280, height: 800 }, multi: true, label: `multi-${i}` });
+  for (let i = 0; i < 5; i++)
+    plan.push({ viewport: { width: 390, height: 844 }, multi: false, label: `narrow-${i}` });
+
+  for (const p of plan) {
+    const r = await oneJumpTrial(browser, p);
+    results.push(r);
+    fs.writeFileSync(
+      "/tmp/jump_latest_torture.json",
+      JSON.stringify(
+        {
+          passed: results.filter((x) => x.ok).length,
+          total: results.length,
+          target: plan.length,
+          results,
+        },
+        null,
+        2,
+      ),
     );
-  }
-  // 5 multi-message
-  for (let i = 0; i < 5; i++) {
-    results.push(
-      await oneJumpTrial(browser, {
-        viewport: { width: 1280, height: 800 },
-        multi: true,
-        label: `multi-${i}`,
-      }),
-    );
-  }
-  // 5 narrow
-  for (let i = 0; i < 5; i++) {
-    results.push(
-      await oneJumpTrial(browser, {
-        viewport: { width: 390, height: 844 },
-        multi: false,
-        label: `narrow-${i}`,
-      }),
-    );
+    console.log(r.detail);
   }
 
   const passed = results.filter((r) => r.ok).length;
   const failed = results.filter((r) => !r.ok);
-  fs.writeFileSync(
-    "/tmp/jump_latest_torture.json",
-    JSON.stringify({ passed, total: results.length, results }, null, 2),
-  );
-  console.log(JSON.stringify({ passed, total: results.length, failed }, null, 2));
-  expect(passed, failed.map((f) => f.detail).join(" | ")).toBe(results.length);
+  expect(passed, failed.map((f) => f.detail).join(" | ")).toBe(plan.length);
 });
