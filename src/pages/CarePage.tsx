@@ -225,8 +225,7 @@ function ManualCareNotePanel({ recipientName }: { recipientName: string }) {
           `Preview (${roleHint}) — review, edit text if needed, then Save. Same care-record path as Relay.`,
         );
       } else if (result.kind === "refusal") {
-        setBundle(null);
-        setPreview(null);
+        // Keep prior draft preview if re-structure refused
         setMsg(result.message ?? "Could not structure that update.");
       } else {
         setMsg(result.message ?? "Could not prepare documentation.");

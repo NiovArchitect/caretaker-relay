@@ -160,18 +160,21 @@ export function RelayPanel({
     }
     setCoordBusy(true);
     setCoordErr(null);
-    const res = await postCoordination(text, coordTo);
-    setCoordBusy(false);
-    if (!res.ok) {
-      setCoordErr(res.message ?? "Could not send");
-      return;
-    }
-    setCoordDraft("");
-    const r = await fetchCoordination();
-    if (r.ok) {
-      setCoord(r.messages.filter((m) => !isTestPollution(m.body)));
-      setCoordPinnedBottom(true);
-      window.requestAnimationFrame(() => scrollCoordToLatest(true));
+    try {
+      const res = await postCoordination(text, coordTo);
+      if (!res.ok) {
+        setCoordErr(res.message ?? "Could not send");
+        return;
+      }
+      setCoordDraft("");
+      const r = await fetchCoordination();
+      if (r.ok) {
+        setCoord(r.messages.filter((m) => !isTestPollution(m.body)));
+        setCoordPinnedBottom(true);
+        window.requestAnimationFrame(() => scrollCoordToLatest(true));
+      }
+    } finally {
+      setCoordBusy(false);
     }
   }
 
