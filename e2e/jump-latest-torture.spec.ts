@@ -78,7 +78,15 @@ async function oneJumpTrial(
     await login(pb, "p-walter", "walter-lab-password");
     const thread = await openCoord(pa);
     await scrollCoordUp(pa, thread);
+    // Settle pin state after scroll before any peer post
+    await pa.waitForTimeout(800);
     const scrollBefore = await thread.evaluate((el) => el.scrollTop);
+    const distBefore = await thread.evaluate(
+      (el) => el.scrollHeight - el.scrollTop - el.clientHeight,
+    );
+    if (distBefore < 120) {
+      return { ok: false, detail: `${opts.label}: failed to leave bottom before post` };
+    }
 
     await openCoord(pb);
     const msg = `Jump torture ${opts.label} ${Date.now()}`;
@@ -88,19 +96,25 @@ async function oneJumpTrial(
       await sendCoord(pb, msg + " #3");
     }
 
+    // Do not thrash scrollTop during wait — that races pin sync. Stay put.
     const jump = pa.getByTestId("coord-jump-latest");
     let visible = false;
-    for (let i = 0; i < 20; i++) {
-      // keep reading history — do not remount; re-assert not-at-bottom for pin sync
-      await thread.evaluate((el) => {
-        el.scrollTop = 0;
-        el.dispatchEvent(new Event("scroll", { bubbles: true }));
-      });
+    for (let i = 0; i < 25; i++) {
       if (await jump.isVisible().catch(() => false)) {
         visible = true;
         break;
       }
-      await pa.waitForTimeout(600);
+      // Only re-assert top if something force-scrolled us
+      const dist = await thread.evaluate(
+        (el) => el.scrollHeight - el.scrollTop - el.clientHeight,
+      );
+      if (dist < 120) {
+        await thread.evaluate((el) => {
+          el.scrollTop = 0;
+          el.dispatchEvent(new Event("scroll", { bubbles: true }));
+        });
+      }
+      await pa.waitForTimeout(500);
     }
     if (!visible) {
       return { ok: false, detail: `${opts.label}: indicator never visible` };
