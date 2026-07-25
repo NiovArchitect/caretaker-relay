@@ -498,14 +498,29 @@ export function App() {
             .map((i) => i.label),
         ];
         setRelayHandled((prev) => [...nextHandled, ...prev].slice(0, 8));
+        const careNoteBody =
+          (result.persisted as { careNoteBody?: string } | undefined)
+            ?.careNoteBody;
         setMessages((prev) => [
           ...prev,
           {
             id: `s-${Date.now()}`,
             role: "system",
-            text: `Saved. ${activeSpace.displayName}'s care picture is updated. A care handoff is ready for ${people.maya.displayName} to review.`,
+            text:
+              result.message ??
+              `Saved. ${activeSpace.displayName}'s care picture is updated. A care handoff is ready for ${people.maya.displayName} to review.`,
             at: nowLabel(),
           },
+          ...(careNoteBody
+            ? [
+                {
+                  id: `note-${Date.now()}`,
+                  role: "relay" as const,
+                  text: careNoteBody,
+                  at: nowLabel(),
+                },
+              ]
+            : []),
         ]);
         setBundle(null);
         setTodayRefresh((n) => n + 1);

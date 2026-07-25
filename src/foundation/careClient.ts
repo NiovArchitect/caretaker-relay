@@ -37,6 +37,9 @@ import {
   careToday,
   careUnderstand,
   careRecipientProfile,
+  careHistory,
+  careCoverage,
+  careNotes,
   getCareApiBaseUrl,
 } from "./careHttpClient";
 
@@ -835,6 +838,56 @@ export async function fetchRecipientProfile(): Promise<RecipientProfilePayload> 
       source: "package",
     };
   }
+}
+
+export async function fetchCareHistory(filter = "all"): Promise<{
+  items: Array<{
+    id: string;
+    at: string;
+    kind: string;
+    title: string;
+    detail: string;
+    sourceLabel?: string;
+  }>;
+  source: string;
+}> {
+  const useHttp = await ensureHttpSession();
+  if (useHttp && httpToken) {
+    const res = await careHistory(httpToken, rid(), filter);
+    if (res.ok) return { items: res.data.items ?? [], source: "http" };
+  }
+  return { items: [], source: "empty" };
+}
+
+export async function fetchCareCoverage(): Promise<{
+  summary: string;
+  slots: Array<Record<string, unknown>>;
+  source: string;
+}> {
+  const useHttp = await ensureHttpSession();
+  if (useHttp && httpToken) {
+    const res = await careCoverage(httpToken, rid());
+    if (res.ok) {
+      return {
+        summary: res.data.summary ?? "",
+        slots: res.data.slots ?? [],
+        source: "http",
+      };
+    }
+  }
+  return { summary: "", slots: [], source: "empty" };
+}
+
+export async function fetchCareNotes(): Promise<{
+  notes: Array<Record<string, unknown>>;
+  source: string;
+}> {
+  const useHttp = await ensureHttpSession();
+  if (useHttp && httpToken) {
+    const res = await careNotes(httpToken, rid());
+    if (res.ok) return { notes: res.data.notes ?? [], source: "http" };
+  }
+  return { notes: [], source: "empty" };
 }
 
 export async function fetchCareState(): Promise<CareStateSnapshot> {

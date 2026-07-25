@@ -34,6 +34,12 @@ import {
   handoffHash,
   medAdminHash,
 } from "./idempotency.js";
+import {
+  composeCareNote,
+  persistCareNote,
+  listCareNotes,
+  coachingPromptForRaw,
+} from "./care-notes.js";
 
 export interface CareLoopServiceConfig {
   store: CareStore;
@@ -464,6 +470,41 @@ export class CareLoopService {
       void sr;
     }
 
+    // Role-aware care note from verified update (documentation without forms).
+    // Idempotent: same raw text already noted → reuse (confirm retries).
+    const roleLabel =
+      ctx.roles?.find((r) => /family|professional|physician|dsp|primary/i.test(r)) ??
+      ctx.roles?.[0] ??
+      "caregiver";
+    const rawKey = (bundle.understood.rawText ?? "").trim();
+    const existingNote = listCareNotes(this.config.store, ctx.careRecipientId).find(
+      (n) =>
+        (n.originalRawText ?? "").trim() === rawKey &&
+        n.authorPersonId === ctx.actorPersonId,
+    );
+    const careNote =
+      existingNote ??
+      composeCareNote({
+        bundle,
+        ctx,
+        roleLabel,
+        eventIds,
+        confirmedItemIds: opts?.confirmedItemIds,
+      });
+    if (!existingNote) {
+      const noteUpdate = persistCareNote(this.config.store, careNote, {
+        id: `src-note-${careNote.id}`,
+        kind: "system_derived",
+        label: careNote.title,
+        actorName: ctx.actorDisplayName,
+        actorPersonId: ctx.actorPersonId,
+        recordedAt: now,
+        whyVisible: "Verified care update structured into a care note.",
+        rawExcerpt: bundle.understood.rawText?.slice(0, 280),
+      });
+      updateIds.push(noteUpdate.id);
+    }
+
     const audit = this.config.store.writeAudit({
       at: now,
       actorPersonId: ctx.actorPersonId,
@@ -476,13 +517,19 @@ export class CareLoopService {
         updateIds,
         safetyReviewIds,
         handoffId: handoff.id,
+        careNoteId: careNote.id,
+        careNoteKind: careNote.kind,
         evidenceMode,
       },
     });
 
+    const coach = coachingPromptForRaw(bundle.understood.rawText ?? "");
+    const noteLine = `${careNote.title} prepared for the care record.`;
+    const coachLine = coach ? ` ${coach}` : "";
+
     return {
       kind: "persisted",
-      message: "Confirmed. Organized into the care picture. Handoff ready.",
+      message: `Confirmed. ${noteLine} Handoff ready.${coachLine}`,
       evidenceMode,
       auditIds: [audit.id],
       persisted: {
@@ -491,6 +538,8 @@ export class CareLoopService {
         updateIds,
         medicationRecordIds: medIds,
         safetyReviewIds,
+        careNoteId: careNote.id,
+        careNoteBody: careNote.body,
       },
       currentState: this.config.store.getCurrentState(ctx.careRecipientId),
     };

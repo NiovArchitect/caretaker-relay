@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
   fetchCareState,
   fetchRecipientProfile,
+  fetchCareHistory,
   type CareStateSnapshot,
   type RecipientProfilePayload,
 } from "../foundation/careClient";
@@ -27,6 +28,7 @@ import { loadActiveCareRecipientId, resolveCareSpace } from "../lib/careContext"
 
 type CareSection =
   | "about"
+  | "history"
   | "medications"
   | "appointments"
   | "observations"
@@ -35,6 +37,7 @@ type CareSection =
 
 const sections: { id: CareSection; label: string }[] = [
   { id: "about", label: "About" },
+  { id: "history", label: "History" },
   { id: "medications", label: "Medications" },
   { id: "appointments", label: "Appointments" },
   { id: "observations", label: "Observations" },
@@ -402,6 +405,17 @@ export function CarePage({
   );
   const [state, setState] = useState<CareStateSnapshot | null>(null);
   const [profile, setProfile] = useState<RecipientProfilePayload | null>(null);
+  const [history, setHistory] = useState<
+    Array<{
+      id: string;
+      at: string;
+      kind: string;
+      title: string;
+      detail: string;
+      sourceLabel?: string;
+    }>
+  >([]);
+  const [historyFilter, setHistoryFilter] = useState("all");
   const [selected, setSelected] = useState<Record<string, unknown> | null>(
     null,
   );
@@ -425,10 +439,13 @@ export function CarePage({
     void fetchRecipientProfile().then((p) => {
       if (!cancelled) setProfile(p);
     });
+    void fetchCareHistory(historyFilter).then((h) => {
+      if (!cancelled) setHistory(h.items);
+    });
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [historyFilter]);
 
   const observationClusters = useMemo(
     () => clusterObservations(state?.observations ?? []),
@@ -511,6 +528,57 @@ export function CarePage({
             recipientName={recipientName}
             profile={profile}
           />
+        )}
+        {section === "history" && (
+          <div data-testid="care-history-panel">
+            <h2>Care history</h2>
+            <p className="muted">
+              What happened for {recipientName} — human labels, not database IDs.
+            </p>
+            <div className="btn-row" style={{ marginBottom: 12 }}>
+              {(
+                [
+                  "all",
+                  "medications",
+                  "appointments",
+                  "observations",
+                  "care_notes",
+                  "handoffs",
+                ] as const
+              ).map((f) => (
+                <button
+                  key={f}
+                  type="button"
+                  className={
+                    historyFilter === f ? "primary-btn" : "secondary-btn"
+                  }
+                  style={{ minHeight: 36, padding: "0 12px", fontSize: "0.85rem" }}
+                  data-testid={`history-filter-${f}`}
+                  onClick={() => setHistoryFilter(f)}
+                >
+                  {f === "care_notes" ? "Care notes" : f}
+                </button>
+              ))}
+            </div>
+            {history.length === 0 ? (
+              <p className="muted">No history items yet for this filter.</p>
+            ) : (
+              <div className="timeline" data-testid="care-history-list">
+                {history.map((item) => (
+                  <div key={item.id} className="timeline-item">
+                    <strong>{item.title}</strong>
+                    <div className="muted" style={{ fontSize: "0.85rem" }}>
+                      {item.at
+                        ? new Date(item.at).toLocaleString()
+                        : ""}
+                      {item.sourceLabel ? ` · ${item.sourceLabel}` : ""}
+                    </div>
+                    <div>{item.detail}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         )}
         {section === "medications" && (
           <>

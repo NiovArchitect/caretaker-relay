@@ -278,6 +278,51 @@ export async function careRecipientProfile(
   }>(`/api/v1/care/recipients/${careRecipientId}/profile`, { token, baseUrl });
 }
 
+export async function careHistory(
+  token: string,
+  careRecipientId: string,
+  filter = "all",
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    items: Array<{
+      id: string;
+      at: string;
+      kind: string;
+      title: string;
+      detail: string;
+      sourceLabel?: string;
+    }>;
+  }>(
+    `/api/v1/care/recipients/${careRecipientId}/history?filter=${encodeURIComponent(filter)}`,
+    { token, baseUrl },
+  );
+}
+
+export async function careCoverage(
+  token: string,
+  careRecipientId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    slots: Array<Record<string, unknown>>;
+    summary: string;
+  }>(`/api/v1/care/recipients/${careRecipientId}/coverage`, { token, baseUrl });
+}
+
+export async function careNotes(
+  token: string,
+  careRecipientId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    notes: Array<Record<string, unknown>>;
+  }>(`/api/v1/care/recipients/${careRecipientId}/notes`, { token, baseUrl });
+}
+
 export async function careCircle(
   token: string,
   careRecipientId: string,

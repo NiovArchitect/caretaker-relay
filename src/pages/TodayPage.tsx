@@ -5,7 +5,10 @@ import {
   getSessionIdentity,
   fetchServerNotifications,
   notificationAction,
+  fetchRecipientProfile,
+  fetchCareCoverage,
   type TodayAttentionItem,
+  type RecipientProfilePayload,
 } from "../foundation/careClient";
 import {
   buildAttentionNotifications,
@@ -45,11 +48,19 @@ export function TodayPage({
   } | null>(null);
   const [acked, setAcked] = useState<Set<string>>(new Set());
   const [inbox, setInbox] = useState<Array<Record<string, unknown>>>([]);
+  const [profile, setProfile] = useState<RecipientProfilePayload | null>(null);
+  const [coverageSummary, setCoverageSummary] = useState("");
 
   useEffect(() => {
     let cancelled = false;
     void fetchTodayProjection().then((p) => {
       if (!cancelled) setProj(p);
+    });
+    void fetchRecipientProfile().then((p) => {
+      if (!cancelled) setProfile(p);
+    });
+    void fetchCareCoverage().then((c) => {
+      if (!cancelled) setCoverageSummary(c.summary);
     });
     const loadInbox = () => {
       void fetchServerNotifications().then((r) => {
@@ -162,6 +173,82 @@ export function TodayPage({
             </div>
           </div>
         </div>
+
+        {/* 60-second orientation — person first, then priorities */}
+        <section
+          className="section surface-known"
+          style={{ marginTop: 16 }}
+          data-testid="orientation-card"
+          aria-label="Quick orientation"
+        >
+          <h2 style={{ fontSize: "1.05rem", marginBottom: 8 }}>
+            Orient for {recipientName}
+          </h2>
+          <ul className="list-plain" data-testid="orientation-list">
+            <li>
+              <strong>You:</strong> {session.displayName} · {session.roleLabel}
+            </li>
+            {profile?.profile &&
+            Array.isArray(
+              (profile.profile as { confirmedConditions?: unknown[] })
+                .confirmedConditions,
+            ) ? (
+              <li>
+                <strong>Conditions on file:</strong>{" "}
+                {(
+                  (profile.profile as { confirmedConditions: Array<{ label: string }> })
+                    .confirmedConditions ?? []
+                )
+                  .map((c) => c.label)
+                  .join("; ") || "none listed"}
+              </li>
+            ) : (
+              <li>
+                <strong>Conditions:</strong> open Care → About
+              </li>
+            )}
+            <li>
+              <strong>Medications:</strong>{" "}
+              {(profile?.medications ?? [])
+                .map((m) => `${String(m.name)} ${String(m.dose ?? "")}`)
+                .join("; ") || "see Care"}
+            </li>
+            <li>
+              <strong>Next:</strong> {next[0] ?? "Nothing scheduled on Today"}
+            </li>
+            <li>
+              <strong>Attention:</strong>{" "}
+              {notifications.length === 0
+                ? "Nothing urgent"
+                : notifications[0]?.title}
+            </li>
+          </ul>
+          {coverageSummary ? (
+            <div
+              className="surface-reported"
+              style={{ padding: 12, marginTop: 12 }}
+              data-testid="coverage-panel"
+            >
+              <strong>Who is helping</strong>
+              <pre
+                style={{
+                  margin: "8px 0 0",
+                  whiteSpace: "pre-wrap",
+                  fontFamily: "inherit",
+                  fontSize: "0.9rem",
+                }}
+              >
+                {coverageSummary}
+              </pre>
+              {/maya|next/i.test(coverageSummary) && (
+                <p className="muted" style={{ marginBottom: 0, fontSize: "0.85rem" }}>
+                  When the next helper is due, open handoff so they orient without
+                  re-explaining.
+                </p>
+              )}
+            </div>
+          ) : null}
+        </section>
 
         {proj && (
           <span
