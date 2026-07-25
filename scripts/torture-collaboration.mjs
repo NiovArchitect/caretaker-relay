@@ -411,7 +411,7 @@ async function main() {
   assert(
     "unknown_maya_offers_ask_or_states_missing",
     // After orchestration confirm, a Maya record may exist — that is success.
-    /ask Maya|don't have a medication administration recorded from Maya|I don't have|Yes — I have a record from Maya|confirmed in the medication history/i.test(
+    /ask Maya|don't have a medication administration recorded from Maya|I don't have|Yes — I have a record from Maya|I have a record(ed administration)? from Maya|recorded administration from Maya|confirmed in the medication history/i.test(
       String(ansMaya.body?.answer || ""),
     ),
   );

@@ -200,7 +200,7 @@ function ManualCareNotePanel({ recipientName }: { recipientName: string }) {
     import("../domain/types").VerificationBundle | null
   >(null);
 
-  const roleHint = /physician|provider|doctor|np|nurse|clinician/i.test(
+  const roleHint = /physician|provider|doctor|\bnp\b|nurse|clinician/i.test(
     session.roleLabel,
   )
     ? "Provider update"
