@@ -54,7 +54,7 @@ Allowed statuses: IMPLEMENTED + PUBLICLY PROVEN | IMPLEMENTED + TEST PROVEN | UN
 | Orientation | 20/20 | this audit |
 | Human proof | 95/95 | prior post-recovery |
 | Public E2E | PASS | prior post-recovery multi-event verify |
-| Scenarios-30+ | **12+/32 PARTIAL** | S01–S12 PASS observed; full 32 hung mid-run on long provider loops |
+| Scenarios-30+ | **32/32 PASS** | Full public API suite on final API SHA; includes S24_maya_no_robert |
 
 ## Closure rule
 
