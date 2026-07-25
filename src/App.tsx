@@ -182,6 +182,16 @@ export function App() {
 
   // Hooks must run on every render path (including LoginGate) — never after
   // conditional returns, or authenticated shells crash with React #310.
+  // Document-level Escape so avatar menu closes without requiring menu focus.
+  useEffect(() => {
+    if (!profileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setProfileOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [profileOpen]);
+
   const pageTitle = useMemo(() => {
     switch (tab) {
       case "today":
