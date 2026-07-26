@@ -58,12 +58,15 @@ export function TodayPage({
   const [profile, setProfile] = useState<RecipientProfilePayload | null>(null);
   const [coverageSummary, setCoverageSummary] = useState("");
   const [showOnboarding, setShowOnboarding] = useState(() => {
+    // Established users with authorized recipients never see first-time role onboarding.
+    // Lightweight second spaces get progressive empty-state paths instead.
     const d = loadOnboardingDraft();
+    if (d.completed || d.awaitingAuthorization) return false;
+    // Only first-time incomplete drafts for authorized lab users with empty progressive setup
     return (
       !d.completed &&
-      (d.intent === "create_account" ||
-        d.intent === "set_up_care" ||
-        space.depth === "lightweight")
+      space.depth === "lightweight" &&
+      (d.intent === "add_recipient" || d.intent === "set_up_care")
     );
   });
   const [shellReady, setShellReady] = useState(false);

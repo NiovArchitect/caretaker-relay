@@ -36,11 +36,18 @@ describe("identity resolution", () => {
   });
 
   it("Robert care space is lightweight (not Evelyn fill)", () => {
-    const space = resolveCareSpace("cr-robert");
+    const space = resolveCareSpace("cr-robert", "p-sadeil");
     expect(space.displayName).toBe("Robert Hale");
     expect(space.depth).toBe("lightweight");
     expect(space.careRecipientId).toBe("cr-robert");
     expect(space.careRecipientId).not.toBe("cr-olivia");
+  });
+
+  it("pending accounts get zero recipients (fail closed)", () => {
+    expect(listAuthorizedCareSpaces("pending-local-abc")).toEqual([]);
+    expect(resolveCareSpace("cr-olivia", "pending-local-abc").careRecipientId).toBe(
+      "cr-none",
+    );
   });
 
   it("detects technical id values", () => {
@@ -145,7 +152,13 @@ describe("multi-recipient architecture", () => {
   });
 
   it("resolves active space without hard-coding only Evelyn", () => {
-    expect(resolveCareSpace("cr-robert").displayName).toBe("Robert Hale");
+    expect(resolveCareSpace("cr-robert", "p-sadeil").displayName).toBe(
+      "Robert Hale",
+    );
+  });
+
+  it("role-unknown principal cannot resolve Evelyn", () => {
+    expect(listAuthorizedCareSpaces("unknown-user")).toEqual([]);
   });
 });
 
@@ -255,11 +268,13 @@ describe("message targeting self-exclusion", () => {
 });
 
 describe("onboarding path mapping", () => {
-  it("maps paths to lab principals without inventing clinical data", () => {
-    expect(labPrincipalForPath("family_friend")).toBe("p-maya");
-    expect(labPrincipalForPath("paid_dsp")).toBe("p-walter");
-    expect(labPrincipalForPath("clinician")).toBe("p-dr-shah");
+  it("never maps role claims to lab principals with memberships", () => {
+    // SECURITY: create-account path must not grant existing recipient access
+    expect(labPrincipalForPath("family_friend")).toBeNull();
+    expect(labPrincipalForPath("paid_dsp")).toBeNull();
+    expect(labPrincipalForPath("clinician")).toBeNull();
     expect(emptyOnboardingDraft().completed).toBe(false);
+    expect(emptyOnboardingDraft().awaitingAuthorization).toBe(false);
   });
 });
 
@@ -317,5 +332,30 @@ describe("production logo system", () => {
     expect(fav).not.toContain(">CR</text>");
     expect(html).toContain("favicon-orb-translucent.svg");
     expect(html).not.toMatch(/href="\/favicon\.svg"/);
+  });
+});
+
+import {
+  isPendingPersonId,
+  makePendingPersonId,
+  markPendingAccount,
+  loadAuthorizationState,
+  clearAuthorizationState,
+} from "../src/lib/authorization";
+
+describe("secure authorization contracts", () => {
+  it("pending person ids are detected", () => {
+    expect(isPendingPersonId(makePendingPersonId())).toBe(true);
+    expect(isPendingPersonId("p-sadeil")).toBe(false);
+  });
+
+  it("create-account style pending state grants no spaces", () => {
+    clearAuthorizationState();
+    markPendingAccount("Alex Tester", "family_friend");
+    const st = loadAuthorizationState();
+    expect(st.pendingRecipientAccess).toBe(true);
+    expect(st.labPrincipalAuthorized).toBe(false);
+    expect(listAuthorizedCareSpaces(makePendingPersonId()).length).toBe(0);
+    clearAuthorizationState();
   });
 });

@@ -243,18 +243,30 @@ function persistSession(token: string, identity: SessionIdentity) {
 }
 
 function loadPersistedSession(): {
-  token: string;
+  token: string | null;
   identity: SessionIdentity;
+  pending?: boolean;
 } | null {
   try {
     const raw = sessionStorage.getItem(SESSION_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as {
-      token?: string;
+      token?: string | null;
       identity?: SessionIdentity;
+      pending?: boolean;
     };
-    if (parsed.token && parsed.identity?.carePersonId) {
-      return { token: parsed.token, identity: parsed.identity };
+    if (parsed.identity?.carePersonId) {
+      // Pending local accounts have identity without JWT
+      if (parsed.pending || parsed.identity.authMode === "pending_local") {
+        return {
+          token: null,
+          identity: parsed.identity,
+          pending: true,
+        };
+      }
+      if (parsed.token) {
+        return { token: parsed.token, identity: parsed.identity };
+      }
     }
   } catch {
     /* ignore */
@@ -268,6 +280,15 @@ export function clearSession() {
   sessionIdentity = null;
   try {
     sessionStorage.removeItem(SESSION_KEY);
+  } catch {
+    /* ignore */
+  }
+  try {
+    // Clear authorization + active recipient so next login does not inherit access
+    void import("../lib/authorization").then((m) => m.clearAuthorizationState());
+    void import("../lib/careContext").then((m) =>
+      m.saveActiveCareRecipientId("cr-none"),
+    );
   } catch {
     /* ignore */
   }
@@ -330,6 +351,16 @@ export async function loginAsPrincipal(
 export async function restoreSession(): Promise<SessionIdentity | null> {
   const persisted = loadPersistedSession();
   if (!persisted) return null;
+
+  // Pending local account — no JWT, no recipient access
+  if (persisted.pending || !persisted.token) {
+    httpToken = null;
+    httpAvailable = false;
+    sessionIdentity = persisted.identity;
+    transportUsed = "package";
+    return sessionIdentity;
+  }
+
   httpToken = persisted.token;
   httpAvailable = true;
   sessionIdentity = persisted.identity;

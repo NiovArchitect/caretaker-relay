@@ -8,15 +8,21 @@ import {
 import { CaretakerRelayLogo } from "./BrandMark";
 import { warmCareApi } from "../lib/apiWarm";
 import {
-  labPrincipalForPath,
   loadOnboardingDraft,
   saveOnboardingDraft,
   type CaregiverPath,
   type OnboardingIntent,
   PATH_LABELS,
 } from "../lib/onboarding";
+import {
+  bindInviteToken,
+  makePendingPersonId,
+  markLabPrincipalAuthorized,
+  markPendingAccount,
+} from "../lib/authorization";
+import { saveActiveCareRecipientId } from "../lib/careContext";
 
-/** Lab passwords are synthetic and bound to seed principals server-side. */
+/** Lab passwords are synthetic and bound to seed principals server-side. Demo only. */
 const LAB_PASSWORDS: Record<string, string> = {
   "p-sadeil": "sadeil-lab-password",
   "p-maya": "maya-lab-password",
@@ -63,9 +69,9 @@ export function LoginGate({
   const [inviteToken, setInviteToken] = useState("");
   const [createPath, setCreatePath] = useState<CaregiverPath | null>(null);
   const [displayName, setDisplayName] = useState("");
+  const [email, setEmail] = useState("");
   const [warmHint, setWarmHint] = useState(false);
 
-  // Instant UI: fallback principals first; warm API in background.
   useEffect(() => {
     void warmCareApi(true).then(() => setWarmHint(true));
     void listLabPrincipals().then((rows) => {
@@ -88,15 +94,15 @@ export function LoginGate({
     if (path) d.path = path;
     if (intent === "set_up_care" || intent === "create_account") {
       d.completed = false;
+      d.awaitingAuthorization = true;
     }
     saveOnboardingDraft(d);
   }
 
-  async function doLogin(carePersonId: string, pw: string) {
+  async function doLabLogin(carePersonId: string, pw: string) {
     setBusy(true);
     setError(null);
     const started = Date.now();
-    // Ensure warm completed or race it — reduces pure cold-start pain.
     await warmCareApi();
     try {
       const res = await loginAsPrincipal(carePersonId, pw);
@@ -108,11 +114,15 @@ export function LoginGate({
         );
         return;
       }
+      // Lab demo principals only — authorized via server membership, not role claim
+      markLabPrincipalAuthorized(res.session.displayName);
+      const d = loadOnboardingDraft();
+      d.awaitingAuthorization = false;
+      d.completed = true;
+      saveOnboardingDraft(d);
       onAuthenticated(res.session);
     } catch {
-      setError(
-        "Could not reach the care service. Wait a moment and try again.",
-      );
+      setError("Could not reach the care service. Wait a moment and try again.");
     } finally {
       setBusy(false);
     }
@@ -121,41 +131,120 @@ export function LoginGate({
   async function submitSignIn(e: React.FormEvent) {
     e.preventDefault();
     rememberIntent("sign_in");
-    await doLogin(selected, password);
+    await doLabLogin(selected, password);
   }
 
-  async function submitCreate(e: React.FormEvent) {
+  function submitCreate(e: React.FormEvent) {
     e.preventDefault();
-    if (!createPath) {
-      setError("Choose how you are connecting.");
+    const name = displayName.trim();
+    if (!name) {
+      setError("Your name is required so care actions can be attributed to you.");
       return;
     }
-    const pid = labPrincipalForPath(createPath);
-    rememberIntent(
-      createPath === "invited" ? "accept_invite" : "create_account",
-      createPath,
-    );
-    if (displayName.trim()) {
-      const d = loadOnboardingDraft();
-      d.relationship = displayName.trim();
-      saveOnboardingDraft(d);
+    if (name.length < 2) {
+      setError("Enter a preferred name with at least 2 characters.");
+      return;
     }
-    // Lab product: map path → seeded principal (real IdP is external).
-    await doLogin(pid, LAB_PASSWORDS[pid] ?? "");
+    if (!createPath) {
+      setError("Choose how you are connecting. This does not grant care access.");
+      return;
+    }
+    if (!email.trim() || !email.includes("@")) {
+      setError("Enter a valid email. You will need to verify it before sensitive access.");
+      return;
+    }
+
+    setBusy(true);
+    setError(null);
+
+    // SECURITY: Role selection is a claim only. Do NOT log in as a lab principal
+    // who already has recipient memberships. New accounts start with zero recipients.
+    const pendingId = makePendingPersonId();
+    markPendingAccount(name, createPath);
+    saveActiveCareRecipientId("cr-none");
+
+    const d = loadOnboardingDraft();
+    d.intent = createPath === "invited" ? "accept_invite" : "create_account";
+    d.path = createPath;
+    d.accountDisplayName = name;
+    d.recipientPreferredName = ""; // never auto-assign
+    d.awaitingAuthorization = true;
+    d.completed = false;
+    saveOnboardingDraft(d);
+
+    const session: SessionIdentity = {
+      carePersonId: pendingId,
+      displayName: name,
+      roleLabel: "Account pending authorization",
+      authMode: "pending_local",
+    };
+
+    // Persist a client-only session shell (no JWT / no recipient data)
+    try {
+      sessionStorage.setItem(
+        "cr_care_session_v1",
+        JSON.stringify({
+          token: null,
+          identity: session,
+          pending: true,
+          email: email.trim().toLowerCase(),
+        }),
+      );
+    } catch {
+      /* ignore */
+    }
+
+    setBusy(false);
+    onAuthenticated(session);
   }
 
-  async function submitInvite(e: React.FormEvent) {
+  function submitInvite(e: React.FormEvent) {
     e.preventDefault();
-    if (!inviteToken.trim()) {
+    const token = inviteToken.trim();
+    if (!token) {
       setError("Paste the invitation code you received.");
       return;
     }
-    rememberIntent("accept_invite", "invited");
+    if (!displayName.trim()) {
+      setError("Your name is required before accepting an invitation.");
+      return;
+    }
+
+    setBusy(true);
+    // Bind token only — do not reveal recipient until accept succeeds server-side.
+    bindInviteToken(token);
+    markPendingAccount(displayName.trim(), "invited");
+    saveActiveCareRecipientId("cr-none");
+
     const d = loadOnboardingDraft();
-    d.helpersNote = `Invite code on file: ${inviteToken.trim().slice(0, 12)}…`;
+    d.intent = "accept_invite";
+    d.path = "invited";
+    d.accountDisplayName = displayName.trim();
+    d.awaitingAuthorization = true;
+    d.helpersNote = "Invitation code saved. Open People after you finish account setup to complete join.";
     saveOnboardingDraft(d);
-    // Sign in as family helper, then accept on People with the code.
-    await doLogin("p-maya", LAB_PASSWORDS["p-maya"]);
+
+    const session: SessionIdentity = {
+      carePersonId: makePendingPersonId(),
+      displayName: displayName.trim(),
+      roleLabel: "Invitation pending",
+      authMode: "pending_local",
+    };
+    try {
+      sessionStorage.setItem(
+        "cr_care_session_v1",
+        JSON.stringify({
+          token: null,
+          identity: session,
+          pending: true,
+          inviteToken: token,
+        }),
+      );
+    } catch {
+      /* ignore */
+    }
+    setBusy(false);
+    onAuthenticated(session);
   }
 
   return (
@@ -164,11 +253,7 @@ export function LoginGate({
       <div className="cr-login-panel" data-testid="login-panel">
         <div className="cr-login-panel-inner">
           <div className="cr-login-brand">
-            <CaretakerRelayLogo
-              layout="stacked"
-              markSize={56}
-              testId="login-brand-logo"
-            />
+            <CaretakerRelayLogo layout="stacked" markSize={56} testId="login-brand-logo" />
             <p className="muted cr-login-tag">Shared care, verified</p>
           </div>
 
@@ -176,8 +261,9 @@ export function LoginGate({
             <div data-testid="login-entry-home">
               <h1 className="cr-login-title">Care continuity</h1>
               <p className="cr-login-sub">
-                One trusted picture for everyone helping — without re-explaining
-                the day.
+                Create an account or sign in. Access to someone’s care always
+                requires a separate invitation or approval — not just a role
+                selection.
               </p>
               <div className="login-entry-grid" data-testid="login-entry-paths">
                 <button
@@ -199,7 +285,7 @@ export function LoginGate({
                   }}
                 >
                   <strong>Create account</strong>
-                  <span className="muted">Start or join care support</span>
+                  <span className="muted">Start without care access</span>
                 </button>
                 <button
                   type="button"
@@ -221,7 +307,7 @@ export function LoginGate({
                   }}
                 >
                   <strong>Set up care</strong>
-                  <span className="muted">For someone you support</span>
+                  <span className="muted">Create an account, then authorize</span>
                 </button>
               </div>
               {warmHint && (
@@ -229,6 +315,10 @@ export function LoginGate({
                   Care service is ready.
                 </p>
               )}
+              <p className="muted cr-login-lab-note" data-testid="login-lab-boundary">
+                Lab demo sign-in uses seeded principals. Create account never
+                opens an existing care record.
+              </p>
             </div>
           )}
 
@@ -238,21 +328,16 @@ export function LoginGate({
               aria-label="Sign in"
               data-testid="login-sign-in-form"
             >
-              <button
-                type="button"
-                className="cr-login-back"
-                onClick={goHome}
-                data-testid="login-back"
-              >
+              <button type="button" className="cr-login-back" onClick={goHome} data-testid="login-back">
                 ← All options
               </button>
               <h1 className="cr-login-title">Sign in</h1>
               <p className="muted cr-login-paths">
-                Lab demo: choose a caregiver. Production identity will use your
-                organization or email.
+                Lab demo: choose a seeded caregiver with existing memberships.
+                Production uses verified identity and invitations.
               </p>
               <label className="cr-field">
-                <span>Caregiver</span>
+                <span>Caregiver (lab)</span>
                 <select
                   data-testid="login-principal"
                   value={selected}
@@ -288,43 +373,51 @@ export function LoginGate({
               >
                 {busy ? "Signing in…" : "Continue"}
               </button>
-              {busy && (
-                <p className="muted cr-login-wait-hint" data-testid="login-wait-hint">
-                  Opening your care space. First open after idle can take longer.
-                </p>
-              )}
             </form>
           )}
 
           {mode === "create" && (
             <form
-              onSubmit={(ev) => void submitCreate(ev)}
+              onSubmit={(ev) => submitCreate(ev)}
               aria-label="Create account"
               data-testid="login-create-form"
             >
-              <button
-                type="button"
-                className="cr-login-back"
-                onClick={goHome}
-                data-testid="login-back"
-              >
+              <button type="button" className="cr-login-back" onClick={goHome} data-testid="login-back">
                 ← All options
               </button>
               <h1 className="cr-login-title">Create account</h1>
-              <p className="muted section-lead">
-                Tell us how you connect to care — we’ll open the right space.
-                Health details come later.
+              <p className="muted section-lead" data-testid="create-account-boundary">
+                This creates your account only. You will not see anyone’s care
+                record until invited or approved. Selecting a role is not
+                authorization.
               </p>
               <label className="cr-field">
-                <span>Your name (optional)</span>
+                <span>Your preferred name (required)</span>
                 <input
                   data-testid="create-display-name"
                   value={displayName}
                   onChange={(e) => setDisplayName(e.target.value)}
                   placeholder="How should we address you?"
                   autoComplete="name"
+                  required
+                  minLength={2}
                 />
               </label>
+              <label className="cr-field">
+                <span>Email (required)</span>
+                <input
+                  data-testid="create-email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                  required
+                />
+              </label>
+              <p className="muted" style={{ fontSize: "0.82rem" }}>
+                How you connect (claim only — not access):
+              </p>
               <div className="onboarding-choices" role="list">
                 {(
                   [
@@ -360,37 +453,38 @@ export function LoginGate({
                 type="submit"
                 className="primary-btn cr-login-submit"
                 data-testid="create-submit"
-                disabled={busy || !createPath}
+                disabled={busy || !createPath || !displayName.trim() || !email.trim()}
               >
-                {busy ? "Setting up…" : "Continue"}
+                {busy ? "Creating account…" : "Create account"}
               </button>
-              {busy && (
-                <p className="muted cr-login-wait-hint" data-testid="login-wait-hint">
-                  Preparing your account…
-                </p>
-              )}
             </form>
           )}
 
           {mode === "invite" && (
             <form
-              onSubmit={(ev) => void submitInvite(ev)}
+              onSubmit={(ev) => submitInvite(ev)}
               aria-label="Accept invitation"
               data-testid="login-invite-form"
             >
-              <button
-                type="button"
-                className="cr-login-back"
-                onClick={goHome}
-                data-testid="login-back"
-              >
+              <button type="button" className="cr-login-back" onClick={goHome} data-testid="login-back">
                 ← All options
               </button>
               <h1 className="cr-login-title">Accept invitation</h1>
               <p className="muted section-lead">
-                Paste the code from your invitation. After sign-in, open People
-                to finish joining the circle.
+                Enter your name and the code. Care details appear only after the
+                invitation is validated — codes do not reveal recipients until
+                accepted.
               </p>
+              <label className="cr-field">
+                <span>Your preferred name (required)</span>
+                <input
+                  data-testid="invite-display-name"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                  required
+                  minLength={2}
+                />
+              </label>
               <label className="cr-field">
                 <span>Invitation code</span>
                 <input
@@ -410,19 +504,13 @@ export function LoginGate({
                 type="submit"
                 className="primary-btn cr-login-submit"
                 data-testid="invite-entry-submit"
-                disabled={busy || !inviteToken.trim()}
+                disabled={busy || !inviteToken.trim() || !displayName.trim()}
               >
-                {busy ? "Joining…" : "Continue with code"}
+                {busy ? "Saving…" : "Continue with code"}
               </button>
-              {busy && (
-                <p className="muted cr-login-wait-hint" data-testid="login-wait-hint">
-                  Connecting…
-                </p>
-              )}
             </form>
           )}
 
-          {/* Hidden principal fields for e2e when on home (smoke can open sign-in) */}
           {mode === "home" && (
             <>
               <input type="hidden" data-testid="login-principal" value={selected} readOnly />

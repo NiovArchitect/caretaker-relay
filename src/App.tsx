@@ -22,20 +22,24 @@ import { RelayPanel } from "./components/RelayPanel";
 import { HandoffPanel } from "./components/HandoffPanel";
 import { LoginGate } from "./components/LoginGate";
 import { CaretakerRelayLogo } from "./components/BrandMark";
+import { AuthorizationGate } from "./components/AuthorizationGate";
 import { TodayPage } from "./pages/TodayPage";
 import { CarePage } from "./pages/CarePage";
 import { PeoplePage } from "./pages/PeoplePage";
 import { DocumentsPage } from "./pages/DocumentsPage";
 import { people } from "./scenario/olivia";
 import {
+  hasAuthorizedRecipient,
   listAuthorizedCareSpaces,
   loadActiveCareRecipientId,
+  NO_RECIPIENT_SPACE,
   resolveCareSpace,
   saveActiveCareRecipientId,
 } from "./lib/careContext";
 import { setActiveCareRecipientId } from "./foundation/careClient";
 import { warmCareApi } from "./lib/apiWarm";
 import { isSelfMessageTarget } from "./lib/messageTarget";
+import { clearAuthorizationState } from "./lib/authorization";
 
 function nowLabel() {
   return new Date().toLocaleTimeString([], {
@@ -88,7 +92,7 @@ export function App() {
   >(null);
   const [profileOpen, setProfileOpen] = useState(false);
   const [activeRecipientId, setActiveRecipientId] = useState(() => {
-    const id = loadActiveCareRecipientId();
+    const id = loadActiveCareRecipientId(null);
     setActiveCareRecipientId(id);
     return id;
   });
@@ -100,12 +104,17 @@ export function App() {
   const [recipientSwitching, setRecipientSwitching] = useState(false);
   const [notifConnected, setNotifConnected] = useState(true);
   const [unreadCount, setUnreadCount] = useState(0);
-  const activeSpace = resolveCareSpace(activeRecipientId);
+  const activeSpace = resolveCareSpace(
+    activeRecipientId,
+    session?.carePersonId,
+  );
+  const hasCareAccess =
+    !!session && hasAuthorizedRecipient(session.carePersonId);
 
   // Server notification transport health (poll — EventSource cannot send Bearer)
   // Count is recipient-scoped when possible to avoid cross-person "726 new" noise.
   useEffect(() => {
-    if (!session) return;
+    if (!session || !hasCareAccess) return;
     let stopped = false;
     const tick = () => {
       void import("./foundation/careClient").then(({ fetchServerNotifications }) =>
@@ -131,7 +140,7 @@ export function App() {
       stopped = true;
       window.clearInterval(iv);
     };
-  }, [session, activeRecipientId]);
+  }, [session, activeRecipientId, hasCareAccess]);
 
   useEffect(() => {
     setActiveCareRecipientId(activeRecipientId);
@@ -162,16 +171,19 @@ export function App() {
       setSession(s);
       setAuthReady(true);
       if (s) {
-        const id = loadActiveCareRecipientId();
+        const id = loadActiveCareRecipientId(s.carePersonId);
         setActiveCareRecipientId(id);
         setActiveRecipientId(id);
-        const space = resolveCareSpace(id);
+        const space = resolveCareSpace(id, s.carePersonId);
+        const authorized = hasAuthorizedRecipient(s.carePersonId);
         setMessages([
           {
             id: "m0",
             role: "relay",
             at: nowLabel(),
-            text: `Signed in as ${s.displayName} (${s.roleLabel}).\n\nI'm here for ${space.displayName}'s care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.`,
+            text: authorized
+              ? `Signed in as ${s.displayName} (${s.roleLabel}).\n\nI'm here for ${space.displayName}'s care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.`
+              : `Signed in as ${s.displayName}.\n\nYou are not connected to a care recipient yet. Use an invitation or request access — I will not open anyone's care record based on a role alone.`,
           },
         ]);
       }
@@ -268,13 +280,19 @@ export function App() {
       <LoginGate
         onAuthenticated={(s) => {
           setSession(s);
-          const space = resolveCareSpace(loadActiveCareRecipientId());
+          const id = loadActiveCareRecipientId(s.carePersonId);
+          setActiveCareRecipientId(id);
+          setActiveRecipientId(id);
+          const space = resolveCareSpace(id, s.carePersonId);
+          const authorized = hasAuthorizedRecipient(s.carePersonId);
           setMessages([
             {
               id: "m0",
               role: "relay",
               at: nowLabel(),
-              text: `Signed in as ${s.displayName} (${s.roleLabel}).\n\nI'm here for ${space.displayName}'s care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.`,
+              text: authorized
+                ? `Signed in as ${s.displayName} (${s.roleLabel}).\n\nI'm here for ${space.displayName}'s care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.`
+                : `Signed in as ${s.displayName}.\n\nYou are not connected to a care recipient yet. Use an invitation or request access — I will not open anyone's care record based on a role alone.`,
             },
           ]);
           setTodayRefresh((n) => n + 1);
@@ -285,11 +303,14 @@ export function App() {
 
   function signOut() {
     clearSession();
+    clearAuthorizationState();
+    saveActiveCareRecipientId(NO_RECIPIENT_SPACE.careRecipientId);
     setSession(null);
     setMessages([]);
     setBundle(null);
     setShowHandoff(false);
     setProfileOpen(false);
+    setActiveRecipientId(NO_RECIPIENT_SPACE.careRecipientId);
   }
 
   function openRelay() {
@@ -725,17 +746,23 @@ export function App() {
         <div className="topbar-center">
           <div className="recipient-chip" data-testid="care-recipient-chip">
             <span className="avatar-3d" aria-hidden>
-              {activeSpace.preferredName.charAt(0)}
+              {hasCareAccess ? activeSpace.preferredName.charAt(0) : "?"}
             </span>
             <div className="recipient-chip-text">
-              <div className="recipient-chip-kicker">Caring for</div>
+              <div className="recipient-chip-kicker">
+                {hasCareAccess ? "Caring for" : "Access"}
+              </div>
               <div
                 data-testid="care-recipient-label"
                 className="recipient-chip-name"
               >
-                {activeSpace.displayName}
+                {hasCareAccess
+                  ? activeSpace.displayName
+                  : "No recipient connected"}
               </div>
-              <div className="muted recipient-chip-role">Care recipient</div>
+              <div className="muted recipient-chip-role">
+                {hasCareAccess ? "Care recipient" : "Authorization required"}
+              </div>
             </div>
           </div>
           <span className="topbar-date">{todayDateLabel()}</span>
@@ -812,6 +839,15 @@ export function App() {
                 </div>
                 <div className="profile-menu-section">
                   <div className="profile-menu-label">Switch care recipient</div>
+                  {listAuthorizedCareSpaces(session.carePersonId).length ===
+                    0 && (
+                    <div
+                      className="profile-menu-item muted"
+                      data-testid="no-recipient-menu"
+                    >
+                      No authorized care recipients
+                    </div>
+                  )}
                   {listAuthorizedCareSpaces(session.carePersonId).map((s) => (
                     <button
                       key={s.careRecipientId}
@@ -886,7 +922,10 @@ export function App() {
               Switching care context to {activeSpace.displayName}…
             </p>
           )}
-          {workspaceTab === "today" && (
+          {!hasCareAccess && (
+            <AuthorizationGate displayName={session.displayName} />
+          )}
+          {hasCareAccess && workspaceTab === "today" && (
             <TodayPage
               relayHandled={relayHandled}
               onOpenHandoff={() => void openLatestHandoff()}
@@ -895,8 +934,10 @@ export function App() {
               onReviewAttention={onReviewAttention}
             />
           )}
-          {workspaceTab === "care" && <CarePage focusKind={careFocus} />}
-          {workspaceTab === "people" && (
+          {hasCareAccess && workspaceTab === "care" && (
+            <CarePage focusKind={careFocus} />
+          )}
+          {hasCareAccess && workspaceTab === "people" && (
             <PeoplePage
               onMessagePerson={(personId) => {
                 if (isSelfMessageTarget(personId, session.carePersonId)) {
@@ -929,7 +970,7 @@ export function App() {
               }}
             />
           )}
-          {workspaceTab === "documents" && <DocumentsPage />}
+          {hasCareAccess && workspaceTab === "documents" && <DocumentsPage />}
 
           {showHandoff && (
             <HandoffPanel
