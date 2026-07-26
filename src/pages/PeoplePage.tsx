@@ -34,6 +34,18 @@ export function PeoplePage({
   const session = getSessionIdentity();
   const space = resolveCareSpace(loadActiveCareRecipientId());
 
+  function isSelfMember(m: { personId: string; displayName: string }) {
+    if (m.personId === session.carePersonId) return true;
+    if (
+      session.displayName &&
+      m.displayName.trim().toLowerCase() ===
+        session.displayName.trim().toLowerCase()
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   function requestMessage(personId: string, _displayName?: string) {
     void _displayName;
     const target = resolveMessageTarget(
@@ -228,7 +240,7 @@ export function PeoplePage({
                 {member.status === "active" ? "Active" : member.status}
               </span>
             </button>
-            {member.personId !== session.carePersonId ? (
+            {!isSelfMember(member) ? (
               <button
                 type="button"
                 className="btn-comm btn-with-icon member-card-message"
@@ -256,6 +268,12 @@ export function PeoplePage({
         {messageHint && (
           <p className="attention-limit" role="status" data-testid="message-target-hint">
             {messageHint}
+          </p>
+        )}
+        {!members.some((m) => isSelfMember(m)) && (
+          <p className="muted" data-testid="person-self-session">
+            Signed in as <strong>{session.displayName}</strong> — message others
+            in the circle, not yourself.
           </p>
         )}
       </section>
@@ -497,7 +515,7 @@ export function PeoplePage({
                 Call
               </a>
             )}
-            {selected.personId !== session.carePersonId ? (
+            {!isSelfMember(selected) ? (
               <button
                 type="button"
                 className="btn-comm btn-with-icon"

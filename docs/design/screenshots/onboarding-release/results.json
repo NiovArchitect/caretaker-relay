@@ -1,0 +1,88 @@
+{
+  "base": "https://care.niovlabs.com",
+  "sha": "312eb594718922b7f0449005cf53e7a2d61f2364",
+  "steps": [
+    {
+      "n": "bundle_markers",
+      "ok": true
+    },
+    {
+      "n": "bundle_self_exclusion",
+      "ok": true
+    },
+    {
+      "n": "bundle_entry",
+      "ok": true
+    },
+    {
+      "n": "login_visible",
+      "ok": true,
+      "message": "481ms"
+    },
+    {
+      "n": "entry_home",
+      "ok": true
+    },
+    {
+      "n": "entry_paths",
+      "ok": true
+    },
+    {
+      "n": "create_form",
+      "ok": true
+    },
+    {
+      "n": "shell",
+      "ok": true,
+      "message": "loginToShell=26691ms"
+    },
+    {
+      "n": "shell_first",
+      "ok": true
+    },
+    {
+      "n": "brand_mark",
+      "ok": true
+    },
+    {
+      "n": "self_label_you",
+      "ok": false
+    },
+    {
+      "n": "coord_banner",
+      "ok": true,
+      "message": "Message Daniel Kim about EvelynStays in Evelyn Carter's circle only — not Relay AI."
+    },
+    {
+      "n": "not_self_target",
+      "ok": true,
+      "message": "Message Daniel Kim about EvelynStays in Evelyn Carter's circle only — not Relay AI."
+    },
+    {
+      "n": "coord_to_not_self",
+      "ok": true,
+      "message": "to=p-walter"
+    },
+    {
+      "n": "robert_path",
+      "ok": true,
+      "message": "wizard=1 empty=0"
+    },
+    {
+      "n": "onboarding_progress",
+      "ok": true
+    },
+    {
+      "n": "exception",
+      "ok": false,
+      "message": "TimeoutError: page.waitForSelector: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('[data-testid=\"login-gate\"]') to be visible\n"
+    }
+  ],
+  "timings": {
+    "loginPaintMs": 481,
+    "loginToShellMs": 26691
+  },
+  "pass": 15,
+  "total": 17,
+  "finishedAt": "2026-07-26T16:30:52.166Z"
+}
