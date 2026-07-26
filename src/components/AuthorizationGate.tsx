@@ -5,7 +5,10 @@ import {
   submitAccessRequest,
 } from "../lib/authorization";
 import { ESTABLISHED_ACTIONS, loadOnboardingDraft, saveOnboardingDraft } from "../lib/onboarding";
-import { careSubmitAccessRequest } from "../foundation/careHttpClient";
+import {
+  careCreateProvisional,
+  careSubmitAccessRequest,
+} from "../foundation/careHttpClient";
 
 /**
  * Shown when authenticated account has zero authorized care recipients.
@@ -219,7 +222,49 @@ export function AuthorizationGate({
       )}
 
       {mode === "provisional" && (
-        <div data-testid="provisional-recipient-panel">
+        <form
+          data-testid="provisional-recipient-panel"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            if (recipientName.trim().length < 2) {
+              setStatus("Enter the preferred name for the care draft.");
+              return;
+            }
+            if (!relationship.trim()) {
+              setStatus("Describe your claimed authority (not proven access).");
+              return;
+            }
+            setBusy(true);
+            try {
+              const raw = sessionStorage.getItem("cr_care_session_v1");
+              const parsed = raw
+                ? (JSON.parse(raw) as { token?: string | null })
+                : null;
+              if (parsed?.token) {
+                const res = await careCreateProvisional(parsed.token, {
+                  preferred_name: recipientName.trim(),
+                  claimed_authority: relationship.trim(),
+                  creator_note: reason.trim() || undefined,
+                });
+                if (res.ok) {
+                  setStatus(
+                    `Draft “${res.data.provisional.preferred_name}” saved (${res.data.provisional.status}). No care record opened. Bind/activate only after authorized path.`,
+                  );
+                } else {
+                  setStatus(res.message || "Could not save provisional draft.");
+                }
+              } else {
+                setStatus(
+                  "Draft saved locally as intent only. Sign in with a durable account to persist on the care service.",
+                );
+              }
+            } catch {
+              setStatus("Could not reach care service for provisional draft.");
+            }
+            setBusy(false);
+            setMode("home");
+          }}
+        >
           <h2>Set up a new care circle</h2>
           <p className="muted section-lead">
             Starting a circle for someone requires their consent or lawful
@@ -227,29 +272,44 @@ export function AuthorizationGate({
             draft is not full access and is never linked to an existing person by
             name alone.
           </p>
+          <label className="cr-field">
+            <span>Preferred name (draft only)</span>
+            <input
+              data-testid="provisional-name"
+              value={recipientName}
+              onChange={(e) => setRecipientName(e.target.value)}
+              required
+              minLength={2}
+            />
+          </label>
+          <label className="cr-field">
+            <span>Claimed authority</span>
+            <input
+              data-testid="provisional-authority"
+              value={relationship}
+              onChange={(e) => setRelationship(e.target.value)}
+              placeholder="e.g. adult child, personal representative"
+              required
+            />
+          </label>
           <p className="attention-limit" role="note">
-            Production: identity matching and consent capture are required before
-            any sensitive fields. This lab stores only your intent until authorized.
+            No automatic match to existing people. Provider approval is only used
+            when an organization assignment applies — not for private family circles.
           </p>
           <div className="btn-row">
             <button type="button" className="ghost-btn" onClick={() => setMode("home")}>
               Back
             </button>
             <button
-              type="button"
+              type="submit"
               className="primary-btn"
               data-testid="provisional-start"
-              onClick={() => {
-                setStatus(
-                  "Provisional setup recorded as intent only. No existing care recipient was opened or assumed.",
-                );
-                setMode("home");
-              }}
+              disabled={busy}
             >
-              Record setup intent
+              {busy ? "Saving…" : "Save provisional draft"}
             </button>
           </div>
-        </div>
+        </form>
       )}
     </div>
   );

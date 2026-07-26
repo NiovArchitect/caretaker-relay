@@ -139,6 +139,38 @@ export async function careSubmitAccessRequest(
   });
 }
 
+export async function careCreateProvisional(
+  token: string,
+  input: {
+    preferred_name: string;
+    claimed_authority: string;
+    creator_note?: string;
+  },
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    provisional: {
+      id: string;
+      preferred_name: string;
+      status: string;
+    };
+  }>("/api/v1/care/provisional-recipients", {
+    method: "POST",
+    token,
+    body: input,
+    baseUrl,
+  });
+}
+
+export async function careLogout(token: string, baseUrl?: string) {
+  return request<{ ok: boolean }>("/api/v1/care/auth/logout", {
+    method: "POST",
+    token,
+    baseUrl,
+  });
+}
+
 /** Secondary lab JWT path. Prefer careLogin. */
 export async function careLabLogin(
   carePersonId: string,
