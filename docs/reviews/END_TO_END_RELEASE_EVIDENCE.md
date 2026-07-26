@@ -7,8 +7,21 @@
 
 | Component | SHA |
 |-----------|-----|
-| App public / recovered | `eea3d2cd0c16b7e1c0272e205f591467ab3656db` |
+| App public / recovered (P0) | `eea3d2cd0c16b7e1c0272e205f591467ab3656db` |
 | API | `d8e4cd136e589a789439777a1b9a534096c49d6a` |
+
+## Released SHAs (this campaign)
+
+| Component | SHA | Notes |
+|-----------|-----|-------|
+| App source + deploy | `c5d346e813c3145bdc2d301c80b42b4ead8bb671` | Render `dep-d9j2u2l8nd3s73anqgi0` **live** |
+| API source + deploy | `d8e4cd136e589a789439777a1b9a534096c49d6a` | unchanged this slice |
+
+### Public smoke (2026-07-26)
+
+URL: https://care.niovlabs.com  
+Evidence: `docs/design/screenshots/public-e2e-experience/results.json`  
+Result: **12 / 12 PASS** (login shell, invite authority, coverage, no technical-delivery copy, coord banner, Robert lightweight empty, blood type never guessed, care light banner).
 
 ## Implementation summary
 

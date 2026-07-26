@@ -1,0 +1,61 @@
+{
+  "base": "https://care.niovlabs.com",
+  "startedAt": "2026-07-26T16:04:53.817Z",
+  "steps": [
+    {
+      "name": "login_gate",
+      "ok": true
+    },
+    {
+      "name": "entry_paths",
+      "ok": true
+    },
+    {
+      "name": "shell",
+      "ok": true,
+      "loginMs": 29134
+    },
+    {
+      "name": "invite_section",
+      "ok": true
+    },
+    {
+      "name": "invite_create_primary",
+      "ok": true
+    },
+    {
+      "name": "coverage_section",
+      "ok": true
+    },
+    {
+      "name": "no_tech_delivery",
+      "ok": true
+    },
+    {
+      "name": "coord_banner",
+      "ok": true,
+      "message": "Message Marcus Carter about EvelynStays in Evelyn Carter's circle only — not Relay AI."
+    },
+    {
+      "name": "robert_empty",
+      "ok": true
+    },
+    {
+      "name": "blood_type",
+      "ok": true,
+      "message": "Blood type: not on file — never guessed"
+    },
+    {
+      "name": "care_light_banner",
+      "ok": true
+    },
+    {
+      "name": "shell_end",
+      "ok": true
+    }
+  ],
+  "sha": "c5d346e813c3145bdc2d301c80b42b4ead8bb671",
+  "pass": 12,
+  "total": 12,
+  "finishedAt": "2026-07-26T16:05:33.971Z"
+}
