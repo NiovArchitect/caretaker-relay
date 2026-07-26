@@ -1,0 +1,40 @@
+[
+  {
+    "name": "chromium-desktop",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "errors": [],
+    "loginMs": 459,
+    "loginVisible": true,
+    "shellMs": 28104,
+    "shell": true,
+    "has310": false,
+    "bodyLen": 4395,
+    "blankAfterScroll": false,
+    "care": true
+  },
+  {
+    "name": "chromium-mobile",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "errors": [],
+    "loginMs": 248,
+    "loginVisible": true,
+    "shellMs": 22447,
+    "shell": true,
+    "has310": false,
+    "bodyLen": 3844,
+    "blankAfterScroll": false,
+    "bottomNav": true,
+    "care": true
+  },
+  {
+    "name": "webkit-desktop",
+    "error": "Error: browserType.launch: Executable doesn't exist at /Users/genghishameha/Library/Caches/ms-playwright/webkit-2104/pw_",
+    "skipped": true
+  }
+]

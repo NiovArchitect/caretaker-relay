@@ -140,16 +140,63 @@ export function TodayPage({
     [attention, next, space.careRecipientId, recipientName, acked],
   );
 
+  const isLightweight = space.depth === "lightweight";
+
   return (
     <>
+      {isLightweight && (
+        <section
+          className="section surface-known empty-care-space"
+          data-testid="lightweight-empty-state"
+          aria-label="Getting started with this care space"
+        >
+          <h2>Getting started with {recipientName}</h2>
+          <p className="muted section-lead">
+            You are connected to {recipientName}, but this care record is still
+            light. That is intentional — not a copy of another person&apos;s
+            file. Coordinate now; enrich facts as you learn them.
+          </p>
+          <ul className="list-plain">
+            <li>
+              <strong>People</strong> — authorized helpers and messaging
+            </li>
+            <li>
+              <strong>Care</strong> — About, preferences, emergency snapshot
+            </li>
+            <li>
+              <strong>Relay</strong> — ask, record an update, verify
+            </li>
+          </ul>
+          <div className="btn-row">
+            <button
+              type="button"
+              className="primary-btn"
+              data-testid="empty-open-relay"
+              onClick={onOpenRelay}
+            >
+              Add a care update
+            </button>
+            <button
+              type="button"
+              className="secondary-btn"
+              data-testid="empty-open-handoff"
+              onClick={onOpenHandoff}
+            >
+              Review handoff
+            </button>
+          </div>
+        </section>
+      )}
+
       <section className="today-hero" aria-label="Care context for today">
         <div className="today-hero-kicker">Today</div>
         <h1 data-testid="today-greeting" className="today-hero-recipient">
           <span data-testid="care-recipient-label">{recipientName}</span>
         </h1>
-        <p className="muted" style={{ margin: "4px 0 0", fontSize: "0.9rem" }}>
-          Open <strong>Care → About</strong> for age, conditions, and essential
-          care context — not only today&apos;s tasks.
+        <p className="muted today-hero-lead">
+          {isLightweight
+            ? `${recipientName}'s circle is available — enrich Care when you are ready.`
+            : "Scan what needs you, what changed, and who is helping."}
         </p>
         <div className="today-hero-caregiver">
           <span>

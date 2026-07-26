@@ -27,6 +27,8 @@ export function PeoplePage({
   const [inviteMsg, setInviteMsg] = useState<string | null>(null);
   const [inviteReady, setInviteReady] = useState(false);
   const [acceptToken, setAcceptToken] = useState("");
+  const [coverageNote, setCoverageNote] = useState("");
+  const [coverageStatus, setCoverageStatus] = useState<string | null>(null);
   const session = getSessionIdentity();
   const space = resolveCareSpace(loadActiveCareRecipientId());
 
@@ -90,6 +92,10 @@ export function PeoplePage({
     ? SYNTHETIC_CONTACTS[selected.personId]
     : null;
 
+  const canInvite =
+    /primary/i.test(session.roleLabel) ||
+    session.carePersonId === "p-sadeil";
+
   return (
     <>
       <div className="greeting">
@@ -135,35 +141,27 @@ export function PeoplePage({
       >
         <h2>Privacy, dignity, and access</h2>
         <p className="muted section-lead">
-          Only authorized people in {space.displayName}&apos;s care circle can
-          see care information. Access is role-scoped: what someone can see and
-          do is listed on each person. Invitation and acceptance are logged.
-          Relay never shares across care recipients.
+          Only people in {space.preferredName}&apos;s care circle can see care
+          details. Each person&apos;s role controls what they can view and do.
+          Information is never mixed across care recipients.
         </p>
         <ul className="list-plain">
           <li>
-            <strong>You are signed in as</strong> {session.displayName} ·{" "}
-            {session.roleLabel}
+            <strong>You:</strong> {session.displayName}
+            {session.roleLabel ? ` · ${session.roleLabel}` : ""}
           </li>
           <li>
-            <strong>Active care recipient:</strong> {space.displayName} (switch
-            only from your profile menu when authorized)
+            <strong>Active care:</strong> {space.displayName}
+            {canInvite ? " · you can invite people" : " · invite needs primary contact"}
           </li>
           <li>
-            <strong>Export / portability:</strong> Documents → Prepare care
-            summary — review before any share
-          </li>
-          <li>
-            <strong>Revocation:</strong> access is enforced server-side.
-            Self-serve “revoke this person now” is not available in this
-            Phase 1 UI — a principal with authority must use the care API /
-            admin path. Unauthorized principals are denied automatically.
+            <strong>Share a summary:</strong> Documents → Prepare care summary
           </li>
           <li data-testid="access-control-honesty">
-            <strong>What this screen shows:</strong> each person&apos;s{" "}
-            <em>Can see</em> / <em>Can do</em> lists when you open their card —
-            minimum-necessary visibility for accountability, not a full IAM
-            console.
+            <strong>Access changes:</strong> Open a person to see what they can
+            see and do. Removing someone requires the primary circle contact
+            (or organization admin). Unauthorized access is blocked
+            automatically.
           </li>
         </ul>
       </section>
@@ -219,70 +217,72 @@ export function PeoplePage({
         ))}
       </section>
 
-      <section className="section surface-reported" aria-label="Invitations">
-        <h2>Invite someone to {space.displayName}&apos;s care circle</h2>
-        <p className="muted">
-          They&apos;ll only see the care information their role allows. Choose
-          the person and send the invitation. Technical delivery happens in the
-          background.
-        </p>
-        <label className="muted" style={{ display: "block", marginTop: 8 }}>
-          Person and role
-          <select
-            data-testid="invite-person"
-            value={inviteeId}
-            onChange={(e) => setInviteeId(e.target.value)}
-            style={{
-              display: "block",
-              width: "100%",
-              marginTop: 4,
-              minHeight: 48,
-            }}
-          >
-            <option value="p-maya">
-              Maya Bennett · Family / friend caregiver
-            </option>
-            <option value="p-walter">
-              Daniel Kim · Professional caregiver
-            </option>
-          </select>
-        </label>
-        <div className="btn-row" style={{ marginTop: 10 }}>
-          <button
-            type="button"
-            className="btn-comm btn-with-icon"
-            data-testid="invite-create"
-            data-action-kind="communication"
-            disabled={inviteBusy}
-            onClick={() => void onInvite()}
-          >
-            <span className="btn-glyph" aria-hidden>
-              ✉
-            </span>
-            Send invitation
-          </button>
-        </div>
+      <section
+        className="section surface-reported"
+        aria-label="Care circle invitations"
+        data-testid="invite-section"
+      >
+        <h2>Care circle access</h2>
+        {canInvite ? (
+          <>
+            <p className="muted section-lead">
+              As primary circle contact, you can invite people to help with{" "}
+              {space.preferredName}. Each person only sees what their role
+              allows. You stay accountable for who you invite.
+            </p>
+            <label className="cr-field">
+              <span>Who to invite</span>
+              <select
+                data-testid="invite-person"
+                value={inviteeId}
+                onChange={(e) => setInviteeId(e.target.value)}
+              >
+                <option value="p-maya">
+                  Maya Bennett · Family / friend caregiver
+                </option>
+                <option value="p-walter">
+                  Daniel Kim · Professional caregiver
+                </option>
+              </select>
+            </label>
+            <div className="btn-row">
+              <button
+                type="button"
+                className="btn-comm btn-with-icon"
+                data-testid="invite-create"
+                data-action-kind="communication"
+                disabled={inviteBusy}
+                onClick={() => void onInvite()}
+              >
+                <span className="btn-glyph" aria-hidden>
+                  ✉
+                </span>
+                Send invitation
+              </button>
+            </div>
+          </>
+        ) : (
+          <p className="muted section-lead" data-testid="invite-not-authorized">
+            Only the primary circle contact can invite new people for{" "}
+            {space.preferredName}. If you need access, ask them for an invitation
+            code.
+          </p>
+        )}
         {inviteReady && (
           <p className="muted" data-testid="invite-token" style={{ display: "none" }}>
             {acceptToken}
           </p>
         )}
-        <label className="muted" style={{ display: "block", marginTop: 14 }}>
-          Join with invitation code (if you received one)
+        <label className="cr-field" style={{ marginTop: 16 }}>
+          <span>Have an invitation code?</span>
           <input
             data-testid="invite-accept-token"
             value={acceptToken}
             onChange={(e) => setAcceptToken(e.target.value)}
-            placeholder="Paste invitation code"
-            style={{
-              display: "block",
-              width: "100%",
-              marginTop: 4,
-              minHeight: 36,
-            }}
+            placeholder="Paste your code"
           />
         </label>
-        <div className="btn-row" style={{ marginTop: 8 }}>
+        <div className="btn-row">
           <button
             type="button"
             className="secondary-btn"
@@ -300,6 +300,63 @@ export function PeoplePage({
             data-testid="invite-status"
           >
             {inviteMsg}
+          </p>
+        )}
+      </section>
+
+      <section
+        className="section surface-known"
+        aria-label="Coverage"
+        data-testid="coverage-section"
+      >
+        <h2>Coverage</h2>
+        <p className="muted section-lead">
+          Ask people already in {space.preferredName}&apos;s circle for help
+          covering time. This is private circle coverage — not a public
+          marketplace, and not emergency dispatch.
+        </p>
+        <label className="cr-field">
+          <span>What do you need?</span>
+          <textarea
+            data-testid="coverage-request-note"
+            value={coverageNote}
+            onChange={(e) => setCoverageNote(e.target.value)}
+            rows={2}
+            placeholder={`e.g. Need someone with ${space.preferredName} Thursday 2–6 PM`}
+          />
+        </label>
+        <div className="btn-row">
+          <button
+            type="button"
+            className="secondary-btn btn-with-icon"
+            data-testid="coverage-request-send"
+            disabled={!coverageNote.trim()}
+            onClick={() => {
+              const note = coverageNote.trim();
+              const backup =
+                members.find(
+                  (m) =>
+                    m.personId !== session.carePersonId &&
+                    m.status === "active",
+                ) ?? members.find((m) => m.personId !== session.carePersonId);
+              setCoverageStatus(
+                `Coverage need noted for ${space.preferredName}: “${note}”. ` +
+                  (backup
+                    ? `Open Coordination to confirm with ${backup.displayName}.`
+                    : "Message someone in the circle above to confirm."),
+              );
+              setCoverageNote("");
+              if (backup) {
+                onMessagePerson?.(backup.personId, backup.displayName);
+              }
+            }}
+          >
+            Request help from circle
+          </button>
+        </div>
+        {coverageStatus && (
+          <p className="attention-limit" role="status" data-testid="coverage-status">
+            {coverageStatus}
           </p>
         )}
       </section>

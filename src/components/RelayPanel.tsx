@@ -128,6 +128,17 @@ export function RelayPanel({
     if (coordFocusPersonId) {
       setCoordTo(coordFocusPersonId);
       setMode("messages");
+      // Make destination unmistakable: scroll panel + focus composer.
+      window.requestAnimationFrame(() => {
+        const panel = document.querySelector(
+          '[data-testid="relay-panel"]',
+        ) as HTMLElement | null;
+        panel?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        const input = document.querySelector(
+          '[data-testid="coord-input"]',
+        ) as HTMLTextAreaElement | null;
+        input?.focus();
+      });
     }
   }, [coordFocusPersonId, coordFocusKey]);
 
@@ -355,6 +366,20 @@ export function RelayPanel({
           data-recipient-id={rid}
         >
           <div
+            className="coord-destination-banner"
+            data-testid="coord-destination-banner"
+            role="status"
+          >
+            <strong>
+              Message{" "}
+              {resolvePersonName(coordTo) || "care partner"} about{" "}
+              {space.preferredName}
+            </strong>
+            <span className="muted">
+              Stays in {space.displayName}&apos;s circle only — not Relay AI.
+            </span>
+          </div>
+          <div
             className="relay-thread coord-thread"
             ref={coordThreadRef}
             data-testid="coord-thread"
@@ -364,9 +389,8 @@ export function RelayPanel({
             }}
           >
             <div className="bubble bubble-system" data-testid="coord-context-banner">
-              Human coordination for <strong>{space.displayName}</strong> only.
-              Messages are from people in their care circle — not AI, and not
-              about another care recipient.
+              Care-circle messages about <strong>{space.displayName}</strong>.
+              Not clinical orders. Not about another person.
             </div>
             {coordLoading && (
               <div className="cr-skeleton-stack coord-loading" aria-busy="true">

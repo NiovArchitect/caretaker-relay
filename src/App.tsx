@@ -873,6 +873,12 @@ export function App() {
                 setCoordFocusPersonId(personId);
                 setCoordFocusKey((k) => k + 1);
                 setRelayOpen(true);
+                // Scroll coordination into view (desktop rail / mobile drawer).
+                window.requestAnimationFrame(() => {
+                  document
+                    .querySelector('[data-testid="relay-panel"]')
+                    ?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+                });
               }}
               onPrepareHandoff={() => void openLatestHandoff()}
               onOpenRelayForProvider={() => {

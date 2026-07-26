@@ -3490,3 +3490,137 @@ p {
 .workspace {
   scroll-behavior: auto;
 }
+
+/* ==========================================================================
+   COMPLETE CARE OPERATING EXPERIENCE — depth without compositor thrash
+   ========================================================================== */
+
+/* Relay loop mark: two arcs around protected center (staged identity) */
+.brand-mark {
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.92) 0 22%, transparent 24%),
+    conic-gradient(
+      from 210deg,
+      var(--cr-accent) 0 55%,
+      var(--cr-accent-2) 55% 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 0 0 1px rgba(15, 107, 124, 0.18),
+    0 8px 18px rgba(15, 107, 124, 0.22);
+}
+
+.brand-mark::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-top-color: transparent;
+  border-left-color: transparent;
+  transform: rotate(-20deg);
+  pointer-events: none;
+}
+
+.coord-destination-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 0 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 107, 124, 0.28);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(15, 107, 124, 0.12) 0%,
+      rgba(125, 196, 220, 0.14) 55%,
+      rgba(255, 255, 255, 0.92) 100%
+    );
+  box-shadow: 0 6px 16px rgba(15, 70, 90, 0.08);
+  animation: cr-dest-in 280ms ease-out;
+}
+
+.coord-destination-banner strong {
+  color: var(--cr-ink, #0f2f38);
+  font-size: 0.98rem;
+  letter-spacing: -0.02em;
+}
+
+.coord-destination-banner .muted {
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+@keyframes cr-dest-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coord-destination-banner {
+    animation: none;
+  }
+}
+
+.empty-care-space {
+  border: 1px solid rgba(15, 107, 124, 0.2);
+  box-shadow: 0 10px 28px rgba(15, 70, 90, 0.07);
+}
+
+.empty-care-space h2 {
+  margin-top: 0;
+  letter-spacing: -0.02em;
+}
+
+.today-hero-lead {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  max-width: 36rem;
+}
+
+.cr-login-paths {
+  margin: 0 0 14px;
+  font-size: 0.84rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.cr-field textarea {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  min-height: 72px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 70, 90, 0.16);
+  background: rgba(255, 255, 255, 0.96);
+  font: inherit;
+  resize: vertical;
+}
+
+.cr-field textarea:focus {
+  outline: 2px solid rgba(15, 107, 124, 0.35);
+  outline-offset: 1px;
+}
+
+.person-detail-panel {
+  border-left: 3px solid rgba(15, 107, 124, 0.45);
+}
+
+.emergency-disclaimer {
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+[data-testid="emergency-provenance"],
+[data-testid="emergency-blood-type"] {
+  font-size: 0.9rem;
+}

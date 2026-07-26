@@ -362,6 +362,9 @@ function AboutRecipientPanel({
     return `${age} years old · DOB ${dob}`;
   }
 
+  const space = resolveCareSpace(loadActiveCareRecipientId());
+  const isLightweight = space.depth === "lightweight";
+
   return (
     <>
       <h2>About {recipientName}</h2>
@@ -369,6 +372,12 @@ function AboutRecipientPanel({
         Person-first care context. Confirmed fields only — missing items are not
         invented.
       </p>
+      {isLightweight && (
+        <p className="attention-limit" data-testid="care-lightweight-banner" role="status">
+          Early care space for {recipientName}: empty fields mean not yet on
+          file — never invented. Add facts as the circle confirms them.
+        </p>
+      )}
 
       <div className="surface-known care-panel">
         <h3 className="care-panel-title">Overview</h3>
@@ -529,10 +538,8 @@ function AboutRecipientPanel({
       >
         <h3 className="care-panel-title">Essential / emergency</h3>
         <p className="attention-limit emergency-disclaimer" role="note">
-          For a medical emergency, call your local emergency number (for example
-          911 in the U.S.). Caretaker Relay does not diagnose emergencies, dispatch
-          responders, or replace emergency services. This card only shows
-          authorized information already on file.
+          Emergency: call your local emergency number (e.g. 911). This app does
+          not dispatch responders or diagnose.
         </p>
         <ul className="list-plain">
           <li>{ageLine()}</li>
@@ -543,6 +550,12 @@ function AboutRecipientPanel({
           <li>
             Conditions:{" "}
             {conditions.map((c) => String(c.label)).join("; ") || "none on file"}
+          </li>
+          <li data-testid="emergency-blood-type">
+            Blood type:{" "}
+            {typeof p.bloodType === "string" && p.bloodType.trim()
+              ? `${p.bloodType.trim()} (on file · not inferred)`
+              : "not on file — never guessed"}
           </li>
           {p.primaryProviderName ? (
             <li>Provider: {String(p.primaryProviderName)}</li>
@@ -563,6 +576,11 @@ function AboutRecipientPanel({
             </li>
           ))}
         </ul>
+        <p className="muted meta-time" data-testid="emergency-provenance">
+          Source: care profile on file
+          {p.profileSourceSummary ? ` · ${String(p.profileSourceSummary)}` : ""}
+          . Values are only shown when present — not inferred.
+        </p>
         {p.profileSourceSummary ? (
           <p className="muted meta-time" style={{ marginBottom: 0 }}>
             {String(p.profileSourceSummary)}

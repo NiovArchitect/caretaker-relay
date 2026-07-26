@@ -103,8 +103,12 @@ export function LoginGate({
           </div>
           <h1 className="cr-login-title">Sign in</h1>
           <p className="cr-login-sub">
-            Shared care context for everyone helping someone. Ask, coordinate,
-            and stay current without re-explaining.
+            Stay current with the people you care with — one shared picture,
+            human confirmation when it matters.
+          </p>
+          <p className="muted cr-login-paths" data-testid="login-entry-paths">
+            Lab access: choose a caregiver below. Joining a circle? Use an
+            invitation code after you sign in (People).
           </p>
 
           <label className="cr-field">

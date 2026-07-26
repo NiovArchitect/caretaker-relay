@@ -19,6 +19,8 @@ import {
   listAuthorizedCareSpaces,
   resolveCareSpace,
 } from "../src/lib/careContext";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 
 describe("identity resolution", () => {
   it("maps technical person ids to human names", () => {
@@ -31,6 +33,14 @@ describe("identity resolution", () => {
   it("maps recipient ids to human names", () => {
     expect(resolveRecipientName("cr-olivia")).toBe("Evelyn Carter");
     expect(resolveRecipientName("cr-robert")).toBe("Robert Hale");
+  });
+
+  it("Robert care space is lightweight (not Evelyn fill)", () => {
+    const space = resolveCareSpace("cr-robert");
+    expect(space.displayName).toBe("Robert Hale");
+    expect(space.depth).toBe("lightweight");
+    expect(space.careRecipientId).toBe("cr-robert");
+    expect(space.careRecipientId).not.toBe("cr-olivia");
   });
 
   it("detects technical id values", () => {
@@ -154,5 +164,46 @@ describe("forbidden caregiver UI patterns", () => {
       const hit = FORBIDDEN_ID_PATTERNS.some((re) => re.test(s));
       expect(hit).toBe(true);
     }
+  });
+});
+
+describe("operating experience copy contracts", () => {
+  it("purges technical-delivery invite copy from PeoplePage", () => {
+    const src = readFileSync(
+      join(process.cwd(), "src/pages/PeoplePage.tsx"),
+      "utf8",
+    );
+    expect(src.toLowerCase()).not.toContain("technical delivery");
+    expect(src).toContain("canInvite");
+    expect(src).toContain("invite-not-authorized");
+    expect(src).toContain("coverage-section");
+  });
+
+  it("coordination destination banner exists in RelayPanel", () => {
+    const src = readFileSync(
+      join(process.cwd(), "src/components/RelayPanel.tsx"),
+      "utf8",
+    );
+    expect(src).toContain("coord-destination-banner");
+    expect(src).toMatch(/Message[\s\S]*about/);
+  });
+
+  it("emergency blood type never invents values", () => {
+    const src = readFileSync(
+      join(process.cwd(), "src/pages/CarePage.tsx"),
+      "utf8",
+    );
+    expect(src).toContain("never guessed");
+    expect(src).toContain("emergency-blood-type");
+    expect(src).toContain("emergency-provenance");
+  });
+
+  it("lightweight empty state exists for progressive onboarding", () => {
+    const src = readFileSync(
+      join(process.cwd(), "src/pages/TodayPage.tsx"),
+      "utf8",
+    );
+    expect(src).toContain("lightweight-empty-state");
+    expect(src).toContain("Getting started");
   });
 });
