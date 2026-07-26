@@ -1,12 +1,13 @@
-import { logoPalette, type LogoTone } from "../../brand/logoTokens";
+import { CaretakerRelaySymbol } from "./CaretakerRelaySymbol";
 import { LogoMicroMark } from "./logoRefinements";
+import { logoPalette, type LogoTone } from "../../brand/logoTokens";
 
 export type LogoLayout = "horizontal" | "stacked" | "mark";
 
 /**
- * TEMPORARY LIVE POLICY (founder rejected emblem 3645fd2):
- * Default is refined wordmark-only. No permanent A/B/C symbol until founder selects.
- * Optional micro-mark only when layout==="mark" and showMicro is true (favicon-scale contexts).
+ * Production lockup — founder selected Option A (Protected Relay).
+ * Horizontal / stacked: A mark + refined wordmark.
+ * Mark-only: A at ≥24px; use LogoMicroMark for ≤16–20px contexts.
  */
 export function CaretakerRelayLogo({
   layout = "horizontal",
@@ -15,9 +16,8 @@ export function CaretakerRelayLogo({
   className = "",
   title = "Caretaker Relay",
   showWordmark = true,
-  /** Temporary: hide rejected emblem; do not show A/B/C until founder selects. */
-  showSymbol = false,
-  showMicro = false,
+  showSymbol = true,
+  useMicro = false,
   testId = "caretaker-relay-logo",
 }: {
   layout?: LogoLayout;
@@ -27,62 +27,48 @@ export function CaretakerRelayLogo({
   title?: string;
   showWordmark?: boolean;
   showSymbol?: boolean;
-  showMicro?: boolean;
+  /** Prefer micro-mark geometry (favicon-scale). */
+  useMicro?: boolean;
   testId?: string;
 }) {
   const c = logoPalette(tone);
   const size =
     markSize ??
     (layout === "mark" ? 28 : layout === "stacked" ? 48 : 36);
+  const Mark = useMicro || size <= 20 ? LogoMicroMark : CaretakerRelaySymbol;
 
-  // Mark-only temporary: micro-mark if requested, else wordmark text
-  if (layout === "mark" && !showWordmark) {
-    if (showMicro) {
-      return (
-        <span
-          className={`cr-logo cr-logo-mark ${className}`.trim()}
-          data-testid={testId}
-          data-logo-layout="mark"
-          data-logo-mode="micro-temporary"
-        >
-          <LogoMicroMark size={size} tone={tone} title={title} />
-        </span>
-      );
-    }
+  if (layout === "mark" || !showWordmark) {
     return (
       <span
-        className={`cr-logo cr-logo-wordmark-only ${className}`.trim()}
+        className={`cr-logo cr-logo-mark ${className}`.trim()}
         data-testid={testId}
         data-logo-layout="mark"
-        data-logo-mode="wordmark-temporary"
-        role="img"
-        aria-label={title}
+        data-logo-option="A"
       >
-        <span className="cr-logo-wordmark cr-logo-wordmark-refined" aria-hidden>
-          <span className="cr-logo-caretaker" style={{ color: c.caretaker }}>
-            Caretaker
-          </span>
-          <span className="cr-logo-space"> </span>
-          <span className="cr-logo-relay" style={{ color: c.relay }}>
-            Relay
-          </span>
-        </span>
+        <Mark size={size} tone={tone} title={title} testId={`${testId}-mark`} />
       </span>
     );
   }
 
   return (
     <span
-      className={`cr-logo cr-logo-${layout} cr-logo-wordmark-temporary ${className}`.trim()}
+      className={`cr-logo cr-logo-${layout} ${className}`.trim()}
       data-testid={testId}
       data-logo-layout={layout}
       data-logo-tone={tone}
-      data-logo-mode="wordmark-temporary"
-      data-show-symbol={showSymbol ? "true" : "false"}
+      data-logo-option="A"
+      data-logo-mode="option-a-production"
       role="img"
       aria-label={title}
     >
-      {/* Symbol intentionally omitted until founder selects A/B/C */}
+      {showSymbol && (
+        <Mark
+          size={size}
+          tone={tone}
+          decorative
+          testId={`${testId}-mark`}
+        />
+      )}
       <span className="cr-logo-wordmark cr-logo-wordmark-refined" aria-hidden>
         <span className="cr-logo-caretaker" style={{ color: c.caretaker }}>
           Caretaker

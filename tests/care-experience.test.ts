@@ -277,15 +277,21 @@ describe("production logo system", () => {
     expect(logoPalette("white").relay).toBe(LOGO_COLORS.white);
   });
 
-  it("temporary live logo is wordmark-only (rejected emblem not default)", () => {
-    const src = readFileSync(
+  it("production logo is founder-selected Option A Protected Relay", () => {
+    const logo = readFileSync(
       join(process.cwd(), "src/components/brand/CaretakerRelayLogo.tsx"),
       "utf8",
     );
-    expect(src).toContain("wordmark-temporary");
-    expect(src).toContain("showSymbol = false");
-    expect(src).toContain("Caretaker");
-    expect(src).toContain("Relay");
+    const symbol = readFileSync(
+      join(process.cwd(), "src/components/brand/CaretakerRelaySymbol.tsx"),
+      "utf8",
+    );
+    expect(logo).toContain("option-a-production");
+    expect(logo).toContain("showSymbol = true");
+    expect(logo).toContain("Caretaker");
+    expect(logo).toContain("Relay");
+    expect(symbol).toContain("LogoOptionA");
+    expect(symbol).toContain("Protected Relay");
   });
 
   it("refinement options A/B/C exist as SVG-only source", () => {
@@ -300,19 +306,20 @@ describe("production logo system", () => {
     expect(src).not.toContain("backdrop-filter");
   });
 
-  it("BrandMark is temporary micro-mark, not rejected pin emblem", () => {
+  it("BrandMark is Option A, not rejected pin emblem", () => {
     const src = readFileSync(
       join(process.cwd(), "src/components/BrandMark.tsx"),
       "utf8",
     );
-    expect(src).toContain("LogoMicroMark");
+    expect(src).toContain("CaretakerRelaySymbol");
+    expect(src).toContain("Option A");
     expect(src).not.toContain("conic-gradient");
   });
 
-  it("favicon is temporary micro-mark (not full rejected emblem)", () => {
+  it("favicon is micro-mark (not rejected pin triangle)", () => {
     const fav = readFileSync(join(process.cwd(), "public/favicon.svg"), "utf8");
     expect(fav).toContain("viewBox=\"0 0 32 32\"");
-    expect(fav).toContain("Temporary micro-mark");
+    expect(fav).toContain("Option A micro");
     expect(fav).not.toContain("L39.2 42.5");
     expect(
       existsSync(

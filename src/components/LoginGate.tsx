@@ -166,6 +166,7 @@ export function LoginGate({
           <div className="cr-login-brand">
             <CaretakerRelayLogo
               layout="stacked"
+              markSize={52}
               testId="login-brand-logo"
             />
             <p className="muted cr-login-tag">Shared care, verified</p>

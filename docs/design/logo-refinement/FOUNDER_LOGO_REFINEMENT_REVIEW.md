@@ -61,9 +61,16 @@ See comparison.html table (totals /50):
 Highest score; calm; monochrome-capable; no pin/claw artifacts.
 
 ## FOUNDER DECISION REQUIRED
-**YES** — reply **A**, **B**, **C**, or **revise**.
+**RESOLVED — A**
 
-Do not permanently deploy a symbol until that selection.
+Founder selected **Option A (Protected Relay)** on 2026-07-26.
+
+## PRODUCTION FOLLOW-THROUGH
+- Runtime mark: `LogoOptionA` via `CaretakerRelaySymbol`
+- Lockups: symbol + refined wordmark (login stacked, header horizontal)
+- Favicon: micro-mark (open ring + protected center)
+- App icon: Option A scaled
+- Options B/C retained in `logoRefinements.tsx` for history only
 
 ## BACKGROUND WORKERS
 **0**

@@ -1,7 +1,10 @@
 # Caretaker Relay — Production Logo System
 
-**Status:** PRODUCTION IMPLEMENTED — FOUNDER FINAL VISUAL REVIEW PENDING  
+**Status:** PRODUCTION — FOUNDER SELECTED **OPTION A (Protected Relay)**  
 **Date:** 2026-07-26  
+**Selection:** Founder reply `a` after refinement review  
+
+Rejected geometry (pin/hands/arrow) retired from runtime.
 
 ## Approved source image
 
