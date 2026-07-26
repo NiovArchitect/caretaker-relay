@@ -367,8 +367,8 @@ export function LoginGate({
                     setMode("create");
                   }}
                 >
-                  <strong>Set up care</strong>
-                  <span className="muted">Create an account, then authorize</span>
+                  <strong>Create &amp; connect</strong>
+                  <span className="muted">New account — then request access</span>
                 </button>
               </div>
               {warmHint && (

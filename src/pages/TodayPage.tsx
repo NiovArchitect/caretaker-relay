@@ -224,7 +224,7 @@ export function TodayPage({
               data-testid="empty-start-onboarding"
               onClick={() => setShowOnboarding(true)}
             >
-              Set up care
+              Complete care setup
             </button>
             <button
               type="button"

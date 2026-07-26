@@ -838,14 +838,19 @@ export function App() {
                   </span>
                 </div>
                 <div className="profile-menu-section">
-                  <div className="profile-menu-label">Switch care recipient</div>
+                  <div className="profile-menu-label">
+                    {listAuthorizedCareSpaces(session.carePersonId).length > 0
+                      ? "Switch care recipient"
+                      : "Care access"}
+                  </div>
                   {listAuthorizedCareSpaces(session.carePersonId).length ===
                     0 && (
                     <div
                       className="profile-menu-item muted"
                       data-testid="no-recipient-menu"
                     >
-                      No authorized care recipients
+                      No authorized care recipients — use invitation or request
+                      access
                     </div>
                   )}
                   {listAuthorizedCareSpaces(session.carePersonId).map((s) => (
@@ -865,6 +870,20 @@ export function App() {
                       {s.depth === "lightweight" ? " (demo)" : ""}
                     </button>
                   ))}
+                  {listAuthorizedCareSpaces(session.carePersonId).length > 0 && (
+                    <button
+                      type="button"
+                      role="menuitem"
+                      className="profile-menu-item"
+                      data-testid="manage-access-menu"
+                      onClick={() => {
+                        setProfileOpen(false);
+                        setTab("people");
+                      }}
+                    >
+                      Manage access
+                    </button>
+                  )}
                 </div>
                 <button
                   type="button"
