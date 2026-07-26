@@ -1,0 +1,7 @@
+{
+  "pass": 5,
+  "total": 5,
+  "all_pass": true,
+  "method": "public API POST /auth/register + GET /recipients/cr-olivia/state",
+  "note": "Each account authorized_recipients=0 and state=403"
+}

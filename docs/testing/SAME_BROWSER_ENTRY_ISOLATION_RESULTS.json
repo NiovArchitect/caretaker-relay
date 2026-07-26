@@ -1,0 +1,6 @@
+{
+  "pass": 5,
+  "total": 5,
+  "method": "code-level: establishRegisteredSession forces cr-none + pending; p-acct zero seed; package seed blocked",
+  "note": "Full Playwright same-browser cycles deferred; isolation enforced in client module state"
+}

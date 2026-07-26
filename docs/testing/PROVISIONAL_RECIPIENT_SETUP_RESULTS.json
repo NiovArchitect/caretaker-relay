@@ -1,0 +1,8 @@
+{
+  "pass": 5,
+  "total": 5,
+  "all_pass": true,
+  "method": "POST /provisional-recipients after register",
+  "status": "draft",
+  "existing_name_test": "name Evelyn Carter creates draft only — no bound_recipient_id"
+}

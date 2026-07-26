@@ -1,0 +1,11 @@
+{
+  "entry_labels": {
+    "sign_in": "Sign in / Return to care you already have access to",
+    "create_account": "Create account / Create a private account with no care access",
+    "accept_invitation": "Accept invitation / Use a secure invitation from an authorized person",
+    "setup_new": "Set up care for someone new / Create a new provisional care profile"
+  },
+  "create_and_connect": "REMOVED",
+  "hierarchy": "primary: sign_in + create; secondary: invite + setup_new",
+  "unit_tests": "80/80"
+}

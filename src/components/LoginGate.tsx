@@ -32,7 +32,7 @@ const LAB_PASSWORDS: Record<string, string> = {
   "p-dr-shah": "drshah-lab-password",
 };
 
-type EntryMode = "home" | "sign_in" | "create" | "invite";
+type EntryMode = "home" | "sign_in" | "create" | "invite" | "setup_new";
 
 const FALLBACK_PRINCIPALS: LabPrincipal[] = [
   {
@@ -74,6 +74,8 @@ export function LoginGate({
   const [email, setEmail] = useState("");
   const [createPassword, setCreatePassword] = useState("");
   const [warmHint, setWarmHint] = useState(false);
+  /** True when entry was “Set up care for someone new” (provisional only). */
+  const [setupNewCare, setSetupNewCare] = useState(false);
 
   useEffect(() => {
     void warmCareApi(true).then(() => setWarmHint(true));
@@ -89,6 +91,7 @@ export function LoginGate({
   function goHome() {
     setMode("home");
     setError(null);
+    setSetupNewCare(false);
   }
 
   function rememberIntent(intent: OnboardingIntent, path?: CaregiverPath | null) {
@@ -178,18 +181,29 @@ export function LoginGate({
         markPendingAccount(name, createPath);
         saveActiveCareRecipientId("cr-none");
         const d = loadOnboardingDraft();
-        d.intent = createPath === "invited" ? "accept_invite" : "create_account";
+        d.intent = setupNewCare
+          ? "set_up_care"
+          : createPath === "invited"
+            ? "accept_invite"
+            : "create_account";
         d.path = createPath;
         d.accountDisplayName = name;
         d.recipientPreferredName = "";
         d.awaitingAuthorization = true;
         d.completed = false;
+        // Flag provisional-only path for AuthorizationGate
+        if (setupNewCare) {
+          d.helpersNote =
+            "INTENT:set_up_care_new_provisional — create new profile only, never match existing";
+        }
         saveOnboardingDraft(d);
 
         const session: SessionIdentity = {
           carePersonId: reg.data.care_person_id,
           displayName: reg.data.display_name || name,
-          roleLabel: "Account pending authorization",
+          roleLabel: setupNewCare
+            ? "Account — new care profile pending"
+            : "Account pending authorization",
           authMode: (reg.data.auth_mode as SessionIdentity["authMode"]) ?? "http",
         };
         try {
@@ -198,8 +212,9 @@ export function LoginGate({
             JSON.stringify({
               token: reg.data.token,
               identity: session,
-              pending: (reg.data.authorized_recipients ?? 0) === 0,
+              pending: true,
               email: email.trim().toLowerCase(),
+              setupNewCare: setupNewCare || undefined,
             }),
           );
         } catch {
@@ -322,9 +337,8 @@ export function LoginGate({
             <div data-testid="login-entry-home">
               <h1 className="cr-login-title">Care continuity</h1>
               <p className="cr-login-sub">
-                Create an account or sign in. Access to someone’s care always
-                requires a separate invitation or approval — not just a role
-                selection.
+                Create an account or sign in. Access to someone’s care requires
+                an invitation or approval — not a role selection alone.
               </p>
               <div className="login-entry-grid" data-testid="login-entry-paths">
                 <button
@@ -334,20 +348,33 @@ export function LoginGate({
                   onClick={() => setMode("sign_in")}
                 >
                   <strong>Sign in</strong>
-                  <span className="muted">I already have access</span>
+                  <span className="muted">
+                    Return to care you already have access to
+                  </span>
                 </button>
                 <button
                   type="button"
-                  className="login-entry-card"
+                  className="login-entry-card primary-surface"
                   data-testid="entry-create"
                   onClick={() => {
+                    setSetupNewCare(false);
                     rememberIntent("create_account");
                     setMode("create");
                   }}
                 >
                   <strong>Create account</strong>
-                  <span className="muted">Start without care access</span>
+                  <span className="muted">
+                    Create a private account with no care access
+                  </span>
                 </button>
+              </div>
+              <p className="muted cr-login-secondary-label" data-testid="login-secondary-label">
+                Secure paths
+              </p>
+              <div
+                className="login-entry-grid login-entry-grid-secondary"
+                data-testid="login-entry-paths-secondary"
+              >
                 <button
                   type="button"
                   className="login-entry-card"
@@ -355,20 +382,25 @@ export function LoginGate({
                   onClick={() => setMode("invite")}
                 >
                   <strong>Accept invitation</strong>
-                  <span className="muted">I received a code</span>
+                  <span className="muted">
+                    Use a secure invitation from an authorized person
+                  </span>
                 </button>
                 <button
                   type="button"
                   className="login-entry-card"
                   data-testid="entry-setup-care"
                   onClick={() => {
+                    setSetupNewCare(true);
                     rememberIntent("set_up_care", "family_friend");
                     setCreatePath("family_friend");
-                    setMode("create");
+                    setMode("setup_new");
                   }}
                 >
-                  <strong>Create &amp; connect</strong>
-                  <span className="muted">New account — then request access</span>
+                  <strong>Set up care for someone new</strong>
+                  <span className="muted">
+                    Create a new provisional care profile
+                  </span>
                 </button>
               </div>
               {warmHint && (
@@ -378,7 +410,8 @@ export function LoginGate({
               )}
               <p className="muted cr-login-lab-note" data-testid="login-lab-boundary">
                 Lab demo sign-in uses seeded principals. Create account never
-                opens an existing care record.
+                opens an existing care record. “Someone new” never searches for
+                people already in the system.
               </p>
             </div>
           )}
@@ -437,21 +470,38 @@ export function LoginGate({
             </form>
           )}
 
-          {mode === "create" && (
+          {(mode === "create" || mode === "setup_new") && (
             <form
-              onSubmit={(ev) => submitCreate(ev)}
-              aria-label="Create account"
+              onSubmit={(ev) => void submitCreate(ev)}
+              aria-label={
+                mode === "setup_new"
+                  ? "Set up care for someone new"
+                  : "Create account"
+              }
               data-testid="login-create-form"
             >
               <button type="button" className="cr-login-back" onClick={goHome} data-testid="login-back">
                 ← All options
               </button>
-              <h1 className="cr-login-title">Create account</h1>
-              <p className="muted section-lead" data-testid="create-account-boundary">
-                This creates your account only. You will not see anyone’s care
-                record until invited or approved. Selecting a role is not
-                authorization.
-              </p>
+              <h1 className="cr-login-title">
+                {mode === "setup_new"
+                  ? "Set up care for someone new"
+                  : "Create account"}
+              </h1>
+              {mode === "setup_new" ? (
+                <p className="muted section-lead" data-testid="setup-new-boundary">
+                  This creates <strong>your private account</strong>, then a{" "}
+                  <strong>new provisional care profile</strong> only. It does not
+                  search for or connect to anyone already in Caretaker Relay.
+                  Authority still needs confirmation before full access.
+                </p>
+              ) : (
+                <p className="muted section-lead" data-testid="create-account-boundary">
+                  This creates your account only. You will not see anyone’s care
+                  record until invited or approved. Selecting a role is not
+                  authorization.
+                </p>
+              )}
               <label className="cr-field">
                 <span>Your preferred name (required)</span>
                 <input

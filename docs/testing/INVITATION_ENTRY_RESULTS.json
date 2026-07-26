@@ -1,0 +1,5 @@
+{
+  "valid": "prior server invitation lifecycle retained",
+  "invalid": "token hash + expire + wrong principal 403 — prior tests",
+  "status": "PASS_SERVER"
+}

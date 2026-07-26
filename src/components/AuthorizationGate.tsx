@@ -22,8 +22,12 @@ export function AuthorizationGate({
   onInviteReady?: (token: string) => void;
 }) {
   const authz = loadAuthorizationState();
+  const draft = loadOnboardingDraft();
+  const wantsNewCare =
+    draft.intent === "set_up_care" ||
+    (draft.helpersNote ?? "").includes("set_up_care_new_provisional");
   const [mode, setMode] = useState<"home" | "request" | "invite" | "provisional">(
-    "home",
+    wantsNewCare ? "provisional" : "home",
   );
   const [recipientName, setRecipientName] = useState("");
   const [relationship, setRelationship] = useState("");
@@ -108,6 +112,8 @@ export function AuthorizationGate({
       <p className="muted section-lead" data-testid="authz-zero-recipients">
         Your account is ready. You are not connected to any care recipient yet.
         Selecting a role or typing a name does not open someone’s care record.
+        Access requires an invitation or approval. Setting up care for someone
+        new creates a provisional profile only — it never finds an existing person.
       </p>
 
       {status && (

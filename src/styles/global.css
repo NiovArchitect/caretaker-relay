@@ -3675,6 +3675,17 @@ p {
   margin-top: 18px;
 }
 
+.login-entry-grid-secondary {
+  margin-top: 10px;
+}
+
+.cr-login-secondary-label {
+  margin: 16px 0 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 @media (max-width: 420px) {
   .login-entry-grid {
     grid-template-columns: 1fr;

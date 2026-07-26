@@ -48,3 +48,11 @@ Synthetic probe principal `p-acct-9556854676714bdd` **suspended** (incident clea
 **EXPOSURE CONTAINED: YES** (app deploy eea7b79 + API already denying memberships)
 
 API SHA unchanged: **5b128f1** (server isolation held).
+
+## Post-fix verification (login entry pass)
+
+- Create-account path still forces `cr-none` + pending.  
+- Package seed fallback remains blocked for `p-acct-*`.  
+- Entry “Set up care for someone new” creates provisional only (no existing-recipient path).  
+- “Create & connect” removed to avoid intent confusion.  
+- Public isolation suite: see `docs/testing/P0_PUBLIC_SIGNUP_ISOLATION_20.json`.

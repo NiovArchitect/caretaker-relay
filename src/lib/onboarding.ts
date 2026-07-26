@@ -126,22 +126,24 @@ export const PATH_LABELS: Record<CaregiverPath, string> = {
   invited: "I was invited to a care circle",
 };
 
-/** Labels for established users (not first-time onboarding). */
+/** Labels for zero-access AuthorizationGate and related entry. */
 export const ESTABLISHED_ACTIONS = [
   {
     id: "add_recipient" as const,
-    title: "Add another care recipient",
-    detail: "Start a new care circle you are authorized to set up",
+    title: "Set up care for someone new",
+    detail:
+      "Create a new provisional care profile — does not search existing people",
   },
   {
     id: "request_access" as const,
-    title: "Request access to someone’s care",
-    detail: "Send a request for approval — you will not see records until authorized",
+    title: "Request access",
+    detail:
+      "Ask for approval to join someone’s care — you see nothing until approved",
   },
   {
     id: "join_circle" as const,
-    title: "Join with an invitation code",
-    detail: "Use a code from someone already authorized",
+    title: "Accept an invitation",
+    detail: "Use a secure code from an authorized person",
   },
   {
     id: "manage_recipients" as const,
