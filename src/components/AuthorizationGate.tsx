@@ -5,6 +5,7 @@ import {
   submitAccessRequest,
 } from "../lib/authorization";
 import { ESTABLISHED_ACTIONS, loadOnboardingDraft, saveOnboardingDraft } from "../lib/onboarding";
+import { careSubmitAccessRequest } from "../foundation/careHttpClient";
 
 /**
  * Shown when authenticated account has zero authorized care recipients.
@@ -25,6 +26,7 @@ export function AuthorizationGate({
   const [relationship, setRelationship] = useState("");
   const [reason, setReason] = useState("");
   const [inviteCode, setInviteCode] = useState(authz.inviteTokenBound ?? "");
+  const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState<string | null>(
     authz.accessRequest?.status === "submitted"
       ? "Access request submitted. You will not see care details until approved."
@@ -40,7 +42,7 @@ export function AuthorizationGate({
     saveOnboardingDraft(d);
   }
 
-  function submitRequest(e: React.FormEvent) {
+  async function submitRequest(e: React.FormEvent) {
     e.preventDefault();
     if (!recipientName.trim() || recipientName.trim().length < 2) {
       setStatus("Enter the preferred name of the person you support.");
@@ -50,14 +52,33 @@ export function AuthorizationGate({
       setStatus("Describe your relationship or authority basis.");
       return;
     }
+    setBusy(true);
+    // Local draft always (offline-safe)
     submitAccessRequest({
       recipientPreferredName: recipientName.trim(),
       relationship: relationship.trim(),
-      reason: reason.trim(),
+      reason: reason.trim() || "Access needed for care coordination",
     });
+    // Durable server record when JWT session exists
+    try {
+      const raw = sessionStorage.getItem("cr_care_session_v1");
+      const parsed = raw
+        ? (JSON.parse(raw) as { token?: string | null })
+        : null;
+      if (parsed?.token) {
+        await careSubmitAccessRequest(parsed.token, {
+          provisional_recipient_name: recipientName.trim(),
+          claimed_relationship: relationship.trim(),
+          reason: reason.trim() || "Access needed for care coordination",
+        });
+      }
+    } catch {
+      /* local draft remains */
+    }
     setStatus(
       `Request submitted for “${recipientName.trim()}”. No care record is visible until an authorized person approves. This is not medical access yet.`,
     );
+    setBusy(false);
     setMode("home");
   }
 
@@ -158,8 +179,13 @@ export function AuthorizationGate({
             <button type="button" className="ghost-btn" onClick={() => setMode("home")}>
               Back
             </button>
-            <button type="submit" className="primary-btn" data-testid="access-request-submit">
-              Submit request
+            <button
+              type="submit"
+              className="primary-btn"
+              data-testid="access-request-submit"
+              disabled={busy}
+            >
+              {busy ? "Submitting…" : "Submit request"}
             </button>
           </div>
         </form>

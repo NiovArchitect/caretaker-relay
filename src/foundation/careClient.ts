@@ -256,22 +256,49 @@ function loadPersistedSession(): {
       pending?: boolean;
     };
     if (parsed.identity?.carePersonId) {
-      // Pending local accounts have identity without JWT
-      if (parsed.pending || parsed.identity.authMode === "pending_local") {
+      // Zero-recipient accounts may still hold a server JWT (durable register).
+      // Only strip token for true offline pending_local shells.
+      if (
+        parsed.identity.authMode === "pending_local" &&
+        (!parsed.token || parsed.pending)
+      ) {
+        return {
+          token: parsed.token ?? null,
+          identity: parsed.identity,
+          pending: true,
+        };
+      }
+      if (parsed.token) {
+        return {
+          token: parsed.token,
+          identity: parsed.identity,
+          pending: parsed.pending,
+        };
+      }
+      if (parsed.pending) {
         return {
           token: null,
           identity: parsed.identity,
           pending: true,
         };
       }
-      if (parsed.token) {
-        return { token: parsed.token, identity: parsed.identity };
-      }
     }
   } catch {
     /* ignore */
   }
   return null;
+}
+
+/** After durable register — establish HTTP session with zero memberships. */
+export function establishRegisteredSession(
+  token: string,
+  identity: SessionIdentity,
+): void {
+  httpToken = token;
+  httpAvailable = true;
+  sessionIdentity = identity;
+  transportUsed = "http";
+  persistSession(token, identity);
 }
 
 export function clearSession() {
@@ -352,8 +379,8 @@ export async function restoreSession(): Promise<SessionIdentity | null> {
   const persisted = loadPersistedSession();
   if (!persisted) return null;
 
-  // Pending local account — no JWT, no recipient access
-  if (persisted.pending || !persisted.token) {
+  // Offline pending shell — no JWT, no recipient access
+  if (!persisted.token) {
     httpToken = null;
     httpAvailable = false;
     sessionIdentity = persisted.identity;
@@ -371,6 +398,16 @@ export async function restoreSession(): Promise<SessionIdentity | null> {
   if (!me.ok) {
     clearSession();
     return null;
+  }
+  // Keep pendingAuthorization flag from server membership count
+  if (
+    typeof (me.data as { authorized_recipients?: number }).authorized_recipients ===
+      "number" &&
+    (me.data as { authorized_recipients: number }).authorized_recipients === 0
+  ) {
+    void import("../lib/authorization").then((m) =>
+      m.markPendingAccount(me.data.display_name, null),
+    );
   }
   sessionIdentity = {
     carePersonId: me.data.care_person_id,

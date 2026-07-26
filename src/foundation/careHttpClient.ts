@@ -82,9 +82,59 @@ export async function careLogin(
     roles?: string[];
     auth_mode?: string;
     entity_id?: string;
+    authorized_recipients?: number;
   }>("/api/v1/care/auth/login", {
     method: "POST",
     body: { care_person_id: carePersonId, password },
+    baseUrl,
+  });
+}
+
+/** Durable account registration — zero recipient memberships. */
+export async function careRegister(
+  input: {
+    preferred_name: string;
+    email: string;
+    password: string;
+    claimed_relationship?: string;
+  },
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    token: string;
+    session_id: string;
+    care_person_id: string;
+    display_name: string;
+    roles?: string[];
+    auth_mode?: string;
+    authorized_recipients: number;
+    account_status?: string;
+  }>("/api/v1/care/auth/register", {
+    method: "POST",
+    body: input,
+    baseUrl,
+  });
+}
+
+export async function careSubmitAccessRequest(
+  token: string,
+  input: {
+    care_recipient_id?: string;
+    provisional_recipient_name?: string;
+    claimed_relationship: string;
+    reason: string;
+  },
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    access_request: { id: string; status: string };
+    authorized_recipients: number;
+  }>("/api/v1/care/access-requests", {
+    method: "POST",
+    token,
+    body: input,
     baseUrl,
   });
 }
@@ -399,6 +449,9 @@ export async function careMe(token: string, baseUrl?: string) {
     roles: string[];
     session_id: string;
     auth_mode?: string;
+    authorized_recipients?: number;
+    pending_recipient_access?: boolean;
+    contact_verified?: boolean;
   }>("/api/v1/care/me", { token, baseUrl });
 }
 

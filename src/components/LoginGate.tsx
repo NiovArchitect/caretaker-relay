@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import {
   listLabPrincipals,
   loginAsPrincipal,
+  establishRegisteredSession,
   type LabPrincipal,
   type SessionIdentity,
 } from "../foundation/careClient";
+import { careRegister } from "../foundation/careHttpClient";
 import { CaretakerRelayLogo } from "./BrandMark";
 import { warmCareApi } from "../lib/apiWarm";
 import {
@@ -70,6 +72,7 @@ export function LoginGate({
   const [createPath, setCreatePath] = useState<CaregiverPath | null>(null);
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
+  const [createPassword, setCreatePassword] = useState("");
   const [warmHint, setWarmHint] = useState(false);
 
   useEffect(() => {
@@ -134,7 +137,7 @@ export function LoginGate({
     await doLabLogin(selected, password);
   }
 
-  function submitCreate(e: React.FormEvent) {
+  async function submitCreate(e: React.FormEvent) {
     e.preventDefault();
     const name = displayName.trim();
     if (!name) {
@@ -153,12 +156,71 @@ export function LoginGate({
       setError("Enter a valid email. You will need to verify it before sensitive access.");
       return;
     }
+    if (createPassword.trim().length < 8) {
+      setError("Choose a password with at least 8 characters.");
+      return;
+    }
 
     setBusy(true);
     setError(null);
+    await warmCareApi();
 
-    // SECURITY: Role selection is a claim only. Do NOT log in as a lab principal
-    // who already has recipient memberships. New accounts start with zero recipients.
+    // Prefer durable server registration (zero memberships). Fall back to
+    // local pending shell only if API is unreachable.
+    try {
+      const reg = await careRegister({
+        preferred_name: name,
+        email: email.trim().toLowerCase(),
+        password: createPassword,
+        claimed_relationship: createPath,
+      });
+      if (reg.ok) {
+        markPendingAccount(name, createPath);
+        saveActiveCareRecipientId("cr-none");
+        const d = loadOnboardingDraft();
+        d.intent = createPath === "invited" ? "accept_invite" : "create_account";
+        d.path = createPath;
+        d.accountDisplayName = name;
+        d.recipientPreferredName = "";
+        d.awaitingAuthorization = true;
+        d.completed = false;
+        saveOnboardingDraft(d);
+
+        const session: SessionIdentity = {
+          carePersonId: reg.data.care_person_id,
+          displayName: reg.data.display_name || name,
+          roleLabel: "Account pending authorization",
+          authMode: (reg.data.auth_mode as SessionIdentity["authMode"]) ?? "http",
+        };
+        try {
+          sessionStorage.setItem(
+            "cr_care_session_v1",
+            JSON.stringify({
+              token: reg.data.token,
+              identity: session,
+              pending: (reg.data.authorized_recipients ?? 0) === 0,
+              email: email.trim().toLowerCase(),
+            }),
+          );
+        } catch {
+          /* ignore */
+        }
+        establishRegisteredSession(reg.data.token, session);
+        setBusy(false);
+        onAuthenticated(session);
+        return;
+      }
+      // If server rejects (e.g. email in use), show message — do not fake access
+      if (reg.status > 0) {
+        setError(reg.message || "Could not create account");
+        setBusy(false);
+        return;
+      }
+    } catch {
+      /* network — fall through to local pending shell */
+    }
+
+    // Offline / API-down fail-closed local shell (no JWT, no recipients)
     const pendingId = makePendingPersonId();
     markPendingAccount(name, createPath);
     saveActiveCareRecipientId("cr-none");
@@ -167,7 +229,7 @@ export function LoginGate({
     d.intent = createPath === "invited" ? "accept_invite" : "create_account";
     d.path = createPath;
     d.accountDisplayName = name;
-    d.recipientPreferredName = ""; // never auto-assign
+    d.recipientPreferredName = "";
     d.awaitingAuthorization = true;
     d.completed = false;
     saveOnboardingDraft(d);
@@ -179,7 +241,6 @@ export function LoginGate({
       authMode: "pending_local",
     };
 
-    // Persist a client-only session shell (no JWT / no recipient data)
     try {
       sessionStorage.setItem(
         "cr_care_session_v1",
@@ -415,6 +476,18 @@ export function LoginGate({
                   required
                 />
               </label>
+              <label className="cr-field">
+                <span>Password (required, min 8)</span>
+                <input
+                  data-testid="create-password"
+                  type="password"
+                  value={createPassword}
+                  onChange={(e) => setCreatePassword(e.target.value)}
+                  autoComplete="new-password"
+                  required
+                  minLength={8}
+                />
+              </label>
               <p className="muted" style={{ fontSize: "0.82rem" }}>
                 How you connect (claim only — not access):
               </p>
@@ -453,7 +526,13 @@ export function LoginGate({
                 type="submit"
                 className="primary-btn cr-login-submit"
                 data-testid="create-submit"
-                disabled={busy || !createPath || !displayName.trim() || !email.trim()}
+                disabled={
+                  busy ||
+                  !createPath ||
+                  !displayName.trim() ||
+                  !email.trim() ||
+                  createPassword.trim().length < 8
+                }
               >
                 {busy ? "Creating account…" : "Create account"}
               </button>

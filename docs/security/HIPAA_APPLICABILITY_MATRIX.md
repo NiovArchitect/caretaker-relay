@@ -15,16 +15,18 @@
 | E. White-label org-hosted | Org is typically CE or BA | Customer BAAs + config |
 | F. Lab / demo / competition | Synthetic data preferred | Label lab; no compliance claim from demo shortcuts |
 
-## Rule areas
+## Rule areas vs technical evidence
 
-| Area | Status | Notes |
-|------|--------|-------|
-| Privacy Rule (uses/disclosures) | Partial product model | Authorization paths required |
-| Security Rule (administrative/physical/technical) | Partial implemented | Encrypt transit (TLS public); audit partial |
-| Breach Notification | Process EXTERNAL | Needs runbooks + counsel |
-| BAA with model providers | EXTERNAL | OpenAI/other — inventory required |
-| Minimum necessary | Product enforced direction | Role + recipient scopes |
-| Personal representative | Partial UX | Pending full legal authority capture |
+| Area | Technical status | Legal / ops status |
+|------|------------------|--------------------|
+| Privacy Rule (uses/disclosures) | Server deny-by-default membership; invitations + access requests | EXTERNAL: CE/BA determination |
+| Security Rule technical | TLS public; JWT sessions; central authorize; audit rows | EXTERNAL: full risk analysis |
+| Minimum necessary | Scope categories on relationships; field filtering helpers | Partial — expand field policy matrix |
+| Personal representatives | Model placeholders; no legal authority proof capture | EXTERNAL + product completion |
+| Audit controls | CareAuditRow + actions on access/auth | Partial — retention / review process EXTERNAL |
+| Breach Notification | None operational | EXTERNAL process + counsel |
+| BAA with model providers | Keys configured; no executed BAA evidenced here | EXTERNAL |
+| Workforce / MFA / IdP | Lab passwords + password accounts | EXTERNAL production IdP |
 
 ## Honest claim language
 

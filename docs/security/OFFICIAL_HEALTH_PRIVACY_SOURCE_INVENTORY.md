@@ -1,35 +1,49 @@
 # Official Health Privacy Source Inventory
 
-**Retrieved:** 2026-07-26  
+**Retrieval date:** 2026-07-26  
 **Product:** Caretaker Relay  
-**Claim posture:** HIPAA-ready technical and operational controls — not “HIPAA compliant” without legal determination.
+**Claim language:** HIPAA-READY TECHNICAL AND OPERATIONAL CONTROLS (not “HIPAA compliant”)
 
-## Primary official sources (to verify continuously)
+## Binding / statutory (US federal — counsel must confirm applicability)
 
-| Source | Topic | URL |
-|--------|-------|-----|
-| HHS OCR | HIPAA Privacy Rule overview | https://www.hhs.gov/hipaa/for-professionals/privacy/index.html |
-| HHS OCR | HIPAA Security Rule | https://www.hhs.gov/hipaa/for-professionals/security/index.html |
-| HHS OCR | Breach Notification Rule | https://www.hhs.gov/hipaa/for-professionals/breach-notification/index.html |
-| HHS | Business associates / BAAs | https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html |
-| HHS | Cloud computing & HIPAA | https://www.hhs.gov/hipaa/for-professionals/special-topics/cloud-computing/index.html |
-| FTC | Health Breach Notification Rule | https://www.ftc.gov/legal-library/browse/rules/health-breach-notification-rule |
-| NIST | Digital identity (SP 800-63) | https://pages.nist.gov/800-63-3/ |
-| NIST | Cybersecurity Framework | https://www.nist.gov/cyberframework |
-| ONC | Patient identification / matching | https://www.healthit.gov/ |
-| ACL | Caregiver AI Challenge / principles | https://acl.gov/ |
+| Source | Authority | Topic | URL pattern |
+|--------|-----------|-------|-------------|
+| HIPAA Privacy Rule | 45 CFR Part 160 & 164 Subpart E | Uses/disclosures, minimum necessary, personal representatives | hhs.gov/hipaa |
+| HIPAA Security Rule | 45 CFR Part 164 Subpart C | Administrative, physical, technical safeguards | hhs.gov/hipaa |
+| HIPAA Breach Notification Rule | 45 CFR Part 164 Subpart D | Breach notification to individuals/HHS/media | hhs.gov/hipaa |
+| HITECH Act | Pub. L. 111-5 | Strengthened HIPAA enforcement, BA liability | hhs.gov |
+| FTC Health Breach Notification Rule | 16 CFR Part 318 | Non-HIPAA health apps / PHR vendors | ftc.gov |
+| ONC patient matching guidance | HHS ONC | Patient matching accuracy principles | healthit.gov |
 
-## Retrieval notes
+## Official guidance (not substitute for legal determination)
 
-- Direct fetch of some HHS pages may be blocked by edge CDN from automated clients; treat URLs as authoritative and re-verify in a controlled browser with counsel.
-- This inventory is **not** legal advice.
+| Source | Topic | Notes |
+|--------|-------|-------|
+| HHS OCR — Business Associates | Cloud / BA contracts | BAA required when acting as BA |
+| HHS — Personal representatives | Family/friend access | Authority under state law + Privacy Rule |
+| HHS — Minimum necessary | Access scope | Limit PHI to needed purpose |
+| HHS — Audit controls | Security Rule §164.312(b) | Record and examine activity |
+| NIST SP 800-63 | Digital identity | Authenticator AAL, identity proofing IAL |
+| NIST Cybersecurity Framework | Risk management | Organize controls; not HIPAA cert |
+| ACL Caregiver AI Challenge | Judging criteria / AI principles | Product/judging expectation, not law |
 
-## Product relevance
+## Vendor-primary (BAA / AI)
 
-| Domain | Why it matters for Relay |
-|--------|--------------------------|
-| Privacy Rule | Minimum necessary, personal representatives, uses/disclosures |
-| Security Rule | Access control, audit, integrity, authentication, transmission security |
-| Breach Notification | Incident readiness when BA or regulated data involved |
-| FTC HBNR | Consumer health apps even when HIPAA may not apply |
-| NIST identity | Account proofing before sensitive access |
+| Vendor | Concern | Status in product |
+|--------|---------|-------------------|
+| Anthropic | LLM inference | Key present in care API deploy; **BAA EXTERNAL** |
+| OpenAI | LLM fallback | Key optional; **BAA EXTERNAL** |
+| Render | Hosting | Subprocessor; **BAA/DPA EXTERNAL** |
+| Postgres host (current DATABASE_URL) | ePHI at rest | Encryption/ops **EXTERNAL verification** |
+| Email/SMS provider | Verification delivery | **Not integrated** — contract pending |
+
+## Classification key
+
+- **Binding requirement** — statute/regulation if covered entity/BA status applies  
+- **Official guidance** — HHS/NIST/ONC interpretive materials  
+- **Security best practice** — NIST CSF, zero-trust patterns  
+- **ACL judging expectation** — competition rubric  
+- **Product decision** — Caretaker Relay design choices  
+- **Legal interpretation requiring counsel** — CE/BA determination, state law  
+- **Customer-contract requirement** — future BAAs with orgs  
+- **External certification** — SOC 2, HITRUST, pentest — not claimed
