@@ -12,6 +12,7 @@ import {
 } from "../foundation/careClient";
 import {
   buildAttentionNotifications,
+  filterPrimaryNotifications,
   kindIcon,
   kindLabel,
   severityClass,
@@ -48,6 +49,7 @@ export function TodayPage({
   } | null>(null);
   const [acked, setAcked] = useState<Set<string>>(new Set());
   const [inbox, setInbox] = useState<Array<Record<string, unknown>>>([]);
+  const [showAllNotifs, setShowAllNotifs] = useState(false);
   const [profile, setProfile] = useState<RecipientProfilePayload | null>(null);
   const [coverageSummary, setCoverageSummary] = useState("");
 
@@ -121,6 +123,11 @@ export function TodayPage({
           : [];
   const next = proj && proj.next.length > 0 ? proj.next : [];
   const organizedCount = proj?.organizedCount ?? whatChanged.length;
+
+  const inboxFiltered = useMemo(() => {
+    const cap = showAllNotifs ? 40 : 8;
+    return filterPrimaryNotifications(inbox, cap);
+  }, [inbox, showAllNotifs]);
 
   const notifications = useMemo(
     () =>
@@ -411,8 +418,12 @@ export function TodayPage({
             Notifications
           </h2>
           <p className="muted section-lead">
-            Unread for {recipientName} only. Seen/resolved items leave this
-            list and no longer inflate the top badge.
+            Unread for {recipientName} only. Lab/test markers are hidden from
+            this primary list. Seen/resolved items leave the list and no longer
+            inflate the top badge.
+            {inboxFiltered.noiseDropped > 0
+              ? ` (${inboxFiltered.noiseDropped} lab marker${inboxFiltered.noiseDropped === 1 ? "" : "s"} hidden.)`
+              : ""}
           </p>
           <div className="btn-row section-actions">
             <button
@@ -444,7 +455,7 @@ export function TodayPage({
             </button>
           </div>
           <div className="notify-scroll" data-testid="notifications-scroll">
-          {inbox.slice(0, 12).map((n) => {
+          {inboxFiltered.visible.map((n) => {
               const urgent =
                 n.priority === "urgent" || n.priority === "important";
               const when = n.created_at
@@ -535,6 +546,21 @@ export function TodayPage({
               );
             })}
           </div>
+          {(inboxFiltered.hiddenCount > 0 || !showAllNotifs) &&
+            inbox.length > inboxFiltered.visible.length && (
+              <div className="btn-row section-actions">
+                <button
+                  type="button"
+                  className="ghost-btn"
+                  data-testid="notifications-show-more"
+                  onClick={() => setShowAllNotifs((v) => !v)}
+                >
+                  {showAllNotifs
+                    ? "Show fewer notifications"
+                    : `Show more (${inboxFiltered.hiddenCount} hidden)`}
+                </button>
+              </div>
+            )}
         </section>
       )}
 

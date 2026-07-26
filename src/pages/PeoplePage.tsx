@@ -154,8 +154,16 @@ export function PeoplePage({
             summary — review before any share
           </li>
           <li>
-            <strong>Revocation:</strong> invitation and access changes are
-            enforced server-side; unauthorized principals are denied
+            <strong>Revocation:</strong> access is enforced server-side.
+            Self-serve “revoke this person now” is not available in this
+            Phase 1 UI — a principal with authority must use the care API /
+            admin path. Unauthorized principals are denied automatically.
+          </li>
+          <li data-testid="access-control-honesty">
+            <strong>What this screen shows:</strong> each person&apos;s{" "}
+            <em>Can see</em> / <em>Can do</em> lists when you open their card —
+            minimum-necessary visibility for accountability, not a full IAM
+            console.
           </li>
         </ul>
       </section>

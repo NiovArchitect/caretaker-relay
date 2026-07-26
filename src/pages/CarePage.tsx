@@ -479,18 +479,46 @@ function AboutRecipientPanel({
         </ul>
       </div>
 
-      <div className="surface-reported care-panel">
-        <h3 className="care-panel-title">Preferences & goals</h3>
+      <div
+        className="surface-reported care-panel"
+        data-testid="person-centered-preferences"
+      >
+        <h3 className="care-panel-title">Preferences, dignity, and goals</h3>
+        <p className="muted care-panel-lead">
+          Person-centered support notes — not diagnostic labels. Prefer the
+          person&apos;s name and adult language. Supported decision-making and
+          substitute decision-making are different; only use labels that are on
+          file.
+        </p>
         <ul className="list-plain">
+          {p.communicationPreferences ? (
+            <li>
+              <strong>Communication preferences:</strong>{" "}
+              {String(p.communicationPreferences)}
+            </li>
+          ) : null}
+          {p.supportedDecisionMaking ? (
+            <li>
+              <strong>Decision support:</strong>{" "}
+              {String(p.supportedDecisionMaking)}
+            </li>
+          ) : null}
           {prefs.map((x) => (
-            <li key={x}>{x}</li>
+            <li key={x}>
+              <strong>Preference:</strong> {x}
+            </li>
           ))}
           {goals.map((x) => (
-            <li key={x}>Goal: {x}</li>
+            <li key={x}>
+              <strong>Goal:</strong> {x}
+            </li>
           ))}
-          {prefs.length === 0 && goals.length === 0 && (
-            <li className="muted">Not on file</li>
-          )}
+          {prefs.length === 0 &&
+            goals.length === 0 &&
+            !p.communicationPreferences &&
+            !p.supportedDecisionMaking && (
+              <li className="muted">Not on file</li>
+            )}
         </ul>
       </div>
 

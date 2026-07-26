@@ -31,6 +31,36 @@ export type CareNotification = {
   actionTarget: "care" | "relay" | "people" | "handoff" | "documents";
 };
 
+/** Lab/test markers that should not dominate judge/demo attention inbox. */
+const LAB_NOISE_RE =
+  /\b(JL-SMOKE|JL_|TORTURE|__CR_E2E|e2e-?harness|load.?test|synthetic.?marker)\b/i;
+
+export function isLabNoiseNotification(n: {
+  title?: unknown;
+  body?: unknown;
+  type?: unknown;
+  description?: unknown;
+}): boolean {
+  const blob = `${n.title ?? ""} ${n.body ?? ""} ${n.description ?? ""} ${n.type ?? ""}`;
+  return LAB_NOISE_RE.test(blob);
+}
+
+/** Primary inbox: drop noise, cap for scanability (does not delete server history). */
+export function filterPrimaryNotifications<
+  T extends { title?: unknown; body?: unknown; type?: unknown; description?: unknown },
+>(items: T[], cap = 8): { visible: T[]; hiddenCount: number; noiseDropped: number } {
+  const cleaned = items.filter((n) => !isLabNoiseNotification(n));
+  const noiseDropped = items.length - cleaned.length;
+  if (cleaned.length <= cap) {
+    return { visible: cleaned, hiddenCount: 0, noiseDropped };
+  }
+  return {
+    visible: cleaned.slice(0, cap),
+    hiddenCount: cleaned.length - cap,
+    noiseDropped,
+  };
+}
+
 export function kindLabel(kind: NotificationKind): string {
   switch (kind) {
     case "medication_due":
