@@ -108,7 +108,9 @@ export function renderDocumentBlocks(blocks: DocBlock[]): ReactNode {
   );
 }
 
-/** Filter export lines that are pure technical IDs / noise for humans. */
+/** Filter export lines that are pure technical IDs / noise for humans.
+ * Also rewrite any residual raw ISO timestamps in prose lines.
+ */
 export function sanitizeExportMarkdown(md: string): string {
   return md
     .split("\n")
@@ -119,5 +121,28 @@ export function sanitizeExportMarkdown(md: string): string {
         return false;
       return true;
     })
+    .map((line) =>
+      line.replace(
+        /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z?/g,
+        (iso) => {
+          try {
+            const d = new Date(iso);
+            if (Number.isNaN(d.getTime())) return iso;
+            return new Intl.DateTimeFormat("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+              hour: "numeric",
+              minute: "2-digit",
+              hour12: true,
+              timeZone: "America/Los_Angeles",
+              timeZoneName: "short",
+            }).format(d);
+          } catch {
+            return iso;
+          }
+        },
+      ),
+    )
     .join("\n");
 }

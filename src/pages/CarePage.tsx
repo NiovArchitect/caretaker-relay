@@ -621,7 +621,7 @@ export function CarePage({
         >
           {sourceLabel}
           {state?.lastUpdatedAt
-            ? ` · updated ${new Date(state.lastUpdatedAt).toLocaleString()}`
+            ? ` · updated ${formatCareDateTime(String(state.lastUpdatedAt))}`
             : ""}
         </p>
         <span className="sr-only" data-testid="care-recipient-id-hidden">
@@ -709,7 +709,7 @@ export function CarePage({
                     <strong>{item.title}</strong>
                     <div className="muted" style={{ fontSize: "0.85rem" }}>
                       {item.at
-                        ? new Date(item.at).toLocaleString()
+                        ? formatCareDateTime(String(item.at))
                         : ""}
                       {item.sourceLabel ? ` · ${item.sourceLabel}` : ""}
                     </div>

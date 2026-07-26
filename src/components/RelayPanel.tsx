@@ -41,6 +41,7 @@ export function RelayPanel({
   onCorrect,
   onCloseMobile,
   coordFocusPersonId,
+  coordFocusKey = 0,
   activeRecipientId,
 }: {
   open: boolean;
@@ -58,6 +59,8 @@ export function RelayPanel({
   onCloseMobile?: () => void;
   /** When messaging from People, target this person. */
   coordFocusPersonId?: string | null;
+  /** Increment to re-enter Coordination when the same person is re-selected. */
+  coordFocusKey?: number;
   /** Active care recipient — rebinds coordination when switched. */
   activeRecipientId?: string;
 }) {
@@ -126,7 +129,7 @@ export function RelayPanel({
       setCoordTo(coordFocusPersonId);
       setMode("messages");
     }
-  }, [coordFocusPersonId]);
+  }, [coordFocusPersonId, coordFocusKey]);
 
   // Recipient switch is a transaction boundary: clear immediately, then reload
   useEffect(() => {

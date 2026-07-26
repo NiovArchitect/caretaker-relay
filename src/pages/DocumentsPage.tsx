@@ -9,6 +9,7 @@ import {
   sanitizeExportMarkdown,
 } from "../lib/documentRender";
 import { loadActiveCareRecipientId, resolveCareSpace } from "../lib/careContext";
+import { formatCareDateTime } from "../lib/humanCopy";
 
 /**
  * Documents are generated from current care truth (export).
@@ -150,7 +151,7 @@ export function DocumentsPage() {
             <p className="muted">
               For {space.displayName} · prepared by {session.displayName}
               {meta?.exportedAt
-                ? ` · ${new Date(meta.exportedAt).toLocaleString()}`
+                ? ` · ${formatCareDateTime(String(meta.exportedAt))}`
                 : ""}
             </p>
             <p className="attention-limit" role="status">

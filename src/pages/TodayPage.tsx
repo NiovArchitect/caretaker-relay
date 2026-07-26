@@ -17,7 +17,7 @@ import {
   severityClass,
 } from "../lib/notifications";
 import { resolveCareSpace, loadActiveCareRecipientId } from "../lib/careContext";
-
+import { formatCareDateTimeRecent } from "../lib/humanCopy";
 
 export function TodayPage({
   relayHandled,
@@ -335,7 +335,7 @@ export function TodayPage({
               const urgent =
                 n.priority === "urgent" || n.priority === "important";
               const when = n.created_at
-                ? new Date(String(n.created_at)).toLocaleString()
+                ? formatCareDateTimeRecent(String(n.created_at))
                 : "";
               return (
                 <article

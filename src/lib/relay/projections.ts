@@ -4,9 +4,23 @@
  */
 
 import { resolvePersonName } from "../identity";
-import { plainDiscrepancyMessage } from "../humanCopy";
+import {
+  formatCareDateTimeRecent,
+  plainDiscrepancyMessage,
+  shiftBucketLabel,
+} from "../humanCopy";
 import { clusterObservations } from "../observations";
 import type { CareStateSnapshot } from "../../foundation/careClient";
+
+export type RecentChangeLine = {
+  text: string;
+  at?: string;
+  whenLabel: string;
+  bucket: string;
+  who?: string;
+  status?: string;
+  type?: string;
+};
 
 export type CareProjections = {
   recipientId: string;
@@ -15,8 +29,14 @@ export type CareProjections = {
   NEXT_24H_TASKS: string[];
   NEXT_APPOINTMENT: Record<string, unknown> | null;
   OPEN_UNCERTAINTIES: string[];
+  /** Actionable open-item cards with safe next steps (no clinical invent). */
+  OPEN_ITEM_ACTIONS: Array<{
+    summary: string;
+    nextSteps: string[];
+  }>;
   LATEST_PROVIDER_INSTRUCTIONS: string[];
   RECENT_CHANGES: string[];
+  RECENT_CHANGE_LINES: RecentChangeLine[];
   CARE_TEAM_NOW: Array<{ name: string; role: string; phone?: string }>;
   LAST_MEDICATION_ADMINISTRATIONS: Array<Record<string, unknown>>;
   RECENT_OBSERVATION_CLUSTERS: Array<{
@@ -115,17 +135,65 @@ export function buildProjections(input: {
       .join(" · ");
   });
 
-  const RECENT_CHANGES = events
+  // Chronological recent changes with human times — skip superseded
+  const changeSource = events
     .slice()
-    .reverse()
-    .slice(0, 8)
-    .map((e) => {
-      const who =
-        e.source && typeof e.source === "object"
-          ? str((e.source as { actorName?: string }).actorName)
-          : "";
-      return `${str(e.statement ?? e.title)}${who ? ` (from ${who})` : ""}`;
+    .filter((e) => {
+      const st = str(e.epistemicStatus).toUpperCase();
+      return st !== "SUPERSEDED" && !str(e.supersededById);
+    })
+    .sort((a, b) =>
+      str(b.occurredAt ?? b.recordedAt ?? "").localeCompare(
+        str(a.occurredAt ?? a.recordedAt ?? ""),
+      ),
+    );
+
+  // Collapse exact same-minute duplicate statements for Relay view
+  const seenKeys = new Set<string>();
+  const RECENT_CHANGE_LINES: RecentChangeLine[] = [];
+  for (const e of changeSource) {
+    const at = str(e.occurredAt ?? e.recordedAt ?? "");
+    const statement = str(e.statement ?? e.title).trim();
+    const minute = at.slice(0, 16);
+    const key = `${str(e.type)}|${statement.toLowerCase()}|${minute}`;
+    if (seenKeys.has(key)) continue;
+    seenKeys.add(key);
+    const who =
+      e.source && typeof e.source === "object"
+        ? str((e.source as { actorName?: string }).actorName)
+        : "";
+    const whenLabel = at
+      ? formatCareDateTimeRecent(at)
+      : "Time not on file";
+    const bucket = shiftBucketLabel(at || null);
+    const status = str(e.epistemicStatus);
+    RECENT_CHANGE_LINES.push({
+      text: statement,
+      at: at || undefined,
+      whenLabel,
+      bucket,
+      who: who || undefined,
+      status: status || undefined,
+      type: str(e.type) || undefined,
     });
+    if (RECENT_CHANGE_LINES.length >= 10) break;
+  }
+
+  const RECENT_CHANGES = RECENT_CHANGE_LINES.map((line) => {
+    const who = line.who ? ` · ${line.who}` : "";
+    const st = line.status ? ` [${line.status}]` : "";
+    return `${line.text}${st} · ${line.whenLabel}${who}`;
+  });
+
+  const OPEN_ITEM_ACTIONS = OPEN_UNCERTAINTIES.slice(0, 4).map((summary) => ({
+    summary,
+    nextSteps: [
+      "Review the medication label or packaging against the authorized care plan.",
+      "If still unclear, confirm with an authorized care-team member (do not invent a dose).",
+      "Record who confirmed, when, and what was verified before marking resolved.",
+      "Keep the original report on file — closing does not erase prior evidence.",
+    ],
+  }));
 
   const clusters = clusterObservations(obs as never[]).map((c) => ({
     theme: c.theme,
@@ -178,8 +246,10 @@ export function buildProjections(input: {
     ],
     NEXT_APPOINTMENT,
     OPEN_UNCERTAINTIES: [...new Set(OPEN_UNCERTAINTIES)].slice(0, 6),
+    OPEN_ITEM_ACTIONS,
     LATEST_PROVIDER_INSTRUCTIONS,
     RECENT_CHANGES,
+    RECENT_CHANGE_LINES,
     CARE_TEAM_NOW: [
       { name: "Marcus Carter", role: "Primary family caregiver", phone: "+1-555-0101" },
       { name: "Maya Bennett", role: "Family / friend caregiver", phone: "+1-555-0102" },

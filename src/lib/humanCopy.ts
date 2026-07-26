@@ -3,6 +3,13 @@
  * No architecture jargon, no engineering discrepancy phrasing.
  */
 
+import {
+  formatCareInstant,
+  formatCareInstantLayered,
+  shiftBucketLabel,
+  type FormatOpts,
+} from "./dateTime";
+
 export function plainDiscrepancyMessage(
   technical: string | undefined,
   recipientName = "the care recipient",
@@ -73,63 +80,38 @@ export function priorityLabel(safety: unknown): string {
   }
 }
 
-/** Format ISO or label into unambiguous caregiver datetime. */
+/** Format ISO or label into unambiguous caregiver datetime (full weekday form). */
 export function formatCareDateTime(
   isoOrLabel: string | null | undefined,
   opts?: { timeZone?: string },
 ): string {
-  if (!isoOrLabel) return "";
-  const raw = String(isoOrLabel).trim();
-  // Already human label without ISO shape
-  if (!/^\d{4}-\d{2}-\d{2}/.test(raw) && !raw.includes("T")) {
-    // Enrich vague "around 3" style if present
-    if (/around\s+(\d{1,2})\b/i.test(raw) && !/\b(am|pm)\b/i.test(raw)) {
-      return raw.replace(
-        /around\s+(\d{1,2})\b/i,
-        (_m, h) => {
-          const hour = Number(h);
-          if (hour >= 1 && hour <= 11) return `around ${hour}:00 PM`;
-          if (hour === 12) return "around 12:00 PM";
-          return `around ${hour}:00`;
-        },
-      );
-    }
-    return raw;
-  }
-  const d = new Date(raw);
-  if (Number.isNaN(d.getTime())) return raw;
-  const tz = opts?.timeZone ?? "America/Los_Angeles";
-  try {
-    return new Intl.DateTimeFormat("en-US", {
-      weekday: "long",
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-      timeZone: tz,
-      timeZoneName: "short",
-    }).format(d);
-  } catch {
-    return d.toLocaleString();
-  }
+  return formatCareInstant(isoOrLabel, "full", opts);
+}
+
+/** Standard compact: Jul 23, 2026 · 3:04 PM PDT */
+export function formatCareDateTimeStandard(
+  isoOrLabel: string | null | undefined,
+  opts?: FormatOpts,
+): string {
+  return formatCareInstant(isoOrLabel, "standard", opts);
+}
+
+/** Recent-aware: Today at 3:04 PM (with standard in parentheses when recent). */
+export function formatCareDateTimeRecent(
+  isoOrLabel: string | null | undefined,
+  opts?: FormatOpts,
+): string {
+  return formatCareInstantLayered(isoOrLabel, opts);
 }
 
 export function formatTimeOnly(
   iso: string | null | undefined,
   timeZone = "America/Los_Angeles",
 ): string {
-  if (!iso) return "";
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return String(iso);
-  return new Intl.DateTimeFormat("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-    timeZone,
-  }).format(d);
+  return formatCareInstant(iso, "compact", { timeZone });
 }
+
+export { shiftBucketLabel, formatCareInstant, formatCareInstantLayered };
 
 export function stripEmDashes(text: string): string {
   return text

@@ -92,6 +92,8 @@ export function App() {
   const [coordFocusPersonId, setCoordFocusPersonId] = useState<string | null>(
     null,
   );
+  /** Bumps so re-clicking the same person re-enters Coordination mode. */
+  const [coordFocusKey, setCoordFocusKey] = useState(0);
   const [recipientSwitching, setRecipientSwitching] = useState(false);
   const [notifConnected, setNotifConnected] = useState(true);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -849,6 +851,7 @@ export function App() {
             <PeoplePage
               onMessagePerson={(personId) => {
                 setCoordFocusPersonId(personId);
+                setCoordFocusKey((k) => k + 1);
                 setRelayOpen(true);
               }}
               onPrepareHandoff={() => void openLatestHandoff()}
@@ -915,6 +918,7 @@ export function App() {
         onCorrect={startCorrection}
         onCloseMobile={() => setRelayOpen(false)}
         coordFocusPersonId={coordFocusPersonId}
+        coordFocusKey={coordFocusKey}
         activeRecipientId={activeRecipientId}
       />
 

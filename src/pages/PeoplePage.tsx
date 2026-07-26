@@ -135,29 +135,47 @@ export function PeoplePage({
           <p className="muted cr-empty">No authorized members returned.</p>
         )}
         {members.map((member) => (
-          <button
+          <div
             key={member.personId}
-            type="button"
-            className="member-card"
+            className="member-card member-card-row"
             data-testid={`person-${member.personId}`}
-            onClick={() =>
-              setSelected((cur) =>
-                cur?.personId === member.personId ? null : member,
-              )
-            }
           >
-            <strong>{member.displayName}</strong>
-            <span className="muted">{member.roleLabel}</span>
-            <span
-              className={
-                member.status === "active"
-                  ? "badge badge-teal"
-                  : "badge badge-amber"
+            <button
+              type="button"
+              className="member-card-main"
+              onClick={() =>
+                setSelected((cur) =>
+                  cur?.personId === member.personId ? null : member,
+                )
               }
             >
-              {member.status === "active" ? "Active" : member.status}
-            </span>
-          </button>
+              <strong>{member.displayName}</strong>
+              <span className="muted">{member.roleLabel}</span>
+              <span
+                className={
+                  member.status === "active"
+                    ? "badge badge-teal"
+                    : "badge badge-amber"
+                }
+              >
+                {member.status === "active" ? "Active" : member.status}
+              </span>
+            </button>
+            <button
+              type="button"
+              className="btn-comm btn-with-icon member-card-message"
+              data-testid={`person-message-quick-${member.personId}`}
+              data-action-kind="communication"
+              onClick={() =>
+                onMessagePerson?.(member.personId, member.displayName)
+              }
+            >
+              <span className="btn-glyph" aria-hidden>
+                ✉
+              </span>
+              Message
+            </button>
+          </div>
         ))}
       </section>
 
@@ -338,7 +356,7 @@ export function PeoplePage({
             )}
             <button
               type="button"
-              className="btn-comm-quiet btn-with-icon"
+              className="btn-comm btn-with-icon"
               data-testid="person-message"
               data-action-kind="communication"
               onClick={() =>
@@ -348,7 +366,7 @@ export function PeoplePage({
               <span className="btn-glyph" aria-hidden>
                 ✉
               </span>
-              Message
+              Message in Coordination
             </button>
             {selected.personId === "p-dr-shah" ? (
               <button

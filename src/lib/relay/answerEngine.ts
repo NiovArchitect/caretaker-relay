@@ -280,6 +280,18 @@ function composeAnswer(ctx: {
           : `Nothing is flagged as uncertain about ${medName} right now. ${lastAdminLine()}`,
       );
       parts.push(lastAdminLine());
+      if (proj.OPEN_ITEM_ACTIONS?.[0]) {
+        used.add("OPEN_ITEM_ACTIONS");
+        parts.push(
+          "Safe next steps (you confirm — Relay will not invent a dose):\n" +
+            proj.OPEN_ITEM_ACTIONS[0].nextSteps
+              .map((s) => `• ${s}`)
+              .join("\n"),
+        );
+        parts.push(
+          "When verified, use Care → open the item and mark it resolved with who confirmed and when. The original conflicted report stays on record.",
+        );
+      }
     }
     if (intents.includes("MEDICATION_CHANGE")) {
       used.add("LATEST_PROVIDER_INSTRUCTIONS");
@@ -353,9 +365,12 @@ function composeAnswer(ctx: {
     used.add("RECENT_CHANGES");
     used.add("RECENT_OBSERVATION_CLUSTERS");
     if (persona === "physician") {
-      parts.push(`High-signal changes for ${recipientName}:`);
+      parts.push(`High-signal changes for ${recipientName} (with times):`);
       parts.push(
-        (proj.RECENT_CHANGES.slice(0, 5).map((c) => `• ${c}`).join("\n") ||
+        (proj.RECENT_CHANGE_LINES?.slice(0, 5).map(
+          (c) => `• ${c.text} · ${c.whenLabel}${c.who ? ` · ${c.who}` : ""}`,
+        ).join("\n") ||
+          proj.RECENT_CHANGES.slice(0, 5).map((c) => `• ${c}`).join("\n") ||
           "• No recent confirmed events on file"),
       );
       if (proj.RECENT_OBSERVATION_CLUSTERS.length) {
@@ -374,18 +389,30 @@ function composeAnswer(ctx: {
     } else if (persona === "professional_dsp") {
       parts.push(`What changed since your last context with ${recipientName}:`);
       parts.push(
-        proj.RECENT_CHANGES.slice(0, 5).map((c) => `• ${c}`).join("\n") ||
+        proj.RECENT_CHANGE_LINES?.slice(0, 5).map(
+          (c) => `• ${c.text} · ${c.whenLabel}${c.who ? ` · ${c.who}` : ""}`,
+        ).join("\n") ||
+          proj.RECENT_CHANGES.slice(0, 5).map((c) => `• ${c}`).join("\n") ||
           "• No new events listed",
       );
       parts.push(
-        "Family-reported items appear as REPORTED. Document your own observations separately.",
+        "Family-reported items appear as Reported (not automatically confirmed). Document your own observations separately.",
       );
     } else {
-      parts.push(`Here's what changed for ${recipientName}:`);
-      parts.push(
-        proj.RECENT_CHANGES.slice(0, 5).map((c) => `• ${c}`).join("\n") ||
-          "• Nothing new is recorded yet",
-      );
+      parts.push(`Here's what changed for ${recipientName} (newest first, with times):`);
+      const lines = proj.RECENT_CHANGE_LINES?.length
+        ? proj.RECENT_CHANGE_LINES.slice(0, 6).map((c) => {
+            const who = c.who ? ` · ${c.who}` : "";
+            const st =
+              c.status && c.status !== "CONFIRMED"
+                ? ` · ${c.status}`
+                : c.status === "CONFIRMED"
+                  ? " · confirmed"
+                  : "";
+            return `• ${c.text}${st}\n  ${c.bucket} · ${c.whenLabel}${who}`;
+          })
+        : proj.RECENT_CHANGES.slice(0, 5).map((c) => `• ${c}`);
+      parts.push(lines.join("\n") || "• Nothing new is recorded yet");
       if (intents.includes("TREND") && proj.RECENT_OBSERVATION_CLUSTERS[0]) {
         const c = proj.RECENT_OBSERVATION_CLUSTERS[0];
         parts.push(
@@ -508,6 +535,15 @@ function composeAnswer(ctx: {
       parts.push(
         `Still open:\n${(proj.ACTIVE_HANDOFF?.stillNeedsAttention?.length ? proj.ACTIVE_HANDOFF.stillNeedsAttention : proj.OPEN_UNCERTAINTIES).slice(0, 3).map((x) => `• ${x}`).join("\n") || "• Nothing listed"}`,
       );
+      if (proj.OPEN_ITEM_ACTIONS?.[0]) {
+        parts.push(
+          "How to close safely:\n" +
+            proj.OPEN_ITEM_ACTIONS[0].nextSteps
+              .slice(0, 3)
+              .map((s) => `• ${s}`)
+              .join("\n"),
+        );
+      }
       parts.push(
         "Document before you leave: observations, meds assisted (if any), unfinished tasks, and who to call.",
       );

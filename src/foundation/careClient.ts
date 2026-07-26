@@ -26,6 +26,7 @@ import {
   type BurdenMetrics,
   type AuthCareContext,
 } from "@caretaker-relay/care-domain";
+import { formatCareDateTimeRecent } from "../lib/humanCopy";
 import {
   careCircle,
   careConfirm,
@@ -1094,8 +1095,14 @@ export async function fetchTodayProjection(): Promise<{
           .map((x) => x.title) ?? []),
       ];
       const whatChanged = [
-        ...(t.events?.slice(-6).map((e) => plainCaregiverLine(e.statement)) ??
-          []),
+        ...(t.events?.slice(-6).map((e) => {
+          const raw = e as { statement: string; type: string; occurredAt?: string };
+          const when = raw.occurredAt
+            ? formatCareDateTimeRecent(String(raw.occurredAt))
+            : "";
+          const base = plainCaregiverLine(raw.statement);
+          return when ? `${base} · ${when}` : base;
+        }) ?? []),
         ...(t.appointments
           ?.filter((a) => a.status === "moved")
           .map((a) =>
@@ -1128,7 +1135,12 @@ export async function fetchTodayProjection(): Promise<{
   const state = getCareRuntime().store.getCurrentState(rid());
   if (state && state.events.length > 0) {
     const needsYou = state.openSafetyReviews.map((r) => r.reason);
-    const whatChanged = state.events.slice(-6).map((e) => e.statement);
+    const whatChanged = state.events.slice(-6).map((e) => {
+      const when = e.occurredAt
+        ? formatCareDateTimeRecent(String(e.occurredAt))
+        : "";
+      return when ? `${e.statement} · ${when}` : e.statement;
+    });
     return {
       needsYou,
       attention: buildAttentionFromLines(needsYou),
