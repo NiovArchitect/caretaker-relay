@@ -262,3 +262,61 @@ describe("onboarding path mapping", () => {
     expect(emptyOnboardingDraft().completed).toBe(false);
   });
 });
+
+import { readFileSync, existsSync } from "node:fs";
+import { join } from "node:path";
+import { LOGO_COLORS, logoPalette } from "../src/brand/logoTokens";
+
+describe("production logo system", () => {
+  it("defines three principal colors and tone palettes", () => {
+    expect(LOGO_COLORS.ink).toBe("#0B2430");
+    expect(LOGO_COLORS.tealBright).toBe("#1F8A9A");
+    expect(LOGO_COLORS.gold).toBe("#D4A017");
+    expect(logoPalette("color").person).toBe(LOGO_COLORS.gold);
+    expect(logoPalette("ink").person).toBe(LOGO_COLORS.ink);
+    expect(logoPalette("white").relay).toBe(LOGO_COLORS.white);
+  });
+
+  it("symbol source contains person hands ring arrow geometry", () => {
+    const src = readFileSync(
+      join(process.cwd(), "src/components/brand/CaretakerRelaySymbol.tsx"),
+      "utf8",
+    );
+    expect(src).toContain("viewBox=\"0 0 64 64\"");
+    expect(src).toContain("Care recipient");
+    expect(src).toContain("Supporting hands");
+    expect(src).toContain("Clockwise arrow");
+    expect(src).not.toContain("backdrop-filter");
+    expect(src).not.toContain("feGaussianBlur");
+  });
+
+  it("BrandMark re-exports production symbol (no staged CSS disc runtime)", () => {
+    const src = readFileSync(
+      join(process.cwd(), "src/components/BrandMark.tsx"),
+      "utf8",
+    );
+    expect(src).toContain("CaretakerRelaySymbol");
+    expect(src).not.toContain("conic-gradient");
+  });
+
+  it("favicon and app-icon assets exist with symbol paths", () => {
+    const fav = readFileSync(join(process.cwd(), "public/favicon.svg"), "utf8");
+    const app = readFileSync(join(process.cwd(), "public/app-icon.svg"), "utf8");
+    expect(fav).toContain("viewBox=\"0 0 64 64\"");
+    expect(fav).toContain("#D4A017");
+    expect(app).toContain("viewBox=\"0 0 128 128\"");
+    expect(existsSync(
+      join(process.cwd(), "docs/design/logo-source/caretaker-relay-logo-approved.png"),
+    )).toBe(true);
+  });
+
+  it("wordmark text is exact Caretaker Relay", () => {
+    const src = readFileSync(
+      join(process.cwd(), "src/components/brand/CaretakerRelayLogo.tsx"),
+      "utf8",
+    );
+    expect(src).toContain("Caretaker");
+    expect(src).toContain("Relay");
+    expect(src).not.toMatch(/Care\s*Taker Relay/);
+  });
+});

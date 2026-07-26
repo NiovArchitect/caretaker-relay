@@ -3827,3 +3827,78 @@ p {
       rgba(255, 255, 255, 0.94) 100%
     );
 }
+
+/* ==========================================================================
+   PRODUCTION LOGO SYSTEM — person + hands + relay (flat SVG)
+   ========================================================================== */
+
+.cr-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  line-height: 1;
+}
+
+.cr-logo-stacked {
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.cr-logo-wordmark {
+  font-family: var(--font);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
+.cr-logo-stacked .cr-logo-wordmark {
+  font-size: 1.2rem;
+}
+
+.cr-logo-caretaker {
+  font-weight: 700;
+}
+
+.cr-logo-relay {
+  font-weight: 650;
+}
+
+.cr-logo-symbol {
+  display: block;
+  flex-shrink: 0;
+}
+
+.brand .cr-logo {
+  gap: 10px;
+}
+
+.brand .cr-logo-wordmark {
+  font-size: 1.02rem;
+  color: var(--cr-ink);
+}
+
+.cr-login-brand {
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.cr-login-tag {
+  text-align: center;
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+/* Retire competing CSS disc mark (historical; runtime uses SVG only) */
+.brand-mark:not(.cr-logo-symbol) {
+  display: none !important;
+}
+
+.brand-mark::after {
+  content: none !important;
+  display: none !important;
+}

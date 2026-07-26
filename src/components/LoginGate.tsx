@@ -5,7 +5,7 @@ import {
   type LabPrincipal,
   type SessionIdentity,
 } from "../foundation/careClient";
-import { BrandMark } from "./BrandMark";
+import { CaretakerRelayLogo } from "./BrandMark";
 import { warmCareApi } from "../lib/apiWarm";
 import {
   labPrincipalForPath,
@@ -164,11 +164,12 @@ export function LoginGate({
       <div className="cr-login-panel" data-testid="login-panel">
         <div className="cr-login-panel-inner">
           <div className="cr-login-brand">
-            <BrandMark size={36} />
-            <div className="cr-login-brand-text">
-              <span className="cr-login-product">Caretaker Relay</span>
-              <span className="muted cr-login-tag">Shared care, verified</span>
-            </div>
+            <CaretakerRelayLogo
+              layout="stacked"
+              markSize={52}
+              testId="login-brand-logo"
+            />
+            <p className="muted cr-login-tag">Shared care, verified</p>
           </div>
 
           {mode === "home" && (

@@ -21,7 +21,7 @@ import { SideNav } from "./components/SideNav";
 import { RelayPanel } from "./components/RelayPanel";
 import { HandoffPanel } from "./components/HandoffPanel";
 import { LoginGate } from "./components/LoginGate";
-import { BrandMark } from "./components/BrandMark";
+import { CaretakerRelayLogo } from "./components/BrandMark";
 import { TodayPage } from "./pages/TodayPage";
 import { CarePage } from "./pages/CarePage";
 import { PeoplePage } from "./pages/PeoplePage";
@@ -715,9 +715,12 @@ export function App() {
     <div className="app-shell cr-stage" data-testid="app-shell">
       <div className="cr-ambient" aria-hidden />
       <header className="topbar">
-        <div className="brand" aria-label="Caretaker Relay">
-          <BrandMark size={28} />
-          <span>Caretaker Relay</span>
+        <div className="brand">
+          <CaretakerRelayLogo
+            layout="horizontal"
+            markSize={28}
+            testId="app-brand-logo"
+          />
         </div>
         <div className="topbar-center">
           <div className="recipient-chip" data-testid="care-recipient-chip">
