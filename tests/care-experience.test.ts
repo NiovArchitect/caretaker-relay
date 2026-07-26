@@ -35,7 +35,11 @@ describe("identity resolution", () => {
     expect(resolveRecipientName("cr-robert")).toBe("Robert Hale");
   });
 
-  it("Robert care space is lightweight (not Evelyn fill)", () => {
+  it("Robert care space is lightweight (not Evelyn fill)", async () => {
+    const { markLabPrincipalAuthorized } = await import(
+      "../src/lib/authorization"
+    );
+    markLabPrincipalAuthorized("Marcus Carter");
     const space = resolveCareSpace("cr-robert", "p-sadeil");
     expect(space.displayName).toBe("Robert Hale");
     expect(space.depth).toBe("lightweight");
@@ -144,14 +148,22 @@ describe("observation clustering", () => {
 });
 
 describe("multi-recipient architecture", () => {
-  it("exposes more than one care space", () => {
+  it("exposes more than one care space", async () => {
+    const { markLabPrincipalAuthorized } = await import(
+      "../src/lib/authorization"
+    );
+    markLabPrincipalAuthorized("Marcus Carter");
     const spaces = listAuthorizedCareSpaces("p-sadeil");
     expect(spaces.length).toBeGreaterThanOrEqual(2);
     expect(spaces.map((s) => s.displayName)).toContain("Evelyn Carter");
     expect(spaces.map((s) => s.displayName)).toContain("Robert Hale");
   });
 
-  it("resolves active space without hard-coding only Evelyn", () => {
+  it("resolves active space without hard-coding only Evelyn", async () => {
+    const { markLabPrincipalAuthorized } = await import(
+      "../src/lib/authorization"
+    );
+    markLabPrincipalAuthorized("Marcus Carter");
     expect(resolveCareSpace("cr-robert", "p-sadeil").displayName).toBe(
       "Robert Hale",
     );
@@ -159,6 +171,10 @@ describe("multi-recipient architecture", () => {
 
   it("role-unknown principal cannot resolve Evelyn", () => {
     expect(listAuthorizedCareSpaces("unknown-user")).toEqual([]);
+  });
+
+  it("p-acct registered accounts get zero client seed memberships", () => {
+    expect(listAuthorizedCareSpaces("p-acct-deadbeef")).toEqual([]);
   });
 });
 

@@ -76,19 +76,32 @@ export function listAuthorizedCareSpaces(
     return [];
   }
 
+  // Durable registered accounts (p-acct-*) never receive client seed memberships
+  if (id.startsWith("p-acct-")) {
+    return [];
+  }
+
   const authz = loadAuthorizationState();
   if (authz.pendingRecipientAccess && !authz.labPrincipalAuthorized) {
     return [];
   }
+  // Server-pending without lab flag
+  if (authz.pendingRecipientAccess) {
+    return [];
+  }
 
   if (id === "p-maya" || id === "p-walter" || id === "p-dr-shah") {
+    // Lab cast only when explicitly lab-authorized this session
+    if (!authz.labPrincipalAuthorized) return [];
     return CARE_SPACES.filter((s) => s.careRecipientId === "cr-olivia");
   }
   if (id === "p-dr-cole") {
+    if (!authz.labPrincipalAuthorized) return [];
     return CARE_SPACES.filter((s) => s.careRecipientId === "cr-robert");
   }
   // Known lab primary with multi-recipient membership
   if (id === "p-sadeil") {
+    if (!authz.labPrincipalAuthorized) return [];
     return CARE_SPACES;
   }
 
@@ -128,6 +141,18 @@ export function loadActiveCareRecipientId(carePersonId?: string | null): string 
 }
 
 export function saveActiveCareRecipientId(id: string): void {
+  // Keep careClient rid() in sync — sessionStorage alone is not enough.
+  try {
+    void import("../foundation/careClient").then((m) => {
+      m.setActiveCareRecipientId(
+        id === NO_RECIPIENT_SPACE.careRecipientId
+          ? NO_RECIPIENT_SPACE.careRecipientId
+          : id,
+      );
+    });
+  } catch {
+    /* ignore */
+  }
   if (id === NO_RECIPIENT_SPACE.careRecipientId) {
     try {
       sessionStorage.removeItem(STORAGE_KEY);

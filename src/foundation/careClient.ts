@@ -128,21 +128,49 @@ let lastHttpHandoff: {
 } | null = null;
 let transportUsed: "http" | "package" = "package";
 let sessionIdentity: SessionIdentity | null = null;
-/** ONE active care recipient for all product surfaces (not Evelyn-hardcoded). */
-let activeCareRecipientId: string = careRecipient.id;
+/**
+ * ONE active care recipient for all product surfaces.
+ * SECURITY: never default to seeded Evelyn (careRecipient.id).
+ * Unauthorized / pre-auth sessions must use cr-none.
+ */
+const NO_RECIPIENT_ID = "cr-none";
+let activeCareRecipientId: string = NO_RECIPIENT_ID;
 
 /** Call when user switches recipient — must precede all surface reloads. */
 export function setActiveCareRecipientId(id: string): void {
-  activeCareRecipientId = id;
+  activeCareRecipientId =
+    !id || id === NO_RECIPIENT_ID || id === "cr-none" ? NO_RECIPIENT_ID : id;
 }
 
 export function getActiveCareRecipientId(): string {
   return activeCareRecipientId;
 }
 
-/** Recipient id for all API/package calls. */
+/** Recipient id for all API/package calls. Never invent a seeded recipient. */
 function rid(): string {
-  return activeCareRecipientId || careRecipient.id;
+  if (
+    !activeCareRecipientId ||
+    activeCareRecipientId === NO_RECIPIENT_ID ||
+    activeCareRecipientId === "cr-none"
+  ) {
+    return NO_RECIPIENT_ID;
+  }
+  return activeCareRecipientId;
+}
+
+/** True only when session is a lab principal with known seed memberships. */
+function mayUsePackageSeed(): boolean {
+  const id = sessionIdentity?.carePersonId ?? "";
+  if (!id) return false;
+  if (id.startsWith("pending-local-") || id.startsWith("p-acct-")) return false;
+  // Only explicit lab cast may read in-process seed store
+  return (
+    id === "p-sadeil" ||
+    id === "p-maya" ||
+    id === "p-walter" ||
+    id === "p-dr-shah" ||
+    id === "p-dr-cole"
+  );
 }
 
 function resolveMode(): CareClientMode {
@@ -181,11 +209,13 @@ export function resetCareRuntimeForTests() {
 }
 
 export function getSessionIdentity(): SessionIdentity {
+  // SECURITY: never default to Marcus/lab principal — that re-opens seeded care data.
   return (
     sessionIdentity ?? {
-      carePersonId: people.sadeil.id,
-      displayName: people.sadeil.displayName,
-      roleLabel: "Family caregiver",
+      carePersonId: "pending-local-anonymous",
+      displayName: "Not signed in",
+      roleLabel: "Unauthenticated",
+      authMode: "pending_local",
     }
   );
 }
@@ -298,7 +328,26 @@ export function establishRegisteredSession(
   httpAvailable = true;
   sessionIdentity = identity;
   transportUsed = "http";
-  persistSession(token, identity);
+  // Force zero recipient context — never inherit module default seed id
+  activeCareRecipientId = NO_RECIPIENT_ID;
+  try {
+    sessionStorage.setItem(
+      SESSION_KEY,
+      JSON.stringify({
+        token,
+        identity,
+        pending: true,
+      }),
+    );
+  } catch {
+    persistSession(token, identity);
+  }
+  void import("../lib/careContext").then((m) =>
+    m.saveActiveCareRecipientId("cr-none"),
+  );
+  void import("../lib/authorization").then((m) =>
+    m.markPendingAccount(identity.displayName, null),
+  );
 }
 
 export function clearSession() {
@@ -399,15 +448,17 @@ export async function restoreSession(): Promise<SessionIdentity | null> {
     clearSession();
     return null;
   }
-  // Keep pendingAuthorization flag from server membership count
-  if (
+  // Keep pendingAuthorization flag from server membership count — sync, not fire-and-forget
+  const zeroAccess =
     typeof (me.data as { authorized_recipients?: number }).authorized_recipients ===
       "number" &&
-    (me.data as { authorized_recipients: number }).authorized_recipients === 0
-  ) {
-    void import("../lib/authorization").then((m) =>
-      m.markPendingAccount(me.data.display_name, null),
-    );
+    (me.data as { authorized_recipients: number }).authorized_recipients === 0;
+  if (zeroAccess) {
+    const { markPendingAccount } = await import("../lib/authorization");
+    markPendingAccount(me.data.display_name, null);
+    setActiveCareRecipientId(NO_RECIPIENT_ID);
+    const { saveActiveCareRecipientId } = await import("../lib/careContext");
+    saveActiveCareRecipientId("cr-none");
   }
   sessionIdentity = {
     carePersonId: me.data.care_person_id,
@@ -899,6 +950,14 @@ export type RecipientProfilePayload = {
 };
 
 export async function fetchRecipientProfile(): Promise<RecipientProfilePayload> {
+  const denied: RecipientProfilePayload = {
+    id: NO_RECIPIENT_ID,
+    displayName: "No care recipient connected",
+    profile: null,
+    medications: [],
+    source: "package",
+  };
+  if (rid() === NO_RECIPIENT_ID) return denied;
   const useHttp = await ensureHttpSession();
   if (useHttp && httpToken) {
     const res = await careRecipientProfile(httpToken, rid());
@@ -907,13 +966,16 @@ export async function fetchRecipientProfile(): Promise<RecipientProfilePayload> 
         id: res.data.recipient.id,
         displayName: res.data.recipient.displayName,
         preferredName: res.data.recipient.preferredName,
-        profile: res.data.recipient.profile,
+        profile: res.data.recipient.profile as Record<string, unknown> | null,
         medications: res.data.medications ?? [],
         source: "http",
       };
     }
+    // 403/401: empty — never seed fallback (P0 isolation)
+    return denied;
   }
-  // Package path: seed recipient profile
+  // Package path: seed only for lab principals
+  if (!mayUsePackageSeed()) return denied;
   try {
     const { store } = getCareRuntime();
     const r = store.getRecipient(rid());
@@ -931,13 +993,7 @@ export async function fetchRecipientProfile(): Promise<RecipientProfilePayload> 
       source: "package",
     };
   } catch {
-    return {
-      id: rid(),
-      displayName: "Care recipient",
-      profile: null,
-      medications: [],
-      source: "package",
-    };
+    return denied;
   }
 }
 
@@ -1140,7 +1196,7 @@ export async function fetchCareExportMarkdown(): Promise<{
   };
 }
 
-/** Prefer HTTP Today projection; fall back to package store / static seeds. */
+/** Prefer HTTP Today projection; package seed only for lab principals. */
 export async function fetchTodayProjection(): Promise<{
   needsYou: string[];
   attention: TodayAttentionItem[];
@@ -1151,6 +1207,57 @@ export async function fetchTodayProjection(): Promise<{
   storeBackend?: string;
   organizedCount?: number;
 }> {
+  const empty = {
+    needsYou: [] as string[],
+    attention: [] as TodayAttentionItem[],
+    whatChanged: [] as string[],
+    handled: [] as string[],
+    next: [] as string[],
+    source: "static" as const,
+    organizedCount: 0,
+  };
+  // Zero-access: never touch seed store
+  if (rid() === NO_RECIPIENT_ID || !mayUsePackageSeed()) {
+    const useHttp = await ensureHttpSession();
+    if (useHttp && httpToken && rid() !== NO_RECIPIENT_ID) {
+      const res = await careToday(httpToken, rid());
+      if (res.ok) {
+        const t = res.data.today;
+        const needsYou = [
+          ...(t.open_safety_reviews?.map((r) => r.reason) ?? []),
+          ...(t.tasks
+            ?.filter((x) => x.status === "pending")
+            .map((x) => x.title) ?? []),
+        ];
+        const whatChanged =
+          t.events?.slice(-6).map((e) => {
+            const raw = e as {
+              statement: string;
+              type: string;
+              occurredAt?: string;
+            };
+            const when = raw.occurredAt
+              ? formatCareDateTimeRecent(String(raw.occurredAt))
+              : "";
+            const base = plainCaregiverLine(raw.statement);
+            return when ? `${base} · ${when}` : base;
+          }) ?? [];
+        return {
+          needsYou,
+          attention: buildAttentionFromLines(needsYou),
+          whatChanged,
+          handled: t.latest_handoff?.whatChanged ?? [],
+          next: t.latest_handoff?.stillNeedsAttention ?? [],
+          source: "http",
+          storeBackend: res.data.store_backend,
+          organizedCount: whatChanged.length,
+        };
+      }
+      // 403/401: empty — never package-seed fallback
+      return empty;
+    }
+    return empty;
+  }
   const useHttp = await ensureHttpSession();
   if (useHttp && httpToken) {
     const res = await careToday(httpToken, rid());
@@ -1164,7 +1271,11 @@ export async function fetchTodayProjection(): Promise<{
       ];
       const whatChanged = [
         ...(t.events?.slice(-6).map((e) => {
-          const raw = e as { statement: string; type: string; occurredAt?: string };
+          const raw = e as {
+            statement: string;
+            type: string;
+            occurredAt?: string;
+          };
           const when = raw.occurredAt
             ? formatCareDateTimeRecent(String(raw.occurredAt))
             : "";
@@ -1182,7 +1293,9 @@ export async function fetchTodayProjection(): Promise<{
       const handled =
         t.latest_handoff?.whatChanged ??
         t.events
-          ?.filter((e) => /maya|meal|breakfast|blood pressure/i.test(e.statement))
+          ?.filter((e) =>
+            /maya|meal|breakfast|blood pressure/i.test(e.statement),
+          )
           .slice(-4)
           .map((e) => e.statement) ??
         [];
@@ -1199,7 +1312,10 @@ export async function fetchTodayProjection(): Promise<{
         organizedCount: whatChanged.length,
       };
     }
+    // Unauthorized HTTP must not fall through to seed PHI
+    return empty;
   }
+  if (!mayUsePackageSeed()) return empty;
   const state = getCareRuntime().store.getCurrentState(rid());
   if (state && state.events.length > 0) {
     const needsYou = state.openSafetyReviews.map((r) => r.reason);
@@ -1219,16 +1335,7 @@ export async function fetchTodayProjection(): Promise<{
       organizedCount: whatChanged.length,
     };
   }
-  // No fabricated static day — empty until server or package has state.
-  return {
-    needsYou: [],
-    attention: [],
-    whatChanged: [],
-    handled: [],
-    next: [],
-    source: "static",
-    organizedCount: 0,
-  };
+  return empty;
 }
 
 /** Apply correction using HTTP or package domain path. */

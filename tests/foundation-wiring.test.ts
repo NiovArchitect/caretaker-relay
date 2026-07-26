@@ -28,6 +28,11 @@ describe("App foundation wiring", () => {
   });
 
   it("runs propose+confirm through foundation CareLoopService store", async () => {
+    // Lab package path requires explicit recipient (no default seed id)
+    const { setActiveCareRecipientId } = await import(
+      "../src/foundation/careClient"
+    );
+    setActiveCareRecipientId(careRecipient.id);
     const propose = await proposeCareUpdate(DEMO_UTTERANCE);
     expect(propose.kind).toBe("verify");
     expect(propose.bundle).toBeTruthy();

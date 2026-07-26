@@ -700,6 +700,19 @@ export function App() {
   }
 
   function onNavChange(t: NavTab) {
+    // Zero-access accounts: only AuthorizationGate surfaces — no care workspace tabs
+    if (
+      !hasCareAccess &&
+      (t === "today" || t === "care" || t === "people" || t === "documents")
+    ) {
+      setTab("today");
+      setRelayOpen(false);
+      return;
+    }
+    if (!hasCareAccess && t === "relay") {
+      setRelayOpen(false);
+      return;
+    }
     setTab(t);
     if (t === "relay") openRelayForCareUpdate();
     if (t !== "care") setCareFocus(null);
@@ -1048,7 +1061,9 @@ export function App() {
 
       <footer className="status-bar">
         <span>
-          {session.displayName} · caring for {activeSpace.displayName}
+          {hasCareAccess
+            ? `${session.displayName} · caring for ${activeSpace.displayName}`
+            : `${session.displayName} · no care recipient connected`}
         </span>
         <span>Not medical advice · you verify care truth</span>
       </footer>
