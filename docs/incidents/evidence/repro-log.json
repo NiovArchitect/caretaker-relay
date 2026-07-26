@@ -1,0 +1,166 @@
+[
+  {
+    "t": 339,
+    "m": "resp",
+    "status": 200,
+    "url": "https://care.niovlabs.com/",
+    "ok": true
+  },
+  {
+    "t": 476,
+    "m": "resp",
+    "status": 200,
+    "url": "https://care.niovlabs.com/assets/index-BBDZ7hdy.css",
+    "ok": true
+  },
+  {
+    "t": 568,
+    "m": "resp",
+    "status": 200,
+    "url": "https://care.niovlabs.com/assets/index-pfQ_54GX.js",
+    "ok": true
+  },
+  {
+    "t": 588,
+    "m": "domcontentloaded",
+    "ms": 587
+  },
+  {
+    "t": 863,
+    "m": "resp",
+    "status": 200,
+    "url": "https://caretaker-relay-care-api.onrender.com/api/v1/care/auth/lab-principals",
+    "ok": true
+  },
+  {
+    "t": 1124,
+    "m": "login_visible",
+    "loginVisible": true
+  },
+  {
+    "t": 1811,
+    "m": "login_submit"
+  },
+  {
+    "t": 1851,
+    "m": "wait",
+    "i": 0,
+    "shell": false,
+    "body": {
+      "bg": "rgb(238, 245, 251)",
+      "html": "Caretaker Relay\nSign in\n\nShared care context for everyone helping someone. Ask, ",
+      "kids": 1
+    }
+  },
+  {
+    "t": 11942,
+    "m": "wait",
+    "i": 5,
+    "shell": false,
+    "body": {
+      "bg": "rgb(238, 245, 251)",
+      "html": "Caretaker Relay\nSign in\n\nShared care context for everyone helping someone. Ask, ",
+      "kids": 1
+    }
+  },
+  {
+    "t": 22029,
+    "m": "wait",
+    "i": 10,
+    "shell": false,
+    "body": {
+      "bg": "rgb(238, 245, 251)",
+      "html": "Caretaker Relay\nSign in\n\nShared care context for everyone helping someone. Ask, ",
+      "kids": 1
+    }
+  },
+  {
+    "t": 25048,
+    "m": "resp",
+    "status": 200,
+    "url": "https://caretaker-relay-care-api.onrender.com/api/v1/care/auth/login",
+    "ok": true
+  },
+  {
+    "t": 25104,
+    "m": "console.error",
+    "text": "Error: Minified React error #310; visit https://reactjs.org/docs/error-decoder.html?invariant=310 for the full message or use the non-minified dev environment for full errors and additional helpful wa"
+  },
+  {
+    "t": 25104,
+    "m": "pageerror",
+    "text": "Error: Minified React error #310; visit https://reactjs.org/docs/error-decoder.html?invariant=310 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+  },
+  {
+    "t": 32101,
+    "m": "wait",
+    "i": 15,
+    "shell": false,
+    "body": {
+      "bg": "rgb(238, 245, 251)",
+      "html": "",
+      "kids": 1
+    }
+  },
+  {
+    "t": 42170,
+    "m": "wait",
+    "i": 20,
+    "shell": false,
+    "body": {
+      "bg": "rgb(238, 245, 251)",
+      "html": "",
+      "kids": 1
+    }
+  },
+  {
+    "t": 52224,
+    "m": "wait",
+    "i": 25,
+    "shell": false,
+    "body": {
+      "bg": "rgb(238, 245, 251)",
+      "html": "",
+      "kids": 1
+    }
+  },
+  {
+    "t": 62300,
+    "m": "wait",
+    "i": 30,
+    "shell": false,
+    "body": {
+      "bg": "rgb(238, 245, 251)",
+      "html": "",
+      "kids": 1
+    }
+  },
+  {
+    "t": 72350,
+    "m": "wait",
+    "i": 35,
+    "shell": false,
+    "body": {
+      "bg": "rgb(238, 245, 251)",
+      "html": "",
+      "kids": 1
+    }
+  },
+  {
+    "t": 82421,
+    "m": "wait",
+    "i": 40,
+    "shell": false,
+    "body": {
+      "bg": "rgb(238, 245, 251)",
+      "html": "",
+      "kids": 1
+    }
+  },
+  {
+    "t": 92477,
+    "m": "after_login",
+    "shell": false,
+    "ms": 90734
+  }
+]

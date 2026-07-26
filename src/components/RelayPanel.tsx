@@ -201,7 +201,7 @@ export function RelayPanel({
         });
       });
     };
-    const iv = window.setInterval(tick, 2000);
+    const iv = window.setInterval(tick, 8000);
     const t0 = window.setTimeout(tick, 400);
     return () => {
       cancelled = true;

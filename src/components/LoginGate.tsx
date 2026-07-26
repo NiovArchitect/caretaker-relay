@@ -65,13 +65,27 @@ export function LoginGate({
     e.preventDefault();
     setBusy(true);
     setError(null);
-    const res = await loginAsPrincipal(selected, password);
-    setBusy(false);
-    if (!res.ok || !res.session) {
-      setError(res.message ?? "Sign-in failed");
-      return;
+    const started = Date.now();
+    try {
+      const res = await loginAsPrincipal(selected, password);
+      if (!res.ok || !res.session) {
+        const slow = Date.now() - started > 8000;
+        setError(
+          (res.message ?? "Sign-in failed") +
+            (slow
+              ? " The care service may have been waking up — try again."
+              : ""),
+        );
+        return;
+      }
+      onAuthenticated(res.session);
+    } catch {
+      setError(
+        "Could not reach the care service. Wait a moment and try again — free-tier services can be slow to wake.",
+      );
+    } finally {
+      setBusy(false);
     }
-    onAuthenticated(res.session);
   }
 
   return (
@@ -133,6 +147,12 @@ export function LoginGate({
           >
             {busy ? "Signing in…" : "Continue"}
           </button>
+          {busy && (
+            <p className="muted cr-login-wait-hint" data-testid="login-wait-hint">
+              Stay on this screen. If the care service was idle, the first sign-in
+              can take up to about a minute — the app will open when ready.
+            </p>
+          )}
 
           <button
             type="button"

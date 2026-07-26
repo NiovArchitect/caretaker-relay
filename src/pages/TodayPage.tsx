@@ -81,7 +81,7 @@ export function TodayPage({
     loadInbox();
     window.addEventListener("cr-notification", loadInbox);
     // Lightweight poll as SSE backup (4s) for multi-tab coherence
-    const iv = window.setInterval(loadInbox, 4000);
+    const iv = window.setInterval(loadInbox, 15000);
     return () => {
       cancelled = true;
       window.removeEventListener("cr-notification", loadInbox);

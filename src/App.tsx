@@ -122,7 +122,8 @@ export function App() {
       );
     };
     tick();
-    const iv = window.setInterval(tick, 5000);
+    // Was 5s — too aggressive with Today 4s + Relay 2s polls; reduces main-thread load.
+    const iv = window.setInterval(tick, 15000);
     return () => {
       stopped = true;
       window.clearInterval(iv);
@@ -207,6 +208,25 @@ export function App() {
         return "Relay";
     }
   }, [tab]);
+
+  // Deep-link navigation (Today → emergency, etc.) — must stay above early returns.
+  useEffect(() => {
+    const onNav = (ev: Event) => {
+      const detail = (ev as CustomEvent<{ tab?: NavTab; focus?: string }>).detail;
+      if (!detail?.tab || detail.tab === "relay") return;
+      setTab(detail.tab);
+      setRelayOpen(false);
+      if (detail.focus === "emergency") {
+        window.setTimeout(() => {
+          document
+            .getElementById("emergency-snapshot")
+            ?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 160);
+      }
+    };
+    window.addEventListener("cr-navigate", onNav);
+    return () => window.removeEventListener("cr-navigate", onNav);
+  }, []);
 
   if (!authReady) {
     return (
@@ -631,24 +651,6 @@ export function App() {
     setCareFocus(item.kind === "task" ? "task" : "general");
     setTab("care");
   }
-
-  useEffect(() => {
-    const onNav = (ev: Event) => {
-      const detail = (ev as CustomEvent<{ tab?: NavTab; focus?: string }>).detail;
-      if (!detail?.tab || detail.tab === "relay") return;
-      setTab(detail.tab);
-      setRelayOpen(false);
-      if (detail.focus === "emergency") {
-        window.setTimeout(() => {
-          document
-            .getElementById("emergency-snapshot")
-            ?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 160);
-      }
-    };
-    window.addEventListener("cr-navigate", onNav);
-    return () => window.removeEventListener("cr-navigate", onNav);
-  }, []);
 
   function onNavChange(t: NavTab) {
     setTab(t);

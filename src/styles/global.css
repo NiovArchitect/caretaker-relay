@@ -131,8 +131,9 @@
   --cr-relay-w: min(400px, 32vw);
   --cr-top-h: 72px;
   --cr-tap: 48px;
-  --cr-blur: 28px;
-  --cr-blur-strong: 40px;
+  /* P0 recovery: keep light frost only — large blurs caused blank/black frames */
+  --cr-blur: 8px;
+  --cr-blur-strong: 12px;
 
   /* legacy aliases used in some components */
   --cr-muted: var(--cr-ink-3);
@@ -3412,4 +3413,80 @@ p {
   .attention-card {
     background: rgba(255, 255, 255, 0.96);
   }
+}
+
+/* ==========================================================================
+   P0 LIVE AVAILABILITY — compositor / scroll recovery
+   Nested backdrop-filter + multi-layer blur on scrolling sections caused
+   blank shells after React remount and black frames on scroll (Safari/GPU).
+   Prefer opaque/near-opaque surfaces; keep light brand tint without GPU cost.
+   ========================================================================== */
+
+.section,
+.attention-card,
+.member-card,
+.document-card,
+.workspace,
+.sidenav,
+.bottom-nav,
+.today-scan-cell,
+.today-command-cell,
+.ambient-watch-strip,
+.coord-composer-sticky {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.section,
+.attention-card,
+.member-card,
+.document-card {
+  background: rgba(255, 255, 255, 0.94) !important;
+}
+
+.cr-shell,
+.app-shell[data-testid="app-shell"]:not(:has(.cr-shell)) {
+  backdrop-filter: blur(8px) saturate(1.1) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(1.1) !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+}
+
+.topbar {
+  backdrop-filter: blur(10px) saturate(1.1) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(1.1) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+}
+
+.relay-panel {
+  backdrop-filter: blur(10px) saturate(1.1) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(1.1) !important;
+  background: rgba(248, 252, 255, 0.96) !important;
+}
+
+/* Stop infinite ambient orb animation (GPU thrash on low-end / Safari) */
+.cr-login-ambient::before,
+.cr-login-ambient::after,
+.cr-ambient::before,
+.cr-ambient::after {
+  animation: none !important;
+  will-change: auto !important;
+  filter: blur(40px) !important;
+  opacity: 0.35 !important;
+}
+
+.cr-login-panel {
+  backdrop-filter: blur(16px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.2) !important;
+}
+
+.cr-login-wait-hint {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+/* Prefer auto over smooth scroll for reliability under load */
+.workspace {
+  scroll-behavior: auto;
 }
