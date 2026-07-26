@@ -15,6 +15,7 @@ import {
   defaultCoordinationTarget,
   isSelfMessageTarget,
 } from "../lib/messageTarget";
+import type { RoleExperience } from "../lib/roleExperience";
 
 type RelayMode = "relay" | "messages";
 
@@ -48,6 +49,7 @@ export function RelayPanel({
   coordFocusPersonId,
   coordFocusKey = 0,
   activeRecipientId,
+  roleExperience,
 }: {
   open: boolean;
   messages: RelayMessage[];
@@ -68,6 +70,8 @@ export function RelayPanel({
   coordFocusKey?: number;
   /** Active care recipient — rebinds coordination when switched. */
   activeRecipientId?: string;
+  /** Role-aware tone (copy only; server authorizes retrieval). */
+  roleExperience?: RoleExperience | null;
 }) {
   const rid = activeRecipientId ?? loadActiveCareRecipientId();
   const space = resolveCareSpace(rid);
@@ -294,11 +298,13 @@ export function RelayPanel({
             <span className="relay-pulse" aria-hidden />
             {mode === "relay" ? "Relay" : "Coordination"}
           </div>
-          <div className="relay-panel-sub">
+          <div className="relay-panel-sub" data-testid="relay-role-tone">
             {mode === "relay"
               ? correcting
                 ? "Correction mode. Prior evidence stays on record."
-                : `Ask or update about ${space.displayName}`
+                : roleExperience?.relayTone
+                  ? roleExperience.relayTone
+                  : `Ask or update about ${space.displayName}`
               : `Messages with ${space.displayName}'s care circle`}
           </div>
         </div>

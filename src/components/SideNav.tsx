@@ -1,7 +1,8 @@
 import type { NavTab } from "../domain/types";
 import { NAV_ICONS } from "./NavIcons";
+import type { RoleExperience } from "../lib/roleExperience";
 
-const items: { id: Exclude<NavTab, "relay">; label: string }[] = [
+const DEFAULT_ITEMS: { id: Exclude<NavTab, "relay">; label: string }[] = [
   { id: "today", label: "Today" },
   { id: "care", label: "Care" },
   { id: "people", label: "People" },
@@ -11,10 +12,16 @@ const items: { id: Exclude<NavTab, "relay">; label: string }[] = [
 export function SideNav({
   tab,
   onChange,
+  roleExperience,
 }: {
   tab: NavTab;
   onChange: (t: NavTab) => void;
+  roleExperience?: RoleExperience | null;
 }) {
+  const items = DEFAULT_ITEMS.map((item) => ({
+    ...item,
+    label: roleExperience?.navLabels[item.id] ?? item.label,
+  }));
   return (
     <nav className="sidenav" aria-label="Primary">
       <div className="sidenav-label">Navigate</div>
@@ -36,7 +43,10 @@ export function SideNav({
           </button>
         );
       })}
-      <div className="sidenav-foot">Care for who needs you today.</div>
+      <div className="sidenav-foot" data-testid="sidenav-role-foot">
+        {roleExperience?.orientation?.slice(0, 80) ??
+          "Care for who needs you today."}
+      </div>
     </nav>
   );
 }

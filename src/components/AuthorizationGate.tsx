@@ -4,15 +4,21 @@ import {
   loadAuthorizationState,
   submitAccessRequest,
 } from "../lib/authorization";
-import { ESTABLISHED_ACTIONS, loadOnboardingDraft, saveOnboardingDraft } from "../lib/onboarding";
+import { loadOnboardingDraft, saveOnboardingDraft } from "../lib/onboarding";
 import {
   careCreateProvisional,
   careSubmitAccessRequest,
 } from "../foundation/careHttpClient";
+import {
+  claimFromPath,
+  gateActionsForClaim,
+  resolveRoleExperience,
+} from "../lib/roleExperience";
 
 /**
  * Shown when authenticated account has zero authorized care recipients.
  * Never lists or assumes existing recipients.
+ * Role claim only shapes guidance — never grants access.
  */
 export function AuthorizationGate({
   displayName,
@@ -23,11 +29,17 @@ export function AuthorizationGate({
 }) {
   const authz = loadAuthorizationState();
   const draft = loadOnboardingDraft();
+  const claim = claimFromPath(draft.path);
+  const roleXp = resolveRoleExperience({
+    carePersonId: null,
+    authorized: false,
+  });
   const wantsNewCare =
     draft.intent === "set_up_care" ||
     (draft.helpersNote ?? "").includes("set_up_care_new_provisional");
+  const wantsInvite = claim === "invited" || draft.intent === "accept_invite";
   const [mode, setMode] = useState<"home" | "request" | "invite" | "provisional">(
-    wantsNewCare ? "provisional" : "home",
+    wantsNewCare ? "provisional" : wantsInvite ? "invite" : "home",
   );
   const [recipientName, setRecipientName] = useState("");
   const [relationship, setRelationship] = useState("");
@@ -106,14 +118,18 @@ export function AuthorizationGate({
   return (
     <div className="section surface-known" data-testid="authorization-gate">
       <div className="greeting">
-        <h1>Connect to care</h1>
+        <h1 data-testid="authz-role-title">{roleXp.todayTitle}</h1>
         <p className="for-person">Signed in as {displayName}</p>
+        <p className="badge badge-teal" data-testid="authz-role-badge">
+          {roleXp.badge}
+        </p>
       </div>
       <p className="muted section-lead" data-testid="authz-zero-recipients">
-        Your account is ready. You are not connected to any care recipient yet.
-        Selecting a role or typing a name does not open someone’s care record.
-        Access requires an invitation or approval. Setting up care for someone
-        new creates a provisional profile only — it never finds an existing person.
+        {roleXp.gateLead} A role claim never opens a care record. Access requires
+        invitation, approval, assignment, or provisional activation.
+      </p>
+      <p className="muted" data-testid="authz-role-orientation">
+        {roleXp.orientation}
       </p>
 
       {status && (
@@ -124,26 +140,25 @@ export function AuthorizationGate({
 
       {mode === "home" && (
         <div className="onboarding-choices" role="list">
-          {ESTABLISHED_ACTIONS.filter((a) => a.id !== "manage_recipients").map(
-            (a) => (
-              <button
-                key={a.id}
-                type="button"
-                className="onboarding-choice"
-                data-testid={`authz-action-${a.id}`}
-                onClick={() => {
-                  if (a.id === "request_access") goRequest();
-                  else if (a.id === "join_circle") setMode("invite");
-                  else if (a.id === "add_recipient") setMode("provisional");
-                }}
-              >
-                <strong>{a.title}</strong>
-                <span className="muted" style={{ display: "block", marginTop: 4 }}>
-                  {a.detail}
-                </span>
-              </button>
-            ),
-          )}
+          {gateActionsForClaim(claim).map((a) => (
+            <button
+              key={`${a.id}-${a.title}`}
+              type="button"
+              className="onboarding-choice"
+              data-testid={`authz-action-${a.id}`}
+              disabled={a.mode === null}
+              onClick={() => {
+                if (a.mode === "request") goRequest();
+                else if (a.mode === "invite") setMode("invite");
+                else if (a.mode === "provisional") setMode("provisional");
+              }}
+            >
+              <strong>{a.title}</strong>
+              <span className="muted" style={{ display: "block", marginTop: 4 }}>
+                {a.detail}
+              </span>
+            </button>
+          ))}
         </div>
       )}
 

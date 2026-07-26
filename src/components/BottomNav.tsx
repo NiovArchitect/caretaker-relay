@@ -1,7 +1,8 @@
 import type { NavTab } from "../domain/types";
 import { NAV_ICONS } from "./NavIcons";
+import type { RoleExperience } from "../lib/roleExperience";
 
-const items: { id: NavTab; label: string }[] = [
+const DEFAULT_ITEMS: { id: NavTab; label: string }[] = [
   { id: "today", label: "Today" },
   { id: "care", label: "Care" },
   { id: "people", label: "People" },
@@ -12,10 +13,19 @@ const items: { id: NavTab; label: string }[] = [
 export function BottomNav({
   tab,
   onChange,
+  roleExperience,
 }: {
   tab: NavTab;
   onChange: (t: NavTab) => void;
+  roleExperience?: RoleExperience | null;
 }) {
+  const items = DEFAULT_ITEMS.map((item) => ({
+    ...item,
+    label:
+      item.id === "documents"
+        ? (roleExperience?.navLabels.documents ?? "Docs").slice(0, 10)
+        : (roleExperience?.navLabels[item.id] ?? item.label),
+  }));
   return (
     <nav className="bottom-nav" aria-label="Main">
       {items.map((item) => {

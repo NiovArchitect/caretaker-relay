@@ -24,6 +24,8 @@ import {
   loadOnboardingDraft,
   saveOnboardingDraft,
 } from "../lib/onboarding";
+import { resolveRoleExperience } from "../lib/roleExperience";
+import { hasAuthorizedRecipient } from "../lib/careContext";
 
 export function TodayPage({
   relayHandled,
@@ -42,6 +44,12 @@ export function TodayPage({
   const session = getSessionIdentity();
   const space = resolveCareSpace(loadActiveCareRecipientId());
   const recipientName = space.displayName;
+  const authorized = hasAuthorizedRecipient(session.carePersonId);
+  const roleXp = resolveRoleExperience({
+    carePersonId: session.carePersonId,
+    authorized,
+    membershipRoleLabel: session.roleLabel,
+  });
   const [proj, setProj] = useState<{
     needsYou: string[];
     attention: TodayAttentionItem[];
@@ -247,14 +255,16 @@ export function TodayPage({
       )}
 
       <section className="today-hero" aria-label="Care context for today">
-        <div className="today-hero-kicker">Today</div>
+        <div className="today-hero-kicker" data-testid="today-role-kicker">
+          {roleXp.todayTitle}
+        </div>
         <h1 data-testid="today-greeting" className="today-hero-recipient">
           <span data-testid="care-recipient-label">{recipientName}</span>
         </h1>
-        <p className="muted today-hero-lead">
+        <p className="muted today-hero-lead" data-testid="today-role-orientation">
           {isLightweight
             ? `${recipientName}'s circle is available — enrich Care when you are ready.`
-            : "Scan what needs you, what changed, and who is helping."}
+            : roleXp.orientation}
         </p>
         <div className="today-hero-caregiver">
           <span>
@@ -263,8 +273,20 @@ export function TodayPage({
               {session.displayName}
             </strong>
           </span>
-          <span className="badge badge-teal">{session.roleLabel}</span>
+          <span className="badge badge-teal" data-testid="today-role-badge">
+            {roleXp.badge}
+          </span>
         </div>
+        {roleXp.priorities.length > 0 && (
+          <ul
+            className="list-plain today-role-priorities"
+            data-testid="today-role-priorities"
+          >
+            {roleXp.priorities.map((p) => (
+              <li key={p}>{p}</li>
+            ))}
+          </ul>
+        )}
 
         {/* AHA 1 — five-second orientation (no hunting) */}
         <div

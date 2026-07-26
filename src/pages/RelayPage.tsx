@@ -1,23 +1,35 @@
 import type { RelayMessage } from "../domain/types";
+import type { RoleExperience } from "../lib/roleExperience";
 
 export function RelayPage({
   messages,
   onUseDemo,
   correcting,
+  roleExperience,
 }: {
   messages: RelayMessage[];
   onUseDemo: () => void;
   correcting?: boolean;
+  /** Role-aware copy only — server still authorizes retrieval. */
+  roleExperience?: RoleExperience | null;
 }) {
+  const roleHint = roleExperience?.relayTone;
   return (
     <>
       <div className="greeting">
-        <h1>Relay</h1>
-        <p className="muted" style={{ marginTop: 0 }}>
+        <h1>{roleExperience?.navLabels.relay ?? "Relay"}</h1>
+        <p className="muted" style={{ marginTop: 0 }} data-testid="relay-role-lead">
           {correcting
             ? "Correcting a previous note — prior evidence stays on record"
-            : "Voice first · text second · same care context"}
+            : roleHint
+              ? roleHint
+              : "Voice first · text second · same care context"}
         </p>
+        {roleExperience?.badge && (
+          <p className="badge badge-teal" data-testid="relay-role-badge">
+            {roleExperience.badge}
+          </p>
+        )}
       </div>
 
       <div className="relay-thread" aria-live="polite" data-testid="relay-thread">

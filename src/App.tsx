@@ -23,6 +23,7 @@ import { HandoffPanel } from "./components/HandoffPanel";
 import { LoginGate } from "./components/LoginGate";
 import { CaretakerRelayLogo } from "./components/BrandMark";
 import { AuthorizationGate } from "./components/AuthorizationGate";
+import { resolveRoleExperience } from "./lib/roleExperience";
 import { TodayPage } from "./pages/TodayPage";
 import { CarePage } from "./pages/CarePage";
 import { PeoplePage } from "./pages/PeoplePage";
@@ -110,6 +111,13 @@ export function App() {
   );
   const hasCareAccess =
     !!session && hasAuthorizedRecipient(session.carePersonId);
+  const roleXp = session
+    ? resolveRoleExperience({
+        carePersonId: session.carePersonId,
+        authorized: hasCareAccess,
+        membershipRoleLabel: session.roleLabel,
+      })
+    : null;
 
   // Server notification transport health (poll — EventSource cannot send Bearer)
   // Count is recipient-scoped when possible to avoid cross-person "726 new" noise.
@@ -773,8 +781,12 @@ export function App() {
                   ? activeSpace.displayName
                   : "No recipient connected"}
               </div>
-              <div className="muted recipient-chip-role">
-                {hasCareAccess ? "Care recipient" : "Authorization required"}
+              <div
+                className="muted recipient-chip-role"
+                data-testid="role-experience-badge"
+              >
+                {roleXp?.badge ??
+                  (hasCareAccess ? "Care recipient" : "Authorization required")}
               </div>
             </div>
           </div>
@@ -945,7 +957,11 @@ export function App() {
         </div>
       </header>
 
-      <SideNav tab={workspaceTab} onChange={onNavChange} />
+      <SideNav
+        tab={workspaceTab}
+        onChange={onNavChange}
+        roleExperience={roleXp}
+      />
 
       <main className="workspace" aria-label={pageTitle}>
         <div className="workspace-inner" key={activeRecipientId} data-testid="active-recipient-surface" data-recipient={activeRecipientId}>
@@ -1052,11 +1068,13 @@ export function App() {
         coordFocusPersonId={coordFocusPersonId}
         coordFocusKey={coordFocusKey}
         activeRecipientId={activeRecipientId}
+        roleExperience={roleXp}
       />
 
       <BottomNav
         tab={tab === "relay" ? "relay" : workspaceTab}
         onChange={onNavChange}
+        roleExperience={roleXp}
       />
 
       <footer className="status-bar">

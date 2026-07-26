@@ -1,16 +1,20 @@
-# Role Journey Coherence Audit — 2026-07-26
+# Role Journey Coherence Audit — 2026-07-26 (updated role OS)
 
-| Role | Entry | AuthZ | Surfaces | Relay | Issues fixed |
-|------|-------|-------|----------|-------|--------------|
-| Pending / new account | Create account | 0 recipients | AuthorizationGate | Denied | Server register durable |
-| Family caregiver | Lab or invite | Membership | Full care | Scoped | Existing user labels |
-| Family/friend | Invite/approve | Limited scope | Subset | Min-necessary | Scope API |
-| DSP / paid | Seed membership | Limited | Shift-relevant | Scoped | Field projection |
-| Clinician | Seed | Clinical categories | Care/People | Scoped | No admin by default |
+| Role | Entry | AuthZ | Surfaces | Relay | Status |
+|------|-------|-------|----------|-------|--------|
+| Pending / new account | Create account | 0 recipients | Role-specific AuthorizationGate | Denied | PASS |
+| Family/friend claim | Path claim | 0 until invite/request/provisional | Family gate order + Today labels | Tone only until authz | PASS claim; authz path prior |
+| Receiving care claim | Path claim | 0 until profile/invite | My day / helpers / privacy note | Recipient tone | PARTIAL product depth |
+| DSP claim | Path claim | 0 until assignment | Shift gate + Shift nav | Briefing tone | PARTIAL assignment UX |
+| Clinician claim | Path claim | 0 until verification | Clinical gate + Summary | Evidence tone | PARTIAL / EXTERNAL credentialing |
+| Invited claim | Path claim | 0 until code accept | Invite-first gate | Wait | PARTIAL accept UX |
+| Family caregiver active | Membership | Recipient-scoped | Full care | Scoped | PASS (lab/membership) |
+| DSP active | Assignment | Time-bounded scope | Shift framing | Scoped | PARTIAL |
+| Clinician active | Relationship | Clinical categories | Clinical framing | Provenance | PARTIAL |
+| Recipient self active | Self membership | Self | Access control primary | Direct speech | PARTIAL |
 | Org admin | N/A product | — | — | — | EXTERNAL |
-| Recipient self | Future | Self | All | All | Partial product |
-| Personal rep | EXTERNAL | — | — | — | Legal EXTERNAL |
-| Revoked | After revoke | None | Gate/deny | 403 | Immediate |
-| Suspended | Suspend API | Account block | Deny | Deny | Session wipe |
+| Personal rep | EXTERNAL | — | — | — | EXTERNAL |
+| Revoked | After revoke | None | Gate/deny | 403 | PASS |
+| Suspended | Suspend API | Account block | Deny | Deny | PASS |
 
-Coherence: **COHERENT** for care product roles with EXTERNAL for rep/credentialing.
+See `ROLE_SPECIFIC_CARE_OS.md`. Coherence: **PARTIAL** for full ambient OS; **PASS** for claim-only zero-access + role-aware shell.
