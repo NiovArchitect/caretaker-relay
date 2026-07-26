@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Concept 2 Trusted Interlock hero">
+  <defs>
+    <linearGradient id="c2a" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0B2430"/>
+      <stop offset="55%" stop-color="#163F4E"/>
+      <stop offset="100%" stop-color="#2A6A7A"/>
+    </linearGradient>
+    <linearGradient id="c2b" x1="100%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#0C5C6A"/>
+      <stop offset="60%" stop-color="#1F8A9A"/>
+      <stop offset="100%" stop-color="#7EC8D4"/>
+    </linearGradient>
+    <linearGradient id="c2lite" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Two interlocking soft volumes create protected central void -->
+  <path d="M28 34
+           C18 42 16 58 24 70
+           C32 82 48 88 62 84
+           L58 74
+           C48 78 36 74 32 64
+           C28 54 30 44 38 40 Z" fill="url(#c2a)"/>
+  <path d="M100 94
+           C110 86 112 70 104 58
+           C96 46 80 40 66 44
+           L70 54
+           C80 50 92 54 96 64
+           C100 74 98 84 90 88 Z" fill="url(#c2b)"/>
+  <!-- Bevel faces -->
+  <path d="M38 40 C30 44 28 54 32 64 C36 74 48 78 58 74 L62 84 C48 88 32 82 24 70 C20 62 20 52 24 44 Z" fill="url(#c2lite)"/>
+  <path d="M90 88 C98 84 100 74 96 64 C92 54 80 50 70 54 L66 44 C80 40 96 46 104 58 C108 66 108 76 104 84 Z" fill="url(#c2lite)" opacity="0.5"/>
+  <!-- Protected center — negative space framed, no figure -->
+  <ellipse cx="64" cy="64" rx="11" ry="13" fill="#F3F6F8"/>
+  <ellipse cx="64" cy="64" rx="7" ry="8" fill="none" stroke="#C4A574" stroke-width="2.5" opacity="0.85"/>
+</svg>

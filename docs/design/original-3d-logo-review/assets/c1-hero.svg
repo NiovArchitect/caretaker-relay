@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Concept 1 Continuity Object hero">
+  <defs>
+    <linearGradient id="c1-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3AA8B8"/>
+      <stop offset="45%" stop-color="#1F8A9A"/>
+      <stop offset="100%" stop-color="#0C5C6A"/>
+    </linearGradient>
+    <linearGradient id="c1-side" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#163F4E"/>
+      <stop offset="100%" stop-color="#0B2430"/>
+    </linearGradient>
+    <linearGradient id="c1-hi" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E8F6F8" stop-opacity="0.55"/>
+      <stop offset="40%" stop-color="#E8F6F8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Sculpted continuous carrier — single folded band transferring volume (not arrow, not infinity) -->
+  <path d="M22 78
+           C18 62 28 42 48 36
+           C62 31 78 36 86 50
+           L94 48
+           C84 28 60 20 40 28
+           C18 36 8 60 16 82 Z" fill="url(#c1-side)"/>
+  <path d="M24 74
+           C22 58 34 42 52 38
+           C68 34 82 40 88 54
+           C78 46 64 42 52 46
+           C38 51 28 62 28 74 Z" fill="url(#c1-top)"/>
+  <path d="M52 38 C68 34 82 40 88 54 L96 52 C88 34 68 26 50 32 Z" fill="url(#c1-hi)"/>
+  <!-- Forward mass — continuity object carried through the band -->
+  <ellipse cx="92" cy="58" rx="14" ry="11" fill="url(#c1-top)"/>
+  <ellipse cx="90" cy="56" rx="8" ry="6" fill="#D4E8EC" opacity="0.35"/>
+  <path d="M78 62 C84 70 94 72 102 66 L98 74 C88 78 78 74 74 66 Z" fill="url(#c1-side)"/>
+</svg>

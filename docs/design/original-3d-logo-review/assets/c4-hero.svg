@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Concept 4 Coherent Handoff hero">
+  <defs>
+    <linearGradient id="c4l" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2A6A7A"/>
+      <stop offset="100%" stop-color="#0B2430"/>
+    </linearGradient>
+    <linearGradient id="c4r" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7EC8D4"/>
+      <stop offset="100%" stop-color="#0C5C6A"/>
+    </linearGradient>
+    <linearGradient id="c4join" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C4A574"/>
+      <stop offset="50%" stop-color="#E8D5B0"/>
+      <stop offset="100%" stop-color="#C4A574"/>
+    </linearGradient>
+  </defs>
+  <!-- Two precision plates meeting — collaboration without hands -->
+  <path d="M18 40 L54 28 L54 100 L18 88 Z" fill="url(#c4l)"/>
+  <path d="M18 40 L54 28 L54 40 L22 50 Z" fill="#4A90A0" opacity="0.55"/>
+  <path d="M74 28 L110 40 L110 88 L74 100 Z" fill="url(#c4r)"/>
+  <path d="M74 28 L110 40 L106 50 L74 40 Z" fill="#B8E0E8" opacity="0.35"/>
+  <!-- Transfer join — the signature moment of relay -->
+  <rect x="50" y="50" width="28" height="28" rx="4" fill="url(#c4join)" transform="rotate(45 64 64)"/>
+  <rect x="56" y="56" width="16" height="16" rx="2" fill="#0B2430" opacity="0.2" transform="rotate(45 64 64)"/>
+  <circle cx="64" cy="64" r="4" fill="#0B2430"/>
+</svg>

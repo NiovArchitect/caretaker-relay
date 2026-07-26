@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Concept 3 Care Signal hero">
+  <defs>
+    <linearGradient id="c3tube" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0B2430"/>
+      <stop offset="50%" stop-color="#163F4E"/>
+      <stop offset="100%" stop-color="#0B2430"/>
+    </linearGradient>
+    <linearGradient id="c3core" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0C5C6A"/>
+      <stop offset="50%" stop-color="#3AA8B8"/>
+      <stop offset="100%" stop-color="#0C5C6A"/>
+    </linearGradient>
+    <linearGradient id="c3node" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E8F6F8"/>
+      <stop offset="35%" stop-color="#1F8A9A"/>
+      <stop offset="100%" stop-color="#0C5C6A"/>
+    </linearGradient>
+  </defs>
+  <!-- Closed precision conduit — not Wi-Fi bars -->
+  <rect x="18" y="48" width="92" height="32" rx="16" fill="url(#c3tube)"/>
+  <rect x="24" y="54" width="80" height="20" rx="10" fill="url(#c3core)" opacity="0.55"/>
+  <rect x="24" y="54" width="80" height="6" rx="3" fill="#FFFFFF" opacity="0.12"/>
+  <!-- Single elongated intelligence node in channel -->
+  <ellipse cx="72" cy="64" rx="22" ry="12" fill="url(#c3node)"/>
+  <ellipse cx="68" cy="60" rx="10" ry="5" fill="#FFFFFF" opacity="0.28"/>
+  <!-- Soft end caps suggesting sealed continuity -->
+  <circle cx="26" cy="64" r="9" fill="#0B2430"/>
+  <circle cx="102" cy="64" r="9" fill="#0B2430"/>
+  <circle cx="26" cy="64" r="4" fill="#1F8A9A" opacity="0.7"/>
+  <circle cx="102" cy="64" r="4" fill="#C4A574" opacity="0.85"/>
+</svg>

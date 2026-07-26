@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Concept 2 Trusted Interlock product">
+  <path d="M14 18 C8 24 8 36 14 44 C20 52 32 54 40 50 L36 44 C30 48 22 46 18 40 C14 34 14 26 20 22 Z" fill="#0B2430"/>
+  <path d="M50 46 C56 40 56 28 50 20 C44 12 32 10 24 14 L28 20 C34 16 42 18 46 24 C50 30 50 38 44 42 Z" fill="#1F8A9A"/>
+  <ellipse cx="32" cy="32" rx="7" ry="8" fill="none" stroke="#0B2430" stroke-width="2.5"/>
+</svg>

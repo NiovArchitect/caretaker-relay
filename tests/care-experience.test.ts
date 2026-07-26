@@ -277,57 +277,44 @@ describe("production logo system", () => {
     expect(logoPalette("white").relay).toBe(LOGO_COLORS.white);
   });
 
-  it("production logo is founder-selected Option A Protected Relay", () => {
+  it("temporary live logo is wordmark-only while original 3D review is open", () => {
     const logo = readFileSync(
       join(process.cwd(), "src/components/brand/CaretakerRelayLogo.tsx"),
       "utf8",
     );
-    const symbol = readFileSync(
-      join(process.cwd(), "src/components/brand/CaretakerRelaySymbol.tsx"),
-      "utf8",
-    );
-    expect(logo).toContain("option-a-production");
-    expect(logo).toContain("showSymbol = true");
+    expect(logo).toContain("wordmark-only-provisional");
     expect(logo).toContain("Caretaker");
     expect(logo).toContain("Relay");
-    expect(symbol).toContain("LogoOptionA");
-    expect(symbol).toContain("Protected Relay");
+    expect(logo).not.toContain("option-a-production");
   });
 
-  it("refinement options A/B/C exist as SVG-only source", () => {
-    const src = readFileSync(
-      join(process.cwd(), "src/components/brand/logoRefinements.tsx"),
-      "utf8",
-    );
-    expect(src).toContain("LogoOptionA");
-    expect(src).toContain("LogoOptionB");
-    expect(src).toContain("LogoOptionC");
-    expect(src).not.toContain("feGaussianBlur");
-    expect(src).not.toContain("backdrop-filter");
+  it("original 3D concept assets exist (four independent systems)", () => {
+    const base = join(process.cwd(), "docs/design/original-3d-logo-review/assets");
+    for (const id of ["c1", "c2", "c3", "c4"]) {
+      expect(existsSync(join(base, `${id}-hero.svg`))).toBe(true);
+      expect(existsSync(join(base, `${id}-flat.svg`))).toBe(true);
+      expect(existsSync(join(base, `${id}-micro.svg`))).toBe(true);
+    }
+    expect(
+      existsSync(
+        join(process.cwd(), "docs/design/original-3d-logo-review/comparison.html"),
+      ),
+    ).toBe(true);
   });
 
-  it("BrandMark is Option A, not rejected pin emblem", () => {
+  it("BrandMark is provisional CR monogram, not Option A", () => {
     const src = readFileSync(
       join(process.cwd(), "src/components/BrandMark.tsx"),
       "utf8",
     );
-    expect(src).toContain("CaretakerRelaySymbol");
-    expect(src).toContain("Option A");
-    expect(src).not.toContain("conic-gradient");
+    expect(src).toContain("provisional-cr-monogram");
+    expect(src).not.toContain("LogoOptionA");
   });
 
-  it("favicon is micro-mark (not rejected pin triangle)", () => {
+  it("favicon is provisional CR monogram", () => {
     const fav = readFileSync(join(process.cwd(), "public/favicon.svg"), "utf8");
-    expect(fav).toContain("viewBox=\"0 0 32 32\"");
-    expect(fav).toContain("Option A micro");
-    expect(fav).not.toContain("L39.2 42.5");
-    expect(
-      existsSync(
-        join(
-          process.cwd(),
-          "docs/design/logo-refinement/comparison.html",
-        ),
-      ),
-    ).toBe(true);
+    expect(fav).toContain("Provisional CR monogram");
+    expect(fav).toContain(">CR</text>");
+    expect(fav).not.toContain("Option A");
   });
 });
