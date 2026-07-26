@@ -128,6 +128,38 @@ export function PeoplePage({
         </div>
       </section>
 
+      <section
+        className="section surface-known privacy-access-card"
+        aria-label="Privacy and access"
+        data-testid="privacy-access-card"
+      >
+        <h2>Privacy, dignity, and access</h2>
+        <p className="muted section-lead">
+          Only authorized people in {space.displayName}&apos;s care circle can
+          see care information. Access is role-scoped: what someone can see and
+          do is listed on each person. Invitation and acceptance are logged.
+          Relay never shares across care recipients.
+        </p>
+        <ul className="list-plain">
+          <li>
+            <strong>You are signed in as</strong> {session.displayName} ·{" "}
+            {session.roleLabel}
+          </li>
+          <li>
+            <strong>Active care recipient:</strong> {space.displayName} (switch
+            only from your profile menu when authorized)
+          </li>
+          <li>
+            <strong>Export / portability:</strong> Documents → Prepare care
+            summary — review before any share
+          </li>
+          <li>
+            <strong>Revocation:</strong> invitation and access changes are
+            enforced server-side; unauthorized principals are denied
+          </li>
+        </ul>
+      </section>
+
       <section className="section" aria-label="Care circle">
         <h2>Authorized people</h2>
         {loading && <p className="muted cr-empty">Loading care circle…</p>}

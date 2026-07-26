@@ -495,10 +495,17 @@ function AboutRecipientPanel({
       </div>
 
       <div
-        className="surface-verify care-panel"
+        className="surface-verify care-panel emergency-snapshot"
         data-testid="emergency-snapshot-card"
+        id="emergency-snapshot"
       >
         <h3 className="care-panel-title">Essential / emergency</h3>
+        <p className="attention-limit emergency-disclaimer" role="note">
+          For a medical emergency, call your local emergency number (for example
+          911 in the U.S.). Caretaker Relay does not diagnose emergencies, dispatch
+          responders, or replace emergency services. This card only shows
+          authorized information already on file.
+        </p>
         <ul className="list-plain">
           <li>{ageLine()}</li>
           <li>
@@ -516,12 +523,20 @@ function AboutRecipientPanel({
             <li key={String(c.name)}>
               Contact: {String(c.name)}
               {c.relationship ? ` · ${String(c.relationship)}` : ""}
-              {c.phone ? ` · ${String(c.phone)}` : ""}
+              {c.phone ? (
+                <>
+                  {" "}
+                  ·{" "}
+                  <a href={`tel:${String(c.phone)}`}>{String(c.phone)}</a>
+                </>
+              ) : (
+                ""
+              )}
             </li>
           ))}
         </ul>
         {p.profileSourceSummary ? (
-          <p className="muted" style={{ fontSize: "0.8rem", marginBottom: 0 }}>
+          <p className="muted meta-time" style={{ marginBottom: 0 }}>
             {String(p.profileSourceSummary)}
           </p>
         ) : null}

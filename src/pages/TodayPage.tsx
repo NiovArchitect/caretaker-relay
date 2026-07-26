@@ -154,37 +154,90 @@ export function TodayPage({
           <span className="badge badge-teal">{session.roleLabel}</span>
         </div>
 
-        <div className="today-command-strip" data-testid="today-command-strip">
-          <div className="today-command-cell">
+        {/* AHA 1 — five-second orientation (no hunting) */}
+        <div
+          className="today-scan-grid"
+          data-testid="today-command-strip"
+          aria-label="Five-second care scan"
+        >
+          <div className="today-scan-cell">
             <div className="label">Who</div>
             <div className="value">{recipientName}</div>
           </div>
-          <div className="today-command-cell">
-            <div className="label">Attention</div>
+          <div className="today-scan-cell today-scan-attention">
+            <div className="label">Needs you</div>
             <div className="value">
               {notifications.length === 0
                 ? "Nothing urgent"
-                : `${notifications.length} item${notifications.length === 1 ? "" : "s"}`}
+                : notifications[0]?.title ??
+                  `${notifications.length} item${notifications.length === 1 ? "" : "s"}`}
             </div>
           </div>
-          <div className="today-command-cell">
-            <div className="label">Coming up</div>
+          <div className="today-scan-cell">
+            <div className="label">Changed</div>
             <div className="value">
-              {next[0] ?? "See schedule in Care"}
+              {whatChanged[0] ??
+                (organizedCount
+                  ? `${organizedCount} updates on file`
+                  : "No new events listed")}
+            </div>
+          </div>
+          <div className="today-scan-cell">
+            <div className="label">Already handled</div>
+            <div className="value">
+              {handled[0] ?? "Nothing marked handled yet"}
+            </div>
+          </div>
+          <div className="today-scan-cell">
+            <div className="label">Coming up</div>
+            <div className="value">{next[0] ?? "See Care schedule"}</div>
+          </div>
+          <div className="today-scan-cell">
+            <div className="label">Who is helping</div>
+            <div className="value">
+              {coverageSummary ||
+                "Open People for the authorized care circle"}
             </div>
           </div>
         </div>
 
+        {/* Ambient AI — what the system notices without being asked */}
+        <section
+          className="ambient-watch-strip"
+          data-testid="ambient-watch-strip"
+          aria-label="What Relay watches for you"
+        >
+          <h2 className="ambient-watch-title">What Relay watches for you</h2>
+          <p className="muted ambient-watch-lead">
+            Relay surfaces open medication checks, new care-circle messages,
+            recent reports, and upcoming appointments for{" "}
+            <strong>{recipientName}</strong> — without you having to ask. It
+            never invents a dose or closes a conflict for you.
+          </p>
+          <ul className="ambient-watch-list" data-testid="ambient-watch-list">
+            <li>
+              <strong>Why a notification appears:</strong> something is unread,
+              unresolved, or needs human judgment for this care recipient only.
+            </li>
+            <li>
+              <strong>What you still decide:</strong> confirmations, corrections,
+              and when an item is truly resolved.
+            </li>
+            <li>
+              <strong>Emergency info:</strong> open Care → Essential / emergency
+              for contacts and allergies — Relay does not call emergency
+              services for you.
+            </li>
+          </ul>
+        </section>
+
         {/* 60-second orientation — person first, then priorities */}
         <section
-          className="section surface-known"
-          style={{ marginTop: 16 }}
+          className="section surface-known orientation-card"
           data-testid="orientation-card"
           aria-label="Quick orientation"
         >
-          <h2 style={{ fontSize: "1.05rem", marginBottom: 8 }}>
-            Orient for {recipientName}
-          </h2>
+          <h2 className="orientation-title">Orient for {recipientName}</h2>
           <ul className="list-plain" data-testid="orientation-list">
             <li>
               <strong>You:</strong> {session.displayName} · {session.roleLabel}
@@ -197,8 +250,9 @@ export function TodayPage({
               <li>
                 <strong>Conditions on file:</strong>{" "}
                 {(
-                  (profile.profile as { confirmedConditions: Array<{ label: string }> })
-                    .confirmedConditions ?? []
+                  (profile.profile as {
+                    confirmedConditions: Array<{ label: string }>;
+                  }).confirmedConditions ?? []
                 )
                   .map((c) => c.label)
                   .join("; ") || "none listed"}
@@ -209,7 +263,7 @@ export function TodayPage({
               </li>
             )}
             <li>
-              <strong>Medications:</strong>{" "}
+              <strong>Medications (plan):</strong>{" "}
               {(profile?.medications ?? [])
                 .map((m) => `${String(m.name)} ${String(m.dose ?? "")}`)
                 .join("; ") || "see Care"}
@@ -285,8 +339,67 @@ export function TodayPage({
             </span>
             Review care handoff
           </button>
+          <button
+            type="button"
+            className="btn-verify btn-with-icon"
+            data-testid="open-emergency-snapshot"
+            data-action-kind="verify"
+            onClick={() => {
+              window.location.hash = "#care";
+              // Navigate via custom event so App can switch tab without product rewrite
+              window.dispatchEvent(
+                new CustomEvent("cr-navigate", { detail: { tab: "care", focus: "emergency" } }),
+              );
+            }}
+          >
+            <span className="btn-glyph" aria-hidden>
+              ⚠
+            </span>
+            Essential / emergency info
+          </button>
         </div>
       </section>
+
+      {/* AHA 6 — physician signal, not noise */}
+      {/physician|provider|doctor|clinician/i.test(session.roleLabel) && (
+        <section
+          className="section surface-known physician-signal"
+          data-testid="physician-signal-card"
+          aria-label="Clinic signal summary"
+        >
+          <h2>Clinic signal — {recipientName}</h2>
+          <p className="muted section-lead">
+            Concise picture for clinical review. Caregiver reports stay labeled
+            as reported until confirmed. Relay does not order medications.
+          </p>
+          <div className="pair-grid">
+            <div>
+              <h3 className="care-panel-title">Open verification</h3>
+              <ul className="list-plain">
+                {(proj?.needsYou?.length ? proj.needsYou : ["None flagged"])
+                  .slice(0, 4)
+                  .map((line) => (
+                    <li key={line}>{line}</li>
+                  ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="care-panel-title">Recent changes (timed)</h3>
+              <ul className="list-plain">
+                {(whatChanged.length ? whatChanged : ["None listed"])
+                  .slice(0, 5)
+                  .map((line) => (
+                    <li key={line}>{line}</li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+          <p className="muted meta-time">
+            Administration history and caregiver observations are not the same
+            as the authorized medication plan. Open Care for full provenance.
+          </p>
+        </section>
+      )}
 
       {inbox.length > 0 && (
         <section

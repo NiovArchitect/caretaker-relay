@@ -69,6 +69,10 @@ export type ClassifiedTurn = {
 const QUESTION_RE =
   /\?$|^(what|when|where|who|how|did|does|do|is|are|can|should|has|have|was|were)\b/i;
 
+/** Incoming-shift / ambient continuity cues */
+const SHIFT_BRIEF_RE =
+  /\b(overnight|last shift|before i (got|arrived|came)|what happened|brief me|orient me|catch me up|since (i left|yesterday|last night)|coming on|start(ing)? (my )?(shift|visit))\b/i;
+
 export function classifyPersona(roleLabel: string | undefined | null): CaregiverPersona {
   const r = (roleLabel ?? "").toLowerCase();
   if (/physician|primary care|provider|doctor|clinician|health professional/.test(r)) {
@@ -140,6 +144,7 @@ export function classifyIntent(
   }
 
   if (
+    SHIFT_BRIEF_RE.test(q) ||
     /what changed|since yesterday|since (my )?last|what happened|going on|while daniel|while maya|during my visit|this week/.test(
       q,
     )
@@ -153,6 +158,11 @@ export function classifyIntent(
     // DSP: "since my last visit" is change_since (state delta), not only activity
     if (/since (my )?last visit/.test(q) && !intents.includes("CHANGE_SINCE")) {
       intents.push("CHANGE_SINCE");
+    }
+    // Ambient continuity: also pull open items + handoff framing
+    if (SHIFT_BRIEF_RE.test(q)) {
+      if (!intents.includes("HANDOFF_REVIEW")) intents.push("HANDOFF_REVIEW");
+      if (!intents.includes("TASKS_NOW")) intents.push("TASKS_NOW");
     }
   }
 

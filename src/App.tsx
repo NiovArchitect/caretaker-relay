@@ -632,6 +632,24 @@ export function App() {
     setTab("care");
   }
 
+  useEffect(() => {
+    const onNav = (ev: Event) => {
+      const detail = (ev as CustomEvent<{ tab?: NavTab; focus?: string }>).detail;
+      if (!detail?.tab || detail.tab === "relay") return;
+      setTab(detail.tab);
+      setRelayOpen(false);
+      if (detail.focus === "emergency") {
+        window.setTimeout(() => {
+          document
+            .getElementById("emergency-snapshot")
+            ?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 160);
+      }
+    };
+    window.addEventListener("cr-navigate", onNav);
+    return () => window.removeEventListener("cr-navigate", onNav);
+  }, []);
+
   function onNavChange(t: NavTab) {
     setTab(t);
     if (t === "relay") openRelayForCareUpdate();

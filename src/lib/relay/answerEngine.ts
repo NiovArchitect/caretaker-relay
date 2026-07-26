@@ -399,7 +399,13 @@ function composeAnswer(ctx: {
         "Family-reported items appear as Reported (not automatically confirmed). Document your own observations separately.",
       );
     } else {
-      parts.push(`Here's what changed for ${recipientName} (newest first, with times):`);
+      const ambientBrief =
+        intents.includes("HANDOFF_REVIEW") || intents.includes("TASKS_NOW");
+      parts.push(
+        ambientBrief
+          ? `Incoming continuity for ${recipientName} — what changed, what is still open, and what is next (newest first, with times):`
+          : `Here's what changed for ${recipientName} (newest first, with times):`,
+      );
       const lines = proj.RECENT_CHANGE_LINES?.length
         ? proj.RECENT_CHANGE_LINES.slice(0, 6).map((c) => {
             const who = c.who ? ` · ${c.who}` : "";
