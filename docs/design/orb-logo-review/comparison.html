@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Caretaker Relay — Simple 3D Orb Review</title>
+  <style>
+    :root { --ink:#0B2430; --teal:#1F8A9A; --paper:#F3F6F8; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui,-apple-system,"SF Pro Display",sans-serif; background:var(--paper); color:var(--ink); padding:28px 20px 72px; line-height:1.45; }
+    h1 { font-size:1.4rem; letter-spacing:-0.03em; margin:0 0 8px; }
+    h2 { font-size:1.05rem; margin:28px 0 12px; letter-spacing:-0.02em; }
+    h3 { margin:0 0 6px; font-size:.98rem; }
+    .badge { display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:4px 8px; border-radius:999px; background:#e8f4f6; color:#0C5C6A; }
+    .lead { color:#4a5f6c; max-width:40rem; font-size:.95rem; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }
+    .card { background:#fff; border:1px solid rgba(11,36,48,.1); border-radius:16px; padding:16px; box-shadow:0 8px 22px rgba(11,36,48,.05); }
+    .desc { font-size:.84rem; color:#4a5f6c; margin:0 0 12px; min-height:2.6em; }
+    .hero { display:flex; justify-content:center; align-items:center; padding:28px; border-radius:14px; background:linear-gradient(160deg,#eef5f8,#e2ebf0); }
+    .hero.dark { background:#0B2430; }
+    .hero.white { background:#fff; border:1px solid rgba(11,36,48,.08); }
+    .lockup { display:inline-flex; align-items:center; gap:12px; }
+    .lockup.stack { flex-direction:column; gap:10px; text-align:center; }
+    .wm { font-weight:700; letter-spacing:-0.02em; font-size:1.15rem; }
+    .wm .c { color:#0B2430; }
+    .wm .r { color:#1F8A9A; margin-left:.16em; font-weight:650; }
+    .wm.dark .c { color:#F5FAFC; }
+    .wm.dark .r { color:#9ad4de; }
+    .wm.ink .c,.wm.ink .r { color:#0B2430; }
+    .row { display:flex; flex-wrap:wrap; gap:12px; align-items:end; margin-top:12px; }
+    .sw { display:flex; flex-direction:column; align-items:center; gap:3px; font-size:.66rem; color:#6a7d88; }
+    .mock { display:flex; align-items:center; gap:10px; width:100%; padding:10px 12px; border-radius:12px; background:#fff; border:1px solid rgba(11,36,48,.1); margin-top:10px; }
+    .mock .fill { flex:1; height:8px; background:#eef3f6; border-radius:4px; }
+    .mock.dark { background:#0B2430; border-color:#1a3a48; }
+    .mock.dark .fill { background:#163040; }
+    .rec { margin-top:20px; padding:16px; border-radius:14px; background:#e8f4f6; border:1px solid rgba(12,92,106,.25); }
+    .sizes { font-size:.78rem; color:#4a5f6c; font-family:ui-monospace,monospace; }
+    footer { margin-top:36px; font-size:.8rem; color:#6a7d88; }
+  </style>
+</head>
+<body>
+  <p><span class="badge">One orb · three materials · no symbols</span></p>
+  <h1>Simple 3D orb identity review</h1>
+  <p class="lead">
+    Same geometry. Three material treatments only. Live site stays wordmark-only until you pick
+    <strong>Satin glass</strong>, <strong>Polished ceramic</strong>, or <strong>Soft translucent</strong>.
+  </p>
+
+  <h2>Temporary live</h2>
+  <div class="card">
+    <div class="hero white">
+      <div class="wm" style="font-size:1.35rem"><span class="c">Caretaker</span><span class="r">Relay</span></div>
+    </div>
+    <p class="desc" style="margin-top:10px;min-height:0">No orb deployed. Provisional CR monogram favicon only.</p>
+  </div>
+
+  <h2>Material treatments</h2>
+  <div class="grid">
+    <div class="card" id="m1">
+      <h3>1 · Satin glass</h3>
+      <p class="desc">Cool aqua highlight, translucent mid-tones, deep ink rim. Calm spatial-computing glass.</p>
+      <div class="hero"><img src="assets/orb-satin-glass.svg" width="112" height="112" alt="Satin glass orb"/></div>
+      <div class="hero white" style="margin-top:8px;padding:16px">
+        <div class="lockup"><img src="assets/orb-satin-glass.svg" width="40" height="40" alt=""/><div class="wm"><span class="c">Caretaker</span><span class="r">Relay</span></div></div>
+      </div>
+      <div class="hero dark" style="margin-top:8px;padding:16px">
+        <div class="lockup"><img src="assets/orb-satin-glass.svg" width="40" height="40" alt=""/><div class="wm dark"><span class="c">Caretaker</span><span class="r">Relay</span></div></div>
+      </div>
+      <div class="hero white" style="margin-top:8px;padding:16px">
+        <div class="lockup stack"><img src="assets/orb-satin-glass.svg" width="48" height="48" alt=""/><div class="wm"><span class="c">Caretaker</span><span class="r">Relay</span></div></div>
+      </div>
+      <div class="row">
+        <div class="sw"><img src="assets/orb-favicon-satin.svg" width="16" height="16" alt=""/>16</div>
+        <div class="sw"><img src="assets/orb-favicon-satin.svg" width="24" height="24" alt=""/>24</div>
+        <div class="sw"><img src="assets/orb-favicon-satin.svg" width="32" height="32" alt=""/>32</div>
+        <div class="sw"><img src="assets/orb-mono.svg" width="32" height="32" alt=""/>mono</div>
+      </div>
+      <div class="mock"><img src="assets/orb-satin-glass.svg" width="28" height="28" alt=""/><div class="wm" style="font-size:.95rem"><span class="c">Caretaker</span><span class="r">Relay</span></div><div class="fill"></div></div>
+      <div class="mock dark"><img src="assets/orb-satin-glass.svg" width="28" height="28" alt=""/><div class="wm dark" style="font-size:.95rem"><span class="c">Caretaker</span><span class="r">Relay</span></div><div class="fill"></div></div>
+    </div>
+
+    <div class="card" id="m2">
+      <h3>2 · Polished ceramic</h3>
+      <p class="desc">Denser body, matte-leaning highlight, medical-device substance. Premium without chrome.</p>
+      <div class="hero"><img src="assets/orb-polished-ceramic.svg" width="112" height="112" alt="Polished ceramic orb"/></div>
+      <div class="hero white" style="margin-top:8px;padding:16px">
+        <div class="lockup"><img src="assets/orb-polished-ceramic.svg" width="40" height="40" alt=""/><div class="wm"><span class="c">Caretaker</span><span class="r">Relay</span></div></div>
+      </div>
+      <div class="hero dark" style="margin-top:8px;padding:16px">
+        <div class="lockup"><img src="assets/orb-polished-ceramic.svg" width="40" height="40" alt=""/><div class="wm dark"><span class="c">Caretaker</span><span class="r">Relay</span></div></div>
+      </div>
+      <div class="hero white" style="margin-top:8px;padding:16px">
+        <div class="lockup stack"><img src="assets/orb-polished-ceramic.svg" width="48" height="48" alt=""/><div class="wm"><span class="c">Caretaker</span><span class="r">Relay</span></div></div>
+      </div>
+      <div class="row">
+        <div class="sw"><img src="assets/orb-favicon-ceramic.svg" width="16" height="16" alt=""/>16</div>
+        <div class="sw"><img src="assets/orb-favicon-ceramic.svg" width="24" height="24" alt=""/>24</div>
+        <div class="sw"><img src="assets/orb-favicon-ceramic.svg" width="32" height="32" alt=""/>32</div>
+        <div class="sw"><img src="assets/orb-mono.svg" width="32" height="32" alt=""/>mono</div>
+      </div>
+      <div class="mock"><img src="assets/orb-polished-ceramic.svg" width="28" height="28" alt=""/><div class="wm" style="font-size:.95rem"><span class="c">Caretaker</span><span class="r">Relay</span></div><div class="fill"></div></div>
+      <div class="mock dark"><img src="assets/orb-polished-ceramic.svg" width="28" height="28" alt=""/><div class="wm dark" style="font-size:.95rem"><span class="c">Caretaker</span><span class="r">Relay</span></div><div class="fill"></div></div>
+    </div>
+
+    <div class="card" id="m3">
+      <h3>3 · Soft translucent</h3>
+      <p class="desc">Pale aqua interior, softer light, tiny optional warm core. Most “alive / ambient.”</p>
+      <div class="hero"><img src="assets/orb-soft-translucent.svg" width="112" height="112" alt="Soft translucent orb"/></div>
+      <div class="hero white" style="margin-top:8px;padding:16px">
+        <div class="lockup"><img src="assets/orb-soft-translucent.svg" width="40" height="40" alt=""/><div class="wm"><span class="c">Caretaker</span><span class="r">Relay</span></div></div>
+      </div>
+      <div class="hero dark" style="margin-top:8px;padding:16px">
+        <div class="lockup"><img src="assets/orb-soft-translucent.svg" width="40" height="40" alt=""/><div class="wm dark"><span class="c">Caretaker</span><span class="r">Relay</span></div></div>
+      </div>
+      <div class="hero white" style="margin-top:8px;padding:16px">
+        <div class="lockup stack"><img src="assets/orb-soft-translucent.svg" width="48" height="48" alt=""/><div class="wm"><span class="c">Caretaker</span><span class="r">Relay</span></div></div>
+      </div>
+      <div class="row">
+        <div class="sw"><img src="assets/orb-favicon-translucent.svg" width="16" height="16" alt=""/>16</div>
+        <div class="sw"><img src="assets/orb-favicon-translucent.svg" width="24" height="24" alt=""/>24</div>
+        <div class="sw"><img src="assets/orb-favicon-translucent.svg" width="32" height="32" alt=""/>32</div>
+        <div class="sw"><img src="assets/orb-mono.svg" width="32" height="32" alt=""/>mono</div>
+      </div>
+      <div class="mock"><img src="assets/orb-soft-translucent.svg" width="28" height="28" alt=""/><div class="wm" style="font-size:.95rem"><span class="c">Caretaker</span><span class="r">Relay</span></div><div class="fill"></div></div>
+      <div class="mock dark"><img src="assets/orb-soft-translucent.svg" width="28" height="28" alt=""/><div class="wm dark" style="font-size:.95rem"><span class="c">Caretaker</span><span class="r">Relay</span></div><div class="fill"></div></div>
+    </div>
+  </div>
+
+  <div class="rec">
+    <strong>Recommended: 2 · Polished ceramic</strong><br/>
+    Most substantial and medically trustworthy at header size; least “planet / marble / Siri.” Satin glass is a close second if you want more spatial-computing lightness. Soft translucent is the most ambient but can read slightly soft on white UI.
+  </div>
+
+  <h2>Asset sizes</h2>
+  <p class="sizes" id="sizes">See commit listing — all hero orbs are pure SVG (typically under 1 KB).</p>
+
+  <footer>
+    docs/design/orb-logo-review/comparison.html · Reply: <strong>satin</strong> · <strong>ceramic</strong> · <strong>translucent</strong> · or <strong>revise</strong>
+  </footer>
+</body>
+</html>

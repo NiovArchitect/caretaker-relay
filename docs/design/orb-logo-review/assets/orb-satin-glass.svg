@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Caretaker Relay orb — satin glass">
+  <defs>
+    <radialGradient id="sg-body" cx="38%" cy="34%" r="68%">
+      <stop offset="0%" stop-color="#B8E8E6"/>
+      <stop offset="28%" stop-color="#4AADB8"/>
+      <stop offset="58%" stop-color="#1F8A9A"/>
+      <stop offset="82%" stop-color="#0C5C6A"/>
+      <stop offset="100%" stop-color="#0B2430"/>
+    </radialGradient>
+    <radialGradient id="sg-hi" cx="32%" cy="28%" r="42%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.72"/>
+      <stop offset="45%" stop-color="#FFFFFF" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sg-rim" cx="50%" cy="50%" r="50%">
+      <stop offset="78%" stop-color="#0B2430" stop-opacity="0"/>
+      <stop offset="92%" stop-color="#0B2430" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#0B2430" stop-opacity="0.45"/>
+    </radialGradient>
+  </defs>
+  <circle cx="64" cy="64" r="56" fill="url(#sg-body)"/>
+  <circle cx="64" cy="64" r="56" fill="url(#sg-rim)"/>
+  <ellipse cx="48" cy="44" rx="22" ry="16" fill="url(#sg-hi)"/>
+  <!-- Quiet internal intelligence — soft core, not an icon -->
+  <circle cx="64" cy="68" r="10" fill="#8DD8D6" opacity="0.22"/>
+</svg>

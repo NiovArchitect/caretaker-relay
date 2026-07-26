@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Caretaker Relay">
+  <defs>
+    <radialGradient id="f" cx="36%" cy="32%" r="68%">
+      <stop offset="0%" stop-color="#8DD8D6"/>
+      <stop offset="45%" stop-color="#1F8A9A"/>
+      <stop offset="100%" stop-color="#0B2430"/>
+    </radialGradient>
+  </defs>
+  <circle cx="16" cy="16" r="14" fill="url(#f)"/>
+  <ellipse cx="12" cy="11" rx="5" ry="3.5" fill="#FFFFFF" opacity="0.35"/>
+</svg>
