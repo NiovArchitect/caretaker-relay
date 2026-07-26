@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Caretaker Relay — Logo Refinement Review</title>
+  <style>
+    :root {
+      --ink: #0B2430;
+      --teal: #0C5C6A;
+      --teal2: #1F8A9A;
+      --gold: #D4A017;
+      --paper: #F3F6F8;
+      --card: #fff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "SF Pro Display", "Inter", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.45;
+      padding: 32px 24px 80px;
+    }
+    h1 { font-size: 1.5rem; letter-spacing: -0.03em; margin: 0 0 8px; }
+    h2 { font-size: 1.1rem; letter-spacing: -0.02em; margin: 28px 0 12px; }
+    p.lead { color: #4a5f6c; max-width: 52rem; }
+    .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #fde8e6;
+      color: #a61f18;
+    }
+    .badge.ok { background: #e6f4f1; color: #176b5c; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(11,36,48,0.1);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 8px 24px rgba(11,36,48,0.05);
+    }
+    .card h3 { margin: 0 0 6px; font-size: 1rem; }
+    .card .desc { font-size: 0.85rem; color: #4a5f6c; margin: 0 0 14px; min-height: 2.6em; }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      gap: 14px;
+      margin: 10px 0;
+    }
+    .swatch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.68rem;
+      color: #6a7d88;
+    }
+    .panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      padding: 16px;
+      min-height: 88px;
+    }
+    .panel.light { background: #fff; border: 1px solid rgba(11,36,48,0.08); }
+    .panel.dark { background: #0B2430; }
+    .panel.powder { background: linear-gradient(180deg, #eef5f8, #e2ebf0); }
+    .lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .lockup.stacked {
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+    }
+    .wm .c { color: var(--ink); }
+    .wm .r { color: var(--teal2); font-weight: 650; letter-spacing: -0.015em; }
+    .wm.ink .c, .wm.ink .r { color: var(--ink); }
+    .wm.white .c, .wm.white .r { color: #F5FAFC; }
+    .wm.refined {
+      letter-spacing: 0.005em;
+      font-size: 1.15rem;
+    }
+    .wm.refined .r { margin-left: 0.2em; }
+    .wm-only {
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .wm-only .r { color: var(--teal2); margin-left: 0.22em; font-weight: 650; }
+    .scores {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .scores th, .scores td {
+      border-bottom: 1px solid rgba(11,36,48,0.08);
+      padding: 8px 10px;
+      text-align: center;
+    }
+    .scores th:first-child, .scores td:first-child { text-align: left; }
+    .scores th { background: #f7fafb; font-size: 0.75rem; }
+    .rec {
+      margin-top: 20px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: #e8f4f6;
+      border: 1px solid rgba(12,92,106,0.25);
+    }
+    .fav-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .fav-box {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(11,36,48,0.12);
+      border-radius: 6px;
+      display: grid; place-items: center;
+      background: #fff;
+      image-rendering: auto;
+    }
+    .fav-box.dark { background: #0B2430; border-color: #1a3a48; }
+    footer { margin-top: 40px; font-size: 0.8rem; color: #6a7d88; }
+  </style>
+</head>
+<body>
+  <p><span class="badge">Current logo: REJECTED</span>
+     <span class="badge ok" style="margin-left:8px">Founder decision required</span></p>
+  <h1>Caretaker Relay — Logo refinement review</h1>
+  <p class="lead">
+    SVG-only refinements. No AI image generation. No permanent production deploy of A/B/C
+    until founder selects. Temporary live product uses refined <strong>wordmark-only</strong>
+    until selection.
+  </p>
+
+  <h2>1. Current rejected emblem (live as of 3645fd2)</h2>
+  <div class="card">
+    <div class="row">
+      <div class="swatch"><svg width="16" height="16" viewBox="0 0 64 64"><use href="#rej"/></svg>16</div>
+      <div class="swatch"><svg width="24" height="24" viewBox="0 0 64 64"><use href="#rej"/></svg>24</div>
+      <div class="swatch"><svg width="32" height="32" viewBox="0 0 64 64"><use href="#rej"/></svg>32</div>
+      <div class="swatch"><svg width="48" height="48" viewBox="0 0 64 64"><use href="#rej"/></svg>48</div>
+      <div class="swatch"><svg width="64" height="64" viewBox="0 0 64 64"><use href="#rej"/></svg>64</div>
+    </div>
+    <div class="panel light" style="margin-top:12px">
+      <div class="lockup stacked">
+        <svg width="52" height="52" viewBox="0 0 64 64"><use href="#rej"/></svg>
+        <div class="wm refined"><span class="c">Caretaker</span><span class="r">Relay</span></div>
+      </div>
+    </div>
+    <p class="desc" style="margin-top:12px">
+      Rendered findings: central figure reads as a <strong>map pin / warning location</strong>;
+      hands become <strong>claw-like blue blobs</strong>; ring is fragmented; arrow is pasted;
+      too many competing shapes; fails monochrome clarity and favicon scale.
+    </p>
+  </div>
+
+  <h2>2. Temporary live fallback (recommended until selection)</h2>
+  <div class="card">
+    <div class="panel light">
+      <div class="wm-only"><span class="c">Caretaker</span><span class="r">Relay</span></div>
+    </div>
+    <div class="panel dark" style="margin-top:10px">
+      <div class="wm-only"><span class="c" style="color:#F5FAFC">Caretaker</span><span class="r" style="color:#7ec8d4">Relay</span></div>
+    </div>
+    <p class="desc" style="margin-top:10px">Clean wordmark, deep ink + restrained teal on “Relay”, no symbol, no glow.</p>
+  </div>
+
+  <h2>3. Refinement options (SVG)</h2>
+  <div class="grid">
+    <!-- A -->
+    <div class="card" id="opt-a">
+      <h3>Option A — Protected Relay</h3>
+      <p class="desc">Center person-point, one supportive lower curve, one open relay arc. Maximum three primary shapes.</p>
+      <div class="row">
+        <div class="swatch"><svg width="16" height="16" viewBox="0 0 64 64"><use href="#a"/></svg>16</div>
+        <div class="swatch"><svg width="24" height="24" viewBox="0 0 64 64"><use href="#a"/></svg>24</div>
+        <div class="swatch"><svg width="32" height="32" viewBox="0 0 64 64"><use href="#a"/></svg>32</div>
+        <div class="swatch"><svg width="48" height="48" viewBox="0 0 64 64"><use href="#a"/></svg>48</div>
+        <div class="swatch"><svg width="64" height="64" viewBox="0 0 64 64"><use href="#a"/></svg>64</div>
+      </div>
+      <div class="panel powder" style="margin-top:8px">
+        <div class="lockup">
+          <svg width="36" height="36" viewBox="0 0 64 64"><use href="#a"/></svg>
+          <div class="wm refined"><span class="c">Caretaker</span><span class="r">Relay</span></div>
+        </div>
+      </div>
+      <div class="panel dark" style="margin-top:8px">
+        <div class="lockup">
+          <svg width="36" height="36" viewBox="0 0 64 64"><use href="#a-w"/></svg>
+          <div class="wm white refined"><span class="c">Caretaker</span><span class="r">Relay</span></div>
+        </div>
+      </div>
+      <div class="panel light" style="margin-top:8px">
+        <div class="lockup">
+          <svg width="36" height="36" viewBox="0 0 64 64"><use href="#a-ink"/></svg>
+          <div class="wm ink refined"><span class="c">Caretaker</span><span class="r">Relay</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B -->
+    <div class="card" id="opt-b">
+      <h3>Option B — Human Continuity</h3>
+      <p class="desc">Soft human figure + two interlocking handoff paths. Relay implied by direction; no arrowhead.</p>
+      <div class="row">
+        <div class="swatch"><svg width="16" height="16" viewBox="0 0 64 64"><use href="#b"/></svg>16</div>
+        <div class="swatch"><svg width="24" height="24" viewBox="0 0 64 64"><use href="#b"/></svg>24</div>
+        <div class="swatch"><svg width="32" height="32" viewBox="0 0 64 64"><use href="#b"/></svg>32</div>
+        <div class="swatch"><svg width="48" height="48" viewBox="0 0 64 64"><use href="#b"/></svg>48</div>
+        <div class="swatch"><svg width="64" height="64" viewBox="0 0 64 64"><use href="#b"/></svg>64</div>
+      </div>
+      <div class="panel powder" style="margin-top:8px">
+        <div class="lockup">
+          <svg width="36" height="36" viewBox="0 0 64 64"><use href="#b"/></svg>
+          <div class="wm refined"><span class="c">Caretaker</span><span class="r">Relay</span></div>
+        </div>
+      </div>
+      <div class="panel dark" style="margin-top:8px">
+        <div class="lockup">
+          <svg width="36" height="36" viewBox="0 0 64 64"><use href="#b-w"/></svg>
+          <div class="wm white refined"><span class="c">Caretaker</span><span class="r">Relay</span></div>
+        </div>
+      </div>
+      <div class="panel light" style="margin-top:8px">
+        <div class="lockup">
+          <svg width="36" height="36" viewBox="0 0 64 64"><use href="#b-ink"/></svg>
+          <div class="wm ink refined"><span class="c">Caretaker</span><span class="r">Relay</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C -->
+    <div class="card" id="opt-c">
+      <h3>Option C — Relay Monogram</h3>
+      <p class="desc">Abstract open C, protected center, continuity arc. Strongest favicon candidate.</p>
+      <div class="row">
+        <div class="swatch"><svg width="16" height="16" viewBox="0 0 64 64"><use href="#c"/></svg>16</div>
+        <div class="swatch"><svg width="24" height="24" viewBox="0 0 64 64"><use href="#c"/></svg>24</div>
+        <div class="swatch"><svg width="32" height="32" viewBox="0 0 64 64"><use href="#c"/></svg>32</div>
+        <div class="swatch"><svg width="48" height="48" viewBox="0 0 64 64"><use href="#c"/></svg>48</div>
+        <div class="swatch"><svg width="64" height="64" viewBox="0 0 64 64"><use href="#c"/></svg>64</div>
+      </div>
+      <div class="panel powder" style="margin-top:8px">
+        <div class="lockup">
+          <svg width="36" height="36" viewBox="0 0 64 64"><use href="#c"/></svg>
+          <div class="wm refined"><span class="c">Caretaker</span><span class="r">Relay</span></div>
+        </div>
+      </div>
+      <div class="panel dark" style="margin-top:8px">
+        <div class="lockup">
+          <svg width="36" height="36" viewBox="0 0 64 64"><use href="#c-w"/></svg>
+          <div class="wm white refined"><span class="c">Caretaker</span><span class="r">Relay</span></div>
+        </div>
+      </div>
+      <div class="panel light" style="margin-top:8px">
+        <div class="lockup">
+          <svg width="36" height="36" viewBox="0 0 64 64"><use href="#c-ink"/></svg>
+          <div class="wm ink refined"><span class="c">Caretaker</span><span class="r">Relay</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>4. Favicon micro-marks (16–32)</h2>
+  <div class="card">
+    <div class="fav-row">
+      <div>
+        <div class="fav-box"><svg width="16" height="16" viewBox="0 0 32 32"><use href="#micro"/></svg></div>
+        <div style="font-size:0.7rem;margin-top:4px">Micro 16</div>
+      </div>
+      <div>
+        <div class="fav-box"><svg width="24" height="24" viewBox="0 0 32 32"><use href="#micro"/></svg></div>
+        <div style="font-size:0.7rem;margin-top:4px">Micro 24</div>
+      </div>
+      <div>
+        <div class="fav-box"><svg width="16" height="16" viewBox="0 0 64 64"><use href="#c"/></svg></div>
+        <div style="font-size:0.7rem;margin-top:4px">C @16</div>
+      </div>
+      <div>
+        <div class="fav-box"><svg width="16" height="16" viewBox="0 0 64 64"><use href="#a"/></svg></div>
+        <div style="font-size:0.7rem;margin-top:4px">A @16</div>
+      </div>
+      <div>
+        <div class="fav-box dark"><svg width="16" height="16" viewBox="0 0 32 32"><use href="#micro-w"/></svg></div>
+        <div style="font-size:0.7rem;margin-top:4px">Micro dark</div>
+      </div>
+    </div>
+    <p class="desc" style="margin-top:10px">Micro-mark: open ring + protected center only. No hands, body, or arrow at 16px.</p>
+  </div>
+
+  <h2>5. Wordmark options</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>W1 — Refined dual weight</h3>
+      <div class="panel light"><div class="wm-only"><span class="c">Caretaker</span><span class="r">Relay</span></div></div>
+      <p class="desc" style="margin-top:8px">Ink + teal; 0.22em word gap; no glow.</p>
+    </div>
+    <div class="card">
+      <h3>W2 — Single ink</h3>
+      <div class="panel light"><div class="wm-only"><span class="c">Caretaker</span><span class="r" style="color:var(--ink)">Relay</span></div></div>
+      <p class="desc" style="margin-top:8px">One-color deep ink; strongest document/print.</p>
+    </div>
+    <div class="card">
+      <h3>W3 — Dark surface</h3>
+      <div class="panel dark"><div class="wm-only"><span class="c" style="color:#F5FAFC">Caretaker</span><span class="r" style="color:#9ad4de">Relay</span></div></div>
+      <p class="desc" style="margin-top:8px">White + pale teal; presentation headers.</p>
+    </div>
+  </div>
+
+  <h2>6. Agency agent scores (1–5, rendered evidence)</h2>
+  <table class="scores">
+    <thead>
+      <tr>
+        <th>Criterion</th>
+        <th>Rejected</th>
+        <th>A</th>
+        <th>B</th>
+        <th>C</th>
+        <th>Wordmark only</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Recognition (&lt;1s)</td><td>1</td><td>4</td><td>4</td><td>3</td><td>5</td></tr>
+      <tr><td>Simplicity</td><td>1</td><td>5</td><td>4</td><td>4</td><td>5</td></tr>
+      <tr><td>Distinctiveness</td><td>2</td><td>4</td><td>4</td><td>4</td><td>2</td></tr>
+      <tr><td>Premium quality</td><td>1</td><td>4</td><td>4</td><td>4</td><td>4</td></tr>
+      <tr><td>Human warmth</td><td>2</td><td>3</td><td>5</td><td>2</td><td>3</td></tr>
+      <tr><td>Medical trust</td><td>1</td><td>4</td><td>4</td><td>4</td><td>4</td></tr>
+      <tr><td>AI relevance (no cliché)</td><td>2</td><td>4</td><td>3</td><td>4</td><td>3</td></tr>
+      <tr><td>Favicon quality</td><td>1</td><td>3</td><td>2</td><td>5</td><td>1</td></tr>
+      <tr><td>Wordmark quality</td><td>3</td><td>4</td><td>4</td><td>4</td><td>4</td></tr>
+      <tr><td>Product fit</td><td>1</td><td>5</td><td>4</td><td>4</td><td>4</td></tr>
+      <tr><td><strong>Total /50</strong></td><td><strong>15</strong></td><td><strong>40</strong></td><td><strong>38</strong></td><td><strong>38</strong></td><td><strong>35</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="rec">
+    <strong>Recommended option: A — Protected Relay</strong>, with <strong>Option C micro-mark</strong> for favicon.
+    Reason: highest total, calm premium fit, readable without pin/claw artifacts, monochrome-capable,
+    supports care-continuity story without literal hands. Wordmark-only remains safer temporary live
+    identity until founder selects.
+  </div>
+
+  <footer>
+    File: docs/design/logo-refinement/comparison.html · SVG definitions only · No permanent deploy of A/B/C without founder selection · BACKGROUND WORKERS: 0
+  </footer>
+
+  <!-- ========== SYMBOL DEFS ========== -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute">
+    <defs>
+      <!-- REJECTED -->
+      <g id="rej">
+        <path d="M14.5 40.5C12.2 36.2 11.5 31.2 12.8 26.5C14.5 20.2 19.2 15.2 25.5 12.8" fill="none" stroke="#0A2F5C" stroke-width="4.2" stroke-linecap="round"/>
+        <path d="M25.5 12.8C32.2 9.8 40.2 10.4 46.2 14.5C50.5 17.5 53.2 22.2 54 27.5" fill="none" stroke="#1F8A9A" stroke-width="4.2" stroke-linecap="round"/>
+        <path d="M50.2 24.8 L55.2 28.2 L49.6 31.4 Z" fill="#D4A017"/>
+        <path d="M18 42.5C20 36.5 24.5 33 29.5 32.2C27.5 35.5 26.8 39.5 27.5 44C24.2 43.5 20.8 43.2 18 42.5Z" fill="#0A2F5C"/>
+        <path d="M46 42.5C44 36.5 39.5 33 34.5 32.2C36.5 35.5 37.2 39.5 36.5 44C39.8 43.5 43.2 43.2 46 42.5Z" fill="#0A2F5C"/>
+        <path d="M22.5 44.5C26 46.5 30 47.5 32 47.5C34 47.5 38 46.5 41.5 44.5C39.5 48.5 35.5 51 32 51C28.5 51 24.5 48.5 22.5 44.5Z" fill="#0A2F5C"/>
+        <circle cx="32" cy="24.5" r="5.4" fill="#D4A017"/>
+        <path d="M32 30.2 L39.2 42.5 L24.8 42.5 Z" fill="#D4A017"/>
+      </g>
+      <!-- A color -->
+      <g id="a">
+        <path d="M18 44C14 36 15 24 24 17C31 11.5 42 12 49 20C52 24 53.5 29 53 34" fill="none" stroke="#0C5C6A" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M49 18.5C51.5 21.5 52.8 25 53 28.5" fill="none" stroke="#1F8A9A" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M21 43.5C26.5 48 37.5 48 43 43.5" fill="none" stroke="#0B2430" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="32" cy="30" r="6" fill="#0B2430"/>
+        <circle cx="32" cy="30" r="2.4" fill="#1F8A9A"/>
+      </g>
+      <g id="a-w">
+        <path d="M18 44C14 36 15 24 24 17C31 11.5 42 12 49 20C52 24 53.5 29 53 34" fill="none" stroke="#F5FAFC" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M49 18.5C51.5 21.5 52.8 25 53 28.5" fill="none" stroke="#F5FAFC" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M21 43.5C26.5 48 37.5 48 43 43.5" fill="none" stroke="#F5FAFC" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="32" cy="30" r="6" fill="#F5FAFC"/>
+      </g>
+      <g id="a-ink">
+        <path d="M18 44C14 36 15 24 24 17C31 11.5 42 12 49 20C52 24 53.5 29 53 34" fill="none" stroke="#0B2430" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M49 18.5C51.5 21.5 52.8 25 53 28.5" fill="none" stroke="#0B2430" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M21 43.5C26.5 48 37.5 48 43 43.5" fill="none" stroke="#0B2430" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="32" cy="30" r="6" fill="#0B2430"/>
+      </g>
+      <!-- B -->
+      <g id="b">
+        <path d="M14 38C18 22 30 16 40 22C46 26 48 34 44 40" fill="none" stroke="#1F8A9A" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M50 26C46 42 34 48 24 42C18 38 16 30 20 24" fill="none" stroke="#0B2430" stroke-width="3.2" stroke-linecap="round"/>
+        <circle cx="32" cy="26" r="4.5" fill="#0B2430"/>
+        <rect x="27.5" y="31" width="9" height="12" rx="4.5" fill="#0B2430"/>
+      </g>
+      <g id="b-w">
+        <path d="M14 38C18 22 30 16 40 22C46 26 48 34 44 40" fill="none" stroke="#F5FAFC" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M50 26C46 42 34 48 24 42C18 38 16 30 20 24" fill="none" stroke="#F5FAFC" stroke-width="3.2" stroke-linecap="round"/>
+        <circle cx="32" cy="26" r="4.5" fill="#F5FAFC"/>
+        <rect x="27.5" y="31" width="9" height="12" rx="4.5" fill="#F5FAFC"/>
+      </g>
+      <g id="b-ink">
+        <path d="M14 38C18 22 30 16 40 22C46 26 48 34 44 40" fill="none" stroke="#0B2430" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M50 26C46 42 34 48 24 42C18 38 16 30 20 24" fill="none" stroke="#0B2430" stroke-width="3.2" stroke-linecap="round"/>
+        <circle cx="32" cy="26" r="4.5" fill="#0B2430"/>
+        <rect x="27.5" y="31" width="9" height="12" rx="4.5" fill="#0B2430"/>
+      </g>
+      <!-- C -->
+      <g id="c">
+        <path d="M46 18C38 12 26 12 20 20C14 28 14 40 22 48C28 53.5 38 54 46 48" fill="none" stroke="#0B2430" stroke-width="4" stroke-linecap="round"/>
+        <path d="M34 22C42 24 46 30 44 38C42 44 36 48 30 46" fill="none" stroke="#1F8A9A" stroke-width="3.2" stroke-linecap="round"/>
+        <circle cx="30" cy="34" r="4" fill="#1F8A9A"/>
+      </g>
+      <g id="c-w">
+        <path d="M46 18C38 12 26 12 20 20C14 28 14 40 22 48C28 53.5 38 54 46 48" fill="none" stroke="#F5FAFC" stroke-width="4" stroke-linecap="round"/>
+        <path d="M34 22C42 24 46 30 44 38C42 44 36 48 30 46" fill="none" stroke="#F5FAFC" stroke-width="3.2" stroke-linecap="round"/>
+        <circle cx="30" cy="34" r="4" fill="#F5FAFC"/>
+      </g>
+      <g id="c-ink">
+        <path d="M46 18C38 12 26 12 20 20C14 28 14 40 22 48C28 53.5 38 54 46 48" fill="none" stroke="#0B2430" stroke-width="4" stroke-linecap="round"/>
+        <path d="M34 22C42 24 46 30 44 38C42 44 36 48 30 46" fill="none" stroke="#0B2430" stroke-width="3.2" stroke-linecap="round"/>
+        <circle cx="30" cy="34" r="4" fill="#0B2430"/>
+      </g>
+      <!-- micro -->
+      <g id="micro">
+        <path d="M24 8.5C18 5.5 10.5 7 8 13C5.5 19 8.5 26 15.5 27.5C20 28.5 24 26.5 26 22" fill="none" stroke="#0B2430" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="3.2" fill="#1F8A9A"/>
+      </g>
+      <g id="micro-w">
+        <path d="M24 8.5C18 5.5 10.5 7 8 13C5.5 19 8.5 26 15.5 27.5C20 28.5 24 26.5 26 22" fill="none" stroke="#F5FAFC" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="3.2" fill="#F5FAFC"/>
+      </g>
+    </defs>
+  </svg>
+</body>
+</html>

@@ -1,11 +1,12 @@
-import { CaretakerRelaySymbol } from "./CaretakerRelaySymbol";
 import { logoPalette, type LogoTone } from "../../brand/logoTokens";
+import { LogoMicroMark } from "./logoRefinements";
 
 export type LogoLayout = "horizontal" | "stacked" | "mark";
 
 /**
- * Full brand lockup: symbol + optional wordmark.
- * Wordmark is exact: "Caretaker Relay" (no glow; color weight distinguishes Relay).
+ * TEMPORARY LIVE POLICY (founder rejected emblem 3645fd2):
+ * Default is refined wordmark-only. No permanent A/B/C symbol until founder selects.
+ * Optional micro-mark only when layout==="mark" and showMicro is true (favicon-scale contexts).
  */
 export function CaretakerRelayLogo({
   layout = "horizontal",
@@ -14,53 +15,75 @@ export function CaretakerRelayLogo({
   className = "",
   title = "Caretaker Relay",
   showWordmark = true,
+  /** Temporary: hide rejected emblem; do not show A/B/C until founder selects. */
+  showSymbol = false,
+  showMicro = false,
   testId = "caretaker-relay-logo",
 }: {
   layout?: LogoLayout;
   tone?: LogoTone;
-  /** Symbol pixel size; defaults by layout */
   markSize?: number;
   className?: string;
   title?: string;
   showWordmark?: boolean;
+  showSymbol?: boolean;
+  showMicro?: boolean;
   testId?: string;
 }) {
   const c = logoPalette(tone);
   const size =
     markSize ??
     (layout === "mark" ? 28 : layout === "stacked" ? 48 : 36);
-  const markOnly = layout === "mark" || !showWordmark;
 
-  if (markOnly) {
+  // Mark-only temporary: micro-mark if requested, else wordmark text
+  if (layout === "mark" && !showWordmark) {
+    if (showMicro) {
+      return (
+        <span
+          className={`cr-logo cr-logo-mark ${className}`.trim()}
+          data-testid={testId}
+          data-logo-layout="mark"
+          data-logo-mode="micro-temporary"
+        >
+          <LogoMicroMark size={size} tone={tone} title={title} />
+        </span>
+      );
+    }
     return (
       <span
-        className={`cr-logo cr-logo-mark ${className}`.trim()}
+        className={`cr-logo cr-logo-wordmark-only ${className}`.trim()}
         data-testid={testId}
         data-logo-layout="mark"
+        data-logo-mode="wordmark-temporary"
+        role="img"
+        aria-label={title}
       >
-        <CaretakerRelaySymbol size={size} tone={tone} title={title} />
+        <span className="cr-logo-wordmark cr-logo-wordmark-refined" aria-hidden>
+          <span className="cr-logo-caretaker" style={{ color: c.caretaker }}>
+            Caretaker
+          </span>
+          <span className="cr-logo-space"> </span>
+          <span className="cr-logo-relay" style={{ color: c.relay }}>
+            Relay
+          </span>
+        </span>
       </span>
     );
   }
 
-  const stacked = layout === "stacked";
-
   return (
     <span
-      className={`cr-logo cr-logo-${layout} ${className}`.trim()}
+      className={`cr-logo cr-logo-${layout} cr-logo-wordmark-temporary ${className}`.trim()}
       data-testid={testId}
       data-logo-layout={layout}
       data-logo-tone={tone}
+      data-logo-mode="wordmark-temporary"
+      data-show-symbol={showSymbol ? "true" : "false"}
       role="img"
       aria-label={title}
     >
-      <CaretakerRelaySymbol
-        size={size}
-        tone={tone}
-        decorative
-        testId={`${testId}-mark`}
-      />
-      <span className="cr-logo-wordmark" aria-hidden>
+      {/* Symbol intentionally omitted until founder selects A/B/C */}
+      <span className="cr-logo-wordmark cr-logo-wordmark-refined" aria-hidden>
         <span className="cr-logo-caretaker" style={{ color: c.caretaker }}>
           Caretaker
         </span>
@@ -69,12 +92,10 @@ export function CaretakerRelayLogo({
           Relay
         </span>
       </span>
-      {stacked ? null : null}
     </span>
   );
 }
 
-/** Back-compat thin alias used by App / Login. */
 export function BrandWordmark({
   tone = "color",
   className = "",
@@ -84,7 +105,10 @@ export function BrandWordmark({
 }) {
   const c = logoPalette(tone);
   return (
-    <span className={`cr-logo-wordmark ${className}`.trim()} aria-hidden>
+    <span
+      className={`cr-logo-wordmark cr-logo-wordmark-refined ${className}`.trim()}
+      aria-hidden
+    >
       <span className="cr-logo-caretaker" style={{ color: c.caretaker }}>
         Caretaker
       </span>{" "}

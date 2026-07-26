@@ -3902,3 +3902,33 @@ p {
   content: none !important;
   display: none !important;
 }
+
+/* Temporary wordmark-only identity (rejected emblem removed from chrome) */
+.cr-logo-wordmark-temporary,
+.cr-logo-wordmark-only {
+  gap: 0;
+}
+
+.cr-logo-wordmark-refined {
+  font-weight: 700;
+  letter-spacing: -0.018em;
+  font-size: 1.08rem;
+}
+
+.cr-logo-wordmark-refined .cr-logo-space {
+  margin: 0 0.08em;
+}
+
+.cr-logo-wordmark-refined .cr-logo-relay {
+  font-weight: 650;
+  letter-spacing: -0.012em;
+}
+
+.cr-logo-stacked.cr-logo-wordmark-temporary .cr-logo-wordmark-refined {
+  font-size: 1.28rem;
+  letter-spacing: -0.022em;
+}
+
+.brand .cr-logo-wordmark-refined {
+  font-size: 1.05rem;
+}

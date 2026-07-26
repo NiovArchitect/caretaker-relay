@@ -277,46 +277,50 @@ describe("production logo system", () => {
     expect(logoPalette("white").relay).toBe(LOGO_COLORS.white);
   });
 
-  it("symbol source contains person hands ring arrow geometry", () => {
-    const src = readFileSync(
-      join(process.cwd(), "src/components/brand/CaretakerRelaySymbol.tsx"),
-      "utf8",
-    );
-    expect(src).toContain("viewBox=\"0 0 64 64\"");
-    expect(src).toContain("Care recipient");
-    expect(src).toContain("Supporting hands");
-    expect(src).toContain("Clockwise arrow");
-    expect(src).not.toContain("backdrop-filter");
-    expect(src).not.toContain("feGaussianBlur");
-  });
-
-  it("BrandMark re-exports production symbol (no staged CSS disc runtime)", () => {
-    const src = readFileSync(
-      join(process.cwd(), "src/components/BrandMark.tsx"),
-      "utf8",
-    );
-    expect(src).toContain("CaretakerRelaySymbol");
-    expect(src).not.toContain("conic-gradient");
-  });
-
-  it("favicon and app-icon assets exist with symbol paths", () => {
-    const fav = readFileSync(join(process.cwd(), "public/favicon.svg"), "utf8");
-    const app = readFileSync(join(process.cwd(), "public/app-icon.svg"), "utf8");
-    expect(fav).toContain("viewBox=\"0 0 64 64\"");
-    expect(fav).toContain("#D4A017");
-    expect(app).toContain("viewBox=\"0 0 128 128\"");
-    expect(existsSync(
-      join(process.cwd(), "docs/design/logo-source/caretaker-relay-logo-approved.png"),
-    )).toBe(true);
-  });
-
-  it("wordmark text is exact Caretaker Relay", () => {
+  it("temporary live logo is wordmark-only (rejected emblem not default)", () => {
     const src = readFileSync(
       join(process.cwd(), "src/components/brand/CaretakerRelayLogo.tsx"),
       "utf8",
     );
+    expect(src).toContain("wordmark-temporary");
+    expect(src).toContain("showSymbol = false");
     expect(src).toContain("Caretaker");
     expect(src).toContain("Relay");
-    expect(src).not.toMatch(/Care\s*Taker Relay/);
+  });
+
+  it("refinement options A/B/C exist as SVG-only source", () => {
+    const src = readFileSync(
+      join(process.cwd(), "src/components/brand/logoRefinements.tsx"),
+      "utf8",
+    );
+    expect(src).toContain("LogoOptionA");
+    expect(src).toContain("LogoOptionB");
+    expect(src).toContain("LogoOptionC");
+    expect(src).not.toContain("feGaussianBlur");
+    expect(src).not.toContain("backdrop-filter");
+  });
+
+  it("BrandMark is temporary micro-mark, not rejected pin emblem", () => {
+    const src = readFileSync(
+      join(process.cwd(), "src/components/BrandMark.tsx"),
+      "utf8",
+    );
+    expect(src).toContain("LogoMicroMark");
+    expect(src).not.toContain("conic-gradient");
+  });
+
+  it("favicon is temporary micro-mark (not full rejected emblem)", () => {
+    const fav = readFileSync(join(process.cwd(), "public/favicon.svg"), "utf8");
+    expect(fav).toContain("viewBox=\"0 0 32 32\"");
+    expect(fav).toContain("Temporary micro-mark");
+    expect(fav).not.toContain("L39.2 42.5");
+    expect(
+      existsSync(
+        join(
+          process.cwd(),
+          "docs/design/logo-refinement/comparison.html",
+        ),
+      ),
+    ).toBe(true);
   });
 });
