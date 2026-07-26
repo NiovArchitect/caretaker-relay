@@ -41,7 +41,12 @@ export function HandoffPanel({
   if (loading) {
     return (
       <section className="section handoff-hero" data-testid="handoff-panel">
-        <p className="muted">Loading latest care handoff…</p>
+        <div className="cr-skeleton-stack" aria-busy="true" aria-live="polite">
+          <div className="cr-skeleton cr-skeleton-title" />
+          <div className="cr-skeleton cr-skeleton-line" />
+          <div className="cr-skeleton cr-skeleton-line cr-skeleton-short" />
+        </div>
+        <p className="muted cr-empty">Loading latest care handoff…</p>
         <button type="button" className="secondary-btn" onClick={onClose}>
           Close
         </button>
@@ -56,18 +61,8 @@ export function HandoffPanel({
         aria-label="Care handoff"
         data-testid="handoff-panel"
       >
-        <h2
-          style={{
-            margin: "4px 0 0",
-            color: "var(--cr-teal)",
-            fontSize: "1.2rem",
-            textTransform: "none",
-            letterSpacing: "-0.02em",
-          }}
-        >
-          No care handoff yet
-        </h2>
-        <p className="muted" data-testid="handoff-empty">
+        <h2 className="handoff-title">No care handoff yet</h2>
+        <p className="muted cr-empty" data-testid="handoff-empty">
           {emptyReason ??
             `No handoff is saved for ${space.displayName} yet. Confirm a care update (with continuity for the next caregiver) to create one.`}
         </p>
@@ -84,40 +79,15 @@ export function HandoffPanel({
       aria-label="Care handoff"
       data-testid="handoff-panel"
     >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          gap: 8,
-        }}
-      >
+      <div className="handoff-head">
         <div>
-          <p
-            className="muted"
-            style={{
-              margin: 0,
-              fontSize: "0.75rem",
-              fontWeight: 700,
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-            }}
-          >
+          <p className="handoff-kicker">
             Care handoff · {space.displayName}
           </p>
-          <h2
-            style={{
-              margin: "4px 0 0",
-              color: "var(--cr-teal)",
-              fontSize: "1.2rem",
-              textTransform: "none",
-              letterSpacing: "-0.02em",
-            }}
-            data-testid="handoff-title"
-          >
+          <h2 className="handoff-title" data-testid="handoff-title">
             Update for {toName}
           </h2>
-          <p className="muted" style={{ margin: "4px 0 0", fontSize: "0.85rem" }}>
+          <p className="handoff-sub">
             From {fromName} · what {toName} needs to know
           </p>
         </div>
@@ -126,26 +96,18 @@ export function HandoffPanel({
         </button>
       </div>
 
-      <p
-        className="muted"
-        style={{ marginTop: 10, fontSize: "0.85rem" }}
-        data-testid="handoff-status"
-      >
+      <p className="handoff-status" data-testid="handoff-status">
         {statusLabel}
       </p>
 
-      <h3 className="muted" style={{ marginBottom: 6 }}>
-        What changed
-      </h3>
+      <h3 className="handoff-section-label">What changed</h3>
       <ul className="list-plain" data-testid="handoff-what-changed">
         {h.whatChanged.map((x) => (
           <li key={x}>{x}</li>
         ))}
       </ul>
 
-      <h3 className="muted" style={{ marginBottom: 6 }}>
-        Still needs attention
-      </h3>
+      <h3 className="handoff-section-label">Still needs attention</h3>
       <ul className="list-plain">
         {h.stillNeedsAttention.length === 0 ? (
           <li className="muted">Nothing listed</li>
@@ -154,9 +116,7 @@ export function HandoffPanel({
         )}
       </ul>
 
-      <h3 className="muted" style={{ marginBottom: 6 }}>
-        Watch
-      </h3>
+      <h3 className="handoff-section-label">Watch</h3>
       <ul className="list-plain">
         {h.watch.length === 0 ? (
           <li className="muted">Nothing listed</li>

@@ -210,9 +210,7 @@ export function App() {
     return (
       <div className="app-shell cr-stage" data-testid="auth-loading">
         <div className="cr-ambient" aria-hidden />
-        <p className="muted" style={{ padding: 24, position: "relative", zIndex: 1 }}>
-          Checking session…
-        </p>
+        <p className="muted auth-loading-label">Checking session…</p>
       </div>
     );
   }
@@ -678,30 +676,15 @@ export function App() {
             <span className="avatar-3d" aria-hidden>
               {activeSpace.preferredName.charAt(0)}
             </span>
-            <div style={{ minWidth: 0 }}>
-              <div
-                style={{
-                  fontSize: "0.72rem",
-                  fontWeight: 600,
-                  color: "var(--cr-ink-3)",
-                  letterSpacing: "0.04em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Caring for
-              </div>
+            <div className="recipient-chip-text">
+              <div className="recipient-chip-kicker">Caring for</div>
               <div
                 data-testid="care-recipient-label"
-                style={{ lineHeight: 1.2, fontWeight: 700 }}
+                className="recipient-chip-name"
               >
                 {activeSpace.displayName}
               </div>
-              <div
-                className="muted"
-                style={{ fontSize: "0.75rem", fontWeight: 500 }}
-              >
-                Care recipient
-              </div>
+              <div className="muted recipient-chip-role">Care recipient</div>
             </div>
           </div>
           <span className="topbar-date">{todayDateLabel()}</span>
@@ -709,11 +692,10 @@ export function App() {
         <div className="topbar-right">
           {lastError && (
             <span
-              className="muted"
+              className="muted app-error-chip"
               data-testid="app-error"
               role="alert"
               title={lastError}
-              style={{ fontSize: "0.75rem", maxWidth: 140 }}
             >
               Connection issue
             </span>
@@ -733,7 +715,7 @@ export function App() {
             title="Signed-in caregiver"
           >
             {session.displayName}
-            <span className="muted" style={{ fontWeight: 500 }}>
+            <span className="muted session-role-sep">
               {" "}
               · {session.roleLabel}
             </span>

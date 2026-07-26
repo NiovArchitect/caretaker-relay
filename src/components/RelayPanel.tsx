@@ -263,8 +263,7 @@ export function RelayPanel({
         {onCloseMobile && (
           <button
             type="button"
-            className="secondary-btn"
-            style={{ minHeight: 36, minWidth: 36, padding: "0 10px" }}
+            className="secondary-btn relay-close-btn"
             onClick={onCloseMobile}
             aria-label="Close panel"
           >
@@ -332,10 +331,7 @@ export function RelayPanel({
           </div>
 
           <div className="relay-composer-wrap" data-testid="composer-dock">
-            <p
-              className="muted"
-              style={{ fontSize: "0.75rem", margin: "0 0 8px" }}
-            >
+            <p className="muted relay-hint-copy">
               Ask a question or share what you observed. Relay organizes and asks
               you to verify anything consequential.
             </p>
@@ -370,12 +366,16 @@ export function RelayPanel({
               about another care recipient.
             </div>
             {coordLoading && (
-              <p className="muted" style={{ padding: "8px 4px" }}>
-                Loading messages for {space.displayName}…
-              </p>
+              <div className="cr-skeleton-stack coord-loading" aria-busy="true">
+                <div className="cr-skeleton cr-skeleton-line" />
+                <div className="cr-skeleton cr-skeleton-line cr-skeleton-short" />
+                <p className="muted coord-empty-copy">
+                  Loading messages for {space.displayName}…
+                </p>
+              </div>
             )}
             {!coordLoading && coord.length === 0 && (
-              <p className="muted" style={{ padding: "8px 4px" }}>
+              <p className="muted cr-empty coord-empty-copy">
                 No messages yet for {space.displayName}. Share a practical update
                 for the next person helping them.
               </p>
@@ -392,9 +392,7 @@ export function RelayPanel({
                 >
                   <div className="coord-meta">
                     <strong>{fromName}</strong>
-                    <span className="muted" style={{ fontSize: "0.75rem" }}>
-                      {m.at}
-                    </span>
+                    <span className="muted coord-time">{m.at}</span>
                   </div>
                   <div>{m.body}</div>
                 </div>
@@ -404,15 +402,8 @@ export function RelayPanel({
           {coordHasNewWhileUp && (
             <button
               type="button"
-              className="primary-btn"
+              className="primary-btn coord-jump-latest-btn"
               data-testid="coord-jump-latest"
-              style={{
-                position: "sticky",
-                bottom: 8,
-                margin: "0 auto 8px",
-                display: "block",
-                zIndex: 2,
-              }}
               onClick={() => scrollCoordToLatest(true)}
             >
               New messages ↓
@@ -422,18 +413,12 @@ export function RelayPanel({
             className="relay-composer-wrap coord-composer-sticky"
             data-testid="coord-composer-sticky"
           >
-            <label className="muted" style={{ fontSize: "0.75rem" }}>
+            <label className="muted coord-to-label">
               To (in {space.preferredName}&apos;s circle)
               <select
                 value={coordTo}
                 onChange={(e) => setCoordTo(e.target.value)}
-                style={{
-                  display: "block",
-                  width: "100%",
-                  marginTop: 4,
-                  marginBottom: 8,
-                  minHeight: 40,
-                }}
+                className="coord-to-select"
                 data-testid="coord-to"
               >
                 <option value={people.maya.id}>Maya Bennett</option>
@@ -448,11 +433,11 @@ export function RelayPanel({
             )}
             <textarea
               data-testid="coord-input"
+              className="coord-input"
               value={coordDraft}
               onChange={(e) => setCoordDraft(e.target.value)}
               placeholder={`Write to ${resolvePersonName(coordTo)} about ${space.preferredName}…`}
               rows={3}
-              style={{ width: "100%", marginBottom: 8 }}
             />
             <button
               type="button"

@@ -297,11 +297,11 @@ export function TodayPage({
           <h2 id="messages-inbox" data-testid="today-notifications">
             Notifications
           </h2>
-          <p className="muted" style={{ marginTop: 0 }}>
+          <p className="muted section-lead">
             Unread for {recipientName} only. Seen/resolved items leave this
             list and no longer inflate the top badge.
           </p>
-          <div className="btn-row" style={{ marginBottom: 12 }}>
+          <div className="btn-row section-actions">
             <button
               type="button"
               className="secondary-btn"
@@ -330,6 +330,7 @@ export function TodayPage({
               Mark all read
             </button>
           </div>
+          <div className="notify-scroll" data-testid="notifications-scroll">
           {inbox.slice(0, 12).map((n) => {
               const urgent =
                 n.priority === "urgent" || n.priority === "important";
@@ -339,7 +340,7 @@ export function TodayPage({
               return (
                 <article
                   key={String(n.id)}
-                  className={`attention-card cr-notify-attention${urgent ? " cr-notify-pulse" : ""}`}
+                  className={`attention-card attention-card-compact cr-notify-attention${urgent ? " cr-notify-pulse" : ""}`}
                   data-testid="server-notification"
                   data-type={String(n.type ?? "")}
                   data-recipient={String(n.care_recipient_id ?? "")}
@@ -348,14 +349,14 @@ export function TodayPage({
                     <span className="badge badge-coral">
                       {String(n.type ?? "update").replace(/_/g, " ")}
                     </span>
-                    <span className="muted" style={{ fontSize: "0.75rem" }}>
+                    <span className="muted meta-time">
                       {recipientName}
                       {when ? ` · ${when}` : ""}
                     </span>
                   </div>
                   <h3 className="item-title">{String(n.title)}</h3>
                   <p className="attention-body">{String(n.body)}</p>
-                  <p className="muted" style={{ fontSize: "0.75rem" }}>
+                  <p className="muted meta-time">
                     Source: {String(n.source_type ?? "care")} ·{" "}
                     {String(n.actor_display_name ?? "System")}
                   </p>
@@ -420,6 +421,7 @@ export function TodayPage({
                 </article>
               );
             })}
+          </div>
         </section>
       )}
 

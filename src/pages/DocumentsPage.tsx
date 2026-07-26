@@ -110,7 +110,7 @@ export function DocumentsPage() {
           {session.displayName}.
         </p>
         {!markdown && !error && (
-          <p className="muted" data-testid="documents-empty-state">
+          <p className="muted cr-empty" data-testid="documents-empty-state">
             No document prepared yet for {space.displayName}. Generate a care
             summary from current care truth when you are ready — empty is honest,
             not broken.

@@ -130,9 +130,9 @@ export function PeoplePage({
 
       <section className="section" aria-label="Care circle">
         <h2>Authorized people</h2>
-        {loading && <p className="muted">Loading care circle…</p>}
+        {loading && <p className="muted cr-empty">Loading care circle…</p>}
         {!loading && members.length === 0 && (
-          <p className="muted">No authorized members returned.</p>
+          <p className="muted cr-empty">No authorized members returned.</p>
         )}
         {members.map((member) => (
           <button

@@ -370,8 +370,8 @@ function AboutRecipientPanel({
         invented.
       </p>
 
-      <div className="surface-known" style={{ padding: 16, marginTop: 12 }}>
-        <h3 style={{ margin: "0 0 8px", fontSize: "1rem" }}>Overview</h3>
+      <div className="surface-known care-panel">
+        <h3 className="care-panel-title">Overview</h3>
         <ul className="list-plain">
           <li>
             <strong>{profile?.displayName ?? recipientName}</strong>
@@ -399,9 +399,9 @@ function AboutRecipientPanel({
         </ul>
       </div>
 
-      <div className="surface-reported" style={{ padding: 16, marginTop: 12 }}>
-        <h3 style={{ margin: "0 0 8px", fontSize: "1rem" }}>Health</h3>
-        <p className="muted" style={{ marginTop: 0 }}>
+      <div className="surface-reported care-panel">
+        <h3 className="care-panel-title">Health</h3>
+        <p className="muted care-panel-lead">
           Confirmed conditions vs caregiver-reported concerns are separate.
         </p>
         {conditions.length === 0 ? (
@@ -414,7 +414,7 @@ function AboutRecipientPanel({
                 {c.sourceLabel ? (
                   <span className="muted"> · {String(c.sourceLabel)}</span>
                 ) : null}
-                <span className="badge badge-teal" style={{ marginLeft: 8 }}>
+                <span className="badge badge-teal care-inline-badge">
                   {String(c.verification ?? "CONFIRMED")}
                 </span>
               </li>
@@ -423,7 +423,7 @@ function AboutRecipientPanel({
         )}
         {concerns.length > 0 && (
           <>
-            <p style={{ marginBottom: 4 }}>
+            <p className="care-subhead">
               <strong>Concerns / observations (not diagnoses)</strong>
             </p>
             <ul className="list-plain">
@@ -433,7 +433,7 @@ function AboutRecipientPanel({
             </ul>
           </>
         )}
-        <p style={{ marginBottom: 4 }}>
+        <p className="care-subhead">
           <strong>Allergies</strong>
         </p>
         <ul className="list-plain">
@@ -445,7 +445,7 @@ function AboutRecipientPanel({
             ))
           )}
         </ul>
-        <p style={{ marginBottom: 4 }}>
+        <p className="care-subhead">
           <strong>Medications on file</strong>
         </p>
         <ul className="list-plain">
@@ -462,8 +462,8 @@ function AboutRecipientPanel({
         </ul>
       </div>
 
-      <div className="surface-known" style={{ padding: 16, marginTop: 12 }}>
-        <h3 style={{ margin: "0 0 8px", fontSize: "1rem" }}>Daily support</h3>
+      <div className="surface-known care-panel">
+        <h3 className="care-panel-title">Daily support</h3>
         <ul className="list-plain">
           {p.mobilityBaseline ? (
             <li>Mobility: {String(p.mobilityBaseline)}</li>
@@ -479,10 +479,8 @@ function AboutRecipientPanel({
         </ul>
       </div>
 
-      <div className="surface-reported" style={{ padding: 16, marginTop: 12 }}>
-        <h3 style={{ margin: "0 0 8px", fontSize: "1rem" }}>
-          Preferences & goals
-        </h3>
+      <div className="surface-reported care-panel">
+        <h3 className="care-panel-title">Preferences & goals</h3>
         <ul className="list-plain">
           {prefs.map((x) => (
             <li key={x}>{x}</li>
@@ -497,13 +495,10 @@ function AboutRecipientPanel({
       </div>
 
       <div
-        className="surface-verify"
-        style={{ padding: 16, marginTop: 12 }}
+        className="surface-verify care-panel"
         data-testid="emergency-snapshot-card"
       >
-        <h3 style={{ margin: "0 0 8px", fontSize: "1rem" }}>
-          Essential / emergency
-        </h3>
+        <h3 className="care-panel-title">Essential / emergency</h3>
         <ul className="list-plain">
           <li>{ageLine()}</li>
           <li>
