@@ -5,11 +5,16 @@ import { VerifyPanel } from "./VerifyPanel";
 import type { TranscriptMeta } from "../foundation/careClient";
 import {
   fetchCoordination,
+  getSessionIdentity,
   postCoordination,
 } from "../foundation/careClient";
 import { people } from "../scenario/olivia";
 import { resolvePersonName } from "../lib/identity";
 import { loadActiveCareRecipientId, resolveCareSpace } from "../lib/careContext";
+import {
+  defaultCoordinationTarget,
+  isSelfMessageTarget,
+} from "../lib/messageTarget";
 
 type RelayMode = "relay" | "messages";
 
@@ -73,7 +78,11 @@ export function RelayPanel({
   const [coordDraft, setCoordDraft] = useState("");
   const [coordBusy, setCoordBusy] = useState(false);
   const [coordErr, setCoordErr] = useState<string | null>(null);
-  const [coordTo, setCoordTo] = useState(coordFocusPersonId ?? people.maya.id);
+  const selfId = getSessionIdentity().carePersonId;
+  const [coordTo, setCoordTo] = useState(() => {
+    const preferred = coordFocusPersonId ?? people.maya.id;
+    return preferred === selfId ? people.daniel.id : preferred;
+  });
   const [coordLoading, setCoordLoading] = useState(false);
   const [coordHasNewWhileUp, setCoordHasNewWhileUp] = useState(false);
   const coordThreadRef = useRef<HTMLDivElement | null>(null);
@@ -126,7 +135,16 @@ export function RelayPanel({
 
   useEffect(() => {
     if (coordFocusPersonId) {
-      setCoordTo(coordFocusPersonId);
+      const self = getSessionIdentity().carePersonId;
+      const safe =
+        coordFocusPersonId === self
+          ? defaultCoordinationTarget(self, [
+              people.maya.id,
+              people.daniel.id,
+              people.marcus.id,
+            ])
+          : coordFocusPersonId;
+      if (safe) setCoordTo(safe);
       setMode("messages");
       // Make destination unmistakable: scroll panel + focus composer.
       window.requestAnimationFrame(() => {
@@ -147,7 +165,17 @@ export function RelayPanel({
     setCoord([]);
     setCoordDraft("");
     setCoordErr(null);
-    setCoordTo(coordFocusPersonId ?? people.maya.id);
+    const self = getSessionIdentity().carePersonId;
+    const preferred = coordFocusPersonId ?? people.maya.id;
+    const safe =
+      preferred === self
+        ? defaultCoordinationTarget(self, [
+            people.maya.id,
+            people.daniel.id,
+            people.marcus.id,
+          ]) ?? people.daniel.id
+        : preferred;
+    setCoordTo(safe);
     coordPinnedBottomRef.current = true;
   }, [rid, coordFocusPersonId]);
 
@@ -444,13 +472,29 @@ export function RelayPanel({
               To (in {space.preferredName}&apos;s circle)
               <select
                 value={coordTo}
-                onChange={(e) => setCoordTo(e.target.value)}
+                onChange={(e) => {
+                  const next = e.target.value;
+                  if (isSelfMessageTarget(next, getSessionIdentity().carePersonId)) {
+                    setCoordErr("Pick someone else — you can’t message yourself here.");
+                    return;
+                  }
+                  setCoordErr(null);
+                  setCoordTo(next);
+                }}
                 className="coord-to-select"
                 data-testid="coord-to"
               >
-                <option value={people.maya.id}>Maya Bennett</option>
-                <option value={people.daniel.id}>Daniel Kim</option>
-                <option value={people.marcus.id}>Marcus Carter</option>
+                {[
+                  { id: people.maya.id, name: "Maya Bennett" },
+                  { id: people.daniel.id, name: "Daniel Kim" },
+                  { id: people.marcus.id, name: "Marcus Carter" },
+                ]
+                  .filter((o) => o.id !== getSessionIdentity().carePersonId)
+                  .map((o) => (
+                    <option key={o.id} value={o.id}>
+                      {o.name}
+                    </option>
+                  ))}
               </select>
             </label>
             {coordErr && (

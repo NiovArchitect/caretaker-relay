@@ -19,6 +19,11 @@ import {
 } from "../lib/notifications";
 import { resolveCareSpace, loadActiveCareRecipientId } from "../lib/careContext";
 import { formatCareDateTimeRecent } from "../lib/humanCopy";
+import { OnboardingWizard } from "../components/OnboardingWizard";
+import {
+  loadOnboardingDraft,
+  saveOnboardingDraft,
+} from "../lib/onboarding";
 
 export function TodayPage({
   relayHandled,
@@ -52,18 +57,47 @@ export function TodayPage({
   const [showAllNotifs, setShowAllNotifs] = useState(false);
   const [profile, setProfile] = useState<RecipientProfilePayload | null>(null);
   const [coverageSummary, setCoverageSummary] = useState("");
+  const [showOnboarding, setShowOnboarding] = useState(() => {
+    const d = loadOnboardingDraft();
+    return (
+      !d.completed &&
+      (d.intent === "create_account" ||
+        d.intent === "set_up_care" ||
+        space.depth === "lightweight")
+    );
+  });
+  const [shellReady, setShellReady] = useState(false);
 
+  // Shell-first: paint Today chrome immediately; hydrate secondary data next.
   useEffect(() => {
+    setShellReady(true);
     let cancelled = false;
+    // Critical: orientation projection first
     void fetchTodayProjection().then((p) => {
       if (!cancelled) setProj(p);
     });
-    void fetchRecipientProfile().then((p) => {
-      if (!cancelled) setProfile(p);
-    });
-    void fetchCareCoverage().then((c) => {
-      if (!cancelled) setCoverageSummary(c.summary);
-    });
+    // Secondary: profile, coverage, notifications — progressive
+    window.setTimeout(() => {
+      if (cancelled) return;
+      void fetchRecipientProfile().then((p) => {
+        if (!cancelled) setProfile(p);
+      });
+      void fetchCareCoverage().then((c) => {
+        if (!cancelled) setCoverageSummary(c.summary);
+      });
+      void fetchServerNotifications().then((r) => {
+        if (!cancelled && r.ok) {
+          setInbox(
+            r.notifications.filter(
+              (n) =>
+                !n.resolved_at &&
+                !n.seen_at &&
+                String(n.care_recipient_id ?? "") === space.careRecipientId,
+            ),
+          );
+        }
+      });
+    }, 0);
     const loadInbox = () => {
       void fetchServerNotifications().then((r) => {
         if (!cancelled && r.ok) {
@@ -78,9 +112,7 @@ export function TodayPage({
         }
       });
     };
-    loadInbox();
     window.addEventListener("cr-notification", loadInbox);
-    // Lightweight poll as SSE backup (4s) for multi-tab coherence
     const iv = window.setInterval(loadInbox, 15000);
     return () => {
       cancelled = true;
@@ -144,7 +176,22 @@ export function TodayPage({
 
   return (
     <>
-      {isLightweight && (
+      <span className="sr-only" data-testid="today-shell-ready">
+        {shellReady ? "ready" : "loading"}
+      </span>
+      {showOnboarding && (
+        <OnboardingWizard
+          initialPath={loadOnboardingDraft().path}
+          onDismiss={() => {
+            const d = loadOnboardingDraft();
+            d.completed = true;
+            saveOnboardingDraft(d);
+            setShowOnboarding(false);
+          }}
+          onComplete={() => setShowOnboarding(false)}
+        />
+      )}
+      {isLightweight && !showOnboarding && (
         <section
           className="section surface-known empty-care-space"
           data-testid="lightweight-empty-state"
@@ -171,6 +218,14 @@ export function TodayPage({
             <button
               type="button"
               className="primary-btn"
+              data-testid="empty-start-onboarding"
+              onClick={() => setShowOnboarding(true)}
+            >
+              Set up care
+            </button>
+            <button
+              type="button"
+              className="secondary-btn"
               data-testid="empty-open-relay"
               onClick={onOpenRelay}
             >

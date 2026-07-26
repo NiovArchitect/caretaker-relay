@@ -8,6 +8,7 @@ import {
 } from "../foundation/careClient";
 import { SYNTHETIC_CONTACTS } from "../lib/identity";
 import { loadActiveCareRecipientId, resolveCareSpace } from "../lib/careContext";
+import { resolveMessageTarget } from "../lib/messageTarget";
 
 export function PeoplePage({
   onMessagePerson,
@@ -29,8 +30,36 @@ export function PeoplePage({
   const [acceptToken, setAcceptToken] = useState("");
   const [coverageNote, setCoverageNote] = useState("");
   const [coverageStatus, setCoverageStatus] = useState<string | null>(null);
+  const [messageHint, setMessageHint] = useState<string | null>(null);
   const session = getSessionIdentity();
   const space = resolveCareSpace(loadActiveCareRecipientId());
+
+  function requestMessage(personId: string, _displayName?: string) {
+    void _displayName;
+    const target = resolveMessageTarget(
+      personId,
+      session.carePersonId,
+      members.map((m) => ({
+        personId: m.personId,
+        displayName: m.displayName,
+        status: m.status,
+      })),
+    );
+    if (!target) {
+      setMessageHint(
+        "No other person in this circle to message yet. Invite someone or accept an invitation first.",
+      );
+      return;
+    }
+    if (target.personId !== personId) {
+      setMessageHint(
+        `You can’t message yourself. Opening Coordination with ${target.displayName} instead.`,
+      );
+    } else {
+      setMessageHint(null);
+    }
+    onMessagePerson?.(target.personId, target.displayName);
+  }
 
   function reload() {
     setLoading(true);
@@ -199,22 +228,36 @@ export function PeoplePage({
                 {member.status === "active" ? "Active" : member.status}
               </span>
             </button>
-            <button
-              type="button"
-              className="btn-comm btn-with-icon member-card-message"
-              data-testid={`person-message-quick-${member.personId}`}
-              data-action-kind="communication"
-              onClick={() =>
-                onMessagePerson?.(member.personId, member.displayName)
-              }
-            >
-              <span className="btn-glyph" aria-hidden>
-                ✉
+            {member.personId !== session.carePersonId ? (
+              <button
+                type="button"
+                className="btn-comm btn-with-icon member-card-message"
+                data-testid={`person-message-quick-${member.personId}`}
+                data-action-kind="communication"
+                onClick={() =>
+                  requestMessage(member.personId, member.displayName)
+                }
+              >
+                <span className="btn-glyph" aria-hidden>
+                  ✉
+                </span>
+                Message
+              </button>
+            ) : (
+              <span
+                className="muted member-card-you"
+                data-testid={`person-self-${member.personId}`}
+              >
+                You
               </span>
-              Message
-            </button>
+            )}
           </div>
         ))}
+        {messageHint && (
+          <p className="attention-limit" role="status" data-testid="message-target-hint">
+            {messageHint}
+          </p>
+        )}
       </section>
 
       <section
@@ -333,12 +376,15 @@ export function PeoplePage({
             disabled={!coverageNote.trim()}
             onClick={() => {
               const note = coverageNote.trim();
-              const backup =
-                members.find(
-                  (m) =>
-                    m.personId !== session.carePersonId &&
-                    m.status === "active",
-                ) ?? members.find((m) => m.personId !== session.carePersonId);
+              const backup = resolveMessageTarget(
+                "",
+                session.carePersonId,
+                members.map((m) => ({
+                  personId: m.personId,
+                  displayName: m.displayName,
+                  status: m.status,
+                })),
+              );
               setCoverageStatus(
                 `Coverage need noted for ${space.preferredName}: “${note}”. ` +
                   (backup
@@ -347,7 +393,7 @@ export function PeoplePage({
               );
               setCoverageNote("");
               if (backup) {
-                onMessagePerson?.(backup.personId, backup.displayName);
+                requestMessage(backup.personId, backup.displayName);
               }
             }}
           >
@@ -451,20 +497,26 @@ export function PeoplePage({
                 Call
               </a>
             )}
-            <button
-              type="button"
-              className="btn-comm btn-with-icon"
-              data-testid="person-message"
-              data-action-kind="communication"
-              onClick={() =>
-                onMessagePerson?.(selected.personId, selected.displayName)
-              }
-            >
-              <span className="btn-glyph" aria-hidden>
-                ✉
-              </span>
-              Message in Coordination
-            </button>
+            {selected.personId !== session.carePersonId ? (
+              <button
+                type="button"
+                className="btn-comm btn-with-icon"
+                data-testid="person-message"
+                data-action-kind="communication"
+                onClick={() =>
+                  requestMessage(selected.personId, selected.displayName)
+                }
+              >
+                <span className="btn-glyph" aria-hidden>
+                  ✉
+                </span>
+                Message in Coordination
+              </button>
+            ) : (
+              <p className="muted" data-testid="person-message-self-blocked">
+                This is you — pick someone else to message.
+              </p>
+            )}
             {selected.personId === "p-dr-shah" ? (
               <button
                 type="button"

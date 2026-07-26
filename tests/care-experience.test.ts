@@ -207,3 +207,58 @@ describe("operating experience copy contracts", () => {
     expect(src).toContain("Getting started");
   });
 });
+
+import {
+  resolveMessageTarget,
+  defaultCoordinationTarget,
+  isSelfMessageTarget,
+} from "../src/lib/messageTarget";
+import {
+  labPrincipalForPath,
+  emptyOnboardingDraft,
+} from "../src/lib/onboarding";
+
+describe("message targeting self-exclusion", () => {
+  const members = [
+    { personId: "p-sadeil", displayName: "Marcus Carter", status: "active" },
+    { personId: "p-maya", displayName: "Maya Bennett", status: "active" },
+    { personId: "p-walter", displayName: "Daniel Kim", status: "active" },
+  ];
+
+  it("uses clicked non-self person", () => {
+    const t = resolveMessageTarget("p-maya", "p-sadeil", members);
+    expect(t?.personId).toBe("p-maya");
+  });
+
+  it("never returns self when self is clicked", () => {
+    const t = resolveMessageTarget("p-sadeil", "p-sadeil", members);
+    expect(t).not.toBeNull();
+    expect(t!.personId).not.toBe("p-sadeil");
+  });
+
+  it("returns null when only self exists", () => {
+    const t = resolveMessageTarget("p-sadeil", "p-sadeil", [
+      { personId: "p-sadeil", displayName: "Marcus" },
+    ]);
+    expect(t).toBeNull();
+  });
+
+  it("default coordination excludes self", () => {
+    const id = defaultCoordinationTarget("p-maya", ["p-maya", "p-walter"], members);
+    expect(id).toBe("p-walter");
+  });
+
+  it("detects self target", () => {
+    expect(isSelfMessageTarget("p-sadeil", "p-sadeil")).toBe(true);
+    expect(isSelfMessageTarget("p-maya", "p-sadeil")).toBe(false);
+  });
+});
+
+describe("onboarding path mapping", () => {
+  it("maps paths to lab principals without inventing clinical data", () => {
+    expect(labPrincipalForPath("family_friend")).toBe("p-maya");
+    expect(labPrincipalForPath("paid_dsp")).toBe("p-walter");
+    expect(labPrincipalForPath("clinician")).toBe("p-dr-shah");
+    expect(emptyOnboardingDraft().completed).toBe(false);
+  });
+});

@@ -21,6 +21,7 @@ import { SideNav } from "./components/SideNav";
 import { RelayPanel } from "./components/RelayPanel";
 import { HandoffPanel } from "./components/HandoffPanel";
 import { LoginGate } from "./components/LoginGate";
+import { BrandMark } from "./components/BrandMark";
 import { TodayPage } from "./pages/TodayPage";
 import { CarePage } from "./pages/CarePage";
 import { PeoplePage } from "./pages/PeoplePage";
@@ -33,6 +34,8 @@ import {
   saveActiveCareRecipientId,
 } from "./lib/careContext";
 import { setActiveCareRecipientId } from "./foundation/careClient";
+import { warmCareApi } from "./lib/apiWarm";
+import { isSelfMessageTarget } from "./lib/messageTarget";
 
 function nowLabel() {
   return new Date().toLocaleTimeString([], {
@@ -134,8 +137,28 @@ export function App() {
     setActiveCareRecipientId(activeRecipientId);
   }, [activeRecipientId]);
 
+  // Warm API ASAP; session restore must not block login paint more than needed.
   useEffect(() => {
+    void warmCareApi(true);
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const persistedFast = (() => {
+      try {
+        return !!sessionStorage.getItem("cr_care_session_v1");
+      } catch {
+        return false;
+      }
+    })();
+    // Shell-first: if no persisted session, show LoginGate immediately.
+    if (!persistedFast) {
+      setAuthReady(true);
+      setSession(null);
+      return;
+    }
     void restoreSession().then((s) => {
+      if (cancelled) return;
       setSession(s);
       setAuthReady(true);
       if (s) {
@@ -153,6 +176,9 @@ export function App() {
         ]);
       }
     });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
@@ -690,7 +716,7 @@ export function App() {
       <div className="cr-ambient" aria-hidden />
       <header className="topbar">
         <div className="brand" aria-label="Caretaker Relay">
-          <span className="brand-mark" aria-hidden />
+          <BrandMark size={28} />
           <span>Caretaker Relay</span>
         </div>
         <div className="topbar-center">
@@ -870,6 +896,10 @@ export function App() {
           {workspaceTab === "people" && (
             <PeoplePage
               onMessagePerson={(personId) => {
+                if (isSelfMessageTarget(personId, session.carePersonId)) {
+                  // PeoplePage should already exclude self; hard guard.
+                  return;
+                }
                 setCoordFocusPersonId(personId);
                 setCoordFocusKey((k) => k + 1);
                 setRelayOpen(true);

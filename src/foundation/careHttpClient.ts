@@ -388,6 +388,9 @@ export function getCareApiBaseUrl(): string {
   return DEFAULT_BASE;
 }
 
+/** Export for connection warming / performance instrumentation. */
+export { DEFAULT_BASE as CARE_API_DEFAULT_BASE };
+
 export async function careMe(token: string, baseUrl?: string) {
   return request<{
     ok: boolean;
