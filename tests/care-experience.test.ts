@@ -277,44 +277,45 @@ describe("production logo system", () => {
     expect(logoPalette("white").relay).toBe(LOGO_COLORS.white);
   });
 
-  it("temporary live logo is wordmark-only while original 3D review is open", () => {
+  it("production logo is soft translucent orb + wordmark", () => {
     const logo = readFileSync(
       join(process.cwd(), "src/components/brand/CaretakerRelayLogo.tsx"),
       "utf8",
     );
-    expect(logo).toContain("wordmark-only-provisional");
+    const orb = readFileSync(
+      join(process.cwd(), "src/components/brand/SoftTranslucentOrb.tsx"),
+      "utf8",
+    );
+    expect(logo).toContain("soft-translucent-production");
     expect(logo).toContain("Caretaker");
     expect(logo).toContain("Relay");
-    expect(logo).not.toContain("option-a-production");
+    expect(logo).not.toContain("wordmark-only-provisional");
+    expect(orb).toContain("soft-translucent");
+    expect(orb).toContain("#8DD8D6");
+    expect(orb).not.toContain("feGaussianBlur");
+    expect(orb).not.toContain("backdrop-filter");
   });
 
-  it("original 3D concept assets exist (four independent systems)", () => {
-    const base = join(process.cwd(), "docs/design/original-3d-logo-review/assets");
-    for (const id of ["c1", "c2", "c3", "c4"]) {
-      expect(existsSync(join(base, `${id}-hero.svg`))).toBe(true);
-      expect(existsSync(join(base, `${id}-flat.svg`))).toBe(true);
-      expect(existsSync(join(base, `${id}-micro.svg`))).toBe(true);
-    }
-    expect(
-      existsSync(
-        join(process.cwd(), "docs/design/original-3d-logo-review/comparison.html"),
-      ),
-    ).toBe(true);
-  });
-
-  it("BrandMark is provisional CR monogram, not Option A", () => {
+  it("BrandMark is SoftTranslucentOrb", () => {
     const src = readFileSync(
       join(process.cwd(), "src/components/BrandMark.tsx"),
       "utf8",
     );
-    expect(src).toContain("provisional-cr-monogram");
+    expect(src).toContain("SoftTranslucentOrb");
+    expect(src).not.toContain("provisional-cr-monogram");
     expect(src).not.toContain("LogoOptionA");
   });
 
-  it("favicon is provisional CR monogram", () => {
-    const fav = readFileSync(join(process.cwd(), "public/favicon.svg"), "utf8");
-    expect(fav).toContain("Provisional CR monogram");
-    expect(fav).toContain(">CR</text>");
-    expect(fav).not.toContain("Option A");
+  it("favicon is translucent orb, not CR monogram", () => {
+    const fav = readFileSync(
+      join(process.cwd(), "public/favicon-orb-translucent.svg"),
+      "utf8",
+    );
+    const html = readFileSync(join(process.cwd(), "index.html"), "utf8");
+    expect(fav).toContain("radialGradient");
+    expect(fav).toContain("#3AA8B5");
+    expect(fav).not.toContain(">CR</text>");
+    expect(html).toContain("favicon-orb-translucent.svg");
+    expect(html).not.toMatch(/href="\/favicon\.svg"/);
   });
 });

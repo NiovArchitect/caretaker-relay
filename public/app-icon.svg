@@ -1,5 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Caretaker Relay">
-  <!-- Provisional CR monogram app icon -->
-  <rect width="128" height="128" rx="28" fill="#0B2430"/>
-  <text x="64" y="84" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="44" font-weight="700" fill="#F5FAFC" letter-spacing="-0.05em">CR</text>
+  <defs>
+    <radialGradient id="st-body" cx="40%" cy="36%" r="66%">
+      <stop offset="0%" stop-color="#E8F8F7"/>
+      <stop offset="20%" stop-color="#8DD8D6"/>
+      <stop offset="48%" stop-color="#3AA8B5"/>
+      <stop offset="75%" stop-color="#0C5C6A"/>
+      <stop offset="100%" stop-color="#0B2430"/>
+    </radialGradient>
+    <radialGradient id="st-hi" cx="34%" cy="30%" r="48%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.85"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="st-core" cx="55%" cy="58%" r="40%">
+      <stop offset="0%" stop-color="#C9893A" stop-opacity="0.14"/>
+      <stop offset="55%" stop-color="#1F8A9A" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1F8A9A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="64" cy="64" r="56" fill="url(#st-body)"/>
+  <circle cx="64" cy="64" r="56" fill="url(#st-core)"/>
+  <ellipse cx="50" cy="46" rx="24" ry="18" fill="url(#st-hi)"/>
+  <circle cx="64" cy="64" r="55" fill="none" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="1.5"/>
 </svg>

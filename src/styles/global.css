@@ -3932,3 +3932,21 @@ p {
 .brand .cr-logo-wordmark-refined {
   font-size: 1.05rem;
 }
+
+/* Soft Translucent orb production lockups */
+.cr-logo-orb {
+  display: block;
+  flex-shrink: 0;
+}
+
+.cr-logo[data-logo-mode="soft-translucent-production"] {
+  gap: 10px;
+}
+
+.cr-logo-stacked[data-logo-mode="soft-translucent-production"] {
+  gap: 10px;
+}
+
+.cr-logo-stacked[data-logo-mode="soft-translucent-production"] .cr-logo-wordmark-refined {
+  font-size: 1.22rem;
+}

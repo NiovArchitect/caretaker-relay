@@ -1,16 +1,25 @@
+import { SoftTranslucentOrb, type OrbTone } from "./SoftTranslucentOrb";
 import { logoPalette, type LogoTone } from "../../brand/logoTokens";
 
 export type LogoLayout = "horizontal" | "stacked" | "mark";
 
+function toOrbTone(tone: LogoTone): OrbTone {
+  if (tone === "ink" || tone === "white") return tone;
+  return "color";
+}
+
 /**
- * TEMPORARY LIVE IDENTITY (Option A rejected; original 3D concepts pending founder selection).
- * Wordmark-only — no symbol geometry of any prior mark.
+ * Production identity — Soft Translucent orb + Caretaker Relay wordmark.
+ * Founder-selected Material 3. No provisional monogram. No rejected marks.
  */
 export function CaretakerRelayLogo({
   layout = "horizontal",
   tone = "color",
+  markSize,
   className = "",
   title = "Caretaker Relay",
+  showWordmark = true,
+  showSymbol = true,
   testId = "caretaker-relay-logo",
 }: {
   layout?: LogoLayout;
@@ -20,40 +29,50 @@ export function CaretakerRelayLogo({
   title?: string;
   showWordmark?: boolean;
   showSymbol?: boolean;
-  useMicro?: boolean;
   testId?: string;
 }) {
   const c = logoPalette(tone);
-  // Mark-only contexts still show refined wordmark initials style, not a rejected mark
-  if (layout === "mark") {
+  const size =
+    markSize ??
+    (layout === "mark" ? 28 : layout === "stacked" ? 52 : 32);
+  const orbTone = toOrbTone(tone);
+
+  if (layout === "mark" || !showWordmark) {
     return (
       <span
-        className={`cr-logo cr-logo-mark cr-logo-wordmark-temporary ${className}`.trim()}
+        className={`cr-logo cr-logo-mark ${className}`.trim()}
         data-testid={testId}
         data-logo-layout="mark"
-        data-logo-mode="wordmark-only-provisional"
-        role="img"
-        aria-label={title}
+        data-logo-mode="soft-translucent-production"
       >
-        <span className="cr-logo-wordmark cr-logo-wordmark-refined" aria-hidden>
-          <span className="cr-logo-caretaker" style={{ color: c.caretaker }}>
-            CR
-          </span>
-        </span>
+        <SoftTranslucentOrb
+          size={size}
+          tone={orbTone}
+          title={title}
+          testId={`${testId}-mark`}
+        />
       </span>
     );
   }
 
   return (
     <span
-      className={`cr-logo cr-logo-${layout} cr-logo-wordmark-temporary ${className}`.trim()}
+      className={`cr-logo cr-logo-${layout} ${className}`.trim()}
       data-testid={testId}
       data-logo-layout={layout}
       data-logo-tone={tone}
-      data-logo-mode="wordmark-only-provisional"
+      data-logo-mode="soft-translucent-production"
       role="img"
       aria-label={title}
     >
+      {showSymbol && (
+        <SoftTranslucentOrb
+          size={size}
+          tone={orbTone}
+          decorative
+          testId={`${testId}-mark`}
+        />
+      )}
       <span className="cr-logo-wordmark cr-logo-wordmark-refined" aria-hidden>
         <span className="cr-logo-caretaker" style={{ color: c.caretaker }}>
           Caretaker

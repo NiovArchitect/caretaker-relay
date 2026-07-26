@@ -718,7 +718,7 @@ export function App() {
         <div className="brand">
           <CaretakerRelayLogo
             layout="horizontal"
-            markSize={28}
+            markSize={30}
             testId="app-brand-logo"
           />
         </div>
