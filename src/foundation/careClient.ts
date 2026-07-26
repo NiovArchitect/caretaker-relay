@@ -36,6 +36,7 @@ import {
   careLogin,
   careState,
   careToday,
+  careRoleProjection,
   careUnderstand,
   careRecipientProfile,
   careHistory,
@@ -1466,4 +1467,56 @@ export function getAuditTrail() {
 
 export function getTransportUsed() {
   return transportUsed;
+}
+
+/** Server role-projected care surface (authorized only). */
+export async function fetchRoleProjection(): Promise<{
+  ok: boolean;
+  role?: string;
+  projection?: {
+    orientation?: string;
+    priorities?: string[];
+    today?: {
+      whatChanged?: string[];
+      unresolved?: string[];
+      upcoming?: string[];
+      whoHelping?: string[];
+      overdue?: string[];
+    };
+    shift?: { briefing?: string[]; roleLabel?: string };
+    clinical?: { trends?: string[]; openQuestions?: string[] };
+    privacy?: { accessNote?: string };
+  };
+  source: "http" | "none";
+}> {
+  if (rid() === NO_RECIPIENT_ID || !mayUsePackageSeed()) {
+    const useHttp = await ensureHttpSession();
+    if (useHttp && httpToken && rid() !== NO_RECIPIENT_ID) {
+      const res = await careRoleProjection(httpToken, rid());
+      if (res.ok) {
+        return {
+          ok: true,
+          role: res.data.role,
+          projection: res.data.projection as {
+            orientation?: string;
+            priorities?: string[];
+            today?: {
+              whatChanged?: string[];
+              unresolved?: string[];
+              upcoming?: string[];
+              whoHelping?: string[];
+              overdue?: string[];
+            };
+            shift?: { briefing?: string[]; roleLabel?: string };
+            clinical?: { trends?: string[]; openQuestions?: string[] };
+            privacy?: { accessNote?: string };
+          },
+          source: "http",
+        };
+      }
+    }
+    return { ok: false, source: "none" };
+  }
+  // Lab package path: no separate projection service — client roleExperience remains
+  return { ok: false, source: "none" };
 }

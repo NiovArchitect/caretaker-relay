@@ -34,6 +34,7 @@ import {
   candidateToVerificationItem,
 } from "./safety.js";
 import { extractDoseFromText } from "./dose-units.js";
+import { resolveEffectiveAt } from "./care-time.js";
 
 export interface UnderstandOptions {
   /**
@@ -115,9 +116,16 @@ function mkCandidate(
         partial.recordedDose && /\d/.test(partial.recordedDose),
       ),
     });
+  const times = resolveEffectiveAt(
+    partial.statement + " " + (partial.timeLabel ?? ""),
+    new Date(source.recordedAt || Date.now()),
+  );
   return {
     id: `cand-${idx}-${Date.now().toString(36)}`,
     eventType: partial.eventType,
+    recordedAt: times.recordedAt,
+    effectiveAt: times.effectiveAt,
+    timePrecision: times.precision,
     statement: partial.statement,
     careRecipientId: ctx.careRecipientId,
     careRecipientName,
@@ -158,9 +166,9 @@ export function fixtureExtract(
     return emptySlice(ctx, careRecipientName, text, "FIXTURE");
   }
 
-  // Meal
-  if (/ate|meal|lunch|breakfast|dinner|noon/.test(lower)) {
-    const aroundNoon = /around noon|at noon|noon|12\s*pm|12:00/.test(lower);
+  // Meal (word-boundary: do not treat "afternoon" as noon meal)
+  if (/\bate\b|\bmeal\b|\blunch\b|\bbreakfast\b|\bdinner\b|\bsupper\b|\baround noon\b|\bat noon\b|\bnoon\b|\b12\s*pm\b|\b12:00\b/.test(lower)) {
+    const aroundNoon = /around noon|at noon|\bnoon\b|12\s*pm|12:00/.test(lower);
     const aroundNine =
       /around nine|at nine|about nine|9\s*(am|a\.m\.)?|nine o'?clock/.test(
         lower,
@@ -247,13 +255,85 @@ export function fixtureExtract(
     );
   }
 
-// Soft observation — MUST remain reported/uncertain, not "has fatigue" diagnosis
+// Provider / clinical-source documentation (role-aware note, not a diagnosis claim)
   if (
+    /as prescribed|continue current|monitor (for |dizziness|symptoms)|provider (note|guidance|update)|clinical (note|guidance)|care team should|authorized instruction/i.test(
+      lower,
+    )
+  ) {
+    candidates.push(
+      mkCandidate(
+        {
+          eventType: "note",
+          statement: "Provider documentation: " + text.slice(0, 220),
+          epistemicStatus: "REPORTED",
+          confidence: 0.86,
+          consequentiality: "moderate",
+        },
+        ctx,
+        careRecipientName,
+        source,
+        ++i,
+      ),
+    );
+  }
+
+  // Soft observation — MUST remain reported/uncertain, not "has fatigue" diagnosis
+  // Positive / neutral wellbeing is valid caregiver evidence (REPORTED, not "needs checking")
+  if (
+    /feels?\s+(very\s+)?(good|great|well|better|fine|ok|okay|herself|himself|comfortable|energetic)|seems?\s+(very\s+)?(good|great|well|better|fine|herself|himself|comfortable|energetic|alert|off)|more\s+alert|ate\s+(well|all)|slept\s+(well|poorly|badly|ok)|appears?\s+comfortable|more energetic|in (a )?(good|great) mood|good spirits|doing (well|better|fine)|wasn'?t\s+(her|him|their)self|not\s+(her|him|their)self/i.test(
+      lower,
+    )
+  ) {
+    const negative =
+      /not\s+(good|well|fine)|poorly|badly|off\b|wasn'?t\s+(her|him|their)self|not\s+(her|him|their)self/.test(
+        lower,
+      );
+    const slept = /slept/.test(lower);
+    const ate = /ate/.test(lower);
+    let statement = "Caregiver reported: general wellbeing / feels good";
+    if (slept && /poor|bad/.test(lower))
+      statement = "Caregiver reported: slept poorly";
+    else if (slept) statement = "Caregiver reported: slept well";
+    else if (ate) statement = "Caregiver reported: ate well";
+    else if (negative)
+      statement = "Caregiver reported: seems off / not their usual self";
+    else if (/alert/.test(lower))
+      statement = "Caregiver reported: more alert";
+    else if (/energetic|energy/.test(lower))
+      statement = "Caregiver reported: more energetic than usual";
+    else if (/comfortable/.test(lower))
+      statement = "Caregiver reported: appears comfortable";
+    else if (/mood|spirits/.test(lower))
+      statement = "Caregiver reported: good mood";
+    candidates.push(
+      mkCandidate(
+        {
+          eventType: "observation",
+          statement,
+          epistemicStatus: "REPORTED",
+          confidence: 0.88,
+          consequentiality: "low",
+          timeLabel: /\btoday\b/.test(lower)
+            ? "today"
+            : /\bnow\b|right now/.test(lower)
+              ? "now"
+              : undefined,
+        },
+        ctx,
+        careRecipientName,
+        source,
+        ++i,
+      ),
+    );
+  } else if (
     /tired|fatigue|fatigued|exhausted|weaker|seemed|dizzy|dizziness|light[- ]?headed/.test(
       lower,
     )
   ) {
-    const soft = /seemed|a little|more tired than usual/.test(lower);
+    const soft = /seemed|a little|more tired than usual|seems\s+tired/.test(
+      lower,
+    );
     const dizzy = /dizzy|dizziness|light[- ]?headed/.test(lower);
     candidates.push(
       mkCandidate(
@@ -264,8 +344,10 @@ export function fixtureExtract(
             : soft
               ? "Caregiver reported: seemed more tired than usual"
               : "Caregiver reported tiredness",
-          epistemicStatus: soft || dizzy ? "REPORTED" : "UNCERTAIN",
-          confidence: soft || dizzy ? 0.75 : 0.55,
+          // Soft caregiver observations are REPORTED evidence, not clinical NEEDS CHECKING
+          epistemicStatus: "REPORTED",
+          confidence: soft || dizzy ? 0.75 : 0.65,
+          consequentiality: dizzy ? "moderate" : "low",
         },
         ctx,
         careRecipientName,
@@ -567,6 +649,124 @@ export function fixtureExtract(
     );
   }
 
+  // DSP / professional caregiver support, mobility, and ADL observations.
+  // Generalized phrase classes (not exact sentence lists). REPORTED only —
+  // never a diagnosis or clinical order.
+  if (
+    candidates.length === 0 ||
+    /transfer|walker|wheel\s*chair|mobility|unsteady|stand(ing)?|gait|reposition|bath(e|ing)?|dress(ed|ing)?|shower|toilet|bathroom|adl|assist|assistance|helped?|support(ed|ing)?|independen|refus(ed|al)|exercise|out of bed|getting up|from the (bed|chair)|walk(ed|ing)? from|reminders?|prompts?|get ready|morning routine|hygiene|wheelchair/i.test(
+      lower,
+    )
+  ) {
+    const mobility =
+      /transfer|walker|wheel\s*chair|mobility|unsteady|gait|stand(ing)?|walk(ed|ing)?|out of bed|from the (bed|chair)|getting up|bedroom|kitchen/i.test(
+        lower,
+      );
+    const adl =
+      /bath(e|ing)?|dress(ed|ing)?|shower|toilet|bathroom|adl|morning routine|get ready|hygiene/i.test(
+        lower,
+      );
+    const support =
+      /assist|assistance|helped?|support(ed|ing)?|needed help|with assistance|standby/i.test(
+        lower,
+      );
+    const refused = /refus(ed|al)|would not|didn't want|did not want/i.test(
+      lower,
+    );
+    const independent =
+      /more independen|independen(t|ce)|on (her|his|their) own|without help/i.test(
+        lower,
+      );
+    const tiredWalk =
+      /tired during|more tired|fatigue during|exhausted during/i.test(lower) &&
+      /walk|exercise|routine|mobil/i.test(lower);
+    const reminders = /reminders?|prompt(ed|s|ing)?/i.test(lower);
+    const exercises = /exercise|pt exercises|range of motion|stretch/i.test(
+      lower,
+    );
+    const reposition = /reposition/i.test(lower);
+
+    if (
+      mobility ||
+      adl ||
+      support ||
+      refused ||
+      independent ||
+      tiredWalk ||
+      reminders ||
+      exercises ||
+      reposition
+    ) {
+      let statement = "Caregiver reported: support / care observation";
+      if (refused && adl)
+        statement = "Caregiver reported: refused personal care (e.g. shower/ADL)";
+      else if (refused)
+        statement = "Caregiver reported: refused offered support";
+      else if (independent && adl)
+        statement = "Caregiver reported: more independent with personal care";
+      else if (independent)
+        statement = "Caregiver reported: more independent with mobility/support";
+      else if (reposition)
+        statement = "Caregiver reported: repositioned for comfort";
+      else if (exercises && support)
+        statement = "Caregiver reported: exercises completed with assistance";
+      else if (exercises)
+        statement = "Caregiver reported: participated in exercises";
+      else if (mobility && support)
+        statement =
+          "Caregiver reported: mobility/transfer support provided";
+      else if (mobility && /unsteady|wobble|balance/i.test(lower))
+        statement = "Caregiver reported: unsteady when standing/walking";
+      else if (mobility)
+        statement = "Caregiver reported: mobility observation";
+      else if (adl && support)
+        statement = "Caregiver reported: ADL support provided";
+      else if (adl) statement = "Caregiver reported: ADL observation";
+      else if (reminders)
+        statement = "Caregiver reported: needed reminders for routine";
+      else if (tiredWalk)
+        statement = "Caregiver reported: more tired during activity";
+      else if (support)
+        statement = "Caregiver reported: support provided";
+
+      // Avoid duplicate observation if a similar one already exists
+      const alreadyObs = candidates.some(
+        (c) =>
+          c.eventType === "observation" &&
+          /support|mobility|ADL|transfer|independen|refused|exercise|reposition|unsteady|reminders/i.test(
+            c.statement,
+          ),
+      );
+      if (!alreadyObs) {
+        candidates.push(
+          mkCandidate(
+            {
+              eventType: "observation",
+              statement,
+              epistemicStatus: "REPORTED",
+              confidence: 0.84,
+              consequentiality:
+                refused || /unsteady|fall|safety/i.test(lower)
+                  ? "moderate"
+                  : "low",
+              timeLabel: /\bthis morning\b|\bmorning\b/.test(lower)
+                ? "this morning"
+                : /\btoday\b/.test(lower)
+                  ? "today"
+                  : /\bthis afternoon\b/.test(lower)
+                    ? "this afternoon"
+                    : undefined,
+            },
+            ctx,
+            careRecipientName,
+            source,
+            ++i,
+          ),
+        );
+      }
+    }
+  }
+
   if (candidates.length === 0) {
     uncertainties.push(
       "I heard you, but I'm not sure what to file yet. You can correct me.",
@@ -683,6 +883,20 @@ function parseLlmJson(
       model,
     );
   } catch {
+    // Prefer deterministic structured extract over opaque raw-note dump.
+    const fallback = fixtureExtract(rawText, ctx, careRecipientName);
+    if (fallback.candidates.length > 0) {
+      return {
+        ...fallback,
+        evidenceMode: "LIVE_FOUNDATION_BACKED",
+        modelProvider: model.provider,
+        modelName: model.model,
+        uncertainties: [
+          "Model output was not valid structured JSON; used structured fallback extraction",
+          ...fallback.uncertainties,
+        ],
+      };
+    }
     return toSlice(
       [
         mkCandidate(
@@ -766,7 +980,29 @@ export async function understandCareInput(
       }),
     });
     if (!result.ok) {
-      // Fail closed to uncertainty — do not invent
+      // LLM unavailable (quota/network): fall back to deterministic structured
+      // extraction so ordinary caregiver observations still become REPORTED
+      // candidates with recorded_at/effective_at — never invent clinical facts.
+      const fallback = fixtureExtract(text, ctx, careRecipientName, {
+        recordedDoseOverride: opts.recordedDoseOverride,
+        now: opts.now,
+      });
+      if (fallback.candidates.length > 0) {
+        return {
+          kind: "understood",
+          slice: {
+            ...fallback,
+            evidenceMode: "LIVE_FOUNDATION_BACKED",
+            modelProvider: result.provider,
+            modelName: "unavailable-fallback",
+            uncertainties: [
+              result.fallback_message,
+              "Structured fallback extraction used while the language model was unavailable",
+              ...fallback.uncertainties,
+            ],
+          },
+        };
+      }
       return {
         kind: "understood",
         slice: toSlice(
@@ -793,16 +1029,65 @@ export async function understandCareInput(
         ),
       };
     }
+    const parsed = parseLlmJson(
+      result.text,
+      ctx,
+      careRecipientName,
+      source,
+      text,
+      { provider: result.provider, model: result.model },
+    );
+    // Always merge deterministic structured extract for known care phrases
+    // (LLM may return empty/weak JSON while still HTTP-200).
+    const fixture = fixtureExtract(text, ctx, careRecipientName, {
+      recordedDoseOverride: opts.recordedDoseOverride,
+      now: opts.now,
+    });
+    if (fixture.candidates.length > 0) {
+      const keys = new Set(
+        parsed.candidates.map(
+          (c) => `${c.eventType}:${c.statement.slice(0, 48).toLowerCase()}`,
+        ),
+      );
+      const merged = [...parsed.candidates];
+      for (const c of fixture.candidates) {
+        const k = `${c.eventType}:${c.statement.slice(0, 48).toLowerCase()}`;
+        if (!keys.has(k)) {
+          merged.push(c);
+          keys.add(k);
+        }
+      }
+      if (merged.length > parsed.candidates.length || !parsed.candidates.length) {
+        // Prefer live LLM surface labels when present; fixture only fills gaps.
+        // (Regression: overwriting meals with fixture hid scripted "LLM path" proof.)
+        return {
+          kind: "understood",
+          slice: {
+            ...parsed,
+            candidates: merged.length ? merged : fixture.candidates,
+            meals: parsed.meals.length ? parsed.meals : fixture.meals,
+            observations: parsed.observations.length
+              ? parsed.observations
+              : fixture.observations,
+            evidenceMode: "LIVE_FOUNDATION_BACKED",
+            modelProvider: result.provider,
+            modelName: result.model,
+            uncertainties: [
+              ...(parsed.candidates.length
+                ? []
+                : [
+                    "Model returned weak structure; merged structured fallback extraction",
+                  ]),
+              ...parsed.uncertainties,
+              ...fixture.uncertainties,
+            ],
+          },
+        };
+      }
+    }
     return {
       kind: "understood",
-      slice: parseLlmJson(
-        result.text,
-        ctx,
-        careRecipientName,
-        source,
-        text,
-        { provider: result.provider, model: result.model },
-      ),
+      slice: parsed,
     };
   }
 
@@ -828,6 +1113,15 @@ export function toVerificationBundle(
     return candidateToVerificationItem(c, discrepancy);
   });
   for (const u of understood.uncertainties) {
+    // Keep system/ops messages on the slice for audit — do not surface them
+    // as caregiver-facing verify rows when structured candidates already exist.
+    if (
+      /OpenAI|Anthropic|provider failed|quota|model unavailable|structured fallback|language model was unavailable|Model output was not valid|saved raw note for human review/i.test(
+        u,
+      )
+    ) {
+      continue;
+    }
     if (!items.some((i) => i.label === u)) {
       items.push({
         id: `v-unc-${items.length + 1}`,

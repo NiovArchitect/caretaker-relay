@@ -716,3 +716,144 @@ export async function careCandidateAction(
     { method: "POST", token, baseUrl, body },
   );
 }
+
+/** Role-projected care surface (server-enforced). */
+export async function careRoleProjection(
+  token: string,
+  careRecipientId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    role: string;
+    projection: Record<string, unknown>;
+  }>(`/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/projection`, {
+    token,
+    baseUrl,
+  });
+}
+
+/** Durable care-event ingest (ETL). */
+export async function careIngestEvent(
+  token: string,
+  careRecipientId: string,
+  input: {
+    type?: string;
+    title?: string;
+    statement: string;
+    source_kind?: string;
+    event_at?: string;
+    report_at?: string;
+    actor_active_role?: string;
+    idempotency_key?: string;
+    confidence_label?: string;
+    truth_state?: string;
+  },
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    event: Record<string, unknown>;
+    deduped: boolean;
+    task_ids: string[];
+    notification_ids: string[];
+  }>(`/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/events`, {
+    method: "POST",
+    token,
+    body: input,
+    baseUrl,
+  });
+}
+
+export async function careTimelineEvents(
+  token: string,
+  careRecipientId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    events: Array<Record<string, unknown>>;
+    count: number;
+  }>(`/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/events`, {
+    token,
+    baseUrl,
+  });
+}
+
+export async function careCreateSchedule(
+  token: string,
+  careRecipientId: string,
+  input: {
+    title: string;
+    starts_at: string;
+    starts_at_label?: string;
+    location?: string;
+    schedule_state?: string;
+  },
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    appointment: Record<string, unknown>;
+  }>(`/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/schedule`, {
+    method: "POST",
+    token,
+    body: input,
+    baseUrl,
+  });
+}
+
+export async function careProposeAction(
+  token: string,
+  careRecipientId: string,
+  input: {
+    type: string;
+    title: string;
+    summary?: string;
+    payload?: Record<string, unknown>;
+  },
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    action: Record<string, unknown>;
+    requires_confirmation: boolean;
+  }>(`/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/actions`, {
+    method: "POST",
+    token,
+    body: input,
+    baseUrl,
+  });
+}
+
+export async function careDecideAction(
+  token: string,
+  careRecipientId: string,
+  actionId: string,
+  decision: "approve" | "reject",
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    action: Record<string, unknown>;
+  }>(
+    `/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/actions/${encodeURIComponent(actionId)}/decide`,
+    {
+      method: "POST",
+      token,
+      body: { decision },
+      baseUrl,
+    },
+  );
+}
+
+export async function careCalendarOAuthStatus(token: string, baseUrl?: string) {
+  return request<{
+    ok: boolean;
+    provider: string;
+    configured: boolean;
+    mode: string;
+    message: string;
+  }>("/api/v1/care/calendar/oauth-status", { token, baseUrl });
+}
+

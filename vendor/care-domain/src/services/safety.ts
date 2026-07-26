@@ -82,7 +82,11 @@ export function refuseUnknownProtocol(text: string): string {
 }
 
 export function isMedicalDosageRequest(text: string): boolean {
-  return /what\s+dose\s+should|how\s+much\s+should\s+(i|we)\s+give|recommend\s+a\s+dose|prescribe|change\s+her\s+dose|double\s+.{0,40}\bdose\b|increase\s+the\s+dose|told\s+me\s+to\s+double/i.test(
+  // "as prescribed" is documentation of existing orders, not a dose-change ask.
+  if (/\bas\s+prescribed\b/i.test(text) && !/what\s+dose|how\s+much\s+should|double|increase\s+the\s+dose/i.test(text)) {
+    return false;
+  }
+  return /what\s+dose\s+should|how\s+much\s+should\s+(i|we)\s+give|recommend\s+a\s+dose|(?<!\bas\s)prescrib(?:e|ing)\b|change\s+her\s+(?:\w+\s+){0,3}dose|change\s+.{0,40}\bdose\b|double\s+.{0,40}\bdose\b|increase\s+the\s+dose|told\s+me\s+to\s+double|\bi\s+am\s+ordering\b.{0,40}\b(medicat|dose|mg)\b|\border(?:ing)?\s+(a\s+)?new\s+.{0,40}\bmedication\b/i.test(
     text,
   );
 }

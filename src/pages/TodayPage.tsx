@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { today } from "../scenario/olivia";
 import {
   fetchTodayProjection,
+  fetchRoleProjection,
   getSessionIdentity,
   fetchServerNotifications,
   notificationAction,
@@ -65,6 +66,19 @@ export function TodayPage({
   const [showAllNotifs, setShowAllNotifs] = useState(false);
   const [profile, setProfile] = useState<RecipientProfilePayload | null>(null);
   const [coverageSummary, setCoverageSummary] = useState("");
+  const [serverProjection, setServerProjection] = useState<{
+    orientation?: string;
+    priorities?: string[];
+    today?: {
+      whatChanged?: string[];
+      unresolved?: string[];
+      upcoming?: string[];
+      whoHelping?: string[];
+      overdue?: string[];
+    };
+    shift?: { briefing?: string[]; roleLabel?: string };
+    clinical?: { trends?: string[]; openQuestions?: string[] };
+  } | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(() => {
     // Established users with authorized recipients never see first-time role onboarding.
     // Lightweight second spaces get progressive empty-state paths instead.
@@ -87,9 +101,12 @@ export function TodayPage({
     void fetchTodayProjection().then((p) => {
       if (!cancelled) setProj(p);
     });
-    // Secondary: profile, coverage, notifications — progressive
+    // Secondary: role projection, profile, coverage, notifications — progressive
     window.setTimeout(() => {
       if (cancelled) return;
+      void fetchRoleProjection().then((r) => {
+        if (!cancelled && r.ok && r.projection) setServerProjection(r.projection);
+      });
       void fetchRecipientProfile().then((p) => {
         if (!cancelled) setProfile(p);
       });
@@ -264,7 +281,7 @@ export function TodayPage({
         <p className="muted today-hero-lead" data-testid="today-role-orientation">
           {isLightweight
             ? `${recipientName}'s circle is available — enrich Care when you are ready.`
-            : roleXp.orientation}
+            : serverProjection?.orientation ?? roleXp.orientation}
         </p>
         <div className="today-hero-caregiver">
           <span>
@@ -277,15 +294,35 @@ export function TodayPage({
             {roleXp.badge}
           </span>
         </div>
-        {roleXp.priorities.length > 0 && (
+        {(serverProjection?.priorities?.length || roleXp.priorities.length) > 0 && (
           <ul
             className="list-plain today-role-priorities"
             data-testid="today-role-priorities"
           >
-            {roleXp.priorities.map((p) => (
+            {(serverProjection?.priorities ?? roleXp.priorities).map((p) => (
               <li key={p}>{p}</li>
             ))}
           </ul>
+        )}
+        {serverProjection?.shift?.briefing && serverProjection.shift.briefing.length > 0 && (
+          <div className="section surface-known" data-testid="today-shift-briefing">
+            <h2>Shift briefing</h2>
+            <ul className="list-plain">
+              {serverProjection.shift.briefing.map((b) => (
+                <li key={b}>{b}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {serverProjection?.clinical?.trends && serverProjection.clinical.trends.length > 0 && (
+          <div className="section surface-known" data-testid="today-clinical-trends">
+            <h2>Clinical trends (evidence-linked)</h2>
+            <ul className="list-plain">
+              {serverProjection.clinical.trends.map((b) => (
+                <li key={b}>{b}</li>
+              ))}
+            </ul>
+          </div>
         )}
 
         {/* AHA 1 — five-second orientation (no hunting) */}

@@ -11,6 +11,8 @@ import { createHmac, randomUUID } from "node:crypto";
 import type { CareStore } from "../store/memory-store.js";
 import type { AuthCareContext } from "../types.js";
 import { people, careRecipient, HOUSEHOLD_OLIVIA } from "../scenario/olivia.js";
+import { careLabSessionDenylist } from "./session-denylist.js";
+import { getSharedSessionRevocation } from "./shared-session-revocation.js";
 
 export interface CareSessionClaims {
   sub: string; // care person id OR foundation entity id
@@ -32,6 +34,17 @@ export interface CarePrincipalDirectoryEntry {
   /** Optional Foundation entity_id when linked */
   foundationEntityId?: string;
   passwordLab?: string;
+  /** Normalized email for registered accounts (lab / durable register path). */
+  email?: string;
+  /** Account lifecycle status — role claim is not authorization. */
+  accountStatus?:
+    | "unverified"
+    | "verified"
+    | "pending_access"
+    | "active"
+    | "suspended"
+    | "closed";
+  claimedRelationship?: string;
 }
 
 /** Lab directory for Olivia scenario principals (synthetic). */
@@ -125,6 +138,46 @@ export class CareAuthService {
     private readonly directory: CarePrincipalDirectoryEntry[] = defaultLabDirectory(),
   ) {}
 
+  /** Register a dynamic principal (durable account path without Foundation Entity). */
+  registerPrincipal(entry: CarePrincipalDirectoryEntry): void {
+    const existing = this.directory.findIndex(
+      (p) => p.carePersonId === entry.carePersonId,
+    );
+    if (existing >= 0) {
+      this.directory[existing] = entry;
+    } else {
+      this.directory.push(entry);
+    }
+  }
+
+  findPrincipal(
+    carePersonId: string,
+  ): CarePrincipalDirectoryEntry | undefined {
+    return this.directory.find((p) => p.carePersonId === carePersonId);
+  }
+
+  /** Issue a session JWT for an already-authenticated principal entry. */
+  mintSession(
+    principal: CarePrincipalDirectoryEntry,
+    kind: CareSessionClaims["kind"] = "care_lab",
+  ): { token: string; session_id: string } {
+    const session_id = randomUUID();
+    const now = Math.floor(Date.now() / 1000);
+    const claims: CareSessionClaims = {
+      sub: principal.carePersonId,
+      sid: session_id,
+      carePersonId: principal.carePersonId,
+      displayName: principal.displayName,
+      roles: principal.roles,
+      ops: ["read", "write"],
+      iat: now,
+      exp: now + 60 * 60 * 12,
+      iss: "caretaker-relay-care-auth",
+      kind,
+    };
+    return { token: signHs256(claims, this.secret), session_id };
+  }
+
   loginLab(
     carePersonId: string,
     password: string,
@@ -139,21 +192,33 @@ export class CareAuthService {
         message: "Invalid care credentials",
       };
     }
-    const session_id = randomUUID();
-    const now = Math.floor(Date.now() / 1000);
-    const claims: CareSessionClaims = {
-      sub: principal.carePersonId,
-      sid: session_id,
-      carePersonId: principal.carePersonId,
-      displayName: principal.displayName,
-      roles: principal.roles,
-      ops: ["read", "write"],
-      iat: now,
-      exp: now + 60 * 60 * 12,
-      iss: "caretaker-relay-care-auth",
-      kind: "care_lab",
-    };
-    const token = signHs256(claims, this.secret);
+    const { token, session_id } = this.mintSession(principal, "care_lab");
+    this.trackSession(principal.carePersonId, session_id);
+    return { ok: true, token, session_id, principal };
+  }
+
+  /** Login by email for registered dynamic accounts (lab JWT path). */
+  loginByEmail(
+    email: string,
+    password: string,
+  ):
+    | { ok: true; token: string; session_id: string; principal: CarePrincipalDirectoryEntry }
+    | { ok: false; code: string; message: string } {
+    const normalized = email.trim().toLowerCase();
+    const principal = this.directory.find(
+      (p) =>
+        (p as CarePrincipalDirectoryEntry & { email?: string }).email ===
+          normalized && p.passwordLab === password,
+    );
+    if (!principal) {
+      return {
+        ok: false,
+        code: "INVALID_CREDENTIALS",
+        message: "Invalid care credentials",
+      };
+    }
+    const { token, session_id } = this.mintSession(principal, "care_lab");
+    this.trackSession(principal.carePersonId, session_id);
     return { ok: true, token, session_id, principal };
   }
 
@@ -214,6 +279,13 @@ export class CareAuthService {
         message: "Invalid or expired care session",
       };
     }
+    if (careLabSessionDenylist.isRevoked(claims.sid)) {
+      return {
+        ok: false,
+        code: "SESSION_REVOKED",
+        message: "Session has been revoked",
+      };
+    }
     if (!claims.ops.includes("read") && !claims.ops.includes("write")) {
       return {
         ok: false,
@@ -222,6 +294,84 @@ export class CareAuthService {
       };
     }
     return { ok: true, claims };
+  }
+
+  /**
+   * Async validation including shared multi-instance denylist.
+   * Prefer this over validateBearer when awaiting is available.
+   */
+  async validateBearerShared(
+    authorizationHeader: string | undefined,
+  ): Promise<
+    | { ok: true; claims: CareSessionClaims }
+    | { ok: false; code: string; message: string }
+  > {
+    const base = this.validateBearer(authorizationHeader);
+    if (!base.ok) return base;
+    try {
+      const revoked = await getSharedSessionRevocation().isSessionRevoked(
+        base.claims.sid,
+      );
+      if (revoked) {
+        // Mirror into process-local for fast subsequent checks
+        careLabSessionDenylist.revoke(base.claims.sid, {
+          reason: "shared_denylist",
+        });
+        return {
+          ok: false,
+          code: "SESSION_REVOKED",
+          message: "Session has been revoked",
+        };
+      }
+    } catch {
+      /* shared store failure: fall back to local only */
+    }
+    return base;
+  }
+
+  /** Immediately invalidate a lab JWT session id (local + shared). */
+  revokeSession(
+    sessionId: string,
+    opts?: { reason?: string; actorPersonId?: string; principalId?: string },
+  ): void {
+    careLabSessionDenylist.revoke(sessionId, {
+      reason: opts?.reason ?? "logout",
+      actorPersonId: opts?.actorPersonId,
+    });
+    void getSharedSessionRevocation().revokeSession(sessionId, {
+      reason: opts?.reason ?? "logout",
+      actorPersonId: opts?.actorPersonId,
+      principalId: opts?.principalId,
+    });
+  }
+
+  async revokeSessionAsync(
+    sessionId: string,
+    opts?: { reason?: string; actorPersonId?: string; principalId?: string },
+  ): Promise<void> {
+    this.revokeSession(sessionId, opts);
+    await getSharedSessionRevocation().revokeSession(sessionId, {
+      reason: opts?.reason ?? "logout",
+      actorPersonId: opts?.actorPersonId,
+      principalId: opts?.principalId,
+    });
+  }
+
+  /** Track session for principal-wide wipe (suspension). */
+  trackSession(principalId: string, sessionId: string): void {
+    void getSharedSessionRevocation().trackPrincipalSession(
+      principalId,
+      sessionId,
+    );
+  }
+
+  async revokeAllSessionsForPrincipal(
+    principalId: string,
+    reason = "suspension",
+  ): Promise<number> {
+    return getSharedSessionRevocation().revokeAllForPrincipal(principalId, {
+      reason,
+    });
   }
 
   toAuthCareContext(
