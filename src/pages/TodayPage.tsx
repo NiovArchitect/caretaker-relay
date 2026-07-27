@@ -121,6 +121,7 @@ export function TodayPage({
   const [workError, setWorkError] = useState<string | null>(null);
   const [newWorkAction, setNewWorkAction] = useState("");
   const [confirmRecipient, setConfirmRecipient] = useState(false);
+  const [openAccordion, setOpenAccordion] = useState<string | null>("needs");
 
   const reloadWork = () => {
     void fetchWorkItems().then((r) => {
@@ -410,51 +411,159 @@ export function TodayPage({
           </div>
         )}
 
-        {/* AHA 1 — five-second orientation (no hunting) */}
+        {/* AHA 1 — accessible click/tap accordions (not hover-only) */}
         <div
-          className="today-scan-grid"
+          className="today-accordion-list"
           data-testid="today-command-strip"
-          aria-label="Five-second care scan"
+          aria-label="Care quick view"
         >
-          <div className="today-scan-cell">
-            <div className="label">Who</div>
-            <div className="value">{recipientName}</div>
-          </div>
-          <div className="today-scan-cell today-scan-attention">
-            <div className="label">Needs you</div>
-            <div className="value">
-              {notifications.length === 0
-                ? "Nothing urgent"
-                : notifications[0]?.title ??
-                  `${notifications.length} item${notifications.length === 1 ? "" : "s"}`}
-            </div>
-          </div>
-          <div className="today-scan-cell">
-            <div className="label">Changed</div>
-            <div className="value">
-              {whatChanged[0] ??
-                (organizedCount
-                  ? `${organizedCount} updates on file`
-                  : "No new events listed")}
-            </div>
-          </div>
-          <div className="today-scan-cell">
-            <div className="label">Already handled</div>
-            <div className="value">
-              {handled[0] ?? "Nothing marked handled yet"}
-            </div>
-          </div>
-          <div className="today-scan-cell">
-            <div className="label">Coming up</div>
-            <div className="value">{next[0] ?? "See Care schedule"}</div>
-          </div>
-          <div className="today-scan-cell">
-            <div className="label">Who is helping</div>
-            <div className="value">
-              {coverageSummary ||
-                "Open People for the authorized care circle"}
-            </div>
-          </div>
+          <p className="muted" style={{ marginBottom: 8 }}>
+            <strong>{recipientName}&apos;s care</strong> · tap a section to expand
+          </p>
+          {(
+            [
+              {
+                id: "needs",
+                title: "What needs you today",
+                count: notifications.length,
+                summary:
+                  notifications.length === 0
+                    ? "Nothing urgent"
+                    : notifications[0]?.title ??
+                      `${notifications.length} item(s)`,
+                body: (
+                  <ul className="list-plain">
+                    {notifications.length === 0 ? (
+                      <li className="muted">No urgent items right now.</li>
+                    ) : (
+                      notifications.slice(0, 8).map((n) => (
+                        <li key={n.id}>
+                          <strong>{n.title}</strong>
+                          {n.description ? (
+                            <span className="muted"> — {n.description}</span>
+                          ) : null}
+                        </li>
+                      ))
+                    )}
+                  </ul>
+                ),
+              },
+              {
+                id: "appointments",
+                title: "Appointments & transport",
+                count: next.length,
+                summary: next[0] ?? "Nothing scheduled on Today",
+                body: (
+                  <ul className="list-plain">
+                    {next.length === 0 ? (
+                      <li className="muted">
+                        No upcoming items listed. Open Care for the full schedule.
+                      </li>
+                    ) : (
+                      next.map((line) => <li key={line}>{line}</li>)
+                    )}
+                    {sinceVisit?.upcoming?.slice(0, 4).map((u) => (
+                      <li key={`${u.title}-${u.when}`}>
+                        {u.title} · {u.when}{" "}
+                        <span className="muted">({u.calendarTruth})</span>
+                      </li>
+                    ))}
+                  </ul>
+                ),
+              },
+              {
+                id: "wellbeing",
+                title: "Meals, mobility, mood",
+                count: whatChanged.length,
+                summary:
+                  whatChanged[0] ??
+                  (organizedCount
+                    ? `${organizedCount} updates on file`
+                    : "No new wellbeing notes"),
+                body: (
+                  <ul className="list-plain">
+                    {whatChanged.length === 0 ? (
+                      <li className="muted">
+                        No new meal, mobility, or mood notes on Today.
+                      </li>
+                    ) : (
+                      whatChanged.slice(0, 8).map((line) => (
+                        <li key={line}>{line}</li>
+                      ))
+                    )}
+                    {handled.length > 0 && (
+                      <li className="muted">
+                        Already handled: {handled[0]}
+                      </li>
+                    )}
+                  </ul>
+                ),
+              },
+              {
+                id: "helpers",
+                title: "Who is helping next",
+                count: coverageSummary ? 1 : 0,
+                summary:
+                  coverageSummary.split("\n")[0] ||
+                  "Open People for the authorized care circle",
+                body: (
+                  <pre
+                    style={{
+                      margin: 0,
+                      whiteSpace: "pre-wrap",
+                      fontFamily: "inherit",
+                      fontSize: "0.9rem",
+                    }}
+                  >
+                    {coverageSummary ||
+                      "No coverage summary yet. Open People to see authorized helpers."}
+                  </pre>
+                ),
+              },
+            ] as const
+          ).map((panel) => {
+            const expanded = openAccordion === panel.id;
+            return (
+              <div
+                key={panel.id}
+                className={`today-accordion ${expanded ? "is-open" : ""}`}
+                data-testid={`today-accordion-${panel.id}`}
+              >
+                <button
+                  type="button"
+                  className="today-accordion-trigger"
+                  aria-expanded={expanded}
+                  aria-controls={`today-panel-${panel.id}`}
+                  id={`today-trigger-${panel.id}`}
+                  data-testid={`today-accordion-trigger-${panel.id}`}
+                  onClick={() =>
+                    setOpenAccordion(expanded ? null : panel.id)
+                  }
+                >
+                  <span className="today-accordion-title">
+                    {panel.title}
+                    <span className="muted"> · {panel.count}</span>
+                  </span>
+                  <span className="today-accordion-summary muted">
+                    {panel.summary}
+                  </span>
+                  <span className="today-accordion-chevron" aria-hidden>
+                    {expanded ? "▾" : "▸"}
+                  </span>
+                </button>
+                {expanded && (
+                  <div
+                    className="today-accordion-panel"
+                    id={`today-panel-${panel.id}`}
+                    role="region"
+                    aria-labelledby={`today-trigger-${panel.id}`}
+                  >
+                    {panel.body}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         <p

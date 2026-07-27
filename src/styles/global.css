@@ -2450,6 +2450,63 @@ p {
   backdrop-filter: none !important;
 }
 
+.today-accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 12px 0 8px;
+}
+.today-accordion {
+  border: 1px solid rgba(30, 58, 95, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.55);
+  overflow: hidden;
+}
+.today-accordion.is-open {
+  border-color: rgba(45, 122, 138, 0.35);
+  box-shadow: 0 4px 18px rgba(30, 58, 95, 0.06);
+}
+.today-accordion-trigger {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 2px 12px;
+  text-align: left;
+  padding: 12px 14px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+.today-accordion-trigger:hover,
+.today-accordion-trigger:focus-visible {
+  background: rgba(45, 122, 138, 0.06);
+  outline: none;
+}
+.today-accordion-title {
+  grid-column: 1;
+  font-weight: 650;
+  font-size: 0.95rem;
+}
+.today-accordion-summary {
+  grid-column: 1;
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+.today-accordion-chevron {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-size: 1.1rem;
+  color: rgba(30, 58, 95, 0.55);
+}
+.today-accordion-panel {
+  padding: 0 14px 12px;
+  border-top: 1px solid rgba(30, 58, 95, 0.08);
+}
+
 .today-command-strip,
 .today-scan-grid {
   display: grid;

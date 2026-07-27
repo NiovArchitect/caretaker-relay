@@ -123,10 +123,10 @@ function experienceFor(
     return {
       claim,
       active: pending ? "pending" : "care_recipient",
-      badge: pending ? "Receiving care · pending access" : "My care",
-      todayTitle: pending ? "Your care account" : "Your day",
+      badge: pending ? "Setting up my care" : "My care",
+      todayTitle: pending ? "Your care setup" : "Your day",
       orientation: pending
-        ? "You control who helps. No one sees your care until you invite or approve them."
+        ? "This is your care account. Start your profile, invite people you trust, or enter an invitation. No one else sees your care until you choose."
         : "Your schedule, helpers, preferences, and privacy — on your terms.",
       navLabels: {
         today: "My day",
@@ -136,14 +136,14 @@ function experienceFor(
         relay: "Relay",
       },
       relayTone:
-        "Speak directly to the care recipient. Confirm before notifying helpers. Honor preferences.",
+        "Speak as a companion to the person receiving care. Confirm before notifying helpers. Honor preferences and dignity.",
       gateLead:
-        "You said you receive care. Invite helpers, accept only trusted invitations, or set up your own care profile.",
+        "You are creating or controlling your own care. Set up your profile, invite trusted helpers, or join with an invitation. You are not requesting access to someone else.",
       priorities: [
-        "Who is helping today",
-        "Upcoming visits",
-        "Preferences & routines",
-        "Who can see my information",
+        "My profile basics",
+        "Who may help me",
+        "My preferences & routines",
+        "Privacy & consent",
       ],
       prefersAccessControl: true,
       prefersShift: false,
@@ -322,7 +322,7 @@ export type GateAction = {
   title: string;
   detail: string;
   /** Maps to AuthorizationGate mode when actionable */
-  mode: "invite" | "request" | "provisional" | null;
+  mode: "invite" | "request" | "provisional" | "privacy_explain" | null;
 };
 
 /**
@@ -361,8 +361,8 @@ export function gateActionsForClaim(claim: RoleClaim): GateAction[] {
     id: "privacy_note",
     title: "Privacy & who can help",
     detail:
-      "After you have a care profile, you control invites, approvals, and revocations.",
-    mode: null,
+      "How invites, approvals, and revocations work — you stay in control before anyone sees your care.",
+    mode: "privacy_explain",
   };
   const orgInvite: GateAction = {
     id: "join_circle",

@@ -24,7 +24,11 @@ import { HandoffPanel } from "./components/HandoffPanel";
 import { LoginGate } from "./components/LoginGate";
 import { CaretakerRelayLogo } from "./components/BrandMark";
 import { AuthorizationGate } from "./components/AuthorizationGate";
-import { resolveRoleExperience } from "./lib/roleExperience";
+import {
+  claimFromPath,
+  resolveRoleExperience,
+} from "./lib/roleExperience";
+import { loadOnboardingDraft } from "./lib/onboarding";
 import { TodayPage } from "./pages/TodayPage";
 import { CarePage } from "./pages/CarePage";
 import { PeoplePage } from "./pages/PeoplePage";
@@ -59,6 +63,15 @@ function todayDateLabel() {
     month: "short",
     day: "numeric",
   });
+}
+
+function claimFromPathForGreeting(): boolean {
+  try {
+    const d = loadOnboardingDraft();
+    return claimFromPath(d.path) === "receiving_care";
+  } catch {
+    return false;
+  }
 }
 
 declare global {
@@ -318,7 +331,9 @@ export function App() {
               at: nowLabel(),
               text: authorized
                 ? `Signed in as ${s.displayName} (${s.roleLabel}).\n\nI'm here for ${space.displayName}'s care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.`
-                : `Signed in as ${s.displayName}.\n\nYou are not connected to a care recipient yet. Use an invitation or request access — I will not open anyone's care record based on a role alone.`,
+                : claimFromPathForGreeting()
+                  ? `Hi ${s.displayName}. This is your care account.\n\nYou can set up your own care profile, invite trusted helpers, or enter an invitation. I will not open anyone else's care without permission.`
+                  : `Signed in as ${s.displayName}.\n\nYou are not linked to a care space yet. Use an invitation, request access to someone you support, or set up care for a person you help — I will not open a care record from a role claim alone.`,
             },
           ]);
           setTodayRefresh((n) => n + 1);
@@ -728,18 +743,32 @@ export function App() {
   }
 
   function onNavChange(t: NavTab) {
-    // Zero-access accounts: only AuthorizationGate surfaces — no care workspace tabs
-    if (
-      !hasCareAccess &&
-      (t === "today" || t === "care" || t === "people" || t === "documents")
-    ) {
-      setTab("today");
-      setRelayOpen(false);
-      return;
-    }
-    if (!hasCareAccess && t === "relay") {
-      setRelayOpen(false);
-      return;
+    // Zero-access: recipient setup nav maps to guided setup sections (not dead controls)
+    if (!hasCareAccess) {
+      const sectionMap: Partial<
+        Record<NavTab, "day" | "care" | "helpers" | "privacy" | "documents">
+      > = {
+        today: "day",
+        care: "care",
+        people: "helpers",
+        documents: "documents",
+        privacy: "privacy",
+      };
+      const section = sectionMap[t];
+      if (section) {
+        window.dispatchEvent(
+          new CustomEvent("cr-recipient-setup-nav", { detail: { section } }),
+        );
+        setTab("today");
+        setRelayOpen(false);
+        return;
+      }
+      if (t === "relay") {
+        // Recipient may open Relay for companion help — no coordination directory
+        setCoordFocusPersonId(null);
+        openRelay();
+        return;
+      }
     }
     setTab(t);
     if (t === "relay") openRelayForCareUpdate();
@@ -791,7 +820,11 @@ export function App() {
             </span>
             <div className="recipient-chip-text">
               <div className="recipient-chip-kicker">
-                {hasCareAccess ? "You're acting for" : "Access"}
+                {hasCareAccess
+                  ? `${activeSpace.displayName}'s care`
+                  : roleXp?.claim === "receiving_care"
+                    ? "Your care"
+                    : "Access"}
               </div>
               <div
                 data-testid="care-recipient-label"
@@ -799,15 +832,17 @@ export function App() {
               >
                 {hasCareAccess
                   ? activeSpace.displayName
-                  : "No recipient connected"}
+                  : roleXp?.claim === "receiving_care"
+                    ? session.displayName
+                    : "No care profile yet"}
               </div>
               {hasCareAccess && (
                 <div
                   className="sr-only"
-                  data-testid="acting-for-banner"
+                  data-testid="care-context-banner"
                   aria-live="polite"
                 >
-                  {`You're acting for ${activeSpace.displayName}.`}
+                  {`Care for ${activeSpace.displayName}. You are ${session.displayName}, ${session.roleLabel}.`}
                 </div>
               )}
               <div

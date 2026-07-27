@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   bindInviteToken,
   loadAuthorizationState,
@@ -38,11 +38,19 @@ export function AuthorizationGate({
     draft.intent === "set_up_care" ||
     (draft.helpersNote ?? "").includes("set_up_care_new_provisional");
   const wantsInvite = claim === "invited" || draft.intent === "accept_invite";
-  const [mode, setMode] = useState<"home" | "request" | "invite" | "provisional">(
-    wantsNewCare ? "provisional" : wantsInvite ? "invite" : "home",
+  const isSelfCare = claim === "receiving_care";
+  const [mode, setMode] = useState<
+    "home" | "request" | "invite" | "provisional" | "privacy_explain" | "section"
+  >(wantsNewCare || isSelfCare ? "provisional" : wantsInvite ? "invite" : "home");
+  const [section, setSection] = useState<
+    "day" | "care" | "helpers" | "privacy" | "documents" | null
+  >(null);
+  const [recipientName, setRecipientName] = useState(
+    isSelfCare ? displayName : "",
   );
-  const [recipientName, setRecipientName] = useState("");
-  const [relationship, setRelationship] = useState("");
+  const [relationship, setRelationship] = useState(
+    isSelfCare ? "Self — I am the person receiving care" : "",
+  );
   const [reason, setReason] = useState("");
   const [inviteCode, setInviteCode] = useState(authz.inviteTokenBound ?? "");
   const [busy, setBusy] = useState(false);
@@ -53,6 +61,24 @@ export function AuthorizationGate({
         ? "Invitation code saved. Complete join when the care service validates it."
         : null,
   );
+
+  useEffect(() => {
+    const onSetupNav = (ev: Event) => {
+      const section = (ev as CustomEvent<{ section?: string }>).detail?.section;
+      if (
+        section === "day" ||
+        section === "care" ||
+        section === "helpers" ||
+        section === "privacy" ||
+        section === "documents"
+      ) {
+        setSection(section);
+        setMode("section");
+      }
+    };
+    window.addEventListener("cr-recipient-setup-nav", onSetupNav);
+    return () => window.removeEventListener("cr-recipient-setup-nav", onSetupNav);
+  }, []);
 
   function goRequest() {
     setMode("request");
@@ -148,9 +174,18 @@ export function AuthorizationGate({
               data-testid={`authz-action-${a.id}`}
               disabled={a.mode === null}
               onClick={() => {
-                if (a.mode === "request") goRequest();
-                else if (a.mode === "invite") setMode("invite");
+                if (a.mode === "request") {
+                  if (isSelfCare) {
+                    setStatus(
+                      "Request access is for helpers joining someone else's care. You are setting up your own care — use “Set up my care profile” or an invitation instead.",
+                    );
+                    return;
+                  }
+                  goRequest();
+                } else if (a.mode === "invite") setMode("invite");
                 else if (a.mode === "provisional") setMode("provisional");
+                else if (a.mode === "privacy_explain")
+                  setMode("privacy_explain");
               }}
             >
               <strong>{a.title}</strong>
@@ -242,17 +277,99 @@ export function AuthorizationGate({
         </form>
       )}
 
+      {mode === "privacy_explain" && (
+        <section data-testid="recipient-privacy-explain">
+          <h2>Privacy & who can help</h2>
+          <ul className="list-plain">
+            <li>
+              Your care stays private until you invite someone or approve a
+              request.
+            </li>
+            <li>
+              You choose what each helper may see (daily support, schedule,
+              emergency info, and more).
+            </li>
+            <li>
+              You can revoke access later. Audit history is retained for safety.
+            </li>
+            <li>
+              Caretaker Relay does not sell your care information or decide legal
+              capacity for you.
+            </li>
+          </ul>
+          <button
+            type="button"
+            className="secondary-btn"
+            onClick={() => setMode("home")}
+          >
+            Back
+          </button>
+        </section>
+      )}
+
+      {mode === "section" && section && (
+        <section data-testid={`recipient-setup-${section}`}>
+          <h2>
+            {section === "day" && "My day"}
+            {section === "care" && "My care"}
+            {section === "helpers" && "My helpers"}
+            {section === "privacy" && "Privacy"}
+            {section === "documents" && "My documents"}
+          </h2>
+          <p className="muted section-lead">
+            {section === "day" &&
+              "After your profile is active, My day shows your schedule, helpers, and reminders in plain language."}
+            {section === "care" &&
+              "My care holds preferences, routines, mobility needs, and emergency information you choose to share."}
+            {section === "helpers" &&
+              "Invite trusted people one at a time. They see only what you approve — never a public caregiver directory."}
+            {section === "privacy" &&
+              "Consent, invites, and revocations live here once your profile is active."}
+            {section === "documents" &&
+              "Care summaries and notes you approve will appear here. Nothing is shared without you."}
+          </p>
+          <div className="btn-row">
+            <button
+              type="button"
+              className="primary-btn"
+              data-testid="recipient-setup-continue-profile"
+              onClick={() => setMode("provisional")}
+            >
+              Continue profile setup
+            </button>
+            <button
+              type="button"
+              className="ghost-btn"
+              onClick={() => {
+                setSection(null);
+                setMode("home");
+              }}
+            >
+              Back
+            </button>
+          </div>
+        </section>
+      )}
+
       {mode === "provisional" && (
         <form
           data-testid="provisional-recipient-panel"
           onSubmit={async (e) => {
             e.preventDefault();
             if (recipientName.trim().length < 2) {
-              setStatus("Enter the preferred name for the care draft.");
+              setStatus(
+                isSelfCare
+                  ? "Enter the name you want on your care profile."
+                  : "Enter the preferred name for the care draft.",
+              );
               return;
             }
             if (!relationship.trim()) {
-              setStatus("Describe your claimed authority (not proven access).");
+              setStatus(
+                isSelfCare
+                  ? "Confirm this profile is for you (self)."
+                  : "Describe your claimed authority (not proven access).",
+              );
               return;
             }
             setBusy(true);
@@ -286,15 +403,20 @@ export function AuthorizationGate({
             setMode("home");
           }}
         >
-          <h2>Set up a new care circle</h2>
+          <h2>
+            {isSelfCare ? "Set up my care profile" : "Set up a new care circle"}
+          </h2>
           <p className="muted section-lead">
-            Starting a circle for someone requires their consent or lawful
-            authority (for example, an authorized representative). A provisional
-            draft is not full access and is never linked to an existing person by
-            name alone.
+            {isSelfCare
+              ? "This is your private draft. Helpers only join when you invite them or approve a request. Nothing is shared by default."
+              : "Starting a circle for someone requires their consent or lawful authority (for example, an authorized representative). A provisional draft is not full access and is never linked to an existing person by name alone."}
           </p>
           <label className="cr-field">
-            <span>Preferred name (draft only)</span>
+            <span>
+              {isSelfCare
+                ? "Preferred name for your care profile"
+                : "Preferred name (draft only)"}
+            </span>
             <input
               data-testid="provisional-name"
               value={recipientName}
