@@ -83,4 +83,10 @@ export interface TodayModel {
 }
 
 /** Desktop primary nav; Relay is a persistent panel (also mobile destination). */
-export type NavTab = "today" | "care" | "people" | "documents" | "relay";
+export type NavTab =
+  | "today"
+  | "care"
+  | "people"
+  | "documents"
+  | "relay"
+  | "privacy";

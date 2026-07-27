@@ -28,6 +28,9 @@ import { TodayPage } from "./pages/TodayPage";
 import { CarePage } from "./pages/CarePage";
 import { PeoplePage } from "./pages/PeoplePage";
 import { DocumentsPage } from "./pages/DocumentsPage";
+import { PrivacyCenterPage } from "./pages/PrivacyCenterPage";
+import { ClinicalSummaryPage } from "./pages/ClinicalSummaryPage";
+import { ConflictsPage } from "./pages/ConflictsPage";
 import { people } from "./scenario/olivia";
 import {
   hasAuthorizedRecipient,
@@ -1019,6 +1022,13 @@ export function App() {
             />
           )}
           {hasCareAccess && workspaceTab === "documents" && <DocumentsPage />}
+          {hasCareAccess && workspaceTab === "privacy" && (
+            <PrivacyCenterPage refreshKey={todayRefresh} />
+          )}
+          {hasCareAccess &&
+            workspaceTab === "today" &&
+            roleXp?.prefersClinical && <ClinicalSummaryPage />}
+          {hasCareAccess && workspaceTab === "care" && <ConflictsPage />}
 
           {showHandoff && (
             <HandoffPanel

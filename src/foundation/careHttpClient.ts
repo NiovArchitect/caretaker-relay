@@ -59,6 +59,19 @@ async function request<T>(
   }
 }
 
+/** Generic authenticated JSON helper for new ambient OS surfaces. */
+export async function careHttpJson<T>(
+  path: string,
+  opts: {
+    method?: string;
+    token?: string;
+    body?: unknown;
+    baseUrl?: string;
+  } = {},
+): Promise<HttpResult<T>> {
+  return request<T>(path, opts);
+}
+
 export async function careHealth(baseUrl?: string) {
   return request<{
     ok: boolean;
