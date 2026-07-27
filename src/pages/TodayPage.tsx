@@ -8,6 +8,12 @@ import {
   notificationAction,
   fetchRecipientProfile,
   fetchCareCoverage,
+  fetchWorkItems,
+  claimCareWorkItem,
+  createCareWorkItem,
+  transitionCareWorkItem,
+  fetchSinceLastVisit,
+  fetchNotificationOps,
   type TodayAttentionItem,
   type RecipientProfilePayload,
 } from "../foundation/careClient";
@@ -92,11 +98,68 @@ export function TodayPage({
     );
   });
   const [shellReady, setShellReady] = useState(false);
+  const [workItems, setWorkItems] = useState<Array<Record<string, unknown>>>([]);
+  const [needsOwner, setNeedsOwner] = useState<Array<Record<string, unknown>>>([]);
+  const [sinceVisit, setSinceVisit] = useState<{
+    plainSummary: string;
+    whatChanged: Array<{ text: string; evidence: string; at?: string }>;
+    needsOwner: Array<{ id: string; action: string; priority: string }>;
+    handoffSummary: string | null;
+    upcoming: Array<{ title: string; when: string; calendarTruth: string }>;
+    conflicts: number;
+  } | null>(null);
+  const [notifOps, setNotifOps] = useState<
+    Array<{
+      id: string;
+      title: string;
+      plainStatus: string;
+      noResponse: boolean;
+    }>
+  >([]);
+  const [syncLabel, setSyncLabel] = useState("Saved");
+  const [workBusy, setWorkBusy] = useState<string | null>(null);
+  const [workError, setWorkError] = useState<string | null>(null);
+  const [newWorkAction, setNewWorkAction] = useState("");
+  const [confirmRecipient, setConfirmRecipient] = useState(false);
+
+  const reloadWork = () => {
+    void fetchWorkItems().then((r) => {
+      if (r.ok) {
+        setWorkItems(r.workItems);
+        setNeedsOwner(r.needsOwner);
+      }
+    });
+    void fetchSinceLastVisit().then((r) => {
+      if (r.ok && r.briefing) {
+        setSinceVisit({
+          plainSummary: r.briefing.plainSummary,
+          whatChanged: r.briefing.whatChanged,
+          needsOwner: r.briefing.needsOwner,
+          handoffSummary: r.briefing.handoffSummary,
+          upcoming: r.briefing.upcoming,
+          conflicts: r.briefing.conflicts,
+        });
+      }
+    });
+    void fetchNotificationOps().then((r) => {
+      if (r.ok) setNotifOps(r.notifications.slice(0, 8));
+    });
+  };
 
   // Shell-first: paint Today chrome immediately; hydrate critical + secondary in parallel.
   useEffect(() => {
     setShellReady(true);
     let cancelled = false;
+    setSyncLabel(
+      typeof navigator !== "undefined" && navigator.onLine
+        ? "Saved"
+        : "Pending sync — do not assume saved",
+    );
+    const onOnline = () => setSyncLabel("Saved");
+    const onOffline = () =>
+      setSyncLabel("Pending sync — do not assume saved");
+    window.addEventListener("online", onOnline);
+    window.addEventListener("offline", onOffline);
     // Critical: Today projection (does not block shell paint)
     void fetchTodayProjection().then((p) => {
       if (!cancelled) setProj(p);
@@ -124,6 +187,27 @@ export function TodayPage({
           );
         }
       }),
+      fetchWorkItems().then((r) => {
+        if (!cancelled && r.ok) {
+          setWorkItems(r.workItems);
+          setNeedsOwner(r.needsOwner);
+        }
+      }),
+      fetchSinceLastVisit().then((r) => {
+        if (!cancelled && r.ok && r.briefing) {
+          setSinceVisit({
+            plainSummary: r.briefing.plainSummary,
+            whatChanged: r.briefing.whatChanged,
+            needsOwner: r.briefing.needsOwner,
+            handoffSummary: r.briefing.handoffSummary,
+            upcoming: r.briefing.upcoming,
+            conflicts: r.briefing.conflicts,
+          });
+        }
+      }),
+      fetchNotificationOps().then((r) => {
+        if (!cancelled && r.ok) setNotifOps(r.notifications.slice(0, 8));
+      }),
     ]);
     const loadInbox = () => {
       void fetchServerNotifications().then((r) => {
@@ -144,6 +228,8 @@ export function TodayPage({
     return () => {
       cancelled = true;
       window.removeEventListener("cr-notification", loadInbox);
+      window.removeEventListener("online", onOnline);
+      window.removeEventListener("offline", onOffline);
       window.clearInterval(iv);
     };
   }, [refreshKey, session.carePersonId, space.careRecipientId]);
@@ -370,6 +456,277 @@ export function TodayPage({
             </div>
           </div>
         </div>
+
+        <p
+          className="muted"
+          data-testid="sync-state-label"
+          style={{ fontSize: "0.85rem", marginTop: 8 }}
+        >
+          Sync: {syncLabel}
+        </p>
+
+        {/* Since last visit — catch-up without re-explaining */}
+        {sinceVisit && (
+          <section
+            className="section surface-known"
+            data-testid="since-last-visit"
+            aria-label="Since your last visit"
+          >
+            <h2>Since you were last here</h2>
+            <p className="muted" data-testid="since-last-visit-summary">
+              {sinceVisit.plainSummary}
+            </p>
+            {sinceVisit.whatChanged.length > 0 && (
+              <ul className="list-plain" data-testid="since-last-visit-changes">
+                {sinceVisit.whatChanged.slice(0, 6).map((c, i) => (
+                  <li key={`${c.text}-${i}`}>
+                    <span className="badge badge-teal" data-testid="evidence-label">
+                      {c.evidence}
+                    </span>{" "}
+                    {c.text}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {sinceVisit.handoffSummary && (
+              <p className="muted" data-testid="since-last-visit-handoff">
+                {sinceVisit.handoffSummary}
+              </p>
+            )}
+            {sinceVisit.upcoming.length > 0 && (
+              <ul className="list-plain" data-testid="calendar-truth-list">
+                {sinceVisit.upcoming.slice(0, 4).map((u) => (
+                  <li key={`${u.title}-${u.when}`}>
+                    {u.title} · {u.when}{" "}
+                    <span className="muted">({u.calendarTruth})</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {sinceVisit.conflicts > 0 && (
+              <p data-testid="since-last-visit-conflicts">
+                {sinceVisit.conflicts} open conflict(s) need review
+              </p>
+            )}
+          </section>
+        )}
+
+        {/* Work ownership — claim, next action, unassigned */}
+        <section
+          className="section surface-known"
+          data-testid="work-ownership-panel"
+          aria-label="Work ownership"
+        >
+          <h2>What needs an owner</h2>
+          <p className="muted section-lead">
+            Unassigned work stays visible until someone claims it. Ownership is
+            explicit — no silent handoffs.
+          </p>
+          {needsOwner.length === 0 && workItems.length === 0 ? (
+            <p className="muted cr-empty" data-testid="work-empty-state">
+              No open work items for {recipientName}. Create one when something
+              needs a named owner.
+            </p>
+          ) : (
+            <ul className="list-plain" data-testid="work-items-list">
+              {[...needsOwner, ...workItems.filter((w) => w.ownerPersonId)]
+                .filter(
+                  (w, i, arr) =>
+                    arr.findIndex((x) => x.id === w.id) === i,
+                )
+                .slice(0, 12)
+                .map((w) => {
+                  const id = String(w.id ?? "");
+                  const action = String(w.action ?? "Care task");
+                  const status = String(w.status ?? "");
+                  const owner =
+                    String(w.ownerDisplayName ?? w.ownerPersonId ?? "") ||
+                    "Unassigned";
+                  const claimable =
+                    !w.ownerPersonId ||
+                    status === "available_to_claim" ||
+                    status === "unassigned";
+                  return (
+                    <li
+                      key={id}
+                      data-testid={`work-item-${id}`}
+                      className="work-item-row"
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: 8,
+                        alignItems: "center",
+                        marginBottom: 8,
+                      }}
+                    >
+                      <span>
+                        <strong>{action}</strong>{" "}
+                        <span className="muted">
+                          · {owner} · {status}
+                          {w.priority ? ` · ${String(w.priority)}` : ""}
+                        </span>
+                      </span>
+                      {claimable && (
+                        <button
+                          type="button"
+                          className="secondary-btn"
+                          data-testid={`claim-work-${id}`}
+                          disabled={workBusy === id}
+                          onClick={() => {
+                            setWorkBusy(id);
+                            setWorkError(null);
+                            void claimCareWorkItem(id).then((r) => {
+                              setWorkBusy(null);
+                              if (!r.ok) {
+                                setWorkError(r.message ?? "Claim failed");
+                                return;
+                              }
+                              reloadWork();
+                            });
+                          }}
+                        >
+                          Claim
+                        </button>
+                      )}
+                      {status === "claimed" || status === "in_progress" || status === "assigned" ? (
+                        <button
+                          type="button"
+                          className="secondary-btn"
+                          data-testid={`complete-work-${id}`}
+                          disabled={workBusy === id}
+                          onClick={() => {
+                            setWorkBusy(id);
+                            void transitionCareWorkItem(id, "completed", {
+                              completion_evidence: "Marked complete by owner",
+                            }).then((r) => {
+                              setWorkBusy(null);
+                              if (!r.ok) setWorkError(r.message ?? "Update failed");
+                              else reloadWork();
+                            });
+                          }}
+                        >
+                          Complete
+                        </button>
+                      ) : null}
+                      {(status === "claimed" || status === "assigned") && (
+                        <button
+                          type="button"
+                          className="secondary-btn"
+                          data-testid={`escalate-work-${id}`}
+                          disabled={workBusy === id}
+                          onClick={() => {
+                            setWorkBusy(id);
+                            void transitionCareWorkItem(id, "escalated", {
+                              blocking_reason: "No response / needs backup owner",
+                            }).then((r) => {
+                              setWorkBusy(null);
+                              if (!r.ok) setWorkError(r.message ?? "Escalate failed");
+                              else reloadWork();
+                            });
+                          }}
+                        >
+                          Escalate
+                        </button>
+                      )}
+                    </li>
+                  );
+                })}
+            </ul>
+          )}
+          <div
+            className="btn-row"
+            style={{ marginTop: 12, flexWrap: "wrap", gap: 8 }}
+            data-testid="create-work-form"
+          >
+            <input
+              type="text"
+              data-testid="new-work-action"
+              placeholder={`Next action for ${recipientName}`}
+              value={newWorkAction}
+              onChange={(e) => setNewWorkAction(e.target.value)}
+              aria-label="New work action"
+              style={{ flex: "1 1 200px", minWidth: 160 }}
+            />
+            <label
+              style={{ display: "flex", alignItems: "center", gap: 6 }}
+              data-testid="confirm-recipient-label"
+            >
+              <input
+                type="checkbox"
+                data-testid="confirm-recipient-checkbox"
+                checked={confirmRecipient}
+                onChange={(e) => setConfirmRecipient(e.target.checked)}
+              />
+              Confirm: {recipientName}
+            </label>
+            <button
+              type="button"
+              className="primary-btn"
+              data-testid="create-work-submit"
+              disabled={!newWorkAction.trim() || workBusy === "create"}
+              onClick={() => {
+                if (!confirmRecipient) {
+                  setWorkError(
+                    "Confirm the care recipient before creating work (shared-device / multi-recipient safety).",
+                  );
+                  return;
+                }
+                setWorkBusy("create");
+                setWorkError(null);
+                void createCareWorkItem({
+                  action: newWorkAction.trim(),
+                  reason: "Created from Today ownership panel",
+                  priority: "normal",
+                  confirm_recipient_id: space.careRecipientId,
+                }).then((r) => {
+                  setWorkBusy(null);
+                  if (!r.ok) {
+                    setWorkError(r.message ?? r.code ?? "Create failed");
+                    return;
+                  }
+                  setNewWorkAction("");
+                  setConfirmRecipient(false);
+                  reloadWork();
+                });
+              }}
+            >
+              Create unassigned work
+            </button>
+          </div>
+          {workError && (
+            <p className="error" data-testid="work-error" role="alert">
+              {workError}
+            </p>
+          )}
+        </section>
+
+        {notifOps.length > 0 && (
+          <section
+            className="section surface-reported"
+            data-testid="notification-ops-panel"
+            aria-label="Notification delivery status"
+          >
+            <h2>Notification status</h2>
+            <p className="muted section-lead">
+              In-app inbox delivery is recorded. External SMS/email is not claimed
+              unless configured.
+            </p>
+            <ul className="list-plain" data-testid="notification-ops-list">
+              {notifOps.map((n) => (
+                <li key={n.id}>
+                  <strong>{n.title}</strong>{" "}
+                  <span className="muted">{n.plainStatus}</span>
+                  {n.noResponse ? (
+                    <span className="badge" data-testid="notif-no-response">
+                      {" "}
+                      no response
+                    </span>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {/* Ambient AI — what the system notices without being asked */}
         <section

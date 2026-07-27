@@ -870,3 +870,170 @@ export async function careCalendarOAuthStatus(token: string, baseUrl?: string) {
   }>("/api/v1/care/calendar/oauth-status", { token, baseUrl });
 }
 
+/** Harmonized ambient care — work ownership + since-last-visit + emergency. */
+
+export async function careWorkItems(
+  token: string,
+  careRecipientId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    work_items: Array<Record<string, unknown>>;
+    needs_owner: Array<Record<string, unknown>>;
+  }>(
+    `/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/work-items`,
+    { token, baseUrl },
+  );
+}
+
+export async function careCreateWorkItem(
+  token: string,
+  careRecipientId: string,
+  input: {
+    action: string;
+    reason?: string;
+    owner_person_id?: string | null;
+    owner_display_name?: string | null;
+    due_at?: string | null;
+    priority?: string;
+    confirm_recipient_id?: string;
+    session_active_recipient_id?: string;
+  },
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    work_item?: Record<string, unknown>;
+    code?: string;
+    message?: string;
+  }>(
+    `/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/work-items`,
+    {
+      method: "POST",
+      token,
+      body: input,
+      baseUrl,
+    },
+  );
+}
+
+export async function careClaimWorkItem(
+  token: string,
+  careRecipientId: string,
+  workItemId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    work_item?: Record<string, unknown>;
+    code?: string;
+    message?: string;
+  }>(
+    `/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/work-items/${encodeURIComponent(workItemId)}/claim`,
+    { method: "POST", token, baseUrl },
+  );
+}
+
+export async function careTransitionWorkItem(
+  token: string,
+  careRecipientId: string,
+  workItemId: string,
+  input: {
+    status: string;
+    blocking_reason?: string;
+    completion_evidence?: string;
+  },
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    work_item?: Record<string, unknown>;
+    code?: string;
+    message?: string;
+  }>(
+    `/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/work-items/${encodeURIComponent(workItemId)}/transition`,
+    { method: "POST", token, body: input, baseUrl },
+  );
+}
+
+export async function careSinceLastVisit(
+  token: string,
+  careRecipientId: string,
+  lastVisitAt?: string | null,
+  baseUrl?: string,
+) {
+  const q =
+    lastVisitAt != null && lastVisitAt !== ""
+      ? `?last_visit_at=${encodeURIComponent(lastVisitAt)}`
+      : "";
+  return request<{
+    ok: boolean;
+    briefing?: {
+      plainSummary: string;
+      whatChanged: Array<{ text: string; evidence: string; at?: string }>;
+      openWork: Array<{
+        id: string;
+        action: string;
+        owner: string;
+        status: string;
+        dueAt?: string | null;
+      }>;
+      needsOwner: Array<{ id: string; action: string; priority: string }>;
+      conflicts: number;
+      upcoming: Array<{ title: string; when: string; calendarTruth: string }>;
+      corrections: Array<{ text: string; at: string }>;
+      handoffSummary: string | null;
+    };
+  }>(
+    `/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/since-last-visit${q}`,
+    { token, baseUrl },
+  );
+}
+
+export async function careEmergencyCard(
+  token: string,
+  careRecipientId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    card?: {
+      preferredName: string;
+      emergencyContacts: Array<{
+        name: string;
+        relation?: string;
+        phone?: string;
+      }>;
+      allergies: Array<{ label: string; source?: string }>;
+      medications: Array<{ name: string; dose: string; schedule: string }>;
+      incomplete: string[];
+      accessNote: string;
+    };
+  }>(
+    `/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/emergency-card`,
+    { token, baseUrl },
+  );
+}
+
+export async function careNotificationOps(
+  token: string,
+  careRecipientId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    notifications: Array<{
+      id: string;
+      title: string;
+      plainStatus: string;
+      noResponse: boolean;
+      acknowledged: boolean;
+      resolved: boolean;
+    }>;
+  }>(
+    `/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/notification-ops`,
+    { token, baseUrl },
+  );
+}
+

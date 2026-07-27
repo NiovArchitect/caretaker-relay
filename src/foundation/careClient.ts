@@ -42,6 +42,13 @@ import {
   careHistory,
   careCoverage,
   careNotes,
+  careWorkItems,
+  careCreateWorkItem,
+  careClaimWorkItem,
+  careTransitionWorkItem,
+  careSinceLastVisit,
+  careEmergencyCard,
+  careNotificationOps,
   getCareApiBaseUrl,
 } from "./careHttpClient";
 
@@ -1519,4 +1526,162 @@ export async function fetchRoleProjection(): Promise<{
   }
   // Lab package path: no separate projection service — client roleExperience remains
   return { ok: false, source: "none" };
+}
+
+/** Harmonized ambient — work ownership queue for active recipient. */
+export async function fetchWorkItems(): Promise<{
+  ok: boolean;
+  workItems: Array<Record<string, unknown>>;
+  needsOwner: Array<Record<string, unknown>>;
+  message?: string;
+}> {
+  const useHttp = await ensureHttpSession();
+  if (!useHttp || !httpToken || rid() === NO_RECIPIENT_ID) {
+    return { ok: false, workItems: [], needsOwner: [], message: "Not signed in" };
+  }
+  const res = await careWorkItems(httpToken, rid());
+  if (!res.ok) {
+    return {
+      ok: false,
+      workItems: [],
+      needsOwner: [],
+      message: res.message,
+    };
+  }
+  return {
+    ok: true,
+    workItems: res.data.work_items ?? [],
+    needsOwner: res.data.needs_owner ?? [],
+  };
+}
+
+export async function createCareWorkItem(input: {
+  action: string;
+  reason?: string;
+  owner_person_id?: string | null;
+  owner_display_name?: string | null;
+  due_at?: string | null;
+  priority?: string;
+  confirm_recipient_id?: string;
+}): Promise<{ ok: boolean; workItem?: Record<string, unknown>; message?: string; code?: string }> {
+  const useHttp = await ensureHttpSession();
+  if (!useHttp || !httpToken || rid() === NO_RECIPIENT_ID) {
+    return { ok: false, message: "Not signed in" };
+  }
+  const res = await careCreateWorkItem(httpToken, rid(), {
+    ...input,
+    session_active_recipient_id: rid(),
+    confirm_recipient_id: input.confirm_recipient_id ?? rid(),
+  });
+  if (!res.ok) {
+    return {
+      ok: false,
+      message: res.message,
+      code: res.code,
+    };
+  }
+  return { ok: true, workItem: res.data.work_item };
+}
+
+export async function claimCareWorkItem(
+  workItemId: string,
+): Promise<{ ok: boolean; workItem?: Record<string, unknown>; message?: string }> {
+  const useHttp = await ensureHttpSession();
+  if (!useHttp || !httpToken || rid() === NO_RECIPIENT_ID) {
+    return { ok: false, message: "Not signed in" };
+  }
+  const res = await careClaimWorkItem(httpToken, rid(), workItemId);
+  if (!res.ok) {
+    return { ok: false, message: res.message };
+  }
+  return { ok: true, workItem: res.data.work_item };
+}
+
+export async function transitionCareWorkItem(
+  workItemId: string,
+  status: string,
+  extra?: { blocking_reason?: string; completion_evidence?: string },
+): Promise<{ ok: boolean; workItem?: Record<string, unknown>; message?: string }> {
+  const useHttp = await ensureHttpSession();
+  if (!useHttp || !httpToken || rid() === NO_RECIPIENT_ID) {
+    return { ok: false, message: "Not signed in" };
+  }
+  const res = await careTransitionWorkItem(httpToken, rid(), workItemId, {
+    status,
+    ...extra,
+  });
+  if (!res.ok) {
+    return { ok: false, message: res.message };
+  }
+  return { ok: true, workItem: res.data.work_item };
+}
+
+export async function fetchSinceLastVisit(lastVisitAt?: string | null): Promise<{
+  ok: boolean;
+  briefing?: {
+    plainSummary: string;
+    whatChanged: Array<{ text: string; evidence: string; at?: string }>;
+    openWork: Array<{
+      id: string;
+      action: string;
+      owner: string;
+      status: string;
+      dueAt?: string | null;
+    }>;
+    needsOwner: Array<{ id: string; action: string; priority: string }>;
+    conflicts: number;
+    upcoming: Array<{ title: string; when: string; calendarTruth: string }>;
+    corrections: Array<{ text: string; at: string }>;
+    handoffSummary: string | null;
+  };
+  message?: string;
+}> {
+  const useHttp = await ensureHttpSession();
+  if (!useHttp || !httpToken || rid() === NO_RECIPIENT_ID) {
+    return { ok: false, message: "Not signed in" };
+  }
+  const res = await careSinceLastVisit(httpToken, rid(), lastVisitAt);
+  if (!res.ok) {
+    return { ok: false, message: res.message };
+  }
+  return { ok: true, briefing: res.data.briefing };
+}
+
+export async function fetchEmergencyCard(): Promise<{
+  ok: boolean;
+  card?: Record<string, unknown>;
+  message?: string;
+}> {
+  const useHttp = await ensureHttpSession();
+  if (!useHttp || !httpToken || rid() === NO_RECIPIENT_ID) {
+    return { ok: false, message: "Not signed in" };
+  }
+  const res = await careEmergencyCard(httpToken, rid());
+  if (!res.ok) {
+    return { ok: false, message: res.message };
+  }
+  return { ok: true, card: res.data.card as Record<string, unknown> };
+}
+
+export async function fetchNotificationOps(): Promise<{
+  ok: boolean;
+  notifications: Array<{
+    id: string;
+    title: string;
+    plainStatus: string;
+    noResponse: boolean;
+    acknowledged: boolean;
+    resolved: boolean;
+  }>;
+  message?: string;
+}> {
+  const useHttp = await ensureHttpSession();
+  if (!useHttp || !httpToken || rid() === NO_RECIPIENT_ID) {
+    return { ok: false, notifications: [], message: "Not signed in" };
+  }
+  const res = await careNotificationOps(httpToken, rid());
+  if (!res.ok) {
+    return { ok: false, notifications: [], message: res.message };
+  }
+  return { ok: true, notifications: res.data.notifications ?? [] };
 }
