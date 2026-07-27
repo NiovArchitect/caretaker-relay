@@ -1,0 +1,75 @@
+{
+  "public": "https://care.niovlabs.com",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "evidence": [
+    {
+      "id": "api_health",
+      "status": 200,
+      "at": "2026-07-27T15:49:38.087Z"
+    },
+    {
+      "id": "work_items_unauth",
+      "status": 401,
+      "at": "2026-07-27T15:49:38.173Z"
+    },
+    {
+      "id": "family_login",
+      "status": "PASS",
+      "ms": 1045,
+      "hasShell": true,
+      "hasNav": false,
+      "at": "2026-07-27T15:49:41.943Z"
+    },
+    {
+      "id": "work_ownership_panel",
+      "status": "PASS",
+      "at": "2026-07-27T15:49:43.515Z"
+    },
+    {
+      "id": "since_last_visit",
+      "status": "PASS",
+      "note": "visible",
+      "at": "2026-07-27T15:49:43.536Z"
+    },
+    {
+      "id": "sync_label",
+      "status": "PASS",
+      "sync": "Sync: Saved",
+      "at": "2026-07-27T15:49:43.565Z"
+    },
+    {
+      "id": "confirm_required_before_create",
+      "status": "PASS",
+      "err": "Confirm the care recipient before creating work (shared-device / multi-recipient safety).",
+      "at": "2026-07-27T15:49:44.317Z"
+    },
+    {
+      "id": "create_work_after_confirm",
+      "status": "PASS",
+      "list": true,
+      "empty": false,
+      "at": "2026-07-27T15:49:46.736Z"
+    },
+    {
+      "id": "handoff_panel",
+      "status": "PASS",
+      "at": "2026-07-27T15:49:47.638Z"
+    },
+    {
+      "id": "dsp_login",
+      "status": "PASS",
+      "ms": 1007,
+      "at": "2026-07-27T15:49:50.656Z"
+    },
+    {
+      "id": "dsp_work_panel",
+      "status": "PASS",
+      "at": "2026-07-27T15:49:52.027Z"
+    },
+    {
+      "id": "adversarial_unauth_create",
+      "status": 401,
+      "at": "2026-07-27T15:49:52.376Z"
+    }
+  ]
+}
