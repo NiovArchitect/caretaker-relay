@@ -328,17 +328,17 @@ export function App() {
   }
 
   function signOut() {
-    void clearSession({ revokeServer: true }).then(() => {
-      clearAuthorizationState();
-      saveActiveCareRecipientId(NO_RECIPIENT_SPACE.careRecipientId);
-      setSession(null);
-      setMessages([]);
-      setBundle(null);
-      setShowHandoff(false);
-      setProfileOpen(false);
-      setLiveHandoff(undefined);
-      setActiveRecipientId(NO_RECIPIENT_SPACE.careRecipientId);
-    });
+    // Wipe UI immediately for shared-device safety; server revoke in background.
+    clearAuthorizationState();
+    saveActiveCareRecipientId(NO_RECIPIENT_SPACE.careRecipientId);
+    setSession(null);
+    setMessages([]);
+    setBundle(null);
+    setShowHandoff(false);
+    setProfileOpen(false);
+    setLiveHandoff(undefined);
+    setActiveRecipientId(NO_RECIPIENT_SPACE.careRecipientId);
+    void clearSession({ revokeServer: true });
   }
 
   function openRelay() {

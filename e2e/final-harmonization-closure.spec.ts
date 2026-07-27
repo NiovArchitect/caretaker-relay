@@ -159,17 +159,13 @@ test("F0 continuous flagship family journey", async ({ page }) => {
 test("F1 shared-device logout isolation", async ({ page }) => {
   await labSignIn(page, "p-sadeil");
   await expect(page.getByTestId("app-shell")).toBeVisible({ timeout: 30_000 });
-  // Sign out
-  if (await page.getByTestId("profile-menu-button").isVisible().catch(() => false)) {
-    await page.getByTestId("profile-menu-button").click();
-  } else if (await page.getByTestId("open-profile").isVisible().catch(() => false)) {
-    await page.getByTestId("open-profile").click();
-  }
-  const signOut = page.getByTestId("sign-out").or(page.getByRole("button", { name: /sign out/i }));
-  if (await signOut.first().isVisible().catch(() => false)) {
-    await signOut.first().click();
-    await page.waitForTimeout(1500);
-  }
+  // Sign out via profile menu
+  const profileBtn = page.getByTestId("profile-menu-btn");
+  await expect(profileBtn).toBeVisible({ timeout: 15_000 });
+  await profileBtn.click();
+  await expect(page.getByTestId("sign-out")).toBeVisible({ timeout: 10_000 });
+  await page.getByTestId("sign-out").click();
+  await page.waitForTimeout(1500);
   // After logout, protected shell should not remain
   const login = await page.getByTestId("login-gate").isVisible().catch(() => false);
   const shell = await page.getByTestId("app-shell").isVisible().catch(() => false);
@@ -208,13 +204,8 @@ test("F2 multi-tab logout", async ({ browser }) => {
   await page2.goto(PUBLIC + "/", { waitUntil: "domcontentloaded" });
   await page2.waitForTimeout(2000);
   // Sign out page1
-  if (await page1.getByTestId("profile-menu-button").isVisible().catch(() => false)) {
-    await page1.getByTestId("profile-menu-button").click();
-  }
-  const so = page1.getByTestId("sign-out").or(page1.getByRole("button", { name: /sign out/i }));
-  if (await so.first().isVisible().catch(() => false)) {
-    await so.first().click();
-  }
+  await page1.getByTestId("profile-menu-btn").click();
+  await page1.getByTestId("sign-out").click();
   await page2.waitForTimeout(1500);
   // Trigger storage by navigation check on page2
   await page2.reload().catch(() => null);
