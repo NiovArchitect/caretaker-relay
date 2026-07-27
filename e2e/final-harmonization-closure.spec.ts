@@ -16,18 +16,32 @@ function rec(id: string, status: "PASS" | "PARTIAL" | "FAIL", detail: Record<str
 }
 
 async function labSignIn(page: Page, principal: string) {
+  // Warm API first to reduce cold-start login failures
+  await page.request.get(`${API}/api/v1/care/health`).catch(() => null);
   await page.goto(PUBLIC + "/", { waitUntil: "domcontentloaded", timeout: 60_000 });
   await expect(page.getByTestId("login-gate")).toBeVisible({ timeout: 30_000 });
   await page.getByTestId("entry-sign-in").click();
   await page.getByTestId("login-principal").selectOption(principal);
   const t0 = Date.now();
   await page.getByTestId("login-submit").click();
-  await page.getByTestId("app-shell").waitFor({ state: "visible", timeout: 60_000 }).catch(() => null);
+  try {
+    await page.getByTestId("app-shell").waitFor({ state: "visible", timeout: 60_000 });
+  } catch {
+    // one recovery: reload login and retry submit
+    await page.goto(PUBLIC + "/", { waitUntil: "domcontentloaded", timeout: 60_000 });
+    await page.getByTestId("entry-sign-in").click().catch(() => null);
+    await page.getByTestId("login-principal").selectOption(principal).catch(() => null);
+    await page.getByTestId("login-submit").click().catch(() => null);
+    await page.getByTestId("app-shell").waitFor({ state: "visible", timeout: 60_000 }).catch(() => null);
+  }
   return Date.now() - t0;
 }
 
 test.describe.configure({ mode: "serial" });
 test.setTimeout(240_000);
+
+// Retry once on cold-start shell failures (Render free-tier wake)
+test.describe.configure({ retries: 1 });
 
 test.afterAll(() => {
   const dir = resolve("docs/testing/final-harmonization-closure");
