@@ -864,6 +864,38 @@ p {
   }
 }
 
+.account-menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: transparent;
+  padding: 2px 4px 2px 2px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.account-menu-trigger:focus-visible {
+  outline: var(--cr-focus-outline);
+  outline-offset: 3px;
+}
+
+.account-menu-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--cr-ink, #0f2a33);
+  padding-right: 6px;
+}
+
+@media (max-width: 520px) {
+  .account-menu-label {
+    /* Keep visible on mobile — sign-out discovery is a hard requirement */
+    font-size: 0.8rem;
+  }
+}
+
 .avatar-btn {
   width: 40px;
   height: 40px;
@@ -874,13 +906,17 @@ p {
   font-weight: 700;
   color: var(--cr-accent);
   box-shadow: var(--cr-shadow-card);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition:
     transform var(--cr-dur) var(--cr-ease-out),
     box-shadow var(--cr-dur) ease,
     border-color var(--cr-dur) ease;
 }
 
-.avatar-btn:hover {
+.avatar-btn:hover,
+.account-menu-trigger:hover .avatar-btn {
   transform: translateY(-1px);
   border-color: rgba(15, 107, 124, 0.22);
   box-shadow: var(--cr-shadow-float);
@@ -889,6 +925,41 @@ p {
 .avatar-btn:focus-visible {
   outline: var(--cr-focus-outline);
   outline-offset: 3px;
+}
+
+.attention-banner {
+  border: 1px solid rgba(196, 92, 62, 0.28);
+  background: linear-gradient(
+    160deg,
+    rgba(255, 248, 244, 0.95),
+    rgba(255, 255, 255, 0.88)
+  );
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin: 12px 0;
+}
+
+.shift-workspace-head {
+  margin-bottom: 12px;
+}
+
+.surface-soft {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--cr-line, rgba(15, 42, 51, 0.1));
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin: 12px 0;
+}
+
+.ghost-btn {
+  border: none;
+  background: transparent;
+  color: var(--cr-accent, #0f6b7c);
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+  padding: 8px 0;
+  margin-top: 8px;
 }
 
 /* ==========================================================================

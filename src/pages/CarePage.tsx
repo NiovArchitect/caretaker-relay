@@ -28,6 +28,8 @@ import {
   clusterSafetyReviews,
 } from "../lib/observations";
 import { loadActiveCareRecipientId, resolveCareSpace } from "../lib/careContext";
+import { MedicationCorrectionPanel } from "../components/MedicationCorrectionPanel";
+import { ShiftWorkspacePage } from "./ShiftWorkspacePage";
 
 type CareSection =
   | "about"
@@ -36,10 +38,12 @@ type CareSection =
   | "appointments"
   | "observations"
   | "events"
-  | "reviews";
+  | "reviews"
+  | "shift";
 
 const sections: { id: CareSection; label: string }[] = [
   { id: "about", label: "About" },
+  { id: "shift", label: "My shift" },
   { id: "history", label: "History" },
   { id: "medications", label: "Medications" },
   { id: "appointments", label: "Appointments" },
@@ -806,9 +810,21 @@ export function CarePage({
             )}
           </div>
         )}
+        {section === "shift" && (
+          <ShiftWorkspacePage
+            refreshKey={0}
+            onOpenRelay={() => {
+              window.dispatchEvent(new CustomEvent("cr-open-relay"));
+            }}
+            onRelayBlocked={(reason) => {
+              window.alert(reason);
+            }}
+          />
+        )}
         {section === "medications" && (
           <>
             <h2>Medications</h2>
+            <MedicationCorrectionPanel refreshKey={0} />
             {!state?.medicationSchedules?.length ? (
               <p className="muted">No medication schedules on file.</p>
             ) : (

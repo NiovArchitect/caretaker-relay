@@ -176,6 +176,25 @@ export function App() {
     void warmCareApi(true);
   }, []);
 
+  // Care → Shift workspace can request Relay without hard navigation.
+  useEffect(() => {
+    const onOpen = () => {
+      setDraft("");
+      setVoiceMeta(undefined);
+      setCorrecting(false);
+      setCoordFocusPersonId(null);
+      setRelayOpen(true);
+      window.setTimeout(() => {
+        const el = document.querySelector(
+          '[data-testid="composer-input"]',
+        ) as HTMLTextAreaElement | null;
+        el?.focus();
+      }, 80);
+    };
+    window.addEventListener("cr-open-relay", onOpen);
+    return () => window.removeEventListener("cr-open-relay", onOpen);
+  }, []);
+
   // Multi-tab shared-device: logout in one tab wipes protected state in others.
   useEffect(() => {
     installMultiTabSessionGuard(() => {
@@ -380,6 +399,18 @@ export function App() {
     if (id === activeRecipientId) {
       setProfileOpen(false);
       return;
+    }
+    const nextSpace = resolveCareSpace(id, session?.carePersonId);
+    // Soft confirm for multi-recipient caregivers (shared-device / mix-up safety)
+    const spaces = listAuthorizedCareSpaces(session?.carePersonId);
+    if (spaces.length > 1) {
+      const ok = window.confirm(
+        `Switch care context to ${nextSpace.displayName}?\n\nToday, Relay, tasks, and documents will show only ${nextSpace.displayName}'s care.`,
+      );
+      if (!ok) {
+        setProfileOpen(false);
+        return;
+      }
     }
     setRecipientSwitching(true);
     setProfileOpen(false);
@@ -890,12 +921,12 @@ export function App() {
           <div className="profile-menu-wrap">
             <button
               type="button"
-              className="avatar-btn"
+              className="account-menu-trigger"
               data-testid="profile-menu-btn"
               aria-haspopup="menu"
               aria-expanded={profileOpen}
-              aria-label={`Account menu for ${session.displayName}`}
-              title={`${session.displayName} · ${session.roleLabel}`}
+              aria-label={`Account menu for ${session.displayName}. Open to switch recipient or sign out.`}
+              title={`${session.displayName} · ${session.roleLabel} · Account`}
               onClick={() => setProfileOpen((v) => !v)}
               onBlur={(e) => {
                 // Dismiss when focus leaves menu
@@ -908,7 +939,15 @@ export function App() {
                 }
               }}
             >
-              {(session.displayName[0] ?? "U").toUpperCase()}
+              <span className="avatar-btn" aria-hidden>
+                {(session.displayName[0] ?? "U").toUpperCase()}
+              </span>
+              <span
+                className="account-menu-label"
+                data-testid="account-menu-label"
+              >
+                Account
+              </span>
             </button>
             {profileOpen && (
               <div
@@ -922,7 +961,7 @@ export function App() {
                 <div className="profile-menu-head">
                   <strong>{session.displayName}</strong>
                   <span className="muted">{session.roleLabel}</span>
-                  <span className="muted">
+                  <span className="muted" data-testid="account-active-recipient">
                     Caring for {activeSpace.displayName}
                   </span>
                 </div>
@@ -974,6 +1013,18 @@ export function App() {
                     </button>
                   )}
                 </div>
+                <button
+                  type="button"
+                  role="menuitem"
+                  className="profile-menu-item"
+                  data-testid="account-accessibility"
+                  onClick={() => {
+                    setProfileOpen(false);
+                    setTab("privacy");
+                  }}
+                >
+                  Accessibility &amp; privacy
+                </button>
                 <button
                   type="button"
                   role="menuitem"
