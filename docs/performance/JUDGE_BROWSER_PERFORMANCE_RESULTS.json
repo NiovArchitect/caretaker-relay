@@ -1,0 +1,32 @@
+{
+  "date": "2026-07-27",
+  "before": {
+    "login_warm_s": 24.2,
+    "register_s": 54.2,
+    "schedule_s": 35.2,
+    "health_s": 0.25
+  },
+  "after": {
+    "app_html_s": 0.29,
+    "health_s": 0.26,
+    "login_warm_s": 0.71,
+    "login_post_delta_flush_s": 1.16,
+    "register_s": 1.23,
+    "schedule_s": 0.82,
+    "shift_s": 1.01,
+    "projection_s": 0.21,
+    "privacy_s": 0.20,
+    "clinical_summary_s": 0.21
+  },
+  "budgets": {
+    "login_ui_first_paint_s": 1.5,
+    "warm_login_to_shell_s": 3.0,
+    "hard_ceiling_login_s": 5.0
+  },
+  "classification": {
+    "login_product_flush": "FIXED",
+    "render_cold_start": "STILL_POSSIBLE_AFTER_IDLE"
+  },
+  "app_sha": "eaaae29a55021ea4160f21ba8f36190a4bf801d2",
+  "api_sha": "344bac2dc3ece52802712dd040d259b938d10628"
+}

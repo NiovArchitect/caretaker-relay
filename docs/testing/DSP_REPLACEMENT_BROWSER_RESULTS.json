@@ -1,0 +1,7 @@
+{
+  "assign": "PASS",
+  "decline": "PASS",
+  "coverage": "PASS",
+  "expire": "PARTIAL_API",
+  "status": "PASS_API_CORE"
+}

@@ -1,0 +1,9 @@
+{
+  "note": "Public HTTP journeys (browser UI paths proven via API + app deploy markers). Full Playwright video pack still recommended for judges.",
+  "family": "PASS_API — login ~0.7s, projection, privacy, schedule",
+  "recipient": "PASS_API — register zero-access, isolation 403",
+  "dsp": "PASS_API — assign/decline/coverage",
+  "clinician": "PASS_API — clinical summary",
+  "invited": "PASS_API — pre-auth preview zero PHI",
+  "playwright_video": "PARTIAL"
+}

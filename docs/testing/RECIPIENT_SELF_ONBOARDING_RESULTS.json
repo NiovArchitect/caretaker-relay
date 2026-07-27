@@ -1,0 +1,6 @@
+{
+  "unique_account": true,
+  "authorized_recipients": 0,
+  "isolation_on_seed_recipient": "NO_RELATIONSHIP",
+  "status": "PASS_API"
+}
