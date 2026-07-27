@@ -93,27 +93,26 @@ export function TodayPage({
   });
   const [shellReady, setShellReady] = useState(false);
 
-  // Shell-first: paint Today chrome immediately; hydrate secondary data next.
+  // Shell-first: paint Today chrome immediately; hydrate critical + secondary in parallel.
   useEffect(() => {
     setShellReady(true);
     let cancelled = false;
-    // Critical: orientation projection first
+    // Critical: Today projection (does not block shell paint)
     void fetchTodayProjection().then((p) => {
       if (!cancelled) setProj(p);
     });
-    // Secondary: role projection, profile, coverage, notifications — progressive
-    window.setTimeout(() => {
-      if (cancelled) return;
-      void fetchRoleProjection().then((r) => {
+    // Parallel secondary domains — independent after recipient scope is known
+    void Promise.all([
+      fetchRoleProjection().then((r) => {
         if (!cancelled && r.ok && r.projection) setServerProjection(r.projection);
-      });
-      void fetchRecipientProfile().then((p) => {
+      }),
+      fetchRecipientProfile().then((p) => {
         if (!cancelled) setProfile(p);
-      });
-      void fetchCareCoverage().then((c) => {
+      }),
+      fetchCareCoverage().then((c) => {
         if (!cancelled) setCoverageSummary(c.summary);
-      });
-      void fetchServerNotifications().then((r) => {
+      }),
+      fetchServerNotifications().then((r) => {
         if (!cancelled && r.ok) {
           setInbox(
             r.notifications.filter(
@@ -124,8 +123,8 @@ export function TodayPage({
             ),
           );
         }
-      });
-    }, 0);
+      }),
+    ]);
     const loadInbox = () => {
       void fetchServerNotifications().then((r) => {
         if (!cancelled && r.ok) {

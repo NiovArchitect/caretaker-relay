@@ -74,10 +74,12 @@ export function LoginGate({
   const [email, setEmail] = useState("");
   const [createPassword, setCreatePassword] = useState("");
   const [warmHint, setWarmHint] = useState(false);
+  const [statusLine, setStatusLine] = useState<string | null>(null);
   /** True when entry was “Set up care for someone new” (provisional only). */
   const [setupNewCare, setSetupNewCare] = useState(false);
 
   useEffect(() => {
+    // Fire-and-forget warm — never delay first paint of login UI.
     void warmCareApi(true).then(() => setWarmHint(true));
     void listLabPrincipals().then((rows) => {
       if (rows.length) setPrincipals(rows);
@@ -108,8 +110,15 @@ export function LoginGate({
   async function doLabLogin(carePersonId: string, pw: string) {
     setBusy(true);
     setError(null);
+    setStatusLine("Signing in…");
     const started = Date.now();
-    await warmCareApi();
+    // Do not await warm — login runs immediately; warm is background only.
+    void warmCareApi();
+    const wakeHint = window.setTimeout(() => {
+      setStatusLine(
+        "Secure care service is waking. Your access has not changed.",
+      );
+    }, 2500);
     try {
       const res = await loginAsPrincipal(carePersonId, pw);
       if (!res.ok || !res.session) {
@@ -126,11 +135,14 @@ export function LoginGate({
       d.awaitingAuthorization = false;
       d.completed = true;
       saveOnboardingDraft(d);
+      setStatusLine(null);
       onAuthenticated(res.session);
     } catch {
       setError("Could not reach the care service. Wait a moment and try again.");
     } finally {
+      window.clearTimeout(wakeHint);
       setBusy(false);
+      setStatusLine(null);
     }
   }
 
@@ -166,7 +178,13 @@ export function LoginGate({
 
     setBusy(true);
     setError(null);
-    await warmCareApi();
+    setStatusLine("Creating secure account…");
+    void warmCareApi();
+    const wakeHint = window.setTimeout(() => {
+      setStatusLine(
+        "Secure care service is waking. Your access has not changed.",
+      );
+    }, 2500);
 
     // Prefer durable server registration (zero memberships). Fall back to
     // local pending shell only if API is unreachable.
@@ -221,19 +239,25 @@ export function LoginGate({
           /* ignore */
         }
         establishRegisteredSession(reg.data.token, session);
+        window.clearTimeout(wakeHint);
         setBusy(false);
+        setStatusLine(null);
         onAuthenticated(session);
         return;
       }
       // If server rejects (e.g. email in use), show message — do not fake access
       if (reg.status > 0) {
+        window.clearTimeout(wakeHint);
         setError(reg.message || "Could not create account");
         setBusy(false);
+        setStatusLine(null);
         return;
       }
     } catch {
       /* network — fall through to local pending shell */
     }
+    window.clearTimeout(wakeHint);
+    setStatusLine(null);
 
     // Offline / API-down fail-closed local shell (no JWT, no recipients)
     const pendingId = makePendingPersonId();
@@ -332,6 +356,22 @@ export function LoginGate({
             <CaretakerRelayLogo layout="stacked" markSize={56} testId="login-brand-logo" />
             <p className="muted cr-login-tag">Shared care, verified</p>
           </div>
+
+          {statusLine && (
+            <p
+              className="attention-limit"
+              role="status"
+              data-testid="login-status"
+              aria-live="polite"
+            >
+              {statusLine}
+            </p>
+          )}
+          {warmHint && !busy && mode === "home" && (
+            <p className="muted sr-only" data-testid="api-warm-ready">
+              Care service warm
+            </p>
+          )}
 
           {mode === "home" && (
             <div data-testid="login-entry-home">

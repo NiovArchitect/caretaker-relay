@@ -17,9 +17,9 @@ export function warmCareApi(force = false): Promise<void> {
   const base = getCareApiBaseUrl();
   warmPromise = (async () => {
     try {
-      // Parallel wake: health + principals (cheap) so login does not pay cold start alone.
+      // Parallel wake: care health + principals (cheap). Never block login submit on this.
       await Promise.allSettled([
-        fetch(`${base}/api/v1/health`, { method: "GET", cache: "no-store" }),
+        fetch(`${base}/api/v1/care/health`, { method: "GET", cache: "no-store" }),
         fetch(`${base}/api/v1/care/auth/lab-principals`, {
           method: "GET",
           cache: "no-store",
