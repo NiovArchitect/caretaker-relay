@@ -1,0 +1,12 @@
+{
+  "public": "https://care.niovlabs.com",
+  "evidence": [
+    {
+      "id": "sign_out_discovery",
+      "status": "PASS",
+      "ms": 1063,
+      "gate": true,
+      "at": "2026-07-27T23:08:46.327Z"
+    }
+  ]
+}

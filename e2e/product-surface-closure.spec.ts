@@ -60,14 +60,21 @@ test("PS1 account menu + sign-out discovery", async ({ page }) => {
   expect(gate).toBeTruthy();
 });
 
+async function openCare(page: Page) {
+  // Desktop SideNav + mobile BottomNav both use nav-care
+  const care = page.locator('.sidenav [data-testid="nav-care"], .bottom-nav [data-testid="nav-care"]').first();
+  await care.click();
+  await page.waitForTimeout(900);
+}
+
 test("PS2 care my shift surface (DSP)", async ({ page }) => {
+  mkdirSync(OUT, { recursive: true });
   const ms = await labSignIn(page, "p-walter");
-  await page.getByTestId("nav-care").click();
-  await page.waitForTimeout(800);
+  await openCare(page);
   const shiftTab = page.getByTestId("care-section-shift");
   if (await shiftTab.isVisible().catch(() => false)) {
     await shiftTab.click();
-    await page.waitForTimeout(1200);
+    await page.waitForTimeout(1500);
   }
   await page.screenshot({ path: resolve(OUT, "ps2-shift-workspace.png"), fullPage: true });
   const workspace = await page.getByTestId("shift-workspace").isVisible().catch(() => false);
@@ -77,11 +84,11 @@ test("PS2 care my shift surface (DSP)", async ({ page }) => {
 });
 
 test("PS3 medication correction panel", async ({ page }) => {
+  mkdirSync(OUT, { recursive: true });
   const ms = await labSignIn(page, "p-sadeil");
-  await page.getByTestId("nav-care").click();
-  await page.waitForTimeout(600);
+  await openCare(page);
   await page.getByTestId("care-section-medications").click();
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(1200);
   await page.screenshot({ path: resolve(OUT, "ps3-med-correction.png"), fullPage: true });
   const panel = await page.getByTestId("med-correction-panel").isVisible().catch(() => false);
   rec("med_correction_panel", panel ? "PASS" : "FAIL", { ms, panel });

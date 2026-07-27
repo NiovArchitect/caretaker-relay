@@ -1,0 +1,43 @@
+
+Running 5 tests using 1 worker
+
+(node:19690) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19690) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › product-surface-closure.spec.ts:48:1 › PS1 account menu + sign-out discovery (11.0s)
+  ✓  2 [chromium] › product-surface-closure.spec.ts:70:1 › PS2 care my shift surface (DSP) (7.3s)
+  ✓  3 [chromium] › product-surface-closure.spec.ts:86:1 › PS3 medication correction panel (8.7s)
+  ✘  4 [chromium] › product-surface-closure.spec.ts:98:1 › PS4 multi-recipient switcher visible for family (12.0s)
+(node:19894) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19894) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  5 [chromium] › product-surface-closure.spec.ts:109:1 › PS5 mobile account label still visible (4.6s)
+
+
+  1) [chromium] › product-surface-closure.spec.ts:98:1 › PS4 multi-recipient switcher visible for family 
+
+    Error: ENOENT: no such file or directory, open '/Users/genghishameha/dev/NIOV Labs/github/caretaker-relay/test-results/.playwright-artifacts-0/traces/b3128f586fbb0b7c478e-0854aad35c479b0fd8a0-recording3.trace'
+
+    Error: ENOENT: no such file or directory, open '/Users/genghishameha/dev/NIOV Labs/github/caretaker-relay/test-results/.playwright-artifacts-0/traces/b3128f586fbb0b7c478e-0854aad35c479b0fd8a0-recording3.trace'
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/product-surface-closure-PS-50e63-switcher-visible-for-family-chromium/test-finished-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/product-surface-closure-PS-50e63-switcher-visible-for-family-chromium/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/product-surface-closure-PS-50e63-switcher-visible-for-family-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/product-surface-closure-PS-50e63-switcher-visible-for-family-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › product-surface-closure.spec.ts:98:1 › PS4 multi-recipient switcher visible for family 
+  4 passed (53.9s)
