@@ -74,6 +74,10 @@ export function clearConversation(
 }
 
 export function clearAllForPrincipal(principalId: string): void {
+  if (principalId === "*" || principalId === "all") {
+    stores.clear();
+    return;
+  }
   for (const k of [...stores.keys()]) {
     if (k.startsWith(`${principalId}::`)) stores.delete(k);
   }

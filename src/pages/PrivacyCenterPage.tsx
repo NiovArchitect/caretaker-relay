@@ -214,6 +214,60 @@ export function PrivacyCenterPage({
             </ul>
           </section>
 
+          <section
+            className="surface-reported"
+            data-testid="leave-circle-panel"
+            aria-label="Leave this care circle"
+          >
+            <h2>Leave this care circle</h2>
+            <p className="muted">
+              You can remove your own access. Audit history is retained. This
+              does not delete {session.displayName === "" ? "the" : ""} care
+              recipient&apos;s record.
+            </p>
+            <button
+              type="button"
+              className="ghost-btn"
+              data-testid="leave-circle-submit"
+              disabled={busy}
+              onClick={() => {
+                void (async () => {
+                  setBusy(true);
+                  try {
+                    const raw = sessionStorage.getItem("cr_care_session_v1");
+                    const token = raw
+                      ? (JSON.parse(raw) as { token?: string }).token
+                      : undefined;
+                    if (!token) return;
+                    const { getCareApiBaseUrl } = await import(
+                      "../foundation/careHttpClient"
+                    );
+                    const base = getCareApiBaseUrl();
+                    const rid = loadActiveCareRecipientId();
+                    await fetch(
+                      `${base}/api/v1/care/recipients/${encodeURIComponent(rid)}/leave`,
+                      {
+                        method: "POST",
+                        headers: {
+                          "content-type": "application/json",
+                          authorization: `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({ reason: "Self leave from Privacy" }),
+                      },
+                    );
+                    setStatus(
+                      "Leave requested. Your access should be removed; re-login if still shown.",
+                    );
+                  } finally {
+                    setBusy(false);
+                  }
+                })();
+              }}
+            >
+              Leave care circle
+            </button>
+          </section>
+
           {center.pendingRequests.length > 0 && (
             <section className="surface-known">
               <h2>Pending access requests</h2>

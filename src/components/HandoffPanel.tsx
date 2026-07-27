@@ -1,6 +1,8 @@
+import { useState } from "react";
 import type { CareHandoff } from "../domain/types";
 import { resolvePersonName } from "../lib/identity";
 import { loadActiveCareRecipientId, resolveCareSpace } from "../lib/careContext";
+import { getCareApiBaseUrl } from "../foundation/careHttpClient";
 
 export function HandoffPanel({
   onClose,
@@ -12,13 +14,58 @@ export function HandoffPanel({
   onClose: () => void;
   liveHandoff?: CareHandoff | null;
   /** Honest delivery state — never claim sent unless system actually sent. */
-  status?: "prepared" | "reviewed" | "ready" | "shared";
+  status?: "prepared" | "reviewed" | "ready" | "shared" | "acknowledged" | "sent";
   loading?: boolean;
   /** When no server handoff exists. */
   emptyReason?: string | null;
 }) {
   const space = resolveCareSpace(loadActiveCareRecipientId());
   const h = liveHandoff ?? null;
+  const [lcStatus, setLcStatus] = useState<string | null>(null);
+  const [lcBusy, setLcBusy] = useState(false);
+  const [lcError, setLcError] = useState<string | null>(null);
+
+  async function transitionLifecycle(next: string) {
+    if (!h) return;
+    setLcBusy(true);
+    setLcError(null);
+    try {
+      const raw = sessionStorage.getItem("cr_care_session_v1");
+      const token = raw
+        ? (JSON.parse(raw) as { token?: string }).token
+        : undefined;
+      if (!token) {
+        setLcError("Not signed in");
+        setLcBusy(false);
+        return;
+      }
+      const base = getCareApiBaseUrl();
+      const res = await fetch(
+        `${base}/api/v1/care/recipients/${encodeURIComponent(h.careRecipientId)}/handoffs/${encodeURIComponent(h.id)}/lifecycle`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ status: next }),
+        },
+      );
+      const json = (await res.json()) as {
+        ok?: boolean;
+        lifecycle?: { status?: string };
+        message?: string;
+      };
+      if (!res.ok || !json.ok) {
+        setLcError(json.message ?? `HTTP ${res.status}`);
+      } else {
+        setLcStatus(json.lifecycle?.status ?? next);
+      }
+    } catch (e) {
+      setLcError(e instanceof Error ? e.message : "Network error");
+    }
+    setLcBusy(false);
+  }
   const fromName = resolvePersonName(h?.fromPersonId, "Marcus Carter");
   const toName = resolvePersonName(h?.toPersonId, "Maya Bennett");
   const sourceLine =
@@ -29,14 +76,17 @@ export function HandoffPanel({
           .join(" · ")
       : "Derived from confirmed care activity";
 
+  const effectiveStatus = lcStatus ?? status;
   const statusLabel =
-    status === "reviewed"
-      ? "You reviewed this care handoff."
-      : status === "ready"
-        ? "Ready for the next caregiver. Still under your control."
-        : status === "shared"
-          ? "Available to the authorized next caregiver in this care space."
-          : "Prepared from current care context. Not automatically sent as a message.";
+    effectiveStatus === "acknowledged"
+      ? "Acknowledged by the incoming caregiver. Unfinished work remains open until completed."
+      : effectiveStatus === "sent" || effectiveStatus === "shared"
+        ? "Sent / available to the authorized next caregiver in this care space."
+        : effectiveStatus === "reviewed"
+          ? "You reviewed this care handoff."
+          : effectiveStatus === "ready"
+            ? "Ready for the next caregiver. Still under your control."
+            : "Prepared from current care context. Not automatically sent as a message.";
 
   if (loading) {
     return (
@@ -129,11 +179,39 @@ export function HandoffPanel({
         Where this came from: {sourceLine}
       </p>
 
-      <div className="btn-row">
+      <div className="btn-row" data-testid="handoff-lifecycle-actions">
+        <button
+          type="button"
+          className="secondary-btn"
+          data-testid="handoff-mark-sent"
+          disabled={lcBusy}
+          onClick={() => void transitionLifecycle("sent")}
+        >
+          Mark sent
+        </button>
+        <button
+          type="button"
+          className="primary-btn"
+          data-testid="handoff-acknowledge"
+          disabled={lcBusy}
+          onClick={() => void transitionLifecycle("acknowledged")}
+        >
+          Acknowledge handoff
+        </button>
         <button type="button" className="secondary-btn" onClick={onClose}>
           Close
         </button>
       </div>
+      {lcError && (
+        <p className="error" data-testid="handoff-lifecycle-error" role="alert">
+          {lcError}
+        </p>
+      )}
+      {lcStatus && (
+        <p className="muted" data-testid="handoff-lifecycle-status">
+          Lifecycle: {lcStatus}
+        </p>
+      )}
     </section>
   );
 }

@@ -579,8 +579,33 @@ function AboutRecipientPanel({
         <p className="muted meta-time" data-testid="emergency-provenance">
           Source: care profile on file
           {p.profileSourceSummary ? ` · ${String(p.profileSourceSummary)}` : ""}
-          . Values are only shown when present — not inferred.
+          . Values are only shown when present — not inferred. Opening emergency
+          information is audited server-side when the emergency-card API is used.
         </p>
+        <button
+          type="button"
+          className="secondary-btn"
+          data-testid="load-emergency-card-api"
+          onClick={() => {
+            void import("../foundation/careClient").then(({ fetchEmergencyCard }) =>
+              fetchEmergencyCard().then((r) => {
+                if (r.ok && r.card) {
+                  const el = document.getElementById("emergency-api-result");
+                  if (el) {
+                    el.textContent = `Emergency card loaded for ${String(r.card.preferredName ?? "")}. Access audited. Incomplete: ${Array.isArray(r.card.incomplete) ? (r.card.incomplete as string[]).join(", ") || "none" : "n/a"}`;
+                  }
+                }
+              }),
+            );
+          }}
+        >
+          Load authorized emergency card (audited)
+        </button>
+        <p
+          className="muted"
+          id="emergency-api-result"
+          data-testid="emergency-api-result"
+        />
         {p.profileSourceSummary ? (
           <p className="muted meta-time" style={{ marginBottom: 0 }}>
             {String(p.profileSourceSummary)}

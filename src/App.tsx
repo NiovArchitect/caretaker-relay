@@ -9,6 +9,7 @@ import {
   fetchLatestHandoff,
   restoreSession,
   clearSession,
+  installMultiTabSessionGuard,
   type TranscriptMeta,
   type TodayAttentionItem,
   type SessionIdentity,
@@ -162,6 +163,20 @@ export function App() {
     void warmCareApi(true);
   }, []);
 
+  // Multi-tab shared-device: logout in one tab wipes protected state in others.
+  useEffect(() => {
+    installMultiTabSessionGuard(() => {
+      clearAuthorizationState();
+      saveActiveCareRecipientId(NO_RECIPIENT_SPACE.careRecipientId);
+      setSession(null);
+      setMessages([]);
+      setBundle(null);
+      setShowHandoff(false);
+      setLiveHandoff(undefined);
+      setActiveRecipientId(NO_RECIPIENT_SPACE.careRecipientId);
+    });
+  }, []);
+
   useEffect(() => {
     let cancelled = false;
     const persistedFast = (() => {
@@ -313,15 +328,17 @@ export function App() {
   }
 
   function signOut() {
-    clearSession();
-    clearAuthorizationState();
-    saveActiveCareRecipientId(NO_RECIPIENT_SPACE.careRecipientId);
-    setSession(null);
-    setMessages([]);
-    setBundle(null);
-    setShowHandoff(false);
-    setProfileOpen(false);
-    setActiveRecipientId(NO_RECIPIENT_SPACE.careRecipientId);
+    void clearSession({ revokeServer: true }).then(() => {
+      clearAuthorizationState();
+      saveActiveCareRecipientId(NO_RECIPIENT_SPACE.careRecipientId);
+      setSession(null);
+      setMessages([]);
+      setBundle(null);
+      setShowHandoff(false);
+      setProfileOpen(false);
+      setLiveHandoff(undefined);
+      setActiveRecipientId(NO_RECIPIENT_SPACE.careRecipientId);
+    });
   }
 
   function openRelay() {
@@ -774,7 +791,7 @@ export function App() {
             </span>
             <div className="recipient-chip-text">
               <div className="recipient-chip-kicker">
-                {hasCareAccess ? "Caring for" : "Access"}
+                {hasCareAccess ? "You're acting for" : "Access"}
               </div>
               <div
                 data-testid="care-recipient-label"
@@ -784,6 +801,15 @@ export function App() {
                   ? activeSpace.displayName
                   : "No recipient connected"}
               </div>
+              {hasCareAccess && (
+                <div
+                  className="sr-only"
+                  data-testid="acting-for-banner"
+                  aria-live="polite"
+                >
+                  {`You're acting for ${activeSpace.displayName}.`}
+                </div>
+              )}
               <div
                 className="muted recipient-chip-role"
                 data-testid="role-experience-badge"

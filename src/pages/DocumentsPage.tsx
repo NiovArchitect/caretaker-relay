@@ -24,8 +24,104 @@ export function DocumentsPage() {
   } | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [docTitle, setDocTitle] = useState("");
+  const [docBody, setDocBody] = useState("");
+  const [proposals, setProposals] = useState<
+    Array<{ id: string; title: string; kind: string; confidence: string }>
+  >([]);
+  const [docNote, setDocNote] = useState<string | null>(null);
   const session = getSessionIdentity();
   const space = resolveCareSpace(loadActiveCareRecipientId());
+
+  async function ingestDocument() {
+    setBusy(true);
+    setError(null);
+    setDocNote(null);
+    try {
+      const raw = sessionStorage.getItem("cr_care_session_v1");
+      const token = raw
+        ? (JSON.parse(raw) as { token?: string }).token
+        : undefined;
+      if (!token) {
+        setError("Not signed in");
+        setBusy(false);
+        return;
+      }
+      const { getCareApiBaseUrl } = await import("../foundation/careHttpClient");
+      const base = getCareApiBaseUrl();
+      const res = await fetch(
+        `${base}/api/v1/care/recipients/${encodeURIComponent(space.careRecipientId)}/documents`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            title: docTitle || "Care document",
+            body: docBody,
+          }),
+        },
+      );
+      const json = (await res.json()) as {
+        ok?: boolean;
+        message?: string;
+        proposals?: Array<{
+          id: string;
+          title: string;
+          kind: string;
+          confidence: string;
+        }>;
+        note?: string;
+      };
+      if (!res.ok || !json.ok) {
+        setError(json.message ?? `HTTP ${res.status}`);
+      } else {
+        setProposals(json.proposals ?? []);
+        setDocNote(
+          json.note ??
+            "Original preserved. Proposals need confirmation before becoming care truth.",
+        );
+      }
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Upload failed");
+    }
+    setBusy(false);
+  }
+
+  async function confirmProposal(proposalId: string, decision: "confirm" | "reject") {
+    setBusy(true);
+    try {
+      const raw = sessionStorage.getItem("cr_care_session_v1");
+      const token = raw
+        ? (JSON.parse(raw) as { token?: string }).token
+        : undefined;
+      if (!token) return;
+      const { getCareApiBaseUrl } = await import("../foundation/careHttpClient");
+      const base = getCareApiBaseUrl();
+      const res = await fetch(
+        `${base}/api/v1/care/recipients/${encodeURIComponent(space.careRecipientId)}/documents/proposals/${encodeURIComponent(proposalId)}`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ decision }),
+        },
+      );
+      const json = (await res.json()) as { ok?: boolean; result?: string; message?: string };
+      if (json.ok) {
+        setDocNote(json.result ?? "Updated");
+        setProposals((p) => p.filter((x) => x.id !== proposalId));
+      } else {
+        setError(json.message ?? "Confirm failed");
+      }
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Confirm failed");
+    }
+    setBusy(false);
+  }
 
   const generate = useCallback(async () => {
     setBusy(true);
@@ -60,6 +156,81 @@ export function DocumentsPage() {
           You stay responsible for what is shared.
         </p>
       </div>
+
+      <section
+        className="section surface-known"
+        data-testid="document-ingest-panel"
+        aria-label="Add care document text"
+      >
+        <h2>Add document text</h2>
+        <p className="muted section-lead">
+          Paste letter or note text. Original is preserved. Extracted actions are
+          proposals only until you confirm — never auto-applied as care truth.
+        </p>
+        <input
+          type="text"
+          data-testid="document-title"
+          placeholder="Document title"
+          value={docTitle}
+          onChange={(e) => setDocTitle(e.target.value)}
+          style={{ width: "100%", marginBottom: 8 }}
+        />
+        <textarea
+          data-testid="document-body"
+          placeholder="Paste therapy note, appointment letter, or medication instruction…"
+          value={docBody}
+          onChange={(e) => setDocBody(e.target.value)}
+          rows={5}
+          style={{ width: "100%" }}
+        />
+        <button
+          type="button"
+          className="primary-btn"
+          data-testid="document-ingest-submit"
+          disabled={busy || docBody.trim().length < 8}
+          onClick={() => void ingestDocument()}
+          style={{ marginTop: 8 }}
+        >
+          Extract proposed actions
+        </button>
+        {docNote && (
+          <p className="muted" data-testid="document-ingest-note">
+            {docNote}
+          </p>
+        )}
+        {proposals.length > 0 && (
+          <ul className="list-plain" data-testid="document-proposals">
+            {proposals.map((p) => (
+              <li key={p.id}>
+                <strong>{p.title}</strong>{" "}
+                <span className="muted">
+                  · {p.kind} · {p.confidence}
+                </span>
+                <div className="btn-row" style={{ marginTop: 4 }}>
+                  <button
+                    type="button"
+                    className="primary-btn"
+                    data-testid={`proposal-confirm-${p.id}`}
+                    disabled={busy}
+                    onClick={() => void confirmProposal(p.id, "confirm")}
+                  >
+                    Confirm
+                  </button>
+                  <button
+                    type="button"
+                    className="secondary-btn"
+                    data-testid={`proposal-reject-${p.id}`}
+                    disabled={busy}
+                    onClick={() => void confirmProposal(p.id, "reject")}
+                  >
+                    Reject
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
 
       {space.depth === "lightweight" && (
         <section

@@ -49,6 +49,7 @@ import {
   careSinceLastVisit,
   careEmergencyCard,
   careNotificationOps,
+  careLogout,
   getCareApiBaseUrl,
 } from "./careHttpClient";
 
@@ -358,21 +359,129 @@ export function establishRegisteredSession(
   );
 }
 
-export function clearSession() {
+/**
+ * Full client wipe for shared-device safety.
+ * Optionally revoke server session first when a token is present.
+ */
+export async function clearSession(opts?: { revokeServer?: boolean }) {
+  const token = httpToken;
+  if (opts?.revokeServer !== false && token) {
+    try {
+      await careLogout(token);
+    } catch {
+      /* best-effort server revoke */
+    }
+  }
   httpToken = null;
   httpAvailable = null;
   sessionIdentity = null;
+  lastBundleId = null;
+  lastHttpBundle = null;
+  lastHttpHandoff = null;
+  transportUsed = "package";
+  activeCareRecipientId = NO_RECIPIENT_ID;
+  runtime = null;
   try {
     sessionStorage.removeItem(SESSION_KEY);
+    sessionStorage.removeItem("cr_offline_outbox_v1");
+    // Multi-tab: signal other tabs to wipe protected state
+    localStorage.setItem(
+      "cr_session_broadcast_v1",
+      JSON.stringify({ type: "logout", at: Date.now() }),
+    );
+    localStorage.removeItem("cr_session_broadcast_v1");
   } catch {
     /* ignore */
   }
   try {
-    // Clear authorization + active recipient so next login does not inherit access
     void import("../lib/authorization").then((m) => m.clearAuthorizationState());
     void import("../lib/careContext").then((m) =>
       m.saveActiveCareRecipientId("cr-none"),
     );
+    void import("../lib/onboarding").then((m) => {
+      if (typeof m.clearOnboardingDraft === "function") m.clearOnboardingDraft();
+    });
+    void import("../lib/relay/conversationMemory").then((m) => {
+      if (typeof m.clearAllForPrincipal === "function") {
+        m.clearAllForPrincipal("*");
+      }
+    });
+  } catch {
+    /* ignore */
+  }
+}
+
+/** Install multi-tab logout listener once (shared-device isolation). */
+let multiTabInstalled = false;
+export function installMultiTabSessionGuard(onRemoteLogout: () => void) {
+  if (multiTabInstalled || typeof window === "undefined") return;
+  multiTabInstalled = true;
+  window.addEventListener("storage", (ev) => {
+    if (ev.key !== "cr_session_broadcast_v1" || !ev.newValue) return;
+    try {
+      const msg = JSON.parse(ev.newValue) as { type?: string };
+      if (msg.type === "logout") {
+        httpToken = null;
+        httpAvailable = null;
+        sessionIdentity = null;
+        lastHttpHandoff = null;
+        lastHttpBundle = null;
+        lastBundleId = null;
+        activeCareRecipientId = NO_RECIPIENT_ID;
+        try {
+          sessionStorage.removeItem(SESSION_KEY);
+        } catch {
+          /* ignore */
+        }
+        onRemoteLogout();
+      }
+    } catch {
+      /* ignore */
+    }
+  });
+}
+
+/** Offline outbox — pending mutations not assumed saved. */
+export type OfflineOutboxItem = {
+  id: string;
+  path: string;
+  method: string;
+  body?: unknown;
+  createdAt: string;
+  label: string;
+};
+
+export function listOfflineOutbox(): OfflineOutboxItem[] {
+  try {
+    const raw = sessionStorage.getItem("cr_offline_outbox_v1");
+    if (!raw) return [];
+    return JSON.parse(raw) as OfflineOutboxItem[];
+  } catch {
+    return [];
+  }
+}
+
+export function enqueueOfflineOutbox(
+  item: Omit<OfflineOutboxItem, "id" | "createdAt">,
+): OfflineOutboxItem {
+  const row: OfflineOutboxItem = {
+    ...item,
+    id: `obx-${Date.now().toString(36)}`,
+    createdAt: new Date().toISOString(),
+  };
+  const list = listOfflineOutbox();
+  list.push(row);
+  try {
+    sessionStorage.setItem("cr_offline_outbox_v1", JSON.stringify(list.slice(-40)));
+  } catch {
+    /* ignore */
+  }
+  return row;
+}
+
+export function clearOfflineOutbox() {
+  try {
+    sessionStorage.removeItem("cr_offline_outbox_v1");
   } catch {
     /* ignore */
   }
@@ -453,7 +562,7 @@ export async function restoreSession(): Promise<SessionIdentity | null> {
   const { careMe } = await import("./careHttpClient");
   const me = await careMe(persisted.token);
   if (!me.ok) {
-    clearSession();
+    void clearSession({ revokeServer: false });
     return null;
   }
   // Keep pendingAuthorization flag from server membership count — sync, not fire-and-forget
