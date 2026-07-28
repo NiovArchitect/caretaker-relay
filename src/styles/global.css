@@ -395,7 +395,7 @@ p {
 /* When using legacy grid children without cr-shell wrapper fallback */
 .app-shell[data-testid="app-shell"]:not(:has(.cr-shell)) {
   display: grid;
-  grid-template-rows: var(--cr-top-h) 1fr auto;
+  grid-template-rows: var(--cr-top-h) minmax(0, 1fr) auto;
   grid-template-columns: var(--cr-nav-w) minmax(0, 1fr) var(--cr-relay-w);
   grid-template-areas:
     "top top top"
@@ -404,8 +404,17 @@ p {
   width: min(var(--cr-shell-max), calc(100vw - 48px));
   max-width: calc(100vw - 48px);
   margin: 24px auto;
-  min-height: calc(100dvh - 48px);
-  max-height: none;
+  /*
+   * P0 desktop Relay: lock shell to the viewport so the right rail cannot
+   * scroll away with a tall Today feed. Main workspace scrolls internally.
+   * min-height alone let the grid grow with content → Relay left the viewport
+   * with no desktop reopen control (founder-observed failure).
+   */
+  height: calc(100dvh - 48px);
+  height: calc(100svh - 48px);
+  min-height: 0;
+  max-height: calc(100dvh - 48px);
+  max-height: calc(100svh - 48px);
   border-radius: var(--cr-r-xl);
   background:
     linear-gradient(
@@ -420,6 +429,38 @@ p {
   box-shadow: var(--cr-shadow-shell);
   overflow: hidden;
   box-sizing: border-box;
+}
+
+/* Desktop: minimize Relay rail when deliberately closed — reopen control stays */
+@media (min-width: 1101px) {
+  .app-shell[data-testid="app-shell"]:not(:has(.cr-shell)).relay-desktop-closed {
+    grid-template-columns: var(--cr-nav-w) minmax(0, 1fr);
+    grid-template-areas:
+      "top top"
+      "nav main"
+      "status status";
+  }
+
+  .app-shell[data-testid="app-shell"]:not(:has(.cr-shell)).relay-desktop-closed
+    .relay-panel {
+    display: none !important;
+  }
+
+  /* Permanently visible labeled reopen / focus control on desktop */
+  .relay-drawer-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--cr-line);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--cr-r-pill);
+    padding: 8px 14px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--cr-accent);
+    box-shadow: var(--cr-shadow-float);
+    min-height: 40px;
+  }
 }
 
 /* ==========================================================================
@@ -982,6 +1023,8 @@ p {
     );
   border-right: 1px solid var(--cr-line);
   box-shadow: 1px 0 0 rgba(255, 255, 255, 0.35) inset;
+  min-height: 0;
+  overflow: auto;
 }
 
 .sidenav-label {
@@ -1085,6 +1128,7 @@ p {
     transparent
   );
   min-width: 0;
+  min-height: 0; /* allow fr row to shrink so this pane scrolls, not the page */
 }
 
 .workspace-inner {
@@ -1400,10 +1444,12 @@ p {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  max-height: calc(100dvh - 48px - var(--cr-top-h));
-  position: sticky;
-  top: var(--cr-top-h);
-  align-self: start;
+  /* Fill the locked grid row — do not use sticky inside overflow:hidden shell */
+  height: 100%;
+  max-height: none;
+  position: relative;
+  top: auto;
+  align-self: stretch;
   overflow: hidden;
   background:
     linear-gradient(165deg, rgba(255, 255, 255, 0.78), rgba(220, 236, 247, 0.45));
@@ -1413,6 +1459,10 @@ p {
   box-shadow:
     inset 1px 0 0 rgba(255, 255, 255, 0.7),
     -12px 0 40px rgba(20, 60, 90, 0.06);
+  /* Desktop rail must never inherit drawer hide state */
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
 }
 
 .relay-panel::before {
@@ -1489,7 +1539,9 @@ p {
 
 .relay-thread {
   flex: 1;
-  min-height: min(48vh, 420px);
+  /* Must shrink inside locked desktop rail — min(48vh) previously pushed the
+     composer below the panel bottom (clipped + off-viewport on short desktops). */
+  min-height: 0;
   overflow: auto;
   padding: var(--s-4);
   display: flex;
@@ -1547,6 +1599,8 @@ p {
   position: relative;
   z-index: 2;
   flex-shrink: 0;
+  /* Keep composer docked inside the rail; never force page overflow */
+  margin-top: auto;
 }
 
 /* Coordination: message history scrolls; composer stays reachable */

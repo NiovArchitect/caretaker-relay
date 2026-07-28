@@ -1,0 +1,528 @@
+{
+  "at": "2026-07-28T20:47:15.980Z",
+  "1366x768": {
+    "atTop": {
+      "viewport": {
+        "w": 1366,
+        "h": 768
+      },
+      "scrollY": 0,
+      "docH": 821,
+      "bodyH": 797,
+      "shell": {
+        "h": 797.453125,
+        "overflow": "hidden",
+        "display": "grid"
+      },
+      "workspace": {
+        "scrollTop": 0,
+        "scrollH": 684,
+        "clientH": 684,
+        "overflow": "auto"
+      },
+      "panel": {
+        "x": 901,
+        "y": 97,
+        "w": 440,
+        "h": 648,
+        "bottom": 745,
+        "visibility": "visible",
+        "transform": "none",
+        "position": "sticky",
+        "maxHeight": "648px"
+      },
+      "composer": {
+        "x": 929,
+        "y": 689.953125,
+        "w": 268.21875,
+        "h": 66.375,
+        "bottom": 756.328125
+      },
+      "toggle": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "display": "none",
+        "visibility": "visible"
+      },
+      "panelInView": true,
+      "composerInView": true,
+      "toggleVisible": false,
+      "mq1100": false
+    },
+    "afterScroll": {
+      "viewport": {
+        "w": 1366,
+        "h": 768
+      },
+      "scrollY": 53,
+      "docH": 821,
+      "bodyH": 797,
+      "shell": {
+        "h": 797.453125,
+        "overflow": "hidden",
+        "display": "grid"
+      },
+      "workspace": {
+        "scrollTop": 0,
+        "scrollH": 684,
+        "clientH": 684,
+        "overflow": "auto"
+      },
+      "panel": {
+        "x": 901,
+        "y": 44,
+        "w": 440,
+        "h": 648,
+        "bottom": 692,
+        "visibility": "visible",
+        "transform": "none",
+        "position": "sticky",
+        "maxHeight": "648px"
+      },
+      "composer": {
+        "x": 929,
+        "y": 636.953125,
+        "w": 268.21875,
+        "h": 66.375,
+        "bottom": 703.328125
+      },
+      "toggle": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "display": "none",
+        "visibility": "visible"
+      },
+      "panelInView": true,
+      "composerInView": true,
+      "toggleVisible": false,
+      "mq1100": false
+    },
+    "founderFailureMode": false,
+    "panelLeftViewportAfterScroll": false,
+    "noReopenControl": true
+  },
+  "1440x900": {
+    "atTop": {
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "scrollY": 0,
+      "docH": 924,
+      "bodyH": 900,
+      "shell": {
+        "h": 852,
+        "overflow": "hidden",
+        "display": "grid"
+      },
+      "workspace": {
+        "scrollTop": 0,
+        "scrollH": 738,
+        "clientH": 738,
+        "overflow": "auto"
+      },
+      "panel": {
+        "x": 939,
+        "y": 97,
+        "w": 440,
+        "h": 737.703125,
+        "bottom": 834.703125,
+        "visibility": "visible",
+        "transform": "none",
+        "position": "sticky",
+        "maxHeight": "780px"
+      },
+      "composer": {
+        "x": 967,
+        "y": 741.328125,
+        "w": 268.21875,
+        "h": 66.375,
+        "bottom": 807.703125
+      },
+      "toggle": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "display": "none",
+        "visibility": "visible"
+      },
+      "panelInView": true,
+      "composerInView": true,
+      "toggleVisible": false,
+      "mq1100": false
+    },
+    "afterScroll": {
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "scrollY": 24,
+      "docH": 924,
+      "bodyH": 900,
+      "shell": {
+        "h": 852,
+        "overflow": "hidden",
+        "display": "grid"
+      },
+      "workspace": {
+        "scrollTop": 0,
+        "scrollH": 738,
+        "clientH": 738,
+        "overflow": "auto"
+      },
+      "panel": {
+        "x": 939,
+        "y": 73,
+        "w": 440,
+        "h": 737.703125,
+        "bottom": 810.703125,
+        "visibility": "visible",
+        "transform": "none",
+        "position": "sticky",
+        "maxHeight": "780px"
+      },
+      "composer": {
+        "x": 967,
+        "y": 717.328125,
+        "w": 268.21875,
+        "h": 66.375,
+        "bottom": 783.703125
+      },
+      "toggle": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "display": "none",
+        "visibility": "visible"
+      },
+      "panelInView": true,
+      "composerInView": true,
+      "toggleVisible": false,
+      "mq1100": false
+    },
+    "founderFailureMode": false,
+    "panelLeftViewportAfterScroll": false,
+    "noReopenControl": true
+  },
+  "1512x982": {
+    "atTop": {
+      "viewport": {
+        "w": 1512,
+        "h": 982
+      },
+      "scrollY": 0,
+      "docH": 1006,
+      "bodyH": 982,
+      "shell": {
+        "h": 934,
+        "overflow": "hidden",
+        "display": "grid"
+      },
+      "workspace": {
+        "scrollTop": 0,
+        "scrollH": 820,
+        "clientH": 820,
+        "overflow": "auto"
+      },
+      "panel": {
+        "x": 975,
+        "y": 97,
+        "w": 440,
+        "h": 737.703125,
+        "bottom": 834.703125,
+        "visibility": "visible",
+        "transform": "none",
+        "position": "sticky",
+        "maxHeight": "862px"
+      },
+      "composer": {
+        "x": 1003,
+        "y": 741.328125,
+        "w": 268.21875,
+        "h": 66.375,
+        "bottom": 807.703125
+      },
+      "toggle": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "display": "none",
+        "visibility": "visible"
+      },
+      "panelInView": true,
+      "composerInView": true,
+      "toggleVisible": false,
+      "mq1100": false
+    },
+    "afterScroll": {
+      "viewport": {
+        "w": 1512,
+        "h": 982
+      },
+      "scrollY": 24,
+      "docH": 1006,
+      "bodyH": 982,
+      "shell": {
+        "h": 934,
+        "overflow": "hidden",
+        "display": "grid"
+      },
+      "workspace": {
+        "scrollTop": 0,
+        "scrollH": 820,
+        "clientH": 820,
+        "overflow": "auto"
+      },
+      "panel": {
+        "x": 975,
+        "y": 73,
+        "w": 440,
+        "h": 737.703125,
+        "bottom": 810.703125,
+        "visibility": "visible",
+        "transform": "none",
+        "position": "sticky",
+        "maxHeight": "862px"
+      },
+      "composer": {
+        "x": 1003,
+        "y": 717.328125,
+        "w": 268.21875,
+        "h": 66.375,
+        "bottom": 783.703125
+      },
+      "toggle": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "display": "none",
+        "visibility": "visible"
+      },
+      "panelInView": true,
+      "composerInView": true,
+      "toggleVisible": false,
+      "mq1100": false
+    },
+    "founderFailureMode": false,
+    "panelLeftViewportAfterScroll": false,
+    "noReopenControl": true
+  },
+  "1280x720": {
+    "atTop": {
+      "viewport": {
+        "w": 1280,
+        "h": 720
+      },
+      "scrollY": 0,
+      "docH": 868,
+      "bodyH": 844,
+      "shell": {
+        "h": 843.671875,
+        "overflow": "hidden",
+        "display": "grid"
+      },
+      "workspace": {
+        "scrollTop": 0,
+        "scrollH": 730,
+        "clientH": 730,
+        "overflow": "auto"
+      },
+      "panel": {
+        "x": 819.8125,
+        "y": 97,
+        "w": 435.1875,
+        "h": 600,
+        "bottom": 697,
+        "visibility": "visible",
+        "transform": "none",
+        "position": "sticky",
+        "maxHeight": "600px"
+      },
+      "composer": {
+        "x": 847.8125,
+        "y": 666.921875,
+        "w": 263.40625,
+        "h": 66.375,
+        "bottom": 733.296875
+      },
+      "toggle": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "display": "none",
+        "visibility": "visible"
+      },
+      "panelInView": true,
+      "composerInView": false,
+      "toggleVisible": false,
+      "mq1100": false
+    },
+    "afterScroll": {
+      "viewport": {
+        "w": 1280,
+        "h": 720
+      },
+      "scrollY": 148,
+      "docH": 868,
+      "bodyH": 844,
+      "shell": {
+        "h": 843.671875,
+        "overflow": "hidden",
+        "display": "grid"
+      },
+      "workspace": {
+        "scrollTop": 0,
+        "scrollH": 730,
+        "clientH": 730,
+        "overflow": "auto"
+      },
+      "panel": {
+        "x": 819.8125,
+        "y": -51,
+        "w": 435.1875,
+        "h": 600,
+        "bottom": 549,
+        "visibility": "visible",
+        "transform": "none",
+        "position": "sticky",
+        "maxHeight": "600px"
+      },
+      "composer": {
+        "x": 847.8125,
+        "y": 518.921875,
+        "w": 263.40625,
+        "h": 66.375,
+        "bottom": 585.296875
+      },
+      "toggle": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "display": "none",
+        "visibility": "visible"
+      },
+      "panelInView": true,
+      "composerInView": true,
+      "toggleVisible": false,
+      "mq1100": false
+    },
+    "founderFailureMode": false,
+    "panelLeftViewportAfterScroll": false,
+    "noReopenControl": true
+  },
+  "1920x1080": {
+    "atTop": {
+      "viewport": {
+        "w": 1920,
+        "h": 1080
+      },
+      "scrollY": 0,
+      "docH": 1104,
+      "bodyH": 1080,
+      "shell": {
+        "h": 1032,
+        "overflow": "hidden",
+        "display": "grid"
+      },
+      "workspace": {
+        "scrollTop": 0,
+        "scrollH": 918,
+        "clientH": 918,
+        "overflow": "auto"
+      },
+      "panel": {
+        "x": 1179,
+        "y": 97,
+        "w": 440,
+        "h": 737.703125,
+        "bottom": 834.703125,
+        "visibility": "visible",
+        "transform": "none",
+        "position": "sticky",
+        "maxHeight": "960px"
+      },
+      "composer": {
+        "x": 1207,
+        "y": 741.328125,
+        "w": 268.21875,
+        "h": 66.375,
+        "bottom": 807.703125
+      },
+      "toggle": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "display": "none",
+        "visibility": "visible"
+      },
+      "panelInView": true,
+      "composerInView": true,
+      "toggleVisible": false,
+      "mq1100": false
+    },
+    "afterScroll": {
+      "viewport": {
+        "w": 1920,
+        "h": 1080
+      },
+      "scrollY": 24,
+      "docH": 1104,
+      "bodyH": 1080,
+      "shell": {
+        "h": 1032,
+        "overflow": "hidden",
+        "display": "grid"
+      },
+      "workspace": {
+        "scrollTop": 0,
+        "scrollH": 918,
+        "clientH": 918,
+        "overflow": "auto"
+      },
+      "panel": {
+        "x": 1179,
+        "y": 73,
+        "w": 440,
+        "h": 737.703125,
+        "bottom": 810.703125,
+        "visibility": "visible",
+        "transform": "none",
+        "position": "sticky",
+        "maxHeight": "960px"
+      },
+      "composer": {
+        "x": 1207,
+        "y": 717.328125,
+        "w": 268.21875,
+        "h": 66.375,
+        "bottom": 783.703125
+      },
+      "toggle": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "display": "none",
+        "visibility": "visible"
+      },
+      "panelInView": true,
+      "composerInView": true,
+      "toggleVisible": false,
+      "mq1100": false
+    },
+    "founderFailureMode": false,
+    "panelLeftViewportAfterScroll": false,
+    "noReopenControl": true
+  }
+}

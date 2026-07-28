@@ -1,0 +1,112 @@
+[
+  {
+    "w": 1280,
+    "h": 720,
+    "top": {
+      "pw": 435.1875,
+      "ph": 558.28125,
+      "py": 97,
+      "pb": 655.28125,
+      "cy": 561.90625,
+      "cb": 628.28125,
+      "panelInView": true,
+      "composerInView": true,
+      "composerInsidePanel": true,
+      "toggle": true,
+      "vh": 720
+    },
+    "scrolled": {
+      "panelInView": true,
+      "composerInView": true
+    },
+    "pass": true
+  },
+  {
+    "w": 1366,
+    "h": 768,
+    "top": {
+      "pw": 440,
+      "ph": 606.28125,
+      "py": 97,
+      "pb": 703.28125,
+      "cy": 609.90625,
+      "cb": 676.28125,
+      "panelInView": true,
+      "composerInView": true,
+      "composerInsidePanel": true,
+      "toggle": true,
+      "vh": 768
+    },
+    "scrolled": {
+      "panelInView": true,
+      "composerInView": true
+    },
+    "pass": true
+  },
+  {
+    "w": 1440,
+    "h": 900,
+    "top": {
+      "pw": 440,
+      "ph": 738.28125,
+      "py": 97,
+      "pb": 835.28125,
+      "cy": 741.90625,
+      "cb": 808.28125,
+      "panelInView": true,
+      "composerInView": true,
+      "composerInsidePanel": true,
+      "toggle": true,
+      "vh": 900
+    },
+    "scrolled": {
+      "panelInView": true,
+      "composerInView": true
+    },
+    "pass": true
+  },
+  {
+    "w": 1512,
+    "h": 982,
+    "top": {
+      "pw": 440,
+      "ph": 820.28125,
+      "py": 97,
+      "pb": 917.28125,
+      "cy": 823.90625,
+      "cb": 890.28125,
+      "panelInView": true,
+      "composerInView": true,
+      "composerInsidePanel": true,
+      "toggle": true,
+      "vh": 982
+    },
+    "scrolled": {
+      "panelInView": true,
+      "composerInView": true
+    },
+    "pass": true
+  },
+  {
+    "w": 1920,
+    "h": 1080,
+    "top": {
+      "pw": 440,
+      "ph": 918.28125,
+      "py": 97,
+      "pb": 1015.28125,
+      "cy": 921.90625,
+      "cb": 988.28125,
+      "panelInView": true,
+      "composerInView": true,
+      "composerInsidePanel": true,
+      "toggle": true,
+      "vh": 1080
+    },
+    "scrolled": {
+      "panelInView": true,
+      "composerInView": true
+    },
+    "pass": true
+  }
+]

@@ -100,7 +100,8 @@ export function App() {
   const [relayHandled, setRelayHandled] = useState(today.relayHandled);
   const [voiceMeta, setVoiceMeta] = useState<TranscriptMeta | undefined>();
   const [todayRefresh, setTodayRefresh] = useState(0);
-  const [relayOpen, setRelayOpen] = useState(false);
+  /** Open by default so desktop rail and compact drawer are available after sign-in. */
+  const [relayOpen, setRelayOpen] = useState(true);
   const [liveHandoff, setLiveHandoff] = useState<CareHandoff | null | undefined>(
     undefined,
   );
@@ -326,6 +327,20 @@ export function App() {
     return () => window.removeEventListener("cr-navigate", onNav);
   }, []);
 
+  /**
+   * Compact ↔ desktop breakpoint: re-open Relay so drawer hide / rail minimize
+   * cannot leave chat inaccessible after a resize. Must stay above early returns.
+   */
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(max-width: 1100px)");
+    const onChange = () => {
+      setRelayOpen(true);
+    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
   if (!authReady) {
     return (
       <div className="app-shell cr-stage" data-testid="auth-loading">
@@ -391,18 +406,15 @@ export function App() {
   }
 
   /**
-   * P0 availability: on phone/tablet drawer layout, open Relay so the
-   * conversation is not off-screen by default (feels "missing").
-   * Desktop keeps the always-visible rail (open class optional).
+   * P0 availability:
+   * - Compact (≤1100): open drawer so conversation is not off-screen.
+   * - Desktop (>1100): keep rail open (not minimized) so chat stays in viewport.
    */
   function ensureRelayAvailableOnCompactLayout() {
     try {
-      if (
-        typeof window !== "undefined" &&
-        window.matchMedia("(max-width: 1100px)").matches
-      ) {
-        setRelayOpen(true);
-      }
+      if (typeof window === "undefined") return;
+      // Always surface Relay after auth/session restore — founder cannot hunt for it.
+      setRelayOpen(true);
     } catch {
       /* ignore */
     }
@@ -893,7 +905,11 @@ export function App() {
   const workspaceTab = tab === "relay" ? "today" : tab;
 
   return (
-    <div className="app-shell cr-stage" data-testid="app-shell">
+    <div
+      className={`app-shell cr-stage${!relayOpen ? " relay-desktop-closed" : ""}`}
+      data-testid="app-shell"
+      data-relay-open={relayOpen ? "true" : "false"}
+    >
       <div className="cr-ambient" aria-hidden />
       <header className="topbar">
         <div className="brand">
@@ -961,6 +977,10 @@ export function App() {
             type="button"
             className="relay-drawer-toggle"
             data-testid="relay-open-mobile"
+            aria-label={
+              relayOpen ? "Focus Relay chat" : "Open Relay chat"
+            }
+            aria-expanded={relayOpen}
             onClick={() => openRelayForCareUpdate()}
           >
             <span className="relay-pulse" aria-hidden />
