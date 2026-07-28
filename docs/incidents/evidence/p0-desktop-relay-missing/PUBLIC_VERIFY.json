@@ -1,0 +1,2203 @@
+{
+  "at": "2026-07-28T21:05:06.402Z",
+  "base": "https://care.niovlabs.com",
+  "cases": [
+    {
+      "w": 1280,
+      "h": 720,
+      "top": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 672,
+        "shellCssH": "672px",
+        "scrollY": 0,
+        "panel": {
+          "x": 819.8125,
+          "y": 97,
+          "w": 435.1875,
+          "h": 558.28125,
+          "bottom": 655.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 847.8125,
+          "y": 561.90625,
+          "w": 263.40625,
+          "h": 66.375,
+          "bottom": 628.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 590,
+          "y": 40.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "scrolled": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 672,
+        "shellCssH": "672px",
+        "scrollY": 24,
+        "panel": {
+          "x": 819.8125,
+          "y": 73,
+          "w": 435.1875,
+          "h": 558.28125,
+          "bottom": 631.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 847.8125,
+          "y": 537.90625,
+          "w": 263.40625,
+          "h": 66.375,
+          "bottom": 604.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 590,
+          "y": 16.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "closed": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 672,
+        "shellCssH": "672px",
+        "scrollY": 24,
+        "panel": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "bottom": 0,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "bottom": 0
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 590,
+          "y": 16.5
+        },
+        "panelInView": false,
+        "composerInView": false,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": true,
+        "open": "false",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "reopened": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 672,
+        "shellCssH": "672px",
+        "scrollY": 24,
+        "panel": {
+          "x": 819.8125,
+          "y": 73,
+          "w": 435.1875,
+          "h": 558.28125,
+          "bottom": 631.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 847.8125,
+          "y": 537.90625,
+          "w": 263.40625,
+          "h": 66.375,
+          "bottom": 604.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 590,
+          "y": 15.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "afterSubmit": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 672,
+        "shellCssH": "672px",
+        "scrollY": 24,
+        "panel": {
+          "x": 819.8125,
+          "y": 73,
+          "w": 435.1875,
+          "h": 558.28125,
+          "bottom": 631.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 847.8125,
+          "y": 537.90625,
+          "w": 263.40625,
+          "h": 66.375,
+          "bottom": 604.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 590,
+          "y": 16.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.How is Evelyn?Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change "
+      },
+      "afterRefresh": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 672,
+        "shellCssH": "672px",
+        "scrollY": 0,
+        "panel": {
+          "x": 819.8125,
+          "y": 97,
+          "w": 435.1875,
+          "h": 558.28125,
+          "bottom": 655.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 847.8125,
+          "y": 561.90625,
+          "w": 263.40625,
+          "h": 66.375,
+          "bottom": 628.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 590,
+          "y": 40.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "bodySample": "Relay\nPlain language. Event time vs report time. Safe next steps. Confirm before consequential actions.\n✕\nRelay\nCoordination\nSigned in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.\nHow is Evelyn?\nHere's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for ",
+      "pass": {
+        "panel": true,
+        "composer": true,
+        "toggle": true,
+        "afterScroll": true,
+        "close": true,
+        "reopen": true,
+        "submitQuestion": true,
+        "answerStart": true,
+        "refresh": true
+      }
+    },
+    {
+      "w": 1366,
+      "h": 768,
+      "top": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 720,
+        "shellCssH": "720px",
+        "scrollY": 0,
+        "panel": {
+          "x": 901,
+          "y": 97,
+          "w": 440,
+          "h": 606.28125,
+          "bottom": 703.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 929,
+          "y": 609.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 676.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 676,
+          "y": 40.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "scrolled": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 720,
+        "shellCssH": "720px",
+        "scrollY": 24,
+        "panel": {
+          "x": 901,
+          "y": 73,
+          "w": 440,
+          "h": 606.28125,
+          "bottom": 679.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 929,
+          "y": 585.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 652.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 676,
+          "y": 16.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "closed": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 720,
+        "shellCssH": "720px",
+        "scrollY": 24,
+        "panel": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "bottom": 0,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "bottom": 0
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 676,
+          "y": 16.5
+        },
+        "panelInView": false,
+        "composerInView": false,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": true,
+        "open": "false",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "reopened": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 720,
+        "shellCssH": "720px",
+        "scrollY": 24,
+        "panel": {
+          "x": 901,
+          "y": 73,
+          "w": 440,
+          "h": 606.28125,
+          "bottom": 679.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 929,
+          "y": 585.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 652.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 676,
+          "y": 15.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "afterSubmit": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 720,
+        "shellCssH": "720px",
+        "scrollY": 24,
+        "panel": {
+          "x": 901,
+          "y": 73,
+          "w": 440,
+          "h": 606.28125,
+          "bottom": 679.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 929,
+          "y": 585.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 652.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 676,
+          "y": 16.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.How is Evelyn?Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change "
+      },
+      "afterRefresh": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 720,
+        "shellCssH": "720px",
+        "scrollY": 0,
+        "panel": {
+          "x": 901,
+          "y": 97,
+          "w": 440,
+          "h": 606.28125,
+          "bottom": 703.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 929,
+          "y": 609.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 676.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 676,
+          "y": 40.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "bodySample": "Relay\nPlain language. Event time vs report time. Safe next steps. Confirm before consequential actions.\n✕\nRelay\nCoordination\nSigned in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.\nHow is Evelyn?\nHere's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for ",
+      "pass": {
+        "panel": true,
+        "composer": true,
+        "toggle": true,
+        "afterScroll": true,
+        "close": true,
+        "reopen": true,
+        "submitQuestion": true,
+        "answerStart": true,
+        "refresh": true
+      }
+    },
+    {
+      "w": 1440,
+      "h": 900,
+      "top": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 852,
+        "shellCssH": "852px",
+        "scrollY": 0,
+        "panel": {
+          "x": 939,
+          "y": 97,
+          "w": 440,
+          "h": 738.28125,
+          "bottom": 835.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 967,
+          "y": 741.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 808.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 714,
+          "y": 40.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "scrolled": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 852,
+        "shellCssH": "852px",
+        "scrollY": 24,
+        "panel": {
+          "x": 939,
+          "y": 73,
+          "w": 440,
+          "h": 738.28125,
+          "bottom": 811.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 967,
+          "y": 717.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 784.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 714,
+          "y": 16.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "closed": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 852,
+        "shellCssH": "852px",
+        "scrollY": 24,
+        "panel": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "bottom": 0,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "bottom": 0
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 714,
+          "y": 16.5
+        },
+        "panelInView": false,
+        "composerInView": false,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": true,
+        "open": "false",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "reopened": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 852,
+        "shellCssH": "852px",
+        "scrollY": 24,
+        "panel": {
+          "x": 939,
+          "y": 73,
+          "w": 440,
+          "h": 738.28125,
+          "bottom": 811.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 967,
+          "y": 717.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 784.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 714,
+          "y": 15.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "afterSubmit": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 852,
+        "shellCssH": "852px",
+        "scrollY": 24,
+        "panel": {
+          "x": 939,
+          "y": 73,
+          "w": 440,
+          "h": 738.28125,
+          "bottom": 811.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 967,
+          "y": 717.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 784.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 714,
+          "y": 16.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.How is Evelyn?Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change "
+      },
+      "afterRefresh": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 852,
+        "shellCssH": "852px",
+        "scrollY": 0,
+        "panel": {
+          "x": 939,
+          "y": 97,
+          "w": 440,
+          "h": 738.28125,
+          "bottom": 835.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 967,
+          "y": 741.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 808.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 714,
+          "y": 40.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "bodySample": "Relay\nPlain language. Event time vs report time. Safe next steps. Confirm before consequential actions.\n✕\nRelay\nCoordination\nSigned in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.\nHow is Evelyn?\nHere's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for ",
+      "pass": {
+        "panel": true,
+        "composer": true,
+        "toggle": true,
+        "afterScroll": true,
+        "close": true,
+        "reopen": true,
+        "submitQuestion": true,
+        "answerStart": true,
+        "refresh": true
+      }
+    },
+    {
+      "w": 1512,
+      "h": 982,
+      "top": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 934,
+        "shellCssH": "934px",
+        "scrollY": 0,
+        "panel": {
+          "x": 975,
+          "y": 97,
+          "w": 440,
+          "h": 820.28125,
+          "bottom": 917.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 1003,
+          "y": 823.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 890.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 750,
+          "y": 40.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "scrolled": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 934,
+        "shellCssH": "934px",
+        "scrollY": 24,
+        "panel": {
+          "x": 975,
+          "y": 73,
+          "w": 440,
+          "h": 820.28125,
+          "bottom": 893.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 1003,
+          "y": 799.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 866.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 750,
+          "y": 16.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "closed": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 934,
+        "shellCssH": "934px",
+        "scrollY": 24,
+        "panel": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "bottom": 0,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "bottom": 0
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 750,
+          "y": 16.5
+        },
+        "panelInView": false,
+        "composerInView": false,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": true,
+        "open": "false",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "reopened": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 934,
+        "shellCssH": "934px",
+        "scrollY": 24,
+        "panel": {
+          "x": 975,
+          "y": 73,
+          "w": 440,
+          "h": 820.28125,
+          "bottom": 893.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 1003,
+          "y": 799.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 866.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 750,
+          "y": 15.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "afterSubmit": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 934,
+        "shellCssH": "934px",
+        "scrollY": 24,
+        "panel": {
+          "x": 975,
+          "y": 73,
+          "w": 440,
+          "h": 820.28125,
+          "bottom": 893.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 1003,
+          "y": 799.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 866.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 750,
+          "y": 16.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.How is Evelyn?Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change "
+      },
+      "afterRefresh": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 934,
+        "shellCssH": "934px",
+        "scrollY": 0,
+        "panel": {
+          "x": 975,
+          "y": 97,
+          "w": 440,
+          "h": 820.28125,
+          "bottom": 917.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 1003,
+          "y": 823.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 890.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 750,
+          "y": 40.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "bodySample": "Relay\nPlain language. Event time vs report time. Safe next steps. Confirm before consequential actions.\n✕\nRelay\nCoordination\nSigned in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.\nHow is Evelyn?\nHere's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for ",
+      "pass": {
+        "panel": true,
+        "composer": true,
+        "toggle": true,
+        "afterScroll": true,
+        "close": true,
+        "reopen": true,
+        "submitQuestion": true,
+        "answerStart": true,
+        "refresh": true
+      }
+    },
+    {
+      "w": 1920,
+      "h": 1080,
+      "top": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 1032,
+        "shellCssH": "1032px",
+        "scrollY": 0,
+        "panel": {
+          "x": 1179,
+          "y": 97,
+          "w": 440,
+          "h": 918.28125,
+          "bottom": 1015.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 1207,
+          "y": 921.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 988.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 954,
+          "y": 40.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "scrolled": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 1032,
+        "shellCssH": "1032px",
+        "scrollY": 24,
+        "panel": {
+          "x": 1179,
+          "y": 73,
+          "w": 440,
+          "h": 918.28125,
+          "bottom": 991.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 1207,
+          "y": 897.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 964.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 954,
+          "y": 16.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "closed": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 1032,
+        "shellCssH": "1032px",
+        "scrollY": 24,
+        "panel": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "bottom": 0,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "bottom": 0
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 954,
+          "y": 16.5
+        },
+        "panelInView": false,
+        "composerInView": false,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": true,
+        "open": "false",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "reopened": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 1032,
+        "shellCssH": "1032px",
+        "scrollY": 24,
+        "panel": {
+          "x": 1179,
+          "y": 73,
+          "w": 440,
+          "h": 918.28125,
+          "bottom": 991.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 1207,
+          "y": 897.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 964.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 954,
+          "y": 15.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "afterSubmit": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 1032,
+        "shellCssH": "1032px",
+        "scrollY": 24,
+        "panel": {
+          "x": 1179,
+          "y": 73,
+          "w": 440,
+          "h": 918.28125,
+          "bottom": 991.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 1207,
+          "y": 897.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 964.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 954,
+          "y": 16.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.How is Evelyn?Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change "
+      },
+      "afterRefresh": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 1032,
+        "shellCssH": "1032px",
+        "scrollY": 0,
+        "panel": {
+          "x": 1179,
+          "y": 97,
+          "w": 440,
+          "h": 918.28125,
+          "bottom": 1015.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 1207,
+          "y": 921.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 988.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 954,
+          "y": 40.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "bodySample": "Relay\nPlain language. Event time vs report time. Safe next steps. Confirm before consequential actions.\n✕\nRelay\nCoordination\nSigned in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.\nHow is Evelyn?\nHere's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for ",
+      "pass": {
+        "panel": true,
+        "composer": true,
+        "toggle": true,
+        "afterScroll": true,
+        "close": true,
+        "reopen": true,
+        "submitQuestion": true,
+        "answerStart": true,
+        "refresh": true
+      }
+    }
+  ],
+  "liveHtml": {
+    "scripts": [
+      "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+    ],
+    "css": [
+      "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+    ]
+  },
+  "resize": {
+    "desk": {
+      "assets": {
+        "scripts": [
+          "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+        ],
+        "css": [
+          "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+        ]
+      },
+      "shellH": 852,
+      "shellCssH": "852px",
+      "scrollY": 0,
+      "panel": {
+        "x": 939,
+        "y": 97,
+        "w": 440,
+        "h": 738.28125,
+        "bottom": 835.28125,
+        "pos": "relative",
+        "vis": "visible",
+        "transform": "none"
+      },
+      "composer": {
+        "x": 967,
+        "y": 741.90625,
+        "w": 268.21875,
+        "h": 66.375,
+        "bottom": 808.28125
+      },
+      "toggle": {
+        "w": 83.625,
+        "h": 40,
+        "display": "flex",
+        "x": 714,
+        "y": 40.5
+      },
+      "panelInView": true,
+      "composerInView": true,
+      "composerInsidePanel": true,
+      "toggleVisible": true,
+      "closed": false,
+      "open": "true",
+      "recipient": "Evelyn Carter",
+      "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+    },
+    "pass": true
+  },
+  "agentZero": [
+    {
+      "w": 1366,
+      "h": 768,
+      "visible": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 720,
+        "shellCssH": "720px",
+        "scrollY": 0,
+        "panel": {
+          "x": 901,
+          "y": 97,
+          "w": 440,
+          "h": 606.28125,
+          "bottom": 703.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 929,
+          "y": 609.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 676.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 676,
+          "y": 40.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "after": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 720,
+        "shellCssH": "720px",
+        "scrollY": 0,
+        "panel": {
+          "x": 901,
+          "y": 97,
+          "w": 440,
+          "h": 606.28125,
+          "bottom": 703.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 929,
+          "y": 609.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 676.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 676,
+          "y": 40.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.How is Evelyn?Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change "
+      },
+      "closed": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 720,
+        "shellCssH": "720px",
+        "scrollY": 0,
+        "panel": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "bottom": 0,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "bottom": 0
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 676,
+          "y": 40.5
+        },
+        "panelInView": false,
+        "composerInView": false,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": true,
+        "open": "false",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.How is Evelyn?Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change "
+      },
+      "reopened": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 720,
+        "shellCssH": "720px",
+        "scrollY": 0,
+        "panel": {
+          "x": 901,
+          "y": 97,
+          "w": 440,
+          "h": 606.28125,
+          "bottom": 703.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 929,
+          "y": 609.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 676.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 676,
+          "y": 39.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.How is Evelyn?Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change "
+      },
+      "afterNav": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 720,
+        "shellCssH": "720px",
+        "scrollY": 0,
+        "panel": {
+          "x": 901,
+          "y": 97,
+          "w": 440,
+          "h": 606.28125,
+          "bottom": 703.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 929,
+          "y": 609.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 676.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 676,
+          "y": 39.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.How is Evelyn?Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change "
+      },
+      "afterRef": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 720,
+        "shellCssH": "720px",
+        "scrollY": 0,
+        "panel": {
+          "x": 901,
+          "y": 97,
+          "w": 440,
+          "h": 606.28125,
+          "bottom": 703.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 929,
+          "y": 609.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 676.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 676,
+          "y": 39.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "hasQuestion": true,
+      "textSample": "Relay\nPlain language. Event time vs report time. Safe next steps. Confirm before consequential actions.\n✕\nRelay\nCoordination\nSigned in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.\nHow is Evelyn?\nHere's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for alle",
+      "pass": true
+    },
+    {
+      "w": 1440,
+      "h": 900,
+      "visible": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 852,
+        "shellCssH": "852px",
+        "scrollY": 0,
+        "panel": {
+          "x": 939,
+          "y": 97,
+          "w": 440,
+          "h": 738.28125,
+          "bottom": 835.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 967,
+          "y": 741.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 808.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 714,
+          "y": 40.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "after": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 852,
+        "shellCssH": "852px",
+        "scrollY": 0,
+        "panel": {
+          "x": 939,
+          "y": 97,
+          "w": 440,
+          "h": 738.28125,
+          "bottom": 835.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 967,
+          "y": 741.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 808.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 714,
+          "y": 40.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.How is Evelyn?Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change "
+      },
+      "closed": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 852,
+        "shellCssH": "852px",
+        "scrollY": 0,
+        "panel": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "bottom": 0,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "bottom": 0
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 714,
+          "y": 40.5
+        },
+        "panelInView": false,
+        "composerInView": false,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": true,
+        "open": "false",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.How is Evelyn?Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change "
+      },
+      "reopened": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 852,
+        "shellCssH": "852px",
+        "scrollY": 0,
+        "panel": {
+          "x": 939,
+          "y": 97,
+          "w": 440,
+          "h": 738.28125,
+          "bottom": 835.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 967,
+          "y": 741.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 808.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 714,
+          "y": 39.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.How is Evelyn?Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change "
+      },
+      "afterNav": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 852,
+        "shellCssH": "852px",
+        "scrollY": 0,
+        "panel": {
+          "x": 939,
+          "y": 97,
+          "w": 440,
+          "h": 738.28125,
+          "bottom": 835.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 967,
+          "y": 741.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 808.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 714,
+          "y": 39.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.How is Evelyn?Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for allergies.\n• Medication change "
+      },
+      "afterRef": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 852,
+        "shellCssH": "852px",
+        "scrollY": 0,
+        "panel": {
+          "x": 939,
+          "y": 97,
+          "w": 440,
+          "h": 738.28125,
+          "bottom": 835.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 967,
+          "y": 741.90625,
+          "w": 268.21875,
+          "h": 66.375,
+          "bottom": 808.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 714,
+          "y": 39.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "hasQuestion": true,
+      "textSample": "Relay\nPlain language. Event time vs report time. Safe next steps. Confirm before consequential actions.\n✕\nRelay\nCoordination\nSigned in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.\nHow is Evelyn?\nHere's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Medication change needs verification: Please add Allegra 60mg for alle",
+      "pass": true
+    }
+  ],
+  "zooms": [
+    {
+      "label": "125pct",
+      "w": 1152,
+      "h": 720,
+      "p": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 672,
+        "shellCssH": "672px",
+        "scrollY": 0,
+        "panel": {
+          "x": 727,
+          "y": 85,
+          "w": 400,
+          "h": 558.28125,
+          "bottom": 643.28125,
+          "pos": "relative",
+          "vis": "visible",
+          "transform": "none"
+        },
+        "composer": {
+          "x": 755,
+          "y": 549.90625,
+          "w": 228.21875,
+          "h": 66.375,
+          "bottom": 616.28125
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 40,
+          "display": "flex",
+          "x": 462,
+          "y": 28.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "pass": true
+    },
+    {
+      "label": "150pct",
+      "w": 960,
+      "h": 600,
+      "p": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 600,
+        "shellCssH": "600px",
+        "scrollY": 0,
+        "panel": {
+          "x": 0,
+          "y": 0,
+          "w": 960,
+          "h": 600,
+          "bottom": 600,
+          "pos": "fixed",
+          "vis": "visible",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        "composer": {
+          "x": 28,
+          "y": 506.625,
+          "w": 788.21875,
+          "h": 66.375,
+          "bottom": 573
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 44,
+          "display": "flex",
+          "x": 557,
+          "y": 13.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "pass": true
+    },
+    {
+      "label": "200pct",
+      "w": 720,
+      "h": 450,
+      "p": {
+        "assets": {
+          "scripts": [
+            "https://care.niovlabs.com/assets/index-BpKOS6ON.js"
+          ],
+          "css": [
+            "https://care.niovlabs.com/assets/index-Y4W5J38l.css"
+          ]
+        },
+        "shellH": 450,
+        "shellCssH": "450px",
+        "scrollY": 0,
+        "panel": {
+          "x": 0,
+          "y": 0,
+          "w": 720,
+          "h": 450,
+          "bottom": 450,
+          "pos": "fixed",
+          "vis": "visible",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        "composer": {
+          "x": 28,
+          "y": 356.625,
+          "w": 548.21875,
+          "h": 66.375,
+          "bottom": 423
+        },
+        "toggle": {
+          "w": 83.625,
+          "h": 44,
+          "display": "flex",
+          "x": 317,
+          "y": 5.5
+        },
+        "panelInView": true,
+        "composerInView": true,
+        "composerInsidePanel": true,
+        "toggleVisible": true,
+        "closed": false,
+        "open": "true",
+        "recipient": "Evelyn Carter",
+        "threadText": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential."
+      },
+      "pass": true
+    }
+  ]
+}
