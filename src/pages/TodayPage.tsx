@@ -438,10 +438,15 @@ export function TodayPage({
         <h1 data-testid="today-greeting" className="today-hero-recipient">
           <span data-testid="care-recipient-label">{recipientName}</span>
         </h1>
-        <p className="muted today-hero-lead" data-testid="today-role-orientation">
+        <p
+          className="muted today-hero-lead"
+          data-testid="today-role-orientation"
+          data-page-purpose="today"
+        >
           {isLightweight
             ? `${recipientName}'s circle is available — enrich Care when you are ready.`
-            : serverProjection?.orientation ?? roleXp.orientation}
+            : (serverProjection?.orientation ?? roleXp.orientation) ||
+              "What matters now for this person — not the full history."}
         </p>
         <div className="today-hero-caregiver">
           <span>

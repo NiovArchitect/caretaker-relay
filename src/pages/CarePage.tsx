@@ -702,9 +702,14 @@ export function CarePage({
     <>
       <div className="greeting">
         <h1>{recipientName}&apos;s care</h1>
-        <p className="muted" style={{ marginTop: 0, maxWidth: 560 }}>
-          Medications, appointments, observations, and reviews for{" "}
-          {recipientName}. Open an item for source and status.
+        <p
+          className="muted section-lead"
+          style={{ marginTop: 0, maxWidth: 560 }}
+          data-testid="page-purpose-care"
+        >
+          Current care picture for {recipientName} — medications, observations,
+          appointments, and reviews. Pending stays separate from active. Open an
+          item for source and status.
         </p>
         <p
           className="muted"

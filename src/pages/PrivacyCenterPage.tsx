@@ -109,6 +109,42 @@ export function PrivacyCenterPage({
     }
   }
 
+  async function decideAccess(
+    requestId: string,
+    decision: "approve" | "deny",
+  ) {
+    setBusy(true);
+    setStatus(null);
+    setError(null);
+    try {
+      const raw = sessionStorage.getItem("cr_care_session_v1");
+      const token = raw
+        ? (JSON.parse(raw) as { token?: string }).token
+        : null;
+      if (!token) return;
+      const res = await careHttpJson(
+        `/api/v1/care/access-requests/${encodeURIComponent(requestId)}/decide`,
+        {
+          method: "POST",
+          token,
+          body: { decision },
+        },
+      );
+      if (!res.ok) {
+        setError(res.message || "Could not record the access decision");
+      } else {
+        setStatus(
+          decision === "approve"
+            ? "Access approved. Membership is active for that person."
+            : "Access denied. No membership was created.",
+        );
+      }
+      await load();
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function narrow(personId: string) {
     setBusy(true);
     try {
@@ -140,9 +176,9 @@ export function PrivacyCenterPage({
     <div className="section" data-testid="privacy-center">
       <div className="greeting">
         <h1>Privacy & access</h1>
-        <p className="muted section-lead">
-          Who can help with {center?.recipientName ?? "care"}, what they can see,
-          and how to change it. Signed in as {session.displayName}.
+        <p className="muted section-lead" data-testid="page-purpose-privacy">
+          Who can access what and why — for {center?.recipientName ?? "care"}.
+          Approve, limit, or revoke with audit. Signed in as {session.displayName}.
         </p>
       </div>
       {error && (
@@ -269,12 +305,51 @@ export function PrivacyCenterPage({
           </section>
 
           {center.pendingRequests.length > 0 && (
-            <section className="surface-known">
+            <section
+              className="surface-known"
+              data-testid="privacy-pending-requests"
+              aria-label="Pending access requests"
+            >
               <h2>Pending access requests</h2>
+              <p className="muted section-lead">
+                Approve only when you know the person and the access they need.
+                Deny leaves no membership. Audit keeps the decision.
+              </p>
               <ul className="list-plain">
                 {center.pendingRequests.map((r) => (
-                  <li key={r.id}>
-                    {r.requesterName} · {r.relationship} · {r.status}
+                  <li key={r.id} className="card-row" data-testid={`access-req-${r.id}`}>
+                    <strong>{r.requesterName}</strong>
+                    <span className="muted">
+                      {" "}
+                      · {r.relationship} · {r.status}
+                    </span>
+                    {r.reason ? (
+                      <div className="muted" style={{ marginTop: 4 }}>
+                        {r.reason}
+                      </div>
+                    ) : null}
+                    {center.canManage && r.status === "pending" && (
+                      <div className="btn-row" style={{ marginTop: 8 }}>
+                        <button
+                          type="button"
+                          className="secondary-btn"
+                          disabled={busy}
+                          data-testid={`access-approve-${r.id}`}
+                          onClick={() => void decideAccess(r.id, "approve")}
+                        >
+                          Approve access
+                        </button>
+                        <button
+                          type="button"
+                          className="ghost-btn"
+                          disabled={busy}
+                          data-testid={`access-deny-${r.id}`}
+                          onClick={() => void decideAccess(r.id, "deny")}
+                        >
+                          Deny
+                        </button>
+                      </div>
+                    )}
                   </li>
                 ))}
               </ul>

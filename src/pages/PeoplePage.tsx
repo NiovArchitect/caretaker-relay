@@ -144,9 +144,13 @@ export function PeoplePage({
         <p className="for-person">
           Who is helping with {space.displayName}&apos;s care
         </p>
-        <p className="muted" style={{ marginTop: 8, maxWidth: 560 }}>
-          Care circle for {space.displayName}. Signed in as{" "}
-          <strong>{session.displayName}</strong>
+        <p
+          className="muted section-lead"
+          style={{ marginTop: 8, maxWidth: 560 }}
+          data-testid="page-purpose-people"
+        >
+          Who is authorized or assigned for {space.displayName} — not clinical
+          details. Signed in as <strong>{session.displayName}</strong>
           {session.roleLabel ? ` · ${session.roleLabel}` : ""}.
         </p>
         <p className="muted sr-only" data-testid="people-source">

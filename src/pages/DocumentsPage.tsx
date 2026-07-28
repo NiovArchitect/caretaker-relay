@@ -146,14 +146,14 @@ export function DocumentsPage() {
 
   return (
     <>
-      <div className="greeting">
+      <div className="greeting" data-testid="page-purpose-documents">
         <h1>Documents</h1>
         <p className="for-person">
           Prepared from {space.displayName}&apos;s current care context
         </p>
-        <p className="muted" style={{ marginTop: 8, maxWidth: 560 }}>
-          Create a readable care summary for another caregiver or the clinic.
-          You stay responsible for what is shared.
+        <p className="muted section-lead" style={{ marginTop: 8, maxWidth: 560 }}>
+          What source records exist and what awaits review. Proposed facts never
+          become care truth until you confirm. You stay responsible for what is shared.
         </p>
       </div>
 

@@ -18,12 +18,16 @@ export function RelayPage({
     <>
       <div className="greeting">
         <h1>{roleExperience?.navLabels.relay ?? "Relay"}</h1>
-        <p className="muted" style={{ marginTop: 0 }} data-testid="relay-role-lead">
+        <p
+          className="muted section-lead"
+          style={{ marginTop: 0 }}
+          data-testid="relay-role-lead"
+        >
           {correcting
             ? "Correcting a previous note — prior evidence stays on record"
             : roleHint
               ? roleHint
-              : "Voice first · text second · same care context"}
+              : "What can I ask, report, or do? Voice first · text second · same care context. Relay does not invent clinical orders."}
         </p>
         {roleExperience?.badge && (
           <p className="badge badge-teal" data-testid="relay-role-badge">
