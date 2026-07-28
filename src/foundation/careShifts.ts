@@ -61,6 +61,7 @@ export async function completeShiftHandoffApi(
   shiftId: string,
   whatChanged: string[],
   stillNeedsAttention: string[],
+  toPersonId?: string,
 ) {
   const token = tokenFromSession();
   if (!token) return { ok: false as const, message: "Not signed in" };
@@ -74,6 +75,7 @@ export async function completeShiftHandoffApi(
     body: {
       what_changed: whatChanged,
       still_needs_attention: stillNeedsAttention,
+      ...(toPersonId ? { to_person_id: toPersonId } : {}),
     },
   });
   if (!res.ok) return { ok: false as const, message: res.message };

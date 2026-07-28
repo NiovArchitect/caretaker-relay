@@ -23,8 +23,16 @@ import {
   getSessionIdentity,
   proposeCareUpdate,
   confirmCareUpdateAsync,
+  fetchCareState,
+  fetchLatestHandoff,
 } from "../foundation/careClient";
 import { loadActiveCareRecipientId, resolveCareSpace } from "../lib/careContext";
+import {
+  getHandoffLifecyclePacket,
+  listHandoffs,
+} from "../foundation/careContinuity";
+import { IncomingHandoffInbox } from "../components/IncomingHandoffInbox";
+import { CorrectionAwarenessPanel } from "../components/CorrectionAwarenessPanel";
 
 function pickMine(shifts: ShiftDto[], personId: string): ShiftDto | null {
   const mine = shifts
@@ -66,6 +74,15 @@ export function ShiftWorkspacePage({
   const [obsText, setObsText] = useState("");
   const [handoffChanged, setHandoffChanged] = useState("");
   const [handoffOpen, setHandoffOpen] = useState("");
+  const [toPersonId, setToPersonId] = useState("");
+  const [briefing, setBriefing] = useState<{
+    handoffLines: string[];
+    tasks: string[];
+    appts: string[];
+    obs: string[];
+    prefs: string[];
+    corrections: string[];
+  } | null>(null);
   const [tick, setTick] = useState(0);
 
   const load = useCallback(async () => {
@@ -84,6 +101,72 @@ export function ShiftWorkspacePage({
   useEffect(() => {
     void load();
   }, [load, refreshKey]);
+
+  // Rich pre-shift briefing from live handoff + care state
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      const [state, hands] = await Promise.all([
+        fetchCareState(),
+        listHandoffs(rid),
+      ]);
+      if (cancelled) return;
+      const latest = hands.handoffs?.[0];
+      let handoffLines: string[] = [];
+      let corrections: string[] = [];
+      if (latest) {
+        const pack = await getHandoffLifecyclePacket(rid, latest.id);
+        if (pack.ok && pack.packet) {
+          handoffLines = [
+            ...(pack.packet.whatChanged ?? []).map((x) => `Changed: ${x}`),
+            ...(pack.packet.stillNeedsAttention ?? []).map(
+              (x) => `Needs attention: ${x}`,
+            ),
+          ];
+          corrections = pack.packet.corrections ?? [];
+        }
+      } else {
+        const ho = await fetchLatestHandoff();
+        if (ho) {
+          handoffLines = [
+            ...ho.whatChanged.map((x) => `Changed: ${x}`),
+            ...ho.stillNeedsAttention.map((x) => `Needs attention: ${x}`),
+          ];
+        }
+      }
+      const tasks = (state?.tasks ?? [])
+        .filter((t) => {
+          const st = String((t as { status?: string }).status ?? "");
+          return st !== "done" && st !== "completed" && st !== "cancelled";
+        })
+        .slice(0, 6)
+        .map((t) => String((t as { title?: string }).title ?? "Task"));
+      const appts = (state?.appointments ?? [])
+        .filter((a) => String((a as { status?: string }).status) !== "cancelled")
+        .slice(0, 4)
+        .map((a) => {
+          const r = a as { title?: string; startsAtLabel?: string; startsAt?: string };
+          return `${r.title ?? "Appointment"} · ${r.startsAtLabel ?? r.startsAt ?? ""}`;
+        });
+      const obs = (state?.observations ?? [])
+        .slice(-4)
+        .map((o) => String((o as { summary?: string }).summary ?? "Observation"));
+      setBriefing({
+        handoffLines,
+        tasks,
+        appts,
+        obs,
+        prefs: [
+          "Support at the recipient’s pace",
+          "Confirm before consequential changes",
+        ],
+        corrections,
+      });
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [rid, refreshKey, tick]);
 
   // Bounded poll so pre-shift → active transitions surface without hard refresh
   useEffect(() => {
@@ -168,13 +251,23 @@ export function ShiftWorkspacePage({
       return;
     }
     setBusy(true);
-    const res = await completeShiftHandoffApi(rid, mine.id, changed, open);
+    const res = await completeShiftHandoffApi(
+      rid,
+      mine.id,
+      changed,
+      open,
+      toPersonId.trim() || undefined,
+    );
     setBusy(false);
     if (!res.ok) {
       setStatusMsg(res.message);
       return;
     }
-    setStatusMsg("Handoff saved for the next caregiver.");
+    setStatusMsg(
+      toPersonId.trim()
+        ? "Handoff saved and marked sent for the next caregiver."
+        : "Handoff saved for the next caregiver.",
+    );
     setHandoffChanged("");
     setHandoffOpen("");
     await load();
@@ -285,12 +378,62 @@ export function ShiftWorkspacePage({
 
       {(ph === "scheduled" || ph === "pre_shift") && (
         <div className="surface-soft" data-testid="shift-prep-card">
-          <h3 style={{ marginTop: 0 }}>Preparation</h3>
+          <h3 style={{ marginTop: 0 }} data-testid="pre-shift-briefing-title">
+            {ph === "pre_shift" ? "Your shift briefing" : "Preparation"}
+          </h3>
           <p>
             {ph === "scheduled"
               ? `Your care briefing becomes available at ${startL} (within the preparation window before start).`
               : "Review the previous handoff and today’s tasks. Family-private and out-of-scope clinical detail stay closed."}
           </p>
+          {ph === "pre_shift" && briefing && (
+            <div data-testid="rich-pre-shift-briefing">
+              <h4>Your shift</h4>
+              <p>
+                {space.displayName} · {startL} – {endL}
+              </p>
+              <h4>What changed / handoff</h4>
+              <ul className="list-plain" data-testid="briefing-handoff">
+                {briefing.handoffLines.length === 0 ? (
+                  <li className="muted">No prior handoff lines on file yet.</li>
+                ) : (
+                  briefing.handoffLines.map((l) => <li key={l}>{l}</li>)
+                )}
+              </ul>
+              <h4>What needs attention</h4>
+              <ul className="list-plain" data-testid="briefing-tasks">
+                {briefing.tasks.length === 0 ? (
+                  <li className="muted">No open tasks listed.</li>
+                ) : (
+                  briefing.tasks.map((t) => <li key={t}>{t}</li>)
+                )}
+              </ul>
+              {(briefing.corrections.length > 0 || briefing.obs.length > 0) && (
+                <>
+                  <h4>Recent observations &amp; corrections</h4>
+                  <ul className="list-plain" data-testid="briefing-obs">
+                    {[...briefing.corrections, ...briefing.obs].map((x) => (
+                      <li key={x}>{x}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              <h4>Coming up</h4>
+              <ul className="list-plain" data-testid="briefing-upcoming">
+                {briefing.appts.length === 0 ? (
+                  <li className="muted">No appointments listed.</li>
+                ) : (
+                  briefing.appts.map((a) => <li key={a}>{a}</li>)
+                )}
+              </ul>
+              <h4>How to support</h4>
+              <ul className="list-plain">
+                {briefing.prefs.map((p) => (
+                  <li key={p}>{p}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           {ph === "pre_shift" && (
             <button
               type="button"
@@ -360,6 +503,15 @@ export function ShiftWorkspacePage({
               onChange={(e) => setHandoffOpen(e.target.value)}
             />
           </label>
+          <label className="cr-field">
+            <span>Incoming caregiver person ID (optional, for acknowledgment)</span>
+            <input
+              data-testid="shift-handoff-to"
+              value={toPersonId}
+              onChange={(e) => setToPersonId(e.target.value)}
+              placeholder="e.g. p-maya or p-walter"
+            />
+          </label>
           <button
             type="button"
             className="primary-btn"
@@ -367,10 +519,17 @@ export function ShiftWorkspacePage({
             disabled={busy}
             onClick={() => void sendHandoff()}
           >
-            Save handoff
+            Save and send handoff
           </button>
         </div>
       )}
+
+      <div style={{ marginTop: 24 }}>
+        <IncomingHandoffInbox refreshKey={tick + refreshKey} />
+      </div>
+      <div style={{ marginTop: 16 }}>
+        <CorrectionAwarenessPanel refreshKey={tick + refreshKey} />
+      </div>
 
       {ph === "documentation_window" && (
         <div data-testid="shift-doc-window">

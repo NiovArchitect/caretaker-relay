@@ -29,6 +29,8 @@ import {
 } from "../lib/observations";
 import { loadActiveCareRecipientId, resolveCareSpace } from "../lib/careContext";
 import { MedicationCorrectionPanel } from "../components/MedicationCorrectionPanel";
+import { IncomingHandoffInbox } from "../components/IncomingHandoffInbox";
+import { CorrectionAwarenessPanel } from "../components/CorrectionAwarenessPanel";
 import { ShiftWorkspacePage } from "./ShiftWorkspacePage";
 
 type CareSection =
@@ -811,19 +813,27 @@ export function CarePage({
           </div>
         )}
         {section === "shift" && (
-          <ShiftWorkspacePage
-            refreshKey={0}
-            onOpenRelay={() => {
-              window.dispatchEvent(new CustomEvent("cr-open-relay"));
-            }}
-            onRelayBlocked={(reason) => {
-              window.alert(reason);
-            }}
-          />
+          <>
+            <ShiftWorkspacePage
+              refreshKey={0}
+              onOpenRelay={() => {
+                window.dispatchEvent(new CustomEvent("cr-open-relay"));
+              }}
+              onRelayBlocked={(reason) => {
+                window.alert(reason);
+              }}
+            />
+          </>
+        )}
+        {section === "about" && (
+          <div style={{ marginBottom: 16 }}>
+            <IncomingHandoffInbox refreshKey={0} />
+          </div>
         )}
         {section === "medications" && (
           <>
             <h2>Medications</h2>
+            <CorrectionAwarenessPanel refreshKey={0} />
             <MedicationCorrectionPanel refreshKey={0} />
             {!state?.medicationSchedules?.length ? (
               <p className="muted">No medication schedules on file.</p>
