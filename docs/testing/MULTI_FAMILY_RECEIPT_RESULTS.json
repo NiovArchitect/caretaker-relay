@@ -1,6 +1,6 @@
 {
-  "started": "2026-07-28T17:42:38.841Z",
-  "marker": "ms4xq93r",
+  "started": "2026-07-28T19:23:17.254Z",
+  "marker": "ms51dglc",
   "api": "https://caretaker-relay-care-api.onrender.com",
   "families": [
     {
@@ -30,7 +30,7 @@
       "destinations": true,
       "plan_safe": true,
       "causation_ok": true,
-      "message": "I recorded this for Evelyn Carter: Breakfast / meal around 9:00; Metformin marked as given (500mg) for Evelyn Carter. It is on the care record and included for ",
+      "message": "I recorded this for Evelyn Carter: Meal recorded; Metformin marked as given (500mg) for Evelyn Carter. It is on the care record and included for the next caregi",
       "dest": [
         "care_timeline",
         "today_glance",
@@ -186,7 +186,7 @@
       "destinations": true,
       "plan_safe": true,
       "causation_ok": true,
-      "message": "I recorded this for Evelyn Carter: Access request: relationship friend · reason: I need access as a friend to help with Evelyn. Family ms4xq93r · Privacy review",
+      "message": "I recorded this for Evelyn Carter: Access request: relationship friend · reason: I need access as a friend to help with Evelyn. Family ms51dglc · Privacy review",
       "dest": [
         "notifications",
         "relay_retrieval",
@@ -223,9 +223,9 @@
   },
   "access_lifecycle": {
     "create": true,
-    "list": true,
-    "decide": true,
-    "detail": "create status 201 id ar-jowgoxyn-ms4y1frs decide denied"
+    "list": false,
+    "decide": false,
+    "detail": "create status 201 id ar-3qk9ydbe-ms51mwnz decide 404"
   },
   "document_lifecycle": {
     "ingest": true,
@@ -233,5 +233,5 @@
     "reject": true,
     "detail": "proposals 2 reject true"
   },
-  "finished": "2026-07-28T17:42:38.851Z"
+  "finished": "2026-07-28T19:23:17.283Z"
 }
