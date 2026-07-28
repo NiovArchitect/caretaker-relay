@@ -8,6 +8,12 @@ import type { CareRelationship } from "../types.js";
 import { evaluateAccess } from "./access.js";
 import { createNotificationIfNew } from "./notifications.js";
 import { ingestCareEvent } from "./care-event-etl.js";
+import {
+  ensureHandoffLifecycle,
+  transitionHandoffLifecycle,
+} from "./handoff-lifecycle.js";
+import { seedWorkItemsFromHandoff } from "./care-work-items.js";
+import { extractScheduleProposalsFromHandoff } from "./schedule-proposals.js";
 
 export type ShiftAssignmentStatus =
   | "proposed"
@@ -200,6 +206,30 @@ function ensureAssignee(
       kind: "professional",
     });
   }
+  /** Shift acceptance must grant observation/task/handoff domains for the window. */
+  const shiftAccess = {
+    informationCategories: [
+      "daily",
+      "Daily updates",
+      "observation",
+      "Health observations",
+      "Care tasks",
+      "Care instructions",
+      "Appointments",
+      "medication_admin",
+      "handoff",
+    ],
+    allowedActions: [
+      "view",
+      "record",
+      "handoff",
+      "record_observations",
+      "complete_tasks",
+      "view_schedule",
+    ],
+    canEscalate: true,
+    authorityLimits: ["shift_scoped", "no_care_plan_change"],
+  };
   const rel: CareRelationship = existing
     ? {
         ...existing,
@@ -208,6 +238,29 @@ function ensureAssignee(
         role: "paid_caregiver",
         roleLabel: "Direct support professional",
         scheduleNotes: "Active shift assignment",
+        // Merge shift domains — do not leave stale transport-only scopes active mid-shift.
+        access: {
+          informationCategories: [
+            ...new Set([
+              ...(existing.access.informationCategories ?? []),
+              ...shiftAccess.informationCategories,
+            ]),
+          ],
+          allowedActions: [
+            ...new Set([
+              ...(existing.access.allowedActions ?? []),
+              ...shiftAccess.allowedActions,
+            ]),
+          ],
+          canEscalate: true,
+          authorityLimits: [
+            ...new Set([
+              ...(existing.access.authorityLimits ?? []),
+              "shift_scoped",
+              "no_care_plan_change",
+            ]),
+          ],
+        },
       }
     : {
         id: store.newId("rel"),
@@ -216,17 +269,7 @@ function ensureAssignee(
         role: "paid_caregiver",
         roleLabel: "Direct support professional",
         responsibilities: ["Shift care", "Observations", "Handoff"],
-        access: {
-          informationCategories: [
-            "daily",
-            "observation",
-            "medication_admin",
-            "handoff",
-          ],
-          allowedActions: ["view", "record", "handoff"],
-          canEscalate: true,
-          authorityLimits: ["shift_scoped", "no_care_plan_change"],
-        },
+        access: shiftAccess,
         status: "active",
         startDate: new Date().toISOString().slice(0, 10),
         endDate,
@@ -425,6 +468,8 @@ export function completeShiftHandoff(
     actorDisplayName: string;
     whatChanged: string[];
     stillNeedsAttention: string[];
+    /** Incoming caregiver who should acknowledge */
+    toPersonId?: string;
   },
 ):
   | { ok: true; assignment: ShiftAssignment; handoffId: string }
@@ -445,6 +490,7 @@ export function completeShiftHandoff(
     id: store.newId("ho"),
     careRecipientId: input.careRecipientId,
     fromPersonId: input.actorPersonId,
+    toPersonId: input.toPersonId,
     whatChanged: input.whatChanged,
     stillNeedsAttention: input.stillNeedsAttention,
     watch: [],
@@ -464,6 +510,33 @@ export function completeShiftHandoff(
     truthState: "confirmed",
     confidenceLabel: "confirmed",
     structured: { handoffId: handoff.id, assignmentId: a.id },
+  });
+  // Wire first-class lifecycle so incoming DSP can discover + acknowledge
+  ensureHandoffLifecycle(store, handoff, input.actorPersonId);
+  transitionHandoffLifecycle(store, {
+    careRecipientId: input.careRecipientId,
+    handoffId: handoff.id,
+    actorPersonId: input.actorPersonId,
+    actorDisplayName: input.actorDisplayName,
+    status: "sent",
+  });
+  // Open work: stillNeedsAttention → unassigned work items (ack ≠ accept)
+  seedWorkItemsFromHandoff(store, {
+    careRecipientId: input.careRecipientId,
+    handoffId: handoff.id,
+    actorPersonId: input.actorPersonId,
+    actorDisplayName: input.actorDisplayName,
+    stillNeedsAttention: input.stillNeedsAttention,
+    backupOwnerPersonId: input.toPersonId ?? null,
+  });
+  // Schedule language → proposals only (never silent appointment mutation)
+  extractScheduleProposalsFromHandoff(store, {
+    careRecipientId: input.careRecipientId,
+    handoffId: handoff.id,
+    actorPersonId: input.actorPersonId,
+    actorDisplayName: input.actorDisplayName,
+    whatChanged: input.whatChanged,
+    stillNeedsAttention: input.stillNeedsAttention,
   });
   const completed: ShiftAssignment = {
     ...a,

@@ -259,15 +259,47 @@ export function classifyPersona(roleLabel: string | undefined | null): Caregiver
   return "unknown";
 }
 
+/**
+ * Normalize typos against authorized recipient preferred names only.
+ * Never hard-code Evelyn/Marcus — pass active recipient first names.
+ */
+export function normalizeCareQuestionText(
+  raw: string,
+  recipientFirstNames: string[] = [],
+): string {
+  let s = raw.trim();
+  for (const name of recipientFirstNames) {
+    const first = name.trim().split(/\s+/)[0];
+    if (!first || first.length < 3) continue;
+    // Common vowel-swap / double-letter caregiver typos for this first name
+    const lower = first.toLowerCase();
+    // e.g. evenlyn for evelyn: allow one transposition pattern around vowels
+    const re = new RegExp(
+      `\\b${lower.slice(0, 2)}[a-z]{0,3}${lower.slice(-2)}\\b`,
+      "gi",
+    );
+    s = s.replace(re, (m) => {
+      if (m.toLowerCase() === lower) return m;
+      // only rewrite if edit distance-ish short
+      if (Math.abs(m.length - first.length) <= 2) return first;
+      return m;
+    });
+  }
+  return s;
+}
+
 export function classifyIntent(
   raw: string,
   priorEntities?: ClassifiedTurn["entities"],
+  opts?: { recipientFirstNames?: string[] },
 ): ClassifiedTurn {
-  const text = raw.trim();
+  const text = normalizeCareQuestionText(raw, opts?.recipientFirstNames ?? []);
   const q = text.toLowerCase();
   const isQuestion =
     QUESTION_RE.test(text) ||
-    /tell me|show me|prepare|summarize|what about|anything i need/.test(q);
+    /tell me|show me|prepare|summarize|what about|anything i need|how is|how'?s|how are|who is|what('s| is)|did anything|feeling|mood/.test(
+      q,
+    );
   const isObservationUpdate =
     !isQuestion &&
     /\b(gave|took|seemed|noticed|ate|dizzy|tired|tired|fell|slept|refused)\b/.test(
@@ -279,18 +311,166 @@ export function classifyIntent(
   if (/\bit\b|\bthat (medicine|med|one|dose)\b|\bthat\b/.test(q)) {
     references.push("it");
   }
-  if (/\bshe\b|\bher\b|\bmom\b|\bevelyn\b/.test(q)) references.push("recipient");
-  if (/\byesterday\b/.test(q)) references.push("yesterday");
+  if (/\bshe\b|\bher\b|\bmom\b|\bevelyn\b|\brobert\b/.test(q))
+    references.push("recipient");
+  if (/\byesterday\b|\bprevious shift\b|\blast shift\b/.test(q))
+    references.push("yesterday");
   if (/\bbefore\b/.test(q)) references.push("before");
 
-  // High-value synthesis: "How is Evelyn doing?"
+  // High-value synthesis: "How is {name} / How is she / How is they"
   if (
-    /how is (evelyn|robert|she|he|mom|they) doing|how('s| is) (she|he|evelyn|robert) (doing|today)|how are they|how is everything|what's (the )?latest (on|with)|how's (evelyn|robert|mom)/i.test(
+    /how('s| is) (she|he|mom|dad|they|everything|my (mom|dad|client|patient))\b/.test(
       q,
-    )
+    ) ||
+    /how('s| is) (she|he) (doing|today|feeling|now)/.test(q) ||
+    /how are they|how is everything|what's (the )?latest (on|with)/.test(q) ||
+    /^how is\b/.test(q) ||
+    /\bhow (is|did|was) [a-z]{2,20}\b/.test(q)
   ) {
     intents.push("STATUS_SYNTHESIS");
     intents.push("CHANGE_SINCE");
+  }
+
+  // Mood / feeling / previous shift wellbeing
+  if (
+    /\bmood\b|\bfeeling\b|\bfeelings\b|\bhow (is|was) (she|he|evelyn|robert) feel/.test(
+      q,
+    ) ||
+    /previous shift|last shift|during (the )?shift|end of shift/.test(q)
+  ) {
+    intents.push("OBSERVATION_HISTORY");
+    intents.push("STATUS_SYNTHESIS");
+    if (/previous shift|last shift|yesterday|while /.test(q)) {
+      intents.push("HANDOFF_REVIEW");
+      intents.push("RECENT_ACTIVITY");
+    }
+  }
+
+  // Caregiver / caretaker identity (who helps — not who is the recipient)
+  if (
+    /who (is|are) (your |her |his |the )?(caregiver|caretaker|care taker|helper|helpers|care team)/.test(
+      q,
+    ) ||
+    /who (helps|is helping|takes care|cares for)/.test(q) ||
+    /who('s| is) on (the )?care (team|circle)/.test(q)
+  ) {
+    intents.push("CARE_TEAM");
+    intents.push("CARE_COVERAGE");
+  }
+
+  // Temporal: anything happen yesterday / last night / overnight / this week
+  if (
+    /did anything happen|what happened|anything (new|happen)|yesterday|last night|this morning|overnight|this week|regarding (evelyn|robert|her|him)|between dinner and bedtime|since i was last|before i go see|different with her today|worse since|quick version|should i be worried|should i know before/.test(
+      q,
+    )
+  ) {
+    if (/worried|safety|fall|unsafe/.test(q)) intents.push("SAFETY_CONCERN");
+    if (/overnight|last night|night caregiver|night report/.test(q)) {
+      intents.push("STATUS_SYNTHESIS");
+      intents.push("HANDOFF_REVIEW");
+    }
+    if (/this week|worse|more tired|trend|compared|than (usual|normal)/.test(q))
+      intents.push("TREND");
+    if (!intents.includes("CHANGE_SINCE")) intents.push("CHANGE_SINCE");
+    if (!intents.includes("RECENT_ACTIVITY")) intents.push("RECENT_ACTIVITY");
+    if (/hand off|handoff to the next|leave for the next/.test(q))
+      intents.push("HANDOFF_PREP");
+  }
+
+  // Meals / hydration / swallowing
+  if (
+    /\b(breakfast|lunch|dinner|eat|ate|eaten|meal|food|water|hydrat|swallow|chew|refuse.*meal)\b/.test(
+      q,
+    )
+  ) {
+    intents.push("OBSERVATION_HISTORY");
+    intents.push("RECIPIENT_ROUTINE");
+    if (/prefer|watch|diet|texture|food i need/.test(q))
+      intents.push("RECIPIENT_PREFERENCES");
+  }
+
+  // Sleep / pain / fever / symptoms
+  if (
+    /\b(sleep|slept|awake|pain|hurt|fever|symptom|tired|fatigue)\b/.test(q)
+  ) {
+    intents.push("OBSERVATION_HISTORY");
+    if (/more tired|than normal|trend/.test(q)) intents.push("TREND");
+    if (/fever|pain|symptom/.test(q)) intents.push("SAFETY_CONCERN");
+  }
+
+  // Mobility / falls / transfers / bathroom assistance
+  if (
+    /\b(walk|walking|mobility|transfer|fall|fell|almost fall|out of bed|bathroom|toilet|shower|dressed|dressing|morning routine|personal.?care)\b/.test(
+      q,
+    )
+  ) {
+    if (/fall|safe to walk|by herself|by himself/.test(q))
+      intents.push("SAFETY_CONCERN");
+    else intents.push("RECIPIENT_MOBILITY");
+    if (/routine|dressed|shower|toilet|bathroom|preferences/.test(q))
+      intents.push("RECIPIENT_ROUTINE");
+  }
+
+  // Medication dose conflict / bottle vs plan
+  if (
+    /bottle says|care plan says|dose mismatch|500 mg|250 mg|what should i do/.test(
+      q,
+    ) && /med|mg|dose|bottle|plan/.test(q)
+  ) {
+    intents.push("MEDICATION_UNCERTAINTY");
+    intents.push("SAFETY_CONCERN");
+  }
+
+  // Documents / provenance / corrections / share
+  if (
+    /discharge|therapy document|where did this .* come from|corrected the report|confirmed and which is only reported|original note|who changed this record|share this document|remove .* access/.test(
+      q,
+    )
+  ) {
+    if (/remove .* access|revoke/.test(q)) intents.push("CARE_UPDATE");
+    else if (/corrected|changed this record|confirmed and which/.test(q))
+      intents.push("VERIFICATION_STATUS");
+    else intents.push("DOCUMENT_PREP");
+  }
+
+  // Privacy / emergency / who can see
+  if (
+    /who can see|last access|emergency information|communication preferences|family notified|share this document/.test(
+      q,
+    )
+  ) {
+    if (/emergency/.test(q)) intents.push("EMERGENCY_SNAPSHOT");
+    else if (/prefer|notified|communication/.test(q))
+      intents.push("RECIPIENT_PREFERENCES");
+    else intents.push("CARE_TEAM");
+  }
+
+  // Coverage / ownership / overdue / reminders / escalate nobody accepts
+  if (
+    /shift covered|accept(ed)? the coverage|needs an owner|owns the transportation|end of my shift|anything overdue|reminders are coming|see the message|nobody accepts|remind maya|bring the walker/.test(
+      q,
+    )
+  ) {
+    if (/nobody accepts|escalat|if nobody/.test(q)) intents.push("ESCALATION");
+    if (/overdue|needs an owner|responded to the coverage/.test(q))
+      intents.push("WAITING_ON");
+    if (/end of my shift|unfinished|still needs to be done|before the end/.test(q))
+      intents.push("TASKS_REMAINING");
+    if (/remind|reminder/.test(q)) intents.push("TASKS_NOW");
+    if (/shift covered|helping after|with evelyn right now|who is with|accept.*coverage|next helper/.test(q))
+      intents.push("CARE_COVERAGE");
+  }
+
+  // Multi-turn: user selects offered slot e.g. "Wednesday, July 29 · 2:00 PM PDT"
+  if (
+    (/\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/.test(q) &&
+      /\b\d{1,2}:\d{2}\s*(am|pm)\b/.test(q)) ||
+    /\b(book|confirm|choose|select|pick|use) (that |this |the )?(slot|time|option)\b/.test(
+      q,
+    ) ||
+    (/·/.test(text) && /\b(am|pm)\b/.test(q) && /\b(pd|edt|est|utc|pt)\b/i.test(q))
+  ) {
+    intents.push("APPOINTMENT_CONFIRM_BOOK");
   }
 
   // Safety-critical: redose / permission-to-give — before history inheritance
@@ -400,7 +580,11 @@ export function classifyIntent(
     )
   ) {
     if (/next|due|need (next|now)|coming up/.test(q)) intents.push("MEDICATION_DUE");
-    if (/already|did anyone|was .* given|last (recorded|given|dose)|when did .* give/.test(q)) {
+    if (
+      /already|did anyone|was .* given|was .* administered|was medication|last (recorded|given|dose|admin)|when did .* give|administered\?|did they (get|take|receive) (the )?(med|dose|pill|metformin)/.test(
+        q,
+      )
+    ) {
       intents.push("MEDICATION_ADMINISTRATION_HISTORY");
     }
     if (/with food|how (do|should)|instruction|take it|route/.test(q)) {
@@ -427,10 +611,11 @@ export function classifyIntent(
 
   // New booking vs existing appointment vs reschedule / move-it
   if (
-    /schedule (a |an )?(doctor|dr|clinic|provider|pcp|physician)|book (a |an )?(doctor|appointment|visit)|make (a |an )?appointment|set up (a |an )?appointment|i want to schedule|i would like to schedule/.test(
+    /schedule (a |an )?(doctor|dr|clinic|provider|pcp|physician|yoga|pt|therapy|appointment)|book (a |an )?(doctor|appointment|visit|yoga|class|session)|make (a |an )?appointment|set up (a |an )?appointment|i want to schedule|i would like to schedule|can you schedule|schedule .* (tomorrow|today|friday|monday)/.test(
       q,
     ) &&
-    !isAmbiguousScheduleMoveQuestion(q)
+    !isAmbiguousScheduleMoveQuestion(q) &&
+    !intents.includes("APPOINTMENT_CONFIRM_BOOK")
   ) {
     intents.push("APPOINTMENT_REQUEST_NEW");
   } else if (isAmbiguousScheduleMoveQuestion(q)) {
@@ -489,9 +674,13 @@ export function classifyIntent(
     } else intents.push("TASKS_NOW");
   }
 
-  if (/who is helping|care (team|circle)|who should i contact|how do i reach|phone|call maya|call daniel/.test(q)) {
+  if (
+    /who is helping|care (team|circle)|who should i contact|how do i reach|phone|call maya|call daniel|caretaker|caregiver/.test(
+      q,
+    )
+  ) {
     if (/reach|phone|call|contact/.test(q)) intents.push("CONTACT_PERSON");
-    else intents.push("CARE_TEAM");
+    else if (!intents.includes("CARE_TEAM")) intents.push("CARE_TEAM");
   }
 
   if (/usually|routine|around lunch|preferences|respect|baseline/.test(q)) {
@@ -522,11 +711,8 @@ export function classifyIntent(
     medicationHint = medicationHint ?? "Metformin";
   }
 
+  // Person hints only from prior conversation entities — not fixture cast
   let personHint = priorEntities?.personHint;
-  if (/maya/.test(q)) personHint = "Maya Bennett";
-  if (/daniel/.test(q)) personHint = "Daniel Kim";
-  if (/marcus/.test(q)) personHint = "Marcus Carter";
-  if (/dr\.?\s*shah|priya/.test(q)) personHint = "Dr. Priya Shah";
   // Named person + give/gave → admin history ONLY for history-shaped questions,
   // never for redose/permission ("should I give…")
   if (

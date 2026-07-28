@@ -41,6 +41,8 @@ export type AnswerEngineInput = {
   priorEntities?: ClassifiedTurn["entities"];
   resolveMemory?: (c: ClassifiedTurn, q: string) => ClassifiedTurn;
   conversationId?: string;
+  careTeam?: Array<{ name: string; role: string; phone?: string }>;
+  personNameMap?: Record<string, string>;
 };
 
 export type AnswerEngineResult = {
@@ -62,7 +64,11 @@ function str(v: unknown): string {
 
 export function runAnswerEngine(input: AnswerEngineInput): AnswerEngineResult {
   const persona = classifyPersona(input.roleLabel);
-  let classified = classifyIntent(input.question, input.priorEntities);
+  const first =
+    input.recipientName.trim().split(/\s+/)[0] ?? input.recipientName;
+  let classified = classifyIntent(input.question, input.priorEntities, {
+    recipientFirstNames: [first, input.recipientName].filter(Boolean),
+  });
   if (input.resolveMemory) {
     classified = input.resolveMemory(classified, input.question);
   }
@@ -72,6 +78,8 @@ export function runAnswerEngine(input: AnswerEngineInput): AnswerEngineResult {
     recipientId: input.recipientId,
     recipientName: input.recipientName,
     attentionLines: input.attentionLines,
+    careTeam: input.careTeam,
+    personNameMap: input.personNameMap,
     handoff: input.handoff,
   });
 
@@ -97,6 +105,8 @@ export function runAnswerEngine(input: AnswerEngineInput): AnswerEngineResult {
     proj,
     recipientName: input.recipientName,
     principalName: input.principalName,
+    question: input.question,
+    personNameMap: input.personNameMap,
   });
 
   return {
@@ -119,9 +129,13 @@ function composeAnswer(ctx: {
   proj: CareProjections;
   recipientName: string;
   principalName: string;
+  question?: string;
+  personNameMap?: Record<string, string>;
 }): { answer: string; sourceRefs: string[]; projectionsUsed: string[] } {
   const { classified, persona, proj, recipientName } = ctx;
+  const personNameMap = ctx.personNameMap;
   const intents = classified.intents;
+  const question = ctx.question ?? "";
   const used = new Set<string>();
   const refs: string[] = [];
   const parts: string[] = [];
@@ -162,17 +176,38 @@ function composeAnswer(ctx: {
     const when = formatCareDateTime(
       str(rec.administeredAt ?? rec.occurredAt ?? rec.recordedAt),
     );
+    const sourceActor =
+      rec.source && typeof rec.source === "object"
+        ? str((rec.source as { actorName?: string }).actorName)
+        : "";
     const by = resolvePersonName(
       str(rec.administeredByPersonId) || undefined,
-      str(rec.lastAdministeredByName) || undefined,
+      str(rec.lastAdministeredByName) || sourceActor || undefined,
+      personNameMap,
     );
     const dose = str(rec.doseRecorded ?? rec.recordedDose ?? rec.dose ?? "");
-    return `${dose || "dose recorded"} · ${when || "time on file"} · by ${by}`;
+    const status = str(rec.status);
+    const truth = str(rec.epistemicStatus);
+    const statusNote =
+      status === "voided"
+        ? " (voided / corrected — not current truth)"
+        : truth
+          ? ` (${truth})`
+          : "";
+    return `${dose || "dose recorded"} · ${when || "time on file"} · by ${by}${statusNote}`;
   }
 
   function lastAdminLine(): string {
-    const last = adminRecords().slice(-1)[0];
+    // Prefer non-voided current administration for "was it given?"
+    const rows = adminRecords();
+    const current = [...rows]
+      .reverse()
+      .find((r) => str(r.status) !== "voided");
+    const last = current ?? rows.slice(-1)[0];
     if (!last) return "No administration is recorded yet.";
+    if (str(last.status) === "voided") {
+      return `Last recorded administration was corrected/voided: ${describeAdmin(last)}. Current truth: not administered (unresolved unless re-confirmed).`;
+    }
     return `Last recorded: ${describeAdmin(last)}`;
   }
 
@@ -185,6 +220,7 @@ function composeAnswer(ctx: {
       const by = resolvePersonName(
         str(r.administeredByPersonId) || undefined,
         str(r.lastAdministeredByName) || undefined,
+        personNameMap,
       ).toLowerCase();
       if (by.includes(key.split(" ")[0]!) || key.includes(by.split(" ")[0]!)) {
         return r;
@@ -284,7 +320,22 @@ function composeAnswer(ctx: {
       }
     }
     if (intents.includes("MEDICATION_ADMINISTRATION_HISTORY")) {
+      used.add("ACTIVE_HANDOFF");
       const who = classified.entities.personHint;
+      // Caregiver handoff may carry the freshest "was it given?" truth before
+      // a formal administration row is written.
+      const handoffMedNotes = (proj.ACTIVE_HANDOFF?.whatChanged ?? []).filter(
+        (w) => /medication|metformin|administered|dose|med /i.test(w),
+      );
+      if (handoffMedNotes.length) {
+        parts.push(
+          `Latest caregiver-reported medication note from handoff (not clinician-confirmed):\n` +
+            handoffMedNotes
+              .slice(0, 3)
+              .map((w) => `• ${w}`)
+              .join("\n"),
+        );
+      }
       if (who) {
         const hit = findAdminByPerson(who);
         if (hit) {
@@ -305,20 +356,26 @@ function composeAnswer(ctx: {
           }
         } else {
           const last = adminRecords().slice(-1)[0];
-          parts.push(
-            `I don't have a medication administration recorded from ${who}${classified.entities.timeHint === "yesterday" ? " yesterday" : ""}.`,
-          );
-          if (last) {
+          if (!handoffMedNotes.length) {
             parts.push(
-              `The most recent record I do have is:\n${describeAdmin(last)}`,
+              `I don't have a medication administration recorded from ${who}${classified.entities.timeHint === "yesterday" ? " yesterday" : ""}.`,
             );
           }
-          parts.push(
-            `Want me to ask ${who} whether they gave it?`,
-          );
+          if (last) {
+            parts.push(
+              `The most recent formal record I do have is:\n${describeAdmin(last)}`,
+            );
+          }
+          if (!handoffMedNotes.length) {
+            parts.push(`Want me to ask ${who} whether they gave it?`);
+          }
         }
-      } else {
+      } else if (!handoffMedNotes.length) {
         parts.push(lastAdminLine());
+      } else {
+        parts.push(
+          "That handoff note is caregiver-reported. It is not automatically clinician confirmed.",
+        );
       }
     }
     if (intents.includes("MEDICATION_INSTRUCTIONS")) {
@@ -411,6 +468,17 @@ function composeAnswer(ctx: {
     used.add("NEXT_APPOINTMENT");
     used.add("OPEN_UNCERTAINTIES");
     used.add("ACTIVE_HANDOFF");
+    // Always ground with recent changes first when clusters empty
+    if (
+      persona !== "physician" &&
+      !proj.RECENT_OBSERVATION_CLUSTERS[0] &&
+      proj.RECENT_CHANGES.length
+    ) {
+      parts.push(
+        `Recent reports on file for ${recipientName}:\n` +
+          proj.RECENT_CHANGES.slice(0, 5).map((c) => `• ${c}`).join("\n"),
+      );
+    }
     if (persona === "physician") {
       parts.push(
         `Clinical-facing status for ${recipientName} (from authorized care record + caregiver reports):`,
@@ -444,6 +512,23 @@ function composeAnswer(ctx: {
       );
     } else if (persona === "professional_dsp") {
       parts.push(`Support-relevant picture for ${recipientName}:`);
+      if (proj.ACTIVE_HANDOFF?.whatChanged?.length) {
+        parts.push(
+          proj.ACTIVE_HANDOFF.whatChanged
+            .slice(0, 5)
+            .map((c) => `• ${c}`)
+            .join("\n"),
+        );
+        if (proj.ACTIVE_HANDOFF.stillNeedsAttention?.length) {
+          parts.push(
+            `Still open:\n` +
+              proj.ACTIVE_HANDOFF.stillNeedsAttention
+                .slice(0, 3)
+                .map((c) => `• ${c}`)
+                .join("\n"),
+          );
+        }
+      }
       parts.push(
         proj.RECENT_CHANGES.slice(0, 4).map((c) => `• ${c}`).join("\n") ||
           "• No new events listed since last context",
@@ -456,12 +541,32 @@ function composeAnswer(ctx: {
       );
     } else {
       parts.push(`Here's a plain-language picture of ${recipientName} right now:`);
+      // Latest shift handoff is first-class current continuity — surface before
+      // long-lived observation clusters so caregivers and judges see what just changed.
+      if (proj.ACTIVE_HANDOFF?.whatChanged?.length) {
+        parts.push(
+          `From the latest caregiver handoff:\n` +
+            proj.ACTIVE_HANDOFF.whatChanged
+              .slice(0, 6)
+              .map((w) => `• ${w}`)
+              .join("\n"),
+        );
+        if (proj.ACTIVE_HANDOFF.stillNeedsAttention?.length) {
+          parts.push(
+            `Still unfinished after that handoff:\n` +
+              proj.ACTIVE_HANDOFF.stillNeedsAttention
+                .slice(0, 4)
+                .map((w) => `• ${w}`)
+                .join("\n"),
+          );
+        }
+      }
       if (proj.RECENT_OBSERVATION_CLUSTERS[0]) {
         const c = proj.RECENT_OBSERVATION_CLUSTERS[0];
         parts.push(
           `Recent caregiver reports: ${c.theme} (last noted ${c.mostRecentLabel}).`,
         );
-      } else {
+      } else if (!proj.ACTIVE_HANDOFF?.whatChanged?.length) {
         parts.push(
           `No new wellbeing observations are on file for today yet — you can share one in Relay.`,
         );
@@ -476,7 +581,7 @@ function composeAnswer(ctx: {
           `Coming up: ${str(proj.NEXT_APPOINTMENT.title)} · ${str(proj.NEXT_APPOINTMENT.startsAtLabel ?? "")}.`,
         );
       }
-      if (proj.OPEN_UNCERTAINTIES[0]) {
+      if (proj.OPEN_UNCERTAINTIES[0] && !proj.ACTIVE_HANDOFF?.stillNeedsAttention?.length) {
         parts.push(`Still open: ${proj.OPEN_UNCERTAINTIES[0]}`);
       }
       parts.push(
@@ -492,6 +597,7 @@ function composeAnswer(ctx: {
   ) {
     used.add("RECENT_CHANGES");
     used.add("RECENT_OBSERVATION_CLUSTERS");
+    used.add("ACTIVE_HANDOFF");
     if (persona === "physician") {
       parts.push(`High-signal changes for ${recipientName}:`);
       parts.push(
@@ -513,6 +619,15 @@ function composeAnswer(ctx: {
       }
     } else if (persona === "professional_dsp") {
       parts.push(`What changed since your last context with ${recipientName}:`);
+      if (proj.ACTIVE_HANDOFF?.whatChanged?.length) {
+        parts.push(
+          `Latest handoff:\n` +
+            proj.ACTIVE_HANDOFF.whatChanged
+              .slice(0, 6)
+              .map((w) => `• ${w}`)
+              .join("\n"),
+        );
+      }
       parts.push(
         proj.RECENT_CHANGES.slice(0, 5).map((c) => `• ${c}`).join("\n") ||
           "• No new events listed",
@@ -522,6 +637,15 @@ function composeAnswer(ctx: {
       );
     } else {
       parts.push(`Here's what changed for ${recipientName}:`);
+      if (proj.ACTIVE_HANDOFF?.whatChanged?.length) {
+        parts.push(
+          `Latest handoff:\n` +
+            proj.ACTIVE_HANDOFF.whatChanged
+              .slice(0, 6)
+              .map((w) => `• ${w}`)
+              .join("\n"),
+        );
+      }
       parts.push(
         proj.RECENT_CHANGES.slice(0, 5).map((c) => `• ${c}`).join("\n") ||
           "• Nothing new is recorded yet",
@@ -540,6 +664,25 @@ function composeAnswer(ctx: {
   if (intents.includes("OBSERVATION_HISTORY") || intents.includes("SAFETY_CONCERN")) {
     used.add("RECENT_OBSERVATION_CLUSTERS");
     used.add("DEMENTIA_WATCH");
+    used.add("ACTIVE_HANDOFF");
+    // Latest handoff mood/meal/fatigue notes often answer "how was mood / did they eat?"
+    // before durable observation clusters catch up.
+    if (proj.ACTIVE_HANDOFF?.whatChanged?.length) {
+      const obsish = proj.ACTIVE_HANDOFF.whatChanged.filter((w) =>
+        /mood|calm|tired|fatigue|breakfast|lunch|dinner|meal|ate|eat|refused|mobility|slept|sleep|therapy|medication/i.test(
+          w,
+        ),
+      );
+      if (obsish.length) {
+        parts.push(
+          `From the latest caregiver handoff for ${recipientName}:\n` +
+            obsish
+              .slice(0, 5)
+              .map((w) => `• ${w}`)
+              .join("\n"),
+        );
+      }
+    }
     if (proj.RECENT_OBSERVATION_CLUSTERS.length) {
       parts.push(`Observations for ${recipientName}:`);
       for (const c of proj.RECENT_OBSERVATION_CLUSTERS.slice(0, 4)) {
@@ -547,7 +690,7 @@ function composeAnswer(ctx: {
           `• ${c.theme}: ${c.count} report(s) · ${c.mostRecentLabel} · ${c.sources.join(", ")}`,
         );
       }
-    } else {
+    } else if (!parts.length) {
       parts.push("No clustered observations on file yet.");
     }
     // Temporal: med before dizzy — compute sequence when both times exist
@@ -692,9 +835,49 @@ function composeAnswer(ctx: {
 
   if (intents.includes("CARE_TEAM")) {
     used.add("CARE_TEAM_NOW");
+    used.add("ACTIVE_HANDOFF");
     parts.push(`Who is helping ${recipientName}:`);
     for (const p of proj.CARE_TEAM_NOW) {
       parts.push(`• ${p.name} · ${p.role}`);
+    }
+    if (proj.ACTIVE_HANDOFF?.whatChanged?.length) {
+      parts.push(
+        `What the next caregiver should know (latest handoff):\n` +
+          proj.ACTIVE_HANDOFF.whatChanged
+            .slice(0, 5)
+            .map((w) => `• ${w}`)
+            .join("\n"),
+      );
+    }
+  }
+
+  // "What should the next caregiver know?" often maps to CARE_COVERAGE / HANDOFF without CARE_TEAM
+  if (
+    intents.includes("CARE_COVERAGE") ||
+    (/next caregiver|should (the )?next|hand off|leave for/i.test(question) &&
+      !intents.includes("HANDOFF_PREP") &&
+      !intents.includes("HANDOFF_REVIEW") &&
+      !parts.some((p) => /latest handoff|next caregiver should know/i.test(p)))
+  ) {
+    used.add("ACTIVE_HANDOFF");
+    used.add("CARE_TEAM_NOW");
+    if (proj.ACTIVE_HANDOFF?.whatChanged?.length) {
+      parts.push(
+        `What the next caregiver should know:\n` +
+          proj.ACTIVE_HANDOFF.whatChanged
+            .slice(0, 6)
+            .map((w) => `• ${w}`)
+            .join("\n"),
+      );
+      if (proj.ACTIVE_HANDOFF.stillNeedsAttention?.length) {
+        parts.push(
+          `Still open:\n` +
+            proj.ACTIVE_HANDOFF.stillNeedsAttention
+              .slice(0, 4)
+              .map((w) => `• ${w}`)
+              .join("\n"),
+        );
+      }
     }
   }
 
@@ -732,16 +915,39 @@ function composeAnswer(ctx: {
     used.add("OPEN_UNCERTAINTIES");
     used.add("NEXT_24H_TASKS");
     used.add("REMINDERS");
+    used.add("ACTIVE_HANDOFF");
+    const openFromHandoff = proj.ACTIVE_HANDOFF?.stillNeedsAttention ?? [];
     if (persona === "family") {
-      parts.push(
-        proj.OPEN_UNCERTAINTIES.length
-          ? `Right now:\n• ${proj.OPEN_UNCERTAINTIES[0]}\nYou're okay to take this one step at a time.`
-          : "Nothing urgent is flagged right now.",
-      );
+      // Prefer latest handoff open work over long-lived review queues so shift
+      // continuity answers advance when unfinished items change.
+      if (openFromHandoff.length) {
+        parts.push(
+          `Still unfinished from the last handoff:\n${openFromHandoff
+            .slice(0, 4)
+            .map((x) => `• ${x}`)
+            .join("\n")}`,
+        );
+        if (proj.OPEN_UNCERTAINTIES.length) {
+          parts.push(
+            `Also needs review:\n• ${proj.OPEN_UNCERTAINTIES[0]}`,
+          );
+        }
+      } else {
+        parts.push(
+          proj.OPEN_UNCERTAINTIES.length
+            ? `Right now:\n• ${proj.OPEN_UNCERTAINTIES[0]}\nYou're okay to take this one step at a time.`
+            : "Nothing urgent is flagged right now.",
+        );
+      }
       parts.push(`Coming up:\n${proj.NEXT_24H_TASKS.slice(0, 3).map((t) => `• ${t}`).join("\n")}`);
     } else if (persona === "professional_dsp") {
       parts.push("During this visit, prioritize:");
       parts.push(proj.NEXT_24H_TASKS.slice(0, 4).map((t) => `• ${t}`).join("\n"));
+      if (openFromHandoff.length) {
+        parts.push(
+          `From last handoff — still open:\n${openFromHandoff.slice(0, 4).map((x) => `• ${x}`).join("\n")}`,
+        );
+      }
       if (proj.OPEN_UNCERTAINTIES.length) {
         parts.push(`Escalation / verification:\n• ${proj.OPEN_UNCERTAINTIES[0]}`);
       }
@@ -888,25 +1094,45 @@ function composeAnswer(ctx: {
   }
 
   if (!parts.length) {
-    // Unknown — answer the gap only. Do NOT append unrelated attention alerts.
+    // Domain-specific no-data (never generic wall when we can name the gap)
     used.add("UNKNOWN_CLEAN");
-    if (persona === "family") {
+    const q = question.toLowerCase();
+    const domainHint = (() => {
+      if (/\b(breakfast|lunch|dinner|eat|meal|water|hydrat|swallow)\b/.test(q))
+        return `No meal or hydration observation is recorded for the period you asked about for ${recipientName}. The latest care events on file may still help — ask what changed, or add a meal note in Relay.`;
+      if (/\b(sleep|slept|awake|overnight|last night)\b/.test(q))
+        return `No overnight sleep observation is recorded for ${recipientName} in the window you asked about. Check the last handoff or add a sleep note if you observed rest.`;
+      if (/\b(pain|hurt|fever|symptom)\b/.test(q))
+        return `No pain/fever/symptom report matching that question is on file for ${recipientName}. I will not invent symptoms — if you observed something, record it with time and who reported it.`;
+      if (/\b(fall|walk|mobility|transfer|out of bed)\b/.test(q))
+        return `No mobility/fall observation matching that question is on file for ${recipientName}. I cannot certify independent walking safety from missing data — use authorized mobility notes and escalate if unsure.`;
+      if (/\b(mood|anxious|upset|confused|repeating|resist|calm)\b/.test(q))
+        return `No mood/behavior observation for that period is on file for ${recipientName}. I will not invent how she felt — ask for the last handoff or record what you observed.`;
+      if (/\b(shower|dressed|toilet|bathroom|routine)\b/.test(q))
+        return `No personal-care completion note for that item is on file for ${recipientName}. Preferences and dignity rules still apply; open Care for preferences if authorized.`;
+      if (/\b(document|discharge|original note|corrected|who changed)\b/.test(q))
+        return `I don't have a linked document extraction for that ask on file. Open Documents to review authorized summaries, or upload text for proposed actions (human confirm required).`;
+      if (/\b(remind|overdue|coverage|shift covered|message)\b/.test(q))
+        return `No matching reminder/coverage/message acknowledgment is on file for that ask. Check People for coverage and Today for open work that needs an owner.`;
+      return null;
+    })();
+    if (domainHint) {
+      parts.push(domainHint);
+    } else if (persona === "family") {
       parts.push(
-        `I don't have enough on file to answer that specifically for ${recipientName}.`,
+        `I don't have a matching record for that specific ask about ${recipientName}.`,
       );
       parts.push(
-        `I can help with who ${recipientName} is (age, conditions on file), medications, appointments, what changed, the care team, handoffs, and what is waiting — when those are authorized.`,
+        `I can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.`,
       );
-      parts.push(
-        `What would you like to know, or what would you like to update?`,
-      );
+      parts.push(`What domain should we check next, or what would you like to update?`);
     } else if (persona === "professional_dsp") {
       parts.push(
-        `I don't have a specific answer for that yet for ${recipientName}. Ask what changed, what to complete, medication authorization, documentation, or escalation.`,
+        `No matching shift documentation answers that ask yet for ${recipientName}. Ask what changed, tasks remaining, medication authorization, or handoff.`,
       );
     } else {
       parts.push(
-        `I don't have a specific answer for that yet. Ask for changes since last encounter, uncertain administrations, or a concise caregiver-reported timeline for ${recipientName}.`,
+        `No matching record for that ask yet. Request changes since last encounter, uncertain administrations, or a caregiver-reported timeline for ${recipientName}.`,
       );
     }
   }

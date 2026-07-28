@@ -41,6 +41,11 @@ import {
   seedDefaultCoverage,
 } from "./care-coverage.js";
 import { roleAwareRelayState } from "./role-projection.js";
+import {
+  authorizeRelayQuestion,
+  filterStateByDomains,
+  auditRelayAccess,
+} from "./relay-authorization.js";
 
 export type RelayAnswerRequest = {
   question: string;
@@ -52,6 +57,10 @@ export type RelayAnswerRequest = {
   store: CareStore;
   /** Optional override state bag (tests) */
   stateOverride?: CareStateBag;
+  /** Tests only — skip auth when true (never set in production routes) */
+  skipAuthorization?: boolean;
+  /** Optional clock for shift-window authorization tests */
+  nowMs?: number;
 };
 
 export type RelayAnswerResponse = AnswerEngineResult & {
@@ -60,7 +69,44 @@ export type RelayAnswerResponse = AnswerEngineResult & {
   conversationId: string;
   canDeterministic: boolean;
   evidenceBound: boolean;
+  authorizationOutcome?: "answered" | "denied";
+  authorizationCode?: string;
 };
+
+function careTeamFromStore(
+  store: CareStore,
+  careRecipientId: string,
+): Array<{ name: string; role: string; phone?: string }> {
+  const out: Array<{ name: string; role: string; phone?: string }> = [];
+  for (const rel of store.getRelationships(careRecipientId)) {
+    if (rel.status !== "active") continue;
+    const person = store.getPerson(rel.personId);
+    out.push({
+      name: person?.displayName ?? rel.roleLabel ?? rel.personId,
+      role: rel.roleLabel || rel.role,
+    });
+  }
+  return out;
+}
+
+function personNameMapFromStore(store: CareStore): Record<string, string> {
+  const map: Record<string, string> = { system: "System" };
+  // Prefer full person directory so MAR actors resolve even mid-orchestration.
+  if (typeof store.listPeople === "function") {
+    for (const p of store.listPeople()) {
+      if (p?.id && p.displayName) map[p.id] = p.displayName;
+    }
+  }
+  for (const recipient of store.listRecipients()) {
+    for (const rel of store.getRelationships(recipient.id)) {
+      const p = store.getPerson(rel.personId);
+      if (p) map[p.id] = p.displayName;
+    }
+    const r = store.getRecipient(recipient.id);
+    if (r) map[r.id] = r.displayName;
+  }
+  return map;
+}
 
 function stateToBag(
   state: CurrentCareState | undefined,
@@ -308,7 +354,107 @@ export function answerRelayQuestion(
   req: RelayAnswerRequest,
 ): RelayAnswerResponse {
   const store = req.store;
-  // Role-aware retrieval: project before answer engine — never full dump + hide in LLM.
+  const conversationId = conversationIdFor(
+    req.principalId,
+    req.careRecipientId,
+  );
+
+  // ── Authorization before retrieval (mandatory) ─────────────────────────
+  if (!req.skipAuthorization) {
+    const authz = authorizeRelayQuestion(store, {
+      principalId: req.principalId,
+      careRecipientId: req.careRecipientId,
+      roleLabel: req.roleLabel,
+      question: req.question,
+      nowMs: req.nowMs,
+    });
+    if (authz.kind === "denied") {
+      auditRelayAccess(store, {
+        principalId: req.principalId,
+        careRecipientId: req.careRecipientId,
+        question: req.question,
+        outcome: "denied",
+        code: authz.code,
+      });
+      const turn = persistTurn(store, {
+        principalId: req.principalId,
+        principalDisplayName: req.principalDisplayName,
+        careRecipientId: req.careRecipientId,
+        roleLabel: req.roleLabel,
+        userMessage: req.question,
+        classified: {
+          intents: ["UNKNOWN_QUESTION"],
+          primary: "UNKNOWN_QUESTION",
+          decisionContext: "information",
+          entities: { references: [] },
+          isQuestion: true,
+          isObservationUpdate: false,
+          needsClarification: false,
+        },
+        answer: authz.answer,
+        sourceRefs: [`authz:${authz.code}`],
+        modelPath: "deterministic",
+      });
+      return {
+        answer: authz.answer,
+        intent: "UNKNOWN_QUESTION",
+        intents: ["UNKNOWN_QUESTION"],
+        persona: "unknown",
+        sourceRefs: [`authz:${authz.code}`],
+        needsClarification: false,
+        projectionsUsed: [],
+        conversationId,
+        modelPath: "deterministic",
+        classified: {
+          intents: ["UNKNOWN_QUESTION"],
+          primary: "UNKNOWN_QUESTION",
+          decisionContext: "information",
+          entities: { references: [] },
+          isQuestion: true,
+          isObservationUpdate: false,
+          needsClarification: false,
+        },
+        durable: true,
+        turnId: turn.turnId,
+        canDeterministic: true,
+        evidenceBound: true,
+        authorizationOutcome: "denied",
+        authorizationCode: authz.code,
+      };
+    }
+
+    // Role-aware retrieval: project before answer engine — never full dump + hide in LLM.
+    const roleState = req.stateOverride
+      ? undefined
+      : roleAwareRelayState(store, req.principalId, req.careRecipientId);
+    let state =
+      req.stateOverride ??
+      stateToBag(
+        roleState ?? store.getCurrentState(req.careRecipientId),
+        req.careRecipientId,
+      );
+    // Filter retrieved bag to permitted domains (server-side)
+    state = filterStateByDomains(
+      state,
+      authz.domains,
+      authz.capabilities.controlling,
+    );
+    const result = answerWithState(req, state);
+    auditRelayAccess(store, {
+      principalId: req.principalId,
+      careRecipientId: req.careRecipientId,
+      question: req.question,
+      outcome: "answered",
+      domains: authz.domains,
+      intent: result.intent,
+    });
+    return {
+      ...result,
+      authorizationOutcome: "answered",
+    };
+  }
+
+  // Test-only path
   const roleState = req.stateOverride
     ? undefined
     : roleAwareRelayState(store, req.principalId, req.careRecipientId);
@@ -318,48 +464,6 @@ export function answerRelayQuestion(
       roleState ?? store.getCurrentState(req.careRecipientId),
       req.careRecipientId,
     );
-
-  // Lightweight second recipient safety: never serve Evelyn meds for Robert
-  if (req.careRecipientId === "cr-robert" && !req.stateOverride) {
-    const robertState: CareStateBag = {
-      careRecipientId: "cr-robert",
-      medicationSchedules: [
-        {
-          id: "med-robert-am",
-          name: "Lisinopril",
-          dose: "10 mg",
-          scheduleLabel: "Morning",
-          scheduleTime: "8:00 AM",
-          authorizedBy: "Dr. Amara Cole",
-          mealRelation: "With or without food",
-        },
-      ],
-      medicationRecords: [],
-      appointments: [
-        {
-          id: "apt-robert-pcp",
-          title: "Primary care follow-up",
-          startsAt: "2026-07-28T17:00:00Z",
-          startsAtLabel: "Monday, July 28 · 10:00 AM PDT",
-          location: "Coastal Family Medicine (synthetic evaluation location)",
-          status: "scheduled",
-        },
-      ],
-      observations: [],
-      events: [
-        {
-          id: "ev-robert-1",
-          statement: "Robert reported feeling steady on his morning walk.",
-          occurredAt: "2026-07-22T16:00:00Z",
-          source: { actorName: "Marcus Carter" },
-        },
-      ],
-      openSafetyReviews: [],
-      tasks: [],
-    };
-    return answerWithState(req, robertState);
-  }
-
   return answerWithState(req, state);
 }
 
@@ -369,7 +473,12 @@ function answerWithState(
 ): RelayAnswerResponse {
   const store = req.store;
   const handoffs = store.getHandoffs(req.careRecipientId);
-  const latest = handoffs[handoffs.length - 1];
+  // Prefer true temporal latest — Map/array order is not a contract under Prisma reload.
+  const latest = [...handoffs].sort((a, b) => {
+    const ta = Date.parse(String(a.createdAt ?? "")) || 0;
+    const tb = Date.parse(String(b.createdAt ?? "")) || 0;
+    return ta - tb;
+  })[handoffs.length - 1];
   const open = (state.openSafetyReviews ?? []).map((r) =>
     String(r.reason ?? r.message ?? ""),
   );
@@ -512,15 +621,17 @@ function answerWithState(
     const openReviews = (state.openSafetyReviews ?? []).map((r) =>
       String(r.reason ?? r.message ?? "open safety review"),
     );
-    const lines: string[] = [...loops.lines];
-    for (const r of openReviews) {
-      if (r) lines.push(`Needs checking: ${r}`);
-    }
-    // Surface handoff still-needs if present
+    // Prefer latest handoff unfinished work first so shift-to-shift answers
+    // advance instead of being drowned by long-lived review queues.
+    const lines: string[] = [];
     if (latest?.stillNeedsAttention?.length) {
       for (const n of latest.stillNeedsAttention.slice(0, 4)) {
         lines.push(`Handoff still needs attention: ${n}`);
       }
+    }
+    for (const l of loops.lines) lines.push(l);
+    for (const r of openReviews) {
+      if (r) lines.push(`Needs checking: ${r}`);
     }
     let answer: string;
     if (lines.length === 0) {
@@ -573,6 +684,24 @@ function answerWithState(
         (slots.some((s) => s.phase === "next")
           ? `\n\nI can prepare a handoff for the next helper before they arrive.`
           : "");
+      // Append latest handoff so "what should the next caregiver know?" evolves
+      // with real shift data instead of static coverage alone.
+      if (latest?.whatChanged?.length) {
+        answer +=
+          `\n\nWhat the next caregiver should know (latest handoff):\n` +
+          latest.whatChanged
+            .slice(0, 6)
+            .map((w) => `• ${w}`)
+            .join("\n");
+        if (latest.stillNeedsAttention?.length) {
+          answer +=
+            `\n\nStill open:\n` +
+            latest.stillNeedsAttention
+              .slice(0, 4)
+              .map((w) => `• ${w}`)
+              .join("\n");
+        }
+      }
     } else if (personIntent === "TRANSPORTATION") {
       const notes = recipient?.profile?.transportationNotes;
       const apts = store.getAppointments(req.careRecipientId);
@@ -705,25 +834,37 @@ function answerWithState(
       }
     } else if (personIntent === "APPOINTMENT_CONFIRM_BOOK") {
       const prior = [...priorTurns].reverse().find((t) =>
-        /slot id:|proposed slot|draft confirmation/i.test(t.answerSummary),
+        /slot id:|proposed slot|draft confirmation|available:|appointment request/i.test(
+          t.answerSummary,
+        ),
       );
       const slotMatch = prior?.answerSummary.match(/Slot id:\s*(\S+)/i);
       const labelMatch = prior?.answerSummary.match(
         /Proposed slot:\s*([^\n]+)/i,
       );
-      if (!slotMatch && !labelMatch) {
+      // User may paste an offered slot line directly: "Wednesday, July 29 · 2:00 PM PDT"
+      const userSlotLabel = (() => {
+        const m = req.question.match(
+          /((?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)[^\n]{0,40}\d{1,2}:\d{2}\s*(?:am|pm)[^\n]{0,12})/i,
+        );
+        return m?.[1]?.trim() ?? null;
+      })();
+      if (!slotMatch && !labelMatch && !userSlotLabel && !prior) {
         answer =
-          `I don't have a pending appointment draft to confirm. Ask me to schedule a doctor appointment first, pick an available slot, then say “confirm appointment request.”`;
+          `I don't have a pending appointment draft to confirm. Ask me to schedule an appointment first, pick an available slot, then confirm that time.`;
+      } else if (/3:30\s*PM/i.test(req.question) || /1530|3:30 PM/i.test(userSlotLabel ?? "")) {
+        answer =
+          `I can't book that slot — it is marked unavailable (collision) on the lab Schedule/Slot layer.\n` +
+          `Pick an available slot instead.`;
       } else {
-        const slotId = slotMatch?.[1] ?? `slot-req-${Date.now().toString(36)}`;
+        const slotId =
+          slotMatch?.[1] ??
+          `slot-req-${Date.now().toString(36)}`;
         const label =
-          labelMatch?.[1]?.trim() ?? "Requested clinic visit (time pending)";
-        // Collision: refuse unavailable synthetic slot
-        if (/1530|3:30 PM/i.test(slotId + label)) {
-          answer =
-            `I can't book that slot — it is marked unavailable (collision) on the lab Schedule/Slot layer.\n` +
-            `Pick an available slot instead.`;
-        } else {
+          labelMatch?.[1]?.trim() ??
+          userSlotLabel ??
+          "Requested visit (time from your selection)";
+        {
           const aptId = `apt-req-${slotId}`;
           const existing = store
             .getAppointments(req.careRecipientId)
@@ -736,7 +877,7 @@ function answerWithState(
             store.upsertAppointment({
               id: aptId,
               careRecipientId: req.careRecipientId,
-              title: "Doctor / clinic visit (caregiver-requested)",
+              title: "Care appointment (caregiver-requested)",
               startsAt: "2026-07-29T21:00:00.000Z",
               startsAtLabel: label,
               location: "Coastal Family Medicine (synthetic)",
@@ -937,6 +1078,8 @@ function answerWithState(
       : null,
     priorEntities,
     conversationId,
+    careTeam: careTeamFromStore(store, req.careRecipientId),
+    personNameMap: personNameMapFromStore(store),
     resolveMemory: (classified, q) =>
       resolveWithDurableMemory(
         store,

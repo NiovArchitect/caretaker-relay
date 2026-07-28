@@ -682,6 +682,38 @@ export function App() {
             .map((i) => i.label),
         ];
         setRelayHandled((prev) => [...nextHandled, ...prev].slice(0, 8));
+        // Receipt destinations → open dedicated product routes when appropriate
+        const dests = (
+          result as {
+            executionReceipt?: { screenDestinations?: string[] };
+          }
+        ).executionReceipt?.screenDestinations;
+        if (dests?.includes("people_privacy")) {
+          // Seamless handoff to People for invitation / access review
+          setTimeout(() => {
+            try {
+              (
+                document.querySelector(
+                  '[data-testid="nav-people"]',
+                ) as HTMLElement | null
+              )?.click();
+            } catch {
+              /* non-fatal */
+            }
+          }, 400);
+        } else if (dests?.includes("documents")) {
+          setTimeout(() => {
+            try {
+              (
+                document.querySelector(
+                  '[data-testid="nav-documents"], [data-testid="nav-docs"]',
+                ) as HTMLElement | null
+              )?.click();
+            } catch {
+              /* non-fatal */
+            }
+          }, 400);
+        }
         const careNoteBody =
           (result.persisted as { careNoteBody?: string } | undefined)
             ?.careNoteBody;
