@@ -244,6 +244,8 @@ export function App() {
               : `Signed in as ${s.displayName}.\n\nYou are not connected to a care recipient yet. Use an invitation or request access — I will not open anyone's care record based on a role alone.`,
           },
         ]);
+        // P0: compact layouts must surface Relay without hunting for a toggle
+        ensureRelayAvailableOnCompactLayout();
       }
     });
     return () => {
@@ -356,6 +358,8 @@ export function App() {
             },
           ]);
           setTodayRefresh((n) => n + 1);
+          // P0: open Relay drawer immediately on compact layouts after sign-in
+          window.setTimeout(() => ensureRelayAvailableOnCompactLayout(), 0);
         }}
       />
     );
@@ -384,6 +388,24 @@ export function App() {
       ) as HTMLTextAreaElement | null;
       el?.focus();
     }, 80);
+  }
+
+  /**
+   * P0 availability: on phone/tablet drawer layout, open Relay so the
+   * conversation is not off-screen by default (feels "missing").
+   * Desktop keeps the always-visible rail (open class optional).
+   */
+  function ensureRelayAvailableOnCompactLayout() {
+    try {
+      if (
+        typeof window !== "undefined" &&
+        window.matchMedia("(max-width: 1100px)").matches
+      ) {
+        setRelayOpen(true);
+      }
+    } catch {
+      /* ignore */
+    }
   }
 
   /** Product path: open Relay for ask/tell — never prefill a demo script. */

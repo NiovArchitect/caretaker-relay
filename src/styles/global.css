@@ -2224,8 +2224,13 @@ p {
   }
 }
 
-/* Phones + short landscape (large phone landscape can exceed 900px width) */
-@media (max-width: 900px), ((max-height: 500px) and (max-width: 960px)) {
+/*
+ * P0 Relay availability: drawer mode from 1100px (not only 900px).
+ * Mid-width tablets previously used a 3-column grid that could clip the
+ * Relay rail under overflow:hidden — chat felt "gone" with no open control.
+ * Phones + short landscape (large phone landscape can exceed 900px width).
+ */
+@media (max-width: 1100px), ((max-height: 500px) and (max-width: 960px)) {
   /*
    * P0 physical-phone recovery:
    * Desktop floating shell used max-width: calc(100vw - 48px) + overflow:hidden.
@@ -2470,18 +2475,22 @@ p {
   }
 
   .relay-drawer-toggle {
-    display: inline-flex;
+    display: inline-flex !important;
     align-items: center;
     gap: 6px;
     border: 1px solid var(--cr-line);
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: var(--cr-r-pill);
     padding: 8px 14px;
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--cr-accent);
-    box-shadow: var(--cr-shadow-card);
+    box-shadow: var(--cr-shadow-float);
     min-height: 44px;
+  }
+
+  .bottom-nav {
+    display: flex !important;
   }
 
   .bottom-nav {

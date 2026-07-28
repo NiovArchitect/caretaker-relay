@@ -1,0 +1,173 @@
+[
+  {
+    "label": "desktop-marcus-1366",
+    "viewport": {
+      "width": 1366,
+      "height": 900
+    },
+    "principal": "p-sadeil",
+    "consoleErrors": [],
+    "shell": true,
+    "relayPanel": true,
+    "relayPanelOpen": false,
+    "relayOpenMobile": false,
+    "composer": true,
+    "navRelay": true,
+    "bodyHasRelay": true,
+    "bounding": {
+      "x": 901,
+      "y": 97,
+      "width": 440,
+      "height": 737.703125
+    },
+    "display": {
+      "display": "flex",
+      "visibility": "visible",
+      "opacity": "1",
+      "transform": "none",
+      "width": "440px",
+      "height": "737.703px",
+      "pointerEvents": "auto",
+      "className": "relay-panel"
+    },
+    "htmlSnippet": ""
+  },
+  {
+    "label": "desktop-marcus-1440",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "principal": "p-sadeil",
+    "consoleErrors": [],
+    "shell": true,
+    "relayPanel": true,
+    "relayPanelOpen": false,
+    "relayOpenMobile": false,
+    "composer": true,
+    "navRelay": true,
+    "bodyHasRelay": true,
+    "bounding": {
+      "x": 939,
+      "y": 97,
+      "width": 440,
+      "height": 737.703125
+    },
+    "display": {
+      "display": "flex",
+      "visibility": "visible",
+      "opacity": "1",
+      "transform": "none",
+      "width": "440px",
+      "height": "737.703px",
+      "pointerEvents": "auto",
+      "className": "relay-panel"
+    },
+    "htmlSnippet": ""
+  },
+  {
+    "label": "mobile-marcus-390",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "principal": "p-sadeil",
+    "consoleErrors": [],
+    "shell": true,
+    "relayPanel": true,
+    "relayPanelOpen": false,
+    "relayOpenMobile": true,
+    "composer": false,
+    "navRelay": true,
+    "bodyHasRelay": true,
+    "bounding": {
+      "x": 390,
+      "y": 0,
+      "width": 390,
+      "height": 844
+    },
+    "display": {
+      "display": "flex",
+      "visibility": "hidden",
+      "opacity": "1",
+      "transform": "matrix(1, 0, 0, 1, 390, 0)",
+      "width": "390px",
+      "height": "844px",
+      "pointerEvents": "none",
+      "className": "relay-panel"
+    },
+    "htmlSnippet": "",
+    "composerAfterOpen": true,
+    "panelOpenAfter": true,
+    "composerAfterForceClass": true
+  },
+  {
+    "label": "mobile-walter-390",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "principal": "p-walter",
+    "consoleErrors": [],
+    "shell": true,
+    "relayPanel": true,
+    "relayPanelOpen": false,
+    "relayOpenMobile": true,
+    "composer": false,
+    "navRelay": true,
+    "bodyHasRelay": true,
+    "bounding": {
+      "x": 390,
+      "y": 0,
+      "width": 390,
+      "height": 844
+    },
+    "display": {
+      "display": "flex",
+      "visibility": "hidden",
+      "opacity": "1",
+      "transform": "matrix(1, 0, 0, 1, 390, 0)",
+      "width": "390px",
+      "height": "844px",
+      "pointerEvents": "none",
+      "className": "relay-panel"
+    },
+    "htmlSnippet": "",
+    "composerAfterOpen": true,
+    "panelOpenAfter": true,
+    "composerAfterForceClass": true
+  },
+  {
+    "label": "desktop-maya-1366",
+    "viewport": {
+      "width": 1366,
+      "height": 900
+    },
+    "principal": "p-maya",
+    "consoleErrors": [],
+    "shell": true,
+    "relayPanel": true,
+    "relayPanelOpen": false,
+    "relayOpenMobile": false,
+    "composer": true,
+    "navRelay": true,
+    "bodyHasRelay": true,
+    "bounding": {
+      "x": 901,
+      "y": 97,
+      "width": 440,
+      "height": 737.703125
+    },
+    "display": {
+      "display": "flex",
+      "visibility": "visible",
+      "opacity": "1",
+      "transform": "none",
+      "width": "440px",
+      "height": "737.703px",
+      "pointerEvents": "auto",
+      "className": "relay-panel"
+    },
+    "htmlSnippet": ""
+  }
+]
