@@ -291,7 +291,9 @@ export async function careConfirm(
   return request<{
     ok: boolean;
     kind: string;
+    message?: string;
     persisted?: unknown;
+    execution_receipt?: unknown;
     current_state?: unknown;
     evidence_mode?: string;
     durable?: boolean;

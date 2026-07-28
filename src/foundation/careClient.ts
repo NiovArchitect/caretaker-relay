@@ -894,15 +894,24 @@ export async function confirmCareUpdateAsync(
           }
         }
       }
+      const receipt = (res.data as { execution_receipt?: CareLoopResult["executionReceipt"] })
+        .execution_receipt;
+      const apiMessage =
+        typeof res.data.message === "string" && res.data.message.trim()
+          ? res.data.message
+          : receipt?.userVisibleConfirmation;
       return {
         kind: "persisted",
-        message: "Confirmed via Foundation care API.",
+        message:
+          apiMessage ??
+          `Saved for ${rid()}. Open Care and the handoff for destinations.`,
         evidenceMode:
           (res.data.evidence_mode as EvidenceMode) ??
           "SYNTHETIC_FOUNDATION_BACKED",
         auditIds: [],
         persisted,
         currentState,
+        executionReceipt: receipt,
       };
     }
   }
