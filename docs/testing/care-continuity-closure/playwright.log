@@ -1,0 +1,15 @@
+
+Running 4 tests using 1 worker
+
+(node:31621) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:31621) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › care-continuity-closure.spec.ts:51:1 › CC1 incoming handoff inbox surface (33.5s)
+  ✓  2 [chromium] › care-continuity-closure.spec.ts:135:1 › CC2 correction awareness panel (6.4s)
+  ✓  3 [chromium] › care-continuity-closure.spec.ts:147:1 › CC3 shift workspace + pre-shift briefing surface (7.0s)
+  ✓  4 [chromium] › care-continuity-closure.spec.ts:166:1 › CC4 three-shift continuity (API stages + browser answers) (33.0s)
+
+  Slow test file: [chromium] › care-continuity-closure.spec.ts (1.3m)
+  Consider splitting slow test files to speed up parallel execution
+  4 passed (1.4m)

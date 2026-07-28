@@ -1,0 +1,54 @@
+{
+  "public": "https://care.niovlabs.com",
+  "evidence": [
+    {
+      "id": "incoming_handoff_inbox",
+      "status": "PASS",
+      "inbox": true,
+      "at": "2026-07-28T00:26:25.610Z"
+    },
+    {
+      "id": "handoff_acknowledgment",
+      "status": "PASS",
+      "ackMsg": "",
+      "statusText": "Status: Acknowledged",
+      "detail": true,
+      "latencyMs": 26808,
+      "at": "2026-07-28T00:26:25.610Z"
+    },
+    {
+      "id": "correction_awareness",
+      "status": "PASS",
+      "panel": true,
+      "med": true,
+      "at": "2026-07-28T00:26:34.884Z"
+    },
+    {
+      "id": "shift_workspace",
+      "status": "PASS",
+      "ws": true,
+      "prep": false,
+      "active": true,
+      "empty": false,
+      "inbox": true,
+      "at": "2026-07-28T00:26:41.787Z"
+    },
+    {
+      "id": "rich_pre_shift_or_active",
+      "status": "PASS",
+      "prep": false,
+      "active": true,
+      "at": "2026-07-28T00:26:41.787Z"
+    },
+    {
+      "id": "three_shift_continuity",
+      "status": "PARTIAL",
+      "answers": [
+        "rapy: around 3:00 PM\nWhat Relay organized\nCalm after breakfast\nMobility assistance provided\nNeed help?\n\nAsk about Evelyn Carter's care or share what you observed.\n\n✦\nAsk or update Relay\n⇄\nCare handoff",
+        "rapy: around 3:00 PM\nWhat Relay organized\nCalm after breakfast\nMobility assistance provided\nNeed help?\n\nAsk about Evelyn Carter's care or share what you observed.\n\n✦\nAsk or update Relay\n⇄\nCare handoff"
+      ],
+      "staticSame": true,
+      "at": "2026-07-28T00:27:13.241Z"
+    }
+  ]
+}

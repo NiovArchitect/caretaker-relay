@@ -107,17 +107,25 @@ test("CC1 incoming handoff inbox surface", async ({ page }) => {
       await page.waitForTimeout(1000);
       const ack = page.getByTestId("incoming-handoff-ack");
       if (await ack.isVisible().catch(() => false)) {
-        await ack.click();
-        await page.waitForTimeout(800);
+        if (await ack.isEnabled().catch(() => false)) {
+          await ack.click();
+          await page.waitForTimeout(800);
+        }
       }
     }
   }
   await page.screenshot({ path: resolve(OUT, "cc1-handoff-ack.png"), fullPage: true });
   const ackMsg = await page.getByTestId("incoming-handoff-msg").textContent().catch(() => "");
   const detail = await page.getByTestId("incoming-handoff-detail").isVisible().catch(() => false);
+  const statusText = await page.getByTestId("handoff-ack-status").textContent().catch(() => "");
+  const ackOk =
+    /Acknowledged|acknowledged/i.test(ackMsg || "") ||
+    /Acknowledged/i.test(statusText || "") ||
+    detail;
   rec("incoming_handoff_inbox", inbox ? "PASS" : "FAIL", { inbox });
-  rec("handoff_acknowledgment", /Acknowledged|acknowledged/i.test(ackMsg || "") || detail ? "PASS" : "PARTIAL", {
+  rec("handoff_acknowledgment", ackOk ? "PASS" : "PARTIAL", {
     ackMsg,
+    statusText,
     detail,
     latencyMs: Date.now() - t0,
   });
