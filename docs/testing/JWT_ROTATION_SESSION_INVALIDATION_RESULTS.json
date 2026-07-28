@@ -1,0 +1,64 @@
+{
+  "started": "2026-07-28T18:52:59Z",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "gates": {
+    "no_auth": {
+      "status": 401,
+      "reject": true
+    },
+    "empty": {
+      "status": 401,
+      "reject": true,
+      "code": "SESSION_INVALID"
+    },
+    "garbage": {
+      "status": 401,
+      "reject": true,
+      "code": "SESSION_INVALID"
+    },
+    "forged_hs": {
+      "status": 401,
+      "reject": true,
+      "code": "SESSION_INVALID"
+    },
+    "pre_rotation_placeholder": {
+      "status": 401,
+      "reject": true,
+      "code": "SESSION_INVALID"
+    },
+    "forged_write": {
+      "status": 401,
+      "reject": true,
+      "code": "SESSION_INVALID"
+    },
+    "new_login": {
+      "status": 200,
+      "ok": true,
+      "auth_mode": "foundation_auth_service"
+    },
+    "valid_today": {
+      "status": 200,
+      "ok": true
+    },
+    "valid_understand": {
+      "status": 200,
+      "ok": true,
+      "evidence_mode": "FIXTURE",
+      "kind": "verify"
+    },
+    "forced_llm_when_unapproved": {
+      "status": 500,
+      "blocked_or_fixture": true,
+      "code": null,
+      "evidence_mode": null
+    }
+  },
+  "summary": {
+    "OLD_JWT_ACCEPTED": 0,
+    "STALE_WRITES_AFTER_TOKEN_FAILURE": 0,
+    "NEW_LOGIN": "PASS",
+    "VALID_SESSION": "PASS",
+    "note": "Pre-rotation tokens unavailable after incident; forged/invalid tokens proven rejected; new login proven"
+  },
+  "finished": "2026-07-28T18:53:02Z"
+}

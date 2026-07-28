@@ -1,7 +1,7 @@
 {
-  "started": "2026-07-28T17:42:40.270Z",
-  "marker": "R2Rms4y1kem",
-  "report": "Please add Allegra 60mg for allergies. Case R2Rms4y1kem",
+  "started": "2026-07-28T18:56:22.893Z",
+  "marker": "R2Rms50ocx9",
+  "report": "Please add Allegra 60mg for allergies. Case R2Rms50ocx9",
   "api": "https://caretaker-relay-care-api.onrender.com",
   "app": "https://care.niovlabs.com",
   "gates": {
@@ -33,7 +33,7 @@
     "planChanged": false,
     "result": "pending_review",
     "events": [
-      "evt-6pd7xsb0-ms4y1mb1"
+      "evt-fim141mu-ms50oehm"
     ],
     "handoffId": "ho-l7bddw4p-ms4a7vzu"
   },
@@ -49,7 +49,7 @@
   "destination_matched": 6,
   "destination_declared": 6,
   "cross_screen_rate": 1,
-  "finished": "2026-07-28T17:43:49.348Z",
+  "finished": "2026-07-28T18:57:30.069Z",
   "summary": {
     "receipt_ok": true,
     "plan_ok": true,
