@@ -1,0 +1,237 @@
+{
+  "started": "2026-07-28T17:42:38.841Z",
+  "marker": "ms4xq93r",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "families": [
+    {
+      "id": "med_plan_change",
+      "interpretation": true,
+      "execution": true,
+      "persistence": true,
+      "destinations": true,
+      "plan_safe": true,
+      "causation_ok": true,
+      "message": "I saved a report for Evelyn Carter that needs verification (not an active medication-plan change): Medication change needs verification: Allegra · reported dose",
+      "dest": [
+        "care_pending_med_changes",
+        "today_attention",
+        "open_work",
+        "handoff",
+        "notifications",
+        "relay_retrieval"
+      ],
+      "result": "pending_review"
+    },
+    {
+      "id": "med_admin",
+      "interpretation": true,
+      "execution": true,
+      "persistence": true,
+      "destinations": true,
+      "plan_safe": true,
+      "causation_ok": true,
+      "message": "I recorded this for Evelyn Carter: Breakfast / meal around 9:00; Metformin marked as given (500mg) for Evelyn Carter. It is on the care record and included for ",
+      "dest": [
+        "care_timeline",
+        "today_glance",
+        "handoff",
+        "relay_retrieval",
+        "care_medications"
+      ],
+      "result": "saved"
+    },
+    {
+      "id": "med_refusal",
+      "interpretation": true,
+      "execution": true,
+      "persistence": true,
+      "destinations": true,
+      "plan_safe": true,
+      "causation_ok": true,
+      "message": "I recorded this for Evelyn Carter: Caregiver reported: Evening refused for Evelyn Carter; Caregiver reported: refused offered support. It is on the care record ",
+      "dest": [
+        "care_medications",
+        "today_attention",
+        "handoff",
+        "relay_retrieval"
+      ],
+      "result": "saved"
+    },
+    {
+      "id": "med_effect",
+      "interpretation": true,
+      "execution": true,
+      "persistence": true,
+      "destinations": true,
+      "plan_safe": true,
+      "causation_ok": true,
+      "message": "I recorded this for Evelyn Carter: Marcus Carter reported that Evelyn Carter experienced dizzy after Advil. Reported association only — not a clinical determina",
+      "dest": [
+        "care_observations",
+        "today_attention",
+        "handoff",
+        "relay_retrieval"
+      ],
+      "result": "saved"
+    },
+    {
+      "id": "symptom",
+      "interpretation": true,
+      "execution": true,
+      "persistence": true,
+      "destinations": true,
+      "plan_safe": true,
+      "causation_ok": true,
+      "message": "I recorded this for Evelyn Carter: Caregiver reported: fever / elevated temperature for Evelyn Carter. It is on the care record and included for the next caregi",
+      "dest": [
+        "care_observations",
+        "today_glance",
+        "handoff",
+        "relay_retrieval"
+      ],
+      "result": "saved"
+    },
+    {
+      "id": "meal",
+      "interpretation": true,
+      "execution": true,
+      "persistence": true,
+      "destinations": true,
+      "plan_safe": true,
+      "causation_ok": true,
+      "message": "I recorded this for Evelyn Carter: Meal around noon. It is on the care record and included for the next caregiver handoff.",
+      "dest": [
+        "care_timeline",
+        "today_glance",
+        "handoff",
+        "relay_retrieval"
+      ],
+      "result": "saved"
+    },
+    {
+      "id": "transport",
+      "interpretation": true,
+      "execution": true,
+      "persistence": true,
+      "destinations": true,
+      "plan_safe": true,
+      "causation_ok": true,
+      "message": "I recorded this for Evelyn Carter: Appointment time changed; Confirm transportation. It is on the care record and included for the next caregiver handoff.",
+      "dest": [
+        "schedule",
+        "today_glance",
+        "handoff",
+        "relay_retrieval",
+        "open_work",
+        "today_attention"
+      ],
+      "result": "saved"
+    },
+    {
+      "id": "task",
+      "interpretation": true,
+      "execution": true,
+      "persistence": true,
+      "destinations": true,
+      "plan_safe": true,
+      "causation_ok": true,
+      "message": "I recorded this for Evelyn Carter: Caregiver reported: mobility observation. It is on the care record and included for the next caregiver handoff.",
+      "dest": [
+        "care_observations",
+        "today_glance",
+        "handoff",
+        "relay_retrieval"
+      ],
+      "result": "saved"
+    },
+    {
+      "id": "invite",
+      "interpretation": true,
+      "execution": true,
+      "persistence": true,
+      "destinations": true,
+      "plan_safe": true,
+      "causation_ok": true,
+      "message": "I created a People invitation for Evelyn Carter: Invite helper: Maya Bennett · role: Family / friend caregiver · scope: help care for Evelyn Carter · People inv",
+      "dest": [
+        "notifications",
+        "relay_retrieval",
+        "people_privacy",
+        "open_work"
+      ],
+      "result": "saved"
+    },
+    {
+      "id": "access_change",
+      "interpretation": true,
+      "execution": true,
+      "persistence": true,
+      "destinations": true,
+      "plan_safe": true,
+      "causation_ok": true,
+      "message": "I saved an access change request for Evelyn Carter. Open People and Privacy to review who can help; open work was created for follow-up.",
+      "dest": [
+        "notifications",
+        "relay_retrieval",
+        "people_privacy",
+        "open_work"
+      ],
+      "result": "saved"
+    },
+    {
+      "id": "access_request",
+      "interpretation": true,
+      "execution": true,
+      "persistence": true,
+      "destinations": true,
+      "plan_safe": true,
+      "causation_ok": true,
+      "message": "I recorded this for Evelyn Carter: Access request: relationship friend · reason: I need access as a friend to help with Evelyn. Family ms4xq93r · Privacy review",
+      "dest": [
+        "notifications",
+        "relay_retrieval",
+        "people_privacy",
+        "open_work"
+      ],
+      "result": "saved"
+    },
+    {
+      "id": "document_ingest",
+      "interpretation": true,
+      "execution": true,
+      "persistence": true,
+      "destinations": true,
+      "plan_safe": true,
+      "causation_ok": true,
+      "message": "I saved a document for Evelyn Carter and extracted proposed facts only. Open Documents to confirm or reject each proposal — nothing becomes care truth until aut",
+      "dest": [
+        "care_timeline",
+        "relay_retrieval",
+        "documents",
+        "open_work"
+      ],
+      "result": "saved"
+    }
+  ],
+  "rates": {
+    "interpretation": 1,
+    "execution": 1,
+    "persistence": 1,
+    "destinations": 1,
+    "plan_safe": 1,
+    "causation_ok": 1
+  },
+  "access_lifecycle": {
+    "create": true,
+    "list": true,
+    "decide": true,
+    "detail": "create status 201 id ar-jowgoxyn-ms4y1frs decide denied"
+  },
+  "document_lifecycle": {
+    "ingest": true,
+    "proposals": 2,
+    "reject": true,
+    "detail": "proposals 2 reject true"
+  },
+  "finished": "2026-07-28T17:42:38.851Z"
+}
