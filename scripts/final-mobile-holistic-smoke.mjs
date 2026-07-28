@@ -126,41 +126,39 @@ try {
     if (space.status === 201 && space.body.care_recipient_id) {
       RID = space.body.care_recipient_id;
       mode = "isolated_register";
-      // Invite DSPs
+      // Invite DSPs (accept by invitation token)
+      evidence.stages.invites = [];
       for (const d of [dsp1, dsp2, dsp3]) {
+        // Ensure person exists for invitee (register creates account; store person may lag)
         const inv = await req(`/api/v1/care/recipients/${RID}/invitations`, {
           method: "POST",
           token: coord.token,
           body: {
             invitee_care_person_id: d.carePersonId,
             invitee_display_name: d.displayName,
+            role: "direct_support_professional",
             role_label: "Direct support professional",
           },
         });
-        // accept if invitation id returned
-        const invId = inv.body.invitation?.id || inv.body.id;
-        if (invId) {
-          await req(`/api/v1/care/invitations/${invId}/accept`, {
+        const token =
+          inv.body.invitation?.token ||
+          inv.body.token ||
+          inv.body.invitation?.id;
+        let accStatus = 0;
+        if (token) {
+          const acc = await req(`/api/v1/care/invitations/${token}/accept`, {
             method: "POST",
             token: d.token,
             body: {},
           });
-        } else {
-          // fallback: some APIs list then accept
-          const list = await req(`/api/v1/care/recipients/${RID}/invitations`, {
-            token: d.token,
-          });
-          const mine = (list.body.invitations || []).find(
-            (i) => i.invitee_care_person_id === d.carePersonId,
-          );
-          if (mine?.id) {
-            await req(`/api/v1/care/invitations/${mine.id}/accept`, {
-              method: "POST",
-              token: d.token,
-              body: {},
-            });
-          }
+          accStatus = acc.status;
         }
+        evidence.stages.invites.push({
+          person: d.carePersonId,
+          invStatus: inv.status,
+          invCode: inv.body.code,
+          accStatus,
+        });
       }
     }
   }
