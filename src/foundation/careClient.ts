@@ -1349,11 +1349,21 @@ export async function fetchTodayProjection(): Promise<{
       const res = await careToday(httpToken, rid());
       if (res.ok) {
         const t = res.data.today;
+        const pendingTasks =
+          t.tasks
+            ?.filter((x) => x.status === "pending")
+            .map((x) => x.title) ?? [];
+        const handoffNeeds = t.latest_handoff?.stillNeedsAttention ?? [];
+        // Receipt→reality: stillNeeds and pending verification belong in attention
         const needsYou = [
           ...(t.open_safety_reviews?.map((r) => r.reason) ?? []),
-          ...(t.tasks
-            ?.filter((x) => x.status === "pending")
-            .map((x) => x.title) ?? []),
+          ...pendingTasks,
+          ...handoffNeeds.filter(
+            (line) =>
+              /medication change needs verification|needs an owner|supply|refill|refused|missed/i.test(
+                line,
+              ) && !pendingTasks.some((p) => p === line),
+          ),
         ];
         const whatChanged =
           t.events?.slice(-6).map((e) => {
@@ -1373,7 +1383,7 @@ export async function fetchTodayProjection(): Promise<{
           attention: buildAttentionFromLines(needsYou),
           whatChanged,
           handled: t.latest_handoff?.whatChanged ?? [],
-          next: t.latest_handoff?.stillNeedsAttention ?? [],
+          next: handoffNeeds,
           source: "http",
           storeBackend: res.data.store_backend,
           organizedCount: whatChanged.length,
@@ -1389,11 +1399,20 @@ export async function fetchTodayProjection(): Promise<{
     const res = await careToday(httpToken, rid());
     if (res.ok) {
       const t = res.data.today;
+      const pendingTasks =
+        t.tasks
+          ?.filter((x) => x.status === "pending")
+          .map((x) => x.title) ?? [];
+      const handoffNeeds = t.latest_handoff?.stillNeedsAttention ?? [];
       const needsYou = [
         ...(t.open_safety_reviews?.map((r) => r.reason) ?? []),
-        ...(t.tasks
-          ?.filter((x) => x.status === "pending")
-          .map((x) => x.title) ?? []),
+        ...pendingTasks,
+        ...handoffNeeds.filter(
+          (line) =>
+            /medication change needs verification|needs an owner|supply|refill|refused|missed/i.test(
+              line,
+            ) && !pendingTasks.some((p) => p === line),
+        ),
       ];
       const whatChanged = [
         ...(t.events?.slice(-6).map((e) => {

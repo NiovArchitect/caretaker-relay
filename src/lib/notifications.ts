@@ -148,6 +148,10 @@ export function buildAttentionNotifications(input: {
   }
 
   for (const line of input.next.slice(0, 3)) {
+    if (/medication change needs verification|needs an owner|supply|refill/i.test(line)) {
+      // already represented via attention for med change; skip duplicate next cards
+      continue;
+    }
     if (/appoint|therapy|pt|visit/i.test(line)) {
       out.push({
         id: `next-apt-${line.slice(0, 24)}`,
