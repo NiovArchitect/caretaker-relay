@@ -14,8 +14,10 @@ import {
   clarifyOpenWork,
   confirmScheduleProposal,
   declineOpenWork,
+  escalateOpenWork,
   listOpenWork,
   listScheduleProposals,
+  reassignOpenWork,
   rejectScheduleProposal,
   type OpenWorkItem,
   type ScheduleProposal,
@@ -135,6 +137,45 @@ export function IncomingHandoffInbox({
       return;
     }
     setMsg("Clarification requested. Original task details stay on file.");
+    await load();
+  }
+
+  async function doEscalate(workId: string) {
+    setBusy(true);
+    const res = await escalateOpenWork(rid, workId, {
+      reason: "No acceptance before deadline — escalate for care continuity",
+      alternate_person_id: "p-sadeil",
+      alternate_display_name: "Marcus Carter",
+    });
+    setBusy(false);
+    if (!res.ok) {
+      setMsg(res.message ?? "Could not escalate");
+      return;
+    }
+    setMsg(
+      res.message ??
+        "Escalated. Task remains open. Authorized helpers were notified.",
+    );
+    await load();
+  }
+
+  async function doReassign(workId: string) {
+    // Coordinator path: offer to primary family controller when DSP declines
+    setBusy(true);
+    const res = await reassignOpenWork(rid, workId, {
+      new_owner_person_id: "p-sadeil",
+      new_owner_display_name: "Marcus Carter",
+      note: "Offered after decline — they must accept",
+    });
+    setBusy(false);
+    if (!res.ok) {
+      setMsg(res.message ?? "Could not reassign");
+      return;
+    }
+    setMsg(
+      res.message ??
+        "Reassignment proposed. New owner must accept — not automatic.",
+    );
     await load();
   }
 
@@ -372,6 +413,24 @@ export function IncomingHandoffInbox({
                         onClick={() => void doClarify(w.id)}
                       >
                         Ask for clarification
+                      </button>
+                      <button
+                        type="button"
+                        className="secondary-btn"
+                        data-testid={`open-work-reassign-${w.id}`}
+                        disabled={busy}
+                        onClick={() => void doReassign(w.id)}
+                      >
+                        Offer to coordinator
+                      </button>
+                      <button
+                        type="button"
+                        className="secondary-btn"
+                        data-testid={`open-work-escalate-${w.id}`}
+                        disabled={busy}
+                        onClick={() => void doEscalate(w.id)}
+                      >
+                        Escalate (still open)
                       </button>
                       {mine && (
                         <span className="muted" data-testid="open-work-you-accepted">

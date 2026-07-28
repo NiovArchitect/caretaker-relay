@@ -4089,3 +4089,53 @@ p {
 .cr-logo-stacked[data-logo-mode="soft-translucent-production"] .cr-logo-wordmark-refined {
   font-size: 1.22rem;
 }
+
+/* ── Open-work / schedule actions — mobile-first care operations ── */
+[data-testid="incoming-handoff-inbox"] .btn-row,
+[data-testid="correction-awareness-panel"] .btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: stretch;
+}
+
+[data-testid="incoming-handoff-inbox"] .primary-btn,
+[data-testid="incoming-handoff-inbox"] .secondary-btn,
+[data-testid="correction-awareness-panel"] .primary-btn {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 10px 14px;
+  touch-action: manipulation;
+}
+
+@media (max-width: 480px) {
+  [data-testid="incoming-handoff-inbox"] .btn-row {
+    flex-direction: column;
+  }
+  [data-testid="incoming-handoff-inbox"] .primary-btn,
+  [data-testid="incoming-handoff-inbox"] .secondary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  [data-testid="incoming-work-owners"] li.surface-soft {
+    padding: 14px;
+  }
+  /* Role-aware priority: open work + corrections first on phone */
+  [data-testid="incoming-handoff-inbox"] {
+    order: -1;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  [data-testid="incoming-handoff-inbox"] .btn-row {
+    gap: 10px;
+  }
+}
+
+/* Keyboard focus visible for new operational controls */
+[data-testid^="open-work-"] :focus-visible,
+[data-testid^="schedule-"] :focus-visible,
+[data-testid="correction-ack-btn"]:focus-visible {
+  outline: 2px solid #2a6f97;
+  outline-offset: 2px;
+}

@@ -80,6 +80,54 @@ export async function declineOpenWork(
   return { ok: true as const, work_item: res.data.work_item, message: res.data.message };
 }
 
+export async function reassignOpenWork(
+  careRecipientId: string,
+  workId: string,
+  input: {
+    new_owner_person_id: string;
+    new_owner_display_name?: string;
+    note?: string;
+  },
+) {
+  const token = tokenFromSession();
+  if (!token) return { ok: false as const, message: "Not signed in" };
+  const res = await careHttpJson<{
+    ok: boolean;
+    work_item?: OpenWorkItem;
+    message?: string;
+    code?: string;
+  }>(
+    `/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/work-items/${encodeURIComponent(workId)}/reassign`,
+    { method: "POST", token, body: input },
+  );
+  if (!res.ok) return { ok: false as const, message: res.message, code: res.code };
+  return { ok: true as const, work_item: res.data.work_item, message: res.data.message };
+}
+
+export async function escalateOpenWork(
+  careRecipientId: string,
+  workId: string,
+  input?: {
+    reason?: string;
+    alternate_person_id?: string;
+    alternate_display_name?: string;
+  },
+) {
+  const token = tokenFromSession();
+  if (!token) return { ok: false as const, message: "Not signed in" };
+  const res = await careHttpJson<{
+    ok: boolean;
+    work_item?: OpenWorkItem;
+    message?: string;
+    code?: string;
+  }>(
+    `/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/work-items/${encodeURIComponent(workId)}/escalate`,
+    { method: "POST", token, body: input ?? {} },
+  );
+  if (!res.ok) return { ok: false as const, message: res.message, code: res.code };
+  return { ok: true as const, work_item: res.data.work_item, message: res.data.message };
+}
+
 export async function clarifyOpenWork(
   careRecipientId: string,
   workId: string,
