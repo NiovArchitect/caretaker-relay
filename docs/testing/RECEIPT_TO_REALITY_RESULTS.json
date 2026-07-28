@@ -1,0 +1,62 @@
+{
+  "started": "2026-07-28T06:51:20.201Z",
+  "marker": "R2Rms4ary15",
+  "report": "Please add Allegra 60mg for allergies. Case R2Rms4ary15",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "app": "https://care.niovlabs.com",
+  "gates": {
+    "receipt_created": true,
+    "plan_unchanged": true,
+    "false_success": false,
+    "api_today_or_handoff": true,
+    "api_open_work": true,
+    "api_notifications": true,
+    "browser_today": true,
+    "browser_care": true,
+    "browser_plan_not_active_order": true,
+    "browser_relay_retrieval": true,
+    "next_shift_visible": true
+  },
+  "receipt": {
+    "message": "I saved a report for Evelyn Carter that needs verification (not an active medication-plan change): Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for Evelyn Car",
+    "destinations": [
+      "care_pending_med_changes",
+      "today_attention",
+      "open_work",
+      "handoff",
+      "notifications",
+      "relay_retrieval"
+    ],
+    "still": [
+      "Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+    ],
+    "planChanged": false,
+    "result": "pending_review",
+    "events": [
+      "evt-54jnczmf-ms4arzdg"
+    ],
+    "handoffId": "ho-l7bddw4p-ms4a7vzu"
+  },
+  "destination_proof": {
+    "today_attention": true,
+    "open_work": true,
+    "handoff": true,
+    "notifications": true,
+    "relay_retrieval": true,
+    "care_pending_med_changes": true
+  },
+  "destination_pass_count": 6,
+  "destination_matched": 6,
+  "destination_declared": 6,
+  "cross_screen_rate": 1,
+  "finished": "2026-07-28T06:52:20.066Z",
+  "summary": {
+    "receipt_ok": true,
+    "plan_ok": true,
+    "browser_today": true,
+    "open_work": true,
+    "next_shift": true,
+    "relay": true,
+    "cross_screen_rate": 1
+  }
+}
