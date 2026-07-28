@@ -1,7 +1,7 @@
 {
-  "started": "2026-07-28T19:23:18.737Z",
-  "marker": "R2Rms51mzpt",
-  "report": "Please add Allegra 60mg for allergies. Case R2Rms51mzpt",
+  "started": "2026-07-28T19:46:44.543Z",
+  "marker": "R2Rms52h4fz",
+  "report": "Please add Allegra 60mg for allergies. Case R2Rms52h4fz",
   "api": "https://caretaker-relay-care-api.onrender.com",
   "app": "https://care.niovlabs.com",
   "gates": {
@@ -18,7 +18,7 @@
     "next_shift_visible": true
   },
   "receipt": {
-    "message": "I saved a report for Evelyn Carter that needs verification (not an active medication-plan change): Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for Evelyn Car",
+    "message": "I saved a report for Evelyn Carter that needs verification (not an active medication-plan change): Medication change needs verification: Please add Allegra 60mg for allergies.; Medication change needs",
     "destinations": [
       "care_pending_med_changes",
       "today_attention",
@@ -28,14 +28,16 @@
       "relay_retrieval"
     ],
     "still": [
+      "Medication change needs verification: Please add Allegra 60mg for allergies.",
       "Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
     ],
     "planChanged": false,
     "result": "pending_review",
     "events": [
-      "evt-9fmau2se-ms51n187"
+      "evt-024yn2af-ms52hakf",
+      "evt-fny0k7yt-ms52hb6n"
     ],
-    "handoffId": "ho-l7bddw4p-ms4a7vzu"
+    "handoffId": "ho-nsc57s7f-ms52hb6n"
   },
   "destination_proof": {
     "today_attention": true,
@@ -49,7 +51,7 @@
   "destination_matched": 6,
   "destination_declared": 6,
   "cross_screen_rate": 1,
-  "finished": "2026-07-28T19:24:20.902Z",
+  "finished": "2026-07-28T19:47:49.072Z",
   "summary": {
     "receipt_ok": true,
     "plan_ok": true,
