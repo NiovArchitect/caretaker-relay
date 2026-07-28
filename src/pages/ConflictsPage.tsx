@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import { getSessionIdentity } from "../foundation/careClient";
 import { loadActiveCareRecipientId } from "../lib/careContext";
 import { careHttpJson } from "../foundation/careHttpClient";
+import {
+  formatCareDateTimeRecent,
+  humanCareLine,
+} from "../lib/humanCopy";
 
 type CareConflict = {
   id: string;
@@ -102,19 +106,23 @@ export function ConflictsPage() {
         )}
         {conflicts.map((c) => (
           <li key={c.id} className="surface-known" data-testid={`conflict-${c.id}`}>
-            <strong>{c.title}</strong>
-            <div className="badge badge-teal">{c.kind}</div>
-            <p>{c.summary}</p>
-            <p className="attention-limit">{c.whyCannotDecide}</p>
+            <strong>{humanCareLine(c.title)}</strong>
+            <div className="badge badge-teal">{humanCareLine(c.kind)}</div>
+            <p>{humanCareLine(c.summary)}</p>
+            <p className="attention-limit">{humanCareLine(c.whyCannotDecide)}</p>
             <ul className="list-plain">
               {c.sides.map((s, i) => (
                 <li key={i}>
-                  Side {i + 1}: {s.statement}
+                  Side {i + 1}: {humanCareLine(s.statement)}
                   <div className="muted">
-                    {s.actor}
-                    {s.eventAt ? ` · event ${s.eventAt}` : ""}
-                    {s.reportAt ? ` · reported ${s.reportAt}` : ""}
-                    {s.confidence ? ` · ${s.confidence}` : ""}
+                    {s.actor ? humanCareLine(s.actor) : ""}
+                    {s.eventAt
+                      ? ` · event ${formatCareDateTimeRecent(s.eventAt) || humanCareLine(s.eventAt)}`
+                      : ""}
+                    {s.reportAt
+                      ? ` · reported ${formatCareDateTimeRecent(s.reportAt) || humanCareLine(s.reportAt)}`
+                      : ""}
+                    {s.confidence ? ` · ${humanCareLine(s.confidence)}` : ""}
                   </div>
                   {c.status === "open" && (
                     <button
@@ -130,7 +138,7 @@ export function ConflictsPage() {
               ))}
             </ul>
             {c.resolution && (
-              <p className="muted">Resolution: {c.resolution}</p>
+              <p className="muted">Resolution: {humanCareLine(c.resolution)}</p>
             )}
           </li>
         ))}
