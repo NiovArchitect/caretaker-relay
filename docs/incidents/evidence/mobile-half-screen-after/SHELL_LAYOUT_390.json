@@ -1,0 +1,63 @@
+{
+  "viewport": "390x844",
+  "route": "today",
+  "innerWidth": 390,
+  "innerHeight": 844,
+  "scrollW": 390,
+  "clientW": 390,
+  "bodyScrollW": 390,
+  "vvWidth": 390,
+  "vvHeight": 844,
+  "shell": {
+    "width": 390,
+    "height": 10327.8,
+    "left": 0,
+    "maxWidth": "100%",
+    "overflow": "hidden auto",
+    "overflowX": "hidden",
+    "minWidth": "0px",
+    "gridTemplateColumns": "390px"
+  },
+  "main": {
+    "width": 390,
+    "height": 10190.8,
+    "left": 0,
+    "maxWidth": "100%",
+    "overflow": "hidden auto",
+    "overflowX": "hidden",
+    "minWidth": "0px",
+    "gridTemplateColumns": "none"
+  },
+  "topbar": {
+    "width": 390,
+    "height": 72,
+    "left": 0,
+    "maxWidth": "100%",
+    "overflow": "visible",
+    "overflowX": "visible",
+    "minWidth": "0px",
+    "gridTemplateColumns": "none"
+  },
+  "bottomNav": {
+    "width": 390,
+    "height": 65,
+    "left": 0,
+    "maxWidth": "100%",
+    "overflow": "visible",
+    "overflowX": "visible",
+    "minWidth": "0px",
+    "gridTemplateColumns": "none"
+  },
+  "hasCrShell": false,
+  "overflows": [],
+  "overflowCount": 0,
+  "residue": {
+    "iso": 0,
+    "enums": 0,
+    "tags": 4
+  },
+  "pass": true,
+  "shellOk": true,
+  "mainOk": true,
+  "scrollOk": true
+}

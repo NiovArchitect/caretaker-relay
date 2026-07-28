@@ -119,3 +119,88 @@ export function stripEmDashes(text: string): string {
     .replace(/\s{2,}/g, " ")
     .trim();
 }
+
+/** Strip lab/smoke run tags and probe markers from ordinary product copy. */
+export function stripLabResidue(text: string): string {
+  return String(text ?? "")
+    .replace(/\[[\s]*?(HOL|FMH|JL|AZ|PROBE|SEED|SMOKE)[^\]]*\]/gi, "")
+    .replace(/\b(HOLms|FMHms|JLms|AZms)\w*\b/gi, "")
+    .replace(/\bPROBESEED\b/gi, "")
+    .replace(/\b(JL-SMOKE|PROBE|SEED|SMOKE)[-_]?\w*/gi, "")
+    .replace(/\bTransport\s+PROBE\w*/gi, "Transportation")
+    .replace(/\bavailable_to_claim\b/gi, "Needs an owner")
+    .replace(/\bwork_item\b/gi, "open work")
+    .replace(/\bcare_event\b/gi, "care event")
+    .replace(/\bsource_type\b/gi, "source")
+    // Raw ISO timestamps embedded in free text
+    .replace(
+      /\b\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?\b/g,
+      (iso) => {
+        try {
+          return formatCareInstantLayered(iso) || "recently";
+        } catch {
+          return "recently";
+        }
+      },
+    )
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s+([,.;:])/g, "$1")
+    .trim();
+}
+
+/** Map internal work-item status enums to plain care language. */
+export function workStatusLabel(status: unknown): string {
+  switch (String(status ?? "").toLowerCase()) {
+    case "available_to_claim":
+    case "unassigned":
+      return "Needs an owner";
+    case "claimed":
+    case "assigned":
+      return "Assigned";
+    case "accepted":
+      return "Accepted";
+    case "in_progress":
+      return "In progress";
+    case "declined":
+      return "Declined — still needs an owner";
+    case "blocked":
+    case "clarification_required":
+    case "correction_required":
+      return "Needs clarification";
+    case "escalated":
+      return "Escalating";
+    case "completed":
+      return "Completed";
+    case "cancelled":
+    case "canceled":
+      return "Cancelled";
+    case "awaiting_approval":
+    case "awaiting_external_confirmation":
+    case "provider_confirmation_pending":
+      return "Waiting for provider confirmation";
+    case "expired":
+    case "missed":
+      return "Past due";
+    default:
+      return status ? String(status).replace(/_/g, " ") : "Open";
+  }
+}
+
+/** Map notification / event source_type to human labels. */
+export function sourceTypeLabel(raw: unknown): string {
+  const s = String(raw ?? "").toLowerCase();
+  if (!s || s === "care") return "Care update";
+  if (s === "work_item") return "Open work";
+  if (s === "care_event" || s === "event") return "Care event";
+  if (s === "handoff") return "Handoff";
+  if (s === "correction") return "Correction";
+  if (s === "schedule_proposal" || s === "schedule") return "Schedule";
+  if (s === "notification") return "Notification";
+  return s.replace(/_/g, " ");
+}
+
+/** Format any free-text care line for ordinary UI (no enums, no smoke tags). */
+export function humanCareLine(text: unknown): string {
+  return stripLabResidue(String(text ?? ""));
+}
+

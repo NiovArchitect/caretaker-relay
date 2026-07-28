@@ -1,0 +1,1522 @@
+[
+  {
+    "vp": {
+      "name": "320x568",
+      "w": 320,
+      "h": 568
+    },
+    "scrollWidth": 320,
+    "clientWidth": 320,
+    "bodyScrollWidth": 320,
+    "innerWidth": 320,
+    "visualViewportWidth": 320,
+    "visualViewportHeight": 568,
+    "overflowPx": 0,
+    "hasCrShell": false,
+    "appShellClass": "app-shell cr-stage",
+    "overflowCount": 336,
+    "topOverflows": [
+      {
+        "tag": "HEADER",
+        "testid": null,
+        "cls": "topbar",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "sticky",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "MAIN",
+        "testid": null,
+        "cls": "workspace",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "NAV",
+        "testid": null,
+        "cls": "bottom-nav",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "static",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": "active-recipient-surface",
+        "cls": "workspace-inner",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "today-hero",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": "coordination-inbox",
+        "cls": "section surface-verify",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": "needs-attention-section",
+        "cls": "section section-hero surface-verify",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "pair-grid",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      }
+    ],
+    "ok": true
+  },
+  {
+    "vp": {
+      "name": "360x800",
+      "w": 360,
+      "h": 800
+    },
+    "scrollWidth": 360,
+    "clientWidth": 360,
+    "bodyScrollWidth": 360,
+    "innerWidth": 360,
+    "visualViewportWidth": 360,
+    "visualViewportHeight": 800,
+    "overflowPx": 0,
+    "hasCrShell": false,
+    "appShellClass": "app-shell cr-stage",
+    "overflowCount": 320,
+    "topOverflows": [
+      {
+        "tag": "HEADER",
+        "testid": null,
+        "cls": "topbar",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "sticky",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "MAIN",
+        "testid": null,
+        "cls": "workspace",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "NAV",
+        "testid": null,
+        "cls": "bottom-nav",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "static",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": "active-recipient-surface",
+        "cls": "workspace-inner",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "today-hero",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": "coordination-inbox",
+        "cls": "section surface-verify",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": "needs-attention-section",
+        "cls": "section section-hero surface-verify",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "pair-grid",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      }
+    ],
+    "ok": true
+  },
+  {
+    "vp": {
+      "name": "375x667",
+      "w": 375,
+      "h": 667
+    },
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "bodyScrollWidth": 375,
+    "innerWidth": 375,
+    "visualViewportWidth": 375,
+    "visualViewportHeight": 667,
+    "overflowPx": 0,
+    "hasCrShell": false,
+    "appShellClass": "app-shell cr-stage",
+    "overflowCount": 258,
+    "topOverflows": [
+      {
+        "tag": "HEADER",
+        "testid": null,
+        "cls": "topbar",
+        "left": 0,
+        "right": 634,
+        "width": 634,
+        "position": "sticky",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "MAIN",
+        "testid": null,
+        "cls": "workspace",
+        "left": 0,
+        "right": 634,
+        "width": 634,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "NAV",
+        "testid": null,
+        "cls": "bottom-nav",
+        "left": 0,
+        "right": 634,
+        "width": 634,
+        "position": "static",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": "active-recipient-surface",
+        "cls": "workspace-inner",
+        "left": 16,
+        "right": 618,
+        "width": 602,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "today-hero",
+        "left": 16,
+        "right": 618,
+        "width": 602,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": "needs-attention-section",
+        "cls": "section section-hero surface-verify",
+        "left": 16,
+        "right": 618,
+        "width": 602,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 618,
+        "width": 602,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 618,
+        "width": 602,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "pair-grid",
+        "left": 16,
+        "right": 618,
+        "width": 602,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 618,
+        "width": 602,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 618,
+        "width": 602,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "H2",
+        "testid": null,
+        "cls": "",
+        "left": 41,
+        "right": 593,
+        "width": 552,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      }
+    ],
+    "ok": true
+  },
+  {
+    "vp": {
+      "name": "390x844",
+      "w": 390,
+      "h": 844
+    },
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "bodyScrollWidth": 390,
+    "innerWidth": 390,
+    "visualViewportWidth": 390,
+    "visualViewportHeight": 844,
+    "overflowPx": 0,
+    "hasCrShell": false,
+    "appShellClass": "app-shell cr-stage",
+    "overflowCount": 318,
+    "topOverflows": [
+      {
+        "tag": "HEADER",
+        "testid": null,
+        "cls": "topbar",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "sticky",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "MAIN",
+        "testid": null,
+        "cls": "workspace",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "NAV",
+        "testid": null,
+        "cls": "bottom-nav",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "static",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": "active-recipient-surface",
+        "cls": "workspace-inner",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "today-hero",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": "coordination-inbox",
+        "cls": "section surface-verify",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": "needs-attention-section",
+        "cls": "section section-hero surface-verify",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "pair-grid",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      }
+    ],
+    "ok": true
+  },
+  {
+    "vp": {
+      "name": "393x852",
+      "w": 393,
+      "h": 852
+    },
+    "scrollWidth": 393,
+    "clientWidth": 393,
+    "bodyScrollWidth": 393,
+    "innerWidth": 393,
+    "visualViewportWidth": 393,
+    "visualViewportHeight": 852,
+    "overflowPx": 0,
+    "hasCrShell": false,
+    "appShellClass": "app-shell cr-stage",
+    "overflowCount": 318,
+    "topOverflows": [
+      {
+        "tag": "HEADER",
+        "testid": null,
+        "cls": "topbar",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "sticky",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "MAIN",
+        "testid": null,
+        "cls": "workspace",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "NAV",
+        "testid": null,
+        "cls": "bottom-nav",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "static",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": "active-recipient-surface",
+        "cls": "workspace-inner",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "today-hero",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": "coordination-inbox",
+        "cls": "section surface-verify",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": "needs-attention-section",
+        "cls": "section section-hero surface-verify",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "pair-grid",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      }
+    ],
+    "ok": true
+  },
+  {
+    "vp": {
+      "name": "412x915",
+      "w": 412,
+      "h": 915
+    },
+    "scrollWidth": 412,
+    "clientWidth": 412,
+    "bodyScrollWidth": 412,
+    "innerWidth": 412,
+    "visualViewportWidth": 412,
+    "visualViewportHeight": 915,
+    "overflowPx": 0,
+    "hasCrShell": false,
+    "appShellClass": "app-shell cr-stage",
+    "overflowCount": 316,
+    "topOverflows": [
+      {
+        "tag": "HEADER",
+        "testid": null,
+        "cls": "topbar",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "sticky",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "MAIN",
+        "testid": null,
+        "cls": "workspace",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "NAV",
+        "testid": null,
+        "cls": "bottom-nav",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "static",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": "active-recipient-surface",
+        "cls": "workspace-inner",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "today-hero",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": "coordination-inbox",
+        "cls": "section surface-verify",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": "needs-attention-section",
+        "cls": "section section-hero surface-verify",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "pair-grid",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      }
+    ],
+    "ok": true
+  },
+  {
+    "vp": {
+      "name": "430x932",
+      "w": 430,
+      "h": 932
+    },
+    "scrollWidth": 430,
+    "clientWidth": 430,
+    "bodyScrollWidth": 430,
+    "innerWidth": 430,
+    "visualViewportWidth": 430,
+    "visualViewportHeight": 932,
+    "overflowPx": 0,
+    "hasCrShell": false,
+    "appShellClass": "app-shell cr-stage",
+    "overflowCount": 310,
+    "topOverflows": [
+      {
+        "tag": "HEADER",
+        "testid": null,
+        "cls": "topbar",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "sticky",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "MAIN",
+        "testid": null,
+        "cls": "workspace",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "NAV",
+        "testid": null,
+        "cls": "bottom-nav",
+        "left": 0,
+        "right": 701,
+        "width": 701,
+        "position": "static",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": "active-recipient-surface",
+        "cls": "workspace-inner",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "today-hero",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": "coordination-inbox",
+        "cls": "section surface-verify",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": "needs-attention-section",
+        "cls": "section section-hero surface-verify",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "pair-grid",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 685,
+        "width": 669,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      }
+    ],
+    "ok": true
+  },
+  {
+    "vp": {
+      "name": "568x320",
+      "w": 568,
+      "h": 320
+    },
+    "scrollWidth": 568,
+    "clientWidth": 568,
+    "bodyScrollWidth": 568,
+    "innerWidth": 568,
+    "visualViewportWidth": 568,
+    "visualViewportHeight": 320,
+    "overflowPx": 0,
+    "hasCrShell": false,
+    "appShellClass": "app-shell cr-stage",
+    "overflowCount": 286,
+    "topOverflows": [
+      {
+        "tag": "HEADER",
+        "testid": null,
+        "cls": "topbar",
+        "left": 0,
+        "right": 773,
+        "width": 773,
+        "position": "sticky",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "MAIN",
+        "testid": null,
+        "cls": "workspace",
+        "left": 0,
+        "right": 773,
+        "width": 773,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "NAV",
+        "testid": null,
+        "cls": "bottom-nav",
+        "left": 0,
+        "right": 773,
+        "width": 773,
+        "position": "static",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": "active-recipient-surface",
+        "cls": "workspace-inner",
+        "left": 16,
+        "right": 757,
+        "width": 741,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "today-hero",
+        "left": 16,
+        "right": 757,
+        "width": 741,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": "coordination-inbox",
+        "cls": "section surface-verify",
+        "left": 16,
+        "right": 757,
+        "width": 741,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": "needs-attention-section",
+        "cls": "section section-hero surface-verify",
+        "left": 16,
+        "right": 757,
+        "width": 741,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 757,
+        "width": 741,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-reported",
+        "left": 16,
+        "right": 757,
+        "width": 741,
+        "position": "relative",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "pair-grid",
+        "left": 16,
+        "right": 757,
+        "width": 741,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 757,
+        "width": 741,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "SECTION",
+        "testid": null,
+        "cls": "section surface-known",
+        "left": 16,
+        "right": 757,
+        "width": 741,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      }
+    ],
+    "ok": true
+  },
+  {
+    "vp": {
+      "name": "844x390",
+      "w": 844,
+      "h": 390
+    },
+    "scrollWidth": 844,
+    "clientWidth": 844,
+    "bodyScrollWidth": 844,
+    "innerWidth": 844,
+    "visualViewportWidth": 844,
+    "visualViewportHeight": 390,
+    "overflowPx": 0,
+    "hasCrShell": false,
+    "appShellClass": "app-shell cr-stage",
+    "overflowCount": 19,
+    "topOverflows": [
+      {
+        "tag": "ASIDE",
+        "testid": "relay-panel",
+        "cls": "relay-panel",
+        "left": 817,
+        "right": 1237,
+        "width": 420,
+        "position": "fixed",
+        "minWidth": "0px",
+        "transform": "matrix(1, 0, 0, 1, 441, 0)"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "relay-panel-header",
+        "left": 818,
+        "right": 1237,
+        "width": 419,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "relay-mode-tabs",
+        "left": 818,
+        "right": 1237,
+        "width": 419,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": "relay-thread",
+        "cls": "relay-thread",
+        "left": 818,
+        "right": 1237,
+        "width": 419,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": "composer-dock",
+        "cls": "relay-composer-wrap",
+        "left": 818,
+        "right": 1237,
+        "width": 419,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "bubble bubble-relay",
+        "left": 834,
+        "right": 1221,
+        "width": 387,
+        "position": "static",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "testid": null,
+        "cls": "muted relay-hint-copy",
+        "left": 834,
+        "right": 1221,
+        "width": 387,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "FORM",
+        "testid": null,
+        "cls": "composer",
+        "left": 834,
+        "right": 1221,
+        "width": 387,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "",
+        "left": 838,
+        "right": 1169,
+        "width": 331,
+        "position": "static",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "relay-panel-title",
+        "left": 838,
+        "right": 1169,
+        "width": 331,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": "relay-role-tone",
+        "cls": "relay-panel-sub",
+        "left": 838,
+        "right": 1169,
+        "width": 331,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "BUTTON",
+        "testid": "relay-mode-ai",
+        "cls": "tab is-active",
+        "left": 834,
+        "right": 1025,
+        "width": 191,
+        "position": "static",
+        "minWidth": "auto",
+        "transform": "none"
+      }
+    ],
+    "ok": true
+  },
+  {
+    "vp": {
+      "name": "768x1024",
+      "w": 768,
+      "h": 1024
+    },
+    "scrollWidth": 768,
+    "clientWidth": 768,
+    "bodyScrollWidth": 768,
+    "innerWidth": 768,
+    "visualViewportWidth": 768,
+    "visualViewportHeight": 1024,
+    "overflowPx": 0,
+    "hasCrShell": false,
+    "appShellClass": "app-shell cr-stage",
+    "overflowCount": 22,
+    "topOverflows": [
+      {
+        "tag": "HEADER",
+        "testid": null,
+        "cls": "topbar",
+        "left": 0,
+        "right": 773,
+        "width": 773,
+        "position": "sticky",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "MAIN",
+        "testid": null,
+        "cls": "workspace",
+        "left": 0,
+        "right": 773,
+        "width": 773,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "NAV",
+        "testid": null,
+        "cls": "bottom-nav",
+        "left": 0,
+        "right": 773,
+        "width": 773,
+        "position": "static",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "ASIDE",
+        "testid": "relay-panel",
+        "cls": "relay-panel",
+        "left": 741,
+        "right": 1161,
+        "width": 420,
+        "position": "fixed",
+        "minWidth": "0px",
+        "transform": "matrix(1, 0, 0, 1, 441, 0)"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "relay-panel-header",
+        "left": 742,
+        "right": 1161,
+        "width": 419,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "relay-mode-tabs",
+        "left": 742,
+        "right": 1161,
+        "width": 419,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": "relay-thread",
+        "cls": "relay-thread",
+        "left": 742,
+        "right": 1161,
+        "width": 419,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": "composer-dock",
+        "cls": "relay-composer-wrap",
+        "left": 742,
+        "right": 1161,
+        "width": 419,
+        "position": "relative",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "bubble bubble-relay",
+        "left": 758,
+        "right": 1145,
+        "width": 387,
+        "position": "static",
+        "minWidth": "auto",
+        "transform": "none"
+      },
+      {
+        "tag": "P",
+        "testid": null,
+        "cls": "muted relay-hint-copy",
+        "left": 758,
+        "right": 1145,
+        "width": 387,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "FORM",
+        "testid": null,
+        "cls": "composer",
+        "left": 758,
+        "right": 1145,
+        "width": 387,
+        "position": "static",
+        "minWidth": "0px",
+        "transform": "none"
+      },
+      {
+        "tag": "DIV",
+        "testid": null,
+        "cls": "",
+        "left": 762,
+        "right": 1093,
+        "width": 331,
+        "position": "static",
+        "minWidth": "auto",
+        "transform": "none"
+      }
+    ],
+    "ok": true
+  }
+]

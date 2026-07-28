@@ -1,0 +1,475 @@
+{
+  "base": "https://care.niovlabs.com",
+  "counts": {
+    "rawIso": 272,
+    "rawUuids": 0,
+    "internalEnums": 184,
+    "undefinedNull": 0,
+    "milliseconds": 0,
+    "timezoneCodes": 289,
+    "sectionTitles": 2981
+  },
+  "duplicateSectionTitles": [
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Evelyn Carter",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Family caregiver",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Medication needs verification",
+      "count": 3
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Transportation incomplete [HOLms3z1b0u-S1]",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Helping now: Marcus Carter · Primary family caregiver",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Claim",
+      "count": 12
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Ask or update Relay",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|CARE UPDATE",
+      "count": 8
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Needs an owner",
+      "count": 4
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Mobility check [FMHms3zsotg-S3]",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Source: work_item · Daniel Kim",
+      "count": 4
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Mark seen",
+      "count": 12
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Resolve",
+      "count": 8
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Shift handoff",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Source: care_event · Daniel Kim",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Needs attention",
+      "count": 3
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Medication",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Urgent care attention",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Open medication",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Needs verification",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Hydration",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Review in Care",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Morning report",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|landing-today|Relay",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Evelyn Carter",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Family caregiver",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Medication needs verification",
+      "count": 3
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Transportation incomplete [HOLms3z1b0u-S1]",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Helping now: Marcus Carter · Primary family caregiver",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Claim",
+      "count": 12
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Ask or update Relay",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|CARE UPDATE",
+      "count": 8
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Needs an owner",
+      "count": 4
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Mobility check [FMHms3zsotg-S3]",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Source: work_item · Daniel Kim",
+      "count": 4
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Mark seen",
+      "count": 12
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Resolve",
+      "count": 8
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Shift handoff",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Source: care_event · Daniel Kim",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Needs attention",
+      "count": 3
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Medication",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Urgent care attention",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Open medication",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Needs verification",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Hydration",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Review in Care",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Morning report",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|today|Relay",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|care|Evelyn Carter",
+      "count": 2
+    },
+    {
+      "key": "marcus-caregiver-desktop-1366|care|Handoff waiting",
+      "count": 8
+    }
+  ],
+  "sampleIso": [
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "2026-07-28T18:00:00Z"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "2026-07-28T15:30:53.282Z"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "2026-07-28T15:00:52.811Z"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "2026-07-28T02:14:30"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "2026-07-28T02:14:28"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "2026-07-28T02:14:27"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "2026-07-28T02:14:25"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "2026-07-28T02:14:20"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "2026-07-28T02:14:16"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "2026-07-28T02:14:15"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "2026-07-28T02:14:14"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "2026-07-28T15:00:52.811Z"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "2026-07-28T15:30:53.282Z"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "2026-07-28T18:00:00Z"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "today",
+      "value": "2026-07-28T18:00:00Z"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "today",
+      "value": "2026-07-28T15:30:53.282Z"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "today",
+      "value": "2026-07-28T15:00:52.811Z"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "today",
+      "value": "2026-07-28T02:14:30"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "today",
+      "value": "2026-07-28T02:14:28"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "today",
+      "value": "2026-07-28T02:14:27"
+    }
+  ],
+  "sampleIds": [],
+  "sampleEnums": [
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "landing-today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "today",
+      "value": "available_to_claim"
+    },
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "screen": "today",
+      "value": "available_to_claim"
+    }
+  ],
+  "personas": [
+    {
+      "persona": "marcus-caregiver-desktop-1366",
+      "recipientLabel": "Evelyn Carter",
+      "screens": 6,
+      "errors": [
+        "nav missing: nav-relay"
+      ]
+    },
+    {
+      "persona": "maya-caregiver-desktop-1366",
+      "recipientLabel": "Evelyn Carter",
+      "screens": 6,
+      "errors": [
+        "nav missing: nav-relay"
+      ]
+    },
+    {
+      "persona": "daniel-dsp-desktop-1366",
+      "recipientLabel": "Evelyn Carter",
+      "screens": 3,
+      "errors": [
+        "nav missing: nav-care",
+        "nav missing: nav-people",
+        "nav missing: nav-documents",
+        "nav missing: nav-relay"
+      ]
+    },
+    {
+      "persona": "marcus-caregiver-mobile-390",
+      "recipientLabel": "Evelyn Carter",
+      "screens": 6,
+      "errors": [
+        "nav missing: nav-privacy"
+      ]
+    },
+    {
+      "persona": "maya-caregiver-mobile-390",
+      "recipientLabel": "Evelyn Carter",
+      "screens": 6,
+      "errors": [
+        "nav missing: nav-privacy"
+      ]
+    },
+    {
+      "persona": "daniel-dsp-mobile-390",
+      "recipientLabel": "Evelyn Carter",
+      "screens": 3,
+      "errors": [
+        "nav missing: nav-care",
+        "nav missing: nav-people",
+        "nav missing: nav-privacy",
+        "nav missing: nav-documents"
+      ]
+    }
+  ]
+}

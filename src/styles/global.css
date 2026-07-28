@@ -2197,24 +2197,183 @@ p {
   }
 }
 
-@media (max-width: 900px) {
+/* Phones + short landscape (large phone landscape can exceed 900px width) */
+@media (max-width: 900px), ((max-height: 500px) and (max-width: 960px)) {
+  /*
+   * P0 physical-phone recovery:
+   * Desktop floating shell used max-width: calc(100vw - 48px) + overflow:hidden.
+   * On a 390px phone that clipped a ~700px-wide main to 342px — half the UI gone.
+   * Force full viewport width and min-width:0 on every grid child.
+   */
   .app-shell[data-testid="app-shell"]:not(:has(.cr-shell)) {
-    width: 100%;
-    margin: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
     min-height: 100dvh;
+    min-height: 100svh;
     border-radius: 0;
     border: none;
     box-shadow: none;
-    grid-template-columns: 1fr;
-    grid-template-rows: var(--cr-top-h) 1fr auto;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: var(--cr-top-h) minmax(0, 1fr) auto;
     grid-template-areas:
       "top"
       "main"
       "nav";
+    overflow-x: clip !important;
+    overflow-y: auto !important;
+    box-sizing: border-box;
+  }
+
+  .app-shell[data-testid="app-shell"]:not(:has(.cr-shell)) > .topbar,
+  .app-shell[data-testid="app-shell"]:not(:has(.cr-shell)) > .workspace,
+  .app-shell[data-testid="app-shell"]:not(:has(.cr-shell)) > main,
+  .app-shell[data-testid="app-shell"]:not(:has(.cr-shell)) > .bottom-nav {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box;
+  }
+
+  .workspace,
+  main.workspace {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+    /* room for bottom nav + home indicator */
+    padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .workspace-inner,
+  .section,
+  .attention-card,
+  .member-card,
+  .document-card,
+  .today-scan-cell,
+  .today-command-cell,
+  .coord-layout,
+  .pair-grid,
+  .item-title,
+  .attention-body,
+  .list-plain,
+  .timeline-item,
+  .meta-time,
+  .btn-row,
+  .surface-soft {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Prevent unbreakable strings from expanding the shell */
+  .workspace p,
+  .workspace li,
+  .workspace h1,
+  .workspace h2,
+  .workspace h3,
+  .workspace h4,
+  .workspace span,
+  .workspace label,
+  .topbar span,
+  .topbar strong {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  img,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Dialogs / modals stay inside visual viewport */
+  [role="dialog"],
+  .modal,
+  .cr-modal,
+  .dialog-panel {
+    max-width: min(100vw - 24px, 520px) !important;
+    max-height: min(100dvh - 32px, 90svh) !important;
+    overflow: auto;
+    box-sizing: border-box;
+  }
+
+  .topbar {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding-left: max(12px, env(safe-area-inset-left, 0px));
+    padding-right: max(12px, env(safe-area-inset-right, 0px));
+    padding-top: env(safe-area-inset-top, 0px);
+    gap: 8px;
+    overflow: visible;
+  }
+
+  .topbar-center {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    justify-content: flex-start;
+  }
+
+  .recipient-chip {
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    padding-right: 12px;
+  }
+
+  .recipient-chip-text {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .recipient-chip-name,
+  .recipient-chip-kicker,
+  .recipient-chip-role {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .topbar-date {
+    display: none;
+  }
+
+  .topbar-right {
+    flex: 0 0 auto;
+    min-width: 0;
+    gap: 6px;
+    z-index: 5;
+    position: relative;
+  }
+
+  .session-label {
+    display: none;
+  }
+
+  .relay-drawer-toggle {
+    position: relative;
+    z-index: 6;
+    flex-shrink: 0;
   }
 
   .sidenav {
-    display: none;
+    display: none !important;
+  }
+
+  .bottom-nav {
+    position: sticky;
+    bottom: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
   }
 
   .relay-panel {
@@ -2222,14 +2381,18 @@ p {
     top: 0;
     right: 0;
     bottom: 0;
-    width: min(100%, 420px);
+    left: auto;
+    width: min(100%, 100vw) !important;
+    max-width: 100vw !important;
     max-height: none;
+    height: 100dvh !important;
+    height: 100svh !important;
     z-index: 50;
-    transform: translateX(105%);
+    transform: translateX(100%);
     transition:
       transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
       box-shadow 0.24s ease;
-    border-radius: var(--cr-r-lg) 0 0 var(--cr-r-lg);
+    border-radius: 0;
     box-shadow: var(--cr-shadow-float);
     /* Closed drawer must not intercept topbar / bottom-nav taps */
     pointer-events: none;
@@ -2240,10 +2403,26 @@ p {
     transform: translateX(0);
     pointer-events: auto;
     visibility: visible;
+    width: 100% !important;
+    max-width: 100vw !important;
     box-shadow:
       -12px 0 48px rgba(20, 60, 90, 0.16),
       var(--cr-shadow-float);
     border-left: 1px solid var(--cr-glass-edge);
+  }
+
+  /* Landscape phones: keep single column; prevent horizontal shell */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .app-shell[data-testid="app-shell"]:not(:has(.cr-shell)) {
+      grid-template-rows: 56px minmax(0, 1fr) auto;
+    }
+    .topbar {
+      height: 56px;
+    }
+    .workspace,
+    main.workspace {
+      padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+    }
   }
 
   .relay-panel.is-open .relay-panel-header {

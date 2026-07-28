@@ -25,7 +25,12 @@ import {
   severityClass,
 } from "../lib/notifications";
 import { resolveCareSpace, loadActiveCareRecipientId } from "../lib/careContext";
-import { formatCareDateTimeRecent } from "../lib/humanCopy";
+import {
+  formatCareDateTimeRecent,
+  humanCareLine,
+  sourceTypeLabel,
+  workStatusLabel,
+} from "../lib/humanCopy";
 import { OnboardingWizard } from "../components/OnboardingWizard";
 import {
   loadOnboardingDraft,
@@ -405,7 +410,7 @@ export function TodayPage({
             <h2>Clinical trends (evidence-linked)</h2>
             <ul className="list-plain">
               {serverProjection.clinical.trends.map((b) => (
-                <li key={b}>{b}</li>
+                <li key={b}>{humanCareLine(b)}</li>
               ))}
             </ul>
           </div>
@@ -426,21 +431,25 @@ export function TodayPage({
                 id: "needs",
                 title: "What needs you today",
                 count: notifications.length,
-                summary:
+                summary: humanCareLine(
                   notifications.length === 0
                     ? "Nothing urgent"
                     : notifications[0]?.title ??
                       `${notifications.length} item(s)`,
+                ),
                 body: (
                   <ul className="list-plain">
                     {notifications.length === 0 ? (
                       <li className="muted">No urgent items right now.</li>
                     ) : (
-                      notifications.slice(0, 8).map((n) => (
+                      notifications.slice(0, 5).map((n) => (
                         <li key={n.id}>
-                          <strong>{n.title}</strong>
+                          <strong>{humanCareLine(n.title)}</strong>
                           {n.description ? (
-                            <span className="muted"> — {n.description}</span>
+                            <span className="muted">
+                              {" "}
+                              — {humanCareLine(n.description)}
+                            </span>
                           ) : null}
                         </li>
                       ))
@@ -452,7 +461,9 @@ export function TodayPage({
                 id: "appointments",
                 title: "Appointments & transport",
                 count: next.length,
-                summary: next[0] ?? "Nothing scheduled on Today",
+                summary: humanCareLine(
+                  next[0] ?? "Nothing scheduled on Today",
+                ),
                 body: (
                   <ul className="list-plain">
                     {next.length === 0 ? (
@@ -460,12 +471,14 @@ export function TodayPage({
                         No upcoming items listed. Open Care for the full schedule.
                       </li>
                     ) : (
-                      next.map((line) => <li key={line}>{line}</li>)
+                      next.map((line) => (
+                        <li key={line}>{humanCareLine(line)}</li>
+                      ))
                     )}
-                    {sinceVisit?.upcoming?.slice(0, 4).map((u) => (
+                    {sinceVisit?.upcoming?.slice(0, 3).map((u) => (
                       <li key={`${u.title}-${u.when}`}>
-                        {u.title} · {u.when}{" "}
-                        <span className="muted">({u.calendarTruth})</span>
+                        {humanCareLine(u.title)} ·{" "}
+                        {formatCareDateTimeRecent(u.when) || humanCareLine(u.when)}
                       </li>
                     ))}
                   </ul>
@@ -475,11 +488,12 @@ export function TodayPage({
                 id: "wellbeing",
                 title: "Meals, mobility, mood",
                 count: whatChanged.length,
-                summary:
+                summary: humanCareLine(
                   whatChanged[0] ??
-                  (organizedCount
-                    ? `${organizedCount} updates on file`
-                    : "No new wellbeing notes"),
+                    (organizedCount
+                      ? `${organizedCount} updates on file`
+                      : "No new wellbeing notes"),
+                ),
                 body: (
                   <ul className="list-plain">
                     {whatChanged.length === 0 ? (
@@ -487,13 +501,13 @@ export function TodayPage({
                         No new meal, mobility, or mood notes on Today.
                       </li>
                     ) : (
-                      whatChanged.slice(0, 8).map((line) => (
-                        <li key={line}>{line}</li>
+                      whatChanged.slice(0, 5).map((line) => (
+                        <li key={line}>{humanCareLine(line)}</li>
                       ))
                     )}
                     {handled.length > 0 && (
                       <li className="muted">
-                        Already handled: {handled[0]}
+                        Already handled: {humanCareLine(handled[0])}
                       </li>
                     )}
                   </ul>
@@ -503,9 +517,10 @@ export function TodayPage({
                 id: "helpers",
                 title: "Who is helping next",
                 count: coverageSummary ? 1 : 0,
-                summary:
+                summary: humanCareLine(
                   coverageSummary.split("\n")[0] ||
-                  "Open People for the authorized care circle",
+                    "Open People for the authorized care circle",
+                ),
                 body: (
                   <pre
                     style={{
@@ -515,8 +530,10 @@ export function TodayPage({
                       fontSize: "0.9rem",
                     }}
                   >
-                    {coverageSummary ||
-                      "No coverage summary yet. Open People to see authorized helpers."}
+                    {humanCareLine(
+                      coverageSummary ||
+                        "No coverage summary yet. Open People to see authorized helpers.",
+                    )}
                   </pre>
                 ),
               },
@@ -583,31 +600,34 @@ export function TodayPage({
           >
             <h2>Since you were last here</h2>
             <p className="muted" data-testid="since-last-visit-summary">
-              {sinceVisit.plainSummary}
+              {humanCareLine(sinceVisit.plainSummary)}
             </p>
             {sinceVisit.whatChanged.length > 0 && (
               <ul className="list-plain" data-testid="since-last-visit-changes">
                 {sinceVisit.whatChanged.slice(0, 6).map((c, i) => (
                   <li key={`${c.text}-${i}`}>
                     <span className="badge badge-teal" data-testid="evidence-label">
-                      {c.evidence}
+                      {humanCareLine(c.evidence)}
                     </span>{" "}
-                    {c.text}
+                    {humanCareLine(c.text)}
                   </li>
                 ))}
               </ul>
             )}
             {sinceVisit.handoffSummary && (
               <p className="muted" data-testid="since-last-visit-handoff">
-                {sinceVisit.handoffSummary}
+                {humanCareLine(sinceVisit.handoffSummary)}
               </p>
             )}
             {sinceVisit.upcoming.length > 0 && (
               <ul className="list-plain" data-testid="calendar-truth-list">
                 {sinceVisit.upcoming.slice(0, 4).map((u) => (
                   <li key={`${u.title}-${u.when}`}>
-                    {u.title} · {u.when}{" "}
-                    <span className="muted">({u.calendarTruth})</span>
+                    {humanCareLine(u.title)} ·{" "}
+                    {formatCareDateTimeRecent(u.when) || humanCareLine(u.when)}{" "}
+                    <span className="muted">
+                      ({humanCareLine(u.calendarTruth)})
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -643,14 +663,14 @@ export function TodayPage({
                   (w, i, arr) =>
                     arr.findIndex((x) => x.id === w.id) === i,
                 )
-                .slice(0, 12)
+                .slice(0, 6)
                 .map((w) => {
                   const id = String(w.id ?? "");
-                  const action = String(w.action ?? "Care task");
+                  const action = humanCareLine(w.action ?? "Care task");
                   const status = String(w.status ?? "");
                   const owner =
-                    String(w.ownerDisplayName ?? w.ownerPersonId ?? "") ||
-                    "Unassigned";
+                    String(w.ownerDisplayName ?? "") ||
+                    (w.ownerPersonId ? "Assigned helper" : "Unassigned");
                   const claimable =
                     !w.ownerPersonId ||
                     status === "available_to_claim" ||
@@ -671,8 +691,10 @@ export function TodayPage({
                       <span>
                         <strong>{action}</strong>{" "}
                         <span className="muted">
-                          · {owner} · {status}
-                          {w.priority ? ` · ${String(w.priority)}` : ""}
+                          · {owner} · {workStatusLabel(status)}
+                          {w.priority && String(w.priority) !== "normal"
+                            ? ` · ${String(w.priority)} priority`
+                            : ""}
                         </span>
                       </span>
                       {claimable && (
@@ -821,14 +843,16 @@ export function TodayPage({
               unless configured.
             </p>
             <ul className="list-plain" data-testid="notification-ops-list">
-              {notifOps.map((n) => (
+              {notifOps.slice(0, 5).map((n) => (
                 <li key={n.id}>
-                  <strong>{n.title}</strong>{" "}
-                  <span className="muted">{n.plainStatus}</span>
+                  <strong>{humanCareLine(n.title)}</strong>{" "}
+                  <span className="muted">
+                    {humanCareLine(n.plainStatus)}
+                  </span>
                   {n.noResponse ? (
                     <span className="badge" data-testid="notif-no-response">
                       {" "}
-                      no response
+                      awaiting response
                     </span>
                   ) : null}
                 </li>
@@ -905,13 +929,14 @@ export function TodayPage({
                 .join("; ") || "see Care"}
             </li>
             <li>
-              <strong>Next:</strong> {next[0] ?? "Nothing scheduled on Today"}
+              <strong>Next:</strong>{" "}
+              {humanCareLine(next[0] ?? "Nothing scheduled on Today")}
             </li>
             <li>
               <strong>Attention:</strong>{" "}
               {notifications.length === 0
                 ? "Nothing urgent"
-                : notifications[0]?.title}
+                : humanCareLine(notifications[0]?.title)}
             </li>
           </ul>
           {coverageSummary ? (
@@ -922,6 +947,7 @@ export function TodayPage({
             >
               <strong>Who is helping</strong>
               <pre
+                data-testid="coverage-summary-text"
                 style={{
                   margin: "8px 0 0",
                   whiteSpace: "pre-wrap",
@@ -929,7 +955,7 @@ export function TodayPage({
                   fontSize: "0.9rem",
                 }}
               >
-                {coverageSummary}
+                {humanCareLine(coverageSummary)}
               </pre>
               {/maya|next/i.test(coverageSummary) && (
                 <p className="muted" style={{ marginBottom: 0, fontSize: "0.85rem" }}>
@@ -1015,7 +1041,7 @@ export function TodayPage({
                 {(proj?.needsYou?.length ? proj.needsYou : ["None flagged"])
                   .slice(0, 4)
                   .map((line) => (
-                    <li key={line}>{line}</li>
+                    <li key={line}>{humanCareLine(line)}</li>
                   ))}
               </ul>
             </div>
@@ -1025,7 +1051,7 @@ export function TodayPage({
                 {(whatChanged.length ? whatChanged : ["None listed"])
                   .slice(0, 5)
                   .map((line) => (
-                    <li key={line}>{line}</li>
+                    <li key={line}>{humanCareLine(line)}</li>
                   ))}
               </ul>
             </div>
@@ -1107,11 +1133,15 @@ export function TodayPage({
                       {when ? ` · ${when}` : ""}
                     </span>
                   </div>
-                  <h3 className="item-title">{String(n.title)}</h3>
-                  <p className="attention-body">{String(n.body)}</p>
+                  <h3 className="item-title">
+                    {humanCareLine(n.title)}
+                  </h3>
+                  <p className="attention-body">
+                    {humanCareLine(n.body)}
+                  </p>
                   <p className="muted meta-time">
-                    Source: {String(n.source_type ?? "care")} ·{" "}
-                    {String(n.actor_display_name ?? "System")}
+                    From {sourceTypeLabel(n.source_type)} ·{" "}
+                    {String(n.actor_display_name ?? "Care team")}
                   </p>
                   <div className="btn-row">
                     <button
@@ -1303,7 +1333,9 @@ export function TodayPage({
               Open Care for medications and appointments, or ask Relay.
             </li>
           ) : (
-            next.map((line) => <li key={line}>{line}</li>)
+            next.slice(0, 5).map((line) => (
+              <li key={line}>{humanCareLine(line)}</li>
+            ))
           )}
         </ul>
       </section>
@@ -1320,9 +1352,9 @@ export function TodayPage({
           {whatChanged.length === 0 ? (
             <p className="muted">No recent changes recorded yet.</p>
           ) : (
-            whatChanged.map((line) => (
+            whatChanged.slice(0, 6).map((line) => (
               <div key={line} className="timeline-item">
-                {line}
+                {humanCareLine(line)}
               </div>
             ))
           )}
@@ -1336,7 +1368,9 @@ export function TodayPage({
             {handled.length === 0 ? (
               <li className="muted">Nothing listed yet</li>
             ) : (
-              handled.map((line) => <li key={line}>{line}</li>)
+              handled.slice(0, 5).map((line) => (
+                <li key={line}>{humanCareLine(line)}</li>
+              ))
             )}
           </ul>
         </section>

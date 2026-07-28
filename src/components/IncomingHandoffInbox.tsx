@@ -24,6 +24,11 @@ import {
 } from "../foundation/careOpenWork";
 import { getSessionIdentity } from "../foundation/careClient";
 import { loadActiveCareRecipientId, resolveCareSpace } from "../lib/careContext";
+import {
+  formatCareDateTimeRecent,
+  humanCareLine,
+  workStatusLabel,
+} from "../lib/humanCopy";
 import { resolvePersonName } from "../lib/identity";
 
 export function IncomingHandoffInbox({
@@ -304,7 +309,9 @@ export function IncomingHandoffInbox({
             {(packet.stillNeedsAttention ?? []).length === 0 ? (
               <li className="muted">Nothing listed</li>
             ) : (
-              (packet.stillNeedsAttention ?? []).map((x) => <li key={x}>{x}</li>)
+              (packet.stillNeedsAttention ?? []).map((x) => (
+                <li key={x}>{humanCareLine(x)}</li>
+              ))
             )}
           </ul>
 
@@ -339,23 +346,19 @@ export function IncomingHandoffInbox({
                   style={{ marginBottom: 10, padding: 12 }}
                   data-testid={`open-work-item-${w.id}`}
                 >
-                  <strong>{w.action}</strong>
+                  <strong>{humanCareLine(w.action)}</strong>
                   <div className="muted">
                     Due:{" "}
                     {w.dueAt
-                      ? new Date(w.dueAt).toLocaleString(undefined, {
-                          weekday: "short",
-                          hour: "numeric",
-                          minute: "2-digit",
-                        })
+                      ? formatCareDateTimeRecent(String(w.dueAt)) || "When able"
                       : "When able"}
                   </div>
                   <div className="muted">
                     Current owner: {w.ownerDisplayName ?? "Unassigned"} ·{" "}
-                    {w.status}
+                    {workStatusLabel(w.status)}
                   </div>
                   <div className="muted">
-                    Source: handoff open work · why it matters: care continuity
+                    From open work · keeps care continuous across helpers
                   </div>
                   {confirmWorkId === w.id ? (
                     <div className="btn-row" style={{ marginTop: 8 }}>
