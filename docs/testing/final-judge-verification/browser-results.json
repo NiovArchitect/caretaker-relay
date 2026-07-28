@@ -1,0 +1,82 @@
+{
+  "public": "https://care.niovlabs.com",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "results": [
+    {
+      "id": "login_first_paint",
+      "status": "PASS",
+      "ms": 611,
+      "at": "2026-07-27T15:30:22.139Z"
+    },
+    {
+      "id": "no_blank_screen",
+      "status": "PASS",
+      "backgroundColor": "rgb(243, 246, 248)",
+      "at": "2026-07-27T15:30:22.152Z"
+    },
+    {
+      "id": "family_login",
+      "status": "PASS",
+      "ms": 898,
+      "hasShell": true,
+      "hasNav": false,
+      "hasGate": false,
+      "hasError": false,
+      "recipient": "Evelyn Carter",
+      "classification": "OK",
+      "at": "2026-07-27T15:30:25.661Z"
+    },
+    {
+      "id": "family_today",
+      "status": "PASS",
+      "recipient": "Evelyn Carter",
+      "at": "2026-07-27T15:30:26.476Z"
+    },
+    {
+      "id": "family_privacy",
+      "status": "PASS",
+      "at": "2026-07-27T15:30:27.843Z"
+    },
+    {
+      "id": "recipient_create_ui",
+      "status": "PASS",
+      "gate": true,
+      "err": null,
+      "zero": true,
+      "at": "2026-07-27T15:30:48.971Z"
+    },
+    {
+      "id": "no_seed_fallback_after_create",
+      "status": "PASS",
+      "classification": "OK",
+      "at": "2026-07-27T15:30:48.987Z"
+    },
+    {
+      "id": "keyboard_focus",
+      "status": "PASS",
+      "tag": "BUTTON",
+      "testid": "entry-create",
+      "outline": "solid",
+      "at": "2026-07-27T15:30:50.266Z"
+    },
+    {
+      "id": "mobile_390_login",
+      "status": "PASS",
+      "box": {
+        "x": 17.422653198242188,
+        "y": 34.24017333984375,
+        "width": 355.15467834472656,
+        "height": 790.3555908203125
+      },
+      "at": "2026-07-27T15:30:50.789Z"
+    },
+    {
+      "id": "zoom_200_login",
+      "status": "PASS",
+      "at": "2026-07-27T15:30:51.592Z"
+    }
+  ],
+  "pass": 10,
+  "partial": 0,
+  "fail": 0
+}

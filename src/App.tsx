@@ -539,7 +539,7 @@ export function App() {
           targetPersonId: target,
           question: isProvider
             ? "Could the recent dizziness require a medication review? Please provide guidance for the care team."
-            : "Can you confirm whether you gave Evelyn her lunch medication yesterday?",
+            : `Can you confirm whether you gave ${activeSpace.displayName} the scheduled medication yesterday?`,
           contextSummary: isProvider
             ? "Provider collaboration — high-signal timeline only (in-app)"
             : "Requested via Relay collaboration offer",

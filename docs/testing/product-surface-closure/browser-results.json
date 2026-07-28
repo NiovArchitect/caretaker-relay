@@ -4,9 +4,37 @@
     {
       "id": "sign_out_discovery",
       "status": "PASS",
-      "ms": 1063,
+      "ms": 1311,
       "gate": true,
-      "at": "2026-07-27T23:08:46.327Z"
+      "at": "2026-07-28T02:03:11.202Z"
+    },
+    {
+      "id": "dsp_shift_ui",
+      "status": "PASS",
+      "ms": 1103,
+      "workspace": true,
+      "empty": false,
+      "at": "2026-07-28T02:03:21.103Z"
+    },
+    {
+      "id": "med_correction_panel",
+      "status": "PASS",
+      "ms": 1833,
+      "panel": true,
+      "at": "2026-07-28T02:03:30.962Z"
+    },
+    {
+      "id": "multi_recipient_menu",
+      "status": "PASS",
+      "ms": 983,
+      "count": 2,
+      "at": "2026-07-28T02:03:40.699Z"
+    },
+    {
+      "id": "mobile_account_label",
+      "status": "PASS",
+      "label": true,
+      "at": "2026-07-28T02:03:47.652Z"
     }
   ]
 }

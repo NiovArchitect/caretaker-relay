@@ -1,0 +1,162 @@
+{
+  "started": "2026-07-28T02:02:05.481Z",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "run_id": "FMHms40fz1l",
+  "gates": {
+    "isolated_universe": "PASS",
+    "reassignment": "PASS",
+    "reassignment_accept": "PASS",
+    "task_decline": "PASS",
+    "escalation": "PASS",
+    "alternate_accept": "PASS",
+    "schedule_confirm": "PASS",
+    "reminders": "PARTIAL",
+    "transport_reconcile": "PASS",
+    "two_user_correction": "PARTIAL",
+    "correction_ack": "PARTIAL",
+    "static_answers": 0,
+    "three_relay_sets": "PASS",
+    "whole_app": "PASS",
+    "unauth_answers": 0,
+    "unsafe_med": 0
+  },
+  "stages": {
+    "register": {
+      "coord": 201,
+      "d1": 201,
+      "d2": 201,
+      "d3": 201
+    },
+    "care_space": {
+      "status": 201,
+      "rid": "cr-ayhtmdf5-ms40g3y1"
+    },
+    "invites": [
+      {
+        "person": "p-acct-91d53e62048b4402",
+        "invStatus": 201,
+        "accStatus": 200
+      },
+      {
+        "person": "p-acct-901eacb097e94212",
+        "invStatus": 201,
+        "accStatus": 200
+      },
+      {
+        "person": "p-acct-153292ac7e284548",
+        "invStatus": 201,
+        "accStatus": 200
+      }
+    ],
+    "s1_create": {
+      "status": 201,
+      "aid": "shift-pbj7bw8a-ms40g4n9"
+    },
+    "s1_handoff": {
+      "status": 200,
+      "handoff_id": "ho-2ab8e2t8-ms40g4xb",
+      "ok": true
+    },
+    "s1_answers": {
+      "How are they?": "Recent reports on file for Isolated Recipient FMHms40fz1l:\n• Calm mood [FMHms40fz1l-S1]; Breakfast eaten [FMHms40fz1l-S1]; Therapy rescheduled to later slot [FMHms40fz1l-S1] (from DSP1 FMHms40fz1l)\n\nHere's a plain-language picture of Isolated Recipient FMHms40fz1l right now:\n\nFro",
+      "What remains unfinished?": "Here's what is still open for Isolated Recipient FMHms40fz1l:\n• Handoff still needs attention: Transportation incomplete [FMHms40fz1l-S1]\n• Handoff still needs attention: Pharmacy pickup [FMHms40fz1l]",
+      "What is the next appointment?": "No appointment is on file for Isolated Recipient FMHms40fz1l.\n\nComing up:\nNo upcoming medication or appointment reminders.",
+      "Was medication administered?": "No administration is recorded yet."
+    },
+    "s2_ack": {
+      "status": 200,
+      "lifecycle": "acknowledged"
+    },
+    "s2_work": {
+      "count": 3,
+      "pharmacyId": "work-swz8b82c-ms40g4tg",
+      "transportId": "work-p45ys54g-ms40g4xq"
+    },
+    "s2_decline": {
+      "status": 200,
+      "work_status": "available_to_claim",
+      "owner": null
+    },
+    "s2_reassign": {
+      "status": 200,
+      "work_status": "available_to_claim",
+      "proposed": "p-acct-cc0821c7aa094b01"
+    },
+    "s2_reassign_accept": {
+      "status": 200,
+      "owner": "p-acct-cc0821c7aa094b01",
+      "work_status": "accepted"
+    },
+    "s2_escalate": {
+      "status": 200,
+      "work_status": "escalated",
+      "owner": null
+    },
+    "s2_alt_accept": {
+      "status": 200,
+      "owner": "p-acct-91d53e62048b4402",
+      "work_status": "accepted"
+    },
+    "schedule_list": {
+      "status": 200,
+      "open": 1,
+      "propId": "sprop-r8k2lo7a-ms40g4xz"
+    },
+    "schedule_confirm": {
+      "status": 200,
+      "apt": "apt-coyy3zat-ms40g697",
+      "proposal_status": "confirmed"
+    },
+    "reminders": {
+      "status": 200,
+      "active": 0,
+      "superseded": 0
+    },
+    "transport_after_sched": {
+      "id": "work-p45ys54g-ms40g4xq",
+      "dueAt": "2026-07-30T02:02:12.665Z",
+      "owner": "p-acct-91d53e62048b4402",
+      "status": "accepted"
+    },
+    "s2_answers": {
+      "How are they?": "Recent reports on file for Isolated Recipient FMHms40fz1l:\n• Calm mood [FMHms40fz1l-S1]; Breakfast eaten [FMHms40fz1l-S1]; Therapy rescheduled to later slot [FMHms40fz1l-S1] (from DSP1 FMHms40fz1l)\n\nHere's a plain-language picture of Isolated Recipient FMHms40fz1l right now:\n\nFro",
+      "What remains unfinished?": "Here's what is still open for Isolated Recipient FMHms40fz1l:\n• Handoff still needs attention: Transportation incomplete [FMHms40fz1l-S1]\n• Handoff still needs attention: Pharmacy pickup [FMHms40fz1l]",
+      "What is the next appointment?": "Physical therapy\nFriday 4:30 PM FMHms40fz1l\nLocation: 1234 Coastal Care Way, Oceanside, CA 92054\nStatus: scheduled\nTravel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship.\nPhone: +1-555-0140\n\n",
+      "Was medication administered?": "No administration is recorded yet."
+    },
+    "s3a_handoff": {
+      "status": 200,
+      "id": "ho-xk95dk5i-ms40g72c"
+    },
+    "s3_med_before": "You can participate in this care space, but medication information is not included in your current access.",
+    "s3_correction_api": {
+      "status": 200,
+      "ok": true
+    },
+    "s3_corr_notifs": {
+      "status": 200,
+      "count": 0,
+      "sample": null
+    },
+    "s3_med_after": "You can participate in this care space, but medication information is not included in your current access.",
+    "s3_answers": {
+      "How are they?": "Recent reports on file for Isolated Recipient FMHms40fz1l:\n• Calm mood [FMHms40fz1l-S1]; Breakfast eaten [FMHms40fz1l-S1]; Therapy rescheduled to later slot [FMHms40fz1l-S1] (from DSP1 FMHms40fz1l)\n• Medication reported administered at noon [FMHms40fz1l-S3a]; Mood improved [FMHms",
+      "What remains unfinished?": "Here's what is still open for Isolated Recipient FMHms40fz1l:\n• Handoff still needs attention: Mobility check [FMHms40fz1l-S3]",
+      "What is the next appointment?": "Physical therapy\nFriday 4:30 PM FMHms40fz1l\nLocation: 1234 Coastal Care Way, Oceanside, CA 92054\nStatus: scheduled\nTravel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship.\nPhone: +1-555-0140\n\n",
+      "Was medication administered?": "Latest caregiver-reported medication note from handoff (not clinician-confirmed):\n• Correction: medication was not administered [FMHms40fz1l-S3b]\n\nThat handoff note is caregiver-reported. It is not automatically clinician confirmed."
+    },
+    "whole_app": {
+      "work_count": 5,
+      "needs_owner": 3,
+      "reminders_active": 0,
+      "proposals": 1,
+      "state_ok": true,
+      "next_appt_preview": "Physical therapy\nFriday 4:30 PM FMHms40fz1l\nLocation: 1234 Coastal Care Way, Oceanside, CA 92054\nStatus: scheduled\nTravel: about 18 minutes. Public facility inf",
+      "unfinished_preview": "Here's what is still open for Isolated Recipient FMHms40fz1l:\n• Handoff still needs attention: Mobility check [FMHms40fz1l-S3]"
+    }
+  },
+  "mode": "isolated_register",
+  "recipient": "cr-ayhtmdf5-ms40g3y1",
+  "verdict": "FINAL_HOLISTIC_PASS",
+  "ended": "2026-07-28T02:02:18.762Z"
+}

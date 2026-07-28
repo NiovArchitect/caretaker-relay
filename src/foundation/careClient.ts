@@ -1012,7 +1012,7 @@ export async function fetchLatestHandoff() {
 function plainCaregiverLine(line: string): string {
   const t = line.trim();
   if (/incompatible dimensions|not comparable|compatible dimensions/i.test(t)) {
-    return "The reported amount doesn't clearly match Evelyn's current medication instructions. Please check the medication label or confirm with the prescribing team before marking this complete.";
+    return "The reported amount doesn't clearly match the current medication instructions. Please check the medication label or confirm with the prescribing team before marking this complete.";
   }
   if (/missing units/i.test(t)) {
     return "The reported dose is missing units. Check the bottle or packaging before marking this complete.";
@@ -1047,7 +1047,7 @@ function buildAttentionFromLines(lines: string[]): TodayAttentionItem[] {
         : "This still needs your judgment or action.",
       relayKnows: med
         ? "A medication-related report was captured from a caregiver update."
-        : "Listed as open on Evelyn's day.",
+        : "Listed as open on the care day.",
       relayDoesNotKnow: med
         ? "Relay will not invent or choose a dose."
         : "Whether it is already fully resolved off-app.",

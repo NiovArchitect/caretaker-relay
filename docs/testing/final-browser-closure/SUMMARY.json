@@ -1,0 +1,38 @@
+{
+  "playwright_tests_passed": 12,
+  "playwright_tests_failed": 0,
+  "evidence_counts": {
+    "PASS": 13,
+    "PARTIAL": 5,
+    "FAIL": 0
+  },
+  "journeys": {
+    "dsp_browser_lifecycle": "PARTIAL",
+    "invitation_browser": "PASS",
+    "active_revocation_multitab": "PASS",
+    "family_relay": "PASS",
+    "active_dsp": "PASS",
+    "partial_domain": "PASS",
+    "zero_access": "PASS",
+    "wrong_tenant": "PASS",
+    "appointment_next": "PASS",
+    "shift_evolution": "PARTIAL",
+    "mobile_390": "PASS",
+    "keyboard": "PASS",
+    "zoom_200": "PASS",
+    "accessibility": "PASS",
+    "logout": "PARTIAL",
+    "medication_two_user": "PARTIAL"
+  },
+  "security_zeros": {
+    "unauthorized_answers": 0,
+    "stale_post_revocation": 0,
+    "hidden_recipient": 0,
+    "cross_tenant_leak": 0,
+    "cancelled_as_next": 0
+  },
+  "api_deploy": "6ede239daca2e5401082803e57f010815fa79a5c",
+  "app_deploy": "61ca1df0c9b3aa8fb7c420d8e2516ed435e19624",
+  "product_files_changed": "NO",
+  "freeze": "NOT RESTORED"
+}

@@ -1,0 +1,21 @@
+
+Running 9 tests using 1 worker
+
+(node:34104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:34104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › care-continuity-closure.spec.ts:51:1 › CC1 incoming handoff inbox surface (30.5s)
+  ✓  2 [chromium] › care-continuity-closure.spec.ts:135:1 › CC2 correction awareness panel (7.4s)
+  ✓  3 [chromium] › care-continuity-closure.spec.ts:147:1 › CC3 shift workspace + pre-shift briefing surface (8.2s)
+  ✓  4 [chromium] › care-continuity-closure.spec.ts:166:1 › CC4 three-shift continuity (API stages + browser answers) (34.3s)
+  ✓  5 [chromium] › product-surface-closure.spec.ts:48:1 › PS1 account menu + sign-out discovery (7.8s)
+  ✓  6 [chromium] › product-surface-closure.spec.ts:70:1 › PS2 care my shift surface (DSP) (7.4s)
+  ✓  7 [chromium] › product-surface-closure.spec.ts:86:1 › PS3 medication correction panel (7.7s)
+  ✓  8 [chromium] › product-surface-closure.spec.ts:98:1 › PS4 multi-recipient switcher visible for family (8.4s)
+  ✓  9 [chromium] › product-surface-closure.spec.ts:109:1 › PS5 mobile account label still visible (4.6s)
+
+  Slow test file: [chromium] › care-continuity-closure.spec.ts (1.3m)
+  Slow test file: [chromium] › product-surface-closure.spec.ts (35.9s)
+  Consider splitting slow test files to speed up parallel execution
+  9 passed (2.0m)

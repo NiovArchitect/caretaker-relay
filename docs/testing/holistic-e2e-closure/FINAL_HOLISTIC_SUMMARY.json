@@ -1,0 +1,25 @@
+{
+  "verdict": "HOLISTIC_PASS",
+  "run_id": "HOLms3z2g2n",
+  "gates": {
+    "work_seeded_from_handoff": "PASS",
+    "ack_not_accept": "PASS",
+    "double_claim_blocked": "PASS",
+    "task_accept": "PASS",
+    "task_decline": "PASS",
+    "schedule_proposal_created": "PASS",
+    "schedule_confirm": "PASS",
+    "three_relay_sets": "PASS",
+    "static_answers": 0,
+    "unauth_answers": 0,
+    "unsafe_med": 0
+  },
+  "api_deploy": "595906d",
+  "app_deploy": "584038b",
+  "remaining_internal_gaps": [
+    "Brand-new isolated recipient + three brand-new caregivers not fully productized (used lab recipient with unique RUN markers)",
+    "Two-user browser same-tab/other-tab correction awareness not re-videoed this campaign (API correction path previously proven)",
+    "Formal screen-reader / axe suite not fully re-executed on final SHA",
+    "Keyboard and 200% zoom not instrumented as dedicated final-SHA suite this campaign (mobile product-surface e2e run)"
+  ]
+}

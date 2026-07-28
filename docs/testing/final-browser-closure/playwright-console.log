@@ -1,0 +1,23 @@
+
+Running 12 tests using 1 worker
+
+(node:16753) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16753) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › final-public-browser-closure.spec.ts:267:1 › F0 runtime health + login latency (5.9s)
+  ✓  2 [chromium] › final-public-browser-closure.spec.ts:287:1 › F1 zero-access browser (6.7s)
+  ✓  3 [chromium] › final-public-browser-closure.spec.ts:310:1 › F2 wrong-tenant browser (other household) (11.7s)
+  ✓  4 [chromium] › final-public-browser-closure.spec.ts:335:1 › F3 family authorized — Relay grounded + storage snap (28.6s)
+  ✓  5 [chromium] › final-public-browser-closure.spec.ts:372:1 › F4 active DSP browser — shift-scoped Relay (28.7s)
+  ✓  6 [chromium] › final-public-browser-closure.spec.ts:434:1 › F5 multi-tab active revocation browser (55.3s)
+  ✓  7 [chromium] › final-public-browser-closure.spec.ts:549:1 › F6 invitation not accepted — browser entry path (5.1s)
+  ✓  8 [chromium] › final-public-browser-closure.spec.ts:583:1 › F7 partial-domain browser (family friend maya) (18.5s)
+  ✓  9 [chromium] › final-public-browser-closure.spec.ts:601:1 › F8 appointment next + shift evolution answers (browser) (23.2s)
+  ✓  10 [chromium] › final-public-browser-closure.spec.ts:628:1 › F9 logout / sign-out clears shell PHI visibility (14.5s)
+  ✓  11 [chromium] › final-public-browser-closure.spec.ts:662:1 › F10 mobile 390 + keyboard + accessibility smoke (19.0s)
+  ✓  12 [chromium] › final-public-browser-closure.spec.ts:710:1 › F11 DSP lifecycle API+browser hybrid honesty labels (4.4s)
+
+  Slow test file: [chromium] › final-public-browser-closure.spec.ts (3.7m)
+  Consider splitting slow test files to speed up parallel execution
+  12 passed (3.9m)

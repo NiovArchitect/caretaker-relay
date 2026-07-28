@@ -1,0 +1,50 @@
+[
+  {
+    "question": "How are they?",
+    "shift1": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • Calm mood after breakfast [HOLms3z2g2n-S1] | • Breakfast eaten [HOLms3z2g2n-S1] |  | Still unfinished after that handoff: | • Transportation incomplete [HOLms3z2g2n-S1] |  | Recent caregiver reports: Fatigue (last noted Saturday, July",
+    "shift2": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • More tired than usual [HOLms3z2g2n-S2] | • Lunch refused [HOLms3z2g2n-S2] | • Medication reported administered at noon [HOLms3z2g2n-S2] | • Therapy rescheduled to later slot [HOLms3z2g2n-S2] |  | Still unfinished after that handoff:",
+    "shift3": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • Correction: medication was not administered [HOLms3z2g2n-S3] | • Mood improved [HOLms3z2g2n-S3] | • New mobility concern noted [HOLms3z2g2n-S3] |  | Still unfinished after that handoff: | • Mobility concern needs monitoring [HOLms3z",
+    "allSame": false,
+    "pass": "PASS"
+  },
+  {
+    "question": "What changed?",
+    "shift1": "Here's what changed for Evelyn Carter: |  | Latest handoff: | • Calm mood after breakfast [HOLms3z2g2n-S1] | • Breakfast eaten [HOLms3z2g2n-S1] |  | • Appointment time changed (from Marcus Carter) | • Caregiver reported: ate well (from Marcus Carter) | • Meal recorded (from Marcus Carter) | • Caregiver reported: slept well (from Marcus ",
+    "shift2": "Here's what changed for Evelyn Carter: |  | Latest handoff: | • More tired than usual [HOLms3z2g2n-S2] | • Lunch refused [HOLms3z2g2n-S2] | • Medication reported administered at noon [HOLms3z2g2n-S2] | • Therapy rescheduled to later slot [HOLms3z2g2n-S2] |  | • Caregiver reported: ate well (from Marcus Carter) | • Meal recorded (from Ma",
+    "shift3": "Here's what changed for Evelyn Carter: |  | Latest handoff: | • Correction: medication was not administered [HOLms3z2g2n-S3] | • Mood improved [HOLms3z2g2n-S3] | • New mobility concern noted [HOLms3z2g2n-S3] |  | • Meal recorded (from Marcus Carter) | • Caregiver reported: slept well (from Marcus Carter) | • Caregiver reported: slept we",
+    "allSame": false,
+    "pass": "PASS"
+  },
+  {
+    "question": "What remains unfinished?",
+    "shift1": "Here's what is still open for Evelyn Carter: | • Handoff still needs attention: Transportation incomplete [HOLms3z2g2n-S1] | • Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon. | • RESPONSE_RECEIVED: Could dizziness need med review? s13-1785047212906 | • Needs your review: Yes — I gave Metformi",
+    "shift2": "Here's what is still open for Evelyn Carter: | • Handoff still needs attention: Watch fatigue after lunch [HOLms3z2g2n-S2] | • Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon. | • RESPONSE_RECEIVED: Could dizziness need med review? s13-1785047212906 | • Needs your review: Yes — I gave Metformi",
+    "shift3": "Here's what is still open for Evelyn Carter: | • Handoff still needs attention: Mobility concern needs monitoring [HOLms3z2g2n-S3] | • Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon. | • RESPONSE_RECEIVED: Could dizziness need med review? s13-1785047212906 | • Needs your review: Yes — I gave ",
+    "allSame": false,
+    "pass": "PASS"
+  },
+  {
+    "question": "Was medication administered?",
+    "shift1": "Last recorded: unidentified tablet(s) · Thursday, July 23, 2026 at 1:56 PM PDT · by Marcus Carter (CONFLICTED)",
+    "shift2": "Latest caregiver-reported medication note from handoff (not clinician-confirmed): | • Medication reported administered at noon [HOLms3z2g2n-S2] |  | That handoff note is caregiver-reported. It is not automatically clinician confirmed.",
+    "shift3": "Latest caregiver-reported medication note from handoff (not clinician-confirmed): | • Correction: medication was not administered [HOLms3z2g2n-S3] |  | That handoff note is caregiver-reported. It is not automatically clinician confirmed.",
+    "allSame": false,
+    "pass": "PASS"
+  },
+  {
+    "question": "What is the next appointment?",
+    "shift1": "Physical therapy | Friday 4:30 PM PDT | Location: Coastal PT | Status: scheduled | Travel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship. | Phone: +1-555-0140 |  | Coming up: | • Medication · Metformin 500 mg · 12:00 PM (window 11:30 AM – 12:30 P",
+    "shift2": "Physical therapy | Confirmed later slot HOLms3z2g2n | Location: 1234 Coastal Care Way, Oceanside, CA 92054 | Status: scheduled | Travel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship. | Phone: +1-555-0140 |  | Coming up: | • Medication · Metformi",
+    "shift3": "Physical therapy | Confirmed later slot HOLms3z2g2n | Location: 1234 Coastal Care Way, Oceanside, CA 92054 | Status: scheduled | Travel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship. | Phone: +1-555-0140 |  | Coming up: | • Medication · Metformi",
+    "allSame": false,
+    "pass": "PASS"
+  },
+  {
+    "question": "What should the next caregiver know?",
+    "shift1": "Helping now: Marcus Carter · Primary family caregiver | Until about 4:00 PM |  | Next: Maya Bennett | Expected around 4:30 PM |  | I can prepare a handoff for the next helper before they arrive. |  | What the next caregiver should know (latest handoff): | • Calm mood after breakfast [HOLms3z2g2n-S1] | • Breakfast eaten [HOLms3z2g2n-S1] |  | S",
+    "shift2": "Helping now: Marcus Carter · Primary family caregiver | Until about 4:00 PM |  | Next: Maya Bennett | Expected around 4:30 PM |  | I can prepare a handoff for the next helper before they arrive. |  | What the next caregiver should know (latest handoff): | • More tired than usual [HOLms3z2g2n-S2] | • Lunch refused [HOLms3z2g2n-S2] | • Medica",
+    "shift3": "Helping now: Marcus Carter · Primary family caregiver | Until about 4:00 PM |  | Next: Maya Bennett | Expected around 4:30 PM |  | I can prepare a handoff for the next helper before they arrive. |  | What the next caregiver should know (latest handoff): | • Correction: medication was not administered [HOLms3z2g2n-S3] | • Mood improved [HO",
+    "allSame": false,
+    "pass": "PASS"
+  }
+]

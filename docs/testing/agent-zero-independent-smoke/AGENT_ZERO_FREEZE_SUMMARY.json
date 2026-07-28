@@ -1,0 +1,41 @@
+{
+  "verdict": "SMOKE_PASS",
+  "run_id": "AZms3y50fs",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "started": "2026-07-28T00:57:32.738Z",
+  "ended": "2026-07-28T00:57:52.363Z",
+  "gates": {
+    "shift1_relay_grounded": "PASS",
+    "handoff_send": "PASS",
+    "handoff_discovery": "PASS",
+    "handoff_acknowledgment": "PASS",
+    "handoff_clarification": "PASS",
+    "shift3_ack": "PASS",
+    "three_data_stages": "PASS",
+    "three_relay_sets": "PASS",
+    "static_answers": 0,
+    "changed_answer_questions": 8,
+    "unsafe_med": 0,
+    "unauth_answers": 0,
+    "correction_notif_present": "PASS"
+  },
+  "staticCount": 0,
+  "changedCount": 8,
+  "api_deploy_sha": "1fb67d87de4c",
+  "app_deploy_sha": "1274ce8486d7",
+  "app_source_head": "e1b3606",
+  "product_defects_found": [
+    "Relay STATUS/CHANGE/TASKS/COVERAGE/MED-ADMIN answers ignored or buried ACTIVE_HANDOFF (fixed 421d02a/4eeff46/1fb67d8)",
+    "latest handoff selected by array order not createdAt (fixed 1fb67d8)",
+    "handoffHash dedupe hid re-run stage advances when content identical (smoke uses unique RUN markers)",
+    "CARE_COVERAGE path returned static coverage without handoff (fixed 1fb67d8)",
+    "Was medication administered? routed to med plan not admin history (fixed 1fb67d8)"
+  ],
+  "remaining_internal_gaps": [
+    "Open-work ownership accept/decline/escalation (A\u2013E) not fully exercised as distinct task-ownership API smoke (no /tasks or /open-work route)",
+    "Next appointment evolution not proven (therapy reschedule only in handoff text; appointment projection unchanged)",
+    "Independent multi-browser-context three-shift video + keyboard + 200% zoom not re-run on post-fix session (prior a11y PARTIAL)",
+    "Isolated synthetic recipient not created; smoke used shared cr-olivia lab recipient",
+    "Two-user medication correction same-tab/other-tab UI awareness not re-smoked this session (API correctionish notifications present)"
+  ]
+}

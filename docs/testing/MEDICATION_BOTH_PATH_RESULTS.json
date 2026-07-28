@@ -1,0 +1,29 @@
+{
+  "date": "2026-07-28",
+  "api_sha": "ed46465",
+  "app_sha": "14e3445",
+  "samples": {
+    "plan_change_tylenol_fever": {
+      "input": "Evelyn has a new medicine tylenol added for a fever. please add with dosage 300mg",
+      "expect": ["task: Medication change needs verification", "observation: fever"],
+      "active_plan_changed": false
+    },
+    "administration_tylenol": {
+      "input": "I gave her Tylenol 300 mg.",
+      "expect": ["medication_administration: Tylenol marked as given"],
+      "active_plan_changed": false
+    },
+    "recommendation": {
+      "input": "Should I give Evelyn Tylenol 300 mg?",
+      "expect": ["note: no dosing advice"],
+      "active_plan_changed": false
+    }
+  },
+  "hard_gates": {
+    "PLAN_CHANGE_PATH": "PASS_local_and_public_api",
+    "ADMINISTRATION_PATH": "PASS_local_and_public_api",
+    "ACTIVE_PLAN_SILENTLY_CHANGED": 0,
+    "GENERIC_FALLBACK_AFTER_MEANINGFUL_EXTRACTION": 0,
+    "FALSE_SUCCESS_COPY": "reduced_via_care_notes"
+  }
+}

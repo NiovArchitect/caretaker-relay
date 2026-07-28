@@ -1,0 +1,115 @@
+{
+  "public": "https://care.niovlabs.com",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "evidence": [
+    {
+      "id": "login_ms",
+      "status": "PASS",
+      "ms": 958,
+      "at": "2026-07-27T16:21:51.533Z"
+    },
+    {
+      "id": "acting_for",
+      "status": "PASS",
+      "at": "2026-07-27T16:21:52.860Z"
+    },
+    {
+      "id": "work_panel",
+      "status": "PASS",
+      "at": "2026-07-27T16:21:52.882Z"
+    },
+    {
+      "id": "since_last_visit",
+      "status": "PASS",
+      "at": "2026-07-27T16:21:52.896Z"
+    },
+    {
+      "id": "create_work",
+      "status": "PASS",
+      "at": "2026-07-27T16:21:54.798Z"
+    },
+    {
+      "id": "handoff_panel",
+      "status": "PASS",
+      "at": "2026-07-27T16:21:55.909Z"
+    },
+    {
+      "id": "handoff_ack_control",
+      "status": "PASS",
+      "at": "2026-07-27T16:21:56.793Z"
+    },
+    {
+      "id": "leave_control",
+      "status": "PASS",
+      "at": "2026-07-27T16:21:57.961Z"
+    },
+    {
+      "id": "keyboard_tab",
+      "status": "PASS",
+      "at": "2026-07-27T16:21:58.023Z"
+    },
+    {
+      "id": "logout_to_login",
+      "status": "PASS",
+      "login": true,
+      "shell": false,
+      "at": "2026-07-27T16:22:04.089Z"
+    },
+    {
+      "id": "session_storage_cleared",
+      "status": "PASS",
+      "session": null,
+      "keys": [],
+      "at": "2026-07-27T16:22:04.099Z"
+    },
+    {
+      "id": "back_button_no_phi",
+      "status": "PASS",
+      "shellAfterBack": false,
+      "loginAfterBack": false,
+      "at": "2026-07-27T16:22:04.963Z"
+    },
+    {
+      "id": "multi_tab",
+      "status": "PASS",
+      "p2shell": false,
+      "p2login": true,
+      "at": "2026-07-27T16:22:13.293Z"
+    },
+    {
+      "id": "adv_unauth_work",
+      "status": 401,
+      "at": "2026-07-27T16:22:13.989Z"
+    },
+    {
+      "id": "adv_unauth_emergency",
+      "status": 401,
+      "at": "2026-07-27T16:22:14.067Z"
+    },
+    {
+      "id": "adv_unauth_docs",
+      "status": 401,
+      "at": "2026-07-27T16:22:14.157Z"
+    },
+    {
+      "id": "adv_public_login_gate",
+      "status": "PASS",
+      "at": "2026-07-27T16:22:14.508Z"
+    },
+    {
+      "id": "mobile_shell",
+      "status": "PASS",
+      "at": "2026-07-27T16:22:16.937Z"
+    },
+    {
+      "id": "mobile_work",
+      "status": "PASS",
+      "at": "2026-07-27T16:22:17.803Z"
+    },
+    {
+      "id": "zoom_200",
+      "status": "PARTIAL",
+      "at": "2026-07-27T16:22:18.292Z"
+    }
+  ]
+}

@@ -1,0 +1,263 @@
+{
+  "public": "https://care.niovlabs.com",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "evidence": [
+    {
+      "id": "api_health",
+      "status": 200,
+      "apiMs": 198,
+      "body": {
+        "ok": true,
+        "product_id": "caretaker-relay",
+        "durable": true,
+        "store_backend": "prisma",
+        "store_path": null,
+        "foundation_auth": true,
+        "understand_mode": "fixture",
+        "llm_ready": false,
+        "timestamp": "2026-07-27T22:48:26.151Z",
+        "deployment_config": {
+          "deployment_mode": "regulated_restricted",
+          "config_ok": true,
+          "lab_login_enabled": false,
+          "ai_live_allowed": false,
+          "multi_instance_session_safe": false,
+          "shared_revocation": "memory_shared",
+          "understand_mode": "llm",
+          "verification_provider": "none",
+          "error_count": 0,
+          "warning_count": 2
+        },
+        "lab_login_enabled": false
+      },
+      "at": "2026-07-27T22:48:26.093Z"
+    },
+    {
+      "id": "public_landing",
+      "status": "PASS",
+      "webMs": 1044,
+      "gate": true,
+      "at": "2026-07-27T22:48:29.946Z"
+    },
+    {
+      "id": "zero_access_browser",
+      "status": "PASS",
+      "ms": 4044,
+      "shell": true,
+      "authGate": true,
+      "leaked": false,
+      "bodyPreview": "Caretaker Relay\n?\nACCESS\nNo care profile yet\nFamily / friend · pending access\nMon, Jul 27\nUnauthorized Relative · Family / friend caregiver\nU\nConnected\nNAVIGATE\nToday\nCare\nPeople\nPrivacy\nDocuments\nHelping a family member or friend starts with invitation, request, or a new prov\nConnect to care\n\nSigned in as Unauthorized Relative\n\nFamily / friend · pending access\n\nYou said you help a family member o",
+      "at": "2026-07-27T22:48:36.672Z"
+    },
+    {
+      "id": "wrong_tenant_browser",
+      "status": "PASS",
+      "ms": 3233,
+      "relayOpen": true,
+      "careLeak": false,
+      "relayPreview": "is claim alone.\n\nAccept an invitation\nUse a secure code from an authorized person — no PHI until accept\nRequest access\nAsk for approval to join someone’s care — you see nothing until approved\nSet up care for someone new\nCreate a provisional care profile only — does not search or open existing people",
+      "at": "2026-07-27T22:48:47.197Z"
+    },
+    {
+      "id": "family_relay_browser",
+      "status": "PASS",
+      "ms": 2327,
+      "grounded": true,
+      "statusPreview": " PDT\nScheduled: Fast PT at 2026-07-28T18:00:00Z · Jul 28, 2026 · 11:00 AM PDT\nScheduled: Judge demo PT at Tue 11am · Jul 29, 2026 · 11:00 AM PDT\nTherapy: 4:00 PM\nPhysical therapy: around 3:00 PM\nWhat Relay organized\nCompleted morning routine\nNeed help?\n\nAsk about Evelyn Carter's care or share what you observed.\n\n✦\nAsk or update Relay\n⇄\nCare handoff",
+      "apptPreview": " PDT\nScheduled: Fast PT at 2026-07-28T18:00:00Z · Jul 28, 2026 · 11:00 AM PDT\nScheduled: Judge demo PT at Tue 11am · Jul 29, 2026 · 11:00 AM PDT\nTherapy: 4:00 PM\nPhysical therapy: around 3:00 PM\nWhat Relay organized\nCompleted morning routine\nNeed help?\n\nAsk about Evelyn Carter's care or share what you observed.\n\n✦\nAsk or update Relay\n⇄\nCare handoff",
+      "storageBefore": {
+        "label": "family-before-relay",
+        "localStorageKeys": [],
+        "sessionStorageKeys": [
+          "cr_care_session_v1",
+          "cr.authorization.v1",
+          "cr.onboarding.v2"
+        ],
+        "localStoragePreview": {},
+        "sessionStoragePreview": {
+          "cr_care_session_v1": "{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uX2lkIjoiNjBlZjEwODctODg4MC00ZDAwLWJlNDQtZmQzMTMzOWMyNzViIiwiZW50aXR5X2lkIjoiYjI1YzA4OWMtNzBkNC00MDYxLWJmNTAtYmQwZGFhZjRhNWVlIiwiYWxsb3dlZF9vc",
+          "cr.authorization.v1": "{\"version\":1,\"pendingRecipientAccess\":false,\"claimedPath\":null,\"displayName\":\"Marcus Carter\",\"pathway\":null,\"accessRequest\":null,\"inviteTokenBound\":null,\"labPrincipalAuthorized\":true,\"updatedAt\":\"2026",
+          "cr.onboarding.v2": "{\"version\":2,\"intent\":\"sign_in\",\"path\":null,\"accountDisplayName\":\"\",\"recipientPreferredName\":\"\",\"relationship\":\"\",\"whatMatters\":\"\",\"helpersNote\":\"\",\"skippedSteps\":[],\"completed\":true,\"awaitingAuthoriz"
+        },
+        "cookies": "",
+        "href": "https://care.niovlabs.com/"
+      },
+      "storageAfter": {
+        "label": "family-after-relay",
+        "localStorageKeys": [],
+        "sessionStorageKeys": [
+          "cr_care_session_v1",
+          "cr.authorization.v1",
+          "cr.onboarding.v2"
+        ],
+        "localStoragePreview": {},
+        "sessionStoragePreview": {
+          "cr_care_session_v1": "{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uX2lkIjoiNjBlZjEwODctODg4MC00ZDAwLWJlNDQtZmQzMTMzOWMyNzViIiwiZW50aXR5X2lkIjoiYjI1YzA4OWMtNzBkNC00MDYxLWJmNTAtYmQwZGFhZjRhNWVlIiwiYWxsb3dlZF9vc",
+          "cr.authorization.v1": "{\"version\":1,\"pendingRecipientAccess\":false,\"claimedPath\":null,\"displayName\":\"Marcus Carter\",\"pathway\":null,\"accessRequest\":null,\"inviteTokenBound\":null,\"labPrincipalAuthorized\":true,\"updatedAt\":\"2026",
+          "cr.onboarding.v2": "{\"version\":2,\"intent\":\"sign_in\",\"path\":null,\"accountDisplayName\":\"\",\"recipientPreferredName\":\"\",\"relationship\":\"\",\"whatMatters\":\"\",\"helpersNote\":\"\",\"skippedSteps\":[],\"completed\":true,\"awaitingAuthoriz"
+        },
+        "cookies": "",
+        "href": "https://care.niovlabs.com/"
+      },
+      "at": "2026-07-27T22:49:14.805Z"
+    },
+    {
+      "id": "active_dsp_browser",
+      "status": "PASS",
+      "ms": 2884,
+      "relayOpen": true,
+      "statusOk": true,
+      "medsOk": true,
+      "statusPreview": " PDT\nScheduled: Fast PT at 2026-07-28T18:00:00Z · Jul 28, 2026 · 11:00 AM PDT\nScheduled: Judge demo PT at Tue 11am · Jul 29, 2026 · 11:00 AM PDT\nTherapy: 4:00 PM\nPhysical therapy: around 3:00 PM\nWhat Relay organized\nCompleted morning routine\nNeed help?\n\nAsk about Evelyn Carter's care or share what you observed.\n\n✦\nAsk or update Relay\n⇄\nCare handoff",
+      "medsPreview": " PDT\nScheduled: Fast PT at 2026-07-28T18:00:00Z · Jul 28, 2026 · 11:00 AM PDT\nScheduled: Judge demo PT at Tue 11am · Jul 29, 2026 · 11:00 AM PDT\nTherapy: 4:00 PM\nPhysical therapy: around 3:00 PM\nWhat Relay organized\nCompleted morning routine\nNeed help?\n\nAsk about Evelyn Carter's care or share what you observed.\n\n✦\nAsk or update Relay\n⇄\nCare handoff",
+      "shiftId": "shift-12wj06ky-ms3tk4rj",
+      "at": "2026-07-27T22:49:45.518Z"
+    },
+    {
+      "id": "active_revocation_multitab",
+      "status": "PASS",
+      "msA": 2164,
+      "revStatus": 200,
+      "deniedFollow": true,
+      "deniedReplay": false,
+      "stalePhi": false,
+      "beforePreview": "py: 4:00 PM\nPhysical therapy: around 3:00 PM\nWhat Relay organized\nCompleted morning routine\nNeed help?\n\nAsk about Evelyn Carter's care or share what you observed.\n\n✦\nAsk or update Relay\n⇄\nCare handoff",
+      "followPreview": "Jul 28, 2026 · 11:00 AM PDT\nScheduled: Judge demo PT at Tue 11am · Jul 29, 2026 · 11:00 AM PDT\nTherapy: 4:00 PM\nPhysical therapy: around 3:00 PM\nWhat Relay organized\nCompleted morning routine\nNeed help?\n\nAsk about Evelyn Carter's care or share what you observed.\n\n✦\nAsk or update Relay\n⇄\nCare handoff",
+      "replayPreview": "Jul 28, 2026 · 11:00 AM PDT\nScheduled: Judge demo PT at Tue 11am · Jul 29, 2026 · 11:00 AM PDT\nTherapy: 4:00 PM\nPhysical therapy: around 3:00 PM\nWhat Relay organized\nCompleted morning routine\nNeed help?\n\nAsk about Evelyn Carter's care or share what you observed.\n\n✦\nAsk or update Relay\n⇄\nCare handoff",
+      "tabBPreview": "Caretaker Relay\n?\nACCESS\nNo care profile yet\nFamily / friend · pending access\nMon, Jul 27\nMaya Bennett · Family / friend caregiver\nM\nConnected\nNAVIGATE\nToday\nCare\nPeople\nPrivacy\nDocuments\nHelping a family member or friend starts with invitation, request, or a new prov\nConnect to care\n\nSigned in as M",
+      "storageBefore": {
+        "label": "tabA-before-revoke",
+        "localStorageKeys": [],
+        "sessionStorageKeys": [
+          "cr_care_session_v1",
+          "cr.authorization.v1",
+          "cr.onboarding.v2"
+        ],
+        "localStoragePreview": {},
+        "sessionStoragePreview": {
+          "cr_care_session_v1": "{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uX2lkIjoiYWViMjQ2NDktZDViMi00ZWM4LTgzZmMtNjgzNDZkZDAwNzk2IiwiZW50aXR5X2lkIjoiMWYzMjNhNDEtNWE5Ny00NWE4LTg3NDItMTRhNTIzZTg1YzI1IiwiYWxsb3dlZF9vc",
+          "cr.authorization.v1": "{\"version\":1,\"pendingRecipientAccess\":false,\"claimedPath\":null,\"displayName\":\"Maya Bennett\",\"pathway\":null,\"accessRequest\":null,\"inviteTokenBound\":null,\"labPrincipalAuthorized\":true,\"updatedAt\":\"2026-",
+          "cr.onboarding.v2": "{\"version\":2,\"intent\":\"sign_in\",\"path\":null,\"accountDisplayName\":\"\",\"recipientPreferredName\":\"\",\"relationship\":\"\",\"whatMatters\":\"\",\"helpersNote\":\"\",\"skippedSteps\":[],\"completed\":true,\"awaitingAuthoriz"
+        },
+        "cookies": "",
+        "href": "https://care.niovlabs.com/"
+      },
+      "storageAfter": {
+        "label": "tabA-after-revoke",
+        "localStorageKeys": [],
+        "sessionStorageKeys": [
+          "cr_care_session_v1",
+          "cr.authorization.v1",
+          "cr.onboarding.v2"
+        ],
+        "localStoragePreview": {},
+        "sessionStoragePreview": {
+          "cr_care_session_v1": "{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uX2lkIjoiYWViMjQ2NDktZDViMi00ZWM4LTgzZmMtNjgzNDZkZDAwNzk2IiwiZW50aXR5X2lkIjoiMWYzMjNhNDEtNWE5Ny00NWE4LTg3NDItMTRhNTIzZTg1YzI1IiwiYWxsb3dlZF9vc",
+          "cr.authorization.v1": "{\"version\":1,\"pendingRecipientAccess\":false,\"claimedPath\":null,\"displayName\":\"Maya Bennett\",\"pathway\":null,\"accessRequest\":null,\"inviteTokenBound\":null,\"labPrincipalAuthorized\":true,\"updatedAt\":\"2026-",
+          "cr.onboarding.v2": "{\"version\":2,\"intent\":\"sign_in\",\"path\":null,\"accountDisplayName\":\"\",\"recipientPreferredName\":\"\",\"relationship\":\"\",\"whatMatters\":\"\",\"helpersNote\":\"\",\"skippedSteps\":[],\"completed\":true,\"awaitingAuthoriz"
+        },
+        "cookies": "",
+        "href": "https://care.niovlabs.com/"
+      },
+      "at": "2026-07-27T22:50:37.758Z"
+    },
+    {
+      "id": "invitation_browser_preview",
+      "status": "PASS",
+      "noPhi": true,
+      "bodyPreview": "Caretaker Relay\n?\nACCESS\nNo care profile yet\nInvited · pending accept\nMon, Jul 27\nInvite Browser Tester · Invitation pending\nI\nConnected\nNAVIGATE\nToday\nCare\nPeople\nPrivacy\nDocuments\nUse your invitation code. You will only see the care circle after a valid accept\nAccept your invitation\n\nSigned in as Invite Browser Tester\n\nInvited · pending accept\n\nYou said you were invited. Enter the secure code fr",
+      "note": "Invalid invite form must not reveal care data even when submit gated",
+      "at": "2026-07-27T22:50:52.208Z"
+    },
+    {
+      "id": "partial_domain_browser",
+      "status": "PASS",
+      "ms": 1901,
+      "relayOpen": true,
+      "apptPreview": "PT at Tue 11am · Jul 29, 2026 · 11:00 AM PDT\nTherapy: 4:00 PM\nPhysical therapy: around 3:00 PM\nWhat Relay organized\nCompleted morning routine\nNeed help?\n\nAsk about Evelyn Carter's care or share what you observed.\n\n✦\nAsk or update Relay\n⇄\nCare handoff",
+      "medsPreview": "PT at Tue 11am · Jul 29, 2026 · 11:00 AM PDT\nTherapy: 4:00 PM\nPhysical therapy: around 3:00 PM\nWhat Relay organized\nCompleted morning routine\nNeed help?\n\nAsk about Evelyn Carter's care or share what you observed.\n\n✦\nAsk or update Relay\n⇄\nCare handoff",
+      "at": "2026-07-27T22:51:09.371Z"
+    },
+    {
+      "id": "shift_evolution_browser",
+      "status": "PARTIAL",
+      "ms": 2416,
+      "staticSame": true,
+      "a1": "py: 4:00 PM\nPhysical therapy: around 3:00 PM\nWhat Relay organized\nCompleted morning routine\nNeed help?\n\nAsk about Evelyn Carter's care or share what you observed.\n\n✦\nAsk or update Relay\n⇄\nCare handoff",
+      "a2": "py: 4:00 PM\nPhysical therapy: around 3:00 PM\nWhat Relay organized\nCompleted morning routine\nNeed help?\n\nAsk about Evelyn Carter's care or share what you observed.\n\n✦\nAsk or update Relay\n⇄\nCare handoff",
+      "at": "2026-07-27T22:51:33.893Z"
+    },
+    {
+      "id": "appointment_next_browser",
+      "status": "PASS",
+      "cancelledPrimary": false,
+      "preview": "Jul 28, 2026 · 11:00 AM PDT\nScheduled: Judge demo PT at Tue 11am · Jul 29, 2026 · 11:00 AM PDT\nTherapy: 4:00 PM\nPhysical therapy: around 3:00 PM\nWhat Relay organized\nCompleted morning routine\nNeed help?\n\nAsk about Evelyn Carter's care or share what you observed.\n\n✦\nAsk or update Relay\n⇄\nCare handoff",
+      "at": "2026-07-27T22:51:33.893Z"
+    },
+    {
+      "id": "logout_browser",
+      "status": "PARTIAL",
+      "clicked": false,
+      "gate": false,
+      "stillShell": true,
+      "bodyPreview": "Caretaker Relay\nE\nEVELYN CARTER'S CARE\nEvelyn Carter\nCare for Evelyn Carter. You are Marcus Carter, Primary family caregiver.\nFamily caregiver\nMon, Jul 27\nMarcus Carter · Primary family caregiver\nM\n21 new\nConnected\nNAVIGATE\nToday\nCare\nPeople\nPrivacy\n",
+      "at": "2026-07-27T22:51:49.753Z"
+    },
+    {
+      "id": "mobile_390",
+      "status": "PASS",
+      "ms": 2340,
+      "relayOpen": true,
+      "at": "2026-07-27T22:52:07.406Z"
+    },
+    {
+      "id": "keyboard",
+      "status": "PASS",
+      "relayOpen": true,
+      "at": "2026-07-27T22:52:07.406Z"
+    },
+    {
+      "id": "zoom_200",
+      "status": "PASS",
+      "note": "screenshot captured at zoom 2",
+      "at": "2026-07-27T22:52:07.406Z"
+    },
+    {
+      "id": "accessibility_smoke",
+      "status": "PASS",
+      "hasMain": true,
+      "composerLabel": "Ask about Evelyn or share an update…",
+      "at": "2026-07-27T22:52:07.406Z"
+    },
+    {
+      "id": "dsp_lifecycle_browser_full",
+      "status": "PARTIAL",
+      "proven_in_browser": [
+        "DSP login",
+        "Relay status while active shift (F4)",
+        "Med domain restriction language"
+      ],
+      "not_fully_ui_driven": [
+        "Invitation accept screen for DSP assignment",
+        "Pre-shift countdown UI",
+        "Documentation window UI",
+        "Expiry toast multi-tab"
+      ],
+      "classification": "product_ui_surface_gap_not_authz_engine",
+      "at": "2026-07-27T22:52:11.015Z"
+    },
+    {
+      "id": "three_shift_browser_full",
+      "status": "PARTIAL",
+      "note": "F8 proves answer variance in-browser; three sequential shift UIs not fully driven from app chrome",
+      "at": "2026-07-27T22:52:11.015Z"
+    },
+    {
+      "id": "medication_correction_two_user_browser",
+      "status": "PARTIAL",
+      "note": "Requires dual interactive MAR correction UI; API path previously proven; browser multi-user correction form not complete in public UI",
+      "at": "2026-07-27T22:52:11.015Z"
+    }
+  ],
+  "generated_at": "2026-07-27T22:52:15.364Z"
+}

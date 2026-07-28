@@ -1,0 +1,347 @@
+{
+  "started": "2026-07-28T00:57:32.738Z",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "stages": {
+    "shift1_create": {
+      "status": 201,
+      "aid": "shift-cjix92sf-ms3y50hc"
+    },
+    "shift1_handoff": {
+      "status": 200,
+      "handoff_id": "ho-v59kdw1n-ms3y519o",
+      "ok": true
+    },
+    "shift1_answers": {
+      "How are they?": {
+        "status": 200,
+        "text": "Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Calm mood after breakfast [AZms3y50fs-S1]\n• Breakfast eaten [AZms3y50fs-S1]\n• Mobility assistance provided [AZms3y50fs-S1]\n\nStill unfinished after that handoff:\n• Transportation incomplete [AZms3y50fs-S1]\n\nRecent caregiver reports: Fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT).\n\nMedication plan: Metformin 500 mg · 12:00 PM.\n\nComing up: Physical therapy · around 3:00.\n\nThis is a synthesis of authorized care records — not a diagnosis. Ask if you want details on meds, appointments, or who is helping next.\n\nHere's what changed for Evelyn Carter:\n\nLatest handoff:\n• Calm mood after breakfast [AZms3y50fs-S1]\n• Breakfast eaten [AZms3y50fs-S1]\n• Mobility assistance provided [AZms3y50fs-S1]\n\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Daniel Kim)\n• Caregiver reported: slept well (from Marcus Carter)\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Marcus Carter)",
+        "preview": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • Calm mood after breakfast [AZms3y50fs-S1] | • Breakfast eaten [AZms3y50fs-S1] | • Mobility assistance provided [AZms3y50fs-S1] |  | Still unfinished after that handoff: | • Transportation incomplete [AZms3y50fs-S1] |  | Recent caregiver reports: Fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT). |  | Medicat",
+        "ms": 574
+      },
+      "What changed?": {
+        "status": 200,
+        "text": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n• Calm mood after breakfast [AZms3y50fs-S1]\n• Breakfast eaten [AZms3y50fs-S1]\n• Mobility assistance provided [AZms3y50fs-S1]\n\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Daniel Kim)\n• Caregiver reported: slept well (from Marcus Carter)\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Marcus Carter)",
+        "preview": "Here's what changed for Evelyn Carter: |  | Latest handoff: | • Calm mood after breakfast [AZms3y50fs-S1] | • Breakfast eaten [AZms3y50fs-S1] | • Mobility assistance provided [AZms3y50fs-S1] |  | • Caregiver reported: seemed more tired than usual (from Marcus Carter) | • Meal recorded (from Daniel Kim) | • Caregiver reported: slept well (from Marcus Carter) | • Caregiver reported: seemed more tired than usual (from M",
+        "ms": 416
+      },
+      "What happened on the previous shift?": {
+        "status": 200,
+        "text": "Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Calm mood after breakfast [AZms3y50fs-S1]\n• Breakfast eaten [AZms3y50fs-S1]\n• Mobility assistance provided [AZms3y50fs-S1]\n\nStill unfinished after that handoff:\n• Transportation incomplete [AZms3y50fs-S1]\n\nRecent caregiver reports: Fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT).\n\nMedication plan: Metformin 500 mg · 12:00 PM.\n\nComing up: Physical therapy · around 3:00.\n\nThis is a synthesis of authorized care records — not a diagnosis. Ask if you want details on meds, appointments, or who is helping next.\n\nHere's what changed for Evelyn Carter:\n\nLatest handoff:\n• Calm mood after breakfast [AZms3y50fs-S1]\n• Breakfast eaten [AZms3y50fs-S1]\n• Mobility assistance provided [AZms3y50fs-S1]\n\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Daniel Kim)\n• Caregiver reported: slept well (from Marcus Carter)\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Marcus Carter)\n\nFrom the latest caregiver handoff for Evelyn Carter:\n• Calm mood after breakfast [AZms3y50fs-S1]\n• Breakfast eaten [AZms3y50fs-S1]\n• Mobility assistance provided [AZms3y50fs-S1]\n\nObservations for Evelyn Carter:\n\n• Fatigue: 11 report(s) · Saturday, July 25, 2026 at 10:21 PM PDT · Marcus Carter, Daniel Kim, Sadeil\n\n• Caregiver reported: more: 3 report(s) · Saturday, July 25, 2026 at 2:38 PM PDT · Marcus Carter\n\n• Caregiver reported: slept: 4 report(s) · Saturday, July 25, 2026 at 12:06 PM PDT · Marcus Carter\n\n• Caregiver reported: ate: 4 report(s) · Saturday, July 25, 2026 at 2:32 PM PDT · Marcus Carter\n\nWhat Maya Bennett needs to know:\n\n• Calm mood after breakfast [AZms3y50fs-S1]\n• Breakfast eaten [AZms3y50fs-S1]\n• Mobility assistance provided [AZms3y50fs-S1]",
+        "preview": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • Calm mood after breakfast [AZms3y50fs-S1] | • Breakfast eaten [AZms3y50fs-S1] | • Mobility assistance provided [AZms3y50fs-S1] |  | Still unfinished after that handoff: | • Transportation incomplete [AZms3y50fs-S1] |  | Recent caregiver reports: Fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT). |  | Medicat",
+        "ms": 413
+      },
+      "How was their mood?": {
+        "status": 200,
+        "text": "Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Calm mood after breakfast [AZms3y50fs-S1]\n• Breakfast eaten [AZms3y50fs-S1]\n• Mobility assistance provided [AZms3y50fs-S1]\n\nStill unfinished after that handoff:\n• Transportation incomplete [AZms3y50fs-S1]\n\nRecent caregiver reports: Fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT).\n\nMedication plan: Metformin 500 mg · 12:00 PM.\n\nComing up: Physical therapy · around 3:00.\n\nThis is a synthesis of authorized care records — not a diagnosis. Ask if you want details on meds, appointments, or who is helping next.\n\nHere's what changed for Evelyn Carter:\n\nLatest handoff:\n• Calm mood after breakfast [AZms3y50fs-S1]\n• Breakfast eaten [AZms3y50fs-S1]\n• Mobility assistance provided [AZms3y50fs-S1]\n\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Daniel Kim)\n• Caregiver reported: slept well (from Marcus Carter)\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Marcus Carter)\n\nFrom the latest caregiver handoff for Evelyn Carter:\n• Calm mood after breakfast [AZms3y50fs-S1]\n• Breakfast eaten [AZms3y50fs-S1]\n• Mobility assistance provided [AZms3y50fs-S1]\n\nObservations for Evelyn Carter:\n\n• Fatigue: 11 report(s) · Saturday, July 25, 2026 at 10:21 PM PDT · Marcus Carter, Daniel Kim, Sadeil\n\n• Caregiver reported: more: 3 report(s) · Saturday, July 25, 2026 at 2:38 PM PDT · Marcus Carter\n\n• Caregiver reported: slept: 4 report(s) · Saturday, July 25, 2026 at 12:06 PM PDT · Marcus Carter\n\n• Caregiver reported: ate: 4 report(s) · Saturday, July 25, 2026 at 2:32 PM PDT · Marcus Carter",
+        "preview": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • Calm mood after breakfast [AZms3y50fs-S1] | • Breakfast eaten [AZms3y50fs-S1] | • Mobility assistance provided [AZms3y50fs-S1] |  | Still unfinished after that handoff: | • Transportation incomplete [AZms3y50fs-S1] |  | Recent caregiver reports: Fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT). |  | Medicat",
+        "ms": 416
+      },
+      "Did they eat?": {
+        "status": 200,
+        "text": "From the latest caregiver handoff for Evelyn Carter:\n• Calm mood after breakfast [AZms3y50fs-S1]\n• Breakfast eaten [AZms3y50fs-S1]\n• Mobility assistance provided [AZms3y50fs-S1]\n\nObservations for Evelyn Carter:\n\n• Fatigue: 11 report(s) · Saturday, July 25, 2026 at 10:21 PM PDT · Marcus Carter, Daniel Kim, Sadeil\n\n• Caregiver reported: more: 3 report(s) · Saturday, July 25, 2026 at 2:38 PM PDT · Marcus Carter\n\n• Caregiver reported: slept: 4 report(s) · Saturday, July 25, 2026 at 12:06 PM PDT · Marcus Carter\n\n• Caregiver reported: ate: 4 report(s) · Saturday, July 25, 2026 at 2:32 PM PDT · Marcus Carter\n\nAround lunchtime for Evelyn Carter: medication support per plan (12:00 PM), meals with food if instructed, watch fatigue/dizziness after eating.\n\nPreferences / person-centered notes:\n• Person-centered: respect Evelyn Carter's pace and preferences",
+        "preview": "From the latest caregiver handoff for Evelyn Carter: | • Calm mood after breakfast [AZms3y50fs-S1] | • Breakfast eaten [AZms3y50fs-S1] | • Mobility assistance provided [AZms3y50fs-S1] |  | Observations for Evelyn Carter: |  | • Fatigue: 11 report(s) · Saturday, July 25, 2026 at 10:21 PM PDT · Marcus Carter, Daniel Kim, Sadeil |  | • Caregiver reported: more: 3 report(s) · Saturday, July 25, 2026 at 2:38 PM PDT · Ma",
+        "ms": 234
+      },
+      "Was medication administered?": {
+        "status": 200,
+        "text": "Last recorded: unidentified tablet(s) · Thursday, July 23, 2026 at 1:56 PM PDT · by Marcus Carter (CONFLICTED)",
+        "preview": "Last recorded: unidentified tablet(s) · Thursday, July 23, 2026 at 1:56 PM PDT · by Marcus Carter (CONFLICTED)",
+        "ms": 349
+      },
+      "What remains unfinished?": {
+        "status": 200,
+        "text": "Here's what is still open for Evelyn Carter:\n• Handoff still needs attention: Transportation incomplete [AZms3y50fs-S1]\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1785047212906\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1785007875254\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1785007310619\n• Waiting on Maya Bennett: Open list 1785005849575\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1785005290693\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784965216596\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784964550165\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784960294143\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784959799127\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784954759516\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784954350126\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784952476289\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784952066827\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784945264833\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784944929906\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784933092165\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784932843936\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784931386782\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784931145320\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784928081440\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784927897326\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784918849070\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784918739092\n• Needs your review: Yes around 12:15 after lunch.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open loop probe 1784912609529\n• Needs your review: Yes I gave two tablets at lunch.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open loop probe 1784909936097\n• Needs your review: Yes I gave two tablets at lunch.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open loop probe 1784876414375\n• Needs your review: Yes I gave two tablets at lunch.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose is ambiguous (Count unit without tablet strength — cannot convert to mg). Requires human review.\n• Needs checking: Reported dose is ambiguous (Count unit without tablet strength — cannot convert to mg). Requires human review.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose is ambiguous (Count unit without tablet strength — cannot convert to mg). Requires human review.\n\nWaiting on: Marcus Carter, Maya Bennett.",
+        "preview": "Here's what is still open for Evelyn Carter: | • Handoff still needs attention: Transportation incomplete [AZms3y50fs-S1] | • Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon. | • RESPONSE_RECEIVED: Could dizziness need med review? s13-1785047212906 | • Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon. | • Waiting on Maya Bennett: Open list 1",
+        "ms": 425
+      },
+      "What is the next appointment?": {
+        "status": 200,
+        "text": "Physical therapy\naround 3:00\nLocation: 1234 Coastal Care Way, Oceanside, CA 92054\nStatus: moved\nTravel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship.\nPhone: +1-555-0140\n\nComing up:\n• Medication · Metformin 500 mg · 12:00 PM (window 11:30 AM – 12:30 PM)\n• Appointment · Doctor / clinic visit (caregiver-requested) · Wednesday, July 29 · 2:00 PM PDT · Leave by about 12:57 PM for a 2:00 PM session (about 18 min travel + buffer) · Coastal Family Medicine (synthetic)\n• Appointment · Doctor / clinic visit (caregiver-requested) — day-before · Day-before reminder for Wednesday, July 29 · 2:00 PM PDT · Coastal Family Medicine (synthetic)\n• Appointment · Physical therapy · 3:00 PM PDT · Leave by about 2:12 PM for a 3:00 PM session (about 18 min travel + buffer) · Coastal PT\n• Appointment · Physical therapy — day-before · Day-before reminder for 3:00 PM PDT · Coastal PT\n• Appointment · Physical therapy · 4:30 PM PDT · Leave by about 3:42 PM for a 4:30 PM session (about 18 min travel + buffer) · Coastal PT",
+        "preview": "Physical therapy | around 3:00 | Location: 1234 Coastal Care Way, Oceanside, CA 92054 | Status: moved | Travel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship. | Phone: +1-555-0140 |  | Coming up: | • Medication · Metformin 500 mg · 12:00 PM (window 11:30 AM – 12:30 PM) | • Appointment · Doctor / clinic visit (caregiver-request",
+        "ms": 213
+      },
+      "What should the next caregiver know?": {
+        "status": 200,
+        "text": "Helping now: Marcus Carter · Primary family caregiver\nUntil about 4:00 PM\n\nNext: Maya Bennett\nExpected around 4:30 PM\n\nI can prepare a handoff for the next helper before they arrive.\n\nWhat the next caregiver should know (latest handoff):\n• Calm mood after breakfast [AZms3y50fs-S1]\n• Breakfast eaten [AZms3y50fs-S1]\n• Mobility assistance provided [AZms3y50fs-S1]\n\nStill open:\n• Transportation incomplete [AZms3y50fs-S1]",
+        "preview": "Helping now: Marcus Carter · Primary family caregiver | Until about 4:00 PM |  | Next: Maya Bennett | Expected around 4:30 PM |  | I can prepare a handoff for the next helper before they arrive. |  | What the next caregiver should know (latest handoff): | • Calm mood after breakfast [AZms3y50fs-S1] | • Breakfast eaten [AZms3y50fs-S1] | • Mobility assistance provided [AZms3y50fs-S1] |  | Still open: | • Transportation incompl",
+        "ms": 374
+      }
+    },
+    "shift2_handoff_list": {
+      "status": 200,
+      "count": 25,
+      "latestId": "ho-v59kdw1n-ms3y519o"
+    },
+    "shift2_ack": {
+      "status": 200,
+      "lifecycle": "acknowledged",
+      "acknowledgedAt": "2026-07-28T00:57:40.563Z",
+      "ok": true,
+      "ms": 194
+    },
+    "shift2_clarify_probe": {
+      "status": 200,
+      "lifecycle": "correction_required",
+      "ok": true
+    },
+    "shift2_handoff": {
+      "status": 200,
+      "handoff_id": "ho-fja1yxnk-ms3y55u0"
+    },
+    "shift2_answers": {
+      "How are they?": {
+        "status": 200,
+        "text": "Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• More tired than usual [AZms3y50fs-S2]\n• Lunch refused [AZms3y50fs-S2]\n• Transportation completed [AZms3y50fs-S2]\n• Medication reported administered at noon [AZms3y50fs-S2]\n\nStill unfinished after that handoff:\n• Watch fatigue after lunch refusal [AZms3y50fs-S2]\n\nRecent caregiver reports: Fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT).\n\nMedication plan: Metformin 500 mg · 12:00 PM.\n\nComing up: Physical therapy · around 3:00.\n\nThis is a synthesis of authorized care records — not a diagnosis. Ask if you want details on meds, appointments, or who is helping next.\n\nHere's what changed for Evelyn Carter:\n\nLatest handoff:\n• More tired than usual [AZms3y50fs-S2]\n• Lunch refused [AZms3y50fs-S2]\n• Transportation completed [AZms3y50fs-S2]\n• Medication reported administered at noon [AZms3y50fs-S2]\n\n• Meal recorded (from Daniel Kim)\n• Caregiver reported: slept well (from Marcus Carter)\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Marcus Carter)\n• Meal recorded (from Daniel Kim)",
+        "preview": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • More tired than usual [AZms3y50fs-S2] | • Lunch refused [AZms3y50fs-S2] | • Transportation completed [AZms3y50fs-S2] | • Medication reported administered at noon [AZms3y50fs-S2] |  | Still unfinished after that handoff: | • Watch fatigue after lunch refusal [AZms3y50fs-S2] |  | Recent caregiver reports: Fatigue (last",
+        "ms": 419
+      },
+      "What changed?": {
+        "status": 200,
+        "text": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n• More tired than usual [AZms3y50fs-S2]\n• Lunch refused [AZms3y50fs-S2]\n• Transportation completed [AZms3y50fs-S2]\n• Medication reported administered at noon [AZms3y50fs-S2]\n\n• Meal recorded (from Daniel Kim)\n• Caregiver reported: slept well (from Marcus Carter)\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Marcus Carter)\n• Meal recorded (from Daniel Kim)",
+        "preview": "Here's what changed for Evelyn Carter: |  | Latest handoff: | • More tired than usual [AZms3y50fs-S2] | • Lunch refused [AZms3y50fs-S2] | • Transportation completed [AZms3y50fs-S2] | • Medication reported administered at noon [AZms3y50fs-S2] |  | • Meal recorded (from Daniel Kim) | • Caregiver reported: slept well (from Marcus Carter) | • Caregiver reported: seemed more tired than usual (from Marcus Carter) | • Meal re",
+        "ms": 340
+      },
+      "What happened on the previous shift?": {
+        "status": 200,
+        "text": "Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• More tired than usual [AZms3y50fs-S2]\n• Lunch refused [AZms3y50fs-S2]\n• Transportation completed [AZms3y50fs-S2]\n• Medication reported administered at noon [AZms3y50fs-S2]\n\nStill unfinished after that handoff:\n• Watch fatigue after lunch refusal [AZms3y50fs-S2]\n\nRecent caregiver reports: Fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT).\n\nMedication plan: Metformin 500 mg · 12:00 PM.\n\nComing up: Physical therapy · around 3:00.\n\nThis is a synthesis of authorized care records — not a diagnosis. Ask if you want details on meds, appointments, or who is helping next.\n\nHere's what changed for Evelyn Carter:\n\nLatest handoff:\n• More tired than usual [AZms3y50fs-S2]\n• Lunch refused [AZms3y50fs-S2]\n• Transportation completed [AZms3y50fs-S2]\n• Medication reported administered at noon [AZms3y50fs-S2]\n\n• Meal recorded (from Daniel Kim)\n• Caregiver reported: slept well (from Marcus Carter)\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Marcus Carter)\n• Meal recorded (from Daniel Kim)\n\nFrom the latest caregiver handoff for Evelyn Carter:\n• More tired than usual [AZms3y50fs-S2]\n• Lunch refused [AZms3y50fs-S2]\n• Medication reported administered at noon [AZms3y50fs-S2]\n\nObservations for Evelyn Carter:\n\n• Fatigue: 11 report(s) · Saturday, July 25, 2026 at 10:21 PM PDT · Marcus Carter, Daniel Kim, Sadeil\n\n• Caregiver reported: more: 3 report(s) · Saturday, July 25, 2026 at 2:38 PM PDT · Marcus Carter\n\n• Caregiver reported: slept: 4 report(s) · Saturday, July 25, 2026 at 12:06 PM PDT · Marcus Carter\n\n• Caregiver reported: ate: 4 report(s) · Saturday, July 25, 2026 at 2:32 PM PDT · Marcus Carter\n\nWhat Marcus Carter needs to know:\n\n• More tired than usual [AZms3y50fs-S2]\n• Lunch refused [AZms3y50fs-S2]\n• Transportation completed [AZms3y50fs-S2]\n• Medication reported administered at noon [AZms3y50fs-S2]",
+        "preview": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • More tired than usual [AZms3y50fs-S2] | • Lunch refused [AZms3y50fs-S2] | • Transportation completed [AZms3y50fs-S2] | • Medication reported administered at noon [AZms3y50fs-S2] |  | Still unfinished after that handoff: | • Watch fatigue after lunch refusal [AZms3y50fs-S2] |  | Recent caregiver reports: Fatigue (last",
+        "ms": 371
+      },
+      "How was their mood?": {
+        "status": 200,
+        "text": "Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• More tired than usual [AZms3y50fs-S2]\n• Lunch refused [AZms3y50fs-S2]\n• Transportation completed [AZms3y50fs-S2]\n• Medication reported administered at noon [AZms3y50fs-S2]\n\nStill unfinished after that handoff:\n• Watch fatigue after lunch refusal [AZms3y50fs-S2]\n\nRecent caregiver reports: Fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT).\n\nMedication plan: Metformin 500 mg · 12:00 PM.\n\nComing up: Physical therapy · around 3:00.\n\nThis is a synthesis of authorized care records — not a diagnosis. Ask if you want details on meds, appointments, or who is helping next.\n\nHere's what changed for Evelyn Carter:\n\nLatest handoff:\n• More tired than usual [AZms3y50fs-S2]\n• Lunch refused [AZms3y50fs-S2]\n• Transportation completed [AZms3y50fs-S2]\n• Medication reported administered at noon [AZms3y50fs-S2]\n\n• Meal recorded (from Daniel Kim)\n• Caregiver reported: slept well (from Marcus Carter)\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Marcus Carter)\n• Meal recorded (from Daniel Kim)\n\nFrom the latest caregiver handoff for Evelyn Carter:\n• More tired than usual [AZms3y50fs-S2]\n• Lunch refused [AZms3y50fs-S2]\n• Medication reported administered at noon [AZms3y50fs-S2]\n\nObservations for Evelyn Carter:\n\n• Fatigue: 11 report(s) · Saturday, July 25, 2026 at 10:21 PM PDT · Marcus Carter, Daniel Kim, Sadeil\n\n• Caregiver reported: more: 3 report(s) · Saturday, July 25, 2026 at 2:38 PM PDT · Marcus Carter\n\n• Caregiver reported: slept: 4 report(s) · Saturday, July 25, 2026 at 12:06 PM PDT · Marcus Carter\n\n• Caregiver reported: ate: 4 report(s) · Saturday, July 25, 2026 at 2:32 PM PDT · Marcus Carter",
+        "preview": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • More tired than usual [AZms3y50fs-S2] | • Lunch refused [AZms3y50fs-S2] | • Transportation completed [AZms3y50fs-S2] | • Medication reported administered at noon [AZms3y50fs-S2] |  | Still unfinished after that handoff: | • Watch fatigue after lunch refusal [AZms3y50fs-S2] |  | Recent caregiver reports: Fatigue (last",
+        "ms": 260
+      },
+      "Did they eat?": {
+        "status": 200,
+        "text": "From the latest caregiver handoff for Evelyn Carter:\n• More tired than usual [AZms3y50fs-S2]\n• Lunch refused [AZms3y50fs-S2]\n• Medication reported administered at noon [AZms3y50fs-S2]\n\nObservations for Evelyn Carter:\n\n• Fatigue: 11 report(s) · Saturday, July 25, 2026 at 10:21 PM PDT · Marcus Carter, Daniel Kim, Sadeil\n\n• Caregiver reported: more: 3 report(s) · Saturday, July 25, 2026 at 2:38 PM PDT · Marcus Carter\n\n• Caregiver reported: slept: 4 report(s) · Saturday, July 25, 2026 at 12:06 PM PDT · Marcus Carter\n\n• Caregiver reported: ate: 4 report(s) · Saturday, July 25, 2026 at 2:32 PM PDT · Marcus Carter\n\nAround lunchtime for Evelyn Carter: medication support per plan (12:00 PM), meals with food if instructed, watch fatigue/dizziness after eating.\n\nPreferences / person-centered notes:\n• Person-centered: respect Evelyn Carter's pace and preferences",
+        "preview": "From the latest caregiver handoff for Evelyn Carter: | • More tired than usual [AZms3y50fs-S2] | • Lunch refused [AZms3y50fs-S2] | • Medication reported administered at noon [AZms3y50fs-S2] |  | Observations for Evelyn Carter: |  | • Fatigue: 11 report(s) · Saturday, July 25, 2026 at 10:21 PM PDT · Marcus Carter, Daniel Kim, Sadeil |  | • Caregiver reported: more: 3 report(s) · Saturday, July 25, 2026 at 2:38 PM PD",
+        "ms": 412
+      },
+      "Was medication administered?": {
+        "status": 200,
+        "text": "Latest caregiver-reported medication note from handoff (not clinician-confirmed):\n• Medication reported administered at noon [AZms3y50fs-S2]\n\nThat handoff note is caregiver-reported. It is not automatically clinician confirmed.",
+        "preview": "Latest caregiver-reported medication note from handoff (not clinician-confirmed): | • Medication reported administered at noon [AZms3y50fs-S2] |  | That handoff note is caregiver-reported. It is not automatically clinician confirmed.",
+        "ms": 209
+      },
+      "What remains unfinished?": {
+        "status": 200,
+        "text": "Here's what is still open for Evelyn Carter:\n• Handoff still needs attention: Watch fatigue after lunch refusal [AZms3y50fs-S2]\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1785047212906\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1785007875254\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1785007310619\n• Waiting on Maya Bennett: Open list 1785005849575\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1785005290693\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784965216596\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784964550165\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784960294143\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784959799127\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784954759516\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784954350126\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784952476289\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784952066827\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784945264833\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784944929906\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784933092165\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784932843936\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784931386782\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784931145320\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784928081440\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784927897326\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784918849070\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784918739092\n• Needs your review: Yes around 12:15 after lunch.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open loop probe 1784912609529\n• Needs your review: Yes I gave two tablets at lunch.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open loop probe 1784909936097\n• Needs your review: Yes I gave two tablets at lunch.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open loop probe 1784876414375\n• Needs your review: Yes I gave two tablets at lunch.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose is ambiguous (Count unit without tablet strength — cannot convert to mg). Requires human review.\n• Needs checking: Reported dose is ambiguous (Count unit without tablet strength — cannot convert to mg). Requires human review.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose is ambiguous (Count unit without tablet strength — cannot convert to mg). Requires human review.\n\nWaiting on: Marcus Carter, Maya Bennett.",
+        "preview": "Here's what is still open for Evelyn Carter: | • Handoff still needs attention: Watch fatigue after lunch refusal [AZms3y50fs-S2] | • Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon. | • RESPONSE_RECEIVED: Could dizziness need med review? s13-1785047212906 | • Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon. | • Waiting on Maya Bennett: Ope",
+        "ms": 405
+      },
+      "What is the next appointment?": {
+        "status": 200,
+        "text": "Physical therapy\naround 3:00\nLocation: 1234 Coastal Care Way, Oceanside, CA 92054\nStatus: moved\nTravel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship.\nPhone: +1-555-0140\n\nComing up:\n• Medication · Metformin 500 mg · 12:00 PM (window 11:30 AM – 12:30 PM)\n• Appointment · Doctor / clinic visit (caregiver-requested) · Wednesday, July 29 · 2:00 PM PDT · Leave by about 12:57 PM for a 2:00 PM session (about 18 min travel + buffer) · Coastal Family Medicine (synthetic)\n• Appointment · Doctor / clinic visit (caregiver-requested) — day-before · Day-before reminder for Wednesday, July 29 · 2:00 PM PDT · Coastal Family Medicine (synthetic)\n• Appointment · Physical therapy · 3:00 PM PDT · Leave by about 2:12 PM for a 3:00 PM session (about 18 min travel + buffer) · Coastal PT\n• Appointment · Physical therapy — day-before · Day-before reminder for 3:00 PM PDT · Coastal PT\n• Appointment · Physical therapy · 4:30 PM PDT · Leave by about 3:42 PM for a 4:30 PM session (about 18 min travel + buffer) · Coastal PT",
+        "preview": "Physical therapy | around 3:00 | Location: 1234 Coastal Care Way, Oceanside, CA 92054 | Status: moved | Travel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship. | Phone: +1-555-0140 |  | Coming up: | • Medication · Metformin 500 mg · 12:00 PM (window 11:30 AM – 12:30 PM) | • Appointment · Doctor / clinic visit (caregiver-request",
+        "ms": 253
+      },
+      "What should the next caregiver know?": {
+        "status": 200,
+        "text": "Helping now: Marcus Carter · Primary family caregiver\nUntil about 4:00 PM\n\nNext: Maya Bennett\nExpected around 4:30 PM\n\nI can prepare a handoff for the next helper before they arrive.\n\nWhat the next caregiver should know (latest handoff):\n• More tired than usual [AZms3y50fs-S2]\n• Lunch refused [AZms3y50fs-S2]\n• Transportation completed [AZms3y50fs-S2]\n• Medication reported administered at noon [AZms3y50fs-S2]\n\nStill open:\n• Watch fatigue after lunch refusal [AZms3y50fs-S2]",
+        "preview": "Helping now: Marcus Carter · Primary family caregiver | Until about 4:00 PM |  | Next: Maya Bennett | Expected around 4:30 PM |  | I can prepare a handoff for the next helper before they arrive. |  | What the next caregiver should know (latest handoff): | • More tired than usual [AZms3y50fs-S2] | • Lunch refused [AZms3y50fs-S2] | • Transportation completed [AZms3y50fs-S2] | • Medication reported administered at noon [AZm",
+        "ms": 209
+      }
+    },
+    "shift3_handoff": {
+      "status": 200,
+      "handoff_id": "ho-kvalkdvw-ms3y59lg"
+    },
+    "shift3_ack": {
+      "status": 200,
+      "lifecycle": "acknowledged",
+      "ok": true
+    },
+    "notifications": {
+      "status": 200,
+      "count": 196,
+      "correctionish": 4
+    },
+    "shift3_answers": {
+      "How are they?": {
+        "status": 200,
+        "text": "Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Correction: medication was not administered [AZms3y50fs-S3]\n• Mood improved [AZms3y50fs-S3]\n• Therapy rescheduled to later slot [AZms3y50fs-S3]\n• New mobility concern noted [AZms3y50fs-S3]\n\nStill unfinished after that handoff:\n• Mobility concern needs monitoring [AZms3y50fs-S3]\n\nRecent caregiver reports: Fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT).\n\nMedication plan: Metformin 500 mg · 12:00 PM.\n\nComing up: Physical therapy · around 3:00.\n\nThis is a synthesis of authorized care records — not a diagnosis. Ask if you want details on meds, appointments, or who is helping next.\n\nHere's what changed for Evelyn Carter:\n\nLatest handoff:\n• Correction: medication was not administered [AZms3y50fs-S3]\n• Mood improved [AZms3y50fs-S3]\n• Therapy rescheduled to later slot [AZms3y50fs-S3]\n• New mobility concern noted [AZms3y50fs-S3]\n\n• Caregiver reported: slept well (from Marcus Carter)\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Marcus Carter)\n• Meal recorded (from Daniel Kim)\n• Breakfast / meal around 9:00 (from Marcus Carter)",
+        "preview": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • Correction: medication was not administered [AZms3y50fs-S3] | • Mood improved [AZms3y50fs-S3] | • Therapy rescheduled to later slot [AZms3y50fs-S3] | • New mobility concern noted [AZms3y50fs-S3] |  | Still unfinished after that handoff: | • Mobility concern needs monitoring [AZms3y50fs-S3] |  | Recent caregiver repor",
+        "ms": 392
+      },
+      "What changed?": {
+        "status": 200,
+        "text": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n• Correction: medication was not administered [AZms3y50fs-S3]\n• Mood improved [AZms3y50fs-S3]\n• Therapy rescheduled to later slot [AZms3y50fs-S3]\n• New mobility concern noted [AZms3y50fs-S3]\n\n• Caregiver reported: slept well (from Marcus Carter)\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Marcus Carter)\n• Meal recorded (from Daniel Kim)\n• Breakfast / meal around 9:00 (from Marcus Carter)",
+        "preview": "Here's what changed for Evelyn Carter: |  | Latest handoff: | • Correction: medication was not administered [AZms3y50fs-S3] | • Mood improved [AZms3y50fs-S3] | • Therapy rescheduled to later slot [AZms3y50fs-S3] | • New mobility concern noted [AZms3y50fs-S3] |  | • Caregiver reported: slept well (from Marcus Carter) | • Caregiver reported: seemed more tired than usual (from Marcus Carter) | • Meal recorded (from Marc",
+        "ms": 530
+      },
+      "What happened on the previous shift?": {
+        "status": 200,
+        "text": "Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Correction: medication was not administered [AZms3y50fs-S3]\n• Mood improved [AZms3y50fs-S3]\n• Therapy rescheduled to later slot [AZms3y50fs-S3]\n• New mobility concern noted [AZms3y50fs-S3]\n\nStill unfinished after that handoff:\n• Mobility concern needs monitoring [AZms3y50fs-S3]\n\nRecent caregiver reports: Fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT).\n\nMedication plan: Metformin 500 mg · 12:00 PM.\n\nComing up: Physical therapy · around 3:00.\n\nThis is a synthesis of authorized care records — not a diagnosis. Ask if you want details on meds, appointments, or who is helping next.\n\nHere's what changed for Evelyn Carter:\n\nLatest handoff:\n• Correction: medication was not administered [AZms3y50fs-S3]\n• Mood improved [AZms3y50fs-S3]\n• Therapy rescheduled to later slot [AZms3y50fs-S3]\n• New mobility concern noted [AZms3y50fs-S3]\n\n• Caregiver reported: slept well (from Marcus Carter)\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Marcus Carter)\n• Meal recorded (from Daniel Kim)\n• Breakfast / meal around 9:00 (from Marcus Carter)\n\nFrom the latest caregiver handoff for Evelyn Carter:\n• Correction: medication was not administered [AZms3y50fs-S3]\n• Mood improved [AZms3y50fs-S3]\n• Therapy rescheduled to later slot [AZms3y50fs-S3]\n• New mobility concern noted [AZms3y50fs-S3]\n\nObservations for Evelyn Carter:\n\n• Fatigue: 11 report(s) · Saturday, July 25, 2026 at 10:21 PM PDT · Marcus Carter, Daniel Kim, Sadeil\n\n• Caregiver reported: more: 3 report(s) · Saturday, July 25, 2026 at 2:38 PM PDT · Marcus Carter\n\n• Caregiver reported: slept: 4 report(s) · Saturday, July 25, 2026 at 12:06 PM PDT · Marcus Carter\n\n• Caregiver reported: ate: 4 report(s) · Saturday, July 25, 2026 at 2:32 PM PDT · Marcus Carter\n\nWhat Maya Bennett needs to know:\n\n• Correction: medication was not administered [AZms3y50fs-S3]\n• Mood improved [AZms3y50fs-S3]\n• Therapy rescheduled to later slot [AZms3y50fs-S3]\n• New mobility concern noted [AZms3y50fs-S3]",
+        "preview": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • Correction: medication was not administered [AZms3y50fs-S3] | • Mood improved [AZms3y50fs-S3] | • Therapy rescheduled to later slot [AZms3y50fs-S3] | • New mobility concern noted [AZms3y50fs-S3] |  | Still unfinished after that handoff: | • Mobility concern needs monitoring [AZms3y50fs-S3] |  | Recent caregiver repor",
+        "ms": 190
+      },
+      "How was their mood?": {
+        "status": 200,
+        "text": "Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n• Correction: medication was not administered [AZms3y50fs-S3]\n• Mood improved [AZms3y50fs-S3]\n• Therapy rescheduled to later slot [AZms3y50fs-S3]\n• New mobility concern noted [AZms3y50fs-S3]\n\nStill unfinished after that handoff:\n• Mobility concern needs monitoring [AZms3y50fs-S3]\n\nRecent caregiver reports: Fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT).\n\nMedication plan: Metformin 500 mg · 12:00 PM.\n\nComing up: Physical therapy · around 3:00.\n\nThis is a synthesis of authorized care records — not a diagnosis. Ask if you want details on meds, appointments, or who is helping next.\n\nHere's what changed for Evelyn Carter:\n\nLatest handoff:\n• Correction: medication was not administered [AZms3y50fs-S3]\n• Mood improved [AZms3y50fs-S3]\n• Therapy rescheduled to later slot [AZms3y50fs-S3]\n• New mobility concern noted [AZms3y50fs-S3]\n\n• Caregiver reported: slept well (from Marcus Carter)\n• Caregiver reported: seemed more tired than usual (from Marcus Carter)\n• Meal recorded (from Marcus Carter)\n• Meal recorded (from Daniel Kim)\n• Breakfast / meal around 9:00 (from Marcus Carter)\n\nFrom the latest caregiver handoff for Evelyn Carter:\n• Correction: medication was not administered [AZms3y50fs-S3]\n• Mood improved [AZms3y50fs-S3]\n• Therapy rescheduled to later slot [AZms3y50fs-S3]\n• New mobility concern noted [AZms3y50fs-S3]\n\nObservations for Evelyn Carter:\n\n• Fatigue: 11 report(s) · Saturday, July 25, 2026 at 10:21 PM PDT · Marcus Carter, Daniel Kim, Sadeil\n\n• Caregiver reported: more: 3 report(s) · Saturday, July 25, 2026 at 2:38 PM PDT · Marcus Carter\n\n• Caregiver reported: slept: 4 report(s) · Saturday, July 25, 2026 at 12:06 PM PDT · Marcus Carter\n\n• Caregiver reported: ate: 4 report(s) · Saturday, July 25, 2026 at 2:32 PM PDT · Marcus Carter",
+        "preview": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • Correction: medication was not administered [AZms3y50fs-S3] | • Mood improved [AZms3y50fs-S3] | • Therapy rescheduled to later slot [AZms3y50fs-S3] | • New mobility concern noted [AZms3y50fs-S3] |  | Still unfinished after that handoff: | • Mobility concern needs monitoring [AZms3y50fs-S3] |  | Recent caregiver repor",
+        "ms": 371
+      },
+      "Did they eat?": {
+        "status": 200,
+        "text": "From the latest caregiver handoff for Evelyn Carter:\n• Correction: medication was not administered [AZms3y50fs-S3]\n• Mood improved [AZms3y50fs-S3]\n• Therapy rescheduled to later slot [AZms3y50fs-S3]\n• New mobility concern noted [AZms3y50fs-S3]\n\nObservations for Evelyn Carter:\n\n• Fatigue: 11 report(s) · Saturday, July 25, 2026 at 10:21 PM PDT · Marcus Carter, Daniel Kim, Sadeil\n\n• Caregiver reported: more: 3 report(s) · Saturday, July 25, 2026 at 2:38 PM PDT · Marcus Carter\n\n• Caregiver reported: slept: 4 report(s) · Saturday, July 25, 2026 at 12:06 PM PDT · Marcus Carter\n\n• Caregiver reported: ate: 4 report(s) · Saturday, July 25, 2026 at 2:32 PM PDT · Marcus Carter\n\nAround lunchtime for Evelyn Carter: medication support per plan (12:00 PM), meals with food if instructed, watch fatigue/dizziness after eating.\n\nPreferences / person-centered notes:\n• Person-centered: respect Evelyn Carter's pace and preferences",
+        "preview": "From the latest caregiver handoff for Evelyn Carter: | • Correction: medication was not administered [AZms3y50fs-S3] | • Mood improved [AZms3y50fs-S3] | • Therapy rescheduled to later slot [AZms3y50fs-S3] | • New mobility concern noted [AZms3y50fs-S3] |  | Observations for Evelyn Carter: |  | • Fatigue: 11 report(s) · Saturday, July 25, 2026 at 10:21 PM PDT · Marcus Carter, Daniel Kim, Sadeil |  | • Caregiver reporte",
+        "ms": 137
+      },
+      "Was medication administered?": {
+        "status": 200,
+        "text": "Latest caregiver-reported medication note from handoff (not clinician-confirmed):\n• Correction: medication was not administered [AZms3y50fs-S3]\n\nThat handoff note is caregiver-reported. It is not automatically clinician confirmed.",
+        "preview": "Latest caregiver-reported medication note from handoff (not clinician-confirmed): | • Correction: medication was not administered [AZms3y50fs-S3] |  | That handoff note is caregiver-reported. It is not automatically clinician confirmed.",
+        "ms": 401
+      },
+      "What remains unfinished?": {
+        "status": 200,
+        "text": "Here's what is still open for Evelyn Carter:\n• Handoff still needs attention: Mobility concern needs monitoring [AZms3y50fs-S3]\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1785047212906\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1785007875254\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1785007310619\n• Waiting on Maya Bennett: Open list 1785005849575\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1785005290693\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784965216596\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784964550165\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784960294143\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784959799127\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784954759516\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784954350126\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784952476289\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784952066827\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784945264833\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784944929906\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784933092165\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784932843936\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784931386782\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784931145320\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784928081440\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784927897326\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open list 1784918849070\n• RESPONSE_RECEIVED: Could dizziness need med review? s13-1784918739092\n• Needs your review: Yes around 12:15 after lunch.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open loop probe 1784912609529\n• Needs your review: Yes I gave two tablets at lunch.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open loop probe 1784909936097\n• Needs your review: Yes I gave two tablets at lunch.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon.\n• Waiting on Maya Bennett: Open loop probe 1784876414375\n• Needs your review: Yes I gave two tablets at lunch.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose is ambiguous (Count unit without tablet strength — cannot convert to mg). Requires human review.\n• Needs checking: Reported dose is ambiguous (Count unit without tablet strength — cannot convert to mg). Requires human review.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Needs checking: Reported dose is ambiguous (Count unit without tablet strength — cannot convert to mg). Requires human review.\n\nWaiting on: Marcus Carter, Maya Bennett.",
+        "preview": "Here's what is still open for Evelyn Carter: | • Handoff still needs attention: Mobility concern needs monitoring [AZms3y50fs-S3] | • Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon. | • RESPONSE_RECEIVED: Could dizziness need med review? s13-1785047212906 | • Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon. | • Waiting on Maya Bennett: Ope",
+        "ms": 238
+      },
+      "What is the next appointment?": {
+        "status": 200,
+        "text": "Physical therapy\naround 3:00\nLocation: 1234 Coastal Care Way, Oceanside, CA 92054\nStatus: moved\nTravel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship.\nPhone: +1-555-0140\n\nComing up:\n• Medication · Metformin 500 mg · 12:00 PM (window 11:30 AM – 12:30 PM)\n• Appointment · Doctor / clinic visit (caregiver-requested) · Wednesday, July 29 · 2:00 PM PDT · Leave by about 12:57 PM for a 2:00 PM session (about 18 min travel + buffer) · Coastal Family Medicine (synthetic)\n• Appointment · Doctor / clinic visit (caregiver-requested) — day-before · Day-before reminder for Wednesday, July 29 · 2:00 PM PDT · Coastal Family Medicine (synthetic)\n• Appointment · Physical therapy · 3:00 PM PDT · Leave by about 2:12 PM for a 3:00 PM session (about 18 min travel + buffer) · Coastal PT\n• Appointment · Physical therapy — day-before · Day-before reminder for 3:00 PM PDT · Coastal PT\n• Appointment · Physical therapy · 4:30 PM PDT · Leave by about 3:42 PM for a 4:30 PM session (about 18 min travel + buffer) · Coastal PT",
+        "preview": "Physical therapy | around 3:00 | Location: 1234 Coastal Care Way, Oceanside, CA 92054 | Status: moved | Travel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship. | Phone: +1-555-0140 |  | Coming up: | • Medication · Metformin 500 mg · 12:00 PM (window 11:30 AM – 12:30 PM) | • Appointment · Doctor / clinic visit (caregiver-request",
+        "ms": 327
+      },
+      "What should the next caregiver know?": {
+        "status": 200,
+        "text": "Helping now: Marcus Carter · Primary family caregiver\nUntil about 4:00 PM\n\nNext: Maya Bennett\nExpected around 4:30 PM\n\nI can prepare a handoff for the next helper before they arrive.\n\nWhat the next caregiver should know (latest handoff):\n• Correction: medication was not administered [AZms3y50fs-S3]\n• Mood improved [AZms3y50fs-S3]\n• Therapy rescheduled to later slot [AZms3y50fs-S3]\n• New mobility concern noted [AZms3y50fs-S3]\n\nStill open:\n• Mobility concern needs monitoring [AZms3y50fs-S3]",
+        "preview": "Helping now: Marcus Carter · Primary family caregiver | Until about 4:00 PM |  | Next: Maya Bennett | Expected around 4:30 PM |  | I can prepare a handoff for the next helper before they arrive. |  | What the next caregiver should know (latest handoff): | • Correction: medication was not administered [AZms3y50fs-S3] | • Mood improved [AZms3y50fs-S3] | • Therapy rescheduled to later slot [AZms3y50fs-S3] | • New mobility c",
+        "ms": 307
+      }
+    },
+    "zero_access": {
+      "status": 403,
+      "preview": "No care relationship grants access."
+    },
+    "wrong_tenant": {
+      "status": 403,
+      "preview": "No care relationship grants access.",
+      "code": "NO_RELATIONSHIP"
+    }
+  },
+  "comparison": [
+    {
+      "question": "How are they?",
+      "shift1": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • Calm mood after breakfast [AZms3y50fs-S1] | • Breakfast eaten [AZms3y50fs-S1] | • Mobility assistance provided [AZms3y50fs-S1] |  | Still unfinished after that handoff: | • Transportation incomplete [AZms3y50fs-S1] |  | Recent caregiver reports: Fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT). |  | Medicat",
+      "shift2": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • More tired than usual [AZms3y50fs-S2] | • Lunch refused [AZms3y50fs-S2] | • Transportation completed [AZms3y50fs-S2] | • Medication reported administered at noon [AZms3y50fs-S2] |  | Still unfinished after that handoff: | • Watch fatigue after lunch refusal [AZms3y50fs-S2] |  | Recent caregiver reports: Fatigue (last",
+      "shift3": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • Correction: medication was not administered [AZms3y50fs-S3] | • Mood improved [AZms3y50fs-S3] | • Therapy rescheduled to later slot [AZms3y50fs-S3] | • New mobility concern noted [AZms3y50fs-S3] |  | Still unfinished after that handoff: | • Mobility concern needs monitoring [AZms3y50fs-S3] |  | Recent caregiver repor",
+      "allSame": false,
+      "expectChange": true,
+      "observedChange": true,
+      "stageMarkersGrounded": true,
+      "pass": "PASS"
+    },
+    {
+      "question": "What changed?",
+      "shift1": "Here's what changed for Evelyn Carter: |  | Latest handoff: | • Calm mood after breakfast [AZms3y50fs-S1] | • Breakfast eaten [AZms3y50fs-S1] | • Mobility assistance provided [AZms3y50fs-S1] |  | • Caregiver reported: seemed more tired than usual (from Marcus Carter) | • Meal recorded (from Daniel Kim) | • Caregiver reported: slept well (from Marcus Carter) | • Caregiver reported: seemed more tired than usual (from M",
+      "shift2": "Here's what changed for Evelyn Carter: |  | Latest handoff: | • More tired than usual [AZms3y50fs-S2] | • Lunch refused [AZms3y50fs-S2] | • Transportation completed [AZms3y50fs-S2] | • Medication reported administered at noon [AZms3y50fs-S2] |  | • Meal recorded (from Daniel Kim) | • Caregiver reported: slept well (from Marcus Carter) | • Caregiver reported: seemed more tired than usual (from Marcus Carter) | • Meal re",
+      "shift3": "Here's what changed for Evelyn Carter: |  | Latest handoff: | • Correction: medication was not administered [AZms3y50fs-S3] | • Mood improved [AZms3y50fs-S3] | • Therapy rescheduled to later slot [AZms3y50fs-S3] | • New mobility concern noted [AZms3y50fs-S3] |  | • Caregiver reported: slept well (from Marcus Carter) | • Caregiver reported: seemed more tired than usual (from Marcus Carter) | • Meal recorded (from Marc",
+      "allSame": false,
+      "expectChange": true,
+      "observedChange": true,
+      "stageMarkersGrounded": true,
+      "pass": "PASS"
+    },
+    {
+      "question": "What happened on the previous shift?",
+      "shift1": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • Calm mood after breakfast [AZms3y50fs-S1] | • Breakfast eaten [AZms3y50fs-S1] | • Mobility assistance provided [AZms3y50fs-S1] |  | Still unfinished after that handoff: | • Transportation incomplete [AZms3y50fs-S1] |  | Recent caregiver reports: Fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT). |  | Medicat",
+      "shift2": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • More tired than usual [AZms3y50fs-S2] | • Lunch refused [AZms3y50fs-S2] | • Transportation completed [AZms3y50fs-S2] | • Medication reported administered at noon [AZms3y50fs-S2] |  | Still unfinished after that handoff: | • Watch fatigue after lunch refusal [AZms3y50fs-S2] |  | Recent caregiver reports: Fatigue (last",
+      "shift3": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • Correction: medication was not administered [AZms3y50fs-S3] | • Mood improved [AZms3y50fs-S3] | • Therapy rescheduled to later slot [AZms3y50fs-S3] | • New mobility concern noted [AZms3y50fs-S3] |  | Still unfinished after that handoff: | • Mobility concern needs monitoring [AZms3y50fs-S3] |  | Recent caregiver repor",
+      "allSame": false,
+      "expectChange": true,
+      "observedChange": true,
+      "stageMarkersGrounded": true,
+      "pass": "PASS"
+    },
+    {
+      "question": "How was their mood?",
+      "shift1": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • Calm mood after breakfast [AZms3y50fs-S1] | • Breakfast eaten [AZms3y50fs-S1] | • Mobility assistance provided [AZms3y50fs-S1] |  | Still unfinished after that handoff: | • Transportation incomplete [AZms3y50fs-S1] |  | Recent caregiver reports: Fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT). |  | Medicat",
+      "shift2": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • More tired than usual [AZms3y50fs-S2] | • Lunch refused [AZms3y50fs-S2] | • Transportation completed [AZms3y50fs-S2] | • Medication reported administered at noon [AZms3y50fs-S2] |  | Still unfinished after that handoff: | • Watch fatigue after lunch refusal [AZms3y50fs-S2] |  | Recent caregiver reports: Fatigue (last",
+      "shift3": "Here's a plain-language picture of Evelyn Carter right now: |  | From the latest caregiver handoff: | • Correction: medication was not administered [AZms3y50fs-S3] | • Mood improved [AZms3y50fs-S3] | • Therapy rescheduled to later slot [AZms3y50fs-S3] | • New mobility concern noted [AZms3y50fs-S3] |  | Still unfinished after that handoff: | • Mobility concern needs monitoring [AZms3y50fs-S3] |  | Recent caregiver repor",
+      "allSame": false,
+      "expectChange": true,
+      "observedChange": true,
+      "stageMarkersGrounded": true,
+      "pass": "PASS"
+    },
+    {
+      "question": "Did they eat?",
+      "shift1": "From the latest caregiver handoff for Evelyn Carter: | • Calm mood after breakfast [AZms3y50fs-S1] | • Breakfast eaten [AZms3y50fs-S1] | • Mobility assistance provided [AZms3y50fs-S1] |  | Observations for Evelyn Carter: |  | • Fatigue: 11 report(s) · Saturday, July 25, 2026 at 10:21 PM PDT · Marcus Carter, Daniel Kim, Sadeil |  | • Caregiver reported: more: 3 report(s) · Saturday, July 25, 2026 at 2:38 PM PDT · Ma",
+      "shift2": "From the latest caregiver handoff for Evelyn Carter: | • More tired than usual [AZms3y50fs-S2] | • Lunch refused [AZms3y50fs-S2] | • Medication reported administered at noon [AZms3y50fs-S2] |  | Observations for Evelyn Carter: |  | • Fatigue: 11 report(s) · Saturday, July 25, 2026 at 10:21 PM PDT · Marcus Carter, Daniel Kim, Sadeil |  | • Caregiver reported: more: 3 report(s) · Saturday, July 25, 2026 at 2:38 PM PD",
+      "shift3": "From the latest caregiver handoff for Evelyn Carter: | • Correction: medication was not administered [AZms3y50fs-S3] | • Mood improved [AZms3y50fs-S3] | • Therapy rescheduled to later slot [AZms3y50fs-S3] | • New mobility concern noted [AZms3y50fs-S3] |  | Observations for Evelyn Carter: |  | • Fatigue: 11 report(s) · Saturday, July 25, 2026 at 10:21 PM PDT · Marcus Carter, Daniel Kim, Sadeil |  | • Caregiver reporte",
+      "allSame": false,
+      "expectChange": true,
+      "observedChange": true,
+      "stageMarkersGrounded": true,
+      "pass": "PASS"
+    },
+    {
+      "question": "Was medication administered?",
+      "shift1": "Last recorded: unidentified tablet(s) · Thursday, July 23, 2026 at 1:56 PM PDT · by Marcus Carter (CONFLICTED)",
+      "shift2": "Latest caregiver-reported medication note from handoff (not clinician-confirmed): | • Medication reported administered at noon [AZms3y50fs-S2] |  | That handoff note is caregiver-reported. It is not automatically clinician confirmed.",
+      "shift3": "Latest caregiver-reported medication note from handoff (not clinician-confirmed): | • Correction: medication was not administered [AZms3y50fs-S3] |  | That handoff note is caregiver-reported. It is not automatically clinician confirmed.",
+      "allSame": false,
+      "expectChange": true,
+      "observedChange": true,
+      "stageMarkersGrounded": true,
+      "pass": "PASS"
+    },
+    {
+      "question": "What remains unfinished?",
+      "shift1": "Here's what is still open for Evelyn Carter: | • Handoff still needs attention: Transportation incomplete [AZms3y50fs-S1] | • Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon. | • RESPONSE_RECEIVED: Could dizziness need med review? s13-1785047212906 | • Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon. | • Waiting on Maya Bennett: Open list 1",
+      "shift2": "Here's what is still open for Evelyn Carter: | • Handoff still needs attention: Watch fatigue after lunch refusal [AZms3y50fs-S2] | • Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon. | • RESPONSE_RECEIVED: Could dizziness need med review? s13-1785047212906 | • Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon. | • Waiting on Maya Bennett: Ope",
+      "shift3": "Here's what is still open for Evelyn Carter: | • Handoff still needs attention: Mobility concern needs monitoring [AZms3y50fs-S3] | • Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon. | • RESPONSE_RECEIVED: Could dizziness need med review? s13-1785047212906 | • Needs your review: Yes — I gave Metformin 500 mg with lunch yesterday around noon. | • Waiting on Maya Bennett: Ope",
+      "allSame": false,
+      "expectChange": true,
+      "observedChange": true,
+      "stageMarkersGrounded": true,
+      "pass": "PASS"
+    },
+    {
+      "question": "What is the next appointment?",
+      "shift1": "Physical therapy | around 3:00 | Location: 1234 Coastal Care Way, Oceanside, CA 92054 | Status: moved | Travel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship. | Phone: +1-555-0140 |  | Coming up: | • Medication · Metformin 500 mg · 12:00 PM (window 11:30 AM – 12:30 PM) | • Appointment · Doctor / clinic visit (caregiver-request",
+      "shift2": "Physical therapy | around 3:00 | Location: 1234 Coastal Care Way, Oceanside, CA 92054 | Status: moved | Travel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship. | Phone: +1-555-0140 |  | Coming up: | • Medication · Metformin 500 mg · 12:00 PM (window 11:30 AM – 12:30 PM) | • Appointment · Doctor / clinic visit (caregiver-request",
+      "shift3": "Physical therapy | around 3:00 | Location: 1234 Coastal Care Way, Oceanside, CA 92054 | Status: moved | Travel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship. | Phone: +1-555-0140 |  | Coming up: | • Medication · Metformin 500 mg · 12:00 PM (window 11:30 AM – 12:30 PM) | • Appointment · Doctor / clinic visit (caregiver-request",
+      "allSame": true,
+      "expectChange": false,
+      "observedChange": false,
+      "stageMarkersGrounded": false,
+      "pass": "PASS"
+    },
+    {
+      "question": "What should the next caregiver know?",
+      "shift1": "Helping now: Marcus Carter · Primary family caregiver | Until about 4:00 PM |  | Next: Maya Bennett | Expected around 4:30 PM |  | I can prepare a handoff for the next helper before they arrive. |  | What the next caregiver should know (latest handoff): | • Calm mood after breakfast [AZms3y50fs-S1] | • Breakfast eaten [AZms3y50fs-S1] | • Mobility assistance provided [AZms3y50fs-S1] |  | Still open: | • Transportation incompl",
+      "shift2": "Helping now: Marcus Carter · Primary family caregiver | Until about 4:00 PM |  | Next: Maya Bennett | Expected around 4:30 PM |  | I can prepare a handoff for the next helper before they arrive. |  | What the next caregiver should know (latest handoff): | • More tired than usual [AZms3y50fs-S2] | • Lunch refused [AZms3y50fs-S2] | • Transportation completed [AZms3y50fs-S2] | • Medication reported administered at noon [AZm",
+      "shift3": "Helping now: Marcus Carter · Primary family caregiver | Until about 4:00 PM |  | Next: Maya Bennett | Expected around 4:30 PM |  | I can prepare a handoff for the next helper before they arrive. |  | What the next caregiver should know (latest handoff): | • Correction: medication was not administered [AZms3y50fs-S3] | • Mood improved [AZms3y50fs-S3] | • Therapy rescheduled to later slot [AZms3y50fs-S3] | • New mobility c",
+      "allSame": false,
+      "expectChange": true,
+      "observedChange": true,
+      "stageMarkersGrounded": true,
+      "pass": "PASS"
+    }
+  ],
+  "gates": {
+    "shift1_relay_grounded": "PASS",
+    "handoff_send": "PASS",
+    "handoff_discovery": "PASS",
+    "handoff_acknowledgment": "PASS",
+    "handoff_clarification": "PASS",
+    "shift3_ack": "PASS",
+    "three_data_stages": "PASS",
+    "three_relay_sets": "PASS",
+    "static_answers": 0,
+    "changed_answer_questions": 8,
+    "unsafe_med": 0,
+    "unauth_answers": 0,
+    "correction_notif_present": "PASS"
+  },
+  "defects": [],
+  "run_id": "AZms3y50fs",
+  "ended": "2026-07-28T00:57:52.363Z",
+  "verdict": "SMOKE_PASS"
+}
