@@ -66,21 +66,6 @@ const PREP_DOMAINS: CareDataDomain[] = [
   "appointments",
 ];
 
-const ACTIVE_DOMAINS: CareDataDomain[] = [
-  "demographics_basic",
-  "daily_observations",
-  "meals_hydration",
-  "mobility",
-  "symptoms",
-  "behavioral_notes",
-  "schedules_coverage",
-  "handoffs",
-  "appointments",
-  "preferences_routines",
-  "medication_admin",
-  "tasks" as CareDataDomain,
-].filter(Boolean) as CareDataDomain[];
-
 // tasks is not a CareDataDomain — use daily_observations + schedules
 const ACTIVE_SHIFT_DOMAINS: CareDataDomain[] = [
   "demographics_basic",

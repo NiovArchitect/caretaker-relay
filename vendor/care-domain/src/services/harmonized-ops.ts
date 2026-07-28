@@ -462,7 +462,8 @@ export function shiftBoundaryChecklist(
   message: string;
 } {
   const shifts = listShiftAssignments(store, careRecipientId);
-  const a = shifts.find((s) => s.id === assignmentId);
+  const _assignment = shifts.find((s) => s.id === assignmentId);
+  void _assignment;
   const unfinished = listWorkItems(store, careRecipientId)
     .filter((w) => w.status !== "completed" && w.status !== "cancelled")
     .map((w) => w.action);
