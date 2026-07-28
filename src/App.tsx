@@ -602,19 +602,44 @@ export function App() {
 
       if (result.kind === "verify" && result.bundle) {
         setBundle(result.bundle);
-        const n = result.bundle.items.length;
-        const lines = result.bundle.items.map((i) => `• ${i.label}`).join("\n");
-        const allSoftObs = result.bundle.items.every(
-          (i) =>
-            /observation|wellbeing|feels|tired|ate|slept/i.test(i.label) &&
-            !i.discrepancy &&
-            i.safetyClass !== "high",
+        const items = result.bundle.items.filter(
+          (i) => i.candidateId !== "uncertainty",
         );
-        fillReply(
-          allSoftObs
-            ? `I captured ${n} caregiver-reported observation${n === 1 ? "" : "s"} for ${activeSpace.displayName}:\n${lines}\n\nSource: you (caregiver-reported). Confirm with Looks right to save on their care timeline — this is observation evidence, not a clinical diagnosis.`
-            : `I organized that into ${n} care item${n === 1 ? "" : "s"} for ${activeSpace.displayName}:\n${lines}\n\nPlease verify the consequential parts before I save them as care truth.`,
+        const unc = result.bundle.items.filter(
+          (i) => i.candidateId === "uncertainty",
         );
+        const n = items.length;
+        const lines = items.map((i) => `• ${i.label}`).join("\n");
+        const planChange = items.some((i) =>
+          /medication change needs verification/i.test(i.label),
+        );
+        const onlyUncertain =
+          n === 0 && unc.length > 0 && !planChange;
+        const allSoftObs =
+          n > 0 &&
+          items.every(
+            (i) =>
+              /observation|wellbeing|feels|tired|ate|slept/i.test(i.label) &&
+              !i.discrepancy &&
+              i.safetyClass !== "high",
+          );
+        if (onlyUncertain) {
+          fillReply(
+            `I heard you, but I could not form a durable care item yet for ${activeSpace.displayName}.\n\n${unc.map((u) => `• ${u.label}`).join("\n")}\n\nPlease restate with the medication name, dose, and whether this is something already given or a change to the medication plan. Nothing has been added to the active plan.`,
+          );
+        } else if (planChange) {
+          fillReply(
+            `I heard a possible medication change for ${activeSpace.displayName}:\n${lines}${unc.length ? `\n\nAlso note:\n${unc.map((u) => `• ${u.label}`).join("\n")}` : ""}\n\nI can save this as a medication-change report that needs verification. It will NOT be added to the active medication plan until an authorized reviewer confirms.\n\nUse Confirm my report to save the pending request (not “confirm medication order”).`,
+          );
+        } else if (allSoftObs) {
+          fillReply(
+            `I captured ${n} caregiver-reported observation${n === 1 ? "" : "s"} for ${activeSpace.displayName}:\n${lines}\n\nSource: you (caregiver-reported). Confirm with Looks right to save on their care timeline — this is observation evidence, not a clinical diagnosis.`,
+          );
+        } else {
+          fillReply(
+            `I organized that into ${n} care item${n === 1 ? "" : "s"} for ${activeSpace.displayName}:\n${lines}\n\nPlease verify the consequential parts before I save them as care truth. This does not create a clinical order by itself.`,
+          );
+        }
       } else {
         // Unexpected empty path — clear pending placeholder
         fillReply("I could not form an answer from the care context. Try rephrasing.");

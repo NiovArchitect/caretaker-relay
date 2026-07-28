@@ -160,7 +160,11 @@ export function VerifyPanel({
           <span className="btn-glyph" aria-hidden>
             ✓
           </span>
-          Looks right
+          {bundle.items.some((i) =>
+            /medication change needs verification/i.test(i.label),
+          )
+            ? "Confirm my report"
+            : "Looks right"}
         </button>
         <button
           type="button"
