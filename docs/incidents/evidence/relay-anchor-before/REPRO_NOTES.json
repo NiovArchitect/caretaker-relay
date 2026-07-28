@@ -1,0 +1,11 @@
+{
+  "pri": "What needs you today\nAppointments & transport\nMeals, mobility, mood\nWho is helping next",
+  "acc": "Evelyn Carter's care · tap a section to expand\n\nWhat needs you today · 4\nMedication needs verification\n▾\nMedication needs verification — The reported amount doesn't clearly match Evelyn's current medication instructions. Please check the medication label or confirm with the prescribing team before marking this complete.\nMedication needs verification — Reported dose is ambiguous (Count unit without tablet strength — cannot convert to mg). Requires human review.\nHydration — Hydration\nMorning report — Morning report\nAppointments & transport · 1\nTransportation incomplete\n▸\nMeals, mobility, mood · 8\nMedication reported administered at noon; Mood improved · Today at 6:44 PM (Jul 27, 2026 · 6:44 PM PDT)\n▸\nWho is helping next · 1\nHelping now: Marcus Carter · Primary family caregiver\n▸",
+  "counts": {
+    "needsYou": 2,
+    "appts": 2,
+    "meals": 2,
+    "helping": 3
+  },
+  "panelOpen": "relay-panel is-open"
+}

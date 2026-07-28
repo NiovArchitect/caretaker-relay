@@ -71,6 +71,8 @@ export interface RelayMessage {
   role: "user" | "relay" | "system";
   text: string;
   at: string;
+  /** True while waiting for Relay answer (placeholder bubble under the user question). */
+  pending?: boolean;
 }
 
 export interface TodayModel {

@@ -1,0 +1,13 @@
+{
+  "counts": {
+    "needsYou": 1,
+    "staticPri": 0
+  },
+  "metrics": {
+    "userTopOffset": 49,
+    "answerTopOffset": 112,
+    "userNearTop": false,
+    "answerStartVisible": true
+  },
+  "jump": true
+}

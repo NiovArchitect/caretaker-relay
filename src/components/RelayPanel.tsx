@@ -19,6 +19,9 @@ import type { RoleExperience } from "../lib/roleExperience";
 
 type RelayMode = "relay" | "messages";
 
+/** px — user is still "with" the active exchange if the user bubble is near the top */
+const ANCHOR_TOP_SLACK_PX = 96;
+
 const SENDER_ACCENT: Record<string, string> = {
   "Marcus Carter": "coord-accent-marcus",
   "Maya Bennett": "coord-accent-maya",
@@ -93,6 +96,101 @@ export function RelayPanel({
   const coordLenRef = useRef(0);
   /** Ref so poll/new-msg path never sees stale pinned state. */
   const coordPinnedBottomRef = useRef(true);
+
+  // ── AI Relay conversation anchor (not scroll-to-bottom) ──
+  const relayThreadRef = useRef<HTMLDivElement | null>(null);
+  const lastAnchoredUserIdRef = useRef<string | null>(null);
+  /** True while the user has not deliberately scrolled away from the active Q&A. */
+  const followActiveExchangeRef = useRef(true);
+  /** Ignore scroll events caused by our own anchor positioning. */
+  const programmaticScrollRef = useRef(false);
+  const [showJumpToResponse, setShowJumpToResponse] = useState(false);
+  const [activeUserMessageId, setActiveUserMessageId] = useState<string | null>(
+    null,
+  );
+
+  function findActiveUserMessage(): RelayMessage | undefined {
+    for (let i = messages.length - 1; i >= 0; i--) {
+      if (messages[i]?.role === "user") return messages[i];
+    }
+    return undefined;
+  }
+
+  /** Place the submitted user message near the top of the thread viewport. */
+  function anchorToUserMessage(userId: string) {
+    const thread = relayThreadRef.current;
+    if (!thread) return;
+    const el = thread.querySelector(
+      `[data-message-id="${CSS.escape(userId)}"]`,
+    ) as HTMLElement | null;
+    if (!el) return;
+    // Bubbles are direct children of .relay-thread — offsetTop is authoritative.
+    const top = Math.max(0, el.offsetTop - 8);
+    programmaticScrollRef.current = true;
+    thread.scrollTop = top;
+    // Release after layout + any residual scroll events
+    window.requestAnimationFrame(() => {
+      window.setTimeout(() => {
+        programmaticScrollRef.current = false;
+      }, 50);
+    });
+  }
+
+  function measureUserNearThreadTop(userId: string): boolean {
+    const thread = relayThreadRef.current;
+    if (!thread) return true;
+    const el = thread.querySelector(
+      `[data-message-id="${CSS.escape(userId)}"]`,
+    ) as HTMLElement | null;
+    if (!el) return true;
+    const tr = thread.getBoundingClientRect();
+    const er = el.getBoundingClientRect();
+    // Visible near the top band of the thread
+    return er.top >= tr.top - 8 && er.top <= tr.top + ANCHOR_TOP_SLACK_PX;
+  }
+
+  function onRelayThreadScroll() {
+    if (programmaticScrollRef.current) return;
+    const uid = activeUserMessageId ?? lastAnchoredUserIdRef.current;
+    if (!uid) return;
+    const near = measureUserNearThreadTop(uid);
+    followActiveExchangeRef.current = near;
+    if (near) setShowJumpToResponse(false);
+    else setShowJumpToResponse(true);
+  }
+
+  // New user message → anchor question; keep follow while answer pending/grows
+  useEffect(() => {
+    const lastUser = findActiveUserMessage();
+    if (!lastUser) return;
+    if (lastUser.id !== lastAnchoredUserIdRef.current) {
+      lastAnchoredUserIdRef.current = lastUser.id;
+      setActiveUserMessageId(lastUser.id);
+      followActiveExchangeRef.current = true;
+      setShowJumpToResponse(false);
+      // Double-rAF: wait for pending placeholder to paint under the question
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => anchorToUserMessage(lastUser.id));
+      });
+      return;
+    }
+    // Same exchange: answer filled or pending text changed — re-anchor only if following
+    if (followActiveExchangeRef.current) {
+      window.requestAnimationFrame(() => anchorToUserMessage(lastUser.id));
+    } else {
+      setShowJumpToResponse(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- deliberate on message/busy identity
+  }, [messages, busy]);
+
+  // Recipient switch clears AI thread pin state
+  useEffect(() => {
+    lastAnchoredUserIdRef.current = null;
+    followActiveExchangeRef.current = true;
+    programmaticScrollRef.current = false;
+    setShowJumpToResponse(false);
+    setActiveUserMessageId(null);
+  }, [rid]);
 
   function scrollCoordToLatest(smooth = true) {
     const el = coordThreadRef.current;
@@ -352,17 +450,33 @@ export function RelayPanel({
           <div
             className="relay-thread"
             data-testid="relay-thread"
+            ref={relayThreadRef}
             aria-live="polite"
+            onScroll={onRelayThreadScroll}
           >
             {messages.map((m) => (
               <div
                 key={m.id}
+                data-message-id={m.id}
+                data-role={m.role}
+                data-pending={m.pending ? "true" : undefined}
+                data-testid={
+                  m.role === "user"
+                    ? "relay-msg-user"
+                    : m.pending
+                      ? "relay-msg-pending"
+                      : m.role === "relay"
+                        ? "relay-msg-assistant"
+                        : "relay-msg-system"
+                }
                 className={
                   m.role === "user"
                     ? "bubble bubble-user"
                     : m.role === "system"
                       ? "bubble bubble-system"
-                      : "bubble bubble-relay"
+                      : m.pending
+                        ? "bubble bubble-relay bubble-pending"
+                        : "bubble bubble-relay"
                 }
               >
                 {m.text}
@@ -377,6 +491,24 @@ export function RelayPanel({
               />
             )}
           </div>
+
+          {showJumpToResponse && (
+            <button
+              type="button"
+              className="primary-btn relay-jump-response-btn"
+              data-testid="relay-jump-to-response"
+              onClick={() => {
+                const uid =
+                  activeUserMessageId ?? lastAnchoredUserIdRef.current;
+                if (!uid) return;
+                followActiveExchangeRef.current = true;
+                setShowJumpToResponse(false);
+                anchorToUserMessage(uid);
+              }}
+            >
+              New response ↑
+            </button>
+          )}
 
           <div className="relay-composer-wrap" data-testid="composer-dock">
             <p className="muted relay-hint-copy">

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { today } from "../scenario/olivia";
 import {
   fetchTodayProjection,
@@ -38,6 +38,75 @@ import {
 } from "../lib/onboarding";
 import { resolveRoleExperience } from "../lib/roleExperience";
 import { hasAuthorizedRecipient } from "../lib/careContext";
+
+/** Collapsed helpers preview — short names only, never the full dump. */
+function helpersPreview(coverage: string): string {
+  const raw = humanCareLine(coverage);
+  if (!raw) return "Open People for the authorized care circle";
+  // Prefer "Name now · Name next" when lines look like Helping now / Next
+  const nowM = raw.match(
+    /(?:helping now|now)[:\s]+([A-Z][a-zA-Z.'-]+(?:\s+[A-Z][a-zA-Z.']+){0,2})/i,
+  );
+  const nextM = raw.match(
+    /(?:next)[:\s]+([A-Z][a-zA-Z.'-]+(?:\s+[A-Z][a-zA-Z.']+){0,2})/i,
+  );
+  if (nowM || nextM) {
+    const now = nowM?.[1]?.replace(/\s+·.*$/, "").trim();
+    const next = nextM?.[1]?.replace(/\s+·.*$/, "").trim();
+    if (now && next) return `${now} now · ${next} next`;
+    if (now) return `${now} now`;
+    if (next) return `${next} next`;
+  }
+  // First non-empty line, truncated
+  const first = raw.split(/\n/).map((l) => l.trim()).find(Boolean) ?? raw;
+  return first.length > 72 ? `${first.slice(0, 69)}…` : first;
+}
+
+/** Expanded helpers detail — structured once (not repeating collapsed line). */
+function helpersExpanded(coverage: string): ReactNode {
+  const raw = humanCareLine(coverage);
+  if (!raw) {
+    return (
+      <p className="muted">
+        No coverage summary yet. Open People to see authorized helpers.
+      </p>
+    );
+  }
+  const lines = raw.split(/\n/).map((l) => l.trim()).filter(Boolean);
+  const nowLine = lines.find((l) => /helping now|^now\b/i.test(l));
+  const nextLine = lines.find((l) => /^next\b|next:/i.test(l));
+  const rest = lines.filter((l) => l !== nowLine && l !== nextLine);
+  return (
+    <div className="helpers-detail">
+      {nowLine ? (
+        <div className="helpers-block" data-testid="helpers-now">
+          <strong>Helping now</strong>
+          <p style={{ margin: "4px 0 0" }}>
+            {nowLine.replace(/^helping now[:\s]*/i, "").replace(/^now[:\s]*/i, "")}
+          </p>
+        </div>
+      ) : null}
+      {nextLine ? (
+        <div className="helpers-block" style={{ marginTop: 10 }} data-testid="helpers-next">
+          <strong>Next</strong>
+          <p style={{ margin: "4px 0 0" }}>
+            {nextLine.replace(/^next[:\s]*/i, "")}
+          </p>
+        </div>
+      ) : null}
+      {rest.length > 0 ? (
+        <ul className="list-plain" style={{ marginTop: 10 }}>
+          {rest.map((l) => (
+            <li key={l}>{l}</li>
+          ))}
+        </ul>
+      ) : null}
+      {!nowLine && !nextLine && rest.length === 0 ? (
+        <p style={{ margin: 0 }}>{raw}</p>
+      ) : null}
+    </div>
+  );
+}
 
 export function TodayPage({
   relayHandled,
@@ -385,16 +454,9 @@ export function TodayPage({
             {roleXp.badge}
           </span>
         </div>
-        {(serverProjection?.priorities?.length || roleXp.priorities.length) > 0 && (
-          <ul
-            className="list-plain today-role-priorities"
-            data-testid="today-role-priorities"
-          >
-            {(serverProjection?.priorities ?? roleXp.priorities).map((p) => (
-              <li key={p}>{p}</li>
-            ))}
-          </ul>
-        )}
+        {/* Role priority labels used to dump the same four category titles as a
+            static list above the expandable sections — removed so mobile has
+            one representation only (today-command-strip accordions). */}
         {serverProjection?.shift?.briefing && serverProjection.shift.briefing.length > 0 && (
           <div className="section surface-known" data-testid="today-shift-briefing">
             <h2>Shift briefing</h2>
@@ -517,24 +579,12 @@ export function TodayPage({
                 id: "helpers",
                 title: "Who is helping next",
                 count: coverageSummary ? 1 : 0,
-                summary: humanCareLine(
-                  coverageSummary.split("\n")[0] ||
-                    "Open People for the authorized care circle",
-                ),
+                // Collapsed: short preview only — not the full “Helping now” sentence.
+                summary: helpersPreview(coverageSummary),
                 body: (
-                  <pre
-                    style={{
-                      margin: 0,
-                      whiteSpace: "pre-wrap",
-                      fontFamily: "inherit",
-                      fontSize: "0.9rem",
-                    }}
-                  >
-                    {humanCareLine(
-                      coverageSummary ||
-                        "No coverage summary yet. Open People to see authorized helpers.",
-                    )}
-                  </pre>
+                  <div data-testid="helpers-expanded-detail">
+                    {helpersExpanded(coverageSummary)}
+                  </div>
                 ),
               },
             ] as const
@@ -928,43 +978,9 @@ export function TodayPage({
                 .map((m) => `${String(m.name)} ${String(m.dose ?? "")}`)
                 .join("; ") || "see Care"}
             </li>
-            <li>
-              <strong>Next:</strong>{" "}
-              {humanCareLine(next[0] ?? "Nothing scheduled on Today")}
-            </li>
-            <li>
-              <strong>Attention:</strong>{" "}
-              {notifications.length === 0
-                ? "Nothing urgent"
-                : humanCareLine(notifications[0]?.title)}
-            </li>
+            {/* Next / Attention / Who is helping live only in expandable sections above —
+                orientation keeps stable identity context, not a second category dump. */}
           </ul>
-          {coverageSummary ? (
-            <div
-              className="surface-reported"
-              style={{ padding: 12, marginTop: 12 }}
-              data-testid="coverage-panel"
-            >
-              <strong>Who is helping</strong>
-              <pre
-                data-testid="coverage-summary-text"
-                style={{
-                  margin: "8px 0 0",
-                  whiteSpace: "pre-wrap",
-                  fontFamily: "inherit",
-                  fontSize: "0.9rem",
-                }}
-              >
-                {humanCareLine(coverageSummary)}
-              </pre>
-              {/maya|next/i.test(coverageSummary) && (
-                <p className="muted" style={{ marginBottom: 0, fontSize: "0.85rem" }}>
-                  When the next helper is due, open handoff so they orient without
-                  re-explaining.
-                </p>
-              )}
-            </div>
-          ) : null}
         </section>
 
         {proj && (
@@ -1325,7 +1341,11 @@ export function TodayPage({
         )}
       </section>
 
-      <section className="section surface-reported" aria-labelledby="coming-up">
+      {/* Desktop-only secondary dumps — mobile primary path is the accordion strip. */}
+      <section
+        className="section surface-reported cr-desktop-only"
+        aria-labelledby="coming-up"
+      >
         <h2 id="coming-up">Coming up</h2>
         <ul className="list-plain" data-testid="next-list">
           {next.length === 0 ? (
@@ -1340,7 +1360,10 @@ export function TodayPage({
         </ul>
       </section>
 
-      <section className="section surface-reported" aria-labelledby="since">
+      <section
+        className="section surface-reported cr-desktop-only"
+        aria-labelledby="since"
+      >
         <h2 id="since">What changed</h2>
         {organizedCount > 0 && (
           <p className="muted" data-testid="organized-count">

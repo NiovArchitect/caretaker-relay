@@ -468,14 +468,37 @@ export function App() {
     if (!trimmed || busy) return;
 
     openRelay();
+    // Stable IDs for conversation anchor contract: user question + answer placeholder
+    // stay paired so RelayPanel can keep the question at the top of the viewport
+    // and the start of the answer immediately below it.
+    const userId = `u-${Date.now()}`;
+    const replyId = `r-${Date.now()}`;
     setMessages((prev) => [
       ...prev,
-      { id: `u-${Date.now()}`, role: "user", text: trimmed, at: nowLabel() },
+      { id: userId, role: "user", text: trimmed, at: nowLabel() },
+      {
+        id: replyId,
+        role: "relay",
+        text: "Relay is preparing an answer…",
+        at: nowLabel(),
+        pending: true,
+      },
     ]);
     setDraft("");
     setConfirmed(false);
     setLastError(null);
     setBusy(true);
+
+    const fillReply = (textOut: string, extra?: RelayMessage[]) => {
+      setMessages((prev) => {
+        const next = prev.map((m) =>
+          m.id === replyId
+            ? { ...m, text: textOut, pending: false, at: nowLabel() }
+            : m,
+        );
+        return extra?.length ? [...next, ...extra] : next;
+      });
+    };
 
     try {
       if (correcting && lastEventIds.length > 0) {
@@ -486,28 +509,16 @@ export function App() {
           if (result.persisted?.eventIds?.length) {
             setLastEventIds(result.persisted.eventIds);
           }
-          setMessages((prev) => [
-            ...prev,
-            {
-              id: `r-${Date.now()}`,
-              role: "relay",
-              text: "Correction saved. The previous version stays in the record so nothing is silently erased.",
-              at: nowLabel(),
-            },
-          ]);
+          fillReply(
+            "Correction saved. The previous version stays in the record so nothing is silently erased.",
+          );
           setTodayRefresh((n) => n + 1);
           setTab("today");
           void openLatestHandoff();
         } else {
-          setMessages((prev) => [
-            ...prev,
-            {
-              id: `r-${Date.now()}`,
-              role: "relay",
-              text: "I'll treat that as a new care update and ask you to verify it.",
-              at: nowLabel(),
-            },
-          ]);
+          fillReply(
+            "I'll treat that as a new care update and ask you to verify it.",
+          );
         }
         if (result.kind === "persisted") return;
       } else if (correcting) {
@@ -535,37 +546,21 @@ export function App() {
         });
         (window as unknown as { __crPendingAsk?: string }).__crPendingAsk =
           undefined;
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: `sys-sent-${Date.now()}`,
-            role: "system",
-            text: r.ok
-              ? isProvider
-                ? "Question prepared for Dr. Shah. They will see it as an in-app notification."
-                : "Request sent. They will get a notification on their account. I'll help you verify anything consequential when they reply."
-              : `Could not send request: ${r.message ?? "error"}`,
-            at: nowLabel(),
-          },
-        ]);
+        fillReply(
+          r.ok
+            ? isProvider
+              ? "Question prepared for Dr. Shah. They will see it as an in-app notification."
+              : "Request sent. They will get a notification on their account. I'll help you verify anything consequential when they reply."
+            : `Could not send request: ${r.message ?? "error"}`,
+        );
         return;
       }
 
       const answer = await answerCareQuestion(trimmed);
       if (answer) {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: `r-${Date.now()}`,
-            role: "relay",
-            text: answer,
-            at: nowLabel(),
-          },
-        ]);
         // Collaboration offer — parse display name; map known lab principals by data id when possible
-        const askMatch = answer.match(
-          /Want me to ask ([^?]+)\?/i,
-        );
+        const askMatch = answer.match(/Want me to ask ([^?]+)\?/i);
+        let collabExtra: RelayMessage[] | undefined;
         if (askMatch) {
           const askedName = askMatch[1]!.trim();
           const lower = askedName.toLowerCase();
@@ -576,16 +571,16 @@ export function App() {
           else if (/maya/i.test(lower)) target = "p-maya";
           (window as unknown as { __crPendingAsk?: string }).__crPendingAsk =
             target;
-          setMessages((prev) => [
-            ...prev,
+          collabExtra = [
             {
               id: `sys-collab-${Date.now()}`,
               role: "system",
               text: `Reply "Yes, please ask ${askedName}" to send a real request to their account.`,
               at: nowLabel(),
             },
-          ]);
+          ];
         }
+        fillReply(answer, collabExtra);
         return;
       }
 
@@ -594,20 +589,14 @@ export function App() {
         setBundle(null);
         const msg = result.message ?? "Access denied for this care context.";
         setLastError(msg);
-        setMessages((prev) => [
-          ...prev,
-          { id: `r-${Date.now()}`, role: "relay", text: msg, at: nowLabel() },
-        ]);
+        fillReply(msg);
         return;
       }
       if (result.kind === "refusal") {
         setBundle(null);
         const msg = result.message ?? "I can't do that safely.";
         setLastError(msg);
-        setMessages((prev) => [
-          ...prev,
-          { id: `r-${Date.now()}`, role: "relay", text: msg, at: nowLabel() },
-        ]);
+        fillReply(msg);
         return;
       }
 
@@ -621,32 +610,23 @@ export function App() {
             !i.discrepancy &&
             i.safetyClass !== "high",
         );
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: `r-${Date.now()}`,
-            role: "relay",
-            text: allSoftObs
-              ? `I captured ${n} caregiver-reported observation${n === 1 ? "" : "s"} for ${activeSpace.displayName}:\n${lines}\n\nSource: you (caregiver-reported). Confirm with Looks right to save on their care timeline — this is observation evidence, not a clinical diagnosis.`
-              : `I organized that into ${n} care item${n === 1 ? "" : "s"} for ${activeSpace.displayName}:\n${lines}\n\nPlease verify the consequential parts before I save them as care truth.`,
-            at: nowLabel(),
-          },
-        ]);
+        fillReply(
+          allSoftObs
+            ? `I captured ${n} caregiver-reported observation${n === 1 ? "" : "s"} for ${activeSpace.displayName}:\n${lines}\n\nSource: you (caregiver-reported). Confirm with Looks right to save on their care timeline — this is observation evidence, not a clinical diagnosis.`
+            : `I organized that into ${n} care item${n === 1 ? "" : "s"} for ${activeSpace.displayName}:\n${lines}\n\nPlease verify the consequential parts before I save them as care truth.`,
+        );
+      } else {
+        // Unexpected empty path — clear pending placeholder
+        fillReply("I could not form an answer from the care context. Try rephrasing.");
       }
     } catch (err) {
       const msg =
         err instanceof Error ? err.message : "Request failed — nothing was saved.";
       setLastError(msg);
       setBundle(null);
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: `r-${Date.now()}`,
-          role: "relay",
-          text: `Could not reach care services. ${msg} Nothing was saved as care truth.`,
-          at: nowLabel(),
-        },
-      ]);
+      fillReply(
+        `Could not reach care services. ${msg} Nothing was saved as care truth.`,
+      );
     } finally {
       setBusy(false);
       setVoiceMeta(undefined);
