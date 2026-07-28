@@ -133,7 +133,8 @@
   /* —— Layout —— */
   --cr-shell-max: 1320px;
   --cr-nav-w: 88px;
-  --cr-relay-w: min(400px, 32vw);
+  /* Slightly larger Relay column for answer visibility without obscuring main */
+  --cr-relay-w: min(440px, 34vw);
   --cr-top-h: 72px;
   --cr-tap: 48px;
   /* P0 recovery: keep light frost only — large blurs caused blank/black frames */
@@ -1488,6 +1489,7 @@ p {
 
 .relay-thread {
   flex: 1;
+  min-height: min(48vh, 420px);
   overflow: auto;
   padding: var(--s-4);
   display: flex;
@@ -1495,6 +1497,7 @@ p {
   gap: var(--s-3);
   position: relative;
   z-index: 1;
+  scroll-padding-bottom: 8px;
 }
 
 .bubble {
@@ -1508,6 +1511,7 @@ p {
 }
 
 .bubble-relay {
+  font-size: calc(var(--t-support) + 0.02rem);
   background:
     linear-gradient(
       165deg,
@@ -2181,7 +2185,7 @@ p {
 
 @media (max-width: 1200px) {
   :root {
-    --cr-relay-w: min(360px, 36vw);
+    --cr-relay-w: min(400px, 38vw);
     --cr-nav-w: 76px;
   }
 
