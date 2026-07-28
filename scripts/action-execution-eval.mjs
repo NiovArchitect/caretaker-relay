@@ -3,11 +3,11 @@
  * Does not rebuild medication extractor — exercises execution-receipt mapping.
  */
 import { writeFileSync, mkdirSync } from "node:fs";
-import { resolve, dirname } from "node:path";
+import { resolve, dirname as pathDirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = pathDirname(fileURLToPath(import.meta.url));
 // Eval via tsx-spawned sibling is heavy; use public API when LIVE=1
 const LIVE = process.env.LIVE === "1";
 const API = process.env.CARE_API_URL || "https://caretaker-relay-care-api.onrender.com";
@@ -117,13 +117,9 @@ async function main() {
     byCat,
     failures: failures.slice(0, 30),
   };
-  mkdirSync(dirname(OUT), { recursive: true });
+  mkdirSync(pathDirname(OUT), { recursive: true });
   writeFileSync(OUT, JSON.stringify(out, null, 2));
   console.log(JSON.stringify({ total, interpretPass, rate: out.interpret_rate, generic, categories: out.categories }, null, 2));
-}
-
-function dirname(p) {
-  return resolve(p, "..");
 }
 
 main().catch((e) => {
