@@ -9,6 +9,17 @@ import {
   type HandoffPacket,
   type HandoffRow,
 } from "../foundation/careContinuity";
+import {
+  acceptOpenWork,
+  clarifyOpenWork,
+  confirmScheduleProposal,
+  declineOpenWork,
+  listOpenWork,
+  listScheduleProposals,
+  rejectScheduleProposal,
+  type OpenWorkItem,
+  type ScheduleProposal,
+} from "../foundation/careOpenWork";
 import { getSessionIdentity } from "../foundation/careClient";
 import { loadActiveCareRecipientId, resolveCareSpace } from "../lib/careContext";
 import { resolvePersonName } from "../lib/identity";
@@ -28,11 +39,18 @@ export function IncomingHandoffInbox({
   const [msg, setMsg] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [workItems, setWorkItems] = useState<OpenWorkItem[]>([]);
+  const [proposals, setProposals] = useState<ScheduleProposal[]>([]);
+  const [confirmWorkId, setConfirmWorkId] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
     const res = await listHandoffs(rid);
     setRows(res.handoffs ?? []);
+    const work = await listOpenWork(rid);
+    if (work.ok) setWorkItems(work.work_items ?? []);
+    const sched = await listScheduleProposals(rid);
+    if (sched.ok) setProposals(sched.open ?? []);
     setLoading(false);
   }, [rid]);
 
@@ -70,13 +88,80 @@ export function IncomingHandoffInbox({
     setStatus(res.lifecycle?.status ?? next);
     setMsg(
       next === "acknowledged"
-        ? `Acknowledged · ${new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })} · ${session.displayName}`
+        ? `Handoff acknowledged · ${new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })} · ${session.displayName}. Open tasks are still unassigned until you accept them.`
         : next === "correction_required"
           ? "Flagged for clarification. The original handoff stays on file."
           : `Updated to ${next}`,
     );
     await load();
     if (activeId) await openHandoff(activeId);
+  }
+
+  async function doAccept(workId: string) {
+    setBusy(true);
+    const res = await acceptOpenWork(rid, workId);
+    setBusy(false);
+    setConfirmWorkId(null);
+    if (!res.ok) {
+      setMsg(res.message ?? res.code ?? "Could not accept task");
+      return;
+    }
+    setMsg(res.message ?? "You accepted this task. It is not marked complete.");
+    await load();
+  }
+
+  async function doDecline(workId: string) {
+    setBusy(true);
+    const res = await declineOpenWork(rid, workId, "Declined from handoff inbox");
+    setBusy(false);
+    if (!res.ok) {
+      setMsg(res.message ?? "Could not decline task");
+      return;
+    }
+    setMsg(res.message ?? "Declined. Task remains open.");
+    await load();
+  }
+
+  async function doClarify(workId: string) {
+    setBusy(true);
+    const res = await clarifyOpenWork(
+      rid,
+      workId,
+      "Clarification requested from incoming handoff inbox",
+    );
+    setBusy(false);
+    if (!res.ok) {
+      setMsg(res.message ?? "Could not request clarification");
+      return;
+    }
+    setMsg("Clarification requested. Original task details stay on file.");
+    await load();
+  }
+
+  async function doConfirmProposal(id: string) {
+    setBusy(true);
+    const res = await confirmScheduleProposal(rid, id, {
+      confirmed_starts_at_label: "Confirmed later slot (authorized)",
+    });
+    setBusy(false);
+    if (!res.ok) {
+      setMsg(res.message ?? "Could not confirm schedule");
+      return;
+    }
+    setMsg("Schedule change confirmed. Next appointment updated.");
+    await load();
+  }
+
+  async function doRejectProposal(id: string) {
+    setBusy(true);
+    const res = await rejectScheduleProposal(rid, id, "Not applying this change");
+    setBusy(false);
+    if (!res.ok) {
+      setMsg(res.message ?? "Could not reject proposal");
+      return;
+    }
+    setMsg("Schedule proposal rejected. Prior appointment remains current.");
+    await load();
   }
 
   // List all handoffs for this recipient (inbox is discovery surface)
@@ -182,13 +267,166 @@ export function IncomingHandoffInbox({
             )}
           </ul>
 
-          {(packet.unfinishedWork?.length ?? 0) > 0 && (
+          <h3>Open work — accept separately</h3>
+          <p className="muted" data-testid="open-work-ack-sep">
+            Acknowledging this handoff does not assign these tasks to you.
+          </p>
+          <ul className="list-plain" data-testid="incoming-work-owners">
+            {(workItems.length
+              ? workItems
+              : (packet.unfinishedWork ?? []).map((w, i) => ({
+                  id: w.id ?? `text-${i}`,
+                  action: w.action,
+                  status: w.status,
+                  ownerDisplayName: w.owner,
+                  ownerPersonId: w.ownerPersonId,
+                  dueAt: w.dueAt,
+                }))
+            ).map((w) => {
+              const open =
+                !w.ownerPersonId ||
+                w.status === "available_to_claim" ||
+                w.status === "unassigned";
+              const mine =
+                w.ownerPersonId === session.carePersonId ||
+                w.status === "accepted" ||
+                w.status === "claimed";
+              return (
+                <li
+                  key={w.id}
+                  className="surface-soft"
+                  style={{ marginBottom: 10, padding: 12 }}
+                  data-testid={`open-work-item-${w.id}`}
+                >
+                  <strong>{w.action}</strong>
+                  <div className="muted">
+                    Due:{" "}
+                    {w.dueAt
+                      ? new Date(w.dueAt).toLocaleString(undefined, {
+                          weekday: "short",
+                          hour: "numeric",
+                          minute: "2-digit",
+                        })
+                      : "When able"}
+                  </div>
+                  <div className="muted">
+                    Current owner: {w.ownerDisplayName ?? "Unassigned"} ·{" "}
+                    {w.status}
+                  </div>
+                  <div className="muted">
+                    Source: handoff open work · why it matters: care continuity
+                  </div>
+                  {confirmWorkId === w.id ? (
+                    <div className="btn-row" style={{ marginTop: 8 }}>
+                      <p className="muted">
+                        Accept for {space.displayName}? You become owner; task
+                        stays open (not completed).
+                      </p>
+                      <button
+                        type="button"
+                        className="primary-btn"
+                        data-testid={`open-work-confirm-accept-${w.id}`}
+                        disabled={busy}
+                        onClick={() => void doAccept(w.id)}
+                      >
+                        Confirm accept
+                      </button>
+                      <button
+                        type="button"
+                        className="secondary-btn"
+                        disabled={busy}
+                        onClick={() => setConfirmWorkId(null)}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="btn-row" style={{ marginTop: 8 }}>
+                      {open && (
+                        <button
+                          type="button"
+                          className="primary-btn"
+                          data-testid={`open-work-accept-${w.id}`}
+                          disabled={busy}
+                          onClick={() => setConfirmWorkId(w.id)}
+                        >
+                          Accept responsibility
+                        </button>
+                      )}
+                      {open && (
+                        <button
+                          type="button"
+                          className="secondary-btn"
+                          data-testid={`open-work-decline-${w.id}`}
+                          disabled={busy}
+                          onClick={() => void doDecline(w.id)}
+                        >
+                          Decline
+                        </button>
+                      )}
+                      <button
+                        type="button"
+                        className="secondary-btn"
+                        data-testid={`open-work-clarify-${w.id}`}
+                        disabled={busy}
+                        onClick={() => void doClarify(w.id)}
+                      >
+                        Ask for clarification
+                      </button>
+                      {mine && (
+                        <span className="muted" data-testid="open-work-you-accepted">
+                          You accepted this task.
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+            {workItems.length === 0 &&
+              (packet.unfinishedWork?.length ?? 0) === 0 && (
+                <li className="muted">No open work items listed</li>
+              )}
+          </ul>
+
+          {proposals.length > 0 && (
             <>
-              <h3>Open work ownership</h3>
-              <ul className="list-plain" data-testid="incoming-work-owners">
-                {packet.unfinishedWork!.map((w) => (
-                  <li key={w.action}>
-                    {w.action} · owner: {w.owner} · {w.status}
+              <h3>Schedule proposals — confirm required</h3>
+              <p className="muted">
+                Handoff schedule language is not applied until someone authorized
+                confirms.
+              </p>
+              <ul className="list-plain" data-testid="schedule-proposals-list">
+                {proposals.map((p) => (
+                  <li
+                    key={p.id}
+                    className="surface-soft"
+                    style={{ marginBottom: 10, padding: 12 }}
+                    data-testid={`schedule-proposal-${p.id}`}
+                  >
+                    <strong>{p.proposedTitle}</strong>
+                    <div className="muted">{p.sourceText}</div>
+                    <div className="muted">{p.proposedStartsAtLabel}</div>
+                    <div className="btn-row" style={{ marginTop: 8 }}>
+                      <button
+                        type="button"
+                        className="primary-btn"
+                        data-testid={`schedule-confirm-${p.id}`}
+                        disabled={busy}
+                        onClick={() => void doConfirmProposal(p.id)}
+                      >
+                        Confirm schedule change
+                      </button>
+                      <button
+                        type="button"
+                        className="secondary-btn"
+                        data-testid={`schedule-reject-${p.id}`}
+                        disabled={busy}
+                        onClick={() => void doRejectProposal(p.id)}
+                      >
+                        Reject
+                      </button>
+                    </div>
                   </li>
                 ))}
               </ul>

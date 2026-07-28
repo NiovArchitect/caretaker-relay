@@ -35,7 +35,17 @@ export type HandoffPacket = {
   stillNeedsAttention: string[];
   watch?: string[];
   completedWork?: string[];
-  unfinishedWork?: Array<{ action: string; owner: string; status: string }>;
+  unfinishedWork?: Array<{
+    id?: string;
+    action: string;
+    owner: string;
+    ownerPersonId?: string | null;
+    status: string;
+    dueAt?: string | null;
+    handoffId?: string | null;
+    declineReason?: string | null;
+    acceptedAt?: string | null;
+  }>;
   conflicts?: string[];
   corrections?: string[];
   upcoming?: string[];
