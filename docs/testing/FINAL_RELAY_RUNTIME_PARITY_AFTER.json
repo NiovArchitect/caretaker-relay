@@ -1,0 +1,17 @@
+{
+  "recorded_at": "2026-07-29T23:46:05Z",
+  "campaign": "FINAL_RELAY_SERVER_PARITY",
+  "app_head": "50bf16665101360f962fd36ea5d5071df3e5f7bf",
+  "app_deploy": "50bf16665101360f962fd36ea5d5071df3e5f7bf",
+  "app_bundle": "assets/index-D7f2xzwb.js",
+  "api_head": "43388e5a6a0631dc9d52ec40a0981957628dea93",
+  "api_deploy": "43388e5a6a0631dc9d52ec40a0981957628dea93",
+  "deployment_parity": true,
+  "public_ui_smoke_all_pass": true,
+  "api_operating_plan_critical": true,
+  "background_workers": 0,
+  "submission_readiness": "READY",
+  "product_freeze": "NOT_RESTORED",
+  "founder_desktop": "PENDING",
+  "founder_phone": "PENDING"
+}

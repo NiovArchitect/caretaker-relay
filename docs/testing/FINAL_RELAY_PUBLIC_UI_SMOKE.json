@@ -1,0 +1,112 @@
+{
+  "recorded_at": "2026-07-29T23:45:00.151Z",
+  "app": "https://care.niovlabs.com",
+  "bundle": [
+    "https://care.niovlabs.com/assets/index-D7f2xzwb.js"
+  ],
+  "results": [
+    {
+      "question": "What am I doing today?",
+      "iso": 0,
+      "ids": 0,
+      "tech": 0,
+      "hasCareUpdatesDump": false,
+      "hasUnfinishedOrComing": true,
+      "hasMayaOrMessage": true,
+      "hasAppointmentDraft": true,
+      "hasDaniel": true,
+      "raw_tail": "rent medication instructions. Please check the medication label or confirm with the care team before marking this complete. Coming up:\n• Metformin 500 mg · 12:00 PM today\n• Physical therapy · Friday 4:30 PM PDT Coming up:\n• Medication · Metformin 500 mg · 12:00 PM (window 11:30 AM – 12:30 PM)\n• Appointment · Physical therapy · 4:30 PM PDT · Leave by about 3:42 PM for a 4:30 PM session (about 18 min travel + buffer) · Coastal PT\n• Appointment · Physical therapy — day-before · Day-before reminder for 4:30 PM PDT · Coastal PT\n• Appointment · Physical therapy · 4:30 PM PDT · Leave by about 3:42 PM for a 4:30 PM session (about 18 min travel + buffer) · Coastal PT\n• Appointment · Physical therapy — day-before · Day-before reminder for 4:30 PM PDT · Coastal PT\n• Appointment · Physical therapy · 4:30 PM PDT · Leave by about 3:42 PM for a 4:30 PM session (about 18 min travel + buffer) · Coastal PT\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend\nMarcus Carter · caring for Evelyn Carter\nNot medical advice · you verify care truth"
+    },
+    {
+      "question": "What is on my shift today?",
+      "iso": 0,
+      "ids": 0,
+      "tech": 0,
+      "hasCareUpdatesDump": false,
+      "hasUnfinishedOrComing": true,
+      "hasMayaOrMessage": true,
+      "hasAppointmentDraft": true,
+      "hasDaniel": true,
+      "raw_tail": "rent medication instructions. Please check the medication label or confirm with the care team before marking this complete. Coming up:\n• Metformin 500 mg · 12:00 PM today\n• Physical therapy · Friday 4:30 PM PDT Coming up:\n• Medication · Metformin 500 mg · 12:00 PM (window 11:30 AM – 12:30 PM)\n• Appointment · Physical therapy · 4:30 PM PDT · Leave by about 3:42 PM for a 4:30 PM session (about 18 min travel + buffer) · Coastal PT\n• Appointment · Physical therapy — day-before · Day-before reminder for 4:30 PM PDT · Coastal PT\n• Appointment · Physical therapy · 4:30 PM PDT · Leave by about 3:42 PM for a 4:30 PM session (about 18 min travel + buffer) · Coastal PT\n• Appointment · Physical therapy — day-before · Day-before reminder for 4:30 PM PDT · Coastal PT\n• Appointment · Physical therapy · 4:30 PM PDT · Leave by about 3:42 PM for a 4:30 PM session (about 18 min travel + buffer) · Coastal PT\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend\nMarcus Carter · caring for Evelyn Carter\nNot medical advice · you verify care truth"
+    },
+    {
+      "question": "What happened during the last shift?",
+      "iso": 0,
+      "ids": 0,
+      "tech": 0,
+      "hasCareUpdatesDump": false,
+      "hasUnfinishedOrComing": true,
+      "hasMayaOrMessage": true,
+      "hasAppointmentDraft": true,
+      "hasDaniel": true,
+      "raw_tail": " about 3:42 PM for a 4:30 PM session (about 18 min travel + buffer) · Coastal PT\n• Appointment · Physical therapy — day-before · Day-before reminder for 4:30 PM PDT · Coastal PT\n• Appointment · Physical therapy · 4:30 PM PDT · Leave by about 3:42 PM for a 4:30 PM session (about 18 min travel + buffer) · Coastal PT\n• Appointment · Physical therapy — day-before · Day-before reminder for 4:30 PM PDT · Coastal PT\n• Appointment · Physical therapy · 4:30 PM PDT · Leave by about 3:42 PM for a 4:30 PM session (about 18 min travel + buffer) · Coastal PT\nWhat happened during the last shift?\nDaniel Kim covered Evelyn Carter before you from recently to recently. They completed or recorded: Medication administration was corrected: not administered.; Medication marked as given (as scheduled) for Evelyn Carter. They left open: Confirm any open transportation or evening medication. Their handoff is seen.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend\nMarcus Carter · caring for Evelyn Carter\nNot medical advice · you verify care truth"
+    },
+    {
+      "question": "Send a message to May saying hello.",
+      "iso": 0,
+      "ids": 0,
+      "tech": 0,
+      "hasCareUpdatesDump": false,
+      "hasUnfinishedOrComing": true,
+      "hasMayaOrMessage": true,
+      "hasAppointmentDraft": true,
+      "hasDaniel": true,
+      "raw_tail": "· Physical therapy — day-before · Day-before reminder for 4:30 PM PDT · Coastal PT\n• Appointment · Physical therapy · 4:30 PM PDT · Leave by about 3:42 PM for a 4:30 PM session (about 18 min travel + buffer) · Coastal PT\nWhat happened during the last shift?\nDaniel Kim covered Evelyn Carter before you from recently to recently. They completed or recorded: Medication administration was corrected: not administered.; Medication marked as given (as scheduled) for Evelyn Carter. They left open: Confirm any open transportation or evening medication. Their handoff is seen.\nSend a message to May saying hello.\nI can send an **in-app care-team message** to **Maya Bennett** about Evelyn Carter: “hello.” This creates an in-app notification for them in this care space. It does **not** send SMS or email unless that is separately configured. Confirm with **Looks right** to send, or **Cancel** to discard.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend\nMarcus Carter · caring for Evelyn Carter\nNot medical advice · you verify care truth"
+    },
+    {
+      "question": "Change Personal Training tomorrow to 2pm.",
+      "iso": 0,
+      "ids": 0,
+      "tech": 0,
+      "hasCareUpdatesDump": false,
+      "hasUnfinishedOrComing": true,
+      "hasMayaOrMessage": true,
+      "hasAppointmentDraft": true,
+      "hasDaniel": true,
+      "raw_tail": " you from recently to recently. They completed or recorded: Medication administration was corrected: not administered.; Medication marked as given (as scheduled) for Evelyn Carter. They left open: Confirm any open transportation or evening medication. Their handoff is seen.\nSend a message to May saying hello.\nI can send an **in-app care-team message** to **Maya Bennett** about Evelyn Carter: “hello.” This creates an in-app notification for them in this care space. It does **not** send SMS or email unless that is separately configured. Confirm with **Looks right** to send, or **Cancel** to discard.\nChange Personal Training tomorrow to 2pm.\nI can update **Evelyn Carter's internal care schedule** so **Personal Training** is at **2pm tomorrow**. This changes the care record only — it is **not** an external clinic booking system. Confirm with **Looks right** to apply, or **Cancel** to discard.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend\nMarcus Carter · caring for Evelyn Carter\nNot medical advice · you verify care truth"
+    },
+    {
+      "question": "Who works after me?",
+      "iso": 0,
+      "ids": 0,
+      "tech": 0,
+      "hasCareUpdatesDump": false,
+      "hasUnfinishedOrComing": true,
+      "hasMayaOrMessage": true,
+      "hasAppointmentDraft": true,
+      "hasDaniel": true,
+      "raw_tail": "ication marked as given (as scheduled) for Evelyn Carter. They left open: Confirm any open transportation or evening medication. Their handoff is seen.\nSend a message to May saying hello.\nI can send an **in-app care-team message** to **Maya Bennett** about Evelyn Carter: “hello.” This creates an in-app notification for them in this care space. It does **not** send SMS or email unless that is separately configured. Confirm with **Looks right** to send, or **Cancel** to discard.\nChange Personal Training tomorrow to 2pm.\nI can update **Evelyn Carter's internal care schedule** so **Personal Training** is at **2pm tomorrow**. This changes the care record only — it is **not** an external clinic booking system. Confirm with **Looks right** to apply, or **Cancel** to discard.\nWho works after me?\nMaya Bennett is listed as next coverage for Evelyn Carter, but an exact start time is not on file yet.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend\nMarcus Carter · caring for Evelyn Carter\nNot medical advice · you verify care truth"
+    },
+    {
+      "question": "What still needs my attention today?",
+      "iso": 0,
+      "ids": 0,
+      "tech": 0,
+      "hasCareUpdatesDump": false,
+      "hasUnfinishedOrComing": true,
+      "hasMayaOrMessage": true,
+      "hasAppointmentDraft": true,
+      "hasDaniel": true,
+      "raw_tail": " or email unless that is separately configured. Confirm with **Looks right** to send, or **Cancel** to discard.\nChange Personal Training tomorrow to 2pm.\nI can update **Evelyn Carter's internal care schedule** so **Personal Training** is at **2pm tomorrow**. This changes the care record only — it is **not** an external clinic booking system. Confirm with **Looks right** to apply, or **Cancel** to discard.\nWho works after me?\nMaya Bennett is listed as next coverage for Evelyn Carter, but an exact start time is not on file yet.\nWhat still needs my attention today?\nHere's what is still open for Evelyn Carter: Waiting on: Marcus Carter, Maya Bennett.\n• Handoff still needs attention: Confirm any open transportation or evening medication\n• Needs your review: a prior Metformin-with-lunch confirmation is still open.\n• Needs checking: a reported dose unit does not match the authorized instruction.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend\nMarcus Carter · caring for Evelyn Carter\nNot medical advice · you verify care truth"
+    }
+  ],
+  "rawScan": {
+    "iso_count": 0,
+    "id_count": 0,
+    "tech_count": 0,
+    "uuid_count": 0
+  },
+  "gates": {
+    "today_not_dump": true,
+    "shift_not_dump": true,
+    "last_shift_grounded": true,
+    "message_not_meal": true,
+    "appointment_preview": true,
+    "next_caregiver": true,
+    "attention": true,
+    "raw_iso_zero": true,
+    "raw_id_zero": true
+  },
+  "defects": [],
+  "all_pass": true
+}

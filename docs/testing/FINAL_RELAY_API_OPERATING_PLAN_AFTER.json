@@ -1,0 +1,244 @@
+{
+  "api_deploy_expected": "fc7af0375322ab38841f1ac27b731aa4bf46a5ca",
+  "recorded_at": "2026-07-29T23:36:50Z",
+  "results": [
+    {
+      "question": "How is Evelyn today?",
+      "intent": "STATUS_SYNTHESIS",
+      "intents": [
+        "STATUS_SYNTHESIS"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "RECENT_CHANGES",
+        "RECENT_OBSERVATION_CLUSTERS",
+        "CURRENT_MEDICATIONS",
+        "NEXT_APPOINTMENT",
+        "OPEN_UNCERTAINTIES",
+        "ACTIVE_HANDOFF"
+      ],
+      "no_match": false,
+      "care_updates_dump": false,
+      "iso": 0,
+      "ids": 0,
+      "preview": "Evelyn Carter's most recent report on file is caregiver reported: slept (last noted Saturday, July 25, 2026 at 12:06 PM PDT). The main item needing attention is Confirm any open transportation or evening medication. Metformin 500 mg remains scheduled for 12:00 PM. Physical therapy is Friday 4:30 PM PDT."
+    },
+    {
+      "question": "What am I doing today?",
+      "intent": "CHANGES_TODAY",
+      "intents": [
+        "TASKS_NOW",
+        "CHANGES_TODAY"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "OPEN_UNCERTAINTIES",
+        "NEXT_24H_TASKS",
+        "REMINDERS",
+        "ACTIVE_HANDOFF"
+      ],
+      "no_match": false,
+      "care_updates_dump": false,
+      "iso": 0,
+      "ids": 0,
+      "preview": "Still unfinished from the last handoff:\n\u2022 Confirm any open transportation or evening medication\n\nAlso needs review:\n\u2022 The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team before marking this complete.\n\nComing up:\n\u2022 Metformin 500 mg \u00b7 12:00 PM today"
+    },
+    {
+      "question": "What is on my shift today?",
+      "intent": "CHANGES_TODAY",
+      "intents": [
+        "TASKS_NOW",
+        "CHANGES_TODAY",
+        "TASKS_REMAINING"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "OPEN_UNCERTAINTIES",
+        "NEXT_24H_TASKS",
+        "REMINDERS",
+        "ACTIVE_HANDOFF"
+      ],
+      "no_match": false,
+      "care_updates_dump": false,
+      "iso": 0,
+      "ids": 0,
+      "preview": "Still unfinished from the last handoff:\n\u2022 Confirm any open transportation or evening medication\n\nAlso needs review:\n\u2022 The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team before marking this complete.\n\nComing up:\n\u2022 Metformin 500 mg \u00b7 12:00 PM today"
+    },
+    {
+      "question": "What happened during the last shift?",
+      "intent": "PREVIOUS_SHIFT",
+      "intents": [
+        "PREVIOUS_SHIFT",
+        "HANDOFF_REVIEW",
+        "RECENT_ACTIVITY"
+      ],
+      "source_refs": [
+        "coverage_timeline",
+        "previous_shift",
+        "handoff"
+      ],
+      "projections_used": [
+        "CARE_COVERAGE_TIMELINE",
+        "ACTIVE_HANDOFF",
+        "RECENT_CHANGES"
+      ],
+      "no_match": false,
+      "care_updates_dump": false,
+      "iso": 0,
+      "ids": 0,
+      "preview": "Daniel Kim covered Evelyn Carter before you from recently to recently. They completed or recorded: Medication administration was corrected: not administered.; Medication marked as given (as scheduled) for Evelyn Carter. They left open: Confirm any open transportation or evening medication. Their handoff is seen."
+    },
+    {
+      "question": "Send a message to May saying hello.",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "no_match": true,
+      "care_updates_dump": false,
+      "iso": 0,
+      "ids": 0,
+      "preview": "No matching reminder/coverage/message acknowledgment is on file for that ask. Check People for coverage and Today for open work that needs an owner."
+    },
+    {
+      "question": "Change Personal Training tomorrow to 2pm.",
+      "intent": "APPOINTMENT_NEXT",
+      "intents": [
+        "APPOINTMENT_NEXT"
+      ],
+      "source_refs": [
+        "scheduling:multi_turn_draft"
+      ],
+      "projections_used": [
+        "SCHEDULING"
+      ],
+      "no_match": false,
+      "care_updates_dump": false,
+      "iso": 0,
+      "ids": 0,
+      "preview": "Draft confirmation (not booked yet):\n\nReply \u201cconfirm appointment request\u201d to save this as a caregiver-requested appointment candidate. I will not claim the clinic has accepted it until office confirmation or a real booking integration exists.\n\u2022 Recipient: Evelyn Carter\n\u2022 Requested: Doctor / clinic visit\n\u2022 Proposed slot: Wednesday, July 29 \u00b7 2:00 PM"
+    },
+    {
+      "question": "Who worked before me?",
+      "intent": "CARE_COVERAGE",
+      "intents": [
+        "CARE_COVERAGE"
+      ],
+      "source_refs": [
+        "coverage_timeline",
+        "previous"
+      ],
+      "projections_used": [
+        "COVERAGE_TIMELINE"
+      ],
+      "no_match": false,
+      "care_updates_dump": false,
+      "iso": 0,
+      "ids": 0,
+      "preview": "Daniel Kim covered Evelyn Carter before you from Jul 27, 6:39 PM to Jul 27, 11:44 PM. Their handoff is seen. They left open: Confirm any open transportation or evening medication."
+    },
+    {
+      "question": "Who works after me?",
+      "intent": "CARE_COVERAGE",
+      "intents": [
+        "CARE_COVERAGE"
+      ],
+      "source_refs": [
+        "coverage_timeline",
+        "next"
+      ],
+      "projections_used": [
+        "COVERAGE_TIMELINE"
+      ],
+      "no_match": false,
+      "care_updates_dump": false,
+      "iso": 0,
+      "ids": 0,
+      "preview": "Maya Bennett is listed as next coverage for Evelyn Carter, but an exact start time is not on file yet."
+    },
+    {
+      "question": "Tell the next caregiver Evelyn refused lunch.",
+      "intent": "CARE_COVERAGE",
+      "intents": [
+        "CARE_COVERAGE"
+      ],
+      "source_refs": [
+        "coverage_timeline",
+        "next"
+      ],
+      "projections_used": [
+        "COVERAGE_TIMELINE"
+      ],
+      "no_match": false,
+      "care_updates_dump": false,
+      "iso": 0,
+      "ids": 0,
+      "preview": "Maya Bennett is listed as next coverage for Evelyn Carter, but an exact start time is not on file yet."
+    },
+    {
+      "question": "What still needs my attention today?",
+      "intent": "TASKS_REMAINING",
+      "intents": [
+        "TASKS_REMAINING",
+        "OPEN_LOOP_STATUS",
+        "WAITING_ON"
+      ],
+      "source_refs": [
+        "orchestration:open_loops"
+      ],
+      "projections_used": [
+        "OPEN_LOOPS"
+      ],
+      "no_match": false,
+      "care_updates_dump": false,
+      "iso": 0,
+      "ids": 0,
+      "preview": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Marcus Carter, Maya Bennett.\n\u2022 Handoff still needs attention: Confirm any open transportation or evening medication\n\u2022 Needs your review: a prior Metformin-with-lunch confirmation is still open.\n\u2022 Needs checking: a reported dose unit does not match the authorized instruction."
+    },
+    {
+      "question": "What did Daniel leave unfinished?",
+      "intent": "TASKS_REMAINING",
+      "intents": [
+        "TASKS_REMAINING",
+        "OPEN_LOOP_STATUS",
+        "WAITING_ON"
+      ],
+      "source_refs": [
+        "orchestration:open_loops"
+      ],
+      "projections_used": [
+        "OPEN_LOOPS"
+      ],
+      "no_match": false,
+      "care_updates_dump": false,
+      "iso": 0,
+      "ids": 0,
+      "preview": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Marcus Carter, Maya Bennett.\n\u2022 Handoff still needs attention: Confirm any open transportation or evening medication\n\u2022 Needs your review: a prior Metformin-with-lunch confirmation is still open.\n\u2022 Needs checking: a reported dose unit does not match the authorized instruction."
+    }
+  ],
+  "gates": {
+    "today_not_care_updates_dump": true,
+    "shift_not_care_updates_dump": true,
+    "today_has_tasks_or_open": true,
+    "shift_has_tasks_or_open": true,
+    "last_shift_grounded": true,
+    "before_me_grounded": true,
+    "after_me_grounded": true,
+    "tell_next_not_only_coverage": false,
+    "iso_zero": true,
+    "id_zero": true
+  },
+  "all_critical": true
+}
