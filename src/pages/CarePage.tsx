@@ -30,6 +30,11 @@ import {
 import { loadActiveCareRecipientId, resolveCareSpace } from "../lib/careContext";
 import { MedicationCorrectionPanel } from "../components/MedicationCorrectionPanel";
 import { IncomingHandoffInbox } from "../components/IncomingHandoffInbox";
+import {
+  listAppointmentsLineage,
+  type AppointmentLineageRow,
+} from "../foundation/careContinuity";
+import { SYNTHETIC_FACILITIES } from "../lib/relay/projections";
 import { CorrectionAwarenessPanel } from "../components/CorrectionAwarenessPanel";
 import { ShiftWorkspacePage } from "./ShiftWorkspacePage";
 
@@ -76,7 +81,7 @@ function DetailRows({
 }) {
   const rows: Array<{ label: string; value: string }> = [];
 
-  // Prefer structured medication fields
+  // Prefer structured medication + appointment fields
   const structured: Array<[string, string]> = [
     ["Name", pick(item, ["name", "title"])],
     ["Strength", pick(item, ["strength"])],
@@ -117,10 +122,21 @@ function DetailRows({
           "occurredAt",
           "createdAt",
         ]),
-      ),
+      ) || pick(item, ["startsAtLabel"]),
     ],
-    ["Location", pick(item, ["location"])],
     ["Status", pick(item, ["status"])],
+    ["Facility", pick(item, ["facility", "location"])],
+    ["Address", pick(item, ["address"])],
+    ["Phone", pick(item, ["phone", "contact"])],
+    ["Directions", pick(item, ["navigation_hint", "mapsUrl"])],
+    ["Travel estimate", pick(item, ["travelMinutes"]) ? `${pick(item, ["travelMinutes"])} minutes` : ""],
+    ["Leave by", pick(item, ["leaveByLabel", "leave_by_label"])],
+    [
+      "Transportation",
+      pick(item, ["transportResponsibility", "transport_hint", "transportationNotes"]),
+    ],
+    ["Prior schedule history", pick(item, ["priorHistory"])],
+    ["Location", pick(item, ["location"])],
     ["Certainty", certaintyLabel(item.epistemicStatus)],
     ["Priority", priorityLabel(item.safetyClass)],
     ["Summary", pick(item, ["summary", "statement", "whatHappened"])],
@@ -183,15 +199,63 @@ function DetailRows({
     }
   }
 
+  const mapsUrl = pick(item, ["mapsUrl", "maps_url"]);
+  const phone = pick(item, ["phone", "contact"]);
+
   return (
-    <dl className="care-detail-dl">
-      {rows.map((r) => (
-        <div key={r.label} className="care-detail-row">
-          <dt>{r.label}</dt>
-          <dd>{r.value}</dd>
+    <>
+      <dl className="care-detail-dl" data-testid="appointment-detail-fields">
+        {rows.map((r) => (
+          <div key={r.label} className="care-detail-row">
+            <dt>{r.label}</dt>
+            <dd>
+              {r.label === "Phone" && phone ? (
+                <a href={`tel:${phone}`} data-testid="appointment-phone-link">
+                  {phone}
+                </a>
+              ) : r.label === "Directions" && mapsUrl ? (
+                <a
+                  href={mapsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-testid="appointment-directions-link"
+                >
+                  {r.value || "Open directions"}
+                </a>
+              ) : (
+                r.value
+              )}
+            </dd>
+          </div>
+        ))}
+      </dl>
+      {(mapsUrl || phone) && (
+        <div className="btn-row" style={{ marginTop: 12 }} data-testid="appointment-actions">
+          {mapsUrl ? (
+            <a
+              className="primary-btn"
+              href={mapsUrl}
+              target="_blank"
+              rel="noreferrer"
+              data-testid="appointment-open-maps"
+              style={{ display: "inline-flex", textDecoration: "none" }}
+            >
+              Open directions
+            </a>
+          ) : null}
+          {phone ? (
+            <a
+              className="secondary-btn"
+              href={`tel:${phone}`}
+              data-testid="appointment-call"
+              style={{ display: "inline-flex", textDecoration: "none" }}
+            >
+              Call facility
+            </a>
+          ) : null}
         </div>
-      ))}
-    </dl>
+      )}
+    </>
   );
 }
 
@@ -661,6 +725,9 @@ export function CarePage({
   const [selectedKind, setSelectedKind] = useState<string>("Care item");
   const [expandedCluster, setExpandedCluster] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [activeApts, setActiveApts] = useState<AppointmentLineageRow[]>([]);
+  const [historyApts, setHistoryApts] = useState<AppointmentLineageRow[]>([]);
+  const [aptsLoaded, setAptsLoaded] = useState(false);
 
   useEffect(() => {
     if (focusKind === "medication") setSection("medications");
@@ -681,10 +748,18 @@ export function CarePage({
     void fetchCareHistory(historyFilter).then((h) => {
       if (!cancelled) setHistory(h.items);
     });
+    void listAppointmentsLineage(space.careRecipientId).then((res) => {
+      if (cancelled) return;
+      if (res.ok) {
+        setActiveApts(res.active);
+        setHistoryApts(res.history);
+      }
+      setAptsLoaded(true);
+    });
     return () => {
       cancelled = true;
     };
-  }, [historyFilter]);
+  }, [historyFilter, space.careRecipientId]);
 
   const observationClusters = useMemo(
     () => clusterObservations(state?.observations ?? []),
@@ -706,6 +781,102 @@ export function CarePage({
   function openItem(item: Record<string, unknown>, kind: string) {
     setSelected(item);
     setSelectedKind(kind);
+  }
+
+  /** Enrich appointment card for real-world caregiver actions (maps, phone, leave-by). */
+  function openAppointmentDetail(row: AppointmentLineageRow) {
+    const title = String(row.title ?? "Appointment");
+    const loc = String(row.location ?? row.address ?? "");
+    const isPt =
+      /physical therapy|coastal pt|\bpt\b|therapy/i.test(title) ||
+      /coastal pt|physical therapy/i.test(loc);
+    const isClinic =
+      /clinic|family medicine|doctor|physician/i.test(title) ||
+      /family medicine|clinic/i.test(loc);
+    const fac = isPt
+      ? SYNTHETIC_FACILITIES.pt
+      : isClinic
+        ? SYNTHETIC_FACILITIES.clinic
+        : null;
+
+    const startsIso = row.starts_at ? String(row.starts_at) : "";
+    let leaveBy = row.leave_by_label ? String(row.leave_by_label) : "";
+    const travelMin =
+      row.travel_minutes ??
+      (fac ? fac.travelMinutes : null);
+    if (!leaveBy && startsIso && travelMin) {
+      try {
+        const start = new Date(startsIso);
+        const leave = new Date(start.getTime() - travelMin * 60_000);
+        leaveBy = leave.toLocaleString(undefined, {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+        });
+      } catch {
+        /* ignore */
+      }
+    }
+
+    const address =
+      row.address ||
+      (fac ? fac.address : null) ||
+      row.location ||
+      "";
+    const phone =
+      row.phone ||
+      row.contact ||
+      (fac ? fac.phone : null) ||
+      "";
+    const mapsUrl =
+      row.maps_url ||
+      (fac ? fac.mapsUrl : null) ||
+      (address
+        ? `https://maps.google.com/?q=${encodeURIComponent(String(address))}`
+        : null);
+
+    const prior = historyApts
+      .filter(
+        (h) =>
+          h.lineage_key &&
+          row.lineage_key &&
+          h.lineage_key === row.lineage_key &&
+          h.id !== row.id,
+      )
+      .slice(0, 6)
+      .map((h) => {
+        const when =
+          formatCareDateTime(String(h.starts_at ?? h.starts_at_label ?? "")) ||
+          String(h.starts_at_label ?? "");
+        return `${h.status ?? "updated"} · ${when || "prior visit"}`;
+      });
+
+    openItem(
+      {
+        id: row.id,
+        title,
+        startsAt: row.starts_at,
+        startsAtLabel: row.starts_at_label,
+        status: row.status,
+        location: row.location || fac?.name || "",
+        facility: fac?.name || row.location || "",
+        address,
+        phone,
+        mapsUrl,
+        navigation_hint: row.navigation_hint,
+        transport_hint: row.transport_hint,
+        leaveByLabel: leaveBy,
+        travelMinutes: travelMin,
+        transportResponsibility: row.transport_hint,
+        priorHistory: prior.join("; ") || "No prior moves or cancellations listed",
+        facilityNote: fac?.note ?? "",
+        lineage_key: row.lineage_key,
+        bucket: row.bucket,
+      },
+      "Appointment",
+    );
   }
 
   return (
@@ -922,32 +1093,71 @@ export function CarePage({
 
         {section === "appointments" && (
           <>
-            <h2>Appointments</h2>
-            {!state?.appointments?.length ? (
-              <p className="muted">No appointments on file.</p>
+            <h2>Current appointments</h2>
+            <p className="muted section-lead">
+              Tap an appointment for time, place, directions, phone, travel, and
+              prior schedule history. Only current items stay here; past moves
+              and cancellations are under Prior schedule.
+            </p>
+            {!aptsLoaded ? (
+              <p className="muted">Loading appointments…</p>
+            ) : activeApts.length === 0 ? (
+              <p className="muted" data-testid="appointments-empty">
+                No current appointments on file.
+              </p>
             ) : (
-              state.appointments.map((a) => {
-                const row = a as Record<string, unknown>;
+              activeApts.map((a) => {
                 const when =
-                  formatCareDateTime(
-                    str(row.startsAt ?? row.startsAtLabel),
-                  ) || str(row.startsAtLabel);
+                  formatCareDateTime(String(a.starts_at ?? a.starts_at_label ?? "")) ||
+                  String(a.starts_at_label ?? "");
                 return (
                   <button
-                    key={str(row.id)}
+                    key={a.id}
                     type="button"
                     className="member-card"
-                    data-testid={`care-apt-${row.id}`}
-                    onClick={() => openItem(row, "Appointment")}
+                    data-testid={`care-apt-${a.id}`}
+                    data-appointment-card="true"
+                    onClick={() => openAppointmentDetail(a)}
                   >
-                    <strong>{str(row.title ?? "Appointment")}</strong>
+                    <strong>{a.title ?? "Appointment"}</strong>
                     <span className="muted">{when}</span>
-                    {str(row.location) && (
-                      <span className="muted">{str(row.location)}</span>
+                    {(a.location || a.address) && (
+                      <span className="muted">{a.location || a.address}</span>
                     )}
                     <span className="badge badge-teal">
-                      {str(row.status ?? "scheduled")}
+                      {a.status ?? "scheduled"}
                     </span>
+                    {a.transport_hint && (
+                      <span className="muted">{a.transport_hint}</span>
+                    )}
+                  </button>
+                );
+              })
+            )}
+
+            <h2 style={{ marginTop: 24 }}>Prior schedule</h2>
+            <p className="muted">
+              Moved, cancelled, or replaced visits stay here so history is not
+              lost.
+            </p>
+            {historyApts.length === 0 ? (
+              <p className="muted">No prior appointment history listed.</p>
+            ) : (
+              historyApts.slice(0, 12).map((a) => {
+                const when =
+                  formatCareDateTime(String(a.starts_at ?? a.starts_at_label ?? "")) ||
+                  String(a.starts_at_label ?? "");
+                return (
+                  <button
+                    key={a.id}
+                    type="button"
+                    className="member-card"
+                    data-testid={`care-apt-history-${a.id}`}
+                    onClick={() => openAppointmentDetail(a)}
+                  >
+                    <strong>{a.title ?? "Appointment"}</strong>
+                    <span className="muted">{when}</span>
+                    <span className="badge">{a.status ?? "history"}</span>
                   </button>
                 );
               })

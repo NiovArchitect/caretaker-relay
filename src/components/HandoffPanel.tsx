@@ -182,26 +182,44 @@ export function HandoffPanel({
       <div className="btn-row" data-testid="handoff-lifecycle-actions">
         <button
           type="button"
-          className="secondary-btn"
+          className="primary-btn"
           data-testid="handoff-mark-sent"
-          disabled={lcBusy}
+          disabled={lcBusy || effectiveStatus === "sent" || effectiveStatus === "acknowledged"}
           onClick={() => void transitionLifecycle("sent")}
         >
-          Mark sent
+          {effectiveStatus === "sent" || effectiveStatus === "shared"
+            ? "Sent to next caregiver"
+            : `Send to ${toName}`}
         </button>
         <button
           type="button"
-          className="primary-btn"
+          className="secondary-btn"
           data-testid="handoff-acknowledge"
-          disabled={lcBusy}
+          disabled={lcBusy || effectiveStatus === "acknowledged"}
           onClick={() => void transitionLifecycle("acknowledged")}
         >
-          Acknowledge handoff
+          {effectiveStatus === "acknowledged"
+            ? "Acknowledged"
+            : "Acknowledge handoff"}
+        </button>
+        <button
+          type="button"
+          className="secondary-btn"
+          data-testid="handoff-amend"
+          disabled={lcBusy}
+          onClick={() => void transitionLifecycle("correction_required")}
+        >
+          Correct after send
         </button>
         <button type="button" className="secondary-btn" onClick={onClose}>
           Close
         </button>
       </div>
+      <p className="muted" data-testid="handoff-lifecycle-hint">
+        Send makes this handoff available to {toName}. Acknowledgment is separate
+        from accepting open tasks. Correct after send records an amendment —
+        prior versions stay in history.
+      </p>
       {lcError && (
         <p className="error" data-testid="handoff-lifecycle-error" role="alert">
           {lcError}
@@ -209,7 +227,7 @@ export function HandoffPanel({
       )}
       {lcStatus && (
         <p className="muted" data-testid="handoff-lifecycle-status">
-          Lifecycle: {lcStatus}
+          Status: {lcStatus}
         </p>
       )}
     </section>

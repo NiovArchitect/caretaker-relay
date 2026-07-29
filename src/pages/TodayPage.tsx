@@ -29,8 +29,10 @@ import {
   formatCareDateTimeRecent,
   humanCareLine,
   sourceTypeLabel,
+  workClarityLabel,
   workStatusLabel,
 } from "../lib/humanCopy";
+import { IncomingHandoffInbox } from "../components/IncomingHandoffInbox";
 import { OnboardingWizard } from "../components/OnboardingWizard";
 import {
   loadOnboardingDraft,
@@ -754,6 +756,14 @@ export function TodayPage({
                   const owner =
                     String(w.ownerDisplayName ?? "") ||
                     (w.ownerPersonId ? "A helper is on it" : "Needs a helper");
+                  const clarity = workClarityLabel({
+                    status,
+                    ownerPersonId: w.ownerPersonId
+                      ? String(w.ownerPersonId)
+                      : null,
+                    sessionPersonId: session.carePersonId,
+                    action: rawAction,
+                  });
                   const claimable =
                     !w.ownerPersonId ||
                     status === "available_to_claim" ||
@@ -763,6 +773,7 @@ export function TodayPage({
                       key={id}
                       data-testid={`work-item-${id}`}
                       className="work-item-row"
+                      data-clarity={clarity}
                       style={{
                         display: "flex",
                         flexWrap: "wrap",
@@ -772,6 +783,13 @@ export function TodayPage({
                       }}
                     >
                       <span>
+                        <span
+                          className="badge badge-teal"
+                          data-testid={`work-clarity-${id}`}
+                          style={{ marginRight: 6 }}
+                        >
+                          {clarity}
+                        </span>
                         <strong>{action}</strong>{" "}
                         <span className="muted">
                           · {owner} · {workStatusLabel(status)}
@@ -914,6 +932,9 @@ export function TodayPage({
           )}
         </section>
 
+        {/* First-class handoff inbox on Today so caregivers do not dig into Care → About */}
+        <IncomingHandoffInbox refreshKey={refreshKey ?? 0} />
+
         {notifOps.length > 0 && (
           <section
             className="section surface-reported"
@@ -1049,6 +1070,22 @@ export function TodayPage({
               ☰
             </span>
             Review care handoff
+          </button>
+          <button
+            type="button"
+            className="secondary-btn btn-with-icon"
+            data-testid="open-handoff-inbox"
+            data-action-kind="secondary"
+            onClick={() => {
+              document
+                .querySelector('[data-testid="incoming-handoff-inbox"]')
+                ?.scrollIntoView({ block: "start", behavior: "smooth" });
+            }}
+          >
+            <span className="btn-glyph" aria-hidden>
+              ↓
+            </span>
+            Incoming handoffs
           </button>
           <button
             type="button"

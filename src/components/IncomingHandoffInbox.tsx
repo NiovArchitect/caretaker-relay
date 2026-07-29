@@ -27,6 +27,7 @@ import { loadActiveCareRecipientId, resolveCareSpace } from "../lib/careContext"
 import {
   formatCareDateTimeRecent,
   humanCareLine,
+  workClarityLabel,
   workStatusLabel,
 } from "../lib/humanCopy";
 import { resolvePersonName } from "../lib/identity";
@@ -425,6 +426,19 @@ export function IncomingHandoffInbox({
                   data-testid={`open-work-item-${w.id}`}
                 >
                   <strong>{humanCareLine(w.action)}</strong>
+                  <div>
+                    <span
+                      className="badge badge-teal"
+                      data-testid={`open-work-clarity-${w.id}`}
+                    >
+                      {workClarityLabel({
+                        status: w.status,
+                        ownerPersonId: w.ownerPersonId,
+                        sessionPersonId: session.carePersonId,
+                        action: w.action,
+                      })}
+                    </span>
+                  </div>
                   <div className="muted">
                     Due:{" "}
                     {w.dueAt

@@ -144,6 +144,59 @@ export async function transitionHandoff(
   return { ok: true as const, lifecycle: res.data.lifecycle };
 }
 
+/** Lineage-projected appointments (active + history) — not the raw state flood. */
+export type AppointmentLineageRow = {
+  id: string;
+  title?: string;
+  status?: string;
+  schedule_state?: string | null;
+  starts_at?: string | null;
+  starts_at_label?: string | null;
+  ends_at?: string | null;
+  location?: string | null;
+  address?: string | null;
+  contact?: string | null;
+  navigation_hint?: string | null;
+  transport_hint?: string | null;
+  lineage_key?: string | null;
+  rescheduled_from_id?: string | null;
+  bucket?: "active" | "history" | string;
+  detail_openable?: boolean;
+  phone?: string | null;
+  leave_by_label?: string | null;
+  travel_minutes?: number | null;
+  maps_url?: string | null;
+  facility?: string | null;
+};
+
+export async function listAppointmentsLineage(careRecipientId: string) {
+  const token = tokenFromSession();
+  if (!token)
+    return {
+      ok: false as const,
+      active: [] as AppointmentLineageRow[],
+      history: [] as AppointmentLineageRow[],
+      message: "Not signed in",
+    };
+  const res = await careHttpJson<{
+    ok: boolean;
+    active?: AppointmentLineageRow[];
+    history?: AppointmentLineageRow[];
+  }>(`/api/v1/care/recipients/${careRecipientId}/appointments`, { token });
+  if (!res.ok)
+    return {
+      ok: false as const,
+      active: [] as AppointmentLineageRow[],
+      history: [] as AppointmentLineageRow[],
+      message: res.message,
+    };
+  return {
+    ok: true as const,
+    active: res.data.active ?? [],
+    history: res.data.history ?? [],
+  };
+}
+
 export type NotifRow = {
   id: string;
   type?: string;

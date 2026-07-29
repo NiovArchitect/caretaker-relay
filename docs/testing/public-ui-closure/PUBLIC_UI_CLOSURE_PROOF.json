@@ -1,0 +1,228 @@
+{
+  "login": {
+    "home_has_sign_in": true,
+    "home_has_password": false,
+    "sign_in_form": true,
+    "password_visible": true,
+    "identity_inputs": 2,
+    "fields": [
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "testid": "login-back",
+        "name": null,
+        "text": "← All options",
+        "visible": true
+      },
+      {
+        "tag": "SELECT",
+        "type": null,
+        "testid": "login-principal",
+        "name": null,
+        "text": "Marcus Carter · Primary family caregiver",
+        "visible": true
+      },
+      {
+        "tag": "INPUT",
+        "type": "password",
+        "testid": "login-password",
+        "name": null,
+        "text": "",
+        "visible": true
+      },
+      {
+        "tag": "BUTTON",
+        "type": "submit",
+        "testid": "login-submit",
+        "name": null,
+        "text": "Continue",
+        "visible": true
+      }
+    ],
+    "hasPrincipalSelect": true,
+    "selectOptions": [
+      "Marcus Carter · Primary family caregiver",
+      "Maya Bennett · Family / friend caregiver",
+      "Daniel Kim · Professional caregiver",
+      "Dr. Priya Shah · Primary care physician"
+    ],
+    "after_url": "https://care.niovlabs.com/",
+    "after_text": "Caretaker Relay\n\nShared care, verified\n\nCare service warm\n\nCare continuity\n\nCreate an account or sign in. Access to someone’s care requires an invitation or approval — not a role selection alone.\n\nSign in\nReturn to care you already have access to\nCreate account\nCreate a private account with no care access\n\nSECURE PATHS\n\nAccept invitation\nUse a secure invitation from an authorized person\nSet up care for someone new\nCreate a new provisional care profile\n\nCare service is ready.\n\nLab demo sign-in uses seeded principals. Create account never opens an existing care record. “Someone new” never search",
+    "consoleErrors": [],
+    "signed_in": true
+  },
+  "family": {
+    "nav": {
+      "today": 0,
+      "care": 0,
+      "people": 0,
+      "relay": 0
+    },
+    "bodyHasEvelyn": false,
+    "hasAttention": false,
+    "rawIds": [],
+    "relayNote": "no relay input found"
+  },
+  "handoff": {
+    "opened": false,
+    "note": "no handoff card visible on default tab"
+  },
+  "appointment": {
+    "careTab": "Caretaker Relay\n\nShared care, verified\n\nCare service warm\n\nCare continuity\n\nCreate an account or sign in. Access to someone’s care requires an invitation or approval — not a role selection alone.\n\nSign in\nReturn to care you already have access to\nCreate account\nCreate a private account with no care access\n\nSECURE PATHS\n\nAccept invitation\nUse a secure invitation from an authorized person\nSet up car",
+    "hasPT": false,
+    "opened": false,
+    "emergencyBlood": false,
+    "emergencyContact": false
+  },
+  "attention": {
+    "badge": 7,
+    "groups": 7,
+    "exact": true,
+    "decisions": [
+      {
+        "group_id": "cr-olivia:sem:access_request",
+        "category": "access",
+        "title": "Needs an owner",
+        "verdict": "Marcus must act",
+        "keep_in_badge": true
+      },
+      {
+        "group_id": "cr-olivia:sem:allegra",
+        "category": "medication_review",
+        "title": "Needs an owner",
+        "verdict": "Marcus must act",
+        "keep_in_badge": true
+      },
+      {
+        "group_id": "cr-olivia:sem:med_correction",
+        "category": "medication_correction",
+        "title": "Shift handoff",
+        "verdict": "Marcus needs current-coverage awareness",
+        "keep_in_badge": true
+      },
+      {
+        "group_id": "cr-olivia:sem:transport",
+        "category": "transport",
+        "title": "Shift handoff",
+        "verdict": "Marcus must act",
+        "keep_in_badge": true
+      },
+      {
+        "group_id": "cr-olivia:sem:handoff",
+        "category": "handoff",
+        "title": "Care handoff ready for you",
+        "verdict": "Marcus must acknowledge",
+        "keep_in_badge": true
+      },
+      {
+        "group_id": "cr-olivia:sem:access",
+        "category": "access",
+        "title": "No response: Needs an owner",
+        "verdict": "Marcus must act",
+        "keep_in_badge": true
+      },
+      {
+        "group_id": "cr-olivia:sem:metformin",
+        "category": "medication_review",
+        "title": "Conflict resolution",
+        "verdict": "Marcus must act",
+        "keep_in_badge": true
+      }
+    ]
+  },
+  "work": {
+    "todaySnippet": "Caretaker Relay\n\nShared care, verified\n\nCare service warm\n\nCare continuity\n\nCreate an account or sign in. Access to someone’s care requires an invitation or approval — not a role selection alone.\n\nSign in\nReturn to care you already have access to\nCreate account\nCreate a private account with no care access\n\nSECURE PATHS\n\nAccept invitation\nUse a secure invitation from an authorized person\nSet up care for someone new\nCreate a new provisional care profile\n\nCare service is ready.\n\nLab demo sign-in us",
+    "hasYourTask": false,
+    "items": [
+      {
+        "action": "Follow up: Medication amount mismatch — Metformin",
+        "owner": "p-maya",
+        "status": "assigned",
+        "clarity_label": "Someone else is handling this"
+      },
+      {
+        "action": "Medication change needs verification: Allegra · reported dose 60mg · r",
+        "owner": null,
+        "status": "available_to_claim",
+        "clarity_label": "Review required"
+      },
+      {
+        "action": "Follow up: Shift declined — coverage needed",
+        "owner": "p-maya",
+        "status": "assigned",
+        "clarity_label": "Someone else is handling this"
+      },
+      {
+        "action": "Follow up: Therapy today",
+        "owner": "p-maya",
+        "status": "assigned",
+        "clarity_label": "Someone else is handling this"
+      },
+      {
+        "action": "Follow up: Conflict resolution",
+        "owner": "p-maya",
+        "status": "assigned",
+        "clarity_label": "Someone else is handling this"
+      },
+      {
+        "action": "Pick up prescription refill",
+        "owner": null,
+        "status": "available_to_claim",
+        "clarity_label": "Help needed"
+      },
+      {
+        "action": "Review who can access care for Evelyn Carter",
+        "owner": null,
+        "status": "available_to_claim",
+        "clarity_label": "Review required"
+      }
+    ]
+  },
+  "roles": {
+    "marcus": {
+      "signed_in": true
+    },
+    "maya": {
+      "home_sign_in": true,
+      "form": true,
+      "signed_in": true,
+      "snippet": "Caretaker Relay\nE\nEVELYN CARTER'S CARE\nEvelyn Carter\nCare for Evelyn Carter. You are Maya Bennett, Family / friend caregiver.\nFamily / friend\nWed, Jul 29\nRelay\nMaya Bennett · Family / friend caregiver\nM\nAccount\n9 new\nConnected\nNAVIGATE\nToday\nCare\nPeople\nDocuments\nPriorities, what changed, who helps "
+    },
+    "walter": {
+      "home_sign_in": true,
+      "form": true,
+      "signed_in": true,
+      "snippet": "Caretaker Relay\nE\nEVELYN CARTER'S CARE\nEvelyn Carter\nCare for Evelyn Carter. You are Daniel Kim, Professional caregiver.\nShift / DSP\nWed, Jul 29\nRelay\nDaniel Kim · Professional caregiver\nD\nAccount\n6 new\nConnected\nNAVIGATE\nShift\nCare plan\nCare team\nNotes\nShift priorities, assigned tasks, observations"
+    },
+    "drshah": {
+      "home_sign_in": true,
+      "form": true,
+      "signed_in": true,
+      "snippet": "Caretaker Relay\nE\nEVELYN CARTER'S CARE\nEvelyn Carter\nCare for Evelyn Carter. You are Dr. Priya Shah, Caregiver.\nClinical view\nWed, Jul 29\nRelay\nDr. Priya Shah · Caregiver\nD\nAccount\n7 new\nConnected\nNAVIGATE\nSummary\nClinical\nCare team\nRecords\nEvidence-linked trends, medications, observations, and prov"
+    },
+    "self": {
+      "create_form": true,
+      "text": "Caretaker Relay\n\nShared care, verified\n\n← All options\nCreate account\n\nThis creates your account only. You will not see anyone’s care record until invited or approved. Selecting a role is not authorization.\n\nYour preferred name (required)\nEmail (requi"
+    }
+  },
+  "multi": {
+    "note": "Marcus membership multi-space proven via API; UI recipient switch depends on signed-in shell"
+  },
+  "a11y": {
+    "keyboard_traps": 0,
+    "sign_in_form": true
+  },
+  "defects": [],
+  "gates": {
+    "public_sign_in_form_available": true,
+    "visible_password_after_sign_in": true,
+    "public_login_journey": "PASS",
+    "home_zero_password_by_design": true,
+    "seed_login_repro_false_alarm": true,
+    "attention_badge_exact": true,
+    "attention_decisions": 7,
+    "work_clarity_labels": true,
+    "handoff_ui": "FAIL",
+    "appointment_ui": "FAIL"
+  }
+}

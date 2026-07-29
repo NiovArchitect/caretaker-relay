@@ -204,6 +204,61 @@ export function workStatusLabel(status: unknown): string {
   }
 }
 
+/**
+ * Visible role clarity for open work cards (product language).
+ * Only four primary labels for caregivers — no internal status enums.
+ */
+export type WorkClarityLabel =
+  | "Your care task"
+  | "Help needed"
+  | "Review required"
+  | "Someone else is handling this";
+
+export function workClarityLabel(input: {
+  status?: unknown;
+  ownerPersonId?: string | null;
+  sessionPersonId?: string | null;
+  action?: string | null;
+}): WorkClarityLabel {
+  const status = String(input.status ?? "").toLowerCase();
+  const owner = input.ownerPersonId ?? null;
+  const me = input.sessionPersonId ?? null;
+  const action = String(input.action ?? "").toLowerCase();
+
+  if (owner && me && owner === me) return "Your care task";
+  if (
+    status === "accepted" ||
+    status === "claimed" ||
+    status === "in_progress"
+  ) {
+    if (owner && me && owner === me) return "Your care task";
+  }
+
+  const needsReview =
+    /review|verification|verify|mismatch|conflict|access|owner|authorization|confirm/i.test(
+      action,
+    ) ||
+    status === "awaiting_approval" ||
+    status === "provider_confirmation_pending" ||
+    status === "clarification_required" ||
+    status === "correction_required";
+
+  if (
+    !owner ||
+    status === "available_to_claim" ||
+    status === "unassigned" ||
+    status === "declined"
+  ) {
+    return needsReview ? "Review required" : "Help needed";
+  }
+
+  if (owner && me && owner !== me) return "Someone else is handling this";
+  if (status === "assigned" || status === "claimed" || status === "in_progress") {
+    return "Someone else is handling this";
+  }
+  return needsReview ? "Review required" : "Help needed";
+}
+
 /** Map notification / event source_type to human labels. */
 export function sourceTypeLabel(raw: unknown): string {
   const s = String(raw ?? "").toLowerCase();
