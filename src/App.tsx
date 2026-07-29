@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { NavTab, RelayMessage, VerificationBundle } from "./domain/types";
 import {
   proposeCareUpdate,
@@ -48,6 +48,13 @@ import { setActiveCareRecipientId } from "./foundation/careClient";
 import { warmCareApi } from "./lib/apiWarm";
 import { isSelfMessageTarget } from "./lib/messageTarget";
 import { clearAuthorizationState } from "./lib/authorization";
+import {
+  beginScopedRequest,
+  getRecipientContextVersion,
+  invalidateScopedRequests,
+  isScopedRequestCurrent,
+  isStaleRecipientContext,
+} from "./lib/activeRecipientContext";
 
 function nowLabel() {
   return new Date().toLocaleTimeString([], {
@@ -96,6 +103,8 @@ export function App() {
   const [correcting, setCorrecting] = useState(false);
   const [lastEventIds, setLastEventIds] = useState<string[]>([]);
   const [messages, setMessages] = useState<RelayMessage[]>([]);
+  /** Partitioned Relay threads by recipient — never merge across care spaces. */
+  const messagesByRecipientRef = useRef<Record<string, RelayMessage[]>>({});
   const [relayHandled, setRelayHandled] = useState(today.relayHandled);
   const [voiceMeta, setVoiceMeta] = useState<TranscriptMeta | undefined>();
   const [todayRefresh, setTodayRefresh] = useState(0);
@@ -114,6 +123,11 @@ export function App() {
     setActiveCareRecipientId(id);
     return id;
   });
+  /** Live recipient id for async gates (React state is stale inside long awaits). */
+  const activeRecipientRef = useRef(activeRecipientId);
+  useEffect(() => {
+    activeRecipientRef.current = activeRecipientId;
+  }, [activeRecipientId]);
   const [coordFocusPersonId, setCoordFocusPersonId] = useState<string | null>(
     null,
   );
@@ -440,14 +454,17 @@ export function App() {
     const spaces = listAuthorizedCareSpaces(session?.carePersonId);
     if (spaces.length > 1) {
       const ok = window.confirm(
-        `Switch care context to ${nextSpace.displayName}?\n\nToday, Relay, tasks, and documents will show only ${nextSpace.displayName}'s care.`,
+        `Switch care context to ${nextSpace.displayName}?\n\nToday, Relay, tasks, and documents will show only ${nextSpace.displayName}'s care. Unsaved Relay drafts for the current recipient stay with that recipient.`,
       );
       if (!ok) {
         setProfileOpen(false);
         return;
       }
     }
+
+    // BEGIN RECIPIENT SWITCH — disable consequential controls first
     setRecipientSwitching(true);
+    setBusy(true);
     setProfileOpen(false);
     setShowHandoff(false);
     setBundle(null);
@@ -455,27 +472,58 @@ export function App() {
     setCorrecting(false);
     setLastEventIds([]);
     setDraft("");
+    setVoiceMeta(undefined);
     setCoordFocusPersonId(null);
     setLiveHandoff(undefined);
     setCareFocus(null);
+    setLastError(null);
+    // Drop collaboration pending targets tied to previous space
+    try {
+      (window as unknown as { __crPendingAsk?: string }).__crPendingAsk =
+        undefined;
+    } catch {
+      /* ignore */
+    }
+
+    // Partition current Relay thread under previous recipient (do not delete)
+    messagesByRecipientRef.current[activeRecipientId] = messages;
+
     // Default UX: NEW PERSON → ORIENT ME (Today, not stale subpage)
     setTab("today");
     setRelayOpen(false);
-    // Atomic: bind API client, persist, then React state so every surface reloads
+
+    // Atomic: bind API client + context_version, persist, then React state
     setActiveCareRecipientId(id);
     saveActiveCareRecipientId(id);
     setActiveRecipientId(id);
-    const space = resolveCareSpace(id);
+    invalidateScopedRequests();
+
+    const space = resolveCareSpace(id, session?.carePersonId);
     setTodayRefresh((n) => n + 1);
     setUnreadCount(0);
-    setMessages([
-      {
-        id: `sys-switch-${Date.now()}`,
-        role: "system",
-        at: nowLabel(),
-        text: `Now caring for ${space.displayName}. Everything on this screen is for them only.`,
-      },
-    ]);
+
+    const priorThread = messagesByRecipientRef.current[id];
+    if (priorThread && priorThread.length > 0) {
+      setMessages([
+        {
+          id: `sys-switch-back-${Date.now()}`,
+          role: "system",
+          at: nowLabel(),
+          text: `Back to ${space.displayName}'s care. Showing only this recipient's Relay thread.`,
+        },
+        ...priorThread.filter((m) => m.role !== "system" || !/Now caring for|Back to /.test(m.text)),
+      ]);
+    } else {
+      setMessages([
+        {
+          id: `sys-switch-${Date.now()}`,
+          role: "system",
+          at: nowLabel(),
+          text: `Now caring for ${space.displayName}. Everything on this screen is for them only.`,
+        },
+      ]);
+    }
+
     // Canonical top of orientation surface
     window.requestAnimationFrame(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -483,7 +531,11 @@ export function App() {
         .querySelector("[data-testid=app-shell] main, .main-stage, .workspace")
         ?.scrollTo?.({ top: 0 });
     });
-    window.setTimeout(() => setRecipientSwitching(false), 350);
+    // END SWITCH — brief gate so stale paint cannot land under new header
+    window.setTimeout(() => {
+      setRecipientSwitching(false);
+      setBusy(false);
+    }, 400);
   }
 
   async function openLatestHandoff() {
@@ -500,9 +552,13 @@ export function App() {
 
   async function submitText(text: string) {
     const trimmed = text.trim();
-    if (!trimmed || busy) return;
+    if (!trimmed || busy || recipientSwitching) return;
 
     openRelay();
+    // Capture active context before any await — reject if user switches mid-flight
+    const scoped = beginScopedRequest("relay-answer");
+    const startedRecipient = activeRecipientId;
+    const startedVersion = scoped.version;
     // Stable IDs for conversation anchor contract: user question + answer placeholder
     // stay paired so RelayPanel can keep the question at the top of the viewport
     // and the start of the answer immediately below it.
@@ -524,7 +580,16 @@ export function App() {
     setLastError(null);
     setBusy(true);
 
+    const stillCurrent = () =>
+      isScopedRequestCurrent("relay-answer", startedVersion, scoped.token) &&
+      !isStaleRecipientContext(startedVersion) &&
+      activeRecipientRef.current === startedRecipient;
+
     const fillReply = (textOut: string, extra?: RelayMessage[]) => {
+      if (!stillCurrent()) {
+        // Stale response: never paint under a different recipient header
+        return;
+      }
       setMessages((prev) => {
         const next = prev.map((m) =>
           m.id === replyId
@@ -694,11 +759,20 @@ export function App() {
   }
 
   async function confirmLooksRight() {
-    if (!bundle || busy) return;
+    if (!bundle || busy || recipientSwitching) return;
+    const startedRecipient = activeRecipientRef.current;
+    const startedVersion = getRecipientContextVersion();
     setBusy(true);
     setLastError(null);
     try {
       const result = await confirmCareUpdateAsync(bundle);
+      if (
+        isStaleRecipientContext(startedVersion) ||
+        activeRecipientRef.current !== startedRecipient
+      ) {
+        // Confirmation completed under previous recipient binding; do not mutate new UI
+        return;
+      }
 
       if (result.kind === "persisted") {
         setConfirmed(true);
@@ -910,6 +984,9 @@ export function App() {
       className={`app-shell cr-stage${!relayOpen ? " relay-desktop-closed" : ""}`}
       data-testid="app-shell"
       data-relay-open={relayOpen ? "true" : "false"}
+      data-active-recipient={activeRecipientId}
+      data-context-version={String(getRecipientContextVersion())}
+      data-recipient-switching={recipientSwitching ? "true" : "false"}
     >
       <div className="cr-ambient" aria-hidden />
       <header className="topbar">
@@ -1246,13 +1323,19 @@ export function App() {
         messages={messages}
         draft={draft}
         onDraftChange={setDraft}
-        onSubmit={() => void submitText(draft)}
+        onSubmit={() => {
+          if (recipientSwitching) return;
+          void submitText(draft);
+        }}
         onVoiceMeta={setVoiceMeta}
-        busy={busy}
+        busy={busy || recipientSwitching}
         correcting={correcting}
         bundle={bundle}
         confirmed={confirmed}
-        onConfirm={() => void confirmLooksRight()}
+        onConfirm={() => {
+          if (recipientSwitching) return;
+          void confirmLooksRight();
+        }}
         onCorrect={startCorrection}
         onCloseMobile={() => setRelayOpen(false)}
         coordFocusPersonId={coordFocusPersonId}

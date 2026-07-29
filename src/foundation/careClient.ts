@@ -149,6 +149,23 @@ let activeCareRecipientId: string = NO_RECIPIENT_ID;
 export function setActiveCareRecipientId(id: string): void {
   activeCareRecipientId =
     !id || id === NO_RECIPIENT_ID || id === "cr-none" ? NO_RECIPIENT_ID : id;
+  // Keep ActiveRecipientContext generation aligned when principal known
+  try {
+    const pid = sessionIdentity?.carePersonId;
+    if (pid && activeCareRecipientId !== NO_RECIPIENT_ID) {
+      void import("../lib/activeRecipientContext").then((m) => {
+        m.buildActiveRecipientContext({
+          recipientId: activeCareRecipientId,
+          principalId: pid,
+          role: sessionIdentity?.roleLabel,
+          source: "switch",
+        });
+        m.invalidateScopedRequests();
+      });
+    }
+  } catch {
+    /* ignore */
+  }
 }
 
 export function getActiveCareRecipientId(): string {

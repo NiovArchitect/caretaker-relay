@@ -1,0 +1,31 @@
+{
+  "principal": {
+    "care_person_id": "p-sadeil",
+    "display_name": "Marcus Carter",
+    "role": "Primary family caregiver"
+  },
+  "recipient_a": {
+    "care_recipient_id": "cr-olivia",
+    "display_name": "Evelyn Carter",
+    "markers": {
+      "work": "BETA-ONLY: Confirm Evelyn evening Allegra review",
+      "name_token": "Evelyn"
+    }
+  },
+  "recipient_b": {
+    "care_recipient_id": "cr-robert",
+    "display_name": "Robert Hale",
+    "markers": {
+      "work": "ALPHA-ONLY: Call pharmacy about blue inhaler refill",
+      "appointment": "ALPHA Podiatry — Robert Hale only",
+      "location": "Harbor Foot Clinic ALPHA",
+      "name_token": "Robert"
+    }
+  },
+  "storage_keys": {
+    "active_recipient": "cr.activeCareRecipientId",
+    "session": "cr_care_session_v1"
+  },
+  "app_deploy_start": "246e950e46a8dc81a28664c24e50bcf7a7413228",
+  "api_deploy": "4394cc53d18bba015ce7220865a91cc58c138176"
+}
