@@ -1,0 +1,161 @@
+{
+  "run": "FUms5rvhvh",
+  "phases": {
+    "attention": {
+      "attention_status": 200,
+      "group_count": 7,
+      "badge_count": 7,
+      "exact_match": true,
+      "notif_badge": 7,
+      "notif_unread": 7,
+      "groups_len": 7,
+      "sample": [
+        {
+          "id": "cr-olivia:sem:access_request",
+          "title": "Needs an owner",
+          "cat": "access"
+        },
+        {
+          "id": "cr-olivia:sem:allegra",
+          "title": "Needs an owner",
+          "cat": "medication_review"
+        },
+        {
+          "id": "cr-olivia:sem:med_correction",
+          "title": "Shift handoff",
+          "cat": "medication_correction"
+        },
+        {
+          "id": "cr-olivia:sem:handoff",
+          "title": "Care handoff ready for you",
+          "cat": "handoff"
+        },
+        {
+          "id": "cr-olivia:sem:transport",
+          "title": "Shift handoff",
+          "cat": "transport"
+        }
+      ]
+    },
+    "multi_med": {
+      "list": "One medication change is waiting for review: Allegra for allergies. It is not active plan instruction until authorized.\n\nActive authorized medication remains Metformin 500 mg.",
+      "when": "medication was reported for Evelyn Carter; a precise clock time is not on file beyond the recent care record.",
+      "second": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what would you like t",
+      "who": "I do not have a clear reporter name on the prior answer for Evelyn Carter. The note is on the care record, but the actor field is incomplete.",
+      "taken": "medication is a pending medication-plan change for Evelyn Carter, not an authorized administration instruction. Relay does not treat a pending plan request as something already given. Check Care → medication administration for administration history.",
+      "active": "No — medication is not confirmed as active plan instruction for Evelyn Carter. It remains pending authorized review.",
+      "first": "Understood — focusing on #1: medication for allergies (reported by caregiver). Ask when it was reported, who reported it, whether it is active, or if the recipient took it."
+    },
+    "five_universes": [
+      {
+        "spec": {
+          "name": "Universe A Family FUms5rvhvh",
+          "tz": "America/Los_Angeles",
+          "role": "family"
+        },
+        "status": 201,
+        "body_keys": [
+          "ok",
+          "care_recipient_id",
+          "relationship_id",
+          "correlation_id"
+        ],
+        "rid": "cr-yo5uf8nw-ms5rvm5f",
+        "seed": {
+          "list": "One medication change is waiting for review: Medication change needs verification: Cetirizine · reported dose 10mg · reason: allergies. Not active until review. [FUms5rvhvh] (from Marcus Carter). It is not active plan instruction until authorized.",
+          "second": "I don't have a matching record for that specific ask about Universe A Family FUms5rvhvh.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what w"
+        }
+      },
+      {
+        "spec": {
+          "name": "Universe B DSP FUms5rvhvh",
+          "tz": "America/New_York",
+          "role": "dsp"
+        },
+        "status": 201,
+        "body_keys": [
+          "ok",
+          "care_recipient_id",
+          "relationship_id",
+          "correlation_id"
+        ],
+        "rid": "cr-7z6qrv6u-ms5rvmm8",
+        "seed": {
+          "list": "One medication change is waiting for review: Medication change needs verification: Cetirizine · reported dose 10mg · reason: allergies. Not active until review. [FUms5rvhvh] (from Marcus Carter). It is not active plan instruction until authorized.",
+          "second": "I don't have a matching record for that specific ask about Universe B DSP FUms5rvhvh.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what woul"
+        }
+      },
+      {
+        "spec": {
+          "name": "Universe C Multi FUms5rvhvh",
+          "tz": "America/Chicago",
+          "role": "family"
+        },
+        "status": 201,
+        "body_keys": [
+          "ok",
+          "care_recipient_id",
+          "relationship_id",
+          "correlation_id"
+        ],
+        "rid": "cr-5iiwh2vj-ms5rvn31",
+        "seed": {
+          "list": "One medication change is waiting for review: Medication change needs verification: Cetirizine · reported dose 10mg · reason: allergies. Not active until review. [FUms5rvhvh] (from Marcus Carter). It is not active plan instruction until authorized.",
+          "second": "I don't have a matching record for that specific ask about Universe C Multi FUms5rvhvh.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what wo"
+        }
+      },
+      {
+        "spec": {
+          "name": "Universe D Self FUms5rvhvh",
+          "tz": "America/Denver",
+          "role": "recipient"
+        },
+        "status": 201,
+        "body_keys": [
+          "ok",
+          "care_recipient_id",
+          "relationship_id",
+          "correlation_id"
+        ],
+        "rid": "cr-ijub3qye-ms5rvnj7",
+        "seed": {
+          "list": "One medication change is waiting for review: Medication change needs verification: Cetirizine · reported dose 10mg · reason: allergies. Not active until review. [FUms5rvhvh] (from Marcus Carter). It is not active plan instruction until authorized.",
+          "second": "I don't have a matching record for that specific ask about Universe D Self FUms5rvhvh.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what wou"
+        }
+      },
+      {
+        "spec": {
+          "name": "Universe E Clinician FUms5rvhvh",
+          "tz": "America/Los_Angeles",
+          "role": "clinician"
+        },
+        "status": 201,
+        "body_keys": [
+          "ok",
+          "care_recipient_id",
+          "relationship_id",
+          "correlation_id"
+        ],
+        "rid": "cr-cdjh9vhp-ms5rvny1",
+        "seed": {
+          "list": "One medication change is waiting for review: Medication change needs verification: Cetirizine · reported dose 10mg · reason: allergies. Not active until review. [FUms5rvhvh] (from Marcus Carter). It is not active plan instruction until authorized.",
+          "second": "I don't have a matching record for that specific ask about Universe E Clinician FUms5rvhvh.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or wha"
+        }
+      }
+    ],
+    "revocation": {
+      "create": 201,
+      "rid": "cr-7hvbfrfj-ms5rvod6",
+      "revoke_status": 200,
+      "revoke_body": "",
+      "post_answer": "Access was revoked and no longer functions.",
+      "post_status": 403,
+      "post_write_status": 403,
+      "post_write": "Access was revoked and no longer functions."
+    },
+    "browser_badge": {
+      "badge": "7 new",
+      "api_badge": 7
+    }
+  }
+}
