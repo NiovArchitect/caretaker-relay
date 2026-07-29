@@ -337,6 +337,18 @@ export function App() {
             ?.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 160);
       }
+      if (detail.focus === "shift") {
+        window.setTimeout(() => {
+          document
+            .querySelector('[data-testid="care-section-shift"]')
+            ?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+          window.setTimeout(() => {
+            document
+              .querySelector('[data-testid="incoming-handoff-inbox"]')
+              ?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 200);
+        }, 160);
+      }
     };
     window.addEventListener("cr-navigate", onNav);
     return () => window.removeEventListener("cr-navigate", onNav);

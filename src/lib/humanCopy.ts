@@ -127,6 +127,13 @@ export function stripLabResidue(text: string): string {
     .replace(/\b(HOLms|FMHms|JLms|AZms)\w*\b/gi, "")
     .replace(/\bPROBESEED\b/gi, "")
     .replace(/\b(JL-SMOKE|PROBE|SEED|SMOKE)[-_]?\w*/gi, "")
+    // Isolation / campaign markers never belong in caregiver UI
+    .replace(/\bALPHA-ONLY:\s*/gi, "")
+    .replace(/\bBETA-ONLY:\s*/gi, "")
+    .replace(/\bALPHA\s+Podiatry[^\n·]*·?\s*/gi, "Podiatry appointment · ")
+    .replace(/\bRobert Hale only\b/gi, "")
+    .replace(/\bHarbor Foot Clinic ALPHA\b/gi, "Harbor Foot Clinic")
+    .replace(/\bPROBE_[A-Z0-9_]+\b/gi, "")
     .replace(/\bTransport\s+PROBE\w*/gi, "Transportation")
     .replace(/\bCampaign\s+ID[A-Za-z0-9]+\b/gi, "")
     .replace(/\bFlagship continuous transport check\b/gi, "Transportation check")
@@ -163,6 +170,7 @@ export function stripLabResidue(text: string): string {
     )
     .replace(/\s{2,}/g, " ")
     .replace(/\s+([,.;:])/g, "$1")
+    .replace(/\s+·\s+·/g, " ·")
     .trim();
 }
 

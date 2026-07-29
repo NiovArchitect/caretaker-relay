@@ -1,0 +1,123 @@
+{
+  "started": "2026-07-29T20:49:38.605Z",
+  "screens": [
+    {
+      "vp": "mobile-390",
+      "tab": "today",
+      "scrollH": 844,
+      "vh": 844,
+      "sections": 17,
+      "cards": 21,
+      "probe": 4,
+      "bodyLen": 7036,
+      "hasHandoffInbox": true,
+      "hasCreateWork": true,
+      "hasNotifOps": true
+    },
+    {
+      "vp": "mobile-390",
+      "tab": "care",
+      "scrollH": 844,
+      "vh": 844,
+      "sections": 17,
+      "cards": 21,
+      "probe": 4,
+      "bodyLen": 7036,
+      "hasHandoffInbox": true,
+      "hasCreateWork": true,
+      "hasNotifOps": true
+    },
+    {
+      "vp": "mobile-390",
+      "tab": "people",
+      "scrollH": 844,
+      "vh": 844,
+      "sections": 17,
+      "cards": 21,
+      "probe": 4,
+      "bodyLen": 7036,
+      "hasHandoffInbox": true,
+      "hasCreateWork": true,
+      "hasNotifOps": true
+    },
+    {
+      "vp": "tablet-768",
+      "tab": "today",
+      "scrollH": 1024,
+      "vh": 1024,
+      "sections": 17,
+      "cards": 21,
+      "probe": 4,
+      "bodyLen": 7046,
+      "hasHandoffInbox": true,
+      "hasCreateWork": true,
+      "hasNotifOps": true
+    },
+    {
+      "vp": "tablet-768",
+      "tab": "care",
+      "scrollH": 1024,
+      "vh": 1024,
+      "sections": 17,
+      "cards": 21,
+      "probe": 4,
+      "bodyLen": 7046,
+      "hasHandoffInbox": true,
+      "hasCreateWork": true,
+      "hasNotifOps": true
+    },
+    {
+      "vp": "tablet-768",
+      "tab": "people",
+      "scrollH": 1024,
+      "vh": 1024,
+      "sections": 17,
+      "cards": 21,
+      "probe": 4,
+      "bodyLen": 7046,
+      "hasHandoffInbox": true,
+      "hasCreateWork": true,
+      "hasNotifOps": true
+    },
+    {
+      "vp": "desktop-1366",
+      "tab": "today",
+      "scrollH": 792,
+      "vh": 768,
+      "sections": 17,
+      "cards": 21,
+      "probe": 4,
+      "bodyLen": 8000,
+      "hasHandoffInbox": true,
+      "hasCreateWork": true,
+      "hasNotifOps": true
+    },
+    {
+      "vp": "desktop-1366",
+      "tab": "care",
+      "scrollH": 792,
+      "vh": 768,
+      "sections": 6,
+      "cards": 11,
+      "probe": 0,
+      "bodyLen": 5034,
+      "hasHandoffInbox": true,
+      "hasCreateWork": false,
+      "hasNotifOps": false
+    },
+    {
+      "vp": "desktop-1366",
+      "tab": "people",
+      "scrollH": 792,
+      "vh": 768,
+      "sections": 9,
+      "cards": 22,
+      "probe": 0,
+      "bodyLen": 2590,
+      "hasHandoffInbox": false,
+      "hasCreateWork": false,
+      "hasNotifOps": false
+    }
+  ],
+  "finished": "2026-07-29T20:53:17.186Z"
+}

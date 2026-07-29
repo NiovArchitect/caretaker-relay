@@ -52,6 +52,8 @@ export function IncomingHandoffInbox({
   const [workItems, setWorkItems] = useState<OpenWorkItem[]>([]);
   const [proposals, setProposals] = useState<ScheduleProposal[]>([]);
   const [confirmWorkId, setConfirmWorkId] = useState<string | null>(null);
+  /** Progressive disclosure — sent/history not primary noise */
+  const [showSentHistory, setShowSentHistory] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -262,7 +264,7 @@ export function IncomingHandoffInbox({
       )}
 
       <ul className="list-plain" data-testid="handoff-inbox-list">
-        {pending.slice(0, 8).map((h) => {
+        {pending.slice(0, 2).map((h) => {
           const waiting =
             !packet ||
             activeId !== h.id ||
@@ -301,14 +303,29 @@ export function IncomingHandoffInbox({
         })}
       </ul>
 
-      {sentRows.length > 0 && (
-        <div data-testid="handoff-sent-section" style={{ marginTop: 20 }}>
+      {(sentRows.length > 0 || historyRows.length > 0) && (
+        <div style={{ marginTop: 16 }}>
+          <button
+            type="button"
+            className="secondary-btn"
+            data-testid="handoff-show-history"
+            onClick={() => setShowSentHistory((v) => !v)}
+          >
+            {showSentHistory
+              ? "Hide sent & past handoffs"
+              : `Show sent & past handoffs (${sentRows.length + historyRows.length})`}
+          </button>
+        </div>
+      )}
+
+      {showSentHistory && sentRows.length > 0 && (
+        <div data-testid="handoff-sent-section" style={{ marginTop: 12 }}>
           <h3 style={{ marginBottom: 8 }}>Sent by you</h3>
           <p className="muted">
             These are handoffs you authored — not incoming work.
           </p>
           <ul className="list-plain">
-            {sentRows.slice(0, 5).map((h) => (
+            {sentRows.slice(0, 3).map((h) => (
               <li key={h.id}>
                 <button
                   type="button"
@@ -327,11 +344,11 @@ export function IncomingHandoffInbox({
         </div>
       )}
 
-      {historyRows.length > 0 && (
-        <div data-testid="handoff-history-section" style={{ marginTop: 16 }}>
+      {showSentHistory && historyRows.length > 0 && (
+        <div data-testid="handoff-history-section" style={{ marginTop: 12 }}>
           <h3 style={{ marginBottom: 8 }}>Handoff history</h3>
           <ul className="list-plain">
-            {historyRows.slice(0, 5).map((h) => (
+            {historyRows.slice(0, 3).map((h) => (
               <li key={h.id}>
                 <button
                   type="button"

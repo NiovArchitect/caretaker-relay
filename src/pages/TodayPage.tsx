@@ -10,10 +10,7 @@ import {
   fetchCareCoverage,
   fetchWorkItems,
   claimCareWorkItem,
-  createCareWorkItem,
-  transitionCareWorkItem,
   fetchSinceLastVisit,
-  fetchNotificationOps,
   type TodayAttentionItem,
   type RecipientProfilePayload,
 } from "../foundation/careClient";
@@ -30,9 +27,7 @@ import {
   humanCareLine,
   sourceTypeLabel,
   workClarityLabel,
-  workStatusLabel,
 } from "../lib/humanCopy";
-import { IncomingHandoffInbox } from "../components/IncomingHandoffInbox";
 import { OnboardingWizard } from "../components/OnboardingWizard";
 import {
   loadOnboardingDraft,
@@ -146,7 +141,7 @@ export function TodayPage({
   const [acked, setAcked] = useState<Set<string>>(new Set());
   const [inbox, setInbox] = useState<Array<Record<string, unknown>>>([]);
   const [showAllNotifs, setShowAllNotifs] = useState(false);
-  const [profile, setProfile] = useState<RecipientProfilePayload | null>(null);
+  const [, setProfile] = useState<RecipientProfilePayload | null>(null);
   const [coverageSummary, setCoverageSummary] = useState("");
   const [serverProjection, setServerProjection] = useState<{
     orientation?: string;
@@ -184,19 +179,9 @@ export function TodayPage({
     upcoming: Array<{ title: string; when: string; calendarTruth: string }>;
     conflicts: number;
   } | null>(null);
-  const [notifOps, setNotifOps] = useState<
-    Array<{
-      id: string;
-      title: string;
-      plainStatus: string;
-      noResponse: boolean;
-    }>
-  >([]);
   const [syncLabel, setSyncLabel] = useState("Saved");
   const [workBusy, setWorkBusy] = useState<string | null>(null);
   const [workError, setWorkError] = useState<string | null>(null);
-  const [newWorkAction, setNewWorkAction] = useState("");
-  const [confirmRecipient, setConfirmRecipient] = useState(false);
   const [openAccordion, setOpenAccordion] = useState<string | null>("needs");
 
   const reloadWork = () => {
@@ -217,9 +202,6 @@ export function TodayPage({
           conflicts: r.briefing.conflicts,
         });
       }
-    });
-    void fetchNotificationOps().then((r) => {
-      if (r.ok) setNotifOps(r.notifications.slice(0, 8));
     });
   };
 
@@ -281,9 +263,6 @@ export function TodayPage({
             conflicts: r.briefing.conflicts,
           });
         }
-      }),
-      fetchNotificationOps().then((r) => {
-        if (!cancelled && r.ok) setNotifOps(r.notifications.slice(0, 8));
       }),
     ]);
     const loadInbox = () => {
@@ -648,24 +627,21 @@ export function TodayPage({
           Sync: {syncLabel}
         </p>
 
-        {/* Since last visit — catch-up without re-explaining */}
+        {/* Compact catch-up — not a history dump (max 3 lines) */}
         {sinceVisit && (
           <section
             className="section surface-known"
             data-testid="since-last-visit"
             aria-label="Since your last visit"
           >
-            <h2>Since you were last here</h2>
+            <h2>Since last visit</h2>
             <p className="muted" data-testid="since-last-visit-summary">
               {humanCareLine(sinceVisit.plainSummary)}
             </p>
             {sinceVisit.whatChanged.length > 0 && (
               <ul className="list-plain" data-testid="since-last-visit-changes">
-                {sinceVisit.whatChanged.slice(0, 6).map((c, i) => (
+                {sinceVisit.whatChanged.slice(0, 3).map((c, i) => (
                   <li key={`${c.text}-${i}`}>
-                    <span className="badge badge-teal" data-testid="evidence-label">
-                      {humanCareLine(c.evidence)}
-                    </span>{" "}
                     {humanCareLine(c.text)}
                   </li>
                 ))}
@@ -676,19 +652,6 @@ export function TodayPage({
                 {humanCareLine(sinceVisit.handoffSummary)}
               </p>
             )}
-            {sinceVisit.upcoming.length > 0 && (
-              <ul className="list-plain" data-testid="calendar-truth-list">
-                {sinceVisit.upcoming.slice(0, 4).map((u) => (
-                  <li key={`${u.title}-${u.when}`}>
-                    {humanCareLine(u.title)} ·{" "}
-                    {formatCareDateTimeRecent(u.when) || humanCareLine(u.when)}{" "}
-                    <span className="muted">
-                      ({humanCareLine(u.calendarTruth)})
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            )}
             {sinceVisit.conflicts > 0 && (
               <p data-testid="since-last-visit-conflicts">
                 {sinceVisit.conflicts} open conflict(s) need review
@@ -697,21 +660,20 @@ export function TodayPage({
           </section>
         )}
 
-        {/* Work ownership — claim, next action, unassigned */}
+        {/* Today priorities only (≤3) — full work catalog lives on Care / work surfaces */}
         <section
           className="section surface-known"
           data-testid="work-ownership-panel"
-          aria-label="Work ownership"
+          aria-label="Today priorities"
         >
-          <h2>Open care work</h2>
+          <h2>Top priorities today</h2>
           <p className="muted section-lead">
-            Each care issue appears once. Take it when you can help—ownership is
-            explicit, never silent.
+            Up to three items that need someone now. Full open work and new
+            tasks live under Care when you need the complete list.
           </p>
           {needsOwner.length === 0 && workItems.length === 0 ? (
             <p className="muted cr-empty" data-testid="work-empty-state">
-              No open work items for {recipientName}. Create one when something
-              needs a named helper.
+              No open priorities for {recipientName} right now.
             </p>
           ) : (
             <ul className="list-plain" data-testid="work-items-list">
@@ -720,7 +682,6 @@ export function TodayPage({
                   (w, i, arr) =>
                     arr.findIndex((x) => x.id === w.id) === i,
                 )
-                // Semantic reconcile: one card per care issue family
                 .filter((w, _i, arr) => {
                   const action = String(w.action ?? "").toLowerCase();
                   let key = action.replace(/[^a-z0-9]+/g, " ").trim().slice(0, 48);
@@ -741,7 +702,7 @@ export function TodayPage({
                   });
                   return first === w;
                 })
-                .slice(0, 6)
+                .slice(0, 3)
                 .map((w) => {
                   const id = String(w.id ?? "");
                   const rawAction = String(w.action ?? "Care task");
@@ -753,9 +714,10 @@ export function TodayPage({
                         ? "Review dose unit mismatch"
                         : humanCareLine(rawAction);
                   const status = String(w.status ?? "");
-                  const owner =
+                  const ownerRaw =
                     String(w.ownerDisplayName ?? "") ||
                     (w.ownerPersonId ? "A helper is on it" : "Needs a helper");
+                  const owner = humanCareLine(ownerRaw);
                   const clarity = workClarityLabel({
                     status,
                     ownerPersonId: w.ownerPersonId
@@ -792,7 +754,7 @@ export function TodayPage({
                         </span>
                         <strong>{action}</strong>{" "}
                         <span className="muted">
-                          · {owner} · {workStatusLabel(status)}
+                          · {owner}
                           {w.priority && String(w.priority) === "urgent"
                             ? " · needs attention soon"
                             : ""}
@@ -820,111 +782,11 @@ export function TodayPage({
                           I can help
                         </button>
                       )}
-                      {status === "claimed" || status === "in_progress" || status === "assigned" ? (
-                        <button
-                          type="button"
-                          className="secondary-btn"
-                          data-testid={`complete-work-${id}`}
-                          disabled={workBusy === id}
-                          onClick={() => {
-                            setWorkBusy(id);
-                            void transitionCareWorkItem(id, "completed", {
-                              completion_evidence: "Marked complete by owner",
-                            }).then((r) => {
-                              setWorkBusy(null);
-                              if (!r.ok) setWorkError(r.message ?? "Update failed");
-                              else reloadWork();
-                            });
-                          }}
-                        >
-                          Complete
-                        </button>
-                      ) : null}
-                      {(status === "claimed" || status === "assigned") && (
-                        <button
-                          type="button"
-                          className="secondary-btn"
-                          data-testid={`escalate-work-${id}`}
-                          disabled={workBusy === id}
-                          onClick={() => {
-                            setWorkBusy(id);
-                            void transitionCareWorkItem(id, "escalated", {
-                              blocking_reason: "No response / needs backup owner",
-                            }).then((r) => {
-                              setWorkBusy(null);
-                              if (!r.ok) setWorkError(r.message ?? "Escalate failed");
-                              else reloadWork();
-                            });
-                          }}
-                        >
-                          Escalate
-                        </button>
-                      )}
                     </li>
                   );
                 })}
             </ul>
           )}
-          <div
-            className="btn-row"
-            style={{ marginTop: 12, flexWrap: "wrap", gap: 8 }}
-            data-testid="create-work-form"
-          >
-            <input
-              type="text"
-              data-testid="new-work-action"
-              placeholder={`Next action for ${recipientName}`}
-              value={newWorkAction}
-              onChange={(e) => setNewWorkAction(e.target.value)}
-              aria-label="New work action"
-              style={{ flex: "1 1 200px", minWidth: 160 }}
-            />
-            <label
-              style={{ display: "flex", alignItems: "center", gap: 6 }}
-              data-testid="confirm-recipient-label"
-            >
-              <input
-                type="checkbox"
-                data-testid="confirm-recipient-checkbox"
-                checked={confirmRecipient}
-                onChange={(e) => setConfirmRecipient(e.target.checked)}
-              />
-              Confirm: {recipientName}
-            </label>
-            <button
-              type="button"
-              className="primary-btn"
-              data-testid="create-work-submit"
-              disabled={!newWorkAction.trim() || workBusy === "create"}
-              onClick={() => {
-                if (!confirmRecipient) {
-                  setWorkError(
-                    "Confirm the care recipient before creating work (shared-device / multi-recipient safety).",
-                  );
-                  return;
-                }
-                setWorkBusy("create");
-                setWorkError(null);
-                void createCareWorkItem({
-                  action: newWorkAction.trim(),
-                  reason: "Created from Today ownership panel",
-                  priority: "normal",
-                  confirm_recipient_id: space.careRecipientId,
-                }).then((r) => {
-                  setWorkBusy(null);
-                  if (!r.ok) {
-                    setWorkError(r.message ?? r.code ?? "Create failed");
-                    return;
-                  }
-                  setNewWorkAction("");
-                  setConfirmRecipient(false);
-                  reloadWork();
-                });
-              }}
-            >
-              Create unassigned work
-            </button>
-          </div>
           {workError && (
             <p className="error" data-testid="work-error" role="alert">
               {workError}
@@ -932,109 +794,41 @@ export function TodayPage({
           )}
         </section>
 
-        {/* First-class handoff inbox on Today so caregivers do not dig into Care → About */}
-        <IncomingHandoffInbox refreshKey={refreshKey ?? 0} />
-
-        {notifOps.length > 0 && (
-          <section
-            className="section surface-reported"
-            data-testid="notification-ops-panel"
-            aria-label="Notification delivery status"
-          >
-            <h2>Notification status</h2>
-            <p className="muted section-lead">
-              In-app inbox delivery is recorded. External SMS/email is not claimed
-              unless configured.
-            </p>
-            <ul className="list-plain" data-testid="notification-ops-list">
-              {notifOps.slice(0, 5).map((n) => (
-                <li key={n.id}>
-                  <strong>{humanCareLine(n.title)}</strong>{" "}
-                  <span className="muted">
-                    {humanCareLine(n.plainStatus)}
-                  </span>
-                  {n.noResponse ? (
-                    <span className="badge" data-testid="notif-no-response">
-                      {" "}
-                      awaiting response
-                    </span>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {/* Ambient AI — what the system notices without being asked */}
+        {/* Handoff — one compact entry, not full lifecycle dump */}
         <section
-          className="ambient-watch-strip"
-          data-testid="ambient-watch-strip"
-          aria-label="What Relay watches for you"
+          className="section surface-known"
+          data-testid="today-handoff-compact"
+          aria-label="Care handoff"
         >
-          <h2 className="ambient-watch-title">What Relay watches for you</h2>
-          <p className="muted ambient-watch-lead">
-            Relay surfaces open medication checks, new care-circle messages,
-            recent reports, and upcoming appointments for{" "}
-            <strong>{recipientName}</strong> — without you having to ask. It
-            never invents a dose or closes a conflict for you.
+          <h2>Care handoff</h2>
+          <p className="muted section-lead">
+            Review what the previous helper left, or open the handoff for the
+            next person. Full sent history lives under Care → My shift.
           </p>
-          <ul className="ambient-watch-list" data-testid="ambient-watch-list">
-            <li>
-              <strong>Why a notification appears:</strong> something is unread,
-              unresolved, or needs human judgment for this care recipient only.
-            </li>
-            <li>
-              <strong>What you still decide:</strong> confirmations, corrections,
-              and when an item is truly resolved.
-            </li>
-            <li>
-              <strong>Emergency info:</strong> open Care → Essential / emergency
-              for contacts and allergies — Relay does not call emergency
-              services for you.
-            </li>
-          </ul>
-        </section>
-
-        {/* 60-second orientation — person first, then priorities */}
-        <section
-          className="section surface-known orientation-card"
-          data-testid="orientation-card"
-          aria-label="Quick orientation"
-        >
-          <h2 className="orientation-title">Orient for {recipientName}</h2>
-          <ul className="list-plain" data-testid="orientation-list">
-            <li>
-              <strong>You:</strong> {session.displayName} · {session.roleLabel}
-            </li>
-            {profile?.profile &&
-            Array.isArray(
-              (profile.profile as { confirmedConditions?: unknown[] })
-                .confirmedConditions,
-            ) ? (
-              <li>
-                <strong>Conditions on file:</strong>{" "}
-                {(
-                  (profile.profile as {
-                    confirmedConditions: Array<{ label: string }>;
-                  }).confirmedConditions ?? []
-                )
-                  .map((c) => c.label)
-                  .join("; ") || "none listed"}
-              </li>
-            ) : (
-              <li>
-                <strong>Conditions:</strong> open Care → About
-              </li>
-            )}
-            <li>
-              <strong>Medications (plan):</strong>{" "}
-              {(profile?.medications ?? [])
-                .map((m) => `${String(m.name)} ${String(m.dose ?? "")}`)
-                .join("; ") || "see Care"}
-            </li>
-            {/* Next / Attention / Who is helping live only in expandable sections above —
-                orientation keeps stable identity context, not a second category dump. */}
-          </ul>
+          <div className="btn-row">
+            <button
+              type="button"
+              className="primary-btn"
+              data-testid="review-handoff"
+              onClick={onOpenHandoff}
+            >
+              Open current handoff
+            </button>
+            <button
+              type="button"
+              className="secondary-btn"
+              data-testid="open-handoff-inbox"
+              onClick={() => {
+                window.dispatchEvent(
+                  new CustomEvent("cr-navigate", {
+                    detail: { tab: "care", focus: "shift" },
+                  }),
+                );
+              }}
+            >
+              Incoming &amp; shift handoffs
+            </button>
+          </div>
         </section>
 
         {proj && (
@@ -1061,40 +855,11 @@ export function TodayPage({
           </button>
           <button
             type="button"
-            className="secondary-btn btn-with-icon"
-            data-testid="review-handoff"
-            data-action-kind="secondary"
-            onClick={onOpenHandoff}
-          >
-            <span className="btn-glyph" aria-hidden>
-              ☰
-            </span>
-            Review care handoff
-          </button>
-          <button
-            type="button"
-            className="secondary-btn btn-with-icon"
-            data-testid="open-handoff-inbox"
-            data-action-kind="secondary"
-            onClick={() => {
-              document
-                .querySelector('[data-testid="incoming-handoff-inbox"]')
-                ?.scrollIntoView({ block: "start", behavior: "smooth" });
-            }}
-          >
-            <span className="btn-glyph" aria-hidden>
-              ↓
-            </span>
-            Incoming handoffs
-          </button>
-          <button
-            type="button"
             className="btn-verify btn-with-icon"
             data-testid="open-emergency-snapshot"
             data-action-kind="verify"
             onClick={() => {
               window.location.hash = "#care";
-              // Navigate via custom event so App can switch tab without product rewrite
               window.dispatchEvent(
                 new CustomEvent("cr-navigate", { detail: { tab: "care", focus: "emergency" } }),
               );
