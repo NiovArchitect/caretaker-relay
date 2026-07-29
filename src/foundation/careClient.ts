@@ -1530,13 +1530,14 @@ export async function answerCareQuestion(question: string): Promise<string> {
   const raw = question.trim();
   if (!raw) return "";
 
-  // Lightweight question gate only (not a competing intelligence engine)
+  // Lightweight question gate only (not a competing intelligence engine).
+  // Include am/why/meta so conversational questions never fall through to care-update.
   const looksLikeQuestion =
     /\?$/.test(raw) ||
-    /^(what|when|where|why|who|how|did|does|do|is|are|can|should|has|have|was|were|prepare|show|tell me|summarize|summary)\b/i.test(
+    /^(what|when|where|why|who|how|did|does|do|is|are|am|was|were|can|should|has|have|prepare|show|tell me|summarize|summary|why did|how come)\b/i.test(
       raw,
     ) ||
-    /what happened|since i was last|caught up|going on|need to deal|still need/.test(
+    /what happened|since i was last|caught up|going on|need to deal|still need|same response|repeat yourself|make that shorter|what did you understand/.test(
       raw.toLowerCase(),
     );
   // Multi-clause caregiver narratives (even if they end with "can you tell Maya?")

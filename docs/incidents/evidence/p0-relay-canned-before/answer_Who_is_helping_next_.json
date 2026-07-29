@@ -1,0 +1,55 @@
+{
+  "question": "Who is helping next?",
+  "status": 200,
+  "latency_ms": 616,
+  "client_gate_would_answer": true,
+  "client_looks_like_question": true,
+  "ok": true,
+  "not_question": null,
+  "intent": "SAFETY_CONCERN",
+  "answer": "Helping now: Marcus Carter \u00b7 Primary family caregiver\nUntil about 4:00 PM\n\nNext: Maya Bennett\nExpected around 4:30 PM\n\nI can prepare a handoff for the next helper before they arrive.\n\nWhat the next caregiver should know (latest handoff):\n\u2022 Medication change needs verification: Please add Allegra 60mg for allergies.\n\u2022 Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.\n\nStill open:\n\u2022 Medication change needs verification: Please add Allegra 60mg for allergies.",
+  "answer_len": 583,
+  "markers": [],
+  "response_keys": [
+    "ok",
+    "answer",
+    "grounded",
+    "intent",
+    "intents",
+    "persona",
+    "source_refs",
+    "projections_used",
+    "conversation_id",
+    "turn_id",
+    "model_path",
+    "can_deterministic",
+    "needs_clarification",
+    "authority",
+    "understand_mode",
+    "correlation_id"
+  ],
+  "full": {
+    "ok": true,
+    "answer": "Helping now: Marcus Carter \u00b7 Primary family caregiver\nUntil about 4:00 PM\n\nNext: Maya Bennett\nExpected around 4:30 PM\n\nI can prepare a handoff for the next helper before they arrive.\n\nWhat the next caregiver should know (latest handoff):\n\u2022 Medication change needs verification: Please add Allegra 60mg for allergies.\n\u2022 Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.\n\nStill open:\n\u2022 Medication change needs verification: Please add Allegra 60mg for allergies.",
+    "grounded": true,
+    "intent": "SAFETY_CONCERN",
+    "intents": [
+      "SAFETY_CONCERN"
+    ],
+    "persona": "family",
+    "source_refs": [
+      "continuity:CARE_COVERAGE"
+    ],
+    "projections_used": [
+      "CONTINUITY"
+    ],
+    "conversation_id": "conv-p-sadeil-cr-olivia",
+    "turn_id": "rt-ms5ip0dk-2e784",
+    "model_path": "deterministic",
+    "can_deterministic": true,
+    "needs_clarification": false,
+    "authority": "server",
+    "understand_mode": "llm",
+    "correlation_id": "5f03ea4d-6f5b-4b5a-927d-20ce4bbb8f38"
+  }
+}

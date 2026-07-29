@@ -1,0 +1,9 @@
+{
+  "question": "Why did you repeat yourself?",
+  "status": 404,
+  "latency_ms": 198,
+  "response": {
+    "error": "HTTP Error 404: Not Found",
+    "body": "{\"ok\":false,\"code\":\"UNKNOWN_RECIPIENT\",\"message\":\"Care recipient not found\",\"correlation_id\":\"9df927a6-b5fd-4206-9443-305b897e4e3f\"}"
+  }
+}

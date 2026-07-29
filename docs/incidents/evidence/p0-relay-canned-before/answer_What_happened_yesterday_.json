@@ -1,0 +1,63 @@
+{
+  "question": "What happened yesterday?",
+  "status": 200,
+  "latency_ms": 405,
+  "client_gate_would_answer": true,
+  "client_looks_like_question": true,
+  "ok": true,
+  "not_question": null,
+  "intent": "CHANGE_SINCE",
+  "answer": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n\u2022 Medication change needs verification: Please add Allegra 60mg for allergies.\n\u2022 Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.\n\n\u2022 Correction: medication was not administered; Mood improved; Therapy rescheduled to later slot; New mobility concern noted (from Daniel Kim)\n\u2022 Calm mood after breakfast [AZms3y50fs-S1]; Breakfast eaten [AZms3y50fs-S1]; Mobility assistance provided [AZms3y50fs-S1] (from Daniel Kim)\n\u2022 More tired than usual [AZms3y50fs-S2]; Lunch refused [AZms3y50fs-S2]; Transportation completed [AZms3y50fs-S2]; Medication reported administered at noon [AZms3y50fs-S2] (from Maya Bennett)\n\u2022 Correction: medication was not administered [AZms3y50fs-S3]; Mood improved [AZms3y50fs-S3]; Therapy rescheduled to later slot [AZms3y50fs-S3]; New mobility concern noted [AZms3y50fs-S3] (from Daniel Kim)\n\u2022 Calm mood after breakfast [HOLms3yw5z1-S1]; Breakfast eaten [HOLms3yw5z1-S1] (from Daniel Kim)",
+  "answer_len": 1087,
+  "markers": [
+    "[AZms3y50fs-S1]",
+    "[AZms3y50fs-S2]",
+    "[AZms3y50fs-S3]",
+    "[HOLms3yw5z1-S1]"
+  ],
+  "response_keys": [
+    "ok",
+    "answer",
+    "grounded",
+    "intent",
+    "intents",
+    "persona",
+    "source_refs",
+    "projections_used",
+    "conversation_id",
+    "turn_id",
+    "model_path",
+    "can_deterministic",
+    "needs_clarification",
+    "authority",
+    "understand_mode",
+    "correlation_id"
+  ],
+  "full": {
+    "ok": true,
+    "answer": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n\u2022 Medication change needs verification: Please add Allegra 60mg for allergies.\n\u2022 Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.\n\n\u2022 Correction: medication was not administered; Mood improved; Therapy rescheduled to later slot; New mobility concern noted (from Daniel Kim)\n\u2022 Calm mood after breakfast [AZms3y50fs-S1]; Breakfast eaten [AZms3y50fs-S1]; Mobility assistance provided [AZms3y50fs-S1] (from Daniel Kim)\n\u2022 More tired than usual [AZms3y50fs-S2]; Lunch refused [AZms3y50fs-S2]; Transportation completed [AZms3y50fs-S2]; Medication reported administered at noon [AZms3y50fs-S2] (from Maya Bennett)\n\u2022 Correction: medication was not administered [AZms3y50fs-S3]; Mood improved [AZms3y50fs-S3]; Therapy rescheduled to later slot [AZms3y50fs-S3]; New mobility concern noted [AZms3y50fs-S3] (from Daniel Kim)\n\u2022 Calm mood after breakfast [HOLms3yw5z1-S1]; Breakfast eaten [HOLms3yw5z1-S1] (from Daniel Kim)",
+    "grounded": true,
+    "intent": "CHANGE_SINCE",
+    "intents": [
+      "CHANGE_SINCE",
+      "RECENT_ACTIVITY"
+    ],
+    "persona": "family",
+    "source_refs": [
+      "care_projections"
+    ],
+    "projections_used": [
+      "RECENT_CHANGES",
+      "RECENT_OBSERVATION_CLUSTERS",
+      "ACTIVE_HANDOFF"
+    ],
+    "conversation_id": "conv-p-sadeil-cr-olivia",
+    "turn_id": "rt-ms5ioyzh-l07to",
+    "model_path": "deterministic",
+    "can_deterministic": true,
+    "needs_clarification": false,
+    "authority": "server",
+    "understand_mode": "llm",
+    "correlation_id": "2965ee3b-3851-4466-9239-430ce93ced56"
+  }
+}

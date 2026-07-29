@@ -1,0 +1,9 @@
+{
+  "question": "Was medication administered?",
+  "status": 404,
+  "latency_ms": 202,
+  "response": {
+    "error": "HTTP Error 404: Not Found",
+    "body": "{\"ok\":false,\"code\":\"UNKNOWN_RECIPIENT\",\"message\":\"Care recipient not found\",\"correlation_id\":\"31376762-172e-4d39-ad09-23d5e90cf02a\"}"
+  }
+}

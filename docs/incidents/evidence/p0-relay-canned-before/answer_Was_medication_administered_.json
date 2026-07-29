@@ -1,0 +1,55 @@
+{
+  "question": "Was medication administered?",
+  "status": 200,
+  "latency_ms": 510,
+  "client_gate_would_answer": true,
+  "client_looks_like_question": true,
+  "ok": true,
+  "not_question": null,
+  "intent": "MEDICATION_ADMINISTRATION_HISTORY",
+  "answer": "Latest caregiver-reported medication note from handoff (not clinician-confirmed):\n\u2022 Medication change needs verification: Please add Allegra 60mg for allergies.\n\u2022 Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.\n\nThat handoff note is caregiver-reported. It is not automatically clinician confirmed.",
+  "answer_len": 422,
+  "markers": [],
+  "response_keys": [
+    "ok",
+    "answer",
+    "grounded",
+    "intent",
+    "intents",
+    "persona",
+    "source_refs",
+    "projections_used",
+    "conversation_id",
+    "turn_id",
+    "model_path",
+    "can_deterministic",
+    "needs_clarification",
+    "authority",
+    "understand_mode",
+    "correlation_id"
+  ],
+  "full": {
+    "ok": true,
+    "answer": "Latest caregiver-reported medication note from handoff (not clinician-confirmed):\n\u2022 Medication change needs verification: Please add Allegra 60mg for allergies.\n\u2022 Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.\n\nThat handoff note is caregiver-reported. It is not automatically clinician confirmed.",
+    "grounded": true,
+    "intent": "MEDICATION_ADMINISTRATION_HISTORY",
+    "intents": [
+      "MEDICATION_ADMINISTRATION_HISTORY"
+    ],
+    "persona": "family",
+    "source_refs": [
+      "care_projections"
+    ],
+    "projections_used": [
+      "ACTIVE_HANDOFF"
+    ],
+    "conversation_id": "conv-p-sadeil-cr-olivia",
+    "turn_id": "rt-ms5iozrp-3lhz5",
+    "model_path": "deterministic",
+    "can_deterministic": true,
+    "needs_clarification": false,
+    "authority": "server",
+    "understand_mode": "llm",
+    "correlation_id": "e016daf4-f5d9-4892-a324-fab50430461f"
+  }
+}

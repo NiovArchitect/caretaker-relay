@@ -32,7 +32,43 @@ export function CorrectionAwarenessPanel({
         n.sourceType === "correction" ||
         n.actionType === "open_correction",
     );
-    setRows(corr);
+    // Collapse duplicate smoke/semantic correction alerts into one current card.
+    const byKey = new Map<string, (typeof corr)[0]>();
+    for (const n of corr) {
+      const raw = `${n.title ?? ""} ${n.body ?? ""}`;
+      // Drop pure harness noise that only carries run markers
+      if (
+        /\[(?:AZ|HOL|FMH|S\d)/i.test(raw) &&
+        /medication was not administered/i.test(raw)
+      ) {
+        // keep one cleaned representative below
+      }
+      const key = /medication was not administered/i.test(raw)
+        ? "med_not_administered"
+        : (n.title || n.body || n.id)
+            .toLowerCase()
+            .replace(/\s*\[(?:AZ|HOL|FMH|S\d)[^\]]*\]/gi, "")
+            .replace(/[^a-z0-9]+/g, " ")
+            .trim()
+            .slice(0, 80);
+      const existing = byKey.get(key);
+      if (!existing) {
+        byKey.set(key, {
+          ...n,
+          title: (n.title || "Medication record corrected").replace(
+            /\s*\[(?:AZ|HOL|FMH|S\d)[^\]]*\]/gi,
+            "",
+          ),
+          body: (n.body || "An earlier report was corrected.")
+            .replace(/\s*\[(?:AZ|HOL|FMH|S\d)[^\]]*\]/gi, "")
+            .replace(/\b(?:AZms|HOLms|FMHms)\w*/gi, "")
+            .trim(),
+        });
+      } else if (!existing.acknowledged_at && n.acknowledged_at) {
+        byKey.set(key, existing);
+      }
+    }
+    setRows([...byKey.values()]);
   }, [rid]);
 
   useEffect(() => {

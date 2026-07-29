@@ -1,0 +1,56 @@
+{
+  "ok": true,
+  "kind": "verify",
+  "verification_bundle_id": "vb-10v4e2t5-ms5ip787",
+  "bundle": {
+    "title": "I got this",
+    "items": [
+      {
+        "id": "v-unc-1",
+        "candidateId": "uncertainty",
+        "label": "Input contains no extractable caregiver coordination events or statements matching schema categories",
+        "safetyClass": "low",
+        "epistemicStatus": "UNCERTAIN",
+        "requiresConfirmation": false
+      }
+    ],
+    "understood": {
+      "candidates": [],
+      "meals": [],
+      "observations": [],
+      "appointmentChanges": [],
+      "medicationEvents": [],
+      "communicationRequests": [],
+      "tasks": [],
+      "uncertainties": [
+        "Input contains no extractable caregiver coordination events or statements matching schema categories"
+      ],
+      "rawText": "Am I getting the same response?",
+      "careRecipientId": "cr-olivia",
+      "careRecipientName": "Evelyn Carter",
+      "evidenceMode": "LIVE_FOUNDATION_BACKED",
+      "modelProvider": "xai",
+      "modelName": "grok-3"
+    },
+    "evidenceMode": "LIVE_FOUNDATION_BACKED"
+  },
+  "evidence_mode": "LIVE_FOUNDATION_BACKED",
+  "temporal_policy": {
+    "originalExpression": "Am I getting the same response?",
+    "status": "UNRESOLVED",
+    "notes": [
+      "No structured time parse; keep original expression"
+    ]
+  },
+  "timezone_policy": [
+    "Machine storage is always UTC ISO when resolved.",
+    "Human expressions are preserved until caregiver confirms.",
+    "Cross-zone: show both caregiver and care-recipient local labels.",
+    "DST: use IANA zones via runtime Intl; never fixed UTC-5 assumptions for display.",
+    "Appointment provider timezone may differ from household."
+  ],
+  "transcript_meta": null,
+  "auth_mode": "foundation_auth_service",
+  "correlation_id": "7829e65d-5ee9-4818-a5f8-b4b2cc37ee8f",
+  "note": "Candidates only. Confirm via POST /api/v1/care/confirm before durable truth."
+}

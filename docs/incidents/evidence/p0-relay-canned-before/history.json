@@ -1,0 +1,637 @@
+{
+  "status": 200,
+  "ms": 251,
+  "data": {
+    "ok": true,
+    "care_recipient_id": "cr-olivia",
+    "filter": "all",
+    "items": [
+      {
+        "id": "apt-02q1h1ir-ms3zt5s9",
+        "at": "2026-07-30T01:44:09.552Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Physical therapy \u00b7 Friday 4:30 PM FMHms3zsotg"
+      },
+      {
+        "id": "apt-req-slot-2026-07-29-1400",
+        "at": "2026-07-29T21:00:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment cancelled",
+        "detail": "Doctor / clinic visit (caregiver-requested) \u00b7 Wednesday, July 29 \u00b7 2:00 PM PDT \u00b7 Coastal Family Medicine (synthetic)",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "apt-req-slot-req-ms3ojqr3",
+        "at": "2026-07-29T21:00:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Care appointment (caregiver-requested) \u00b7 Wednesday, July 29 \u00b7 2:00 PM PDT \u00b7 Coastal Family Medicine (synthetic)",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "apt-req-slot-req-ms3pc7b5",
+        "at": "2026-07-29T21:00:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Care appointment (caregiver-requested) \u00b7 Wednesday, July 29 \u00b7 2:00 PM PDT \u00b7 Coastal Family Medicine (synthetic)",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "apt-req-slot-req-ms3pc7jm",
+        "at": "2026-07-29T21:00:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Care appointment (caregiver-requested) \u00b7 Wednesday, July 29 \u00b7 2:00 PM PDT \u00b7 Coastal Family Medicine (synthetic)",
+        "sourceLabel": "Maya Bennett"
+      },
+      {
+        "id": "apt-req-slot-req-ms3pc7rn",
+        "at": "2026-07-29T21:00:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Care appointment (caregiver-requested) \u00b7 Wednesday, July 29 \u00b7 2:00 PM PDT \u00b7 Coastal Family Medicine (synthetic)",
+        "sourceLabel": "Daniel Kim"
+      },
+      {
+        "id": "apt-req-slot-req-ms3pc7xm",
+        "at": "2026-07-29T21:00:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Care appointment (caregiver-requested) \u00b7 Wednesday, July 29 \u00b7 2:00 PM PDT \u00b7 Coastal Family Medicine (synthetic)",
+        "sourceLabel": "Public PreShift DSP"
+      },
+      {
+        "id": "apt-req-slot-req-ms3pc8cx",
+        "at": "2026-07-29T21:00:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Care appointment (caregiver-requested) \u00b7 Wednesday, July 29 \u00b7 2:00 PM PDT \u00b7 Coastal Family Medicine (synthetic)",
+        "sourceLabel": "Dr. Priya Shah"
+      },
+      {
+        "id": "apt-req-slot-req-ms3mbmsi",
+        "at": "2026-07-29T21:00:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Care appointment (caregiver-requested) \u00b7 Wednesday, July 29 \u00b7 2:00 PM PDT \u00b7 Coastal Family Medicine (synthetic)",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "apt-pvepbdyo-ms2dpzmk",
+        "at": "2026-07-29T18:00:00Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Judge demo PT \u00b7 Tue 11am",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "apt-4yflxaiu-ms2dpzn4",
+        "at": "2026-07-29T18:00:00Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Judge demo PT \u00b7 Tue 11am",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-ye4htocl-ms2dpzn4",
+        "at": "2026-07-29T18:00:00Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Scheduled: Judge demo PT at Tue 11am",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "apt-1u8j7qrk-ms3z2sh2",
+        "at": "2026-07-29T13:23:34.751Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Physical therapy \u00b7 Confirmed later slot HOLms3z2g2n"
+      },
+      {
+        "id": "apt-z4hf9du6-ms3yxzoc",
+        "at": "2026-07-29T13:19:49.517Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Physical therapy \u00b7 Confirmed later slot HOLms3yxma5"
+      },
+      {
+        "id": "apt-s20-1784928088039",
+        "at": "2026-07-28T23:30:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment cancelled",
+        "detail": "Physical therapy \u00b7 4:30 PM PDT (cancelled) \u00b7 Coastal PT"
+      },
+      {
+        "id": "apt-s20-1784954776601",
+        "at": "2026-07-28T23:30:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment cancelled",
+        "detail": "Physical therapy \u00b7 4:30 PM PDT \u00b7 Coastal PT"
+      },
+      {
+        "id": "apt-s20-1784945276834",
+        "at": "2026-07-28T23:30:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment cancelled",
+        "detail": "Physical therapy \u00b7 4:30 PM PDT (cancelled) \u00b7 Coastal PT"
+      },
+      {
+        "id": "apt-s20-1784933102079",
+        "at": "2026-07-28T23:30:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment cancelled",
+        "detail": "Physical therapy \u00b7 4:30 PM PDT (cancelled) \u00b7 Coastal PT"
+      },
+      {
+        "id": "apt-s20-1784918370292",
+        "at": "2026-07-28T23:30:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment cancelled",
+        "detail": "Physical therapy \u00b7 4:30 PM PDT (cancelled) \u00b7 Coastal PT"
+      },
+      {
+        "id": "apt-s20-1784960311440",
+        "at": "2026-07-28T23:30:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Physical therapy \u00b7 4:30 PM PDT \u00b7 Coastal PT"
+      },
+      {
+        "id": "apt-s20-1784918852652",
+        "at": "2026-07-28T23:30:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment cancelled",
+        "detail": "Physical therapy \u00b7 4:30 PM PDT (cancelled) \u00b7 Coastal PT"
+      },
+      {
+        "id": "apt-s20-1785005871395",
+        "at": "2026-07-28T23:30:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Physical therapy \u00b7 4:30 PM PDT \u00b7 Coastal PT"
+      },
+      {
+        "id": "apt-s20-1785007894598",
+        "at": "2026-07-28T23:30:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Physical therapy \u00b7 4:30 PM PDT \u00b7 Coastal PT"
+      },
+      {
+        "id": "apt-s20-1784931394803",
+        "at": "2026-07-28T23:30:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Physical therapy \u00b7 4:30 PM PDT \u00b7 Coastal PT"
+      },
+      {
+        "id": "apt-s20-1784965232690",
+        "at": "2026-07-28T23:30:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Physical therapy \u00b7 4:30 PM PDT \u00b7 Coastal PT"
+      },
+      {
+        "id": "apt-s20-1784952491869",
+        "at": "2026-07-28T22:00:00.000Z",
+        "kind": "appointments",
+        "title": "Appointment cancelled",
+        "detail": "Physical therapy \u00b7 3:00 PM PDT \u00b7 Coastal PT"
+      },
+      {
+        "id": "note-ms52hb6u",
+        "at": "2026-07-28T19:46:53.286Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Medication change (pending verification \u2014 not an active order): Medication change needs verification: Please add Allegra 60mg for allergies.\n\u2022 Medication change (pending",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "ho-nsc57s7f-ms52hb6n",
+        "at": "2026-07-28T19:46:51.609Z",
+        "kind": "handoffs",
+        "title": "Handoff prepared",
+        "detail": "Medication change needs verification: Please add Allegra 60mg for allergies.; Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+        "sourceLabel": "p-sadeil"
+      },
+      {
+        "id": "evt-fny0k7yt-ms52hb6n",
+        "at": "2026-07-28T19:46:51.419Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-024yn2af-ms52hakf",
+        "at": "2026-07-28T19:46:45.605Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Medication change needs verification: Please add Allegra 60mg for allergies.",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms52fu7a",
+        "at": "2026-07-28T19:45:44.505Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Medication change (pending verification \u2014 not an active order): Medication change needs verification: Please add Allegra 60mg for allergies\n\u2022 Medication change (pending ",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "ho-mxvpivfs-ms52fu42",
+        "at": "2026-07-28T19:45:42.928Z",
+        "kind": "handoffs",
+        "title": "Handoff prepared",
+        "detail": "Medication change needs verification: Please add Allegra 60mg for allergies; Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+        "sourceLabel": "p-sadeil"
+      },
+      {
+        "id": "evt-d3p4elc4-ms52fu42",
+        "at": "2026-07-28T19:45:41.097Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-r81rjfmy-ms52fti0",
+        "at": "2026-07-28T19:45:33.336Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Medication change needs verification: Please add Allegra 60mg for allergies",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms51n189",
+        "at": "2026-07-28T19:23:20.696Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Medication change (pending verification \u2014 not an active order): Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter.",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-9fmau2se-ms51n187",
+        "at": "2026-07-28T19:23:19.776Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms51m3l6",
+        "at": "2026-07-28T19:22:37.098Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Care update: Document ingest: discharge summary says PT Friday and Metformin 500mg twice daily. Family ms51dglc\n\nReported by: Marcus Carter\nRole: family_caregiver\nStatus",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "ho-7pcxekdb-ms51m3kz",
+        "at": "2026-07-28T19:22:35.608Z",
+        "kind": "handoffs",
+        "title": "Handoff prepared",
+        "detail": "Document ingest: discharge summary says PT Friday and Metformin 500mg twice daily. Family ms51dglc",
+        "sourceLabel": "p-sadeil"
+      },
+      {
+        "id": "evt-34ii0yqc-ms51m3kz",
+        "at": "2026-07-28T19:22:35.461Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Document ingest: discharge summary says PT Friday and Metformin 500mg twice daily. Family ms51dglc",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms51lanr",
+        "at": "2026-07-28T19:21:59.607Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Communication: Access request: relationship friend \u00b7 reason: I need access as a friend to help with Evelyn. Family ms51dglc \u00b7 Privacy review required before membership\n\n",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "ho-4dju2v6f-ms51lanl",
+        "at": "2026-07-28T19:21:59.597Z",
+        "kind": "handoffs",
+        "title": "Handoff prepared",
+        "detail": "Access request: relationship friend \u00b7 reason: I need access as a friend to help with Evelyn. Family ms51dglc \u00b7 Privacy review required before membership",
+        "sourceLabel": "p-sadeil"
+      },
+      {
+        "id": "evt-f492fz92-ms51lanl",
+        "at": "2026-07-28T19:21:59.504Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Access request: relationship friend \u00b7 reason: I need access as a friend to help with Evelyn. Family ms51dglc \u00b7 Privacy review required before membership",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms51kiqx",
+        "at": "2026-07-28T19:21:23.432Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Communication: Access change request: open People and Privacy to review who can help care for Evelyn Carter\n\nReported by: Marcus Carter\nRole: family_caregiver\nStatus: Ca",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-39pajwtv-ms51kiqu",
+        "at": "2026-07-28T19:21:22.460Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Access change request: open People and Privacy to review who can help care for Evelyn Carter",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms51jrwl",
+        "at": "2026-07-28T19:20:48.645Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Communication: Invite helper: Maya Bennett \u00b7 role: Family / friend caregiver \u00b7 scope: help care for Evelyn Carter \u00b7 People invitation on confirm\n\nReported by: Marcus Car",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-q74ysw08-ms51jrwh",
+        "at": "2026-07-28T19:20:48.404Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Invite helper: Maya Bennett \u00b7 role: Family / friend caregiver \u00b7 scope: help care for Evelyn Carter \u00b7 People invitation on confirm",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms51j014",
+        "at": "2026-07-28T19:20:12.519Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Observation: Caregiver reported: mobility observation\n\nReported by: Marcus Carter\nRole: family_caregiver\nStatus: Caregiver-reported care record (not a clinical diagnosis",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "obs-v7us4w6s-ms51j00z",
+        "at": "2026-07-28T19:20:12.515Z",
+        "kind": "observations",
+        "title": "Observation reported",
+        "detail": "Caregiver reported: mobility observation",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-3p72sn41-ms51j00z",
+        "at": "2026-07-28T19:20:12.405Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Caregiver reported: mobility observation",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms51i47k",
+        "at": "2026-07-28T19:19:31.280Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Appointment / schedule: Appointment time changed\n\u2022 Care activity: Confirm transportation\n\nReported by: Marcus Carter\nRole: family_caregiver\nStatus: Caregiver-reported ca",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-ulnqrk2w-ms51i47h",
+        "at": "2026-07-28T19:19:31.171Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Appointment time changed",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-j5qkibba-ms51i47h",
+        "at": "2026-07-28T19:19:31.171Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Confirm transportation",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms51hery",
+        "at": "2026-07-28T19:18:58.317Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Meal / hydration: Meal around noon\n\nReported by: Marcus Carter\nRole: family_caregiver\nStatus: Caregiver-reported care record (not a clinical diagnosis or order)\nRecorded",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-xr0n1pou-ms51heru",
+        "at": "2026-07-28T19:18:58.226Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Meal around noon",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms51gn35",
+        "at": "2026-07-28T19:18:22.433Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Observation: Caregiver reported: fever / elevated temperature for Evelyn Carter\n\nReported by: Marcus Carter\nRole: family_caregiver\nStatus: Caregiver-reported care record",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "obs-x0xsi10z-ms51gn32",
+        "at": "2026-07-28T19:18:22.430Z",
+        "kind": "observations",
+        "title": "Observation reported",
+        "detail": "Caregiver reported: fever / elevated temperature for Evelyn Carter",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-8xatw6kx-ms51gn32",
+        "at": "2026-07-28T19:18:22.325Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Caregiver reported: fever / elevated temperature for Evelyn Carter",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms51frn4",
+        "at": "2026-07-28T19:17:41.679Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Observation: Marcus Carter reported that Evelyn Carter experienced dizzy after Advil. Reported association only \u2014 not a clinical determination of cause.\n\nReported by: Ma",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "obs-hik5reec-ms51frmz",
+        "at": "2026-07-28T19:17:41.675Z",
+        "kind": "observations",
+        "title": "Observation reported",
+        "detail": "Marcus Carter reported that Evelyn Carter experienced dizzy after Advil. Reported association only \u2014 not a clinical determination of cause.",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-yjbwy46p-ms51frmz",
+        "at": "2026-07-28T19:17:41.577Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Marcus Carter reported that Evelyn Carter experienced dizzy after Advil. Reported association only \u2014 not a clinical determination of cause.",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms51f338",
+        "at": "2026-07-28T19:17:09.859Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Care update: Caregiver reported: Evening refused for Evelyn Carter\n\u2022 Observation: Caregiver reported: refused offered support\n\nReported by: Marcus Carter\nRole: family_ca",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "obs-ffqo6po4-ms51f332",
+        "at": "2026-07-28T19:17:09.854Z",
+        "kind": "observations",
+        "title": "Observation reported",
+        "detail": "Caregiver reported: refused offered support",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-ok32h0y8-ms51f332",
+        "at": "2026-07-28T19:17:09.757Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Caregiver reported: Evening refused for Evelyn Carter",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-gr2zip49-ms51f332",
+        "at": "2026-07-28T19:17:09.757Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Caregiver reported: refused offered support",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms51ea11",
+        "at": "2026-07-28T19:16:32.197Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Meal / hydration: Meal recorded\n\u2022 Medication administration report: Metformin marked as given (500mg) for Evelyn Carter\n\nReported by: Marcus Carter\nRole: family_caregive",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "ho-a6bd6pkp-ms51ea0t",
+        "at": "2026-07-28T19:16:32.189Z",
+        "kind": "handoffs",
+        "title": "Handoff prepared",
+        "detail": "Meal recorded; Metformin marked as given (500mg) for Evelyn Carter",
+        "sourceLabel": "p-sadeil"
+      },
+      {
+        "id": "evt-o0f8db4b-ms51ea0t",
+        "at": "2026-07-28T19:16:32.062Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Meal recorded",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-4mqgbk1h-ms51ea0t",
+        "at": "2026-07-28T19:16:32.062Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Metformin marked as given (500mg) for Evelyn Carter",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms51di9i",
+        "at": "2026-07-28T19:15:56.213Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Medication change (pending verification \u2014 not an active order): Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter.",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-lgow0c6t-ms51di9f",
+        "at": "2026-07-28T19:15:55.312Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-cnzvl8md-ms51c6ja",
+        "at": "2026-07-28T19:14:54.358Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "I can't recommend or change medication dosages. I can show the authorized schedule from the care plan and record what a caregiver confirms they gave. For dosing questions, contact the prescribing clinician.",
+        "sourceLabel": "Relay safety"
+      },
+      {
+        "id": "note-ms50oejn",
+        "at": "2026-07-28T18:56:24.987Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Medication change (pending verification \u2014 not an active order): Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter.",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-fim141mu-ms50oehm",
+        "at": "2026-07-28T18:56:23.991Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms50kw4z",
+        "at": "2026-07-28T18:53:41.100Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Medication change (pending verification \u2014 not an active order): Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter.",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-aufxhcga-ms50kvzg",
+        "at": "2026-07-28T18:53:39.222Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "apt-9vcvnl54-ms3d2xbg",
+        "at": "2026-07-28T18:00:00Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Fast PT \u00b7 2026-07-28T18:00:00Z",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "apt-ffk5fzmc-ms3d2xad",
+        "at": "2026-07-28T18:00:00Z",
+        "kind": "appointments",
+        "title": "Appointment",
+        "detail": "Fast PT \u00b7 2026-07-28T18:00:00Z",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-0b9z3nok-ms3d2xbg",
+        "at": "2026-07-28T18:00:00Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Scheduled: Fast PT at 2026-07-28T18:00:00Z",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "note-ms4y1mcg",
+        "at": "2026-07-28T17:42:42.734Z",
+        "kind": "care_notes",
+        "title": "Care update",
+        "detail": "Care update \u2014 Evelyn Carter\n\n\u2022 Medication change (pending verification \u2014 not an active order): Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter.",
+        "sourceLabel": "Marcus Carter"
+      },
+      {
+        "id": "evt-6pd7xsb0-ms4y1mb1",
+        "at": "2026-07-28T17:42:41.336Z",
+        "kind": "all",
+        "title": "Care activity",
+        "detail": "Medication change needs verification: Allegra \u00b7 reported dose 60mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+        "sourceLabel": "Marcus Carter"
+      }
+    ],
+    "correlation_id": "2101913e-737e-4bd5-aec4-a4bcbc046de6"
+  }
+}

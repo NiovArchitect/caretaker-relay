@@ -1,0 +1,9 @@
+{
+  "question": "How is Evelyn today?",
+  "status": 404,
+  "latency_ms": 215,
+  "response": {
+    "error": "HTTP Error 404: Not Found",
+    "body": "{\"ok\":false,\"code\":\"UNKNOWN_RECIPIENT\",\"message\":\"Care recipient not found\",\"correlation_id\":\"dadccb73-a225-4b3c-844b-d228af2c3926\"}"
+  }
+}

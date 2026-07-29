@@ -1,0 +1,9 @@
+{
+  "question": "What remains unfinished?",
+  "status": 404,
+  "latency_ms": 235,
+  "response": {
+    "error": "HTTP Error 404: Not Found",
+    "body": "{\"ok\":false,\"code\":\"UNKNOWN_RECIPIENT\",\"message\":\"Care recipient not found\",\"correlation_id\":\"d4c5a10a-852a-4874-ae54-a9ec6812bfe4\"}"
+  }
+}

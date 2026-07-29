@@ -1,0 +1,56 @@
+{
+  "question": "What medication does Evelyn take?",
+  "status": 200,
+  "latency_ms": 414,
+  "client_gate_would_answer": true,
+  "client_looks_like_question": true,
+  "ok": true,
+  "not_question": null,
+  "intent": "MEDICATION_CURRENT",
+  "answer": "Metformin 500 mg\nTake at 12:00 PM\nWindow 11:30 AM \u2013 12:30 PM\nTake with food\nAuthorized by Dr. Priya Shah",
+  "answer_len": 104,
+  "markers": [],
+  "response_keys": [
+    "ok",
+    "answer",
+    "grounded",
+    "intent",
+    "intents",
+    "persona",
+    "source_refs",
+    "projections_used",
+    "conversation_id",
+    "turn_id",
+    "model_path",
+    "can_deterministic",
+    "needs_clarification",
+    "authority",
+    "understand_mode",
+    "correlation_id"
+  ],
+  "full": {
+    "ok": true,
+    "answer": "Metformin 500 mg\nTake at 12:00 PM\nWindow 11:30 AM \u2013 12:30 PM\nTake with food\nAuthorized by Dr. Priya Shah",
+    "grounded": true,
+    "intent": "MEDICATION_CURRENT",
+    "intents": [
+      "MEDICATION_CURRENT"
+    ],
+    "persona": "family",
+    "source_refs": [
+      "provider_instruction"
+    ],
+    "projections_used": [
+      "NEXT_24H_TASKS",
+      "CURRENT_MEDICATIONS"
+    ],
+    "conversation_id": "conv-p-sadeil-cr-olivia",
+    "turn_id": "rt-ms5iozat-qgzxu",
+    "model_path": "deterministic",
+    "can_deterministic": true,
+    "needs_clarification": false,
+    "authority": "server",
+    "understand_mode": "llm",
+    "correlation_id": "d4dae8f4-1f56-4da3-b545-441679949774"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "question": "How was the previous shift?",
+  "status": 404,
+  "latency_ms": 209,
+  "response": {
+    "error": "HTTP Error 404: Not Found",
+    "body": "{\"ok\":false,\"code\":\"UNKNOWN_RECIPIENT\",\"message\":\"Care recipient not found\",\"correlation_id\":\"51b870f9-85ed-4345-9ad4-9d257594bf7f\"}"
+  }
+}

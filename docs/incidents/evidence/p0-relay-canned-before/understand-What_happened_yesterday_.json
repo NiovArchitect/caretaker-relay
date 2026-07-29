@@ -1,0 +1,9 @@
+{
+  "question": "What happened yesterday?",
+  "status": 404,
+  "latency_ms": 242,
+  "response": {
+    "error": "HTTP Error 404: Not Found",
+    "body": "{\"ok\":false,\"code\":\"UNKNOWN_RECIPIENT\",\"message\":\"Care recipient not found\",\"correlation_id\":\"dca1ac02-ebe7-4aa8-b1c0-3b009183aad3\"}"
+  }
+}

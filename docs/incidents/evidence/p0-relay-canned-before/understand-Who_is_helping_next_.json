@@ -1,0 +1,9 @@
+{
+  "question": "Who is helping next?",
+  "status": 404,
+  "latency_ms": 228,
+  "response": {
+    "error": "HTTP Error 404: Not Found",
+    "body": "{\"ok\":false,\"code\":\"UNKNOWN_RECIPIENT\",\"message\":\"Care recipient not found\",\"correlation_id\":\"26e1fbe1-3d64-4fd1-bc30-8de3486b915f\"}"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "question": "Am I getting the same response?",
+  "status": 200,
+  "latency_ms": 414,
+  "client_gate_would_answer": true,
+  "client_looks_like_question": true,
+  "ok": true,
+  "not_question": null,
+  "intent": "UNKNOWN_QUESTION",
+  "answer": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+  "answer_len": 309,
+  "markers": [],
+  "response_keys": [
+    "ok",
+    "answer",
+    "grounded",
+    "intent",
+    "intents",
+    "persona",
+    "source_refs",
+    "projections_used",
+    "conversation_id",
+    "turn_id",
+    "model_path",
+    "can_deterministic",
+    "needs_clarification",
+    "authority",
+    "understand_mode",
+    "correlation_id"
+  ],
+  "full": {
+    "ok": true,
+    "answer": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+    "grounded": true,
+    "intent": "UNKNOWN_QUESTION",
+    "intents": [
+      "UNKNOWN_QUESTION"
+    ],
+    "persona": "family",
+    "source_refs": [
+      "care_projections"
+    ],
+    "projections_used": [
+      "UNKNOWN_CLEAN"
+    ],
+    "conversation_id": "conv-p-sadeil-cr-olivia",
+    "turn_id": "rt-ms5ip0ow-7oqdd",
+    "model_path": "deterministic",
+    "can_deterministic": false,
+    "needs_clarification": false,
+    "authority": "server",
+    "understand_mode": "llm",
+    "correlation_id": "83ac46a1-a028-4eae-80b1-4efe3a98ab15"
+  }
+}
