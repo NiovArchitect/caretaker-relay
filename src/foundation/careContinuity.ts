@@ -67,15 +67,39 @@ export type HandoffLifecycle = {
   seenAt?: string | null;
 };
 
+export type HandoffBuckets = {
+  incoming: HandoffRow[];
+  sent: HandoffRow[];
+  history: HandoffRow[];
+  current_draft: HandoffRow[];
+};
+
 export async function listHandoffs(careRecipientId: string) {
   const token = tokenFromSession();
-  if (!token) return { ok: false as const, handoffs: [] as HandoffRow[], message: "Not signed in" };
-  const res = await careHttpJson<{ ok: boolean; handoffs?: HandoffRow[] }>(
-    `/api/v1/care/recipients/${careRecipientId}/handoffs`,
-    { token },
-  );
-  if (!res.ok) return { ok: false as const, handoffs: [] as HandoffRow[], message: res.message };
-  return { ok: true as const, handoffs: res.data.handoffs ?? [] };
+  if (!token)
+    return {
+      ok: false as const,
+      handoffs: [] as HandoffRow[],
+      buckets: null as HandoffBuckets | null,
+      message: "Not signed in",
+    };
+  const res = await careHttpJson<{
+    ok: boolean;
+    handoffs?: HandoffRow[];
+    buckets?: HandoffBuckets;
+  }>(`/api/v1/care/recipients/${careRecipientId}/handoffs`, { token });
+  if (!res.ok)
+    return {
+      ok: false as const,
+      handoffs: [] as HandoffRow[],
+      buckets: null as HandoffBuckets | null,
+      message: res.message,
+    };
+  return {
+    ok: true as const,
+    handoffs: res.data.handoffs ?? [],
+    buckets: res.data.buckets ?? null,
+  };
 }
 
 export async function getHandoffLifecyclePacket(

@@ -6,7 +6,7 @@ const DEFAULT_ITEMS: { id: Exclude<NavTab, "relay">; label: string }[] = [
   { id: "today", label: "Today" },
   { id: "care", label: "Care" },
   { id: "people", label: "People" },
-  { id: "privacy", label: "Privacy" },
+  // Privacy nav removed from caregiver shell (server enforcement remains).
   { id: "documents", label: "Documents" },
 ];
 

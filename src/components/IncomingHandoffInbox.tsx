@@ -40,6 +40,8 @@ export function IncomingHandoffInbox({
   const rid = loadActiveCareRecipientId(session.carePersonId);
   const space = resolveCareSpace(rid, session.carePersonId);
   const [rows, setRows] = useState<HandoffRow[]>([]);
+  const [sentRows, setSentRows] = useState<HandoffRow[]>([]);
+  const [historyRows, setHistoryRows] = useState<HandoffRow[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [packet, setPacket] = useState<HandoffPacket | null>(null);
   const [status, setStatus] = useState<string | null>(null);
@@ -53,13 +55,28 @@ export function IncomingHandoffInbox({
   const load = useCallback(async () => {
     setLoading(true);
     const res = await listHandoffs(rid);
-    setRows(res.handoffs ?? []);
+    const pid = session.carePersonId;
+    if (res.buckets) {
+      setRows(res.buckets.incoming ?? []);
+      setSentRows(res.buckets.sent ?? []);
+      setHistoryRows(res.buckets.history ?? []);
+    } else {
+      // Client-side partition when API has no buckets yet
+      const all = res.handoffs ?? [];
+      setRows(
+        all.filter(
+          (h) => h.toPersonId === pid && h.fromPersonId !== pid,
+        ),
+      );
+      setSentRows(all.filter((h) => h.fromPersonId === pid));
+      setHistoryRows([]);
+    }
     const work = await listOpenWork(rid);
     if (work.ok) setWorkItems(work.work_items ?? []);
     const sched = await listScheduleProposals(rid);
     if (sched.ok) setProposals(sched.open ?? []);
     setLoading(false);
-  }, [rid]);
+  }, [rid, session.carePersonId]);
 
   useEffect(() => {
     void load();
@@ -210,7 +227,7 @@ export function IncomingHandoffInbox({
     await load();
   }
 
-  // List all handoffs for this recipient (inbox is discovery surface)
+  // Incoming only — never list the signed-in user's own sent handoffs as tasks
   const pending = rows;
 
   return (
@@ -271,6 +288,56 @@ export function IncomingHandoffInbox({
           );
         })}
       </ul>
+
+      {sentRows.length > 0 && (
+        <div data-testid="handoff-sent-section" style={{ marginTop: 20 }}>
+          <h3 style={{ marginBottom: 8 }}>Sent by you</h3>
+          <p className="muted">
+            These are handoffs you authored — not incoming work.
+          </p>
+          <ul className="list-plain">
+            {sentRows.slice(0, 5).map((h) => (
+              <li key={h.id}>
+                <button
+                  type="button"
+                  className="member-card"
+                  data-testid={`handoff-sent-item-${h.id}`}
+                  onClick={() => void openHandoff(h.id)}
+                >
+                  <strong>Sent handoff</strong>
+                  <span className="muted">
+                    To {resolvePersonName(h.toPersonId, "Next caregiver")}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {historyRows.length > 0 && (
+        <div data-testid="handoff-history-section" style={{ marginTop: 16 }}>
+          <h3 style={{ marginBottom: 8 }}>Handoff history</h3>
+          <ul className="list-plain">
+            {historyRows.slice(0, 5).map((h) => (
+              <li key={h.id}>
+                <button
+                  type="button"
+                  className="member-card"
+                  data-testid={`handoff-history-item-${h.id}`}
+                  onClick={() => void openHandoff(h.id)}
+                >
+                  <strong>Past handoff</strong>
+                  <span className="muted">
+                    {resolvePersonName(h.fromPersonId, "Caregiver")} →{" "}
+                    {resolvePersonName(h.toPersonId, "Next")}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {packet && activeId && (
         <div

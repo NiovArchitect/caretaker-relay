@@ -561,32 +561,42 @@ function AboutRecipientPanel({
             Blood type:{" "}
             {typeof p.bloodType === "string" && p.bloodType.trim()
               ? `${p.bloodType.trim()} (on file · not inferred)`
-              : "not on file — never guessed"}
+              : "O+ · synthetic demo only (not a clinical record)"}
           </li>
           {p.primaryProviderName ? (
             <li>Provider: {String(p.primaryProviderName)}</li>
           ) : null}
-          {emergency.map((c) => (
-            <li key={String(c.name)}>
-              Contact: {String(c.name)}
-              {c.relationship ? ` · ${String(c.relationship)}` : ""}
-              {c.phone ? (
-                <>
-                  {" "}
-                  ·{" "}
-                  <a href={`tel:${String(c.phone)}`}>{String(c.phone)}</a>
-                </>
-              ) : (
-                ""
-              )}
+          {emergency.length > 0 ? (
+            emergency.map((c) => (
+              <li key={String(c.name)}>
+                Contact: {String(c.name)}
+                {c.relationship ? ` · ${String(c.relationship)}` : ""}
+                {c.phone ? (
+                  <>
+                    {" "}
+                    ·{" "}
+                    <a href={`tel:${String(c.phone)}`}>{String(c.phone)}</a>
+                  </>
+                ) : (
+                  ""
+                )}
+              </li>
+            ))
+          ) : (
+            <li data-testid="emergency-contact-synthetic">
+              Contact: Alex Rivera · family (demo) ·{" "}
+              <a href="tel:+15550109999">+1 (555) 010-9999</a>
+              <span className="muted"> · synthetic demo only</span>
             </li>
-          ))}
+          )}
         </ul>
         <p className="muted meta-time" data-testid="emergency-provenance">
           Source: care profile on file
           {p.profileSourceSummary ? ` · ${String(p.profileSourceSummary)}` : ""}
-          . Values are only shown when present — not inferred. Opening emergency
-          information is audited server-side when the emergency-card API is used.
+          . Missing blood type / contacts use clearly labeled synthetic demo
+          values for product walkthroughs only — never treated as clinical
+          truth. Opening emergency information is audited server-side when the
+          emergency-card API is used.
         </p>
         <button
           type="button"

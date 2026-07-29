@@ -33,7 +33,6 @@ import { TodayPage } from "./pages/TodayPage";
 import { CarePage } from "./pages/CarePage";
 import { PeoplePage } from "./pages/PeoplePage";
 import { DocumentsPage } from "./pages/DocumentsPage";
-import { PrivacyCenterPage } from "./pages/PrivacyCenterPage";
 import { ClinicalSummaryPage } from "./pages/ClinicalSummaryPage";
 import { ConflictsPage } from "./pages/ConflictsPage";
 import { people } from "./scenario/olivia";
@@ -1094,18 +1093,8 @@ export function App() {
                     </button>
                   )}
                 </div>
-                <button
-                  type="button"
-                  role="menuitem"
-                  className="profile-menu-item"
-                  data-testid="account-accessibility"
-                  onClick={() => {
-                    setProfileOpen(false);
-                    setTab("privacy");
-                  }}
-                >
-                  Accessibility &amp; privacy
-                </button>
+                {/* Privacy Center nav removed from caregiver shell until UX is coherent.
+                    Server access-control / revoke / consent enforcement remains active. */}
                 <button
                   type="button"
                   role="menuitem"
@@ -1215,9 +1204,7 @@ export function App() {
             />
           )}
           {hasCareAccess && workspaceTab === "documents" && <DocumentsPage />}
-          {hasCareAccess && workspaceTab === "privacy" && (
-            <PrivacyCenterPage refreshKey={todayRefresh} />
-          )}
+          {/* PrivacyCenterPage route intentionally not mounted in caregiver shell */}
           {hasCareAccess &&
             workspaceTab === "today" &&
             roleXp?.prefersClinical && <ClinicalSummaryPage />}

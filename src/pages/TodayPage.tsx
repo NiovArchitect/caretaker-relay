@@ -1273,15 +1273,19 @@ export function TodayPage({
       )}
 
       <section
-        className="section section-hero surface-verify"
+        className="section surface-known"
         aria-labelledby="needs-you"
         data-testid="needs-attention-section"
       >
         <h2 id="needs-you">Needs attention</h2>
+        <p className="muted" data-testid="needs-attention-pointer">
+          Urgent items open from the attention control at the top of the screen.
+          This page does not repeat a full wall of cards.
+        </p>
         {notifications.length === 0 ? (
           <p className="muted">Nothing urgent right now.</p>
         ) : (
-          notifications.map((n, idx) => {
+          notifications.slice(0, 2).map((n, idx) => {
             const item = attention.find((a) => a.id === n.id);
             return (
               <article

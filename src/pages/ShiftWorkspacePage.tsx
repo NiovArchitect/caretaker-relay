@@ -302,6 +302,42 @@ export function ShiftWorkspacePage({
   }
 
   if (!mine) {
+    // Primary family caregivers often have ongoing coverage without a formal shift row.
+    // Never imply "no responsibility" while the rest of the product shows active care work.
+    const label = (session.roleLabel ?? "").toLowerCase();
+    const ongoingPrimary =
+      /primary|family|friend caregiver|caregiver/.test(label) &&
+      !/professional|paid|dsp|physician|provider/.test(label);
+    if (ongoingPrimary) {
+      return (
+        <section className="section surface-known" data-testid="shift-workspace">
+          <h2 style={{ marginTop: 0 }}>Current coverage</h2>
+          <p data-testid="coverage-ongoing">
+            <strong>{session.displayName}</strong>
+            <br />
+            Primary family caregiver for <strong>{space.displayName}</strong>
+            <br />
+            Coverage: <strong>ongoing</strong> (no clocked shift start/end on file)
+          </p>
+          <p className="muted" data-testid="shift-empty-coverage-note">
+            You are responsible for continuity until another caregiver accepts a
+            scheduled shift. Use Incoming handoff for what the last helper left,
+            and draft a handoff before you step away.
+          </p>
+          <div className="btn-row">
+            <button
+              type="button"
+              className="secondary-btn"
+              data-testid="coverage-open-relay"
+              onClick={() => onOpenRelay?.()}
+            >
+              Ask Relay what needs attention
+            </button>
+          </div>
+          <IncomingHandoffInbox refreshKey={refreshKey} />
+        </section>
+      );
+    }
     return (
       <section className="section surface-known" data-testid="shift-workspace">
         <h2 style={{ marginTop: 0 }}>My shift</h2>
