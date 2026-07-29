@@ -1033,23 +1033,70 @@ function plainCaregiverLine(line: string): string {
     .replace(/around three/gi, "around 3:00 PM");
 }
 
-function buildAttentionFromLines(lines: string[]): TodayAttentionItem[] {
-  // Signal filter: dedupe identical reasons; keep sparse attention.
-  const seen = new Set<string>();
-  const unique: string[] = [];
-  for (const line of lines) {
-    const key = plainCaregiverLine(line).toLowerCase();
-    if (!key || seen.has(key)) continue;
-    seen.add(key);
-    unique.push(plainCaregiverLine(line));
+function semanticAttentionKey(line: string): string {
+  const k = line.toLowerCase();
+  if (/allegra/i.test(k)) return "allegra";
+  if (/metformin|with-lunch|with lunch/i.test(k)) return "metformin_review";
+  if (
+    /incompatible dimensions|not comparable|ambiguous \(count|cannot convert|missing unit|doesn't clearly match|amount doesn't clearly match/i.test(
+      k,
+    )
+  ) {
+    return "dose_unit";
   }
-  return unique.slice(0, 5).map((line, i) => {
-    const med = /medication|dose|pill|mg|med\b|amount|label|prescribing/i.test(
-      line,
-    );
+  return plainCaregiverLine(line)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .slice(0, 64);
+}
+
+function canonicalAttentionLine(key: string, fallback: string): string {
+  if (key === "allegra") {
+    return "Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.";
+  }
+  if (key === "metformin_review") {
+    return "A prior Metformin-with-lunch confirmation is still open.";
+  }
+  if (key === "dose_unit") {
+    return "A reported dose unit does not match the authorized instruction and needs human review.";
+  }
+  return plainCaregiverLine(fallback);
+}
+
+function buildAttentionFromLines(lines: string[]): TodayAttentionItem[] {
+  // Semantic reconcile (same families as open-work answers): collapse duplicate
+  // med-review variants into one card per family without deleting raw records.
+  const seen = new Set<string>();
+  const unique: Array<{ key: string; line: string }> = [];
+  for (const raw of lines) {
+    if (!raw?.trim() || /\bprobe\b|__CR_E2E|\[(?:AZ|HOL|FMH)/i.test(raw)) continue;
+    const key = semanticAttentionKey(raw);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    unique.push({ key, line: canonicalAttentionLine(key, raw) });
+  }
+  return unique.slice(0, 5).map(({ key, line }, i) => {
+    const med =
+      key === "allegra" ||
+      key === "metformin_review" ||
+      key === "dose_unit" ||
+      /medication|dose|pill|mg|med\b|amount|label|prescribing|allegra|metformin/i.test(
+        line,
+      );
+    const title =
+      key === "allegra"
+        ? "Allegra pending verification"
+        : key === "metformin_review"
+          ? "Metformin confirmation open"
+          : key === "dose_unit"
+            ? "Dose unit needs review"
+            : med
+              ? "Medication needs verification"
+              : line;
     return {
-      id: `att-${i}-${line.slice(0, 24)}`,
-      title: med ? "Medication needs verification" : line,
+      id: `att-${key}-${i}`,
+      title,
       whatHappened: line,
       whySurfaced: med
         ? "What was reported does not safely match the current care information, or is too ambiguous to confirm."

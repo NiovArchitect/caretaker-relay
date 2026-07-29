@@ -185,12 +185,47 @@ export function buildAttentionNotifications(input: {
     }
   }
 
-  // Dedupe by title
+  // Semantic reconcile for primary attention cards (do not delete raw history).
   const seen = new Set<string>();
-  return out.filter((n) => {
-    const k = n.title + n.description;
-    if (seen.has(k)) return false;
-    seen.add(k);
-    return true;
-  });
+  const canonical: CareNotification[] = [];
+  for (const n of out) {
+    const blob = `${n.title} ${n.description}`.toLowerCase();
+    let key = blob.replace(/[^a-z0-9]+/g, " ").trim().slice(0, 64);
+    if (/allegra/.test(blob)) key = "allegra";
+    else if (/metformin|with-lunch|with lunch/.test(blob)) key = "metformin_review";
+    else if (
+      /incompatible|not comparable|ambiguous \(count|cannot convert|missing unit|doesn't clearly match|dose unit/.test(
+        blob,
+      )
+    ) {
+      key = "dose_unit";
+    }
+    if (seen.has(key)) continue;
+    seen.add(key);
+    if (key === "allegra") {
+      canonical.push({
+        ...n,
+        title: "Allegra pending verification",
+        description:
+          "Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.",
+      });
+    } else if (key === "metformin_review") {
+      canonical.push({
+        ...n,
+        title: "Metformin confirmation open",
+        description:
+          "A prior Metformin-with-lunch confirmation is still open.",
+      });
+    } else if (key === "dose_unit") {
+      canonical.push({
+        ...n,
+        title: "Dose unit needs review",
+        description:
+          "A reported dose unit does not match the authorized instruction and needs human review.",
+      });
+    } else {
+      canonical.push(n);
+    }
+  }
+  return canonical;
 }

@@ -1,0 +1,26 @@
+{
+  "desktop-1366": {
+    "corrVisible": false,
+    "corrCards": 0,
+    "alreadyOpen": true,
+    "inputVisible": true,
+    "answerLen": 0,
+    "answerSnippet": ""
+  },
+  "mobile-390": {
+    "corrVisible": false,
+    "corrCards": 0,
+    "alreadyOpen": true,
+    "inputVisible": true,
+    "answerLen": 0,
+    "answerSnippet": ""
+  },
+  "tablet-768": {
+    "corrVisible": false,
+    "corrCards": 0,
+    "alreadyOpen": true,
+    "inputVisible": true,
+    "answerLen": 0,
+    "answerSnippet": ""
+  }
+}
