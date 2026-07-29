@@ -128,10 +128,20 @@ export function stripLabResidue(text: string): string {
     .replace(/\bPROBESEED\b/gi, "")
     .replace(/\b(JL-SMOKE|PROBE|SEED|SMOKE)[-_]?\w*/gi, "")
     .replace(/\bTransport\s+PROBE\w*/gi, "Transportation")
-    .replace(/\bavailable_to_claim\b/gi, "Needs an owner")
+    .replace(/\bavailable_to_claim\b/gi, "Needs a helper")
     .replace(/\bwork_item\b/gi, "open work")
     .replace(/\bcare_event\b/gi, "care event")
     .replace(/\bsource_type\b/gi, "source")
+    // Adjudication / harness language must never reach lay caregivers
+    .replace(/\bJudge\s+PT\b/gi, "Physical therapy appointment")
+    .replace(/\bSide\s*[12]\b/gi, "another care report")
+    .replace(/\bSchedule\s*\/\s*report conflict\b/gi, "Schedule disagreement")
+    .replace(
+      /\bMultiple authorized reports disagree\.?\s*Relay will not silently pick one\.?/gi,
+      "Two care notes do not match. Open this item to choose which schedule note is correct.",
+    )
+    .replace(/\bconfirm_side_[ab]\b/gi, "confirm this report")
+    .replace(/\bmark_both_reported\b/gi, "keep both notes on file")
     // Raw ISO timestamps embedded in free text
     .replace(
       /\b\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?\b/g,
@@ -153,16 +163,16 @@ export function workStatusLabel(status: unknown): string {
   switch (String(status ?? "").toLowerCase()) {
     case "available_to_claim":
     case "unassigned":
-      return "Needs an owner";
+      return "Needs a helper";
     case "claimed":
     case "assigned":
-      return "Assigned";
+      return "Someone is handling this";
     case "accepted":
       return "Accepted";
     case "in_progress":
       return "In progress";
     case "declined":
-      return "Declined — still needs an owner";
+      return "Declined — still needs a helper";
     case "blocked":
     case "clarification_required":
     case "correction_required":

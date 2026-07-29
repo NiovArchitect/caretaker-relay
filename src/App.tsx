@@ -148,13 +148,28 @@ export function App() {
           if (stopped) return;
           setNotifConnected(r.ok);
           if (r.ok) {
-            // Unread model: not viewed and not resolved; scoped to active recipient
+            // Group count = meaningful unresolved issues, not raw rows.
+            // Drop resolved/seen; collapse semantic duplicates (Allegra, dose unit, etc.).
             const scoped = r.notifications.filter((n) => {
               const rid = String(n.care_recipient_id ?? "");
               if (rid && rid !== activeRecipientId) return false;
               return !n.seen_at && !n.resolved_at;
             });
-            setUnreadCount(Math.min(scoped.length, 99));
+            const keys = new Set<string>();
+            for (const n of scoped) {
+              const blob = `${n.title ?? ""} ${n.body ?? ""} ${n.type ?? ""}`.toLowerCase();
+              if (/\[(?:az|hol|fmh|jl)|probe|__cr_e2e/i.test(blob)) continue;
+              let key = blob.replace(/[^a-z0-9]+/g, " ").trim().slice(0, 48);
+              if (/allegra/.test(blob)) key = "g:allegra";
+              else if (/dose unit|incompatible|ambiguous \(count|cannot convert/.test(blob))
+                key = "g:dose_unit";
+              else if (/metformin|with.?lunch/.test(blob)) key = "g:metformin";
+              else if (/not administered|correction/.test(blob)) key = "g:med_correction";
+              else if (/medication change|needs verification/.test(blob))
+                key = "g:med_change";
+              keys.add(key || `row:${String(n.id ?? keys.size)}`);
+            }
+            setUnreadCount(Math.min(keys.size, 99));
           }
         }),
       );

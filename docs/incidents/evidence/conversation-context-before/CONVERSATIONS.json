@@ -1,0 +1,437 @@
+{
+  "A": [
+    {
+      "q": "How was Evelyn yesterday, did anything change?",
+      "prevQ": null,
+      "intent": "YESTERDAY_WELLBEING",
+      "intents": [
+        "YESTERDAY_WELLBEING",
+        "OBSERVATION_HISTORY"
+      ],
+      "ms": 436,
+      "answer": "Yesterday, Evelyn Carter was reported as having a fever. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan.",
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ],
+      "care_candidates": null
+    },
+    {
+      "q": "At what time?",
+      "prevQ": "How was Evelyn yesterday, did anything change?",
+      "prevA": "Yesterday, Evelyn Carter was reported as having a fever. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan.",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "ms": 371,
+      "answer": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ],
+      "care_candidates": null
+    },
+    {
+      "q": "Who reported that?",
+      "prevQ": "At what time?",
+      "prevA": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "ms": 224,
+      "answer": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ],
+      "care_candidates": null
+    },
+    {
+      "q": "Was it confirmed?",
+      "prevQ": "Who reported that?",
+      "prevA": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what",
+      "intent": "VERIFICATION_STATUS",
+      "intents": [
+        "VERIFICATION_STATUS",
+        "MEDICATION_CURRENT"
+      ],
+      "ms": 406,
+      "answer": "Verification status for Evelyn Carter (from care truth, not a clinical judgment):\n• Medication instruction (Metformin 500 mg): **CONFIRMED** authorized plan on file (Dr. Priya Shah)\n• Latest administration record: **CONFIRMED** — as scheduled · Tuesday, July 28, 2026 at 10:28 PM PDT · by Marcus Carter (CONFIRMED)\n• Open item: **NEEDS CHECKING** — The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team before marking this complete.\n• Provider guidance on file: **CONFIRMED / AUTHORIZED** — Metformin · 500 mg · 12:00 PM · Take with food · Authorized by Dr. Priya Shah\nStatuses used: CONFIRMED · REPORTED · NEEDS CHECKING · UNKNOWN · CORRECTED. If you meant a different item (observation, appointment, note), name it and I'll check that record's state.",
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ],
+      "care_candidates": null
+    }
+  ],
+  "B": [
+    {
+      "q": "What medication change is waiting?",
+      "prevQ": null,
+      "intent": "WAITING_ON",
+      "intents": [
+        "MEDICATION_CHANGE",
+        "WAITING_ON"
+      ],
+      "ms": 381,
+      "answer": "Current authorized instruction (not a new change from Relay):\nMetformin · 500 mg · 12:00 PM · Take with food · Authorized by Dr. Priya Shah\n\nI only report what is on the care plan. I do not invent medication changes.",
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ],
+      "care_candidates": null
+    },
+    {
+      "q": "When was it reported?",
+      "prevQ": "What medication change is waiting?",
+      "prevA": "Current authorized instruction (not a new change from Relay):\nMetformin · 500 mg · 12:00 PM · Take with food · Authorized by Dr. Priya Shah\n\nI only report what is on the care plan. I do not invent med",
+      "intent": "MEDICATION_ADMINISTRATION_HISTORY",
+      "intents": [
+        "MEDICATION_ADMINISTRATION_HISTORY",
+        "UNKNOWN_QUESTION"
+      ],
+      "ms": 211,
+      "answer": "Last recorded: as scheduled · Tuesday, July 28, 2026 at 10:28 PM PDT · by Marcus Carter (CONFIRMED)\n\nLast recorded: as scheduled · Tuesday, July 28, 2026 at 10:28 PM PDT · by Marcus Carter (CONFIRMED)",
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ],
+      "care_candidates": null
+    },
+    {
+      "q": "Who needs to review it?",
+      "prevQ": "When was it reported?",
+      "prevA": "Last recorded: as scheduled · Tuesday, July 28, 2026 at 10:28 PM PDT · by Marcus Carter (CONFIRMED)\n\nLast recorded: as scheduled · Tuesday, July 28, 2026 at 10:28 PM PDT · by Marcus Carter (CONFIRMED)",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "ms": 208,
+      "answer": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ],
+      "care_candidates": null
+    },
+    {
+      "q": "Has she taken it?",
+      "prevQ": "Who needs to review it?",
+      "prevA": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "ms": 405,
+      "answer": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ],
+      "care_candidates": null
+    }
+  ],
+  "C": [
+    {
+      "q": "How was the previous shift?",
+      "prevQ": null,
+      "intent": "PREVIOUS_SHIFT",
+      "intents": [
+        "PREVIOUS_SHIFT",
+        "HANDOFF_REVIEW",
+        "RECENT_ACTIVITY"
+      ],
+      "ms": 386,
+      "answer": "During the previous shift, the prior caregiver reported care updates for Evelyn Carter. Evelyn Carter had a fever reported. A Tylenol dose for fever was proposed as a medication change and remains pending review — not an active plan instruction. The Allegra 60 mg request remained unresolved at handoff and is still waiting for medication-plan verification.",
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ],
+      "care_candidates": null
+    },
+    {
+      "q": "What time did that happen?",
+      "prevQ": "How was the previous shift?",
+      "prevA": "During the previous shift, the prior caregiver reported care updates for Evelyn Carter. Evelyn Carter had a fever reported. A Tylenol dose for fever was proposed as a medication change and remains pen",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "ms": 223,
+      "answer": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ],
+      "care_candidates": null
+    },
+    {
+      "q": "Who corrected it?",
+      "prevQ": "What time did that happen?",
+      "prevA": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "ms": 206,
+      "answer": "I don't have a linked document extraction for that ask on file. Open Documents to review authorized summaries, or upload text for proposed actions (human confirm required).",
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ],
+      "care_candidates": null
+    },
+    {
+      "q": "What still needs to be done?",
+      "prevQ": "Who corrected it?",
+      "prevA": "I don't have a linked document extraction for that ask on file. Open Documents to review authorized summaries, or upload text for proposed actions (human confirm required).",
+      "intent": "TASKS_REMAINING",
+      "intents": [
+        "TASKS_REMAINING",
+        "OPEN_LOOP_STATUS",
+        "WAITING_ON"
+      ],
+      "ms": 409,
+      "answer": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Marcus Carter, Maya Bennett.\n• Handoff still needs attention: Confirm any open transportation or evening medication\n• Needs your review: a prior Metformin-with-lunch confirmation is still open.\n• Needs checking: a reported dose unit does not match the authorized instruction.",
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ],
+      "care_candidates": null
+    }
+  ],
+  "D": [
+    {
+      "q": "What happened with the fever and Tylenol?",
+      "prevQ": null,
+      "intent": "CHANGE_SINCE",
+      "intents": [
+        "CHANGE_SINCE",
+        "RECENT_ACTIVITY",
+        "OBSERVATION_HISTORY",
+        "SAFETY_CONCERN"
+      ],
+      "ms": 355,
+      "answer": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n• At marked as given (as scheduled) for Evelyn Carter\n\n• Probe calm; Therapy rescheduled to later slot (from Daniel Kim)\n• Caregiver reported: fever (from Marcus Carter)\n• Medication change needs verification: Tylenol · reported dose 300mg · reason: fever. Not an active medication-plan instruction until authorized review. (from Marcus Carter)\n• Medication change needs verification: Zyrtec · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review. (from Marcus Carter)\n• Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.",
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ],
+      "care_candidates": null
+    },
+    {
+      "q": "At what time?",
+      "prevQ": "What happened with the fever and Tylenol?",
+      "prevA": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n• At marked as given (as scheduled) for Evelyn Carter\n\n• Probe calm; Therapy rescheduled to later slot (from Daniel Kim)\n• Caregiver reported: f",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "ms": 215,
+      "answer": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ],
+      "care_candidates": null
+    }
+  ]
+}

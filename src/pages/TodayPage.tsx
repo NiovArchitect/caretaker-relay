@@ -701,15 +701,15 @@ export function TodayPage({
           data-testid="work-ownership-panel"
           aria-label="Work ownership"
         >
-          <h2>What needs an owner</h2>
+          <h2>Open care work</h2>
           <p className="muted section-lead">
-            Unassigned work stays visible until someone claims it. Ownership is
-            explicit — no silent handoffs.
+            Each care issue appears once. Take it when you can help—ownership is
+            explicit, never silent.
           </p>
           {needsOwner.length === 0 && workItems.length === 0 ? (
             <p className="muted cr-empty" data-testid="work-empty-state">
               No open work items for {recipientName}. Create one when something
-              needs a named owner.
+              needs a named helper.
             </p>
           ) : (
             <ul className="list-plain" data-testid="work-items-list">
@@ -718,14 +718,42 @@ export function TodayPage({
                   (w, i, arr) =>
                     arr.findIndex((x) => x.id === w.id) === i,
                 )
+                // Semantic reconcile: one card per care issue family
+                .filter((w, _i, arr) => {
+                  const action = String(w.action ?? "").toLowerCase();
+                  let key = action.replace(/[^a-z0-9]+/g, " ").trim().slice(0, 48);
+                  if (/allegra/.test(action)) key = "sem:allegra";
+                  else if (/metformin|with.?lunch/.test(action)) key = "sem:metformin";
+                  else if (/dose|amount mismatch|incompatible|ambiguous/.test(action))
+                    key = "sem:dose_unit";
+                  else if (/pharmacy|pickup/.test(action)) key = "sem:pharmacy";
+                  const first = arr.find((x) => {
+                    const a = String(x.action ?? "").toLowerCase();
+                    let k = a.replace(/[^a-z0-9]+/g, " ").trim().slice(0, 48);
+                    if (/allegra/.test(a)) k = "sem:allegra";
+                    else if (/metformin|with.?lunch/.test(a)) k = "sem:metformin";
+                    else if (/dose|amount mismatch|incompatible|ambiguous/.test(a))
+                      k = "sem:dose_unit";
+                    else if (/pharmacy|pickup/.test(a)) k = "sem:pharmacy";
+                    return k === key;
+                  });
+                  return first === w;
+                })
                 .slice(0, 6)
                 .map((w) => {
                   const id = String(w.id ?? "");
-                  const action = humanCareLine(w.action ?? "Care task");
+                  const rawAction = String(w.action ?? "Care task");
+                  const action = /allegra/i.test(rawAction)
+                    ? "Review Allegra medication-plan request"
+                    : /metformin|with.?lunch/i.test(rawAction)
+                      ? "Confirm Metformin-with-lunch report"
+                      : /dose|amount mismatch|incompatible|ambiguous/i.test(rawAction)
+                        ? "Review dose unit mismatch"
+                        : humanCareLine(rawAction);
                   const status = String(w.status ?? "");
                   const owner =
                     String(w.ownerDisplayName ?? "") ||
-                    (w.ownerPersonId ? "Assigned helper" : "Unassigned");
+                    (w.ownerPersonId ? "A helper is on it" : "Needs a helper");
                   const claimable =
                     !w.ownerPersonId ||
                     status === "available_to_claim" ||
@@ -747,8 +775,8 @@ export function TodayPage({
                         <strong>{action}</strong>{" "}
                         <span className="muted">
                           · {owner} · {workStatusLabel(status)}
-                          {w.priority && String(w.priority) !== "normal"
-                            ? ` · ${String(w.priority)} priority`
+                          {w.priority && String(w.priority) === "urgent"
+                            ? " · needs attention soon"
                             : ""}
                         </span>
                       </span>
@@ -764,14 +792,14 @@ export function TodayPage({
                             void claimCareWorkItem(id).then((r) => {
                               setWorkBusy(null);
                               if (!r.ok) {
-                                setWorkError(r.message ?? "Claim failed");
+                                setWorkError(r.message ?? "Could not take this work");
                                 return;
                               }
                               reloadWork();
                             });
                           }}
                         >
-                          Claim
+                          I can help
                         </button>
                       )}
                       {status === "claimed" || status === "in_progress" || status === "assigned" ? (

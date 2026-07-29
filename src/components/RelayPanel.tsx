@@ -104,7 +104,6 @@ export function RelayPanel({
   const followActiveExchangeRef = useRef(true);
   /** Ignore scroll events caused by our own anchor positioning. */
   const programmaticScrollRef = useRef(false);
-  const [showJumpToResponse, setShowJumpToResponse] = useState(false);
   const [activeUserMessageId, setActiveUserMessageId] = useState<string | null>(
     null,
   );
@@ -155,8 +154,6 @@ export function RelayPanel({
     if (!uid) return;
     const near = measureUserNearThreadTop(uid);
     followActiveExchangeRef.current = near;
-    if (near) setShowJumpToResponse(false);
-    else setShowJumpToResponse(true);
   }
 
   // New user message → anchor question; keep follow while answer pending/grows
@@ -167,7 +164,6 @@ export function RelayPanel({
       lastAnchoredUserIdRef.current = lastUser.id;
       setActiveUserMessageId(lastUser.id);
       followActiveExchangeRef.current = true;
-      setShowJumpToResponse(false);
       // Double-rAF: wait for pending placeholder to paint under the question
       window.requestAnimationFrame(() => {
         window.requestAnimationFrame(() => anchorToUserMessage(lastUser.id));
@@ -177,8 +173,6 @@ export function RelayPanel({
     // Same exchange: answer filled or pending text changed — re-anchor only if following
     if (followActiveExchangeRef.current) {
       window.requestAnimationFrame(() => anchorToUserMessage(lastUser.id));
-    } else {
-      setShowJumpToResponse(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- deliberate on message/busy identity
   }, [messages, busy]);
@@ -188,7 +182,6 @@ export function RelayPanel({
     lastAnchoredUserIdRef.current = null;
     followActiveExchangeRef.current = true;
     programmaticScrollRef.current = false;
-    setShowJumpToResponse(false);
     setActiveUserMessageId(null);
   }, [rid]);
 
@@ -492,23 +485,7 @@ export function RelayPanel({
             )}
           </div>
 
-          {showJumpToResponse && (
-            <button
-              type="button"
-              className="primary-btn relay-jump-response-btn"
-              data-testid="relay-jump-to-response"
-              onClick={() => {
-                const uid =
-                  activeUserMessageId ?? lastAnchoredUserIdRef.current;
-                if (!uid) return;
-                followActiveExchangeRef.current = true;
-                setShowJumpToResponse(false);
-                anchorToUserMessage(uid);
-              }}
-            >
-              New response ↑
-            </button>
-          )}
+          {/* New response control removed — automatic exchange anchoring + natural scroll. */}
 
           <div className="relay-composer-wrap" data-testid="composer-dock">
             <p className="muted relay-hint-copy">

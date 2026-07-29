@@ -1,7 +1,8 @@
 /**
  * Two-user medication correction awareness — current truth vs history.
+ * State-aware actions; no duplicate identical writes; corrections preserve history.
  */
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   fetchCareState,
   getSessionIdentity,
@@ -17,6 +18,12 @@ function str(v: unknown) {
   return v == null ? "" : String(v);
 }
 
+type AdminUiState =
+  | "none"
+  | "administered"
+  | "not_administered"
+  | "uncertain";
+
 export function MedicationCorrectionPanel({ refreshKey = 0 }: { refreshKey?: number }) {
   const session = getSessionIdentity();
   const rid = loadActiveCareRecipientId(session.carePersonId);
@@ -25,6 +32,7 @@ export function MedicationCorrectionPanel({ refreshKey = 0 }: { refreshKey?: num
   const [msg, setMsg] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [alertSeen, setAlertSeen] = useState(false);
+  const lastIdempotencyKey = useRef<string | null>(null);
 
   useEffect(() => {
     void fetchCareState().then((s) => setState(s));
@@ -41,7 +49,31 @@ export function MedicationCorrectionPanel({ refreshKey = 0 }: { refreshKey?: num
   const voided = records.filter((r) => str(r.status) === "voided");
   const hasCorrection = voided.length > 0;
 
+  const uiState: AdminUiState = useMemo(() => {
+    if (!current && hasCorrection) return "not_administered";
+    if (!current) return "none";
+    const dose = `${str(current.doseRecorded)} ${str(current.name)} ${str(current.status)}`.toLowerCase();
+    if (/not\s+admin|voided|refused/.test(dose)) return "not_administered";
+    if (str(current.epistemicStatus) === "UNCERTAIN") return "uncertain";
+    return "administered";
+  }, [current, hasCorrection]);
+
+  function idemKey(action: string): string {
+    const med =
+      str(current?.id) ||
+      str(current?.name) ||
+      "lunch-med";
+    return `${rid}|${session.carePersonId}|${med}|${action}`;
+  }
+
   async function reportAdministered() {
+    if (uiState === "administered") {
+      setMsg("This record already says the medication was administered.");
+      return;
+    }
+    const key = idemKey("administered");
+    if (lastIdempotencyKey.current === key && busy) return;
+    lastIdempotencyKey.current = key;
     setBusy(true);
     setMsg(null);
     try {
@@ -51,7 +83,7 @@ export function MedicationCorrectionPanel({ refreshKey = 0 }: { refreshKey?: num
         const s = await confirmCareUpdateAsync(p.bundle);
         setMsg(
           s.kind === "persisted"
-            ? `Saved as caregiver-reported · ${session.displayName} · ${new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`
+            ? `Saved as caregiver-reported · current status: administered · ${session.displayName} · ${new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`
             : s.message ?? "Not saved",
         );
         const st = await fetchCareState();
@@ -65,6 +97,13 @@ export function MedicationCorrectionPanel({ refreshKey = 0 }: { refreshKey?: num
   }
 
   async function correctNotAdministered() {
+    if (uiState === "not_administered") {
+      setMsg("This record already says the medication was not administered.");
+      return;
+    }
+    const key = idemKey("not_administered");
+    if (lastIdempotencyKey.current === key && busy) return;
+    lastIdempotencyKey.current = key;
     setBusy(true);
     setMsg(null);
     try {
@@ -74,14 +113,13 @@ export function MedicationCorrectionPanel({ refreshKey = 0 }: { refreshKey?: num
         const s = await confirmCareUpdateAsync(p.bundle);
         setMsg(
           s.kind === "persisted"
-            ? `Correction saved · current status: not administered · ${session.displayName}`
+            ? `Correction saved · current status: not administered · ${session.displayName}. Original report remains in history.`
             : s.message ?? "Correction not saved",
         );
         setAlertSeen(false);
         const st = await fetchCareState();
         setState(st);
       } else {
-        // Fallback: show honest local guidance if structure fails
         setMsg(
           p.message ??
             "Record the correction in Relay or documentation: medication was not administered.",
@@ -128,10 +166,10 @@ export function MedicationCorrectionPanel({ refreshKey = 0 }: { refreshKey?: num
 
       <div className="med-current-truth" data-testid="med-current-truth">
         <h4>Current status</h4>
-        {!current && voided.length === 0 && (
+        {uiState === "none" && (
           <p className="muted">No administration has been recorded yet.</p>
         )}
-        {current && str(current.status) !== "voided" && (
+        {uiState === "administered" && current && (
           <p>
             <strong>
               {str(current.epistemicStatus) === "CONFIRMED"
@@ -151,10 +189,19 @@ export function MedicationCorrectionPanel({ refreshKey = 0 }: { refreshKey?: num
             )}
           </p>
         )}
-        {hasCorrection && !current && (
+        {uiState === "not_administered" && (
           <p data-testid="med-corrected-banner">
-            <strong>Corrected: Not administered</strong> (per latest correction
-            on file). History below keeps the original report.
+            <strong>Current record: medication was not administered</strong>
+            {hasCorrection
+              ? " (correction on file). History below keeps the original report."
+              : "."}
+          </p>
+        )}
+        {uiState === "uncertain" && current && (
+          <p>
+            <strong>Uncertain:</strong> reports disagree or are incomplete for{" "}
+            {str(current.name) || "this medication"}. Review history before
+            confirming.
           </p>
         )}
       </div>
@@ -179,24 +226,50 @@ export function MedicationCorrectionPanel({ refreshKey = 0 }: { refreshKey?: num
       )}
 
       <div className="btn-row" style={{ marginTop: 12 }}>
-        <button
-          type="button"
-          className="primary-btn"
-          data-testid="med-report-admin"
-          disabled={busy}
-          onClick={() => void reportAdministered()}
-        >
-          Record as administered
-        </button>
-        <button
-          type="button"
-          className="secondary-btn"
-          data-testid="med-correct-not-admin"
-          disabled={busy}
-          onClick={() => void correctNotAdministered()}
-        >
-          Correct: not administered
-        </button>
+        {uiState === "none" || uiState === "uncertain" ? (
+          <>
+            <button
+              type="button"
+              className="primary-btn"
+              data-testid="med-report-admin"
+              disabled={busy}
+              onClick={() => void reportAdministered()}
+            >
+              Record as administered
+            </button>
+            <button
+              type="button"
+              className="secondary-btn"
+              data-testid="med-correct-not-admin"
+              disabled={busy}
+              onClick={() => void correctNotAdministered()}
+            >
+              Record as not administered
+            </button>
+          </>
+        ) : null}
+        {uiState === "administered" ? (
+          <button
+            type="button"
+            className="secondary-btn"
+            data-testid="med-correct-not-admin"
+            disabled={busy}
+            onClick={() => void correctNotAdministered()}
+          >
+            Correct record: not administered
+          </button>
+        ) : null}
+        {uiState === "not_administered" ? (
+          <button
+            type="button"
+            className="secondary-btn"
+            data-testid="med-report-admin"
+            disabled={busy}
+            onClick={() => void reportAdministered()}
+          >
+            Correct record: was administered
+          </button>
+        ) : null}
       </div>
       {msg && (
         <p className="muted" role="status" data-testid="med-correction-msg">
