@@ -1,0 +1,67 @@
+{
+  "How did Evelyn feel yesterday?": {
+    "intent": "YESTERDAY_WELLBEING",
+    "intents": [
+      "YESTERDAY_WELLBEING",
+      "OBSERVATION_HISTORY"
+    ],
+    "answer": "Yesterday, Evelyn Carter was reported as having a fever. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan."
+  },
+  "What changed today?": {
+    "intent": "CHANGES_TODAY",
+    "intents": [
+      "CHANGES_TODAY"
+    ],
+    "answer": "Care updates recorded for Evelyn Carter today:\n\u2022 Medication administration was corrected: not administered.\n\u2022 Caregiver reported: fever\n\u2022 Medication change needs verification: Tylenol \u00b7 reported dose 300mg \u00b7 reason: fever. Not an active medication-plan instruction until authorized review.\n\u2022 Medication change needs verification: Zyrtec \u00b7 reported dose 10mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.\n\u2022 Medication change needs verification: Claritin \u00b7 reported dose 10mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+  },
+  "What changed since yesterday?": {
+    "intent": "CHANGES_SINCE_YESTERDAY",
+    "intents": [
+      "CHANGES_SINCE_YESTERDAY"
+    ],
+    "answer": "Since yesterday for Evelyn Carter: the medication-administration report was corrected to say it was not given, a fever report remains on the recent care record, and the Allegra 60 mg request remains pending medication-plan verification."
+  },
+  "How was the previous shift?": {
+    "intent": "PREVIOUS_SHIFT",
+    "intents": [
+      "PREVIOUS_SHIFT",
+      "HANDOFF_REVIEW",
+      "RECENT_ACTIVITY"
+    ],
+    "answer": "During the previous shift, the prior caregiver reported care updates for Evelyn Carter. Evelyn Carter had a fever reported. A meal note was recorded (Probe calm; Therapy rescheduled to later slot). A medication-administration entry was later corrected to show the medication was not given. A Tylenol dose for fever was proposed as a medication change and remains pending review \u2014 not an active plan instruction. The Allegra 60 mg request remained unresolved at handoff and is still waiting for medication-plan verification."
+  },
+  "What did Maya report during her shift?": {
+    "intent": "PREVIOUS_SHIFT",
+    "intents": [
+      "PREVIOUS_SHIFT",
+      "HANDOFF_REVIEW",
+      "RECENT_ACTIVITY"
+    ],
+    "answer": "During the previous shift, Maya reported care updates for Evelyn Carter. Evelyn Carter had a fever reported. A meal note was recorded (Probe calm; Therapy rescheduled to later slot). A medication-administration entry was later corrected to show the medication was not given. A Tylenol dose for fever was proposed as a medication change and remains pending review \u2014 not an active plan instruction. The Allegra 60 mg request remained unresolved at handoff and is still waiting for medication-plan verification."
+  },
+  "What needs review?": {
+    "intent": "TASKS_REMAINING",
+    "intents": [
+      "TASKS_REMAINING",
+      "OPEN_LOOP_STATUS",
+      "WAITING_ON"
+    ],
+    "answer": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Marcus Carter, Maya Bennett.\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\u2022 Needs your review: a prior Metformin-with-lunch confirmation is still open.\n\u2022 Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n\u2022 Needs checking: Reported dose is ambiguous (Count unit without tablet strength \u2014 cannot convert to mg). Requires human review."
+  },
+  "What remains unfinished?": {
+    "intent": "TASKS_REMAINING",
+    "intents": [
+      "TASKS_REMAINING",
+      "OPEN_LOOP_STATUS",
+      "WAITING_ON"
+    ],
+    "answer": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Marcus Carter, Maya Bennett.\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\u2022 Needs your review: a prior Metformin-with-lunch confirmation is still open.\n\u2022 Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n\u2022 Needs checking: Reported dose is ambiguous (Count unit without tablet strength \u2014 cannot convert to mg). Requires human review."
+  },
+  "How is Evelyn today?": {
+    "intent": "STATUS_SYNTHESIS",
+    "intents": [
+      "STATUS_SYNTHESIS"
+    ],
+    "answer": "Evelyn Carter's most recent report on file is caregiver reported: ate (last noted Saturday, July 25, 2026 at 2:32 PM PDT). The main item needing attention is Allegra 60 mg was reported for allergies and is waiting for medication-plan verification. Metformin 500 mg remains scheduled for 12:00 PM. Physical therapy is Friday 4:30 PM PDT."
+  }
+}

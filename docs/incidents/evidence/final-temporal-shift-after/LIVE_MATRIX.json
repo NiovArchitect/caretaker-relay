@@ -1,0 +1,747 @@
+[
+  {
+    "q": "How did Evelyn feel yesterday?",
+    "status": 200,
+    "ms": 716,
+    "intent": "YESTERDAY_WELLBEING",
+    "intents": [
+      "YESTERDAY_WELLBEING",
+      "OBSERVATION_HISTORY"
+    ],
+    "plan": null,
+    "answer": "Yesterday, Evelyn Carter was reported as having a fever. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "How was Evelyn yesterday?",
+    "status": 200,
+    "ms": 409,
+    "intent": "YESTERDAY_WELLBEING",
+    "intents": [
+      "YESTERDAY_WELLBEING",
+      "OBSERVATION_HISTORY"
+    ],
+    "plan": null,
+    "answer": "Yesterday, Evelyn Carter was reported as having a fever. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "Was she tired yesterday?",
+    "status": 200,
+    "ms": 222,
+    "intent": "YESTERDAY_WELLBEING",
+    "intents": [
+      "YESTERDAY_WELLBEING",
+      "OBSERVATION_HISTORY"
+    ],
+    "plan": null,
+    "answer": "Yesterday, Evelyn Carter was reported as having a fever. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What was her mood yesterday?",
+    "status": 200,
+    "ms": 600,
+    "intent": "YESTERDAY_WELLBEING",
+    "intents": [
+      "OBSERVATION_HISTORY",
+      "STATUS_SYNTHESIS",
+      "YESTERDAY_WELLBEING"
+    ],
+    "plan": null,
+    "answer": "Yesterday, Evelyn Carter was reported as having a fever. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "Did anything concerning happen yesterday?",
+    "status": 200,
+    "ms": 460,
+    "intent": "YESTERDAY_WELLBEING",
+    "intents": [
+      "YESTERDAY_WELLBEING",
+      "OBSERVATION_HISTORY"
+    ],
+    "plan": null,
+    "answer": "Yesterday, Evelyn Carter was reported as having a fever. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What changed today?",
+    "status": 200,
+    "ms": 211,
+    "intent": "CHANGES_TODAY",
+    "intents": [
+      "CHANGES_TODAY"
+    ],
+    "plan": null,
+    "answer": "Care updates recorded for Evelyn Carter today:\n• Medication administration was corrected: not administered.\n• Caregiver reported: fever\n• Medication change needs verification: Tylenol · reported dose 300mg · reason: fever. Not an active medication-plan instruction until authorized review.\n• Medication change needs verification: Zyrtec · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.\n• Medication change needs verification: Claritin · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What happened today?",
+    "status": 200,
+    "ms": 204,
+    "intent": "CHANGES_TODAY",
+    "intents": [
+      "CHANGES_TODAY"
+    ],
+    "plan": null,
+    "answer": "Care updates recorded for Evelyn Carter today:\n• Medication administration was corrected: not administered.\n• Caregiver reported: fever\n• Medication change needs verification: Tylenol · reported dose 300mg · reason: fever. Not an active medication-plan instruction until authorized review.\n• Medication change needs verification: Zyrtec · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.\n• Medication change needs verification: Claritin · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What is new today?",
+    "status": 200,
+    "ms": 554,
+    "intent": "CHANGES_TODAY",
+    "intents": [
+      "CHANGES_TODAY"
+    ],
+    "plan": null,
+    "answer": "Care updates recorded for Evelyn Carter today:\n• Medication administration was corrected: not administered.\n• Caregiver reported: fever\n• Medication change needs verification: Tylenol · reported dose 300mg · reason: fever. Not an active medication-plan instruction until authorized review.\n• Medication change needs verification: Zyrtec · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.\n• Medication change needs verification: Claritin · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "Was anything corrected today?",
+    "status": 200,
+    "ms": 491,
+    "intent": "CHANGES_TODAY",
+    "intents": [
+      "CHANGES_TODAY"
+    ],
+    "plan": null,
+    "answer": "Care updates recorded for Evelyn Carter today:\n• Medication administration was corrected: not administered.\n• Caregiver reported: fever\n• Medication change needs verification: Tylenol · reported dose 300mg · reason: fever. Not an active medication-plan instruction until authorized review.\n• Medication change needs verification: Zyrtec · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.\n• Medication change needs verification: Claritin · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What was completed today?",
+    "status": 200,
+    "ms": 257,
+    "intent": "CHANGES_TODAY",
+    "intents": [
+      "CHANGES_TODAY"
+    ],
+    "plan": null,
+    "answer": "Care updates recorded for Evelyn Carter today:\n• Medication administration was corrected: not administered.\n• Caregiver reported: fever\n• Medication change needs verification: Tylenol · reported dose 300mg · reason: fever. Not an active medication-plan instruction until authorized review.\n• Medication change needs verification: Zyrtec · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.\n• Medication change needs verification: Claritin · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What changed since yesterday?",
+    "status": 200,
+    "ms": 289,
+    "intent": "CHANGES_SINCE_YESTERDAY",
+    "intents": [
+      "CHANGES_SINCE_YESTERDAY"
+    ],
+    "plan": null,
+    "answer": "Since yesterday for Evelyn Carter: the medication-administration report was corrected to say it was not given, a fever report remains on the recent care record, and the Allegra 60 mg request remains pending medication-plan verification.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "Is Evelyn doing better than yesterday?",
+    "status": 200,
+    "ms": 393,
+    "intent": "CHANGES_SINCE_YESTERDAY",
+    "intents": [
+      "CHANGES_SINCE_YESTERDAY"
+    ],
+    "plan": null,
+    "answer": "Since yesterday for Evelyn Carter: the medication-administration report was corrected to say it was not given, a fever report remains on the recent care record, and the Allegra 60 mg request remains pending medication-plan verification.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What is different from yesterday?",
+    "status": 200,
+    "ms": 617,
+    "intent": "CHANGES_SINCE_YESTERDAY",
+    "intents": [
+      "CHANGES_SINCE_YESTERDAY"
+    ],
+    "plan": null,
+    "answer": "Since yesterday for Evelyn Carter: the medication-administration report was corrected to say it was not given, a fever report remains on the recent care record, and the Allegra 60 mg request remains pending medication-plan verification.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What became resolved since yesterday?",
+    "status": 200,
+    "ms": 411,
+    "intent": "CHANGES_SINCE_YESTERDAY",
+    "intents": [
+      "CHANGES_SINCE_YESTERDAY"
+    ],
+    "plan": null,
+    "answer": "Since yesterday for Evelyn Carter: the medication-administration report was corrected to say it was not given, a fever report remains on the recent care record, and the Allegra 60 mg request remains pending medication-plan verification.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What still remains from yesterday?",
+    "status": 200,
+    "ms": 409,
+    "intent": "CHANGES_SINCE_YESTERDAY",
+    "intents": [
+      "CHANGES_SINCE_YESTERDAY",
+      "TASKS_REMAINING"
+    ],
+    "plan": null,
+    "answer": "Since yesterday for Evelyn Carter: the medication-administration report was corrected to say it was not given, a fever report remains on the recent care record, and the Allegra 60 mg request remains pending medication-plan verification.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "How was the previous shift?",
+    "status": 200,
+    "ms": 423,
+    "intent": "PREVIOUS_SHIFT",
+    "intents": [
+      "PREVIOUS_SHIFT",
+      "HANDOFF_REVIEW",
+      "RECENT_ACTIVITY"
+    ],
+    "plan": null,
+    "answer": "During the previous shift, the prior caregiver reported care updates for Evelyn Carter. Evelyn Carter had a fever reported. A medication-administration entry was later corrected to show the medication was not given. A Tylenol dose for fever was proposed as a medication change and remains pending review — not an active plan instruction. The Allegra 60 mg request remained unresolved at handoff and is still waiting for medication-plan verification.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What happened last shift?",
+    "status": 200,
+    "ms": 396,
+    "intent": "PREVIOUS_SHIFT",
+    "intents": [
+      "PREVIOUS_SHIFT",
+      "HANDOFF_REVIEW",
+      "RECENT_ACTIVITY"
+    ],
+    "plan": null,
+    "answer": "During the previous shift, the prior caregiver reported care updates for Evelyn Carter. Evelyn Carter had a fever reported. A medication-administration entry was later corrected to show the medication was not given. A Tylenol dose for fever was proposed as a medication change and remains pending review — not an active plan instruction. The Allegra 60 mg request remained unresolved at handoff and is still waiting for medication-plan verification.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What did the previous caregiver report?",
+    "status": 200,
+    "ms": 205,
+    "intent": "HANDOFF_REVIEW",
+    "intents": [
+      "HANDOFF_REVIEW",
+      "CARE_TEAM"
+    ],
+    "plan": null,
+    "answer": "What Maya Bennett needs to know:\n\n• Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What did Maya report during her shift?",
+    "status": 200,
+    "ms": 204,
+    "intent": "PREVIOUS_SHIFT",
+    "intents": [
+      "PREVIOUS_SHIFT",
+      "HANDOFF_REVIEW",
+      "RECENT_ACTIVITY"
+    ],
+    "plan": null,
+    "answer": "During the previous shift, Maya reported care updates for Evelyn Carter. Evelyn Carter had a fever reported. A medication-administration entry was later corrected to show the medication was not given. A Tylenol dose for fever was proposed as a medication change and remains pending review — not an active plan instruction. The Allegra 60 mg request remained unresolved at handoff and is still waiting for medication-plan verification.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What was completed and what remained unfinished?",
+    "status": 200,
+    "ms": 354,
+    "intent": "TASKS_REMAINING",
+    "intents": [
+      "TASKS_REMAINING",
+      "OPEN_LOOP_STATUS",
+      "WAITING_ON"
+    ],
+    "plan": null,
+    "answer": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Marcus Carter, Maya Bennett.\n• Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n• Needs your review: a prior Metformin-with-lunch confirmation is still open.\n• Needs checking: a reported dose unit does not match the authorized instruction.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What needs review?",
+    "status": 200,
+    "ms": 464,
+    "intent": "TASKS_REMAINING",
+    "intents": [
+      "TASKS_REMAINING",
+      "OPEN_LOOP_STATUS",
+      "WAITING_ON"
+    ],
+    "plan": null,
+    "answer": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Marcus Carter, Maya Bennett.\n• Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n• Needs your review: a prior Metformin-with-lunch confirmation is still open.\n• Needs checking: a reported dose unit does not match the authorized instruction.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What medication changes are waiting?",
+    "status": 200,
+    "ms": 414,
+    "intent": "MEDICATION_CHANGE",
+    "intents": [
+      "MEDICATION_CHANGE"
+    ],
+    "plan": null,
+    "answer": "One medication change is waiting for review: Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.. It is not active plan instruction until authorized.\n\nActive authorized medication remains Metformin 500 mg.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "What remains unfinished?",
+    "status": 200,
+    "ms": 206,
+    "intent": "TASKS_REMAINING",
+    "intents": [
+      "TASKS_REMAINING",
+      "OPEN_LOOP_STATUS",
+      "WAITING_ON"
+    ],
+    "plan": null,
+    "answer": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Marcus Carter, Maya Bennett.\n• Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n• Needs your review: a prior Metformin-with-lunch confirmation is still open.\n• Needs checking: a reported dose unit does not match the authorized instruction.",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "How many medication-review tasks are active?",
+    "status": 200,
+    "ms": 611,
+    "intent": "MEDICATION_CURRENT",
+    "intents": [
+      "MEDICATION_CURRENT"
+    ],
+    "plan": null,
+    "answer": "Metformin 500 mg\nTake at 12:00 PM\nWindow 11:30 AM – 12:30 PM\nTake with food\nAuthorized by Dr. Priya Shah",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  },
+  {
+    "q": "Is anything duplicated?",
+    "status": 200,
+    "ms": 406,
+    "intent": "UNKNOWN_QUESTION",
+    "intents": [
+      "UNKNOWN_QUESTION"
+    ],
+    "plan": null,
+    "answer": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+    "raw_keys": [
+      "ok",
+      "answer",
+      "grounded",
+      "intent",
+      "intents",
+      "persona",
+      "source_refs",
+      "projections_used",
+      "conversation_id",
+      "turn_id",
+      "model_path",
+      "can_deterministic",
+      "needs_clarification",
+      "authority",
+      "understand_mode",
+      "correlation_id"
+    ]
+  }
+]
