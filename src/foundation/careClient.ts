@@ -1537,7 +1537,7 @@ export async function answerCareQuestion(question: string): Promise<string> {
     /^(what|when|where|why|who|how|did|does|do|is|are|am|was|were|can|should|has|have|prepare|show|tell me|summarize|summary|why did|how come)\b/i.test(
       raw,
     ) ||
-    /what happened|since i was last|caught up|going on|need to deal|still need|same response|repeat yourself|make that shorter|what did you understand/.test(
+    /what happened|since i was last|caught up|going on|need to deal|still need|same response|repeat yourself|make that shorter|what did you understand|did not answer|didn't answer|canned response|be more concise/.test(
       raw.toLowerCase(),
     );
   // Multi-clause caregiver narratives (even if they end with "can you tell Maya?")

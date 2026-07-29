@@ -1,0 +1,757 @@
+{
+  "answers": [
+    {
+      "q": "How is Evelyn today?",
+      "status": 200,
+      "ms": 606,
+      "intent": "STATUS_SYNTHESIS",
+      "intents": [
+        "STATUS_SYNTHESIS"
+      ],
+      "answer": "Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\nRecent caregiver reports: Caregiver reported: ate (last noted Saturday, July 25, 2026 at 2:32 PM PDT).\n\nMedication plan: Metformin 500 mg \u00b7 12:00 PM.\n\nComing up: Physical therapy \u00b7 Friday 4:30 PM PDT.\n\nThis is a synthesis of authorized care records \u2014 not a diagnosis. Ask if you want details on meds, appointments, or who is helping next.",
+      "len": 527,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": true,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "How is she right now?",
+      "status": 200,
+      "ms": 533,
+      "intent": "STATUS_SYNTHESIS",
+      "intents": [
+        "STATUS_SYNTHESIS"
+      ],
+      "answer": "Here's a plain-language picture of Evelyn Carter right now:\n\nFrom the latest caregiver handoff:\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\nRecent caregiver reports: Caregiver reported: ate (last noted Saturday, July 25, 2026 at 2:32 PM PDT).\n\nMedication plan: Metformin 500 mg \u00b7 12:00 PM.\n\nComing up: Physical therapy \u00b7 Friday 4:30 PM PDT.\n\nThis is a synthesis of authorized care records \u2014 not a diagnosis. Ask if you want details on meds, appointments, or who is helping next.",
+      "len": 527,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": true,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "Is anything urgent today?",
+      "status": 200,
+      "ms": 445,
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "answer": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+      "len": 309,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "How was the previous shift?",
+      "status": 200,
+      "ms": 371,
+      "intent": "PREVIOUS_SHIFT",
+      "intents": [
+        "PREVIOUS_SHIFT",
+        "HANDOFF_REVIEW",
+        "RECENT_ACTIVITY"
+      ],
+      "answer": "From the previous shift for Evelyn Carter:\n\nWhat was handed off:\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\nThis is prior-shift continuity only \u2014 not today's full medication plan or a second \u201cwhat changed\u201d dump.",
+      "len": 261,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "What happened last shift?",
+      "status": 200,
+      "ms": 412,
+      "intent": "PREVIOUS_SHIFT",
+      "intents": [
+        "PREVIOUS_SHIFT",
+        "HANDOFF_REVIEW",
+        "RECENT_ACTIVITY",
+        "CHANGE_SINCE"
+      ],
+      "answer": "From the previous shift for Evelyn Carter:\n\nWhat was handed off:\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\nThis is prior-shift continuity only \u2014 not today's full medication plan or a second \u201cwhat changed\u201d dump.",
+      "len": 261,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "What did Maya report during her shift?",
+      "status": 200,
+      "ms": 231,
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "answer": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+      "len": 309,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "How did Evelyn feel yesterday?",
+      "status": 200,
+      "ms": 588,
+      "intent": "CHANGE_SINCE",
+      "intents": [
+        "CHANGE_SINCE",
+        "RECENT_ACTIVITY"
+      ],
+      "answer": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\n\u2022 Medication administration was corrected: not administered.\n\u2022 Probe calm; Therapy rescheduled to later slot (from Daniel Kim)\n\u2022 Caregiver reported: fever (from Marcus Carter)\n\u2022 Medication change needs verification: Tylenol \u00b7 reported dose 300mg \u00b7 reason: fever. Not an active medication-plan instruction until authorized review. (from Marcus Carter)\n\u2022 Medication change needs verification: Zyrtec \u00b7 reported dose 10mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review. (from Marcus Carter)",
+      "len": 694,
+      "markers": [],
+      "has_what_changed": true,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "What changed today?",
+      "status": 200,
+      "ms": 339,
+      "intent": "CHANGE_SINCE",
+      "intents": [
+        "CHANGE_SINCE"
+      ],
+      "answer": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\n\u2022 Medication administration was corrected: not administered.\n\u2022 Probe calm; Therapy rescheduled to later slot (from Daniel Kim)\n\u2022 Caregiver reported: fever (from Marcus Carter)\n\u2022 Medication change needs verification: Tylenol \u00b7 reported dose 300mg \u00b7 reason: fever. Not an active medication-plan instruction until authorized review. (from Marcus Carter)\n\u2022 Medication change needs verification: Zyrtec \u00b7 reported dose 10mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review. (from Marcus Carter)",
+      "len": 694,
+      "markers": [],
+      "has_what_changed": true,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "What changed since yesterday?",
+      "status": 200,
+      "ms": 263,
+      "intent": "CHANGE_SINCE",
+      "intents": [
+        "CHANGE_SINCE",
+        "RECENT_ACTIVITY"
+      ],
+      "answer": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\n\u2022 Medication administration was corrected: not administered.\n\u2022 Probe calm; Therapy rescheduled to later slot (from Daniel Kim)\n\u2022 Caregiver reported: fever (from Marcus Carter)\n\u2022 Medication change needs verification: Tylenol \u00b7 reported dose 300mg \u00b7 reason: fever. Not an active medication-plan instruction until authorized review. (from Marcus Carter)\n\u2022 Medication change needs verification: Zyrtec \u00b7 reported dose 10mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review. (from Marcus Carter)",
+      "len": 694,
+      "markers": [],
+      "has_what_changed": true,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "What medication is active?",
+      "status": 200,
+      "ms": 420,
+      "intent": "MEDICATION_CURRENT",
+      "intents": [
+        "MEDICATION_CURRENT"
+      ],
+      "answer": "Metformin 500 mg\nTake at 12:00 PM\nWindow 11:30 AM \u2013 12:30 PM\nTake with food\nAuthorized by Dr. Priya Shah",
+      "len": 104,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "Is Allegra active?",
+      "status": 200,
+      "ms": 613,
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "answer": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+      "len": 309,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "Was medication administered?",
+      "status": 200,
+      "ms": 413,
+      "intent": "MEDICATION_ADMINISTRATION_HISTORY",
+      "intents": [
+        "MEDICATION_ADMINISTRATION_HISTORY"
+      ],
+      "answer": "Latest caregiver-reported medication note from handoff (not clinician-confirmed):\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\nThat handoff note is caregiver-reported. It is not automatically clinician confirmed.",
+      "len": 260,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "What medication change is waiting for review?",
+      "status": 200,
+      "ms": 404,
+      "intent": "MEDICATION_CHANGE",
+      "intents": [
+        "MEDICATION_CHANGE"
+      ],
+      "answer": "Current authorized instruction (not a new change from Relay):\nMetformin \u00b7 500 mg \u00b7 12:00 PM \u00b7 Take with food \u00b7 Authorized by Dr. Priya Shah\n\nI only report what is on the care plan. I do not invent medication changes.",
+      "len": 216,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "What remains unfinished?",
+      "status": 200,
+      "ms": 410,
+      "intent": "TASKS_REMAINING",
+      "intents": [
+        "TASKS_REMAINING",
+        "OPEN_LOOP_STATUS",
+        "WAITING_ON"
+      ],
+      "answer": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Marcus Carter, Maya Bennett.\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\u2022 Needs your review: Yes \u2014 I gave Metformin 500 mg with lunch yesterday around noon.\n\u2022 Needs your review: Yes around 12:15 after lunch.\n\u2022 Needs your review: Yes I gave two tablets at lunch.\n\u2022 Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n\u2022 Needs checking: Reported dose is ambiguous (Count unit without tablet strength \u2014 cannot convert to mg). Requires human review.",
+      "len": 645,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "What needs review?",
+      "status": 200,
+      "ms": 527,
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "answer": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+      "len": 309,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "Who owns the remaining work?",
+      "status": 200,
+      "ms": 495,
+      "intent": "TASKS_REMAINING",
+      "intents": [
+        "TASKS_REMAINING"
+      ],
+      "answer": "Still unfinished from the last handoff:\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\nAlso needs review:\n\u2022 The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team before marking this complete.\n\nComing up:\n\u2022 Metformin 500 mg \u00b7 12:00 PM today\n\u2022 Physical therapy \u00b7 Friday 4:30 PM PDT",
+      "len": 426,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "Am I getting the same response?",
+      "status": 200,
+      "ms": 410,
+      "intent": "META_CONVERSATION",
+      "intents": [
+        "META_CONVERSATION"
+      ],
+      "answer": "You're asking about how I answer \u2014 not about a new care event.\n\nI try to answer each question with a different focus: today's status, a prior shift, medications, open work, or the care team. If two answers looked the same, that was a product defect in how I planned the reply \u2014 not a second care update.\n\nI did not file a care report from this question. Ask something like \u201cHow is she today?\u201d or \u201cWhat medication does she take?\u201d for care facts.",
+      "len": 444,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "Why did you repeat yourself?",
+      "status": 200,
+      "ms": 400,
+      "intent": "META_CONVERSATION",
+      "intents": [
+        "META_CONVERSATION"
+      ],
+      "answer": "You're asking about how I answer \u2014 not about a new care event.\n\nI try to answer each question with a different focus: today's status, a prior shift, medications, open work, or the care team. If two answers looked the same, that was a product defect in how I planned the reply \u2014 not a second care update.\n\nI did not file a care report from this question. Ask something like \u201cHow is she today?\u201d or \u201cWhat medication does she take?\u201d for care facts.",
+      "len": 444,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "Make that shorter.",
+      "status": 200,
+      "ms": 620,
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "answer": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+      "len": 309,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "What did you understand from my question?",
+      "status": 200,
+      "ms": 410,
+      "intent": "META_CONVERSATION",
+      "intents": [
+        "META_CONVERSATION"
+      ],
+      "answer": "You're asking about how I answer \u2014 not about a new care event.\n\nI try to answer each question with a different focus: today's status, a prior shift, medications, open work, or the care team. If two answers looked the same, that was a product defect in how I planned the reply \u2014 not a second care update.\n\nI did not file a care report from this question. Ask something like \u201cHow is she today?\u201d or \u201cWhat medication does she take?\u201d for care facts.",
+      "len": 444,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "That did not answer what I asked.",
+      "status": 200,
+      "ms": 412,
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "answer": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+      "len": 309,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    },
+    {
+      "q": "Are you giving me a canned response?",
+      "status": 200,
+      "ms": 351,
+      "intent": "META_CONVERSATION",
+      "intents": [
+        "META_CONVERSATION"
+      ],
+      "answer": "You're asking about how I answer \u2014 not about a new care event.\n\nI try to answer each question with a different focus: today's status, a prior shift, medications, open work, or the care team. If two answers looked the same, that was a product defect in how I planned the reply \u2014 not a second care update.\n\nI did not file a care report from this question. Ask something like \u201cHow is she today?\u201d or \u201cWhat medication does she take?\u201d for care facts.",
+      "len": 444,
+      "markers": [],
+      "has_what_changed": false,
+      "has_picture": false,
+      "keys": [
+        "ok",
+        "answer",
+        "grounded",
+        "intent",
+        "intents",
+        "persona",
+        "source_refs",
+        "projections_used",
+        "conversation_id",
+        "turn_id",
+        "model_path",
+        "can_deterministic",
+        "needs_clarification",
+        "authority",
+        "understand_mode",
+        "correlation_id"
+      ]
+    }
+  ],
+  "understand_meta": [
+    {
+      "q": "Am I getting the same response?",
+      "status": 200,
+      "kind": "verify",
+      "items": 1,
+      "msg": null,
+      "item_labels": [
+        "Input appears to be a meta-question rather than a caregiver coordination message containing extractable events."
+      ]
+    },
+    {
+      "q": "Make that shorter.",
+      "status": 200,
+      "kind": "verify",
+      "items": 0,
+      "msg": null,
+      "item_labels": []
+    },
+    {
+      "q": "Are you giving me a canned response?",
+      "status": 200,
+      "kind": "verify",
+      "items": 1,
+      "msg": null,
+      "item_labels": [
+        "Message contains no extractable care events, observations, or coordination items"
+      ]
+    },
+    {
+      "q": "am I getting the same response",
+      "status": 200,
+      "kind": "verify",
+      "items": 1,
+      "msg": null,
+      "item_labels": [
+        "Input contains no caregiver coordination events or statements matching extraction criteria."
+      ]
+    }
+  ]
+}
