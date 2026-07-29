@@ -1,0 +1,119 @@
+{
+  "base": "https://care.niovlabs.com",
+  "started_at": "2026-07-29T11:08:41.829Z",
+  "login": {
+    "homeHasSignIn": true,
+    "homeHasPassword": false,
+    "pwdVisible": true,
+    "submitVisible": true,
+    "PUBLIC_SIGN_IN_FORM_AVAILABLE": true,
+    "VISIBLE_PASSWORD_INPUT": true,
+    "SUBMIT_CONTROL": true,
+    "home_zero_password_by_design": true,
+    "signed_in": true,
+    "SESSION_RESTORE": true,
+    "consoleErrors": []
+  },
+  "handoff": {
+    "inbox_on_today": true,
+    "opened": true,
+    "detail_visible": true,
+    "acknowledged_ui": true,
+    "panel_open": true,
+    "send_label": "Send to Maya Bennett",
+    "sent_ui": true,
+    "amend_control": true,
+    "amended_ui": true
+  },
+  "appointment": {
+    "card_visible": true,
+    "opened": true,
+    "detail_snippet": "Appointment\n\nFrom Evelyn Carter's care record. Relay is not inventing these fields.\n\nName\nPhysical therapy\nWhen\nWednesday, July 29, 2026 at 6:19 AM PDT\nStatus\nscheduled\nFacility\nNorth County Physical Therapy (synthetic evaluation location)\nAddress\n1234 Coastal Care Way, Oceanside, CA 92054\nPhone\n+1-555-0140\nDirections\nLocation not on file — ask the care team\nTravel estimate\n18 minutes\nLeave by\nWed, Jul 29, 6:01 AM\nTransportation\nAsk Relay who is handling transportation\nPrior schedule history\nsch",
+    "has_when": true,
+    "has_facility": true,
+    "has_address": true,
+    "has_phone": true,
+    "has_directions": true,
+    "has_transport": true,
+    "has_history": true
+  },
+  "work": {
+    "visible_rows": 6,
+    "clarities": [
+      {
+        "text": "Review requiredReview Allegra medication-plan request · Needs a helper · Needs a helper\nI can help",
+        "clarity": "Review required"
+      },
+      {
+        "text": "Help neededPick up prescription refill · Needs a helper · Needs a helper\nI can help",
+        "clarity": "Help needed"
+      },
+      {
+        "text": "Review requiredReview who can access care for Evelyn Carter · Needs a helper · Needs a helper\nI can help",
+        "clarity": "Review required"
+      },
+      {
+        "text": "Someone else is handling thisConfirm Metformin-with-lunch report · p-maya · Someone is handling this · needs attention s",
+        "clarity": "Someone else is handling this"
+      },
+      {
+        "text": "Someone else is handling thisFollow up: Shift declined — coverage needed · p-maya · Someone is handling this\nComplete\nEs",
+        "clarity": "Someone else is handling this"
+      },
+      {
+        "text": "Someone else is handling thisFollow up: Therapy today · p-maya · Someone is handling this\nComplete\nEscalate",
+        "clarity": "Someone else is handling this"
+      }
+    ],
+    "hasYourTask": false,
+    "hasHelp": true,
+    "hasReview": true,
+    "hasSomeoneElse": true
+  },
+  "attention": {
+    "badge": 7,
+    "badgeText": "7 new"
+  },
+  "roles": {
+    "maya": {
+      "signed_in": true,
+      "has_recipient": true,
+      "snippet": "Caretaker Relay\nE\nEVELYN CARTER'S CARE\nEvelyn Carter\nCare for Evelyn Carter. You are Maya Bennett, Family / friend caregiver.\nFamily / friend\nWed, Jul 29\nRelay\nMaya Bennett · Family / friend caregiver\nM\nAccount\n9 new\nConnected\nNAVIGATE\nToday\nCare\nPeople\nDocuments\nPriorities, what"
+    },
+    "walter": {
+      "signed_in": true,
+      "has_recipient": true,
+      "snippet": "Caretaker Relay\nE\nEVELYN CARTER'S CARE\nEvelyn Carter\nCare for Evelyn Carter. You are Daniel Kim, Professional caregiver.\nShift / DSP\nWed, Jul 29\nRelay\nDaniel Kim · Professional caregiver\nD\nAccount\n6 new\nConnected\nNAVIGATE\nShift\nCare plan\nCare team\nNotes\nShift priorities, assigned"
+    },
+    "drshah": {
+      "signed_in": true,
+      "has_recipient": true,
+      "snippet": "Caretaker Relay\nE\nEVELYN CARTER'S CARE\nEvelyn Carter\nCare for Evelyn Carter. You are Dr. Priya Shah, Caregiver.\nClinical view\nWed, Jul 29\nRelay\nDr. Priya Shah · Caregiver\nD\nAccount\n7 new\nConnected\nNAVIGATE\nSummary\nClinical\nCare team\nRecords\nEvidence-linked trends, medications, ob"
+    },
+    "self": {
+      "create_form": true,
+      "text": "Caretaker Relay\n\nShared care, verified\n\n← All options\nCreate account\n\nThis creates your account only. You will not see anyone’s care record until invited or approved. Selecting a role is not authorization.\n\nYour preferred name (required)\nEmail (required)\nPassword (required, min 8)\n\nHow you connect ("
+    }
+  },
+  "a11y": {
+    "keyboard_traps": 0,
+    "sign_in_form": true
+  },
+  "gates": {
+    "public_sign_in_form_available": true,
+    "visible_password_after_sign_in": true,
+    "public_login_journey": "PASS",
+    "handoff_inbox_today": "PASS",
+    "handoff_open_detail": "PASS",
+    "handoff_send_or_ack": "PASS",
+    "appointment_card": "PASS",
+    "appointment_detail": "PASS",
+    "work_clarity_visible": "PASS",
+    "roles_maya": "PASS",
+    "roles_walter": "PASS",
+    "roles_drshah": "PASS",
+    "roles_self": "PASS"
+  },
+  "defects": [],
+  "finished_at": "2026-07-29T11:09:28.203Z"
+}

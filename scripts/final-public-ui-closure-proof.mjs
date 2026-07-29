@@ -46,25 +46,55 @@ function shot(page, name) {
   });
 }
 
-async function openSignInForm(page) {
+async function forceSignOut(page) {
+  // Clear client session storage so LoginGate always remounts cleanly.
   await page.goto(BASE, { waitUntil: "domcontentloaded", timeout: 120_000 });
-  await page.waitForTimeout(1200);
-  // sign out if already in
+  await page.evaluate(() => {
+    try {
+      sessionStorage.clear();
+      localStorage.clear();
+    } catch {
+      /* ignore */
+    }
+  });
+  await page.context().clearCookies();
+  await page.goto(BASE, { waitUntil: "domcontentloaded", timeout: 120_000 });
+  await page.waitForTimeout(1000);
   if (await page.getByTestId("app-shell").isVisible().catch(() => false)) {
     const trigger = page
       .getByTestId("profile-menu-button")
-      .or(page.getByTestId("avatar-menu-button"));
+      .or(page.getByTestId("avatar-menu-button"))
+      .or(page.getByTestId("account-menu-button"));
     if (await trigger.count()) {
       await trigger.first().click().catch(() => {});
+      await page.waitForTimeout(400);
       await page
         .getByTestId("sign-out")
         .or(page.getByRole("button", { name: /sign out/i }))
+        .first()
         .click()
         .catch(() => {});
       await page.waitForTimeout(1500);
     }
+    // Hard clear again if still authed
+    if (await page.getByTestId("app-shell").isVisible().catch(() => false)) {
+      await page.evaluate(() => {
+        try {
+          sessionStorage.clear();
+          localStorage.clear();
+        } catch {
+          /* ignore */
+        }
+      });
+      await page.goto(BASE, { waitUntil: "domcontentloaded", timeout: 120_000 });
+      await page.waitForTimeout(1000);
+    }
   }
-  await page.getByTestId("login-gate").waitFor({ state: "visible", timeout: 45_000 });
+}
+
+async function openSignInForm(page) {
+  await forceSignOut(page);
+  await page.getByTestId("login-gate").waitFor({ state: "visible", timeout: 60_000 });
   const homeHasSignIn = await page
     .getByTestId("entry-sign-in")
     .isVisible()
@@ -314,19 +344,25 @@ async function main() {
       }
     }
 
-    // Self create path (no care access)
-    await openSignInForm(page);
+    // Self create path (no care access) — start from LoginGate home, not sign-in form
+    await forceSignOut(page);
+    await page.getByTestId("login-gate").waitFor({ state: "visible", timeout: 45_000 });
     if (await page.getByTestId("entry-create").isVisible().catch(() => false)) {
       await page.getByTestId("entry-create").click();
       await page.waitForTimeout(800);
     } else if (
       await page.getByRole("button", { name: /Create account/i }).isVisible().catch(() => false)
     ) {
-      await page.getByRole("button", { name: /Create account/i }).click();
+      await page.getByRole("button", { name: /Create account/i }).first().click();
+      await page.waitForTimeout(800);
     }
     const createText = (await page.locator("body").innerText()).slice(0, 300);
     proof.roles.self = {
-      create_form: /Create account|preferred name|Email/i.test(createText),
+      create_form:
+        /preferred name|Your preferred name|Email \(requir|Create a private account/i.test(
+          createText,
+        ) ||
+        (await page.getByTestId("login-create-form").isVisible().catch(() => false)),
       text: createText,
     };
     await shot(page, "role-self-create");
