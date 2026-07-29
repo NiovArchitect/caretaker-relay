@@ -650,6 +650,8 @@ export async function fetchServerNotifications(): Promise<{
   ok: boolean;
   notifications: Array<Record<string, unknown>>;
   unreadCount?: number;
+  badgeCount?: number;
+  attentionGroups?: Array<Record<string, unknown>>;
   totalCount?: number;
   authority?: string;
   message?: string;
@@ -659,20 +661,31 @@ export async function fetchServerNotifications(): Promise<{
   const { careListNotifications } = await import("./careHttpClient");
   const res = await careListNotifications(httpToken, rid());
   if (!res.ok) return { ok: false, notifications: [], message: res.message };
+  const data = res.data as {
+    notifications?: Array<Record<string, unknown>>;
+    unread_count?: number;
+    badge_count?: number;
+    attention_groups?: Array<Record<string, unknown>>;
+    total_count?: number;
+    authority?: string;
+  };
+  const badge =
+    typeof data.badge_count === "number"
+      ? data.badge_count
+      : typeof data.unread_count === "number"
+        ? data.unread_count
+        : 0;
   return {
     ok: true,
-    notifications: res.data.notifications ?? [],
-    unreadCount:
-      typeof res.data.unread_count === "number"
-        ? res.data.unread_count
-        : (res.data.notifications ?? []).filter(
-            (n) => !n.seen_at && !n.resolved_at,
-          ).length,
+    notifications: data.notifications ?? [],
+    unreadCount: badge,
+    badgeCount: badge,
+    attentionGroups: data.attention_groups ?? [],
     totalCount:
-      typeof res.data.total_count === "number"
-        ? res.data.total_count
-        : (res.data.notifications ?? []).length,
-    authority: res.data.authority,
+      typeof data.total_count === "number"
+        ? data.total_count
+        : (data.notifications ?? []).length,
+    authority: data.authority,
   };
 }
 

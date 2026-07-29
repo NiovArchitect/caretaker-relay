@@ -148,49 +148,15 @@ export function App() {
           if (stopped) return;
           setNotifConnected(r.ok);
           if (r.ok) {
-            // Class A only: this user must act now. Not raw rows, not history,
-            // not probes, not other-recipient, not pure awareness after seen.
-            const scoped = r.notifications.filter((n) => {
-              const rid = String(n.care_recipient_id ?? "");
-              if (rid && rid !== activeRecipientId) return false;
-              if (n.resolved_at) return false;
-              if (n.seen_at && !/needs|review|action|claim|verify|correct/i.test(
-                `${n.title ?? ""} ${n.body ?? ""} ${n.type ?? ""}`,
-              )) {
-                return false;
-              }
-              return !n.resolved_at;
-            });
-            const keys = new Set<string>();
-            for (const n of scoped) {
-              const blob = `${n.title ?? ""} ${n.body ?? ""} ${n.type ?? ""}`.toLowerCase();
-              if (
-                /\[(?:az|hol|fmh|jl)|probe|__cr_e2e|smoke_harness|automated_test_probe|performance_probe/i.test(
-                  blob,
-                )
-              ) {
-                continue;
-              }
-              // Pure informational / no-action awareness does not count as Class A
-              const requiresAction =
-                /needs|review|verify|correct|claim|waiting|unresolved|attention|confirm|mismatch|disagreement|access request|transport/i.test(
-                  blob,
-                );
-              if (!requiresAction) continue;
-              let key = blob.replace(/[^a-z0-9]+/g, " ").trim().slice(0, 48);
-              if (/allegra/.test(blob)) key = "g:allegra";
-              else if (/dose unit|incompatible|ambiguous \(count|cannot convert/.test(blob))
-                key = "g:dose_unit";
-              else if (/metformin|with.?lunch/.test(blob)) key = "g:metformin";
-              else if (/not administered|correction/.test(blob)) key = "g:med_correction";
-              else if (/medication change|needs verification/.test(blob))
-                key = "g:med_change";
-              else if (/transport/.test(blob)) key = "g:transport";
-              else if (/access request|invitation/.test(blob)) key = "g:access";
-              else if (/schedule|conflict|disagree/.test(blob)) key = "g:schedule";
-              keys.add(key || `row:${String(n.id ?? keys.size)}`);
-            }
-            setUnreadCount(Math.min(keys.size, 99));
+            // Single source of truth: server badge_count === attention_groups.length
+            // Do not re-group client-side (zero-tolerance exact match).
+            const badge =
+              typeof r.badgeCount === "number"
+                ? r.badgeCount
+                : typeof r.unreadCount === "number"
+                  ? r.unreadCount
+                  : 0;
+            setUnreadCount(Math.min(Math.max(0, badge), 99));
           }
         }),
       );
