@@ -168,6 +168,15 @@ function exclusiveAnswerPlan(
   ) {
     return ["CHANGES_SINCE_YESTERDAY"];
   }
+  // Operating plan must not include CHANGES_TODAY (that block early-returns before TASKS_NOW).
+  if (
+    classified.intents.includes("TASKS_NOW") ||
+    /\bwhat am i (doing|handling|working on)\b|\bon my (shift|plate)\b|\bdoing today\b|\bmy shift today\b|\bneed to (do|handle|focus) today\b|\btoday'?s plan\b|\bwhat needs me\b|\bwhat is on my shift\b|\bon my shift today\b/.test(
+      q,
+    )
+  ) {
+    return ["TASKS_NOW", "TASKS_REMAINING"];
+  }
   if (
     primary === "CHANGES_TODAY" ||
     classified.intents.includes("CHANGES_TODAY") ||

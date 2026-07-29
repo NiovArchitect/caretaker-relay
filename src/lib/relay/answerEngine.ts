@@ -326,7 +326,17 @@ function composeAnswer(ctx: {
             `${title}`,
             when,
             `Location: ${loc}`,
-            status ? `Status: ${status}` : "",
+            status && !/^(scheduled|moved|cancelled|confirmed)$/i.test(status)
+              ? `Status: ${status}`
+              : status
+                ? status === "moved"
+                  ? "Status: rescheduled"
+                  : status === "cancelled"
+                    ? "Status: cancelled"
+                    : status === "scheduled"
+                      ? "Status: scheduled"
+                      : `Status: ${status}`
+                : "",
             prev ? `Changed from: ${prev}` : "",
             `Travel: about ${fac.travelMinutes} minutes. ${fac.note}`,
             `Phone: ${fac.phone}`,

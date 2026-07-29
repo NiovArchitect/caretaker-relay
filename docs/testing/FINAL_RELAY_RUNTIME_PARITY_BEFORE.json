@@ -1,0 +1,80 @@
+{
+  "recorded_at": "2026-07-29T23:33:47Z",
+  "campaign": "FINAL_RELAY_SERVER_PARITY",
+  "app": {
+    "root": "/Users/genghishameha/dev/NIOV Labs/github/caretaker-relay",
+    "branch": "checkpoint/caretaker-relay-track1-2026-07-22",
+    "head": "90a7441193faa51971892d6ce722444a6c8a2cd1",
+    "dirty": [
+      "## checkpoint/caretaker-relay-track1-2026-07-22...origin/checkpoint/caretaker-relay-track1-2026-07-22",
+      " M AGENTS.md",
+      " M docs/incidents/evidence/mobile-half-screen-after/390x844-today.png",
+      " M docs/reviews/AGENT_ZERO_FINAL_FREEZE_DECISION.md",
+      " M docs/reviews/COHERENT_CARE_MASTER_COMPLETION_MATRIX.md",
+      " M e2e/jump-latest-torture.spec.ts",
+      " M evidence/phase1/validation/playwright-raw.json",
+      " M scripts/holistic-e2e-closure-smoke.mjs",
+      " M src/lib/humanCopy.ts",
+      " M src/lib/relay/answerEngine.ts",
+      " M vendor/care-domain/src/relay/answer-engine.ts",
+      " M vendor/care-domain/src/relay/util.ts",
+      "?? docs/agent-zero/",
+      "?? docs/data/HANDOFF_LIFECYCLE_INVENTORY.md",
+      "?? docs/data/MARCUS_EVELYN_VISIBLE_DATA_LINEAGE_AUDIT.md",
+      "?? docs/design/PREMIUM_FINISH_RELEASE.md",
+      "?? docs/design/screenshots/care-1366.png",
+      "?? docs/design/screenshots/care-1920.png",
+      "?? docs/design/screenshots/care-390.png",
+      "?? docs/design/screenshots/care-768.png",
+      "?? docs/design/screenshots/care-recipient-clarity-before/daniel-dsp-desktop-1366-landing-today-bottom.png",
+      "?? docs/design/screenshots/care-recipient-clarity-before/daniel-dsp-desktop-1366-landing-today-mid.png",
+      "?? docs/design/screenshots/care-recipient-clarity-before/daniel-dsp-desktop-1366-landing-today.png",
+      "?? docs/design/screenshots/care-recipient-clarity-before/daniel-dsp-desktop-1366-privacy.png",
+      "?? docs/design/screenshots/care-recipient-clarity-before/daniel-dsp-desktop-1366-today-bottom.png",
+      "?? docs/design/screenshots/care-recipient-clarity-before/daniel-dsp-desktop-1366-today-mid.png",
+      "?? docs/design/screenshots/care-recipient-clarity-before/daniel-dsp-desktop-1366-today.png",
+      "?? docs/design/screenshots/care-recipient-clarity-before/daniel-dsp-mobile-390-landing-today-bottom.png",
+      "?? docs/design/screenshots/care-recipient-clarity-before/daniel-dsp-mobile-390-landing-today-mid.png",
+      "?? docs/design/screenshots/care-recipient-clarity-before/daniel-dsp-mobile-390-landing-today.png"
+    ],
+    "public_bundle": [
+      "assets/index-C6YYw37E.js"
+    ],
+    "public_deploy": {
+      "id": "dep-d9l8a4710e5c73d6i74g",
+      "status": "live",
+      "commit": "95b5e687a8b428ed351719c3e194d4969a9d2f50",
+      "finishedAt": "2026-07-29T22:57:01.543881Z"
+    },
+    "reported_source_sha_campaign_start": "95b5e687"
+  },
+  "api": {
+    "root": "/Users/genghishameha/dev/NIOV Labs/github/caretaker-relay-foundation",
+    "branch": "checkpoint/caretaker-relay-track1-2026-07-22",
+    "head": "b6fa721571a0ade0a0d9c096067f3d11dfd13357",
+    "dirty": [
+      "## checkpoint/caretaker-relay-track1-2026-07-22...origin/checkpoint/caretaker-relay-track1-2026-07-22",
+      " M packages/care-domain/src/relay/answer-engine.ts",
+      "?? scripts/judge-browser-journeys.mjs"
+    ],
+    "public_deploy": {
+      "id": "dep-d9l8pl7lk1mc7389vk80",
+      "status": "live",
+      "commit": "b6fa721571a0ade0a0d9c096067f3d11dfd13357",
+      "finishedAt": "2026-07-29T23:30:52.253887Z"
+    },
+    "prior_deploy_sha": "4394cc53d18bba015ce7220865a91cc58c138176",
+    "campaign_start_foundation_head": "a7916e9",
+    "diff_prior_to_head_stat": "packages/care-domain/src/relay/answer-engine.ts | 10 +++++++++\n packages/care-domain/src/relay/intents.ts       | 18 +++++++++++++++++\n packages/care-domain/src/relay/util.ts          | 27 +++++++++++++++++++++++++\n 3 files changed, 55 insertions(+)"
+  },
+  "public_urls": {
+    "app": "https://care.niovlabs.com",
+    "api": "https://caretaker-relay-care-api.onrender.com"
+  },
+  "background_workers": 0,
+  "notes": [
+    "API deploy b6fa721 went live 2026-07-29T23:30:52Z",
+    "Follow-up fix pending: exclusiveAnswerPlan must not include CHANGES_TODAY for operating-plan (TASKS_NOW early-path bug)",
+    "Marcus lab principal = p-sadeil / sadeil-lab-password; Evelyn = cr-olivia"
+  ]
+}
