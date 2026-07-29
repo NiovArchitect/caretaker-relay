@@ -1070,7 +1070,13 @@ function buildAttentionFromLines(lines: string[]): TodayAttentionItem[] {
   const seen = new Set<string>();
   const unique: Array<{ key: string; line: string }> = [];
   for (const raw of lines) {
-    if (!raw?.trim() || /\bprobe\b|__CR_E2E|\[(?:AZ|HOL|FMH)/i.test(raw)) continue;
+    if (
+      !raw?.trim() ||
+      /\bprobe\b|__CR_E2E|\[(?:AZ|HOL|FMH)|smoke_harness|automated_test_probe|performance_probe|Probe calm|Transport\s+PROBE/i.test(
+        raw,
+      )
+    )
+      continue;
     const key = semanticAttentionKey(raw);
     if (seen.has(key)) continue;
     seen.add(key);
