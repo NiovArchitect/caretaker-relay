@@ -20,6 +20,7 @@ import {
   careTypeLabel,
   certaintyLabel,
   formatCareDateTime,
+  humanCareLine,
   plainDiscrepancyMessage,
   priorityLabel,
 } from "../lib/humanCopy";
@@ -982,18 +983,26 @@ export function CarePage({
               <p className="muted">No history items yet for this filter.</p>
             ) : (
               <div className="timeline" data-testid="care-history-list">
-                {history.map((item) => (
+                {history.slice(0, 12).map((item) => (
                   <div key={item.id} className="timeline-item">
-                    <strong>{item.title}</strong>
+                    <strong>{humanCareLine(item.title)}</strong>
                     <div className="muted" style={{ fontSize: "0.85rem" }}>
                       {item.at
                         ? formatCareDateTime(String(item.at))
                         : ""}
-                      {item.sourceLabel ? ` · ${item.sourceLabel}` : ""}
+                      {item.sourceLabel
+                        ? ` · ${humanCareLine(item.sourceLabel)}`
+                        : ""}
                     </div>
-                    <div>{item.detail}</div>
+                    <div>{humanCareLine(item.detail)}</div>
                   </div>
                 ))}
+                {history.length > 12 && (
+                  <p className="muted" data-testid="history-more-count">
+                    {history.length - 12} older items available — refine the
+                    filter above to focus the list.
+                  </p>
+                )}
               </div>
             )}
           </div>
