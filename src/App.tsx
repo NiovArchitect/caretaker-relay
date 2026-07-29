@@ -55,6 +55,14 @@ import {
   isScopedRequestCurrent,
   isStaleRecipientContext,
 } from "./lib/activeRecipientContext";
+import {
+  answerInformationQuery,
+  buildOperationalPreview,
+  classifyRequestClass,
+  executePendingOperational,
+  type PendingOperationalAction,
+} from "./lib/relay/requestClass";
+import { humanCareLine } from "./lib/humanCopy";
 
 function nowLabel() {
   return new Date().toLocaleTimeString([], {
@@ -136,6 +144,10 @@ export function App() {
   const [recipientSwitching, setRecipientSwitching] = useState(false);
   const [notifConnected, setNotifConnected] = useState(true);
   const [unreadCount, setUnreadCount] = useState(0);
+  /** Operational action draft (message / schedule) awaiting Looks right or Cancel */
+  const [pendingOp, setPendingOp] = useState<PendingOperationalAction | null>(
+    null,
+  );
   const activeSpace = resolveCareSpace(
     activeRecipientId,
     session?.carePersonId,
@@ -613,6 +625,34 @@ export function App() {
     };
 
     try {
+      // ── Request-class router (before domain extraction) ───────────────
+      const classified = classifyRequestClass(trimmed);
+
+      // Cancel / dismiss pending care-update or operational draft
+      if (classified.requestClass === "CANCELLATION_RESPONSE") {
+        setBundle(null);
+        setPendingOp(null);
+        setConfirmed(false);
+        setCorrecting(false);
+        fillReply(
+          "Cancelled. That draft was not saved and nothing was executed. What would you like to do next?",
+        );
+        return;
+      }
+
+      // Confirm pending operational action (message / schedule)
+      if (
+        classified.requestClass === "CONFIRMATION_RESPONSE" &&
+        pendingOp &&
+        !bundle
+      ) {
+        const receipt = await executePendingOperational(pendingOp);
+        setPendingOp(null);
+        fillReply(humanCareLine(receipt));
+        setTodayRefresh((n) => n + 1);
+        return;
+      }
+
       if (correcting && lastEventIds.length > 0) {
         const targetId = lastEventIds[0]!;
         const result = await applyCareCorrection(targetId, trimmed);
@@ -668,6 +708,42 @@ export function App() {
         return;
       }
 
+      // Operational actions — never route to medication/meal extraction
+      if (classified.requestClass === "OPERATIONAL_ACTION") {
+        setBundle(null);
+        const { preview, pending } = buildOperationalPreview(classified);
+        if (pending) setPendingOp(pending);
+        else setPendingOp(null);
+        fillReply(
+          humanCareLine(preview) ||
+            "I understood an action request, but need a clearer person or appointment name.",
+        );
+        return;
+      }
+
+      // Information queries — answer path with local projection fallback
+      if (
+        classified.requestClass === "INFORMATION_QUERY" ||
+        classified.requestClass === "META_CONVERSATION"
+      ) {
+        setPendingOp(null);
+        let answer = await answerCareQuestion(trimmed);
+        if (
+          !answer ||
+          /no matching record|don.?t have a matching|generic domain|What domain should we check/i.test(
+            answer,
+          )
+        ) {
+          const local = await answerInformationQuery(trimmed);
+          if (local) answer = local;
+        }
+        if (answer) {
+          fillReply(humanCareLine(answer));
+          return;
+        }
+        // Fall through only if truly empty
+      }
+
       const answer = await answerCareQuestion(trimmed);
       if (answer) {
         // Collaboration offer — parse display name; map known lab principals by data id when possible
@@ -692,7 +768,32 @@ export function App() {
             },
           ];
         }
-        fillReply(answer, collabExtra);
+        // If server returned generic no-match, try local operating-day answer
+        if (
+          /no matching record|don.?t have a matching|What domain should we check/i.test(
+            answer,
+          )
+        ) {
+          const local = await answerInformationQuery(trimmed);
+          if (local) {
+            fillReply(humanCareLine(local));
+            return;
+          }
+        }
+        fillReply(humanCareLine(answer), collabExtra);
+        return;
+      }
+
+      // Only CARE_REPORT / UNKNOWN go to extract→verify
+      // Guard: never extract meals from message/schedule verbs
+      if (
+        /\b(send|message|text|tell|notify|reschedul|change meeting|change.*appointment)\b/i.test(
+          trimmed,
+        )
+      ) {
+        fillReply(
+          "I treated that as an action request, not a care observation. Try: “Send a message to Maya saying …” or “Change Personal Training tomorrow to 2pm.”",
+        );
         return;
       }
 
@@ -1346,9 +1447,40 @@ export function App() {
         confirmed={confirmed}
         onConfirm={() => {
           if (recipientSwitching) return;
+          if (pendingOp && !bundle) {
+            void executePendingOperational(pendingOp).then((msg) => {
+              setPendingOp(null);
+              setMessages((prev) => [
+                ...prev,
+                {
+                  id: `sys-op-${Date.now()}`,
+                  role: "relay",
+                  text: humanCareLine(msg),
+                  at: nowLabel(),
+                },
+              ]);
+              setTodayRefresh((n) => n + 1);
+            });
+            return;
+          }
           void confirmLooksRight();
         }}
         onCorrect={startCorrection}
+        onCancelVerify={() => {
+          setBundle(null);
+          setPendingOp(null);
+          setConfirmed(false);
+          setCorrecting(false);
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: `sys-cancel-${Date.now()}`,
+              role: "system",
+              text: "Draft cancelled. Nothing was saved or sent.",
+              at: nowLabel(),
+            },
+          ]);
+        }}
         onCloseMobile={() => setRelayOpen(false)}
         coordFocusPersonId={coordFocusPersonId}
         coordFocusKey={coordFocusKey}

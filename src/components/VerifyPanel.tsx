@@ -34,10 +34,13 @@ export function VerifyPanel({
   bundle,
   onConfirm,
   onCorrect,
+  onCancel,
 }: {
   bundle: VerificationBundle;
   onConfirm: () => void;
   onCorrect: () => void;
+  /** Discard draft without saving — required for every pending card */
+  onCancel?: () => void;
 }) {
   const count = bundle.items.length;
   const hasMedIssue = bundle.items.some(
@@ -178,7 +181,26 @@ export function VerifyPanel({
           </span>
           Correct something
         </button>
+        {onCancel ? (
+          <button
+            type="button"
+            className="secondary-btn btn-with-icon"
+            data-testid="verify-cancel"
+            data-action-kind="secondary"
+            onClick={onCancel}
+          >
+            <span className="btn-glyph" aria-hidden>
+              ✕
+            </span>
+            Cancel
+          </button>
+        ) : null}
       </div>
+      {onCancel ? (
+        <p className="muted" style={{ marginBottom: 0, fontSize: "0.85rem" }}>
+          Cancel discards this draft. Nothing is saved to care truth.
+        </p>
+      ) : null}
     </section>
   );
 }

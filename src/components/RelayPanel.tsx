@@ -48,6 +48,7 @@ export function RelayPanel({
   confirmed,
   onConfirm,
   onCorrect,
+  onCancelVerify,
   onCloseMobile,
   coordFocusPersonId,
   coordFocusKey = 0,
@@ -66,6 +67,7 @@ export function RelayPanel({
   confirmed: boolean;
   onConfirm: () => void;
   onCorrect: () => void;
+  onCancelVerify?: () => void;
   onCloseMobile?: () => void;
   /** When messaging from People, target this person. */
   coordFocusPersonId?: string | null;
@@ -481,6 +483,7 @@ export function RelayPanel({
                 bundle={bundle}
                 onConfirm={onConfirm}
                 onCorrect={onCorrect}
+                onCancel={onCancelVerify}
               />
             )}
           </div>
