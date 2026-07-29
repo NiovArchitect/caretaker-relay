@@ -1,26 +1,35 @@
 {
   "desktop-1366": {
+    "needsSnippet": "Evelyn Carter's care · tap a section to expand\n\nWhat needs you today · 3\nDose unit needs review\n▾\nDose unit needs review — A reported dose unit does not match the authorized instruction and needs human review.\nAllegra pending verification — Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\nMedication needs verification — Medication change needs verification: Tylenol · reported dose 300mg · reason: fever. Not an active medication-plan instruction until auth",
+    "doseDupSignals": 2,
+    "allegraMentions": 3,
     "corrVisible": false,
     "corrCards": 0,
     "alreadyOpen": true,
     "inputVisible": true,
-    "answerLen": 0,
-    "answerSnippet": ""
+    "answerHasEvelyn": true,
+    "answerHasAllegra": true
   },
   "mobile-390": {
+    "needsSnippet": "Evelyn Carter's care · tap a section to expand\n\nWhat needs you today · 3\nDose unit needs review\n▾\nDose unit needs review — A reported dose unit does not match the authorized instruction and needs human review.\nAllegra pending verification — Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\nMedication needs verification — Medication change needs verification: Tylenol · reported dose 300mg · reason: fever. Not an active medication-plan instruction until auth",
+    "doseDupSignals": 2,
+    "allegraMentions": 3,
     "corrVisible": false,
     "corrCards": 0,
     "alreadyOpen": true,
     "inputVisible": true,
-    "answerLen": 0,
-    "answerSnippet": ""
+    "answerHasEvelyn": true,
+    "answerHasAllegra": true
   },
   "tablet-768": {
+    "needsSnippet": "Evelyn Carter's care · tap a section to expand\n\nWhat needs you today · 3\nDose unit needs review\n▾\nDose unit needs review — A reported dose unit does not match the authorized instruction and needs human review.\nAllegra pending verification — Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\nMedication needs verification — Medication change needs verification: Tylenol · reported dose 300mg · reason: fever. Not an active medication-plan instruction until auth",
+    "doseDupSignals": 2,
+    "allegraMentions": 3,
     "corrVisible": false,
     "corrCards": 0,
     "alreadyOpen": true,
     "inputVisible": true,
-    "answerLen": 0,
-    "answerSnippet": ""
+    "answerHasEvelyn": true,
+    "answerHasAllegra": true
   }
 }
