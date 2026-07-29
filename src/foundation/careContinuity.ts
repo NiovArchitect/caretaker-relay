@@ -72,6 +72,7 @@ export type HandoffBuckets = {
   sent: HandoffRow[];
   history: HandoffRow[];
   current_draft: HandoffRow[];
+  primary_relevant?: HandoffRow[];
 };
 
 export async function listHandoffs(careRecipientId: string) {

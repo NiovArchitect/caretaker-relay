@@ -57,7 +57,18 @@ export function IncomingHandoffInbox({
     const res = await listHandoffs(rid);
     const pid = session.carePersonId;
     if (res.buckets) {
-      setRows(res.buckets.incoming ?? []);
+      // Prefer primary_relevant (≤2) when present; keep sent/history for sections
+      const primary = (res.buckets as { primary_relevant?: HandoffRow[] })
+        .primary_relevant;
+      setRows(
+        primary && primary.length > 0
+          ? primary.filter(
+              (h) =>
+                h.toPersonId === session.carePersonId ||
+                h.fromPersonId === session.carePersonId,
+            )
+          : (res.buckets.incoming ?? []),
+      );
       setSentRows(res.buckets.sent ?? []);
       setHistoryRows(res.buckets.history ?? []);
     } else {

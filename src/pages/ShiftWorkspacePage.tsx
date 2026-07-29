@@ -33,6 +33,7 @@ import {
 } from "../foundation/careContinuity";
 import { IncomingHandoffInbox } from "../components/IncomingHandoffInbox";
 import { CorrectionAwarenessPanel } from "../components/CorrectionAwarenessPanel";
+import { careHttpJson } from "../foundation/careHttpClient";
 
 function pickMine(shifts: ShiftDto[], personId: string): ShiftDto | null {
   const mine = shifts
@@ -83,6 +84,17 @@ export function ShiftWorkspacePage({
     prefs: string[];
     corrections: string[];
   } | null>(null);
+  const [timeline, setTimeline] = useState<{
+    previous?: { caregiver_name?: string | null; start?: string | null; end?: string | null };
+    current?: {
+      caregiver_name?: string | null;
+      coverage_type?: string | null;
+      is_ongoing_primary_coverage?: boolean;
+      start?: string | null;
+      end?: string | null;
+    };
+    next?: { caregiver_name?: string | null; start?: string | null };
+  } | null>(null);
   const [tick, setTick] = useState(0);
 
   const load = useCallback(async () => {
@@ -94,6 +106,28 @@ export function ShiftWorkspacePage({
       setShifts([]);
     } else {
       setShifts(res.shifts);
+    }
+    // Canonical server coverage timeline (no independent client inference)
+    try {
+      const tok =
+        typeof sessionStorage !== "undefined"
+          ? (
+              JSON.parse(
+                sessionStorage.getItem("cr_care_session_v1") || "{}",
+              ) as { token?: string }
+            ).token
+          : undefined;
+      if (tok) {
+        const tl = await careHttpJson<{
+          ok: boolean;
+          coverage_timeline?: typeof timeline;
+        }>(`/api/v1/care/recipients/${rid}/coverage-timeline`, { token: tok });
+        if (tl.ok && tl.data.coverage_timeline) {
+          setTimeline(tl.data.coverage_timeline);
+        }
+      }
+    } catch {
+      /* non-fatal */
     }
     setLoading(false);
   }, [rid]);
@@ -308,17 +342,38 @@ export function ShiftWorkspacePage({
     const ongoingPrimary =
       /primary|family|friend caregiver|caregiver/.test(label) &&
       !/professional|paid|dsp|physician|provider/.test(label);
-    if (ongoingPrimary) {
+    if (ongoingPrimary || timeline?.current?.is_ongoing_primary_coverage) {
+      const prev = timeline?.previous;
+      const next = timeline?.next;
       return (
         <section className="section surface-known" data-testid="shift-workspace">
           <h2 style={{ marginTop: 0 }}>Current coverage</h2>
           <p data-testid="coverage-ongoing">
-            <strong>{session.displayName}</strong>
+            <strong>
+              {timeline?.current?.caregiver_name ?? session.displayName}
+            </strong>
             <br />
             Primary family caregiver for <strong>{space.displayName}</strong>
             <br />
-            Coverage: <strong>ongoing</strong> (no clocked shift start/end on file)
+            Coverage: <strong>ongoing</strong>
+            {timeline?.current?.coverage_type
+              ? ` · ${String(timeline.current.coverage_type).replace(/_/g, " ")}`
+              : ""}
           </p>
+          {prev?.caregiver_name && (
+            <p className="muted" data-testid="coverage-previous">
+              Before you: <strong>{prev.caregiver_name}</strong>
+              {prev.start && prev.end
+                ? ` (${prev.start} – ${prev.end})`
+                : ""}
+            </p>
+          )}
+          {next?.caregiver_name && (
+            <p className="muted" data-testid="coverage-next">
+              Next: <strong>{next.caregiver_name}</strong>
+              {next.start ? ` starts ${next.start}` : ""}
+            </p>
+          )}
           <p className="muted" data-testid="shift-empty-coverage-note">
             You are responsible for continuity until another caregiver accepts a
             scheduled shift. Use Incoming handoff for what the last helper left,

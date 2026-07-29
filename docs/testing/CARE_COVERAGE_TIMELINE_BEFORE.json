@@ -1,0 +1,3108 @@
+{
+  "captured_at": "2026-07-29T10:17:31.807Z",
+  "principal": "p-sadeil",
+  "recipient": "cr-olivia",
+  "coverage": {
+    "status": 200,
+    "data": {
+      "ok": true,
+      "care_recipient_id": "cr-olivia",
+      "slots": [
+        {
+          "id": "cover-marcus-now",
+          "careRecipientId": "cr-olivia",
+          "personId": "p-sadeil",
+          "personDisplayName": "Marcus Carter",
+          "roleLabel": "Primary family caregiver",
+          "phase": "helping_now",
+          "untilLabel": "4:00 PM",
+          "updatedAt": "2026-07-25T00:51:00.596Z"
+        },
+        {
+          "id": "cover-maya-next",
+          "careRecipientId": "cr-olivia",
+          "personId": "p-maya",
+          "personDisplayName": "Maya Bennett",
+          "roleLabel": "Family / friend caregiver",
+          "phase": "next",
+          "expectedAroundLabel": "4:30 PM",
+          "notes": "Handoff prepared before transition when possible",
+          "updatedAt": "2026-07-25T00:51:00.596Z"
+        }
+      ],
+      "summary": "Helping now: Marcus Carter · Primary family caregiver\nUntil about 4:00 PM\n\nNext: Maya Bennett\nExpected around 4:30 PM",
+      "correlation_id": "d7f53c7c-06b7-49ca-b3c7-251555ef56b8"
+    }
+  },
+  "coverage_timeline": {
+    "status": 404,
+    "data": {
+      "message": "Route GET:/api/v1/care/recipients/cr-olivia/coverage-timeline not found",
+      "error": "Not Found",
+      "statusCode": 404
+    }
+  },
+  "shifts": {
+    "status": 200,
+    "data": {
+      "ok": true,
+      "shifts": [
+        {
+          "id": "shift-7o775b2j-ms3dwmh1",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-walter",
+          "assigneeDisplayName": "W",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "expired",
+          "shiftStart": "2026-07-29T12:00:00Z",
+          "shiftEnd": "2026-07-29T20:00:00Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Shift-scoped care tasks, observations, and handoff only",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-27T15:31:11.173Z",
+          "updatedAt": "2026-07-27T15:31:12.318Z"
+        },
+        {
+          "id": "shift-s0qe3xfo-ms3d2yrh",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-walter",
+          "assigneeDisplayName": "W",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "invited",
+          "shiftStart": "2026-07-28T12:00:00Z",
+          "shiftEnd": "2026-07-28T20:00:00Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Shift-scoped care tasks, observations, and handoff only",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-27T15:08:07.421Z",
+          "updatedAt": "2026-07-27T15:08:07.421Z"
+        },
+        {
+          "id": "shift-2da3mvd3-ms3ztapl",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-walter",
+          "assigneeDisplayName": "Daniel Kim",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T01:39:09.552Z",
+          "shiftEnd": "2026-07-28T06:44:09.552Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Final mobile S3b corr FMHms3zsotg",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T01:44:27.513Z",
+          "updatedAt": "2026-07-28T01:44:28.643Z",
+          "acceptedAt": "2026-07-28T01:44:28.334Z",
+          "handoffId": "ho-55cje837-ms3ztbkz"
+        },
+        {
+          "id": "shift-e33m7rhp-ms3zt8fb",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-walter",
+          "assigneeDisplayName": "Daniel Kim",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T01:34:09.552Z",
+          "shiftEnd": "2026-07-28T05:44:09.552Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Final mobile S3 FMHms3zsotg",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T01:44:24.551Z",
+          "updatedAt": "2026-07-28T01:44:25.503Z",
+          "acceptedAt": "2026-07-28T01:44:25.368Z",
+          "handoffId": "ho-r77c3brf-ms3zt95r"
+        },
+        {
+          "id": "shift-k67awkza-ms3z2ty3",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-walter",
+          "assigneeDisplayName": "Daniel Kim",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T01:13:34.751Z",
+          "shiftEnd": "2026-07-28T05:23:34.751Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Holistic S3 HOLms3z2g2n",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T01:23:52.731Z",
+          "updatedAt": "2026-07-28T01:23:53.630Z",
+          "acceptedAt": "2026-07-28T01:23:53.524Z",
+          "handoffId": "ho-ejfiadt1-ms3z2un3"
+        },
+        {
+          "id": "shift-srhuvvb5-ms3yy1nw",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-walter",
+          "assigneeDisplayName": "Daniel Kim",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T01:09:49.517Z",
+          "shiftEnd": "2026-07-28T05:19:49.517Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Holistic S3 HOLms3yxma5",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T01:20:09.452Z",
+          "updatedAt": "2026-07-28T01:20:10.710Z",
+          "acceptedAt": "2026-07-28T01:20:10.498Z",
+          "handoffId": "ho-npdm5q6c-ms3yy2mu"
+        },
+        {
+          "id": "shift-arwtxx5u-ms3ywcw2",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-walter",
+          "assigneeDisplayName": "Daniel Kim",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T01:08:41.725Z",
+          "shiftEnd": "2026-07-28T05:18:41.725Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Holistic S3 HOLms3yw5z1",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T01:18:50.690Z",
+          "updatedAt": "2026-07-28T01:18:51.691Z",
+          "handoffId": "ho-pu6ok0an-ms3ywdnv"
+        },
+        {
+          "id": "shift-wtz3109k-ms3z2mx4",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-maya",
+          "assigneeDisplayName": "Maya Bennett",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T00:53:34.751Z",
+          "shiftEnd": "2026-07-28T04:23:34.751Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Holistic S2 HOLms3z2g2n",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T01:23:43.624Z",
+          "updatedAt": "2026-07-28T01:23:44.525Z",
+          "acceptedAt": "2026-07-28T01:23:44.429Z",
+          "handoffId": "ho-yyy11mze-ms3z2nm5"
+        },
+        {
+          "id": "shift-gntntwh8-ms3yxtj7",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-maya",
+          "assigneeDisplayName": "Maya Bennett",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T00:49:49.517Z",
+          "shiftEnd": "2026-07-28T04:19:49.517Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Holistic S2 HOLms3yxma5",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T01:19:58.915Z",
+          "updatedAt": "2026-07-28T01:19:59.913Z",
+          "acceptedAt": "2026-07-28T01:19:59.816Z",
+          "handoffId": "ho-jufy4vv5-ms3yxuax"
+        },
+        {
+          "id": "shift-j4cnxl4d-ms3ywaa1",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-maya",
+          "assigneeDisplayName": "Maya Bennett",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T00:48:41.725Z",
+          "shiftEnd": "2026-07-28T04:18:41.725Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Holistic S2 HOLms3yw5z1",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T01:18:47.305Z",
+          "updatedAt": "2026-07-28T01:18:48.222Z",
+          "acceptedAt": "2026-07-28T01:18:48.128Z",
+          "handoffId": "ho-wxypfu9h-ms3ywazi"
+        },
+        {
+          "id": "shift-7qfsszbw-ms3y58qz",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-walter",
+          "assigneeDisplayName": "Daniel Kim",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T00:47:34.840Z",
+          "shiftEnd": "2026-07-28T04:57:34.840Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Agent Zero smoke Shift 3 AZms3y50fs",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T00:57:45.610Z",
+          "updatedAt": "2026-07-28T00:57:46.708Z",
+          "acceptedAt": "2026-07-28T00:57:46.408Z",
+          "handoffId": "ho-kvalkdvw-ms3y59lg"
+        },
+        {
+          "id": "shift-pk26nfgr-ms3y00yf",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-walter",
+          "assigneeDisplayName": "Daniel Kim",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T00:43:33.668Z",
+          "shiftEnd": "2026-07-28T04:53:33.668Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Agent Zero smoke Shift 3",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T00:53:42.231Z",
+          "updatedAt": "2026-07-28T00:53:43.143Z",
+          "acceptedAt": "2026-07-28T00:53:43.047Z",
+          "handoffId": "ho-pjri5opr-ms3xh9qz"
+        },
+        {
+          "id": "shift-4vxa7f6p-ms3xyjc9",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-walter",
+          "assigneeDisplayName": "Daniel Kim",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T00:42:23.127Z",
+          "shiftEnd": "2026-07-28T04:52:23.127Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Agent Zero smoke Shift 3",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T00:52:32.745Z",
+          "updatedAt": "2026-07-28T00:52:33.747Z",
+          "acceptedAt": "2026-07-28T00:52:33.624Z",
+          "handoffId": "ho-pjri5opr-ms3xh9qz"
+        },
+        {
+          "id": "shift-nn90beh7-ms3xh925",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-walter",
+          "assigneeDisplayName": "Daniel Kim",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T00:28:55.588Z",
+          "shiftEnd": "2026-07-28T04:38:55.588Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Agent Zero smoke Shift 3",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T00:39:06.269Z",
+          "updatedAt": "2026-07-28T00:39:07.162Z",
+          "acceptedAt": "2026-07-28T00:39:07.072Z",
+          "handoffId": "ho-pjri5opr-ms3xh9qz"
+        },
+        {
+          "id": "shift-k3b8cbyh-ms3y551j",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-maya",
+          "assigneeDisplayName": "Maya Bennett",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T00:27:34.840Z",
+          "shiftEnd": "2026-07-28T03:57:34.840Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Agent Zero smoke Shift 2 AZms3y50fs",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T00:57:40.807Z",
+          "updatedAt": "2026-07-28T00:57:41.832Z",
+          "acceptedAt": "2026-07-28T00:57:41.722Z",
+          "handoffId": "ho-fja1yxnk-ms3y55u0"
+        },
+        {
+          "id": "shift-y9zi4i68-ms3xzxrn",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-maya",
+          "assigneeDisplayName": "Maya Bennett",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T00:23:33.668Z",
+          "shiftEnd": "2026-07-28T03:53:33.668Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Agent Zero smoke Shift 2",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T00:53:38.099Z",
+          "updatedAt": "2026-07-28T00:53:39.045Z",
+          "acceptedAt": "2026-07-28T00:53:38.954Z",
+          "handoffId": "ho-1n2tjrzb-ms3xh5zw"
+        },
+        {
+          "id": "shift-av552mhh-ms3xyg4w",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-maya",
+          "assigneeDisplayName": "Maya Bennett",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T00:22:23.127Z",
+          "shiftEnd": "2026-07-28T03:52:23.127Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Agent Zero smoke Shift 2",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T00:52:28.592Z",
+          "updatedAt": "2026-07-28T00:52:29.624Z",
+          "acceptedAt": "2026-07-28T00:52:29.525Z",
+          "handoffId": "ho-1n2tjrzb-ms3xh5zw"
+        },
+        {
+          "id": "shift-piia775w-ms3ywt8d",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-walter",
+          "assigneeDisplayName": "Daniel Kim",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T00:19:11.696817+00:00",
+          "shiftEnd": "2026-07-28T03:19:11.696817+00:00",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "probe seed",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T01:19:11.869Z",
+          "updatedAt": "2026-07-28T01:19:13.294Z",
+          "acceptedAt": "2026-07-28T01:19:13.090Z",
+          "handoffId": "ho-82mvqzsd-ms3ywuby"
+        },
+        {
+          "id": "shift-3hq4jlon-ms3xh5ac",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-maya",
+          "assigneeDisplayName": "Maya Bennett",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-28T00:08:55.588Z",
+          "shiftEnd": "2026-07-28T03:38:55.588Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "Agent Zero smoke Shift 2",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T00:39:01.380Z",
+          "updatedAt": "2026-07-28T00:39:02.300Z",
+          "acceptedAt": "2026-07-28T00:39:02.196Z",
+          "handoffId": "ho-1n2tjrzb-ms3xh5zw"
+        },
+        {
+          "id": "shift-vl2rsqll-ms3xzghk",
+          "careRecipientId": "cr-olivia",
+          "assigneePersonId": "p-walter",
+          "assigneeDisplayName": "Daniel Kim",
+          "assignerPersonId": "p-sadeil",
+          "assignerDisplayName": "Marcus Carter",
+          "status": "completed",
+          "shiftStart": "2026-07-27T23:53:15.350144Z",
+          "shiftEnd": "2026-07-28T02:53:15.406483Z",
+          "timezone": "America/Los_Angeles",
+          "scopeNote": "probe handoff order",
+          "dataDomains": [
+            "daily_observations",
+            "schedules_coverage",
+            "handoffs",
+            "meals_hydration",
+            "mobility"
+          ],
+          "createdAt": "2026-07-28T00:53:15.704Z",
+          "updatedAt": "2026-07-28T00:53:17.116Z",
+          "acceptedAt": "2026-07-28T00:53:16.876Z",
+          "handoffId": "ho-d5p3y348-ms3xzhks"
+        }
+      ],
+      "correlation_id": "b32ffd12-576e-4777-9705-a7301ec7046a"
+    }
+  },
+  "handoffs": {
+    "status": 200,
+    "data": {
+      "ok": true,
+      "handoffs": [
+        {
+          "id": "ho-l7bddw4p-ms4a7vzu",
+          "careRecipientId": "cr-olivia",
+          "fromPersonId": "p-sadeil",
+          "toPersonId": "p-maya",
+          "whatChanged": [
+            "Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+          ],
+          "stillNeedsAttention": [
+            "Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+          ],
+          "watch": [
+            "No new watch items"
+          ],
+          "sources": [
+            {
+              "id": "src-34753b76-557d-45b2-9a04-de1eb7b221ae-ms4a7v2x",
+              "kind": "caregiver_text",
+              "label": "Caregiver care update",
+              "actorName": "Marcus Carter",
+              "rawExcerpt": "Please add Allegra 60mg for allergies. Case R2Rprobe1785220543",
+              "recordedAt": "2026-07-28T06:35:43.257Z",
+              "whyVisible": "Marcus Carter shared a care update in this session.",
+              "actorPersonId": "p-sadeil"
+            }
+          ],
+          "createdAt": "2026-07-28T06:35:43.556Z",
+          "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+        },
+        {
+          "id": "ho-ylkr7pxb-ms49zpqs",
+          "careRecipientId": "cr-olivia",
+          "fromPersonId": "p-sadeil",
+          "toPersonId": "p-maya",
+          "whatChanged": [
+            "Medication change needs verification: Claritin · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+          ],
+          "stillNeedsAttention": [
+            "Medication change needs verification: Claritin · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+          ],
+          "watch": [
+            "No new watch items"
+          ],
+          "sources": [
+            {
+              "id": "src-8c224923-ce2a-481d-a37a-63017abe6ddd-ms49zpik",
+              "kind": "caregiver_text",
+              "label": "Caregiver care update",
+              "actorName": "Marcus Carter",
+              "rawExcerpt": "Please add Claritin 10mg for allergies. Marker R2R-CLAR",
+              "recordedAt": "2026-07-28T06:29:22.796Z",
+              "whyVisible": "Marcus Carter shared a care update in this session.",
+              "actorPersonId": "p-sadeil"
+            }
+          ],
+          "createdAt": "2026-07-28T06:29:23.092Z",
+          "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+        },
+        {
+          "id": "ho-9ccxs865-ms5qk9n6",
+          "careRecipientId": "cr-olivia",
+          "fromPersonId": "p-sadeil",
+          "toPersonId": "p-maya",
+          "whatChanged": [
+            "Medication administered as scheduled for lunch for Evelyn Carter.",
+            "Meal recorded",
+            "As marked as given (as scheduled) for Evelyn Carter"
+          ],
+          "stillNeedsAttention": [
+            "Confirm any open transportation or evening medication"
+          ],
+          "watch": [
+            "No new watch items"
+          ],
+          "sources": [
+            {
+              "id": "src-58b0ed76-4b48-4151-8673-960d914b60e9-ms5qk53s",
+              "kind": "caregiver_text",
+              "label": "Caregiver care update",
+              "actorName": "Marcus Carter",
+              "rawExcerpt": "Medication administered as scheduled for lunch for Evelyn Carter. Idempotency campaign test R1.",
+              "recordedAt": "2026-07-29T07:00:56.152Z",
+              "whyVisible": "Marcus Carter shared a care update in this session.",
+              "actorPersonId": "p-sadeil"
+            },
+            {
+              "id": "src-58b0ed76-4b48-4151-8673-960d914b60e9-ms5qk9f0",
+              "kind": "caregiver_text",
+              "label": "Caregiver care update",
+              "actorName": "Marcus Carter",
+              "rawExcerpt": "Medication administered as scheduled for lunch for Evelyn Carter. Idempotency campaign test R1.",
+              "recordedAt": "2026-07-29T07:01:01.740Z",
+              "whyVisible": "Marcus Carter shared a care update in this session.",
+              "actorPersonId": "p-sadeil"
+            },
+            {
+              "id": "src-58b0ed76-4b48-4151-8673-960d914b60e9-ms5qk9f0",
+              "kind": "caregiver_text",
+              "label": "Caregiver care update",
+              "actorName": "Marcus Carter",
+              "rawExcerpt": "Medication administered as scheduled for lunch for Evelyn Carter. Idempotency campaign test R1.",
+              "recordedAt": "2026-07-29T07:01:01.740Z",
+              "whyVisible": "Marcus Carter shared a care update in this session.",
+              "actorPersonId": "p-sadeil"
+            }
+          ],
+          "createdAt": "2026-07-29T07:01:02.033Z",
+          "evidenceMode": "LIVE_FOUNDATION_BACKED"
+        },
+        {
+          "id": "ho-6dk0uiml-ms3pbphk",
+          "careRecipientId": "cr-olivia",
+          "fromPersonId": "p-acct-f8f19fbba9fd4cd1",
+          "whatChanged": [
+            "Completed morning routine"
+          ],
+          "stillNeedsAttention": [
+            "Evening check-in"
+          ],
+          "watch": [],
+          "sources": [],
+          "createdAt": "2026-07-27T20:50:50.696Z",
+          "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+        },
+        {
+          "id": "ho-wkf0ups7-ms3zszqf",
+          "careRecipientId": "cr-olivia",
+          "fromPersonId": "p-walter",
+          "toPersonId": "p-maya",
+          "whatChanged": [
+            "Calm mood [FMHms3zsotg-S1]",
+            "Breakfast eaten [FMHms3zsotg-S1]",
+            "Therapy rescheduled to later slot [FMHms3zsotg-S1]"
+          ],
+          "stillNeedsAttention": [
+            "Transportation incomplete [FMHms3zsotg-S1]",
+            "Pharmacy pickup [FMHms3zsotg]"
+          ],
+          "watch": [],
+          "sources": [],
+          "createdAt": "2026-07-28T01:44:13.287Z",
+          "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+        },
+        {
+          "id": "ho-fdnt9k48-ms4xu2un",
+          "careRecipientId": "cr-olivia",
+          "fromPersonId": "p-sadeil",
+          "toPersonId": "p-maya",
+          "whatChanged": [
+            "Caregiver reported: fever / elevated temperature for Evelyn Carter"
+          ],
+          "stillNeedsAttention": [
+            "Confirm any open transportation or evening medication"
+          ],
+          "watch": [
+            "Caregiver reported: fever / elevated temperature for Evelyn Carter"
+          ],
+          "sources": [
+            {
+              "id": "src-286180bb-0527-47a9-a013-d10c94dcaec1-ms4xu2pa",
+              "kind": "caregiver_text",
+              "label": "Caregiver care update",
+              "actorName": "Marcus Carter",
+              "rawExcerpt": "Evelyn has a fever of about 100.4 this morning. Family ms4xq93r",
+              "recordedAt": "2026-07-28T17:36:50.734Z",
+              "whyVisible": "Marcus Carter shared a care update in this session.",
+              "actorPersonId": "p-sadeil"
+            }
+          ],
+          "createdAt": "2026-07-28T17:36:50.927Z",
+          "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+        },
+        {
+          "id": "ho-r77c3brf-ms3zt95r",
+          "careRecipientId": "cr-olivia",
+          "fromPersonId": "p-walter",
+          "toPersonId": "p-maya",
+          "whatChanged": [
+            "Medication reported administered at noon [FMHms3zsotg-S3a]",
+            "Mood improved [FMHms3zsotg-S3]"
+          ],
+          "stillNeedsAttention": [
+            "Mobility check [FMHms3zsotg-S3]"
+          ],
+          "watch": [],
+          "sources": [],
+          "createdAt": "2026-07-28T01:44:25.503Z",
+          "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+        },
+        {
+          "id": "ho-p2z1hywf-ms49ha51",
+          "careRecipientId": "cr-olivia",
+          "fromPersonId": "p-sadeil",
+          "toPersonId": "p-maya",
+          "whatChanged": [
+            "Medication change needs verification: Zyrtec · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+          ],
+          "stillNeedsAttention": [
+            "Medication change needs verification: Zyrtec · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+          ],
+          "watch": [
+            "No new watch items"
+          ],
+          "sources": [
+            {
+              "id": "src-df0625c2-653c-48b8-befb-15cd6ed5235d-ms49h9u2",
+              "kind": "caregiver_text",
+              "label": "Caregiver care update",
+              "actorName": "Marcus Carter",
+              "rawExcerpt": "Please add Zyrtec 10mg for allergies.",
+              "recordedAt": "2026-07-28T06:15:02.666Z",
+              "whyVisible": "Marcus Carter shared a care update in this session.",
+              "actorPersonId": "p-sadeil"
+            }
+          ],
+          "createdAt": "2026-07-28T06:15:03.061Z",
+          "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+        },
+        {
+          "id": "ho-55cje837-ms3ztbkz",
+          "careRecipientId": "cr-olivia",
+          "fromPersonId": "p-walter",
+          "toPersonId": "p-maya",
+          "whatChanged": [
+            "Correction: medication was not administered [FMHms3zsotg-S3b]"
+          ],
+          "stillNeedsAttention": [
+            "Mobility check [FMHms3zsotg-S3]"
+          ],
+          "watch": [],
+          "sources": [],
+          "createdAt": "2026-07-28T01:44:28.643Z",
+          "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+        },
+        {
+          "id": "ho-74yag17z-mrxzc8f3",
+          "careRecipientId": "cr-olivia",
+          "fromPersonId": "p-sadeil",
+          "toPersonId": "p-maya",
+          "whatChanged": [
+            "Meal recorded"
+          ],
+          "stillNeedsAttention": [
+            "Confirm any open transportation or evening medication"
+          ],
+          "watch": [
+            "No new watch items"
+          ],
+          "sources": [
+            {
+              "id": "src-93e27c8b-4e17-4f49-babd-09c8eaf9d281-mrxzc864",
+              "kind": "caregiver_text",
+              "label": "Caregiver care update",
+              "actorName": "Marcus Carter",
+              "rawExcerpt": "Evelyn felt wobbly after dinner and only ate half a banana at 473. Clinic time still unclear.",
+              "recordedAt": "2026-07-23T20:44:34.012Z",
+              "whyVisible": "Marcus Carter shared a care update in this session.",
+              "actorPersonId": "p-sadeil"
+            }
+          ],
+          "createdAt": "2026-07-23T20:44:34.335Z",
+          "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+        }
+      ],
+      "buckets": {
+        "incoming": [
+          {
+            "id": "ho-fja1yxnk-ms3y55u0",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-maya",
+            "toPersonId": "p-sadeil",
+            "whatChanged": [
+              "More tired than usual [AZms3y50fs-S2]",
+              "Lunch refused [AZms3y50fs-S2]",
+              "Transportation completed [AZms3y50fs-S2]",
+              "Medication reported administered at noon [AZms3y50fs-S2]"
+            ],
+            "stillNeedsAttention": [
+              "Watch fatigue after lunch refusal [AZms3y50fs-S2]"
+            ],
+            "watch": [],
+            "sources": [],
+            "createdAt": "2026-07-28T00:57:41.832Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-jufy4vv5-ms3yxuax",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-maya",
+            "toPersonId": "p-sadeil",
+            "whatChanged": [
+              "More tired than usual [HOLms3yxma5-S2]",
+              "Lunch refused [HOLms3yxma5-S2]",
+              "Medication reported administered at noon [HOLms3yxma5-S2]",
+              "Therapy rescheduled to later slot [HOLms3yxma5-S2]"
+            ],
+            "stillNeedsAttention": [
+              "Watch fatigue after lunch [HOLms3yxma5-S2]"
+            ],
+            "watch": [],
+            "sources": [],
+            "createdAt": "2026-07-28T01:19:59.913Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          }
+        ],
+        "sent": [
+          {
+            "id": "ho-l7bddw4p-ms4a7vzu",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+            ],
+            "stillNeedsAttention": [
+              "Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-34753b76-557d-45b2-9a04-de1eb7b221ae-ms4a7v2x",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Please add Allegra 60mg for allergies. Case R2Rprobe1785220543",
+                "recordedAt": "2026-07-28T06:35:43.257Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T06:35:43.556Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-ylkr7pxb-ms49zpqs",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Medication change needs verification: Claritin · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+            ],
+            "stillNeedsAttention": [
+              "Medication change needs verification: Claritin · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-8c224923-ce2a-481d-a37a-63017abe6ddd-ms49zpik",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Please add Claritin 10mg for allergies. Marker R2R-CLAR",
+                "recordedAt": "2026-07-28T06:29:22.796Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T06:29:23.092Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-9ccxs865-ms5qk9n6",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Medication administered as scheduled for lunch for Evelyn Carter.",
+              "Meal recorded",
+              "As marked as given (as scheduled) for Evelyn Carter"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-58b0ed76-4b48-4151-8673-960d914b60e9-ms5qk53s",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Medication administered as scheduled for lunch for Evelyn Carter. Idempotency campaign test R1.",
+                "recordedAt": "2026-07-29T07:00:56.152Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-58b0ed76-4b48-4151-8673-960d914b60e9-ms5qk9f0",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Medication administered as scheduled for lunch for Evelyn Carter. Idempotency campaign test R1.",
+                "recordedAt": "2026-07-29T07:01:01.740Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-58b0ed76-4b48-4151-8673-960d914b60e9-ms5qk9f0",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Medication administered as scheduled for lunch for Evelyn Carter. Idempotency campaign test R1.",
+                "recordedAt": "2026-07-29T07:01:01.740Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-29T07:01:02.033Z",
+            "evidenceMode": "LIVE_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-fdnt9k48-ms4xu2un",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Caregiver reported: fever / elevated temperature for Evelyn Carter"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "Caregiver reported: fever / elevated temperature for Evelyn Carter"
+            ],
+            "sources": [
+              {
+                "id": "src-286180bb-0527-47a9-a013-d10c94dcaec1-ms4xu2pa",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn has a fever of about 100.4 this morning. Family ms4xq93r",
+                "recordedAt": "2026-07-28T17:36:50.734Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T17:36:50.927Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-p2z1hywf-ms49ha51",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Medication change needs verification: Zyrtec · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+            ],
+            "stillNeedsAttention": [
+              "Medication change needs verification: Zyrtec · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-df0625c2-653c-48b8-befb-15cd6ed5235d-ms49h9u2",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Please add Zyrtec 10mg for allergies.",
+                "recordedAt": "2026-07-28T06:15:02.666Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T06:15:03.061Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-74yag17z-mrxzc8f3",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Meal recorded"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-93e27c8b-4e17-4f49-babd-09c8eaf9d281-mrxzc864",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn felt wobbly after dinner and only ate half a banana at 473. Clinic time still unclear.",
+                "recordedAt": "2026-07-23T20:44:34.012Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-23T20:44:34.335Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-7i1j8fnn-ms4xuwet",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Meal around noon"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-286180bb-0527-47a9-a013-d10c94dcaec1-ms4xuwbb",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn ate most of her lunch around noon. Family ms4xq93r",
+                "recordedAt": "2026-07-28T17:37:29.111Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T17:37:29.237Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-11tjilme-ms45joit",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Care update recorded"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [],
+            "createdAt": "2026-07-28T04:24:56.549Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-8p3kr00m-ms0tg1p6",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Meal around noon",
+              "Caregiver reported: more energetic than usual"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "Caregiver reported: more energetic than usual"
+            ],
+            "sources": [
+              {
+                "id": "src-d9caa0ab-8d1f-46be-bf92-f99bf713348e-ms0tf0lk",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn seemed more energetic this afternoon and finished all of lunch. Corrected: around 2pm.",
+                "recordedAt": "2026-07-25T20:22:05.000Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-d9caa0ab-8d1f-46be-bf92-f99bf713348e-ms0tf0lk",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn seemed more energetic this afternoon and finished all of lunch. Corrected: around 2pm.",
+                "recordedAt": "2026-07-25T20:22:05.000Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-25T20:22:53.082Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-dmpf9m3n-ms0oreti",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Breakfast / meal around 9:00",
+              "Caregiver reported: dizziness when getting up",
+              "Update ready for Maya"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "Caregiver reported: dizziness when getting up"
+            ],
+            "sources": [
+              {
+                "id": "src-ba57f2fd-7c1a-4a03-a9c9-6526d1160983-ms0oqwxi",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Mom was dizzy again when she got up. She ate around nine. She said she took two of the blood pressure pills but the bottle still says one. PT moved to Thursday. Can you make sure Maya knows about the dizziness?",
+                "recordedAt": "2026-07-25T18:11:22.038Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-ba57f2fd-7c1a-4a03-a9c9-6526d1160983-ms0oqwxi",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Mom was dizzy again when she got up. She ate around nine. She said she took two of the blood pressure pills but the bottle still says one. PT moved to Thursday. Can you make sure Maya knows about the dizziness?",
+                "recordedAt": "2026-07-25T18:11:22.038Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-ba57f2fd-7c1a-4a03-a9c9-6526d1160983-ms0oqwxi",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Mom was dizzy again when she got up. She ate around nine. She said she took two of the blood pressure pills but the bottle still says one. PT moved to Thursday. Can you make sure Maya knows about the dizziness?",
+                "recordedAt": "2026-07-25T18:11:22.038Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-ba57f2fd-7c1a-4a03-a9c9-6526d1160983-ms0oqwxi",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Mom was dizzy again when she got up. She ate around nine. She said she took two of the blood pressure pills but the bottle still says one. PT moved to Thursday. Can you make sure Maya knows about the dizziness?",
+                "recordedAt": "2026-07-25T18:11:22.038Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-ba57f2fd-7c1a-4a03-a9c9-6526d1160983-ms0oqwxi",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Mom was dizzy again when she got up. She ate around nine. She said she took two of the blood pressure pills but the bottle still says one. PT moved to Thursday. Can you make sure Maya knows about the dizziness?",
+                "recordedAt": "2026-07-25T18:11:22.038Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-25T18:11:44.144Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-t76ajd4w-ms0udu4t",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Meal recorded",
+              "Caregiver reported: ate well"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "Caregiver reported: ate well"
+            ],
+            "sources": [
+              {
+                "id": "src-27bd0e56-d4c4-429d-8963-5a6c19203327-ms0udcdx",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn was in a good mood today and ate all of lunch.",
+                "recordedAt": "2026-07-25T20:48:46.581Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-27bd0e56-d4c4-429d-8963-5a6c19203327-ms0udcdx",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn was in a good mood today and ate all of lunch.",
+                "recordedAt": "2026-07-25T20:48:46.581Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-25T20:49:09.580Z",
+            "evidenceMode": "LIVE_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-fzvu1eq6-ms4xvtn4",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Confirm transportation"
+            ],
+            "stillNeedsAttention": [
+              "Confirm transportation"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-286180bb-0527-47a9-a013-d10c94dcaec1-ms4xvtid",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Need a ride for Evelyn to PT tomorrow. Family ms4xq93r",
+                "recordedAt": "2026-07-28T17:38:12.133Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-286180bb-0527-47a9-a013-d10c94dcaec1-ms4xvtid",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Need a ride for Evelyn to PT tomorrow. Family ms4xq93r",
+                "recordedAt": "2026-07-28T17:38:12.133Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T17:38:12.303Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-r74hf138-ms0o63bi",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Caregiver reported: slept well"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "Caregiver reported: slept well"
+            ],
+            "sources": [
+              {
+                "id": "src-dd804ce4-ae08-409f-97f9-373fae416440-ms0o56hk",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "She slept well.",
+                "recordedAt": "2026-07-25T17:54:27.992Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-25T17:55:10.542Z",
+            "evidenceMode": "LIVE_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-97zwos2g-ms4xs7uo",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Caregiver reported: Evening refused for Evelyn Carter",
+              "Caregiver reported: refused offered support"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "Caregiver reported: refused offered support"
+            ],
+            "sources": [
+              {
+                "id": "src-286180bb-0527-47a9-a013-d10c94dcaec1-ms4xs7pj",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn refused her evening blood pressure pill. Family ms4xq93r",
+                "recordedAt": "2026-07-28T17:35:23.911Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-286180bb-0527-47a9-a013-d10c94dcaec1-ms4xs7pj",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn refused her evening blood pressure pill. Family ms4xq93r",
+                "recordedAt": "2026-07-28T17:35:23.911Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T17:35:24.096Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-0ekanwk4-ms4xr7tc",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Breakfast / meal around 9:00",
+              "Metformin marked as given (500mg) for Evelyn Carter"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-286180bb-0527-47a9-a013-d10c94dcaec1-ms4xr7l1",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "I gave Evelyn her lunch Metformin 500mg. Family ms4xq93r",
+                "recordedAt": "2026-07-28T17:34:37.093Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-286180bb-0527-47a9-a013-d10c94dcaec1-ms4xr7l1",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "I gave Evelyn her lunch Metformin 500mg. Family ms4xq93r",
+                "recordedAt": "2026-07-28T17:34:37.093Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T17:34:37.387Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-jav52ou3-ms4xws64",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Caregiver reported: mobility observation"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "Caregiver reported: mobility observation"
+            ],
+            "sources": [
+              {
+                "id": "src-286180bb-0527-47a9-a013-d10c94dcaec1-ms4xws2q",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Create a task to pick up the walker from the garage. Family ms4xq93r",
+                "recordedAt": "2026-07-28T17:38:56.930Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T17:38:57.052Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-vvciu7jz-mrzpddyw",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Meal recorded",
+              "Caregiver reported: seemed more tired than usual"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "Caregiver reported: seemed more tired than usual"
+            ],
+            "sources": [
+              {
+                "id": "src-ea13566c-d62c-439f-9a41-5925ec26ecef-mrzpczt8",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Mom seemed more tired after lunch and only ate half her sandwich.",
+                "recordedAt": "2026-07-25T01:40:46.028Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-ea13566c-d62c-439f-9a41-5925ec26ecef-mrzpczt8",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Mom seemed more tired after lunch and only ate half her sandwich.",
+                "recordedAt": "2026-07-25T01:40:46.028Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-25T01:41:04.376Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-op0y6mxb-ms4acog0",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Marcus Carter reported that Evelyn Carter experienced dizzy after Advil. Reported association only — not a clinical determination of cause."
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "Marcus Carter reported that Evelyn Carter experienced dizzy after Advil. Reported association only — not a clinical determination of cause."
+            ],
+            "sources": [
+              {
+                "id": "src-219cb3a6-e0a9-445a-b4a3-d42dacb86976-ms4acoap",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn felt dizzy after Advil this afternoon",
+                "recordedAt": "2026-07-28T06:39:27.745Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T06:39:27.936Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-pjxpocom-ms4abx4n",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Meal recorded",
+              "Marcus Carter reported that Evelyn Carter experienced dizzy after Lunch. Reported association only — not a clinical determination of cause."
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "Marcus Carter reported that Evelyn Carter experienced dizzy after Lunch. Reported association only — not a clinical determination of cause."
+            ],
+            "sources": [
+              {
+                "id": "src-219cb3a6-e0a9-445a-b4a3-d42dacb86976-ms4abwyp",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn seemed dizzy after lunch today. Case OBS20732",
+                "recordedAt": "2026-07-28T06:38:52.321Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-219cb3a6-e0a9-445a-b4a3-d42dacb86976-ms4abwyp",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn seemed dizzy after lunch today. Case OBS20732",
+                "recordedAt": "2026-07-28T06:38:52.321Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T06:38:52.535Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-4dju2v6f-ms51lanl",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Access request: relationship friend · reason: I need access as a friend to help with Evelyn. Family ms51dglc · Privacy review required before membership"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-acded979-4107-40a2-ad26-d2c548d5cf91-ms51lakw",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "I need access as a friend to help with Evelyn. Family ms51dglc",
+                "recordedAt": "2026-07-28T19:21:59.504Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T19:21:59.597Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-wqfggpnz-ms4aqkan",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Document candidate: open Documents to attach a file for Evelyn Carter (Relay does not store clinical files from chat alone)"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-96124605-dcd6-45e4-b6f1-91672ac8e0df-ms4aqk58",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Please upload a document with the discharge summary",
+                "recordedAt": "2026-07-28T06:50:15.548Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T06:50:15.743Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-f1lj1da2-ms4aptlr",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Access change request: open People and Privacy to review who can help care for Evelyn Carter"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-96124605-dcd6-45e4-b6f1-91672ac8e0df-ms4apsur",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Request access change for who can see Evelyn",
+                "recordedAt": "2026-07-28T06:49:40.179Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T06:49:40.458Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-nrjl3bqg-ms4aogcq",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Invite helper: Maya Bennett · role: Family / friend caregiver · scope: help care for Evelyn Carter · People invitation on confirm"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-96124605-dcd6-45e4-b6f1-91672ac8e0df-ms4aofm9",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Invite Maya to help with Evelyn",
+                "recordedAt": "2026-07-28T06:48:36.369Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T06:48:36.559Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-7pcxekdb-ms51m3kz",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Document ingest: discharge summary says PT Friday and Metformin 500mg twice daily. Family ms51dglc"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-acded979-4107-40a2-ad26-d2c548d5cf91-ms51m2bp",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Upload document: discharge summary says PT Friday and Metformin 500mg twice daily. Family ms51dglc",
+                "recordedAt": "2026-07-28T19:22:35.461Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T19:22:35.608Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-v362m4xc-ms5n9reh",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Medication marked as given (as scheduled) for Evelyn Carter"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-9f653050-5a69-47c9-941f-3fdf441c1866-ms5n9r94",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Correction: medication was not administered. Earlier report was incorrect.",
+                "recordedAt": "2026-07-29T05:28:52.791Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-29T05:28:52.984Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-a6bd6pkp-ms51ea0t",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Meal recorded",
+              "Metformin marked as given (500mg) for Evelyn Carter"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-acded979-4107-40a2-ad26-d2c548d5cf91-ms51e9xa",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "I gave Evelyn her lunch Metformin 500mg. Family ms51dglc",
+                "recordedAt": "2026-07-28T19:16:32.062Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-acded979-4107-40a2-ad26-d2c548d5cf91-ms51e9xa",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "I gave Evelyn her lunch Metformin 500mg. Family ms51dglc",
+                "recordedAt": "2026-07-28T19:16:32.062Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T19:16:32.189Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-0b90htbf-ms5nb1c6",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "At marked as given (as scheduled) for Evelyn Carter"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-9f653050-5a69-47c9-941f-3fdf441c1866-ms5nb16x",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Medication administered at 10:29 PM for Evelyn Carter.",
+                "recordedAt": "2026-07-29T05:29:52.329Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-29T05:29:52.518Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-2zixiy2q-ms49xlf2",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Medication change needs verification: Allegra · reported dose 180mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+            ],
+            "stillNeedsAttention": [
+              "Medication change needs verification: Allegra · reported dose 180mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-42f0cc24-3208-443b-8f4a-58b88a1765c0-ms49xl7k",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Please add Allegra 180mg for allergies. Ref R2R-1785220063",
+                "recordedAt": "2026-07-28T06:27:43.904Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T06:27:44.173Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-1ldkwpnl-mrxj1gqd",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Breakfast / meal around 9:00",
+              "Caregiver reported: dizziness when getting up",
+              "Maya visit time changed to around 3:00 (was ~2:00)",
+              "Update ready for Maya"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "Caregiver reported: dizziness when getting up"
+            ],
+            "sources": [
+              {
+                "id": "src-c8b832b4-5472-4461-b844-2109e9deb7f1-mrxj1flc",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Sadeil",
+                "rawExcerpt": "Mom was dizzy again when she got up. She ate around nine. She said she took two of the blue pills, and Maya is coming around three instead of two. Can you make sure she knows what's going on?",
+                "recordedAt": "2026-07-23T13:08:16.560Z",
+                "whyVisible": "Sadeil shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-c8b832b4-5472-4461-b844-2109e9deb7f1-mrxj1flc",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Sadeil",
+                "rawExcerpt": "Mom was dizzy again when she got up. She ate around nine. She said she took two of the blue pills, and Maya is coming around three instead of two. Can you make sure she knows what's going on?",
+                "recordedAt": "2026-07-23T13:08:16.560Z",
+                "whyVisible": "Sadeil shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-c8b832b4-5472-4461-b844-2109e9deb7f1-mrxj1flc",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Sadeil",
+                "rawExcerpt": "Mom was dizzy again when she got up. She ate around nine. She said she took two of the blue pills, and Maya is coming around three instead of two. Can you make sure she knows what's going on?",
+                "recordedAt": "2026-07-23T13:08:16.560Z",
+                "whyVisible": "Sadeil shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-c8b832b4-5472-4461-b844-2109e9deb7f1-mrxj1flc",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Sadeil",
+                "rawExcerpt": "Mom was dizzy again when she got up. She ate around nine. She said she took two of the blue pills, and Maya is coming around three instead of two. Can you make sure she knows what's going on?",
+                "recordedAt": "2026-07-23T13:08:16.560Z",
+                "whyVisible": "Sadeil shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-c8b832b4-5472-4461-b844-2109e9deb7f1-mrxj1flc",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Sadeil",
+                "rawExcerpt": "Mom was dizzy again when she got up. She ate around nine. She said she took two of the blue pills, and Maya is coming around three instead of two. Can you make sure she knows what's going on?",
+                "recordedAt": "2026-07-23T13:08:16.560Z",
+                "whyVisible": "Sadeil shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-23T13:08:18.036Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-9pq797zm-ms46ghkf",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Medication change needs verification: Tylenol · reported dose 300mg · reason: fever. Not an active medication-plan instruction until authorized review.",
+              "Caregiver reported: fever"
+            ],
+            "stillNeedsAttention": [
+              "Medication change needs verification: Tylenol · reported dose 300mg · reason: fever. Not an active medication-plan instruction until authorized review."
+            ],
+            "watch": [
+              "Caregiver reported: fever"
+            ],
+            "sources": [
+              {
+                "id": "src-39baef04-5cd5-4402-9dec-ab41844c0d89-ms46gha9",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn has a new medicine tylenol added for a fever. please add with dosage 300mg",
+                "recordedAt": "2026-07-28T04:50:26.817Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-39baef04-5cd5-4402-9dec-ab41844c0d89-ms46gha9",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn has a new medicine tylenol added for a fever. please add with dosage 300mg",
+                "recordedAt": "2026-07-28T04:50:26.817Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T04:50:27.183Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-1wjwlnoo-ms0poneq",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Maya Bennett reported giving Metformin 12:15; confirmed by Marcus Carter.",
+              "Maya Bennett reported giving Metformin 12:15; confirmed by Marcus Carter.",
+              "Meal recorded",
+              "Caregiver reported: ate well"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "Caregiver reported: ate well"
+            ],
+            "sources": [
+              {
+                "id": "src-8b25c90f-d323-4bff-b0da-67755c55addc-ms0pnurt",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "She ate all her lunch today.",
+                "recordedAt": "2026-07-25T18:36:58.889Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-8b25c90f-d323-4bff-b0da-67755c55addc-ms0pnurt",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "She ate all her lunch today.",
+                "recordedAt": "2026-07-25T18:36:58.889Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-25T18:37:36.001Z",
+            "evidenceMode": "LIVE_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-ki4d08uw-mrxzrx96",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Breakfast / meal around 9:00"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-b555a89e-a905-4c02-a965-863cc6be18ba-mrxzrwhy",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn was unsteady after lunch and only ate half a sandwich at 4899. PT may move again but I'm not sure to when.",
+                "recordedAt": "2026-07-23T20:56:45.382Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-b555a89e-a905-4c02-a965-863cc6be18ba-mrxzrwhy",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn was unsteady after lunch and only ate half a sandwich at 4899. PT may move again but I'm not sure to when.",
+                "recordedAt": "2026-07-23T20:56:45.382Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-b555a89e-a905-4c02-a965-863cc6be18ba-mrxzrwhy",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Evelyn was unsteady after lunch and only ate half a sandwich at 4899. PT may move again but I'm not sure to when.",
+                "recordedAt": "2026-07-23T20:56:45.382Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-23T20:56:46.362Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-mxvpivfs-ms52fu42",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Medication change needs verification: Please add Allegra 60mg for allergies",
+              "Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review."
+            ],
+            "stillNeedsAttention": [
+              "Medication change needs verification: Please add Allegra 60mg for allergies"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-43a95c0f-4980-41d9-8d59-89c3b92ee8e9-ms52fli0",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Please add Allegra 60mg for allergies synthetic-grok",
+                "recordedAt": "2026-07-28T19:45:33.336Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-43a95c0f-4980-41d9-8d59-89c3b92ee8e9-ms52frhl",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Please add Allegra 60mg for allergies synthetic-grok",
+                "recordedAt": "2026-07-28T19:45:41.097Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-28T19:45:42.928Z",
+            "evidenceMode": "LIVE_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-1w4ahryd-ms5qwhnw",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Medication administered as scheduled for lunch for Evelyn Carter. Campaign IDCms5quxzq admin occurrence.",
+              "Meal recorded",
+              "As marked as given (as scheduled) for Evelyn Carter"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-b7db77f6-5cc9-4f87-b16e-7f61fc857c76-ms5qwcvl",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Medication administered as scheduled for lunch for Evelyn Carter. Campaign IDCms5quxzq admin occurrence.",
+                "recordedAt": "2026-07-29T07:10:26.097Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-b7db77f6-5cc9-4f87-b16e-7f61fc857c76-ms5qwhhq",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Medication administered as scheduled for lunch for Evelyn Carter. Campaign IDCms5quxzq admin occurrence.",
+                "recordedAt": "2026-07-29T07:10:32.078Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-b7db77f6-5cc9-4f87-b16e-7f61fc857c76-ms5qwhhq",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Medication administered as scheduled for lunch for Evelyn Carter. Campaign IDCms5quxzq admin occurrence.",
+                "recordedAt": "2026-07-29T07:10:32.078Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-29T07:10:32.289Z",
+            "evidenceMode": "LIVE_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-fd9055ew-ms5qypuo",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-sadeil",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Correction: medication was not administered. Earlier report was incorrect. Campaign IDCms5quxzq.",
+              "Medication marked as given (as scheduled) for Evelyn Carter"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-b7db77f6-5cc9-4f87-b16e-7f61fc857c76-ms5qykim",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Correction: medication was not administered. Earlier report was incorrect. Campaign IDCms5quxzq.",
+                "recordedAt": "2026-07-29T07:12:09.310Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              },
+              {
+                "id": "src-b7db77f6-5cc9-4f87-b16e-7f61fc857c76-ms5qypqs",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Marcus Carter",
+                "rawExcerpt": "Correction: medication was not administered. Earlier report was incorrect. Campaign IDCms5quxzq.",
+                "recordedAt": "2026-07-29T07:12:16.084Z",
+                "whyVisible": "Marcus Carter shared a care update in this session.",
+                "actorPersonId": "p-sadeil"
+              }
+            ],
+            "createdAt": "2026-07-29T07:12:16.219Z",
+            "evidenceMode": "LIVE_FOUNDATION_BACKED"
+          }
+        ],
+        "history": [
+          {
+            "id": "ho-wkf0ups7-ms3zszqf",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-walter",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Calm mood [FMHms3zsotg-S1]",
+              "Breakfast eaten [FMHms3zsotg-S1]",
+              "Therapy rescheduled to later slot [FMHms3zsotg-S1]"
+            ],
+            "stillNeedsAttention": [
+              "Transportation incomplete [FMHms3zsotg-S1]",
+              "Pharmacy pickup [FMHms3zsotg]"
+            ],
+            "watch": [],
+            "sources": [],
+            "createdAt": "2026-07-28T01:44:13.287Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-r77c3brf-ms3zt95r",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-walter",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Medication reported administered at noon [FMHms3zsotg-S3a]",
+              "Mood improved [FMHms3zsotg-S3]"
+            ],
+            "stillNeedsAttention": [
+              "Mobility check [FMHms3zsotg-S3]"
+            ],
+            "watch": [],
+            "sources": [],
+            "createdAt": "2026-07-28T01:44:25.503Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-55cje837-ms3ztbkz",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-walter",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Correction: medication was not administered [FMHms3zsotg-S3b]"
+            ],
+            "stillNeedsAttention": [
+              "Mobility check [FMHms3zsotg-S3]"
+            ],
+            "watch": [],
+            "sources": [],
+            "createdAt": "2026-07-28T01:44:28.643Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-xo1g09mf-ms3wy1f0",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-walter",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Calm after breakfast",
+              "Mobility assistance provided"
+            ],
+            "stillNeedsAttention": [
+              "Transportation incomplete"
+            ],
+            "watch": [],
+            "sources": [],
+            "createdAt": "2026-07-28T00:24:09.900Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-3x1k7zej-ms1cq94b",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-walter",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Meal recorded",
+              "Caregiver reported: mobility/transfer support provided"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "Caregiver reported: mobility/transfer support provided"
+            ],
+            "sources": [
+              {
+                "id": "src-a1dbf5d9-2152-4cb7-bdb1-d151d8c39b8f-ms1cpdzw",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Daniel Kim",
+                "rawExcerpt": "Evelyn needed standby assist to the chair after lunch. Appetite reduced. No fall.",
+                "recordedAt": "2026-07-26T05:22:01.628Z",
+                "whyVisible": "Daniel Kim shared a care update in this session.",
+                "actorPersonId": "p-walter"
+              },
+              {
+                "id": "src-a1dbf5d9-2152-4cb7-bdb1-d151d8c39b8f-ms1cpdzw",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Daniel Kim",
+                "rawExcerpt": "Evelyn needed standby assist to the chair after lunch. Appetite reduced. No fall.",
+                "recordedAt": "2026-07-26T05:22:01.628Z",
+                "whyVisible": "Daniel Kim shared a care update in this session.",
+                "actorPersonId": "p-walter"
+              }
+            ],
+            "createdAt": "2026-07-26T05:22:41.963Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-trv7myzv-ms0v2ger",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-walter",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Meal around noon",
+              "Caregiver reported tiredness"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "Caregiver reported tiredness"
+            ],
+            "sources": [
+              {
+                "id": "src-714f1fc2-b602-4649-9790-681d52be7857-ms0v1xjj",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Daniel Kim",
+                "rawExcerpt": "Evelyn needed standby assistance transferring from chair to walker this afternoon. Supported gait. Handoff: monitor fatigue. DSP note 20260725T210432.",
+                "recordedAt": "2026-07-25T21:07:53.743Z",
+                "whyVisible": "Daniel Kim shared a care update in this session.",
+                "actorPersonId": "p-walter"
+              },
+              {
+                "id": "src-714f1fc2-b602-4649-9790-681d52be7857-ms0v1xjj",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Daniel Kim",
+                "rawExcerpt": "Evelyn needed standby assistance transferring from chair to walker this afternoon. Supported gait. Handoff: monitor fatigue. DSP note 20260725T210432.",
+                "recordedAt": "2026-07-25T21:07:53.743Z",
+                "whyVisible": "Daniel Kim shared a care update in this session.",
+                "actorPersonId": "p-walter"
+              }
+            ],
+            "createdAt": "2026-07-25T21:08:18.195Z",
+            "evidenceMode": "LIVE_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-th5caq27-ms0w0ar1",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-walter",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Care update recorded"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [],
+            "createdAt": "2026-07-25T21:34:37.165Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-d5p3y348-ms3xzhks",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-walter",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "PROBE_UNIQUE_CALM_MOOD_AZ_999",
+              "PROBE_BREAKFAST_AZ_999"
+            ],
+            "stillNeedsAttention": [
+              "PROBE_TRANSPORT_AZ_999"
+            ],
+            "watch": [],
+            "sources": [],
+            "createdAt": "2026-07-28T00:53:17.116Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-mophrh8o-ms0ygs2u",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-walter",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Caregiver reported: mobility/transfer support provided"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "Caregiver reported: mobility/transfer support provided"
+            ],
+            "sources": [
+              {
+                "id": "src-fcccd344-0a92-49b7-b557-1bf2809f646b-ms0ygbsv",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Daniel Kim",
+                "rawExcerpt": "She needed standby support transferring from the chair to the walker.",
+                "recordedAt": "2026-07-25T22:43:04.255Z",
+                "whyVisible": "Daniel Kim shared a care update in this session.",
+                "actorPersonId": "p-walter"
+              }
+            ],
+            "createdAt": "2026-07-25T22:43:25.350Z",
+            "evidenceMode": "LIVE_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-txi5foqh-mrzpdwlq",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-walter",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Meal recorded"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-8dcea2ce-f927-4d80-97c4-c63eed1921e6-mrzpdn8j",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Daniel Kim",
+                "rawExcerpt": "Evelyn needed standby assist to the chair after lunch. Appetite reduced. No fall.",
+                "recordedAt": "2026-07-25T01:41:16.387Z",
+                "whyVisible": "Daniel Kim shared a care update in this session.",
+                "actorPersonId": "p-walter"
+              }
+            ],
+            "createdAt": "2026-07-25T01:41:28.526Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-kx9biucn-ms0v426z",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-dr-shah",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Provider documentation: Continue current Metformin regimen as prescribed. No dose change. Provider guidance note 20260725T210432."
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-c6a15e3d-81e8-4377-9b45-0b525652ab96-ms0v3kol",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Dr. Priya Shah",
+                "rawExcerpt": "Continue current Metformin regimen as prescribed. No dose change. Provider guidance note 20260725T210432.",
+                "recordedAt": "2026-07-25T21:09:10.389Z",
+                "whyVisible": "Dr. Priya Shah shared a care update in this session.",
+                "actorPersonId": "p-dr-shah"
+              }
+            ],
+            "createdAt": "2026-07-25T21:09:33.083Z",
+            "evidenceMode": "LIVE_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-v59kdw1n-ms3y519o",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-walter",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Calm mood after breakfast [AZms3y50fs-S1]",
+              "Breakfast eaten [AZms3y50fs-S1]",
+              "Mobility assistance provided [AZms3y50fs-S1]"
+            ],
+            "stillNeedsAttention": [
+              "Transportation incomplete [AZms3y50fs-S1]"
+            ],
+            "watch": [],
+            "sources": [],
+            "createdAt": "2026-07-28T00:57:35.916Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-kvalkdvw-ms3y59lg",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-walter",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Correction: medication was not administered [AZms3y50fs-S3]",
+              "Mood improved [AZms3y50fs-S3]",
+              "Therapy rescheduled to later slot [AZms3y50fs-S3]",
+              "New mobility concern noted [AZms3y50fs-S3]"
+            ],
+            "stillNeedsAttention": [
+              "Mobility concern needs monitoring [AZms3y50fs-S3]"
+            ],
+            "watch": [],
+            "sources": [],
+            "createdAt": "2026-07-28T00:57:46.708Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-82mvqzsd-ms3ywuby",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-walter",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Probe calm",
+              "Therapy rescheduled to later slot PROBESEED"
+            ],
+            "stillNeedsAttention": [
+              "Transport PROBESEED unique"
+            ],
+            "watch": [],
+            "sources": [],
+            "createdAt": "2026-07-28T01:19:13.294Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-npdm5q6c-ms3yy2mu",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-walter",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Correction: medication was not administered [HOLms3yxma5-S3]",
+              "Mood improved [HOLms3yxma5-S3]",
+              "New mobility concern noted [HOLms3yxma5-S3]"
+            ],
+            "stillNeedsAttention": [
+              "Mobility concern needs monitoring [HOLms3yxma5-S3]"
+            ],
+            "watch": [],
+            "sources": [],
+            "createdAt": "2026-07-28T01:20:10.710Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-z8fiur7p-ms3z1bwn",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-walter",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Calm mood after breakfast [HOLms3z1b0u-S1]",
+              "Breakfast eaten [HOLms3z1b0u-S1]"
+            ],
+            "stillNeedsAttention": [
+              "Transportation incomplete [HOLms3z1b0u-S1]"
+            ],
+            "watch": [],
+            "sources": [],
+            "createdAt": "2026-07-28T01:22:42.695Z",
+            "evidenceMode": "SYNTHETIC_FOUNDATION_BACKED"
+          },
+          {
+            "id": "ho-2s133wvw-ms5qxlwp",
+            "careRecipientId": "cr-olivia",
+            "fromPersonId": "p-maya",
+            "toPersonId": "p-maya",
+            "whatChanged": [
+              "Medication administered as scheduled for lunch for Evelyn Carter.",
+              "Meal recorded",
+              "As marked as given (as scheduled) for Evelyn Carter"
+            ],
+            "stillNeedsAttention": [
+              "Confirm any open transportation or evening medication"
+            ],
+            "watch": [
+              "No new watch items"
+            ],
+            "sources": [
+              {
+                "id": "src-364915ee-6b8d-4371-8928-561bf0986ac2-ms5qxhxw",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Maya Bennett",
+                "rawExcerpt": "Medication administered as scheduled for lunch for Evelyn Carter. Campaign IDCms5quxzq maya.",
+                "recordedAt": "2026-07-29T07:11:19.316Z",
+                "whyVisible": "Maya Bennett shared a care update in this session.",
+                "actorPersonId": "p-maya"
+              },
+              {
+                "id": "src-364915ee-6b8d-4371-8928-561bf0986ac2-ms5qxls7",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Maya Bennett",
+                "rawExcerpt": "Medication administered as scheduled for lunch for Evelyn Carter. Campaign IDCms5quxzq maya.",
+                "recordedAt": "2026-07-29T07:11:24.295Z",
+                "whyVisible": "Maya Bennett shared a care update in this session.",
+                "actorPersonId": "p-maya"
+              },
+              {
+                "id": "src-364915ee-6b8d-4371-8928-561bf0986ac2-ms5qxls7",
+                "kind": "caregiver_text",
+                "label": "Caregiver care update",
+                "actorName": "Maya Bennett",
+                "rawExcerpt": "Medication administered as scheduled for lunch for Evelyn Carter. Campaign IDCms5quxzq maya.",
+                "recordedAt": "2026-07-29T07:11:24.295Z",
+                "whyVisible": "Maya Bennett shared a care update in this session.",
+                "actorPersonId": "p-maya"
+              }
+            ],
+            "createdAt": "2026-07-29T07:11:24.449Z",
+            "evidenceMode": "LIVE_FOUNDATION_BACKED"
+          }
+        ],
+        "current_draft": []
+      },
+      "correlation_id": "d0915dac-97fb-4049-8289-82e4f5631877"
+    }
+  },
+  "work": {
+    "status": 200,
+    "data": {
+      "ok": true,
+      "work_items": [
+        {
+          "id": "work-iy0e02hv-ms3fm8x8",
+          "careRecipientId": "cr-olivia",
+          "action": "Follow up: Medication amount mismatch — Metformin",
+          "reason": "No response to in-app notification since 2026-07-27T14:41:58.276Z",
+          "ownerPersonId": "p-maya",
+          "ownerDisplayName": "p-maya",
+          "backupOwnerPersonId": null,
+          "createdByPersonId": "p-sadeil",
+          "createdByDisplayName": "Marcus Carter",
+          "dueAt": null,
+          "priority": "urgent",
+          "status": "assigned",
+          "escalationRule": "Alternate owner after no response",
+          "sourceEventId": null,
+          "correlationId": "wcorr-cqcq9dfc-ms3fm8x8",
+          "createdAt": "2026-07-27T16:19:06.284Z",
+          "updatedAt": "2026-07-27T16:19:06.284Z",
+          "evidenceKind": "operational"
+        },
+        {
+          "id": "work-7jecw0w2-ms52hakg",
+          "careRecipientId": "cr-olivia",
+          "action": "Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+          "reason": "Recorded from caregiver report · needs an owner / authorized review · not an active medication order",
+          "ownerPersonId": null,
+          "ownerDisplayName": null,
+          "backupOwnerPersonId": null,
+          "createdByPersonId": "p-sadeil",
+          "createdByDisplayName": "Marcus Carter",
+          "dueAt": null,
+          "priority": "high",
+          "status": "available_to_claim",
+          "escalationRule": "If no response in 30 minutes, notify coordinator and escalate",
+          "sourceEventId": null,
+          "correlationId": "wcorr-rb7wvjf8-ms52hakg",
+          "createdAt": "2026-07-28T19:46:52.480Z",
+          "updatedAt": "2026-07-28T19:46:52.480Z",
+          "evidenceKind": "operational"
+        },
+        {
+          "id": "work-314edptt-ms5sfmsh",
+          "careRecipientId": "cr-olivia",
+          "action": "Follow up: Needs an owner",
+          "reason": "No response to in-app notification since 2026-07-28T17:42:42.710Z",
+          "ownerPersonId": "p-sadeil",
+          "ownerDisplayName": "p-sadeil",
+          "backupOwnerPersonId": null,
+          "createdByPersonId": "p-sadeil",
+          "createdByDisplayName": "Marcus Carter",
+          "dueAt": null,
+          "priority": "high",
+          "status": "assigned",
+          "escalationRule": "Alternate owner after no response",
+          "sourceEventId": null,
+          "correlationId": "wcorr-jsn5m1cc-ms5sfmsh",
+          "createdAt": "2026-07-29T07:53:25.025Z",
+          "updatedAt": "2026-07-29T07:53:25.025Z",
+          "evidenceKind": "operational"
+        },
+        {
+          "id": "work-542wmiv5-ms3fm7x2",
+          "careRecipientId": "cr-olivia",
+          "action": "Follow up: Shift declined — coverage needed",
+          "reason": "No response to in-app notification since 2026-07-27T14:44:16.978Z",
+          "ownerPersonId": "p-maya",
+          "ownerDisplayName": "p-maya",
+          "backupOwnerPersonId": null,
+          "createdByPersonId": "p-sadeil",
+          "createdByDisplayName": "Marcus Carter",
+          "dueAt": null,
+          "priority": "high",
+          "status": "assigned",
+          "escalationRule": "Alternate owner after no response",
+          "sourceEventId": null,
+          "correlationId": "wcorr-dro637rt-ms3fm7x2",
+          "createdAt": "2026-07-27T16:19:04.982Z",
+          "updatedAt": "2026-07-27T16:19:04.982Z",
+          "evidenceKind": "operational"
+        },
+        {
+          "id": "work-typbr57f-ms3fm9g1",
+          "careRecipientId": "cr-olivia",
+          "action": "Follow up: Therapy today",
+          "reason": "No response to in-app notification since 2026-07-27T14:41:31.927Z",
+          "ownerPersonId": "p-maya",
+          "ownerDisplayName": "p-maya",
+          "backupOwnerPersonId": null,
+          "createdByPersonId": "p-sadeil",
+          "createdByDisplayName": "Marcus Carter",
+          "dueAt": null,
+          "priority": "high",
+          "status": "assigned",
+          "escalationRule": "Alternate owner after no response",
+          "sourceEventId": null,
+          "correlationId": "wcorr-zw7bvnao-ms3fm9g1",
+          "createdAt": "2026-07-27T16:19:06.961Z",
+          "updatedAt": "2026-07-27T16:19:06.961Z",
+          "evidenceKind": "operational"
+        },
+        {
+          "id": "work-8pg2jfs0-ms3fm8ft",
+          "careRecipientId": "cr-olivia",
+          "action": "Follow up: Conflict resolution",
+          "reason": "No response to in-app notification since 2026-07-27T14:42:50.903Z",
+          "ownerPersonId": "p-maya",
+          "ownerDisplayName": "p-maya",
+          "backupOwnerPersonId": null,
+          "createdByPersonId": "p-sadeil",
+          "createdByDisplayName": "Marcus Carter",
+          "dueAt": null,
+          "priority": "high",
+          "status": "assigned",
+          "escalationRule": "Alternate owner after no response",
+          "sourceEventId": null,
+          "correlationId": "wcorr-vmupe7hw-ms3fm8ft",
+          "createdAt": "2026-07-27T16:19:05.657Z",
+          "updatedAt": "2026-07-27T16:19:05.657Z",
+          "evidenceKind": "operational"
+        },
+        {
+          "id": "work-q1ai1zix-ms3ekhpo",
+          "careRecipientId": "cr-olivia",
+          "action": "Pick up prescription refill",
+          "reason": "Created from Today ownership panel",
+          "ownerPersonId": null,
+          "ownerDisplayName": null,
+          "backupOwnerPersonId": null,
+          "createdByPersonId": "p-sadeil",
+          "createdByDisplayName": "Marcus Carter",
+          "dueAt": null,
+          "priority": "normal",
+          "status": "available_to_claim",
+          "escalationRule": "If no response in 30 minutes, notify coordinator and escalate",
+          "sourceEventId": null,
+          "correlationId": "wcorr-ve8y0rku-ms3ekhpo",
+          "createdAt": "2026-07-27T15:49:44.748Z",
+          "updatedAt": "2026-07-27T15:49:44.748Z",
+          "evidenceKind": "operational"
+        },
+        {
+          "id": "work-0pxd0jnd-ms51ki47",
+          "careRecipientId": "cr-olivia",
+          "action": "Review who can access care for Evelyn Carter",
+          "reason": "Access change requested via Relay — open Privacy",
+          "ownerPersonId": null,
+          "ownerDisplayName": null,
+          "backupOwnerPersonId": null,
+          "createdByPersonId": "p-sadeil",
+          "createdByDisplayName": "Marcus Carter",
+          "dueAt": null,
+          "priority": "normal",
+          "status": "available_to_claim",
+          "escalationRule": "If no response in 30 minutes, notify coordinator and escalate",
+          "sourceEventId": null,
+          "correlationId": "wcorr-048qjqlc-ms51ki47",
+          "createdAt": "2026-07-28T19:21:22.615Z",
+          "updatedAt": "2026-07-28T19:21:22.615Z",
+          "evidenceKind": "operational"
+        }
+      ],
+      "needs_owner": [
+        {
+          "id": "work-7jecw0w2-ms52hakg",
+          "careRecipientId": "cr-olivia",
+          "action": "Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+          "reason": "Recorded from caregiver report · needs an owner / authorized review · not an active medication order",
+          "ownerPersonId": null,
+          "ownerDisplayName": null,
+          "backupOwnerPersonId": null,
+          "createdByPersonId": "p-sadeil",
+          "createdByDisplayName": "Marcus Carter",
+          "dueAt": null,
+          "priority": "high",
+          "status": "available_to_claim",
+          "escalationRule": "If no response in 30 minutes, notify coordinator and escalate",
+          "sourceEventId": null,
+          "correlationId": "wcorr-rb7wvjf8-ms52hakg",
+          "createdAt": "2026-07-28T19:46:52.480Z",
+          "updatedAt": "2026-07-28T19:46:52.480Z",
+          "evidenceKind": "operational"
+        },
+        {
+          "id": "work-q1ai1zix-ms3ekhpo",
+          "careRecipientId": "cr-olivia",
+          "action": "Pick up prescription refill",
+          "reason": "Created from Today ownership panel",
+          "ownerPersonId": null,
+          "ownerDisplayName": null,
+          "backupOwnerPersonId": null,
+          "createdByPersonId": "p-sadeil",
+          "createdByDisplayName": "Marcus Carter",
+          "dueAt": null,
+          "priority": "normal",
+          "status": "available_to_claim",
+          "escalationRule": "If no response in 30 minutes, notify coordinator and escalate",
+          "sourceEventId": null,
+          "correlationId": "wcorr-ve8y0rku-ms3ekhpo",
+          "createdAt": "2026-07-27T15:49:44.748Z",
+          "updatedAt": "2026-07-27T15:49:44.748Z",
+          "evidenceKind": "operational"
+        },
+        {
+          "id": "work-0pxd0jnd-ms51ki47",
+          "careRecipientId": "cr-olivia",
+          "action": "Review who can access care for Evelyn Carter",
+          "reason": "Access change requested via Relay — open Privacy",
+          "ownerPersonId": null,
+          "ownerDisplayName": null,
+          "backupOwnerPersonId": null,
+          "createdByPersonId": "p-sadeil",
+          "createdByDisplayName": "Marcus Carter",
+          "dueAt": null,
+          "priority": "normal",
+          "status": "available_to_claim",
+          "escalationRule": "If no response in 30 minutes, notify coordinator and escalate",
+          "sourceEventId": null,
+          "correlationId": "wcorr-048qjqlc-ms51ki47",
+          "createdAt": "2026-07-28T19:21:22.615Z",
+          "updatedAt": "2026-07-28T19:21:22.615Z",
+          "evidenceKind": "operational"
+        }
+      ],
+      "include_terminal": false,
+      "correlation_id": "0d001afa-89d9-4bcc-be27-3aff6367b014"
+    }
+  },
+  "attention": {
+    "status": 200,
+    "data": {
+      "ok": true,
+      "attention_groups": [
+        {
+          "group_id": "cr-olivia:sem:access_request",
+          "tenant_id": "hh-olivia",
+          "recipient_id": "cr-olivia",
+          "principal_id": "p-sadeil",
+          "semantic_issue": "sem:access_request",
+          "action_required": "Approve, decline, or reassign the access request",
+          "category": "access",
+          "priority": "attention",
+          "created_at": "2026-07-28T17:41:08.189Z",
+          "due_at": null,
+          "resolution_state": "open",
+          "acknowledgment_required": false,
+          "work_id": null,
+          "notification_ids": [
+            "notif-ms4xzlct-crty3"
+          ],
+          "badge_eligible": true,
+          "badge_reason": "Unresolved actionable care item for this principal and recipient",
+          "display_title": "Needs an owner",
+          "display_body": "Review access request from Marcus Carter",
+          "eligible_roles": [
+            "family_primary",
+            "family_caregiver",
+            "dsp",
+            "clinician"
+          ],
+          "escalation_policy": "If no response within 24h, escalate to alternate authorized helper; after 48h mark overdue in attention."
+        },
+        {
+          "group_id": "cr-olivia:sem:allegra",
+          "tenant_id": "hh-olivia",
+          "recipient_id": "cr-olivia",
+          "principal_id": "p-sadeil",
+          "semantic_issue": "sem:allegra",
+          "action_required": "Review, correct, or reject the pending medication-plan change",
+          "category": "medication_review",
+          "priority": "attention",
+          "created_at": "2026-07-28T06:35:44.353Z",
+          "due_at": null,
+          "resolution_state": "open",
+          "acknowledgment_required": false,
+          "work_id": "work-7jecw0w2-ms52hakg",
+          "notification_ids": [
+            "notif-ms52hb68-a516p",
+            "notif-ms52hajy-uzrlr",
+            "notif-ms52fu3r-wggsw",
+            "notif-ms52fthg-u37hn",
+            "notif-ms51n16c-rnctn",
+            "notif-ms51di90-86yjh",
+            "notif-ms50oeh9-jgfux",
+            "notif-ms50kvus-t7ngb",
+            "notif-ms4y1mae-iwsz5",
+            "notif-ms4xqbcn-ovcgn",
+            "notif-ms4arzd1-00ogk",
+            "notif-ms4a9y2z-sv67x",
+            "notif-ms4a8xz4-bcx4i",
+            "notif-ms4a7vxd-7w2uq"
+          ],
+          "badge_eligible": true,
+          "badge_reason": "Unresolved actionable care item for this principal and recipient",
+          "display_title": "Needs an owner",
+          "display_body": "Medication change needs verification: Allegra · reported dose 60mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.",
+          "eligible_roles": [
+            "family_primary",
+            "family_caregiver",
+            "dsp",
+            "clinician"
+          ],
+          "escalation_policy": "If no response within 24h, escalate to alternate authorized helper; after 48h mark overdue in attention."
+        },
+        {
+          "group_id": "cr-olivia:sem:med_correction",
+          "tenant_id": "hh-olivia",
+          "recipient_id": "cr-olivia",
+          "principal_id": "p-sadeil",
+          "semantic_issue": "sem:med_correction",
+          "action_required": "Acknowledge the corrected administration record and review history",
+          "category": "medication_correction",
+          "priority": "attention",
+          "created_at": "2026-07-28T00:39:07.170Z",
+          "due_at": null,
+          "resolution_state": "open",
+          "acknowledgment_required": true,
+          "work_id": null,
+          "notification_ids": [
+            "notif-ms3y01nz-3gdwp",
+            "notif-ms3xyk48-bpmyo",
+            "notif-ms3xh9r6-mmkal"
+          ],
+          "badge_eligible": true,
+          "badge_reason": "Correction acknowledgment required for this principal",
+          "display_title": "Shift handoff",
+          "display_body": "Correction: medication was not administered; Mood improved; Therapy rescheduled to later slot; New mobility concern noted",
+          "eligible_roles": [
+            "family_primary",
+            "family_caregiver",
+            "dsp",
+            "clinician"
+          ],
+          "escalation_policy": "If no response within 24h, escalate to alternate authorized helper; after 48h mark overdue in attention."
+        },
+        {
+          "group_id": "cr-olivia:sem:transport",
+          "tenant_id": "hh-olivia",
+          "recipient_id": "cr-olivia",
+          "principal_id": "p-sadeil",
+          "semantic_issue": "sem:transport",
+          "action_required": "Take the transport task or ask another helper",
+          "category": "transport",
+          "priority": "attention",
+          "created_at": "2026-07-28T00:39:02.310Z",
+          "due_at": null,
+          "resolution_state": "open",
+          "acknowledgment_required": false,
+          "work_id": null,
+          "notification_ids": [
+            "notif-ms3xzyi2-vmfvn",
+            "notif-ms3xygxr-e0sma",
+            "notif-ms3xh606-u7n3o"
+          ],
+          "badge_eligible": true,
+          "badge_reason": "Unresolved actionable care item for this principal and recipient",
+          "display_title": "Shift handoff",
+          "display_body": "More tired than usual; Lunch refused; Transportation completed; Medication reported administered at noon",
+          "eligible_roles": [
+            "family_primary",
+            "family_caregiver",
+            "dsp",
+            "clinician"
+          ],
+          "escalation_policy": "If no response within 24h, escalate to alternate authorized helper; after 48h mark overdue in attention."
+        },
+        {
+          "group_id": "cr-olivia:sem:handoff",
+          "tenant_id": "hh-olivia",
+          "recipient_id": "cr-olivia",
+          "principal_id": "p-sadeil",
+          "semantic_issue": "sem:handoff",
+          "action_required": "Review unfinished handoff items before the next shift",
+          "category": "handoff",
+          "priority": "important",
+          "created_at": "2026-07-27T20:50:50.704Z",
+          "due_at": null,
+          "resolution_state": "open",
+          "acknowledgment_required": false,
+          "work_id": null,
+          "notification_ids": [
+            "notif-ms3z2o6i-ynbpv",
+            "notif-ms3yxuvt-kx7cx",
+            "notif-ms3ywbip-f9fwi",
+            "notif-ms3y56ex-zi4rv",
+            "notif-ms3xzv6t-fdkbw",
+            "notif-ms3xycv2-2a2l7",
+            "notif-ms3xhle5-h2fll",
+            "notif-ms3xh6jg-dve1l",
+            "notif-ms3xh1rc-ut7pu",
+            "notif-ms3x0dcd-v1mp0",
+            "notif-ms3wy1fa-cfovm",
+            "notif-ms3pbphs-q539x"
+          ],
+          "badge_eligible": true,
+          "badge_reason": "Unresolved actionable care item for this principal and recipient",
+          "display_title": "Care handoff ready for you",
+          "display_body": "Review unfinished work and acknowledge when oriented.",
+          "eligible_roles": [
+            "family_primary",
+            "family_caregiver",
+            "dsp",
+            "clinician"
+          ],
+          "escalation_policy": "If no response within 24h, escalate to alternate authorized helper; after 48h mark overdue in attention."
+        },
+        {
+          "group_id": "cr-olivia:sem:access",
+          "tenant_id": "hh-olivia",
+          "recipient_id": "cr-olivia",
+          "principal_id": "p-sadeil",
+          "semantic_issue": "sem:access",
+          "action_required": "Approve, decline, or reassign the access request",
+          "category": "access",
+          "priority": "urgent",
+          "created_at": "2026-07-27T15:49:45.403Z",
+          "due_at": null,
+          "resolution_state": "open",
+          "acknowledgment_required": false,
+          "work_id": "work-0pxd0jnd-ms51ki47",
+          "notification_ids": [
+            "notif-ms5sfnhz-32kev",
+            "notif-ms5sfnhq-g353p",
+            "notif-ms5sfmsf-0a6ul",
+            "notif-ms5sfms4-aan2c",
+            "notif-ms5sflsi-xp01j",
+            "notif-ms5sfls1-6r99p",
+            "notif-ms5sfkyo-mgmch",
+            "notif-ms5sfkyf-5yp3z",
+            "notif-ms5sfk8w-gqc1p",
+            "notif-ms5sfk8n-xz7po",
+            "notif-ms5sfjhg-0b1vg",
+            "notif-ms5sfjh9-sxgqb",
+            "notif-ms5sfinb-fs6xb",
+            "notif-ms5sfin1-r3wiv",
+            "notif-ms5sfhpj-f0xgr",
+            "notif-ms5sfhpb-elh12",
+            "notif-ms5sfgxp-bqcci",
+            "notif-ms5sfgxg-f9hi6",
+            "notif-ms5sfg5p-m84oe",
+            "notif-ms5sfg57-ox2ny",
+            "notif-ms51kiqi-gzqkz",
+            "notif-ms4xymkt-m0sac",
+            "notif-ms3eki7v-4mljq"
+          ],
+          "badge_eligible": true,
+          "badge_reason": "Unresolved actionable care item for this principal and recipient",
+          "display_title": "No response: Needs an owner",
+          "display_body": "p-sadeil has not acknowledged. You are the alternate owner.",
+          "eligible_roles": [
+            "family_primary",
+            "family_caregiver",
+            "dsp",
+            "clinician"
+          ],
+          "escalation_policy": "If no response within 24h, escalate to alternate authorized helper; after 48h mark overdue in attention."
+        },
+        {
+          "group_id": "cr-olivia:sem:metformin",
+          "tenant_id": "hh-olivia",
+          "recipient_id": "cr-olivia",
+          "principal_id": "p-sadeil",
+          "semantic_issue": "sem:metformin",
+          "action_required": "Review, correct, or reject the pending medication-plan change",
+          "category": "medication_review",
+          "priority": "attention",
+          "created_at": "2026-07-26T05:28:45.391Z",
+          "due_at": null,
+          "resolution_state": "open",
+          "acknowledgment_required": false,
+          "work_id": "work-iy0e02hv-ms3fm8x8",
+          "notification_ids": [
+            "notif-ms3c6glz-9a6fn",
+            "notif-ms3c5c04-cycr7",
+            "notif-ms1fi102-9tx3a",
+            "notif-ms1cy1jj-eb46k"
+          ],
+          "badge_eligible": true,
+          "badge_reason": "Unresolved actionable care item for this principal and recipient",
+          "display_title": "Conflict resolution",
+          "display_body": "Authorized Metformin 500 mg confirmed after review",
+          "eligible_roles": [
+            "family_primary",
+            "family_caregiver",
+            "dsp",
+            "clinician"
+          ],
+          "escalation_policy": "If no response within 24h, escalate to alternate authorized helper; after 48h mark overdue in attention."
+        }
+      ],
+      "badge_count": 7,
+      "group_count": 7,
+      "exact_match": true,
+      "authority": "server",
+      "correlation_id": "10a9ae84-656b-4ba5-a373-b6b8926822cd"
+    }
+  },
+  "answer_previous": {
+    "status": 200,
+    "data": {
+      "ok": true,
+      "answer": "Maya Bennett covered Evelyn Carter before your current coverage. What they recorded: Medication administration was corrected: not administered.; Medication marked as given (as scheduled) for Evelyn Carter. A medication-administration entry was later corrected to show the medication was not given. A Tylenol dose for fever was proposed as a medication change and remains pending review — not an active plan instruction. Still open for you: verify the Allegra medication-plan change.",
+      "grounded": true,
+      "intent": "PREVIOUS_SHIFT",
+      "intents": [
+        "PREVIOUS_SHIFT",
+        "HANDOFF_REVIEW",
+        "RECENT_ACTIVITY",
+        "CARE_TEAM"
+      ],
+      "persona": "family",
+      "source_refs": [
+        "previous_shift",
+        "handoff",
+        "recent_changes"
+      ],
+      "projections_used": [
+        "ACTIVE_HANDOFF",
+        "RECENT_CHANGES",
+        "RECENT_OBSERVATION_CLUSTERS"
+      ],
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "turn_id": "rt-ms5xkzkb-hlrkx",
+      "model_path": "deterministic",
+      "can_deterministic": false,
+      "needs_clarification": false,
+      "authority": "server",
+      "understand_mode": "llm",
+      "correlation_id": "771ad189-dda7-4f86-a3e5-2e6790cda6f7"
+    }
+  },
+  "answer_next": {
+    "status": 200,
+    "data": {
+      "ok": true,
+      "answer": "Helping now: Marcus Carter · Primary family caregiver\nUntil about 4:00 PM\n\nNext: Maya Bennett\nExpected around 4:30 PM\n\nI can prepare a handoff for the next helper before they arrive.\n\nWhat the next caregiver should know (latest handoff):\n\nStill open:\n• Medication administration was corrected: not administered.\n• Medication marked as given (as scheduled) for Evelyn Carter\n• Confirm any open transportation or evening medication",
+      "grounded": true,
+      "intent": "CARE_COVERAGE",
+      "intents": [
+        "CARE_COVERAGE",
+        "CARE_TEAM"
+      ],
+      "persona": "family",
+      "source_refs": [
+        "continuity:CARE_COVERAGE"
+      ],
+      "projections_used": [
+        "CONTINUITY"
+      ],
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "turn_id": "rt-ms5xkzvg-10awg",
+      "model_path": "deterministic",
+      "can_deterministic": true,
+      "needs_clarification": false,
+      "authority": "server",
+      "understand_mode": "llm",
+      "correlation_id": "0850d251-7693-4ea5-a56b-fc8da61da4a2"
+    }
+  }
+}
