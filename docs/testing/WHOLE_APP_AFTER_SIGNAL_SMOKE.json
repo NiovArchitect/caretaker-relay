@@ -1,0 +1,53 @@
+{
+  "started": "2026-07-29T20:54:38.430Z",
+  "screens": [
+    {
+      "vp": "mobile-390",
+      "tab": "today",
+      "scrollH": 844,
+      "vh": 844,
+      "scrollRatio": 1,
+      "sections": 10,
+      "workItems": 3,
+      "hasCreate": false,
+      "hasFullInbox": false,
+      "hasCompactHandoff": true,
+      "hasNotifOps": false,
+      "hasAmbient": false,
+      "hasOrient": false,
+      "probe": 0,
+      "bodyLen": 4342
+    },
+    {
+      "vp": "desktop-1366",
+      "tab": "today",
+      "scrollH": 792,
+      "vh": 768,
+      "scrollRatio": 1.03,
+      "sections": 10,
+      "workItems": 3,
+      "hasCreate": false,
+      "hasFullInbox": false,
+      "hasCompactHandoff": true,
+      "hasNotifOps": false,
+      "hasAmbient": false,
+      "hasOrient": false,
+      "probe": 0,
+      "bodyLen": 5306
+    }
+  ],
+  "gates": {
+    "today_no_create_work": "PASS",
+    "today_no_full_handoff_inbox": "PASS",
+    "today_compact_handoff": "PASS",
+    "today_no_notif_ops": "PASS",
+    "today_no_ambient_essay": "PASS",
+    "today_no_orient_card": "PASS",
+    "today_priorities_le_3": "PASS",
+    "probe_markers_zero": "PASS",
+    "today_scroll_reduced": "PASS"
+  },
+  "finished": "2026-07-29T20:54:52.912Z",
+  "app_bundle": "index-BUS525Zj.js",
+  "app_sha": "5df4d142c23f8e5e01e3a64fd4ead1251b8faae2"
+}
