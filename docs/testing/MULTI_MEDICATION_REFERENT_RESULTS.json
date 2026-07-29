@@ -1,0 +1,60 @@
+{
+  "turns": [
+    {
+      "q": "What medication changes are waiting?",
+      "a": "4 medication changes are waiting for review for Evelyn Carter:\n1. Medication change needs verification: Tylenol · reported dose 300mg · reason: fever. Not an active medication-plan instruction until authorized review.\n2. Medication change needs verification: Zyrtec · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.\n3. Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n4. Medication ",
+      "generic": false,
+      "clarifies": false,
+      "silent_guess": false
+    },
+    {
+      "q": "When was it reported?",
+      "a": "Which medication change do you mean? 1) are medication-change report; 2) for medication-change report; 3) review medication-change report. You can say “the second one.”",
+      "generic": false,
+      "clarifies": true,
+      "silent_guess": false
+    },
+    {
+      "q": "The second one.",
+      "a": "Understood — focusing on the you medication-change report. Ask when it was reported, who reported it, or whether it is active.",
+      "generic": false,
+      "clarifies": false,
+      "silent_guess": false
+    },
+    {
+      "q": "Who reported it?",
+      "a": "I do not have a clear reporter name on the prior answer for Evelyn Carter. The note is on the care record, but the actor field is incomplete.",
+      "generic": false,
+      "clarifies": false,
+      "silent_guess": false
+    },
+    {
+      "q": "Has she taken it?",
+      "a": "Which medication-change report is a pending medication-change request for Evelyn Carter, not an authorized administration instruction. Relay does not treat it as something already given.",
+      "generic": false,
+      "clarifies": true,
+      "silent_guess": false
+    },
+    {
+      "q": "Is it active?",
+      "a": "No — Which medication-change report is not confirmed as active plan instruction for Evelyn Carter. It remains pending authorized review.",
+      "generic": false,
+      "clarifies": true,
+      "silent_guess": false
+    },
+    {
+      "q": "What about the first one?",
+      "a": "Understood — focusing on the Which medication-change report. Ask when it was reported, who reported it, or whether it is active.",
+      "generic": false,
+      "clarifies": true,
+      "silent_guess": false
+    },
+    {
+      "q": "[maya] When was it reported?",
+      "a": "Your care access for this person is no longer active. I cannot share care details with expired or revoked access.",
+      "generic": false
+    }
+  ],
+  "generic_count": 0,
+  "clarification_count": 4
+}

@@ -1,0 +1,71 @@
+{
+  "raw_row_count": 1144,
+  "semantic_group_count": 10,
+  "true_attention_group_count": 10,
+  "badge_should_equal": 10,
+  "probe_excluded": 43,
+  "resolved_excluded": 839,
+  "wrong_recipient_excluded": 0,
+  "groups": [
+    {
+      "key": "g:allegra",
+      "title": "Needs an owner",
+      "raw_id": "notif-ms52hb68-a516p",
+      "classification": "A_requires_action"
+    },
+    {
+      "key": "needs an owner review who can access care for ev",
+      "title": "Needs an owner",
+      "raw_id": "notif-ms51kiqi-gzqkz",
+      "classification": "A_requires_action"
+    },
+    {
+      "key": "needs an owner review access request from marcus",
+      "title": "Needs an owner",
+      "raw_id": "notif-ms4xzlct-crty3",
+      "classification": "A_requires_action"
+    },
+    {
+      "key": "care handoff ready for you review unfinished wor",
+      "title": "Care handoff ready for you",
+      "raw_id": "notif-ms3z2o6i-ynbpv",
+      "classification": "A_requires_action"
+    },
+    {
+      "key": "g:med_correction",
+      "title": "Shift handoff",
+      "raw_id": "notif-ms3y01nz-3gdwp",
+      "classification": "A_requires_action"
+    },
+    {
+      "key": "shift handoff more tired than usual lunch refuse",
+      "title": "Shift handoff",
+      "raw_id": "notif-ms3xzyi2-vmfvn",
+      "classification": "A_requires_action"
+    },
+    {
+      "key": "needs an owner flagship continuous transport che",
+      "title": "Needs an owner",
+      "raw_id": "notif-ms3fpu8u-o20af",
+      "classification": "A_requires_action"
+    },
+    {
+      "key": "needs an owner public smoke ownership task care ",
+      "title": "Needs an owner",
+      "raw_id": "notif-ms3el5z7-nlm32",
+      "classification": "A_requires_action"
+    },
+    {
+      "key": "needs an owner pick up prescription refill care ",
+      "title": "Needs an owner",
+      "raw_id": "notif-ms3eki7v-4mljq",
+      "classification": "A_requires_action"
+    },
+    {
+      "key": "g:metformin",
+      "title": "Conflict resolution",
+      "raw_id": "notif-ms3c6glz-9a6fn",
+      "classification": "A_requires_action"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "How is Evelyn today?": {
+    "has_probe": false,
+    "snippet": "Evelyn Carter's most recent report on file is caregiver reported: mobility (last noted Tuesday, July 28, 2026 at 12:20 PM PDT). The main item needing attention is Confirm any open transportation or evening medication. Metformin 500 mg remains scheduled for 12:00 PM. Physical ther"
+  },
+  "What changed today?": {
+    "has_probe": false,
+    "snippet": "Care updates recorded for Evelyn Carter today:\n• A fever observation was recorded.\n• Tylenol was reported as a proposed medication change for fever (pending review, not active plan).\n• Zyrtec was reported as a proposed medication change (pending review, not active plan).\n• Clarit"
+  },
+  "What changed since yesterday?": {
+    "has_probe": false,
+    "snippet": "Since yesterday for Evelyn Carter: a fever report remains on the recent care record."
+  },
+  "How was the previous shift?": {
+    "has_probe": false,
+    "snippet": "During the previous shift, the prior caregiver reported care updates for Evelyn Carter. Evelyn Carter had a fever reported. A meal note was recorded (Marcus Carter reported that Evelyn Carter experienced dizzy after Lunch. Reported association only — not a clinical determination "
+  }
+}

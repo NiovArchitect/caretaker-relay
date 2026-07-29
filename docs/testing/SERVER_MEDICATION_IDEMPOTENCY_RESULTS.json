@@ -1,0 +1,24 @@
+{
+  "same_key_second": {
+    "idempotent_replay": true,
+    "status": 200
+  },
+  "different_key_mar_ids": [
+    "mar-t9py81t1-ms5qv59g",
+    "mar-t9py81t1-ms5qv59g",
+    "mar-t9py81t1-ms5qv59g"
+  ],
+  "maya_mar_ids": [
+    "mar-nvlhhhhq-ms5qxlwj",
+    "mar-nvlhhhhq-ms5qxlwj",
+    "mar-nvlhhhhq-ms5qxlwj"
+  ],
+  "correction_replay": true,
+  "before_lunch_recorded": 3,
+  "after_lunch_recorded": 3,
+  "not_administered_records": 1,
+  "admin_events_in_today_sample": 23,
+  "unique_lunch_mar_ids": [
+    "mar-t9py81t1-ms5qv59g"
+  ]
+}

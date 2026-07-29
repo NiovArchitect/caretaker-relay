@@ -1,0 +1,4 @@
+{
+  "note": "conversation_id is principal×recipient; switch clears focus by construction",
+  "conversation_id_scheme": "conv-{principalId}-{careRecipientId}"
+}

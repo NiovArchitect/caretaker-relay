@@ -1,0 +1,81 @@
+{
+  "mode": "live_public",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "total": 274,
+  "interpretPass": 274,
+  "interpret_rate": 1,
+  "generic_fallbacks": 0,
+  "false_success_strings": 0,
+  "categories": 17,
+  "byCat": {
+    "med_admin": {
+      "n": 3,
+      "pass": 3
+    },
+    "med_plan": {
+      "n": 3,
+      "pass": 3
+    },
+    "med_refuse": {
+      "n": 2,
+      "pass": 2
+    },
+    "med_miss": {
+      "n": 2,
+      "pass": 2
+    },
+    "med_supply": {
+      "n": 2,
+      "pass": 2
+    },
+    "med_discontinue": {
+      "n": 2,
+      "pass": 2
+    },
+    "med_advice": {
+      "n": 2,
+      "pass": 2
+    },
+    "med_effect": {
+      "n": 2,
+      "pass": 2
+    },
+    "med_topical": {
+      "n": 2,
+      "pass": 2
+    },
+    "obs_fever": {
+      "n": 2,
+      "pass": 2
+    },
+    "meal": {
+      "n": 1,
+      "pass": 1
+    },
+    "appointment": {
+      "n": 1,
+      "pass": 1
+    },
+    "gen_admin": {
+      "n": 1,
+      "pass": 1
+    },
+    "gen_plan": {
+      "n": 1,
+      "pass": 1
+    },
+    "gen_refuse": {
+      "n": 1,
+      "pass": 1
+    },
+    "gen_miss": {
+      "n": 1,
+      "pass": 1
+    },
+    "gen_supply": {
+      "n": 1,
+      "pass": 1
+    }
+  },
+  "failures": []
+}

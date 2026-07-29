@@ -1,0 +1,186 @@
+{
+  "run": "IDCms5quxzq",
+  "started": "2026-07-29T07:09:20.150Z",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "phases": {
+    "medication_idempotency": {
+      "same_key_second": {
+        "idempotent_replay": true,
+        "status": 200
+      },
+      "different_key_mar_ids": [
+        "mar-t9py81t1-ms5qv59g",
+        "mar-t9py81t1-ms5qv59g",
+        "mar-t9py81t1-ms5qv59g"
+      ],
+      "maya_mar_ids": [
+        "mar-nvlhhhhq-ms5qxlwj",
+        "mar-nvlhhhhq-ms5qxlwj",
+        "mar-nvlhhhhq-ms5qxlwj"
+      ],
+      "correction_replay": true,
+      "before_lunch_recorded": 3,
+      "after_lunch_recorded": 3,
+      "not_administered_records": 1,
+      "admin_events_in_today_sample": 23,
+      "unique_lunch_mar_ids": [
+        "mar-t9py81t1-ms5qv59g"
+      ]
+    },
+    "multi_medication": {
+      "turns": [
+        {
+          "q": "What medication changes are waiting?",
+          "a": "4 medication changes are waiting for review for Evelyn Carter:\n1. Medication change needs verification: Tylenol · reported dose 300mg · reason: fever. Not an active medication-plan instruction until authorized review.\n2. Medication change needs verification: Zyrtec · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review.\n3. Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n4. Medication ",
+          "generic": false,
+          "clarifies": false,
+          "silent_guess": false
+        },
+        {
+          "q": "When was it reported?",
+          "a": "Which medication change do you mean? 1) are medication-change report; 2) for medication-change report; 3) review medication-change report. You can say “the second one.”",
+          "generic": false,
+          "clarifies": true,
+          "silent_guess": false
+        },
+        {
+          "q": "The second one.",
+          "a": "Understood — focusing on the you medication-change report. Ask when it was reported, who reported it, or whether it is active.",
+          "generic": false,
+          "clarifies": false,
+          "silent_guess": false
+        },
+        {
+          "q": "Who reported it?",
+          "a": "I do not have a clear reporter name on the prior answer for Evelyn Carter. The note is on the care record, but the actor field is incomplete.",
+          "generic": false,
+          "clarifies": false,
+          "silent_guess": false
+        },
+        {
+          "q": "Has she taken it?",
+          "a": "Which medication-change report is a pending medication-change request for Evelyn Carter, not an authorized administration instruction. Relay does not treat it as something already given.",
+          "generic": false,
+          "clarifies": true,
+          "silent_guess": false
+        },
+        {
+          "q": "Is it active?",
+          "a": "No — Which medication-change report is not confirmed as active plan instruction for Evelyn Carter. It remains pending authorized review.",
+          "generic": false,
+          "clarifies": true,
+          "silent_guess": false
+        },
+        {
+          "q": "What about the first one?",
+          "a": "Understood — focusing on the Which medication-change report. Ask when it was reported, who reported it, or whether it is active.",
+          "generic": false,
+          "clarifies": true,
+          "silent_guess": false
+        },
+        {
+          "q": "[maya] When was it reported?",
+          "a": "Your care access for this person is no longer active. I cannot share care details with expired or revoked access.",
+          "generic": false
+        }
+      ],
+      "generic_count": 0,
+      "clarification_count": 4
+    },
+    "notifications": {
+      "raw_row_count": 1144,
+      "semantic_group_count": 10,
+      "true_attention_group_count": 10,
+      "badge_should_equal": 10,
+      "probe_excluded": 43,
+      "resolved_excluded": 839,
+      "wrong_recipient_excluded": 0,
+      "groups": [
+        {
+          "key": "g:allegra",
+          "title": "Needs an owner",
+          "raw_id": "notif-ms52hb68-a516p",
+          "classification": "A_requires_action"
+        },
+        {
+          "key": "needs an owner review who can access care for ev",
+          "title": "Needs an owner",
+          "raw_id": "notif-ms51kiqi-gzqkz",
+          "classification": "A_requires_action"
+        },
+        {
+          "key": "needs an owner review access request from marcus",
+          "title": "Needs an owner",
+          "raw_id": "notif-ms4xzlct-crty3",
+          "classification": "A_requires_action"
+        },
+        {
+          "key": "care handoff ready for you review unfinished wor",
+          "title": "Care handoff ready for you",
+          "raw_id": "notif-ms3z2o6i-ynbpv",
+          "classification": "A_requires_action"
+        },
+        {
+          "key": "g:med_correction",
+          "title": "Shift handoff",
+          "raw_id": "notif-ms3y01nz-3gdwp",
+          "classification": "A_requires_action"
+        },
+        {
+          "key": "shift handoff more tired than usual lunch refuse",
+          "title": "Shift handoff",
+          "raw_id": "notif-ms3xzyi2-vmfvn",
+          "classification": "A_requires_action"
+        },
+        {
+          "key": "needs an owner flagship continuous transport che",
+          "title": "Needs an owner",
+          "raw_id": "notif-ms3fpu8u-o20af",
+          "classification": "A_requires_action"
+        },
+        {
+          "key": "needs an owner public smoke ownership task care ",
+          "title": "Needs an owner",
+          "raw_id": "notif-ms3el5z7-nlm32",
+          "classification": "A_requires_action"
+        },
+        {
+          "key": "needs an owner pick up prescription refill care ",
+          "title": "Needs an owner",
+          "raw_id": "notif-ms3eki7v-4mljq",
+          "classification": "A_requires_action"
+        },
+        {
+          "key": "g:metformin",
+          "title": "Conflict resolution",
+          "raw_id": "notif-ms3c6glz-9a6fn",
+          "classification": "A_requires_action"
+        }
+      ]
+    },
+    "probe_exclusion": {
+      "How is Evelyn today?": {
+        "has_probe": false,
+        "snippet": "Evelyn Carter's most recent report on file is caregiver reported: mobility (last noted Tuesday, July 28, 2026 at 12:20 PM PDT). The main item needing attention is Confirm any open transportation or evening medication. Metformin 500 mg remains scheduled for 12:00 PM. Physical ther"
+      },
+      "What changed today?": {
+        "has_probe": false,
+        "snippet": "Care updates recorded for Evelyn Carter today:\n• A fever observation was recorded.\n• Tylenol was reported as a proposed medication change for fever (pending review, not active plan).\n• Zyrtec was reported as a proposed medication change (pending review, not active plan).\n• Clarit"
+      },
+      "What changed since yesterday?": {
+        "has_probe": false,
+        "snippet": "Since yesterday for Evelyn Carter: a fever report remains on the recent care record."
+      },
+      "How was the previous shift?": {
+        "has_probe": false,
+        "snippet": "During the previous shift, the prior caregiver reported care updates for Evelyn Carter. Evelyn Carter had a fever reported. A meal note was recorded (Marcus Carter reported that Evelyn Carter experienced dizzy after Lunch. Reported association only — not a clinical determination "
+      }
+    },
+    "context": {
+      "status_len": 306,
+      "followup": "Which medication change do you mean? 1) was medication-change report; 2) later medication-change report; 3) corrected medication-change report. You can say “the second one.”",
+      "followup_generic": false
+    }
+  },
+  "finished": "2026-07-29T07:13:09.436Z"
+}
