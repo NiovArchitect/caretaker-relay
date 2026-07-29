@@ -1,0 +1,108 @@
+{
+  "A": [
+    {
+      "q": "How was Evelyn yesterday, did anything change?",
+      "intent": "YESTERDAY_WELLBEING",
+      "ms": 592,
+      "answer": "Yesterday, Evelyn Carter was reported as having a fever. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan.",
+      "isGeneric": false
+    },
+    {
+      "q": "At what time?",
+      "intent": "UNKNOWN_QUESTION",
+      "ms": 388,
+      "answer": "Do you mean when the fever report was recorded, or when the Tylenol medication-change report was recorded?",
+      "isGeneric": false
+    },
+    {
+      "q": "Who reported that?",
+      "intent": "UNKNOWN_QUESTION",
+      "ms": 810,
+      "answer": "I do not have a clear reporter name on the prior answer for Evelyn Carter. The note is on the care record, but the actor field is incomplete.",
+      "isGeneric": false
+    },
+    {
+      "q": "Was it confirmed?",
+      "intent": "UNKNOWN_QUESTION",
+      "ms": 564,
+      "answer": "No — Tylenol medication-change report is not confirmed as active plan instruction for Evelyn Carter. It remains pending authorized review.",
+      "isGeneric": false
+    }
+  ],
+  "B": [
+    {
+      "q": "What medication change is waiting?",
+      "intent": "MEDICATION_CHANGE",
+      "ms": 210,
+      "answer": "Current authorized instruction (not a new change from Relay):\nMetformin · 500 mg · 12:00 PM · Take with food · Authorized by Dr. Priya Shah\n\nI only report what is on the care plan. I do not invent medication changes.",
+      "isGeneric": false
+    },
+    {
+      "q": "When was it reported?",
+      "intent": "UNKNOWN_QUESTION",
+      "ms": 588,
+      "answer": "I believe you mean the Tylenol medication-change report. The time on file is 12:00 PM.",
+      "isGeneric": false
+    },
+    {
+      "q": "Who needs to review it?",
+      "intent": "UNKNOWN_QUESTION",
+      "ms": 524,
+      "answer": "Metformin still needs medication-plan verification for Evelyn Carter. An authorized family primary or clinician can review it—it is not active plan instruction until approved.",
+      "isGeneric": false
+    },
+    {
+      "q": "Has she taken it?",
+      "intent": "UNKNOWN_QUESTION",
+      "ms": 601,
+      "answer": "I do not have a confirmed administration of that item in the prior exchange for Evelyn Carter. Check Care → medication administration for current truth.",
+      "isGeneric": false
+    }
+  ],
+  "C": [
+    {
+      "q": "How was the previous shift?",
+      "intent": "PREVIOUS_SHIFT",
+      "ms": 582,
+      "answer": "During the previous shift, the prior caregiver reported care updates for Evelyn Carter. Evelyn Carter had a fever reported. A Tylenol dose for fever was proposed as a medication change and remains pending review — not an active plan instruction. The Allegra 60 mg request remained unresolved at handoff and is still waiting for medication-plan verification.",
+      "isGeneric": false
+    },
+    {
+      "q": "What time did that happen?",
+      "intent": "UNKNOWN_QUESTION",
+      "ms": 320,
+      "answer": "Do you mean when the fever report was recorded, or when the Tylenol medication-change report was recorded?",
+      "isGeneric": false
+    },
+    {
+      "q": "Who corrected it?",
+      "intent": "UNKNOWN_QUESTION",
+      "ms": 599,
+      "answer": "I do not see a correction called out in the immediately previous answer. Do you mean a medication-administration correction, or something else on the prior shift?",
+      "isGeneric": false
+    },
+    {
+      "q": "What still needs to be done?",
+      "intent": "TASKS_REMAINING",
+      "ms": 711,
+      "answer": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Marcus Carter, Maya Bennett.\n• Handoff still needs attention: Confirm any open transportation or evening medication\n• Needs your review: a prior Metformin-with-lunch confirmation is still open.\n• Needs checking: a reported dose unit does not match the authorized instruction.",
+      "isGeneric": false
+    }
+  ],
+  "D": [
+    {
+      "q": "What happened with the fever and Tylenol?",
+      "intent": "CHANGE_SINCE",
+      "ms": 410,
+      "answer": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n• At marked as given (as scheduled) for Evelyn Carter\n\n• Probe calm; Therapy rescheduled to later slot (from Daniel Kim)\n• Caregiver reported: fever (from Marcus Carter)\n• Medication change needs verification: Tylenol · reported dose 300mg · reason: fever. Not an active medication-plan instruction until authorized review. (from Marcus Carter)\n• Medication change needs verification: Zyrtec · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review. (from Marcus Carter)\n• Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.",
+      "isGeneric": false
+    },
+    {
+      "q": "At what time?",
+      "intent": "UNKNOWN_QUESTION",
+      "ms": 591,
+      "answer": "Do you mean when the fever report was recorded, or when the Tylenol medication-change report was recorded?",
+      "isGeneric": false
+    }
+  ]
+}

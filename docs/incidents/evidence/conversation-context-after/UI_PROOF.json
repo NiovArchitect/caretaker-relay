@@ -1,0 +1,14 @@
+{
+  "badge": "21 new",
+  "jumpBtnCount": 0,
+  "needsSnippet": "Evelyn Carter's care · tap a section to expand\n\nWhat needs you today · 5\nDose unit needs review\n▾\nDose unit needs review — A reported dose unit does not match the authorized instruction and needs human review.\nMedication needs verification — Medication change needs verification: Zyrtec · reported dose 10mg · reason: allergies for Evelyn Carter. Not an active medication-plan instruction until autho",
+  "workSnippet": "Open care work\n\nEach care issue appears once. Take it when you can help—ownership is explicit, never silent.\n\nReview Allegra medication-plan request · Needs a helper · Needs a helper\nI can help\nReview access request from Marcus Carter · Needs a helper · Needs a helper\nI can help\nTransport unique · Needs a helper · Needs a helper\nI can help\nMobility concern needs monitoring · Needs a helper · Needs",
+  "medPanelSnippet": "",
+  "adminBtnVisible": false,
+  "correctBtnVisible": false,
+  "threadHasGeneric": false,
+  "threadSnippet": "Signed in as Marcus Carter (Primary family caregiver).\n\nI'm here for Evelyn Carter's care. Ask me a question or share an update. I'll organize it and ask you to verify anything consequential.\nHow was Evelyn yesterday, did anything change?\nYesterday, Evelyn Carter was reported as having a fever. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan.\nAt what time?\nDo you mean when the fever report was recorded, or when the Tylenol medication-change report was recorded?",
+  "judgePt": false,
+  "needsAnOwner": false,
+  "claimBtn": false
+}
