@@ -42,6 +42,10 @@ async function shot(page, name) {
   return p;
 }
 
+function recipientLabel(page) {
+  return page.getByTestId("care-recipient-chip").getByTestId("care-recipient-label");
+}
+
 async function signInMarcus(page) {
   await page.goto(BASE, { waitUntil: "domcontentloaded", timeout: 120_000 });
   await page.evaluate(() => {
@@ -66,22 +70,23 @@ async function signInMarcus(page) {
   await page.waitForTimeout(2000);
 }
 
-async function openProfile(page) {
-  const btn = page
-    .getByTestId("profile-menu-button")
-    .or(page.getByTestId("avatar-menu-button"))
-    .or(page.getByTestId("account-menu-button"));
-  await btn.first().click();
-  await page.getByTestId("profile-menu").waitFor({ timeout: 10_000 });
-}
-
 async function switchTo(page, recipientId) {
-  page.once("dialog", (d) => d.accept());
-  await openProfile(page);
+  // Accept switch confirm immediately (must register before click)
+  page.once("dialog", async (d) => {
+    await d.accept();
+  });
+  // Account menu — avoid blur races by clicking trigger then menu item quickly
+  const trigger = page.getByTestId("profile-menu-btn");
+  await trigger.click();
   const item = page.getByTestId(`switch-recipient-${recipientId}`);
-  await item.waitFor({ timeout: 10_000 });
+  await item.waitFor({ state: "visible", timeout: 8_000 });
   await item.click();
-  await page.waitForTimeout(1200);
+  // Wait until active recipient attribute flips
+  await page
+    .locator(`[data-testid="app-shell"][data-active-recipient="${recipientId}"]`)
+    .waitFor({ timeout: 15_000 })
+    .catch(() => {});
+  await page.waitForTimeout(800);
 }
 
 async function main() {
@@ -96,7 +101,7 @@ async function main() {
     await signInMarcus(page);
     await shot(page, "01-initial");
 
-    const label0 = await page.getByTestId("care-recipient-label").innerText();
+    const label0 = await recipientLabel(page).innerText();
     log("initial_recipient_label", label0);
     const active0 = await page
       .getByTestId("app-shell")
@@ -108,7 +113,7 @@ async function main() {
       await switchTo(page, "cr-olivia");
     }
     await page.waitForTimeout(1500);
-    const evelynLabel = await page.getByTestId("care-recipient-label").innerText();
+    const evelynLabel = await recipientLabel(page).innerText();
     log("evelyn_label", evelynLabel);
     await shot(page, "02-evelyn");
 
@@ -139,7 +144,7 @@ async function main() {
     // Switch to Robert
     await switchTo(page, "cr-robert");
     await page.waitForTimeout(2000);
-    const robertLabel = await page.getByTestId("care-recipient-label").innerText();
+    const robertLabel = await recipientLabel(page).innerText();
     log("robert_label", robertLabel);
     const activeR = await page
       .getByTestId("app-shell")
@@ -155,9 +160,7 @@ async function main() {
     log("robert_body_has_robert", /Robert/i.test(robertBody));
     log(
       "robert_leaks_evelyn_name_in_header",
-      /Evelyn/i.test(
-        await page.getByTestId("care-recipient-label").innerText(),
-      ),
+      /Evelyn/i.test(await recipientLabel(page).innerText()),
     );
     log(
       "robert_leaks_beta_work",
@@ -211,7 +214,7 @@ async function main() {
     // Switch back to Evelyn — thread partition
     await switchTo(page, "cr-olivia");
     await page.waitForTimeout(1500);
-    const backLabel = await page.getByTestId("care-recipient-label").innerText();
+    const backLabel = await recipientLabel(page).innerText();
     log("back_evelyn_label", backLabel);
     const backBody = (await page.locator("body").innerText()).slice(0, 2000);
     log("back_leaks_alpha_work", /ALPHA-ONLY|blue inhaler/i.test(backBody));
@@ -222,7 +225,7 @@ async function main() {
     await page.waitForTimeout(2500);
     const restoredShell = await page.getByTestId("app-shell").isVisible().catch(() => false);
     const restoredLabel = restoredShell
-      ? await page.getByTestId("care-recipient-label").innerText().catch(() => "")
+      ? await recipientLabel(page).innerText().catch(() => "")
       : "NO_SHELL";
     log("session_restore_shell", restoredShell);
     log("session_restore_label", restoredLabel);
@@ -230,7 +233,8 @@ async function main() {
 
     // Switcher available
     if (restoredShell) {
-      await openProfile(page);
+      await page.getByTestId("profile-menu-btn").click();
+      await page.getByTestId("profile-menu").waitFor({ timeout: 8_000 });
       const hasOlivia = await page
         .getByTestId("switch-recipient-cr-olivia")
         .isVisible()

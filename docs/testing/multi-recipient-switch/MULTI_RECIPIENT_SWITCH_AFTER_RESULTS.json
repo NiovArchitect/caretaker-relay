@@ -1,0 +1,136 @@
+{
+  "base": "https://care.niovlabs.com",
+  "started_at": "2026-07-29T20:13:29.224Z",
+  "steps": [
+    {
+      "k": "initial_recipient_label",
+      "v": "Evelyn Carter"
+    },
+    {
+      "k": "initial_active_attr",
+      "v": "cr-olivia"
+    },
+    {
+      "k": "evelyn_label",
+      "v": "Evelyn Carter"
+    },
+    {
+      "k": "evelyn_relay_snippet",
+      "v": "Caretaker Relay\nE\nEVELYN CARTER'S CARE\nEvelyn Carter\nCare for Evelyn Carter. You are Marcus Carter, Primary family caregiver.\nFamily caregiver\nWed, Jul 29\nRelay\nMarcus Carter · Primary family caregiver\nM\nAccount\n7 new\nConnected\nNAVIGATE\nToday\nCare\nPeople\nDocuments\nPriorities, what changed, who helps"
+    },
+    {
+      "k": "evelyn_has_evelyn_signal",
+      "v": true
+    },
+    {
+      "k": "evelyn_has_beta_work",
+      "v": false
+    },
+    {
+      "k": "evelyn_leaks_alpha",
+      "v": false
+    },
+    {
+      "k": "robert_label",
+      "v": "Robert Hale"
+    },
+    {
+      "k": "robert_active_attr",
+      "v": "cr-robert"
+    },
+    {
+      "k": "switching_flag_after",
+      "v": "false"
+    },
+    {
+      "k": "robert_body_has_robert",
+      "v": true
+    },
+    {
+      "k": "robert_leaks_evelyn_name_in_header",
+      "v": false
+    },
+    {
+      "k": "robert_leaks_beta_work",
+      "v": false
+    },
+    {
+      "k": "robert_has_alpha_work",
+      "v": true
+    },
+    {
+      "k": "robert_relay_snippet",
+      "v": "Caretaker Relay\nR\nROBERT HALE'S CARE\nRobert Hale\nCare for Robert Hale. You are Marcus Carter, Primary family caregiver.\nFamily caregiver\nWed, Jul 29\nRelay\nMarcus Carter · Primary family caregiver\nM\nAccount\n2 new\nConnected\nNAVIGATE\nToday\nCare\nPeople\nDocuments\nPriorities, what changed, who helps next,"
+    },
+    {
+      "k": "robert_relay_leaks_evelyn_med",
+      "v": false
+    },
+    {
+      "k": "robert_apt_has_alpha",
+      "v": true
+    },
+    {
+      "k": "robert_apt_leaks_pt_evelyn_flood",
+      "v": false
+    },
+    {
+      "k": "back_evelyn_label",
+      "v": "Evelyn Carter"
+    },
+    {
+      "k": "back_leaks_alpha_work",
+      "v": false
+    },
+    {
+      "k": "session_restore_shell",
+      "v": true
+    },
+    {
+      "k": "session_restore_label",
+      "v": "Evelyn Carter"
+    },
+    {
+      "k": "switcher_has_both",
+      "v": true
+    }
+  ],
+  "gates": {
+    "multi_recipient_principal": true,
+    "switcher_visible": true,
+    "switch_evelyn_to_robert": "PASS",
+    "header_matches_active": "PASS",
+    "no_beta_work_on_robert": "PASS",
+    "alpha_work_or_apt_on_robert": "PASS",
+    "no_evelyn_header_on_robert": "PASS",
+    "switch_back": "PASS",
+    "session_restore": "PASS",
+    "wrong_recipient_flash": "0_observed"
+  },
+  "initial_recipient_label": "Evelyn Carter",
+  "initial_active_attr": "cr-olivia",
+  "evelyn_label": "Evelyn Carter",
+  "evelyn_relay_snippet": "Caretaker Relay\nE\nEVELYN CARTER'S CARE\nEvelyn Carter\nCare for Evelyn Carter. You are Marcus Carter, Primary family caregiver.\nFamily caregiver\nWed, Jul 29\nRelay\nMarcus Carter · Primary family caregiver\nM\nAccount\n7 new\nConnected\nNAVIGATE\nToday\nCare\nPeople\nDocuments\nPriorities, what changed, who helps next, and plain-language handoffs.\nready\nTODAY’S CARE\nEvelyn Carter\n\nPriorities, what changed, who helps next, and plain-language handoffs.\n\nYou are Marcus Carter\nFamily caregiver\n\nEvelyn Carter's care · tap a section to expand\n\nWhat needs you today · 4\nDose unit needs review\n▾\nDose unit needs review — A reported dose unit does not match the authorized instruction and needs human review.\nMedication needs verification — Medication change needs verification: Tylenol · reported dose 300mg · reason: fever. Not an active medication-plan instruction until authorized review.\nAllegra pending verification — Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\nMedication coming up — Confirm any open transportation or evening medication\nAppointments & transport · 1\nConfirm any open transportation or evening medication\n▸\nMeals, mobility, mood · 8\nMeal recorded ·",
+  "evelyn_has_evelyn_signal": true,
+  "evelyn_has_beta_work": false,
+  "evelyn_leaks_alpha": false,
+  "robert_label": "Robert Hale",
+  "robert_active_attr": "cr-robert",
+  "switching_flag_after": "false",
+  "robert_body_has_robert": true,
+  "robert_leaks_evelyn_name_in_header": false,
+  "robert_leaks_beta_work": false,
+  "robert_has_alpha_work": true,
+  "robert_relay_snippet": "Caretaker Relay\nR\nROBERT HALE'S CARE\nRobert Hale\nCare for Robert Hale. You are Marcus Carter, Primary family caregiver.\nFamily caregiver\nWed, Jul 29\nRelay\nMarcus Carter · Primary family caregiver\nM\nAccount\n2 new\nConnected\nNAVIGATE\nToday\nCare\nPeople\nDocuments\nPriorities, what changed, who helps next, and plain-language handoffs.\nready\nGetting started with Robert Hale\n\nYou are connected to Robert Hale, but this care record is still light. That is intentional — not a copy of another person's file. Coordinate now; enrich facts as you learn them.\n\nPeople — authorized helpers and messaging\nCare — About, preferences, emergency snapshot\nRelay — ask, record an update, verify\nComplete care setup\nAdd a care update\nReview handoff\nTODAY’S CARE\nRobert Hale\n\nRobert Hale's circle is available — enrich Care when you are ready.\n\nYou are Marcus Carter\nFamily caregiver\n\nRobert Hale's care · tap a section to expand\n\nWhat needs you today · 0\nNothing urgent\n▾\nNo urgent items right now.\nAppointments & transport · 0\nNothing scheduled on Today\n▸\nMeals, mobility, mood · 1\nScheduled: ALPHA Podiatry — Robert Hale only at Thu 11:00 AM PDT · ALPHA · Jul 30, 2026 · 11:00 AM PDT\n▸\nWho is helping next · 1\nCoverage for this person is not listed yet.\n▸\n\nSync: Saved\n\nSince you were last here\n\n1 change(s) since you were last here. 1 open work item(s). 1 need an owner\n\nconfirmation Scheduled: ALPHA Podiatry — Robert Hale only at Thu 11:00 AM PDT · ALPHA\nALPHA Podiatry — Robert Hale only · Thu 11:00 AM PDT · ALPHA ",
+  "robert_relay_leaks_evelyn_med": false,
+  "robert_apt_has_alpha": true,
+  "robert_apt_leaks_pt_evelyn_flood": false,
+  "back_evelyn_label": "Evelyn Carter",
+  "back_leaks_alpha_work": false,
+  "session_restore_shell": true,
+  "session_restore_label": "Evelyn Carter",
+  "switcher_has_both": true,
+  "overall": "PASS",
+  "fail_keys": [],
+  "finished_at": "2026-07-29T20:14:10.420Z"
+}
