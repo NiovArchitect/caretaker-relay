@@ -1,0 +1,15 @@
+{
+  "today": {
+    "create": false,
+    "fullHO": false,
+    "compact": true,
+    "work": 3,
+    "probe": 0
+  },
+  "history": {
+    "rawIds": 0,
+    "probe": 0,
+    "hasMore": true
+  },
+  "pass": true
+}
