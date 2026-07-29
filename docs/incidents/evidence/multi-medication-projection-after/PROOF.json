@@ -1,0 +1,38 @@
+{
+  "rid": "cr-pdcd11aw-ms5sfb16",
+  "events": [
+    {
+      "status": 201,
+      "deduped": false,
+      "id": "evt-kfs0lwwu-ms5sfb7n"
+    },
+    {
+      "status": 201,
+      "deduped": false,
+      "id": "evt-b1fak48v-ms5sfbdj"
+    },
+    {
+      "status": 201,
+      "deduped": false,
+      "id": "evt-6eo657ym-ms5sfbki"
+    }
+  ],
+  "event_count": 3,
+  "event_ids": [
+    "evt-kfs0lwwu-ms5sfb7n",
+    "evt-b1fak48v-ms5sfbdj",
+    "evt-6eo657ym-ms5sfbki"
+  ],
+  "list": "3 medication changes are waiting for review for Med3 Zms5sfa9k:\n1. Cetirizine 10mg for allergies (reported by caregiver)\n2. Acetaminophen 325mg for fever (reported by caregiver)\n3. Naproxen 220mg for pain (reported by caregiver)\nNone of these is active plan instruction until authorized. Say “the second one” to focus on a specific change.",
+  "when": "Do you mean when the Cetirizine 10mg pending plan change was recorded, or when the Acetaminophen 325mg pending plan change was recorded?",
+  "first": "I don't have a matching record for that specific ask about Med3 Zms5sfa9k.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+  "when1": "No administration is recorded yet.\n\nNo administration is recorded yet.",
+  "second": "I don't have a matching record for that specific ask about Med3 Zms5sfa9k.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+  "who2": "I do not have a clear reporter name on the prior answer for Med3 Zms5sfa9k. The note is on the care record, but the actor field is incomplete.",
+  "third": "I don't have a matching record for that specific ask about Med3 Zms5sfa9k.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+  "active3": "No — Metformin is not confirmed as active plan instruction for Med3 Zms5sfa9k. It remains pending authorized review.",
+  "last": "I don't have a matching record for that specific ask about Med3 Zms5sfa9k.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+  "byName": "I don't have a matching record for that specific ask about Med3 Zms5sfa9k.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting — when those are authorized.\n\nWhat domain should we check next, or what would you like to update?",
+  "taken": "Metformin is a pending medication-plan change for Med3 Zms5sfa9k, not an authorized administration instruction. Relay does not treat a pending plan request as something already given. Check Care → medication administration for administration history.",
+  "count_in_list": 3
+}
