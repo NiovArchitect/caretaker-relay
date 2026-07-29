@@ -1,0 +1,202 @@
+[
+  {
+    "q": "How did Evelyn feel yesterday?",
+    "intent": "CHANGE_SINCE",
+    "intents": [
+      "CHANGE_SINCE",
+      "RECENT_ACTIVITY"
+    ],
+    "ms": 662,
+    "len": 694,
+    "answer": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\n\u2022 Medication administration was corrected: not administered.\n\u2022 Probe calm; Therapy rescheduled to later slot (from Daniel Kim)\n\u2022 Caregiver reported: fever (from Marcus Carter)\n\u2022 Medication change needs verification: Tylenol \u00b7 reported dose 300mg \u00b7 reason: fever. Not an active medication-plan instruction until authorized review. (from Marcus Carter)\n\u2022 Medication change needs verification: Zyrtec \u00b7 reported dose 10mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review. (from Marcus Carter)",
+    "has_changed_header": true,
+    "semicolon_fragments": 1,
+    "dup_corr": 2
+  },
+  {
+    "q": "How was Evelyn yesterday?",
+    "intent": "CHANGE_SINCE",
+    "intents": [
+      "CHANGE_SINCE",
+      "RECENT_ACTIVITY"
+    ],
+    "ms": 378,
+    "len": 694,
+    "answer": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\n\u2022 Medication administration was corrected: not administered.\n\u2022 Probe calm; Therapy rescheduled to later slot (from Daniel Kim)\n\u2022 Caregiver reported: fever (from Marcus Carter)\n\u2022 Medication change needs verification: Tylenol \u00b7 reported dose 300mg \u00b7 reason: fever. Not an active medication-plan instruction until authorized review. (from Marcus Carter)\n\u2022 Medication change needs verification: Zyrtec \u00b7 reported dose 10mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review. (from Marcus Carter)",
+    "has_changed_header": true,
+    "semicolon_fragments": 1,
+    "dup_corr": 2
+  },
+  {
+    "q": "Was she tired yesterday?",
+    "intent": "CHANGE_SINCE",
+    "intents": [
+      "CHANGE_SINCE",
+      "RECENT_ACTIVITY",
+      "OBSERVATION_HISTORY"
+    ],
+    "ms": 620,
+    "len": 694,
+    "answer": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\n\u2022 Medication administration was corrected: not administered.\n\u2022 Probe calm; Therapy rescheduled to later slot (from Daniel Kim)\n\u2022 Caregiver reported: fever (from Marcus Carter)\n\u2022 Medication change needs verification: Tylenol \u00b7 reported dose 300mg \u00b7 reason: fever. Not an active medication-plan instruction until authorized review. (from Marcus Carter)\n\u2022 Medication change needs verification: Zyrtec \u00b7 reported dose 10mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review. (from Marcus Carter)",
+    "has_changed_header": true,
+    "semicolon_fragments": 1,
+    "dup_corr": 2
+  },
+  {
+    "q": "What changed today?",
+    "intent": "CHANGE_SINCE",
+    "intents": [
+      "CHANGE_SINCE"
+    ],
+    "ms": 376,
+    "len": 694,
+    "answer": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\n\u2022 Medication administration was corrected: not administered.\n\u2022 Probe calm; Therapy rescheduled to later slot (from Daniel Kim)\n\u2022 Caregiver reported: fever (from Marcus Carter)\n\u2022 Medication change needs verification: Tylenol \u00b7 reported dose 300mg \u00b7 reason: fever. Not an active medication-plan instruction until authorized review. (from Marcus Carter)\n\u2022 Medication change needs verification: Zyrtec \u00b7 reported dose 10mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review. (from Marcus Carter)",
+    "has_changed_header": true,
+    "semicolon_fragments": 1,
+    "dup_corr": 2
+  },
+  {
+    "q": "What happened today?",
+    "intent": "CHANGE_SINCE",
+    "intents": [
+      "CHANGE_SINCE",
+      "RECENT_ACTIVITY"
+    ],
+    "ms": 613,
+    "len": 694,
+    "answer": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\n\u2022 Medication administration was corrected: not administered.\n\u2022 Probe calm; Therapy rescheduled to later slot (from Daniel Kim)\n\u2022 Caregiver reported: fever (from Marcus Carter)\n\u2022 Medication change needs verification: Tylenol \u00b7 reported dose 300mg \u00b7 reason: fever. Not an active medication-plan instruction until authorized review. (from Marcus Carter)\n\u2022 Medication change needs verification: Zyrtec \u00b7 reported dose 10mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review. (from Marcus Carter)",
+    "has_changed_header": true,
+    "semicolon_fragments": 1,
+    "dup_corr": 2
+  },
+  {
+    "q": "What changed since yesterday?",
+    "intent": "CHANGE_SINCE",
+    "intents": [
+      "CHANGE_SINCE",
+      "RECENT_ACTIVITY"
+    ],
+    "ms": 402,
+    "len": 694,
+    "answer": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\n\u2022 Medication administration was corrected: not administered.\n\u2022 Probe calm; Therapy rescheduled to later slot (from Daniel Kim)\n\u2022 Caregiver reported: fever (from Marcus Carter)\n\u2022 Medication change needs verification: Tylenol \u00b7 reported dose 300mg \u00b7 reason: fever. Not an active medication-plan instruction until authorized review. (from Marcus Carter)\n\u2022 Medication change needs verification: Zyrtec \u00b7 reported dose 10mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review. (from Marcus Carter)",
+    "has_changed_header": true,
+    "semicolon_fragments": 1,
+    "dup_corr": 2
+  },
+  {
+    "q": "Is Evelyn doing better than yesterday?",
+    "intent": "CHANGE_SINCE",
+    "intents": [
+      "CHANGE_SINCE",
+      "RECENT_ACTIVITY"
+    ],
+    "ms": 408,
+    "len": 694,
+    "answer": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\n\u2022 Medication administration was corrected: not administered.\n\u2022 Probe calm; Therapy rescheduled to later slot (from Daniel Kim)\n\u2022 Caregiver reported: fever (from Marcus Carter)\n\u2022 Medication change needs verification: Tylenol \u00b7 reported dose 300mg \u00b7 reason: fever. Not an active medication-plan instruction until authorized review. (from Marcus Carter)\n\u2022 Medication change needs verification: Zyrtec \u00b7 reported dose 10mg \u00b7 reason: allergies for Evelyn Carter. Not an active medication-plan instruction until authorized review. (from Marcus Carter)",
+    "has_changed_header": true,
+    "semicolon_fragments": 1,
+    "dup_corr": 2
+  },
+  {
+    "q": "How was the previous shift?",
+    "intent": "PREVIOUS_SHIFT",
+    "intents": [
+      "PREVIOUS_SHIFT",
+      "HANDOFF_REVIEW",
+      "RECENT_ACTIVITY"
+    ],
+    "ms": 495,
+    "len": 500,
+    "answer": "During the previous shift, the prior caregiver\u2019s notes on file include Medication administration was corrected: not administered.; Caregiver reported: fever; Medication change needs verification: Tylenol \u00b7 reported dose 300mg \u00b7 reason: fever. Not an active medication-plan instruction until authorized review.. A medication administration entry was corrected: not administered. Still waiting after that shift: Allegra 60 mg was reported for allergies and is waiting for medication-plan verification..",
+    "has_changed_header": false,
+    "semicolon_fragments": 2,
+    "dup_corr": 4
+  },
+  {
+    "q": "What happened last shift?",
+    "intent": "PREVIOUS_SHIFT",
+    "intents": [
+      "PREVIOUS_SHIFT",
+      "HANDOFF_REVIEW",
+      "RECENT_ACTIVITY",
+      "CHANGE_SINCE"
+    ],
+    "ms": 510,
+    "len": 500,
+    "answer": "During the previous shift, the prior caregiver\u2019s notes on file include Medication administration was corrected: not administered.; Caregiver reported: fever; Medication change needs verification: Tylenol \u00b7 reported dose 300mg \u00b7 reason: fever. Not an active medication-plan instruction until authorized review.. A medication administration entry was corrected: not administered. Still waiting after that shift: Allegra 60 mg was reported for allergies and is waiting for medication-plan verification..",
+    "has_changed_header": false,
+    "semicolon_fragments": 2,
+    "dup_corr": 4
+  },
+  {
+    "q": "What did Maya report during her shift?",
+    "intent": "PREVIOUS_SHIFT",
+    "intents": [
+      "PREVIOUS_SHIFT",
+      "HANDOFF_REVIEW",
+      "RECENT_ACTIVITY"
+    ],
+    "ms": 407,
+    "len": 485,
+    "answer": "During the previous shift, Maya\u2019s notes on file include Medication administration was corrected: not administered.; Caregiver reported: fever; Medication change needs verification: Tylenol \u00b7 reported dose 300mg \u00b7 reason: fever. Not an active medication-plan instruction until authorized review.. A medication administration entry was corrected: not administered. Still waiting after that shift: Allegra 60 mg was reported for allergies and is waiting for medication-plan verification..",
+    "has_changed_header": false,
+    "semicolon_fragments": 2,
+    "dup_corr": 4
+  },
+  {
+    "q": "What needs review?",
+    "intent": "TASKS_REMAINING",
+    "intents": [
+      "TASKS_REMAINING",
+      "OPEN_LOOP_STATUS",
+      "WAITING_ON"
+    ],
+    "ms": 395,
+    "len": 533,
+    "answer": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Marcus Carter, Maya Bennett.\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\u2022 Needs your review: a prior Metformin-with-lunch confirmation is still open.\n\u2022 Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n\u2022 Needs checking: Reported dose is ambiguous (Count unit without tablet strength \u2014 cannot convert to mg). Requires human review.",
+    "has_changed_header": false,
+    "semicolon_fragments": 0,
+    "dup_corr": 0
+  },
+  {
+    "q": "What medication changes are waiting?",
+    "intent": "MEDICATION_CHANGE",
+    "intents": [
+      "MEDICATION_CHANGE"
+    ],
+    "ms": 649,
+    "len": 243,
+    "answer": "One medication change is waiting for review: Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.. It is not active plan instruction until authorized.\n\nActive authorized medication remains Metformin 500 mg.",
+    "has_changed_header": false,
+    "semicolon_fragments": 0,
+    "dup_corr": 0
+  },
+  {
+    "q": "What remains unfinished?",
+    "intent": "TASKS_REMAINING",
+    "intents": [
+      "TASKS_REMAINING",
+      "OPEN_LOOP_STATUS",
+      "WAITING_ON"
+    ],
+    "ms": 640,
+    "len": 533,
+    "answer": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Marcus Carter, Maya Bennett.\n\u2022 Allegra 60 mg was reported for allergies and is waiting for medication-plan verification.\n\u2022 Needs your review: a prior Metformin-with-lunch confirmation is still open.\n\u2022 Needs checking: Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n\u2022 Needs checking: Reported dose is ambiguous (Count unit without tablet strength \u2014 cannot convert to mg). Requires human review.",
+    "has_changed_header": false,
+    "semicolon_fragments": 0,
+    "dup_corr": 0
+  },
+  {
+    "q": "How many medication-review tasks are active?",
+    "intent": "MEDICATION_CURRENT",
+    "intents": [
+      "MEDICATION_CURRENT"
+    ],
+    "ms": 590,
+    "len": 104,
+    "answer": "Metformin 500 mg\nTake at 12:00 PM\nWindow 11:30 AM \u2013 12:30 PM\nTake with food\nAuthorized by Dr. Priya Shah",
+    "has_changed_header": false,
+    "semicolon_fragments": 0,
+    "dup_corr": 0
+  }
+]

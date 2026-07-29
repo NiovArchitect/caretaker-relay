@@ -96,8 +96,8 @@ export function CorrectionAwarenessPanel({
     >
       <h2 style={{ marginTop: 0 }}>Corrections that need your attention</h2>
       <p className="muted">
-        When a care report for {space.displayName} is corrected, you see it here
-        if you are authorized and affected. History keeps the original report.
+        Current truth for {space.displayName} after corrections — not every raw
+        notification. History keeps original reports.
       </p>
 
       {rows.length === 0 && (
@@ -106,8 +106,12 @@ export function CorrectionAwarenessPanel({
         </p>
       )}
 
-      <ul className="list-plain">
-        {rows.map((n) => (
+      <ul className="list-plain" data-testid="correction-canonical-list">
+        {rows.map((n) => {
+          const isMedNotGiven = /medication was not administered/i.test(
+            `${n.title ?? ""} ${n.body ?? ""}`,
+          );
+          return (
           <li key={n.id}>
             <button
               type="button"
@@ -115,8 +119,16 @@ export function CorrectionAwarenessPanel({
               data-testid={`correction-alert-${n.id}`}
               onClick={() => setOpenId(n.id)}
             >
-              <strong>{n.title || "Medication record corrected"}</strong>
-              <span className="muted">{n.body || "An earlier report was corrected."}</span>
+              <strong>
+                {isMedNotGiven
+                  ? "Medication administration corrected"
+                  : n.title || "Care record corrected"}
+              </strong>
+              <span className="muted">
+                {isMedNotGiven
+                  ? "Current record: medication was not administered."
+                  : n.body || "An earlier report was corrected."}
+              </span>
               {n.acknowledged_at ? (
                 <span className="muted">Acknowledged</span>
               ) : (
@@ -126,12 +138,16 @@ export function CorrectionAwarenessPanel({
             {openId === n.id && (
               <div className="surface-soft" data-testid="correction-detail">
                 <p>
-                  <strong>An earlier medication record was corrected.</strong>
+                  <strong>
+                    {isMedNotGiven
+                      ? "Current truth: medication was not administered."
+                      : "An earlier care report was corrected."}
+                  </strong>
                 </p>
                 <p className="muted">{n.body}</p>
                 <p className="muted">
-                  Current status: Needs review until you acknowledge. This is not
-                  a dosing instruction.
+                  Original reports remain in history. This is not a dosing
+                  instruction.
                 </p>
                 {!n.acknowledged_at && (
                   <button
@@ -146,7 +162,8 @@ export function CorrectionAwarenessPanel({
               </div>
             )}
           </li>
-        ))}
+          );
+        })}
       </ul>
       {msg && (
         <p className="muted" role="status" data-testid="correction-ack-msg">
