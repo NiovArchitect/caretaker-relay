@@ -1,0 +1,132 @@
+{
+  "started": "2026-07-29T22:58:28.070Z",
+  "bundle": "index-C6YYw37E.js",
+  "app_sha": "95b5e687a8b428ed351719c3e194d4969a9d2f50",
+  "results": [
+    {
+      "q": "How is Evelyn today?",
+      "answer": "Evelyn Carter's most recent report on file is caregiver reported: slept (last noted Saturday, July 25, 2026 at 12:06 PM PDT). The main item needing attention is Confirm any open transportation or evening medication. Metformin 500 mg remains scheduled for 12:00 PM. Physical therapy is Friday 4:30 PM PDT.",
+      "flags": {
+        "meal_card": false,
+        "med_fallback": false,
+        "no_match": false,
+        "iso": false,
+        "action_preview": false,
+        "has_cancel": false,
+        "plan_answer": false
+      },
+      "verifyCancel": false,
+      "looksRight": false,
+      "panelTail": "t recent report on file is caregiver reported: slept (last noted Saturday, July 25, 2026 at 12:06 PM PDT). The main item needing attention is Confirm any open transportation or evening medication. Metformin 500 mg remains scheduled for 12:00 PM. Physical therapy is Friday 4:30 PM PDT.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend"
+    },
+    {
+      "q": "what am I doing today?",
+      "answer": "Here is what matters for Evelyn Carter today: • Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Reported dose is ambiguous (Count unit without tablet strength — cannot convert to mg). Requires human review. Coming up:\n• Confirm any open transportation or evening medication Current ap",
+      "flags": {
+        "meal_card": false,
+        "med_fallback": false,
+        "no_match": false,
+        "iso": false,
+        "action_preview": false,
+        "has_cancel": false,
+        "plan_answer": true
+      },
+      "verifyCancel": false,
+      "looksRight": false,
+      "panelTail": "ment (caregiver-requested) · Wednesday, July 29 · 2:00 PM PDT · Coastal Family Medicine (synthetic) Coverage: Helping now: Marcus Carter · Primary family caregiver\nUntil about 4:00 PM Next: Maya Bennett\nExpected around 4:30 PM Open Today for the full compact plan, or Care for details.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend"
+    },
+    {
+      "q": "What happened during the last shift?",
+      "answer": "Daniel Kim covered Evelyn Carter before you from Jul 27, 2026 · 6:39 PM PDT to Jul 27, 2026 · 11:44 PM PDT. They completed or recorded: Medication administration was corrected: not administered.; Medication marked as given (as scheduled) for Evelyn Carter. They left open: Confirm any open transportation or evening medication. Their handoff is seen.",
+      "flags": {
+        "meal_card": false,
+        "med_fallback": false,
+        "no_match": false,
+        "iso": false,
+        "action_preview": false,
+        "has_cancel": false,
+        "plan_answer": false
+      },
+      "verifyCancel": false,
+      "looksRight": false,
+      "panelTail": ":39 PM PDT to Jul 27, 2026 · 11:44 PM PDT. They completed or recorded: Medication administration was corrected: not administered.; Medication marked as given (as scheduled) for Evelyn Carter. They left open: Confirm any open transportation or evening medication. Their handoff is seen.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend"
+    },
+    {
+      "q": "What is on my shift today?",
+      "answer": "For your current coverage with Evelyn Carter: • Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Reported dose unit is not comparable to the authorized instruction (incompatible dimensions). Relay will not invent a conversion.\n• Reported dose is ambiguous (Count unit without tablet strength — cannot convert to mg). Requires human review. Coming up:\n• Confirm any open transportation or evening medication Current ap",
+      "flags": {
+        "meal_card": false,
+        "med_fallback": false,
+        "no_match": false,
+        "iso": false,
+        "action_preview": false,
+        "has_cancel": false,
+        "plan_answer": true
+      },
+      "verifyCancel": false,
+      "looksRight": false,
+      "panelTail": "ment (caregiver-requested) · Wednesday, July 29 · 2:00 PM PDT · Coastal Family Medicine (synthetic) Coverage: Helping now: Marcus Carter · Primary family caregiver\nUntil about 4:00 PM Next: Maya Bennett\nExpected around 4:30 PM Open Today for the full compact plan, or Care for details.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend"
+    },
+    {
+      "q": "Send a message to May saying hello.",
+      "answer": "I can send an **in-app care-team message** to **Maya Bennett** about Evelyn Carter: “hello.” This creates an in-app notification for them in this care space. It does **not** send SMS or email unless that is separately configured. Confirm with **Looks right** to send, or **Cancel** to discard.",
+      "flags": {
+        "meal_card": false,
+        "med_fallback": false,
+        "no_match": false,
+        "iso": false,
+        "action_preview": true,
+        "has_cancel": true,
+        "plan_answer": false
+      },
+      "verifyCancel": false,
+      "looksRight": false,
+      "panelTail": "nd an **in-app care-team message** to **Maya Bennett** about Evelyn Carter: “hello.” This creates an in-app notification for them in this care space. It does **not** send SMS or email unless that is separately configured. Confirm with **Looks right** to send, or **Cancel** to discard.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend"
+    },
+    {
+      "q": "Change meeting time to 2pm for Personal Training tomorrow.",
+      "answer": "I can update **Evelyn Carter's internal care schedule** so **meeting** is at **2pm tomorrow**. This changes the care record only — it is **not** an external clinic booking system. Confirm with **Looks right** to apply, or **Cancel** to discard.",
+      "flags": {
+        "meal_card": false,
+        "med_fallback": false,
+        "no_match": false,
+        "iso": false,
+        "action_preview": true,
+        "has_cancel": true,
+        "plan_answer": false
+      },
+      "verifyCancel": false,
+      "looksRight": false,
+      "panelTail": "e to 2pm for Personal Training tomorrow.\nI can update **Evelyn Carter's internal care schedule** so **meeting** is at **2pm tomorrow**. This changes the care record only — it is **not** an external clinic booking system. Confirm with **Looks right** to apply, or **Cancel** to discard.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend"
+    },
+    {
+      "q": "Cancel that",
+      "answer": "Cancelled. That draft was not saved and nothing was executed. What would you like to do next?",
+      "flags": {
+        "meal_card": false,
+        "med_fallback": false,
+        "no_match": false,
+        "iso": false,
+        "action_preview": true,
+        "has_cancel": true,
+        "plan_answer": false
+      },
+      "verifyCancel": false,
+      "looksRight": false,
+      "panelTail": "ing** is at **2pm tomorrow**. This changes the care record only — it is **not** an external clinic booking system. Confirm with **Looks right** to apply, or **Cancel** to discard.\nCancel that\nCancelled. That draft was not saved and nothing was executed. What would you like to do next?\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend"
+    }
+  ],
+  "gates": {
+    "no_meal_on_message": true,
+    "no_meal_on_schedule": true,
+    "no_med_on_message": true,
+    "no_med_on_schedule": true,
+    "today_plan_ok": true,
+    "shift_plan_ok": true,
+    "last_shift_ok": true,
+    "message_preview": true,
+    "schedule_preview": true,
+    "cancel_works": true,
+    "iso_times": 0
+  }
+}

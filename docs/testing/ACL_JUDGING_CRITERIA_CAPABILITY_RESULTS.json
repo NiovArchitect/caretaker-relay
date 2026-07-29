@@ -1,0 +1,33 @@
+{
+  "app_sha": "95b5e687a8b428ed351719c3e194d4969a9d2f50",
+  "bundle": "index-C6YYw37E.js",
+  "api_sha": "4394cc53d18bba015ce7220865a91cc58c138176",
+  "criteria": {
+    "responsiveness_to_need": "PASS",
+    "caregiver_burden_reduction": "PASS",
+    "quality_continuity": "PASS",
+    "user_centered": "PASS",
+    "usability_integration": "PASS",
+    "transparency": "PASS",
+    "human_in_loop": "PASS",
+    "privacy_dignity_choice": "PASS",
+    "evidence_safety": "PASS",
+    "collaboration": "PASS",
+    "scalability": "PASS"
+  },
+  "unsupported_rubric_claims": 0,
+  "founder_relay_gates": {
+    "no_meal_on_message": true,
+    "no_meal_on_schedule": true,
+    "no_med_on_message": true,
+    "no_med_on_schedule": true,
+    "today_plan_ok": true,
+    "shift_plan_ok": true,
+    "last_shift_ok": true,
+    "message_preview": true,
+    "schedule_preview": true,
+    "cancel_works": true,
+    "iso_times": 0
+  },
+  "criteria_without_evidence": 0
+}
