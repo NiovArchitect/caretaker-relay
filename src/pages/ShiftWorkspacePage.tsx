@@ -136,7 +136,7 @@ export function ShiftWorkspacePage({
     void load();
   }, [load, refreshKey]);
 
-  // Rich pre-shift briefing from live handoff + care state
+  // Rich pre-shift briefing from live handoff + care state + PRN follow-ups
   useEffect(() => {
     let cancelled = false;
     void (async () => {
@@ -167,6 +167,31 @@ export function ShiftWorkspacePage({
             ...ho.stillNeedsAttention.map((x) => `Needs attention: ${x}`),
           ];
         }
+      }
+      // Canonical PRN reassessments — one line per incomplete episode
+      try {
+        const raw = sessionStorage.getItem("cr_care_session_v1");
+        const tok = raw
+          ? (JSON.parse(raw) as { token?: string }).token
+          : undefined;
+        if (tok) {
+          const { careFetchPrn } = await import("../foundation/careHttpClient");
+          const prn = await careFetchPrn(tok, rid);
+          if (prn.ok) {
+            const due = prn.data.reassessmentDue ?? [];
+            for (const e of due.slice(0, 4)) {
+              const line = String(
+                (e as { humanSummary?: string; human_summary?: string })
+                  .humanSummary ??
+                  (e as { human_summary?: string }).human_summary ??
+                  "As-needed medication follow-up",
+              );
+              handoffLines.push(`As-needed follow-up: ${line}`);
+            }
+          }
+        }
+      } catch {
+        /* non-fatal */
       }
       const tasks = (state?.tasks ?? [])
         .filter((t) => {

@@ -38,6 +38,7 @@ import {
 import { SYNTHETIC_FACILITIES } from "../lib/relay/projections";
 import { CorrectionAwarenessPanel } from "../components/CorrectionAwarenessPanel";
 import { ShiftWorkspacePage } from "./ShiftWorkspacePage";
+import { careFetchPrn, careReassessPrn } from "../foundation/careHttpClient";
 
 type CareSection =
   | "about"
@@ -729,6 +730,13 @@ export function CarePage({
   const [activeApts, setActiveApts] = useState<AppointmentLineageRow[]>([]);
   const [historyApts, setHistoryApts] = useState<AppointmentLineageRow[]>([]);
   const [aptsLoaded, setAptsLoaded] = useState(false);
+  const [prn, setPrn] = useState<{
+    orders: Array<Record<string, unknown>>;
+    openEpisodes: Array<Record<string, unknown>>;
+    completedRecent: Array<Record<string, unknown>>;
+    reassessmentDue: Array<Record<string, unknown>>;
+  } | null>(null);
+  const [prnMsg, setPrnMsg] = useState<string | null>(null);
 
   useEffect(() => {
     if (focusKind === "medication") setSection("medications");
@@ -736,6 +744,25 @@ export function CarePage({
 
   useEffect(() => {
     let cancelled = false;
+    const tok = (() => {
+      try {
+        const raw = sessionStorage.getItem("cr_care_session_v1");
+        return raw ? (JSON.parse(raw) as { token?: string }).token : undefined;
+      } catch {
+        return undefined;
+      }
+    })();
+    if (tok && space.careRecipientId) {
+      void careFetchPrn(tok, space.careRecipientId).then((r) => {
+        if (cancelled || !r.ok) return;
+        setPrn({
+          orders: r.data.orders ?? [],
+          openEpisodes: r.data.openEpisodes ?? [],
+          completedRecent: r.data.completedRecent ?? [],
+          reassessmentDue: r.data.reassessmentDue ?? [],
+        });
+      });
+    }
     void fetchCareState().then((s) => {
       if (cancelled) return;
       setState(s);
@@ -1030,6 +1057,189 @@ export function CarePage({
             <h2>Medications</h2>
             <CorrectionAwarenessPanel refreshKey={0} />
             <MedicationCorrectionPanel refreshKey={0} />
+            <h3 className="muted" style={{ marginTop: 8 }} data-testid="care-prn-heading">
+              As-needed medications
+            </h3>
+            {prnMsg ? (
+              <p className="muted" role="status" data-testid="care-prn-status">
+                {prnMsg}
+              </p>
+            ) : null}
+            {!prn?.orders?.length ? (
+              <p className="muted" data-testid="care-prn-empty">
+                No authorized as-needed (PRN) medications on file for{" "}
+                {recipientName}.
+              </p>
+            ) : (
+              prn.orders.map((o) => (
+                <div
+                  key={str(o.id)}
+                  className="member-card med-card"
+                  data-testid={`care-prn-order-${str(o.id)}`}
+                >
+                  <strong>{str(o.medication ?? "As-needed medication")}</strong>
+                  <span className="muted">
+                    {str(
+                      o.humanSummary ??
+                        o.human_summary ??
+                        [
+                          str(o.allowedDose),
+                          str(o.route),
+                          str(o.indication)
+                            ? `as needed for ${str(o.indication)}`
+                            : "",
+                        ]
+                          .filter(Boolean)
+                          .join(" · "),
+                    )}
+                  </span>
+                  <span className="muted">
+                    Authorized by {str(o.authorizedBy ?? o.authorized_by ?? "prescribing team")}
+                  </span>
+                </div>
+              ))
+            )}
+            {!!prn?.reassessmentDue?.length && (
+              <>
+                <h3 className="muted" style={{ marginTop: 16 }}>
+                  As-needed follow-up needed
+                </h3>
+                {prn.reassessmentDue.map((e) => (
+                  <div
+                    key={str(e.id)}
+                    className="member-card"
+                    data-testid={`care-prn-reassess-${str(e.id)}`}
+                  >
+                    <strong>
+                      {str(e.humanSummary ?? e.human_summary ?? e.medication)}
+                    </strong>
+                    <span className="muted">
+                      {str(e.humanStatus ?? e.human_status ?? "Check how they feel")}
+                    </span>
+                    <div className="btn-row" style={{ marginTop: 8 }}>
+                      <button
+                        type="button"
+                        className="primary-btn"
+                        data-testid={`care-prn-helped-${str(e.id)}`}
+                        onClick={() => {
+                          const tok = (() => {
+                            try {
+                              const raw =
+                                sessionStorage.getItem("cr_care_session_v1");
+                              return raw
+                                ? (JSON.parse(raw) as { token?: string }).token
+                                : undefined;
+                            } catch {
+                              return undefined;
+                            }
+                          })();
+                          if (!tok) return;
+                          void careReassessPrn(tok, space.careRecipientId, {
+                            episode_id: str(e.id),
+                            effect: "improved",
+                          }).then((r) => {
+                            setPrnMsg(
+                              r.ok
+                                ? str(r.data.plain_language ?? "Follow-up saved.")
+                                : str(r.message ?? "Could not save follow-up."),
+                            );
+                            if (r.ok) {
+                              void careFetchPrn(tok, space.careRecipientId).then(
+                                (p) => {
+                                  if (p.ok) {
+                                    setPrn({
+                                      orders: p.data.orders ?? [],
+                                      openEpisodes: p.data.openEpisodes ?? [],
+                                      completedRecent:
+                                        p.data.completedRecent ?? [],
+                                      reassessmentDue:
+                                        p.data.reassessmentDue ?? [],
+                                    });
+                                  }
+                                },
+                              );
+                            }
+                          });
+                        }}
+                      >
+                        Mark as helped
+                      </button>
+                      <button
+                        type="button"
+                        className="secondary-btn"
+                        data-testid={`care-prn-nohelp-${str(e.id)}`}
+                        onClick={() => {
+                          const tok = (() => {
+                            try {
+                              const raw =
+                                sessionStorage.getItem("cr_care_session_v1");
+                              return raw
+                                ? (JSON.parse(raw) as { token?: string }).token
+                                : undefined;
+                            } catch {
+                              return undefined;
+                            }
+                          })();
+                          if (!tok) return;
+                          void careReassessPrn(tok, space.careRecipientId, {
+                            episode_id: str(e.id),
+                            effect: "unchanged",
+                          }).then((r) => {
+                            setPrnMsg(
+                              r.ok
+                                ? str(r.data.plain_language ?? "Follow-up saved.")
+                                : str(r.message ?? "Could not save follow-up."),
+                            );
+                            if (r.ok) {
+                              void careFetchPrn(tok, space.careRecipientId).then(
+                                (p) => {
+                                  if (p.ok) {
+                                    setPrn({
+                                      orders: p.data.orders ?? [],
+                                      openEpisodes: p.data.openEpisodes ?? [],
+                                      completedRecent:
+                                        p.data.completedRecent ?? [],
+                                      reassessmentDue:
+                                        p.data.reassessmentDue ?? [],
+                                    });
+                                  }
+                                },
+                              );
+                            }
+                          });
+                        }}
+                      >
+                        Did not help
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
+            {!!prn?.completedRecent?.length && (
+              <>
+                <h3 className="muted" style={{ marginTop: 16 }}>
+                  Recent as-needed chart (reason · dose · result)
+                </h3>
+                {prn.completedRecent.slice(0, 8).map((e) => (
+                  <div
+                    key={str(e.id)}
+                    className="member-card"
+                    data-testid={`care-prn-history-${str(e.id)}`}
+                  >
+                    <strong>
+                      {str(e.humanSummary ?? e.human_summary ?? e.medication)}
+                    </strong>
+                    <span className="muted">
+                      {str(e.humanStatus ?? e.human_status ?? "Completed")}
+                    </span>
+                  </div>
+                ))}
+              </>
+            )}
+            <h3 className="muted" style={{ marginTop: 20 }}>
+              Scheduled medications
+            </h3>
             {!state?.medicationSchedules?.length ? (
               <p className="muted">No medication schedules on file.</p>
             ) : (

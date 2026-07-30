@@ -1437,13 +1437,26 @@ export async function fetchTodayProjection(): Promise<{
             ?.filter((x) => x.status === "pending")
             .map((x) => x.title) ?? [];
         const handoffNeeds = t.latest_handoff?.stillNeedsAttention ?? [];
+        const prnNeeds = (t as { prn_needs?: string[] }).prn_needs ?? [];
+        const prnAttentionRaw =
+          (t as {
+            prn_attention?: Array<{
+              id: string;
+              title: string;
+              whatHappened: string;
+              whySurfaced: string;
+              nextStep: string;
+              kind: string;
+            }>;
+          }).prn_attention ?? [];
         // Receipt→reality: stillNeeds and pending verification belong in attention
         const needsYou = [
           ...(t.open_safety_reviews?.map((r) => r.reason) ?? []),
           ...pendingTasks,
+          ...prnNeeds,
           ...handoffNeeds.filter(
             (line) =>
-              /medication change needs verification|needs an owner|supply|refill|refused|missed/i.test(
+              /medication change needs verification|needs an owner|supply|refill|refused|missed|as-needed follow-up/i.test(
                 line,
               ) && !pendingTasks.some((p) => p === line),
           ),
@@ -1461,12 +1474,27 @@ export async function fetchTodayProjection(): Promise<{
             const base = plainCaregiverLine(raw.statement);
             return when ? `${base} · ${when}` : base;
           }) ?? [];
+        const prnAtt: TodayAttentionItem[] = prnAttentionRaw.map((p) => ({
+          id: p.id,
+          title: p.title,
+          whatHappened: p.whatHappened,
+          whySurfaced: p.whySurfaced,
+          relayKnows: "As-needed dose was charted; result not complete.",
+          relayDoesNotKnow: "How they feel now until a caregiver reports it.",
+          nextStep: p.nextStep,
+          kind: "medication" as const,
+        }));
         return {
           needsYou,
-          attention: buildAttentionFromLines(needsYou),
+          attention: [
+            ...prnAtt,
+            ...buildAttentionFromLines(
+              needsYou.filter((n) => !prnNeeds.includes(n)),
+            ),
+          ],
           whatChanged,
           handled: t.latest_handoff?.whatChanged ?? [],
-          next: handoffNeeds,
+          next: [...new Set([...prnNeeds, ...handoffNeeds])],
           source: "http",
           storeBackend: res.data.store_backend,
           organizedCount: whatChanged.length,
@@ -1487,12 +1515,15 @@ export async function fetchTodayProjection(): Promise<{
           ?.filter((x) => x.status === "pending")
           .map((x) => x.title) ?? [];
       const handoffNeeds = t.latest_handoff?.stillNeedsAttention ?? [];
+      const prnNeeds = t.prn_needs ?? [];
+      const prnAttentionRaw = t.prn_attention ?? [];
       const needsYou = [
         ...(t.open_safety_reviews?.map((r) => r.reason) ?? []),
         ...pendingTasks,
+        ...prnNeeds,
         ...handoffNeeds.filter(
           (line) =>
-            /medication change needs verification|needs an owner|supply|refill|refused|missed/i.test(
+            /medication change needs verification|needs an owner|supply|refill|refused|missed|as-needed follow-up/i.test(
               line,
             ) && !pendingTasks.some((p) => p === line),
         ),
@@ -1527,14 +1558,27 @@ export async function fetchTodayProjection(): Promise<{
           .slice(-4)
           .map((e) => e.statement) ??
         [];
+      const prnAtt: TodayAttentionItem[] = prnAttentionRaw.map((p) => ({
+        id: p.id,
+        title: p.title,
+        whatHappened: p.whatHappened,
+        whySurfaced: p.whySurfaced,
+        relayKnows: "As-needed dose was charted; result not complete.",
+        relayDoesNotKnow: "How they feel now until a caregiver reports it.",
+        nextStep: p.nextStep,
+        kind: "medication" as const,
+      }));
       return {
         needsYou,
-        attention: buildAttentionFromLines(needsYou),
+        attention: [
+          ...prnAtt,
+          ...buildAttentionFromLines(
+            needsYou.filter((n) => !prnNeeds.includes(n)),
+          ),
+        ],
         whatChanged,
         handled: handled.length > 0 ? handled : [],
-        next: t.latest_handoff?.stillNeedsAttention?.length
-          ? t.latest_handoff.stillNeedsAttention
-          : [],
+        next: [...new Set([...prnNeeds, ...(t.latest_handoff?.stillNeedsAttention ?? [])])],
         source: "http",
         storeBackend: res.data.store_backend,
         organizedCount: whatChanged.length,

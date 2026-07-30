@@ -277,9 +277,93 @@ export async function careToday(
         whatChanged: string[];
         stillNeedsAttention: string[];
       } | null;
+      prn_attention?: Array<{
+        id: string;
+        title: string;
+        whatHappened: string;
+        whySurfaced: string;
+        nextStep: string;
+        kind: string;
+        episode_id?: string;
+      }>;
+      prn_needs?: string[];
+      prn?: {
+        orders: Array<{ id: string; medication: string; human_summary: string }>;
+        reassessment_due: Array<{
+          id: string;
+          human_summary: string;
+          human_status: string;
+        }>;
+      };
     };
     store_backend?: string;
   }>(`/api/v1/care/recipients/${careRecipientId}/today`, { token, baseUrl });
+}
+
+/** Canonical PRN (as-needed) projection for Care / Today / Shift / Relay. */
+export async function careFetchPrn(
+  token: string,
+  careRecipientId: string,
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    recipientId?: string;
+    orders: Array<Record<string, unknown>>;
+    openEpisodes: Array<Record<string, unknown>>;
+    completedRecent: Array<Record<string, unknown>>;
+    reassessmentDue: Array<Record<string, unknown>>;
+  }>(`/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/prn`, {
+    token,
+    baseUrl,
+  });
+}
+
+export async function careCreatePrnEpisode(
+  token: string,
+  careRecipientId: string,
+  body: {
+    medication?: string;
+    symptom?: string;
+    severity_before?: string;
+    dose?: string;
+    confirm?: boolean;
+    notes?: string;
+  },
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    needs_confirmation?: boolean;
+    plain_language?: string;
+    episode?: Record<string, unknown>;
+    message?: string;
+  }>(
+    `/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/prn/episodes`,
+    { method: "POST", token, body, baseUrl },
+  );
+}
+
+export async function careReassessPrn(
+  token: string,
+  careRecipientId: string,
+  body: {
+    episode_id?: string;
+    effect: "improved" | "unchanged" | "worsened" | "unable_to_assess";
+    severity_after?: string;
+    notes?: string;
+  },
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    plain_language?: string;
+    episode?: Record<string, unknown>;
+    message?: string;
+  }>(
+    `/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/prn/episodes/reassess`,
+    { method: "POST", token, body, baseUrl },
+  );
 }
 
 export async function careConfirm(
