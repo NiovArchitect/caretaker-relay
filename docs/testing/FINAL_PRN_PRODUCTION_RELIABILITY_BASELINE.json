@@ -1,0 +1,21 @@
+{
+  "recorded_at": "2026-07-30T11:30:00Z",
+  "app_repo_head": "813e10c290ea49417c43a467c41602386fb35856",
+  "app_product_deploy": "c5dea925de33da101bc81a38ca861b8611e01edf",
+  "app_bundle": "index-DciNDcpz.js",
+  "api_repo_head": "649b11de3d1d8a37023c891e8f30218a8df56495",
+  "api_product_deploy": "0f2bbe2a17f7",
+  "store": "prisma",
+  "deployment_mode": "regulated_restricted",
+  "product_code_modified_before_baseline": false,
+  "background_workers": 0,
+  "open_gates": [
+    "client_idempotency_envelope",
+    "real_elapsed_overdue_soak",
+    "offline_stale_matrix",
+    "public_dual_org_attacks",
+    "full_non_prn_regression",
+    "founder_desktop",
+    "founder_phone"
+  ]
+}

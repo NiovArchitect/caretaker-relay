@@ -39,6 +39,14 @@ import { SYNTHETIC_FACILITIES } from "../lib/relay/projections";
 import { CorrectionAwarenessPanel } from "../components/CorrectionAwarenessPanel";
 import { ShiftWorkspacePage } from "./ShiftWorkspacePage";
 import { careFetchPrn, careReassessPrn } from "../foundation/careHttpClient";
+import {
+  getOrCreateActionEnvelope,
+  markActionAttempt,
+  markActionFailed,
+  markActionSucceeded,
+  markActionUnknown,
+  unknownResultUserMessage,
+} from "../foundation/clientActionEnvelope";
 
 type CareSection =
   | "about"
@@ -1134,16 +1142,29 @@ export function CarePage({
                             }
                           })();
                           if (!tok) return;
+                          const epId = str(e.id);
+                          const env = getOrCreateActionEnvelope({
+                            recipient_id: space.careRecipientId,
+                            object_type: "prn_reassess",
+                            intent_fingerprint: `${epId}:improved`,
+                            episode_id: epId,
+                          });
+                          markActionAttempt(env.idempotency_key, "online");
                           void careReassessPrn(tok, space.careRecipientId, {
-                            episode_id: str(e.id),
+                            episode_id: epId,
                             effect: "improved",
+                            idempotency_key: env.idempotency_key,
                           }).then((r) => {
-                            setPrnMsg(
-                              r.ok
-                                ? str(r.data.plain_language ?? "Follow-up saved.")
-                                : str(r.message ?? "Could not save follow-up."),
-                            );
                             if (r.ok) {
+                              const plain = str(
+                                r.data.plain_language ?? "Follow-up saved.",
+                              );
+                              markActionSucceeded(
+                                env.idempotency_key,
+                                str((r.data.episode as { id?: string })?.id ?? epId),
+                                plain,
+                              );
+                              setPrnMsg(plain);
                               void careFetchPrn(tok, space.careRecipientId).then(
                                 (p) => {
                                   if (p.ok) {
@@ -1157,6 +1178,17 @@ export function CarePage({
                                     });
                                   }
                                 },
+                              );
+                            } else if (r.code === "NETWORK_ERROR" || r.status === 0) {
+                              markActionUnknown(env.idempotency_key, r.message);
+                              setPrnMsg(unknownResultUserMessage());
+                            } else {
+                              markActionFailed(
+                                env.idempotency_key,
+                                str(r.message ?? "Could not save follow-up."),
+                              );
+                              setPrnMsg(
+                                str(r.message ?? "Could not save follow-up."),
                               );
                             }
                           });
@@ -1181,16 +1213,29 @@ export function CarePage({
                             }
                           })();
                           if (!tok) return;
+                          const epId = str(e.id);
+                          const env = getOrCreateActionEnvelope({
+                            recipient_id: space.careRecipientId,
+                            object_type: "prn_reassess",
+                            intent_fingerprint: `${epId}:unchanged`,
+                            episode_id: epId,
+                          });
+                          markActionAttempt(env.idempotency_key, "online");
                           void careReassessPrn(tok, space.careRecipientId, {
-                            episode_id: str(e.id),
+                            episode_id: epId,
                             effect: "unchanged",
+                            idempotency_key: env.idempotency_key,
                           }).then((r) => {
-                            setPrnMsg(
-                              r.ok
-                                ? str(r.data.plain_language ?? "Follow-up saved.")
-                                : str(r.message ?? "Could not save follow-up."),
-                            );
                             if (r.ok) {
+                              const plain = str(
+                                r.data.plain_language ?? "Follow-up saved.",
+                              );
+                              markActionSucceeded(
+                                env.idempotency_key,
+                                str((r.data.episode as { id?: string })?.id ?? epId),
+                                plain,
+                              );
+                              setPrnMsg(plain);
                               void careFetchPrn(tok, space.careRecipientId).then(
                                 (p) => {
                                   if (p.ok) {
@@ -1204,6 +1249,17 @@ export function CarePage({
                                     });
                                   }
                                 },
+                              );
+                            } else if (r.code === "NETWORK_ERROR" || r.status === 0) {
+                              markActionUnknown(env.idempotency_key, r.message);
+                              setPrnMsg(unknownResultUserMessage());
+                            } else {
+                              markActionFailed(
+                                env.idempotency_key,
+                                str(r.message ?? "Could not save follow-up."),
+                              );
+                              setPrnMsg(
+                                str(r.message ?? "Could not save follow-up."),
                               );
                             }
                           });

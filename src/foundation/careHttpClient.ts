@@ -23,6 +23,8 @@ async function request<T>(
     token?: string;
     body?: unknown;
     baseUrl?: string;
+    /** Optional extra headers (e.g. X-Idempotency-Key) */
+    headers?: Record<string, string>;
   } = {},
 ): Promise<HttpResult<T>> {
   const base = opts.baseUrl ?? DEFAULT_BASE;
@@ -32,6 +34,7 @@ async function request<T>(
       headers: {
         "content-type": "application/json",
         ...(opts.token ? { authorization: `Bearer ${opts.token}` } : {}),
+        ...(opts.headers ?? {}),
       },
       body: opts.body !== undefined ? JSON.stringify(opts.body) : undefined,
     });
@@ -329,18 +332,30 @@ export async function careCreatePrnEpisode(
     dose?: string;
     confirm?: boolean;
     notes?: string;
+    order_id?: string;
+    /** Stable action key — same intended action reuses key across retries */
+    idempotency_key?: string;
   },
   baseUrl?: string,
 ) {
+  const idem = body.idempotency_key?.trim();
+  const payload = { ...body };
   return request<{
     ok: boolean;
     needs_confirmation?: boolean;
     plain_language?: string;
     episode?: Record<string, unknown>;
     message?: string;
+    idempotency_key?: string | null;
   }>(
     `/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/prn/episodes`,
-    { method: "POST", token, body, baseUrl },
+    {
+      method: "POST",
+      token,
+      body: payload,
+      baseUrl,
+      headers: idem ? { "x-idempotency-key": idem } : undefined,
+    },
   );
 }
 
@@ -352,9 +367,11 @@ export async function careReassessPrn(
     effect: "improved" | "unchanged" | "worsened" | "unable_to_assess";
     severity_after?: string;
     notes?: string;
+    idempotency_key?: string;
   },
   baseUrl?: string,
 ) {
+  const idem = body.idempotency_key?.trim();
   return request<{
     ok: boolean;
     plain_language?: string;
@@ -362,7 +379,13 @@ export async function careReassessPrn(
     message?: string;
   }>(
     `/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/prn/episodes/reassess`,
-    { method: "POST", token, body, baseUrl },
+    {
+      method: "POST",
+      token,
+      body,
+      baseUrl,
+      headers: idem ? { "x-idempotency-key": idem } : undefined,
+    },
   );
 }
 
