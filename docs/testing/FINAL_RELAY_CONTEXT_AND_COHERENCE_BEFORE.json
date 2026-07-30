@@ -1,0 +1,404 @@
+{
+  "recorded_at": "2026-07-30T05:06:53Z",
+  "api": "77d91bb",
+  "conversation_id": "conv-p-sadeil-cr-olivia",
+  "n": 21,
+  "generic_no_match_count": 4,
+  "empty_recorded_count": 0,
+  "care_report_on_ordinal": false,
+  "results": [
+    {
+      "turn": 1,
+      "q": "How was Evelyn yesterday?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "YESTERDAY_WELLBEING",
+      "intents": [
+        "YESTERDAY_WELLBEING",
+        "OBSERVATION_HISTORY"
+      ],
+      "source_refs": [
+        "yesterday_wellbeing"
+      ],
+      "needs_clarification": false,
+      "preview": "Yesterday, Evelyn Carter was reported as having a fever. I do not have a separate mood or energy report for that day. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 2,
+      "q": "At what time?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "conversation:follow_up:high",
+        "referent:Tylenol"
+      ],
+      "needs_clarification": false,
+      "preview": "Tylenol was reported for Evelyn Carter; a precise clock time is not on file beyond the recent care record.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 3,
+      "q": "Who reported it?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "conversation:follow_up:medium",
+        "referent:prior_answer"
+      ],
+      "needs_clarification": false,
+      "preview": "I do not have a clear reporter name on the prior answer for Evelyn Carter. The note is on the care record, but the actor field is incomplete.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 4,
+      "q": "Does anything from that still affect today?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "tasks_now",
+        "handoff"
+      ],
+      "needs_clarification": false,
+      "preview": "For today's plan, prioritize: / \u2022 Mobility concern needs monitoring /  / Also needs review: / \u2022 The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team before marking this complete. /  / Coming up today: / \u2022 Metformin 500 mg \u00b7 12:00 PM today / \u2022 Physical therapy \u00b7 Fr",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 5,
+      "q": "Who worked before me?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "CARE_COVERAGE",
+      "intents": [
+        "CARE_COVERAGE"
+      ],
+      "source_refs": [
+        "coverage_timeline",
+        "previous"
+      ],
+      "needs_clarification": false,
+      "preview": "Daniel Kim covered Evelyn Carter before you from Jul 29, 6:45 PM to Jul 29, 10:55 PM. Their handoff is sent. They left open: Mobility concern needs monitoring.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 6,
+      "q": "What did Daniel complete?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "needs_clarification": false,
+      "preview": "I don't have a record that answers \u201cwhat did daniel complete\u201d for Evelyn Carter yet. Try naming the timeframe (today, last shift, yesterday) or the domain (meds, appointment, handoff, message).",
+      "generic_no_match": true,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 7,
+      "q": "What did he leave open?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "tasks_remaining",
+        "handoff"
+      ],
+      "needs_clarification": false,
+      "preview": "Still open / unfinished: / \u2022 Mobility concern needs monitoring",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 8,
+      "q": "Is Maya handling that?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "needs_clarification": false,
+      "preview": "I don't have a record that answers \u201cis maya handling that\u201d for Evelyn Carter yet. Try naming the timeframe (today, last shift, yesterday) or the domain (meds, appointment, handoff, message).",
+      "generic_no_match": true,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 9,
+      "q": "Who works after me?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "CARE_COVERAGE",
+      "intents": [
+        "CARE_COVERAGE"
+      ],
+      "source_refs": [
+        "coverage_timeline",
+        "next"
+      ],
+      "needs_clarification": false,
+      "preview": "Maya Bennett is listed as next coverage for Evelyn Carter, but an exact start time is not on file yet.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 10,
+      "q": "What medication changes are waiting?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "MEDICATION_CHANGE",
+      "intents": [
+        "MEDICATION_CHANGE"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "needs_clarification": false,
+      "preview": "6 medication changes are waiting for review for Evelyn Carter: / 1. Allegra 60 mg for allergies (reported by caregiver) / 2. Allegra 180mg for allergies for Evelyn Carter (reported by caregiver) / 3. Allegra 60mg for allergies for Evelyn Carter (reported by caregiver) / 4. Claritin 10mg for allergies for Evelyn Carter (reported by caregiver) / 5. Tylenol 300",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 11,
+      "q": "The second one.",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "conversation:follow_up:high",
+        "referent:Allegra 180mg"
+      ],
+      "needs_clarification": false,
+      "preview": "Understood \u2014 focusing on #2: Allegra 180mg for allergies for Evelyn Carter (reported by caregiver). Ask when it was reported, who reported it, whether it is active, or if the recipient took it.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 12,
+      "q": "Is it active?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "conversation:follow_up:high",
+        "referent:Allegra 180mg"
+      ],
+      "needs_clarification": false,
+      "preview": "No \u2014 Allegra 180mg is not confirmed as active plan instruction for Evelyn Carter. It remains pending authorized review.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 13,
+      "q": "Has she taken it?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "conversation:follow_up:high",
+        "referent:Allegra 180mg"
+      ],
+      "needs_clarification": false,
+      "preview": "Allegra 180mg is a pending medication-plan change for Evelyn Carter, not an authorized administration instruction. Relay does not treat a pending plan request as something already given. Check Care \u2192 medication administration for administration history.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": true,
+      "policy_message": false
+    },
+    {
+      "turn": 14,
+      "q": "What appointment is next?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "APPOINTMENT_NEXT",
+      "intents": [
+        "APPOINTMENT_NEXT"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "needs_clarification": false,
+      "preview": "Physical therapy / Friday 4:30 PM PDT / Location: Coastal PT / Status: scheduled / Travel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship. / Phone: +1-555-0140 /  / Coming up: / \u2022 Medication \u00b7 Metformin 500 mg \u00b7 12:00 PM (window 11:30 AM \u2013 12:30 PM) / \u2022 Appointment \u00b7 Physical th",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 15,
+      "q": "Where is it?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "needs_clarification": false,
+      "preview": "I don't have a record that answers \u201cwhere is it\u201d for Evelyn Carter yet. Try naming the timeframe (today, last shift, yesterday) or the domain (meds, appointment, handoff, message).",
+      "generic_no_match": true,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 16,
+      "q": "When should we leave?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "MEDICATION_ADMINISTRATION_HISTORY",
+      "intents": [
+        "MEDICATION_ADMINISTRATION_HISTORY",
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "administration_record"
+      ],
+      "needs_clarification": false,
+      "preview": "Last recorded: unidentified tablet(s) \u00b7 Thursday, July 23, 2026 at 1:56 PM PDT \u00b7 by Marcus Carter (CONFLICTED) /  / Related caregiver handoff note: / \u2022 Medication administration was corrected: not administered. /  / That handoff note is caregiver-reported. It is not automatically clinician confirmed.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": true,
+      "policy_message": false
+    },
+    {
+      "turn": 17,
+      "q": "What was its previous time?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "needs_clarification": false,
+      "preview": "I don't have a record that answers \u201cwhat was its previous time\u201d for Evelyn Carter yet. Try naming the timeframe (today, last shift, yesterday) or the domain (meds, appointment, handoff, message).",
+      "generic_no_match": true,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 18,
+      "q": "Did Maya receive my message?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_update",
+        "notifications"
+      ],
+      "needs_clarification": false,
+      "preview": "In-app care-team messages about Evelyn Carter are delivered to the named person's Notifications in this care space. /  / I do **not** claim SMS or email delivery. After you confirm Send on a message preview, the other caregiver should see one notification; they can ack and reply in-app. /  / If you have not confirmed Send yet, nothing was delivered.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": true
+    },
+    {
+      "turn": 19,
+      "q": "Did she open it?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_update",
+        "notifications"
+      ],
+      "needs_clarification": false,
+      "preview": "In-app care-team messages about Evelyn Carter are delivered to the named person's Notifications in this care space. /  / I do **not** claim SMS or email delivery. After you confirm Send on a message preview, the other caregiver should see one notification; they can ack and reply in-app. /  / If you have not confirmed Send yet, nothing was delivered.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": true
+    },
+    {
+      "turn": 20,
+      "q": "Did she reply?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_update",
+        "notifications"
+      ],
+      "needs_clarification": false,
+      "preview": "Replies to in-app care-team messages appear in coordination for Evelyn Carter. /  / If Maya replied in Relay, you will see her note in this care space. Ask \u201cshow coordination\u201d or check People/Notifications. External SMS/email was not claimed.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    },
+    {
+      "turn": 21,
+      "q": "What happens if she does not respond?",
+      "conversation_id": "conv-p-sadeil-cr-olivia",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "escalation",
+        "open_loops"
+      ],
+      "needs_clarification": false,
+      "preview": "If someone does not respond in this care space, Relay can escalate: / \u2022 notify an **alternate owner** / \u2022 open a **follow-up work item** / \u2022 keep the original notification visible until acknowledged /  / Something still open right now: Mobility concern needs monitoring. /  / Use Notifications \u2192 escalate no-response, or ask an authorized coordinator. Escalation d",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "policy_message": false
+    }
+  ]
+}

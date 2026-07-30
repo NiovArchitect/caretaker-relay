@@ -53,6 +53,16 @@ export function classifyRequestClass(raw: string): ClassifiedRequest {
     return { requestClass: "CANCELLATION_RESPONSE", actionFamily: "NONE" };
   }
 
+  // Ordinal / list selection is conversation state — never a care report or confirm
+  if (
+    /^(the )?(first|second|third|fourth|fifth|last|1st|2nd|3rd|4th|5th)( one)?\.?$/i.test(
+      text,
+    ) ||
+    /^what about the (first|second|third|last)( one)?\.?$/i.test(text)
+  ) {
+    return { requestClass: "INFORMATION_QUERY", actionFamily: "NONE" };
+  }
+
   if (
     /^(yes|looks right|confirm|confirm my report|do it|send it|apply that)\b/i.test(
       text,
