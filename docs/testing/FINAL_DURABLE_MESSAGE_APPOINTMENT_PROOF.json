@@ -1,0 +1,136 @@
+{
+  "started": "2026-07-30T01:45:08Z",
+  "steps": [
+    {
+      "name": "maya_before",
+      "notif_count": 263,
+      "coord_count": 264
+    },
+    {
+      "name": "message_cancel_no_persist",
+      "cancelled_persist": 0
+    },
+    {
+      "name": "coordination_post",
+      "status": 201,
+      "ok": true,
+      "message_id": "coord-kakiwy07-ms6upwbn",
+      "notif_id": "notif-ms6upxgw-kr9pd",
+      "body_preview": "Hello Maya durable proof 6cce5804"
+    },
+    {
+      "name": "coordination_idempotent",
+      "status": 200,
+      "replay": true,
+      "same_id": true
+    },
+    {
+      "name": "maya_receive",
+      "notif_total": 264,
+      "notif_matches": 1,
+      "coord_matches": 1,
+      "match_from": "Marcus Carter",
+      "match_body": "Hello Maya durable proof 6cce5804"
+    },
+    {
+      "name": "maya_ack",
+      "status": 200,
+      "ok": true,
+      "id": "notif-ms6upxgw-kr9pd"
+    },
+    {
+      "name": "maya_reply",
+      "status": 201,
+      "ok": true,
+      "id": "coord-uzqw1zhe-ms6ur294"
+    },
+    {
+      "name": "marcus_retrieval",
+      "found_sent": true,
+      "found_reply": true,
+      "total": 266
+    },
+    {
+      "name": "clarification_path",
+      "status": 201,
+      "ok": true,
+      "keys": [
+        "ok",
+        "request",
+        "notification_id",
+        "orchestration_id",
+        "orchestration_state",
+        "correlation_id"
+      ],
+      "request_id": "clrq-ms6us5xl-z7lp",
+      "notif": "notif-ms6us5xy-4h62a"
+    },
+    {
+      "name": "list_appointments",
+      "status": 0,
+      "count": 0,
+      "sample": "[]",
+      "keys": [
+        "ok",
+        "active",
+        "history",
+        "correlation_id"
+      ]
+    },
+    {
+      "name": "state_appointments",
+      "count": 39,
+      "sample": "[{'id': 'apt-s20-1784954776601', 'careRecipientId': 'cr-olivia', 'title': 'Physical therapy', 'startsAt': '2026-07-28T23:30:00.000Z', 'startsAtLabel': '4:30 PM PDT', 'location': 'Coastal PT', 'status': 'cancelled', 'epistemicStatus': 'CONFIRMED'}, {'id': 'apt-s20-1784928088039', 'careRecipientId': '"
+    },
+    {
+      "name": "appointment_cancel_no_change",
+      "cancelled_changes": 0
+    },
+    {
+      "name": "schedule_create_or_update",
+      "status": 201,
+      "ok": true,
+      "apt": "{'id': 'apt-7zi3nv3b-ms6us6sa', 'careRecipientId': 'cr-olivia', 'title': 'Personal Training', 'startsAt': '2026-07-31T21:00:00Z', 'startsAtLabel': 'Tomorrow 2:00 PM', 'status': 'scheduled', 'scheduleState': 'confirmed', 'epistemicStatus': 'CONFIRMED'",
+      "msg": null
+    },
+    {
+      "name": "reschedule",
+      "status": 200,
+      "ok": true,
+      "keys": [
+        "ok",
+        "appointment",
+        "reminders_created",
+        "active_reminders",
+        "superseded_count",
+        "correlation_id"
+      ],
+      "body": "{'ok': True, 'appointment': {'id': 'apt-7zi3nv3b-ms6us6sa', 'starts_at': '2026-07-31T21:30:00Z', 'starts_at_label': 'Tomorrow 2:30 PM', 'previous_starts_at_label': 'Tomorrow 2:00 PM'}, 'reminders_created': [{'id': 'rem-apt-up-apt-7zi3nv3b-ms6us6sa-ms6us7fa-40fo68-u', 'type': 'APPOINTMENT_UPCOMING', 'scheduled_at': '2026-07-31T19:30:00.000Z', 'status': 'scheduled', 'source_version': 'apt-7zi3nv3b-m"
+    },
+    {
+      "name": "relay_pt_time",
+      "preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or what would you like t",
+      "has_time": false,
+      "iso_in_answer": false
+    },
+    {
+      "name": "unauthorized_message",
+      "status": 403,
+      "ok": false,
+      "code": "NO_RELATIONSHIP"
+    }
+  ],
+  "gates": {
+    "MESSAGE_PERSISTED": true,
+    "TARGET_RECEIVES": true,
+    "DUPLICATE_ON_IDEMPOTENT": true,
+    "REPLY": true,
+    "LATER_RETRIEVAL": true,
+    "FALSE_EXTERNAL_CLAIMS": 0,
+    "APPOINTMENT_PERSISTED": true,
+    "RESCHEDULE_OK": true,
+    "RELAY_RETRIEVAL_NO_ISO": true,
+    "UNAUTHORIZED_BLOCKED": true
+  },
+  "all_critical": true
+}

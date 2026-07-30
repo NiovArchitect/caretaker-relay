@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-07-30T01:52:55Z",
+  "endpoint": "POST /api/v1/care/recipients/:id/notifications/escalate-no-response",
+  "window_ms_forced": 0,
+  "result": "ok with escalated true, alternateNotified true, workItemId created",
+  "humanize_fix": "3de0729 plainStatus uses display names + human times",
+  "gates": {
+    "ESCALATION_RUNS": true,
+    "ALTERNATE_NOTIFIED": true,
+    "WORK_ITEM_OPENED": true
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "recorded_at": "2026-07-30T01:51:33.985Z",
+  "app": "https://care.niovlabs.com",
+  "bundle": [
+    "https://care.niovlabs.com/assets/index-D7f2xzwb.js"
+  ],
+  "perRoute": [
+    {
+      "route": "today",
+      "iso": 0,
+      "ms": 0,
+      "raw_id": 0,
+      "uuid": 0,
+      "marker": 0,
+      "enum": 0,
+      "dberr": 0,
+      "dev": 0,
+      "a11y": {
+        "iso": 0,
+        "ms": 0,
+        "raw_id": 0,
+        "uuid": 0,
+        "marker": 0,
+        "enum": 0,
+        "dberr": 0,
+        "dev": 0
+      }
+    },
+    {
+      "route": "relay",
+      "iso": 0,
+      "ms": 0,
+      "raw_id": 0,
+      "uuid": 0,
+      "marker": 0,
+      "enum": 0,
+      "dberr": 0,
+      "dev": 0,
+      "a11y": {
+        "iso": 0,
+        "ms": 0,
+        "raw_id": 0,
+        "uuid": 0,
+        "marker": 0,
+        "enum": 0,
+        "dberr": 0,
+        "dev": 0
+      }
+    },
+    {
+      "route": "care",
+      "iso": 0,
+      "ms": 0,
+      "raw_id": 0,
+      "uuid": 0,
+      "marker": 0,
+      "enum": 0,
+      "dberr": 0,
+      "dev": 0,
+      "a11y": {
+        "iso": 0,
+        "ms": 0,
+        "raw_id": 0,
+        "uuid": 0,
+        "marker": 0,
+        "enum": 0,
+        "dberr": 0,
+        "dev": 0
+      }
+    },
+    {
+      "route": "people",
+      "iso": 0,
+      "ms": 0,
+      "raw_id": 0,
+      "uuid": 0,
+      "marker": 0,
+      "enum": 0,
+      "dberr": 0,
+      "dev": 0,
+      "a11y": {
+        "iso": 0,
+        "ms": 0,
+        "raw_id": 0,
+        "uuid": 0,
+        "marker": 0,
+        "enum": 0,
+        "dberr": 0,
+        "dev": 0
+      }
+    },
+    {
+      "route": "documents",
+      "iso": 0,
+      "ms": 0,
+      "raw_id": 0,
+      "uuid": 0,
+      "marker": 0,
+      "enum": 0,
+      "dberr": 0,
+      "dev": 0,
+      "a11y": {
+        "iso": 0,
+        "ms": 0,
+        "raw_id": 0,
+        "uuid": 0,
+        "marker": 0,
+        "enum": 0,
+        "dberr": 0,
+        "dev": 0
+      }
+    },
+    {
+      "route": "privacy",
+      "iso": 0,
+      "ms": 0,
+      "raw_id": 0,
+      "uuid": 0,
+      "marker": 0,
+      "enum": 0,
+      "dberr": 0,
+      "dev": 0,
+      "a11y": {
+        "iso": 0,
+        "ms": 0,
+        "raw_id": 0,
+        "uuid": 0,
+        "marker": 0,
+        "enum": 0,
+        "dberr": 0,
+        "dev": 0
+      }
+    }
+  ],
+  "totals": {
+    "iso": 0,
+    "ms": 0,
+    "raw_id": 0,
+    "uuid": 0,
+    "marker": 0,
+    "enum": 0,
+    "dberr": 0,
+    "dev": 0
+  },
+  "title_aria": {
+    "iso": 0,
+    "ms": 0,
+    "raw_id": 0,
+    "uuid": 0,
+    "marker": 0,
+    "enum": 0,
+    "dberr": 0,
+    "dev": 0
+  },
+  "a11y_raw_total": 0,
+  "gates": {
+    "VISIBLE_ISO": 0,
+    "VISIBLE_MS": 0,
+    "VISIBLE_RAW_IDS": 0,
+    "VISIBLE_UUIDS": 0,
+    "VISIBLE_MARKERS": 0,
+    "VISIBLE_ENUMS": 0,
+    "VISIBLE_DBERR": 0,
+    "VISIBLE_DEV": 0,
+    "A11Y_RAW": 0,
+    "TITLE_ARIA_RAW": 0
+  },
+  "all_zero": true
+}

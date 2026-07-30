@@ -414,24 +414,53 @@ function tokenFromSession(): string | undefined {
 export async function executePendingOperational(
   pending: PendingOperationalAction,
 ): Promise<string> {
-  const { askCaregiverClarification } = await import(
-    "../../foundation/careClient"
-  );
-
   if (pending.kind === "CARE_TEAM_MESSAGE") {
-    const r = await askCaregiverClarification({
-      targetPersonId: pending.toPersonId,
-      question: pending.body,
-      contextSummary: `In-app care-team message from Relay (not SMS/email)`,
-    });
-    if (r.ok) {
+    // Durable care-space coordination + target notification (not SMS/email).
+    // Prefer coordination over clarification so Maya can list the thread later.
+    const token = tokenFromSession();
+    if (!token) {
+      return "You need to be signed in to send an in-app message. Nothing was delivered.";
+    }
+    const { carePostCoordination } = await import(
+      "../../foundation/careHttpClient"
+    );
+    const idem =
+      typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `coord-${Date.now()}`;
+    const r = await carePostCoordination(
+      token,
+      pending.careRecipientId,
+      pending.body,
+      pending.toPersonId,
+    );
+    // carePostCoordination does not take idempotency in signature — server still
+    // accepts body key via raw path when available; delivery proof is message id.
+    if (r.ok && r.data?.message) {
+      void idem;
       return (
         `Sent in-app to **${pending.toName}**: “${pending.body}”.\n\n` +
         `They will see it in their account notifications for this care space. ` +
         `External SMS/email was not claimed.`
       );
     }
-    return `Could not send the in-app message: ${r.message ?? "error"}. Nothing was delivered.`;
+    // Fallback: clarification path still creates a durable request + notification
+    const { askCaregiverClarification } = await import(
+      "../../foundation/careClient"
+    );
+    const fb = await askCaregiverClarification({
+      targetPersonId: pending.toPersonId,
+      question: pending.body,
+      contextSummary: `In-app care-team message from Relay (not SMS/email)`,
+    });
+    if (fb.ok) {
+      return (
+        `Sent in-app to **${pending.toName}**: “${pending.body}”.\n\n` +
+        `They will see it in their account notifications for this care space. ` +
+        `External SMS/email was not claimed.`
+      );
+    }
+    return `Could not send the in-app message: ${r.ok === false ? r.message : fb.message ?? "error"}. Nothing was delivered.`;
   }
 
   if (pending.kind === "APPOINTMENT_UPDATE") {
@@ -440,20 +469,69 @@ export async function executePendingOperational(
       return "You need to be signed in to update the schedule. Nothing was changed.";
     }
     const starts = buildStartsAt(pending.timeLabel, pending.dayHint);
-    const { careCreateSchedule } = await import(
+    const title = /personal training/i.test(pending.title)
+      ? "Personal Training"
+      : pending.title;
+    const { careCreateSchedule, careHttpJson } = await import(
       "../../foundation/careHttpClient"
     );
+    // Prefer lineage reschedule when an active matching appointment exists
+    const lineage = await careHttpJson<{
+      ok: boolean;
+      active?: Array<{ id?: string; title?: string }>;
+      appointments?: Array<{ id?: string; title?: string }>;
+    }>(
+      `/api/v1/care/recipients/${encodeURIComponent(pending.careRecipientId)}/appointments`,
+      { token },
+    );
+    let existingId: string | undefined;
+    if (lineage.ok) {
+      const pool = [
+        ...(lineage.data.active ?? []),
+        ...(lineage.data.appointments ?? []),
+      ];
+      const hit = pool.find((a) =>
+        new RegExp(title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i").test(
+          String(a.title ?? ""),
+        ),
+      );
+      existingId = hit?.id;
+    }
+    if (existingId) {
+      const resch = await careHttpJson<{
+        ok: boolean;
+        appointment?: { previous_starts_at_label?: string };
+      }>(
+        `/api/v1/care/recipients/${encodeURIComponent(pending.careRecipientId)}/appointments/reschedule`,
+        {
+          method: "POST",
+          token,
+          body: {
+            appointment_id: existingId,
+            new_starts_at: starts.iso,
+            new_starts_at_label: starts.label,
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          },
+        },
+      );
+      if (resch.ok) {
+        const prev = resch.data.appointment?.previous_starts_at_label;
+        return (
+          `Updated the **internal care schedule**: ${humanCareLine(title)} → ${starts.label}.\n\n` +
+          (prev ? `Previous time on file: ${prev}.\n\n` : "") +
+          `This is on the care record only — not an external booking confirmation.`
+        );
+      }
+    }
     const res = await careCreateSchedule(token, pending.careRecipientId, {
-      title: /personal training/i.test(pending.title)
-        ? "Personal Training"
-        : pending.title,
+      title,
       starts_at: starts.iso,
       starts_at_label: starts.label,
       schedule_state: "confirmed",
     });
     if (res.ok) {
       return (
-        `Updated the **internal care schedule**: ${humanCareLine(pending.title)} → ${starts.label}.\n\n` +
+        `Updated the **internal care schedule**: ${humanCareLine(title)} → ${starts.label}.\n\n` +
         `This is on the care record only — not an external booking confirmation.`
       );
     }

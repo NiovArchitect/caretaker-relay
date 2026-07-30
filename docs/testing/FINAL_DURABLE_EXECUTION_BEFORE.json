@@ -1,0 +1,83 @@
+{
+  "recorded_at": "2026-07-30T01:45:07Z",
+  "campaign": "FINAL_DURABLE_EXECUTION",
+  "app": {
+    "root": "/Users/genghishameha/dev/NIOV Labs/github/caretaker-relay",
+    "head": "18dd296ab8d060645ca08b5b26234f2161ca8f86",
+    "branch": "checkpoint/caretaker-relay-track1-2026-07-22",
+    "deploy": {
+      "id": "dep-d9l8sijl550s73dp0kig",
+      "status": "live",
+      "commit": "50bf16665101360f962fd36ea5d5071df3e5f7bf"
+    },
+    "bundle": [
+      "assets/index-D7f2xzwb.js"
+    ],
+    "dirty_top": [
+      "## checkpoint/caretaker-relay-track1-2026-07-22...origin/checkpoint/caretaker-relay-track1-2026-07-22",
+      " M AGENTS.md",
+      " M docs/incidents/evidence/mobile-half-screen-after/390x844-today.png",
+      " M docs/reviews/AGENT_ZERO_FINAL_FREEZE_DECISION.md",
+      " M docs/reviews/COHERENT_CARE_MASTER_COMPLETION_MATRIX.md",
+      " M e2e/jump-latest-torture.spec.ts",
+      " M evidence/phase1/validation/playwright-raw.json",
+      " M scripts/holistic-e2e-closure-smoke.mjs"
+    ]
+  },
+  "api": {
+    "root": "/Users/genghishameha/dev/NIOV Labs/github/caretaker-relay-foundation",
+    "head": "43388e5a6a0631dc9d52ec40a0981957628dea93",
+    "branch": "checkpoint/caretaker-relay-track1-2026-07-22",
+    "deploy": {
+      "id": "dep-d9l8u4jl550s73dp3ih0",
+      "status": "live",
+      "commit": "43388e5a6a0631dc9d52ec40a0981957628dea93"
+    },
+    "health": {
+      "ok": true,
+      "product_id": "caretaker-relay",
+      "durable": true,
+      "store_backend": "prisma",
+      "store_path": null,
+      "foundation_auth": true,
+      "understand_mode": "llm",
+      "llm_ready": true,
+      "timestamp": "2026-07-30T01:45:07.787Z",
+      "deployment_config": {
+        "deployment_mode": "regulated_restricted",
+        "config_ok": true,
+        "lab_login_enabled": false,
+        "ai_live_allowed": true,
+        "multi_instance_session_safe": false,
+        "shared_revocation": "memory_shared",
+        "understand_mode": "llm",
+        "care_ai_data_class": "synthetic",
+        "synthetic_universe": true,
+        "verification_provider": "none",
+        "error_count": 0,
+        "warning_count": 2
+      },
+      "lab_login_enabled": false
+    },
+    "dirty_top": [
+      "## checkpoint/caretaker-relay-track1-2026-07-22...origin/checkpoint/caretaker-relay-track1-2026-07-22",
+      "?? scripts/judge-browser-journeys.mjs"
+    ]
+  },
+  "public": {
+    "app": "https://care.niovlabs.com",
+    "api": "https://caretaker-relay-care-api.onrender.com"
+  },
+  "contracts": {
+    "message_preview_executor": "src/lib/relay/requestClass.ts executePendingOperational \u2192 askCaregiverClarification (clarifications)",
+    "message_durable_api": "POST /api/v1/care/recipients/:id/coordination (preferred) OR POST /api/v1/care/clarifications",
+    "appointment_executor": "careCreateSchedule POST /schedule (create) + reschedule POST /appointments/reschedule",
+    "escalation": "POST /api/v1/care/recipients/:id/notifications/escalate-no-response + no-response-escalation.ts"
+  },
+  "background_workers": 0,
+  "notes": [
+    "App product deploy 50bf166; repo HEAD may be docs-ahead 18dd296",
+    "API deploy equals HEAD 43388e5",
+    "Gap: message path may use clarification instead of coordination; prove both"
+  ]
+}
