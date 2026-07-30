@@ -1,0 +1,2020 @@
+{
+  "recorded_at": "2026-07-30T02:23:08Z",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "recipient": "cr-olivia",
+  "principal": "p-sadeil",
+  "n_questions": 60,
+  "family_diversity": {
+    "CURRENT_STATUS": {
+      "n": 4,
+      "unique_fps": 3,
+      "avg_pairwise_jaccard": 0.265,
+      "intents": [
+        "TASKS_REMAINING",
+        "STATUS_SYNTHESIS",
+        "UNKNOWN_QUESTION"
+      ]
+    },
+    "TODAY_OPERATING_PLAN": {
+      "n": 4,
+      "unique_fps": 3,
+      "avg_pairwise_jaccard": 0.271,
+      "intents": [
+        "CHANGES_TODAY",
+        "TASKS_REMAINING",
+        "UNKNOWN_QUESTION"
+      ]
+    },
+    "CURRENT_SHIFT": {
+      "n": 4,
+      "unique_fps": 3,
+      "avg_pairwise_jaccard": 0.225,
+      "intents": [
+        "CHANGES_TODAY",
+        "HANDOFF_REVIEW",
+        "UNKNOWN_QUESTION"
+      ]
+    },
+    "PREVIOUS_SHIFT": {
+      "n": 4,
+      "unique_fps": 3,
+      "avg_pairwise_jaccard": 0.377,
+      "intents": [
+        "CARE_COVERAGE",
+        "PREVIOUS_SHIFT",
+        "UNKNOWN_QUESTION"
+      ]
+    },
+    "NEXT_SHIFT": {
+      "n": 4,
+      "unique_fps": 3,
+      "avg_pairwise_jaccard": 0.225,
+      "intents": [
+        "HANDOFF_PREP",
+        "CARE_COVERAGE",
+        "UNKNOWN_QUESTION"
+      ]
+    },
+    "CHANGES": {
+      "n": 4,
+      "unique_fps": 4,
+      "avg_pairwise_jaccard": 0.155,
+      "intents": [
+        "CHANGES_TODAY",
+        "CHANGES_SINCE_YESTERDAY",
+        "HANDOFF_REVIEW",
+        "CHANGE_SINCE"
+      ]
+    },
+    "YESTERDAY": {
+      "n": 4,
+      "unique_fps": 1,
+      "avg_pairwise_jaccard": 1.0,
+      "intents": [
+        "YESTERDAY_WELLBEING"
+      ]
+    },
+    "UNFINISHED": {
+      "n": 4,
+      "unique_fps": 3,
+      "avg_pairwise_jaccard": 0.249,
+      "intents": [
+        "TASKS_REMAINING",
+        "UNKNOWN_QUESTION"
+      ]
+    },
+    "MEDICATION": {
+      "n": 5,
+      "unique_fps": 5,
+      "avg_pairwise_jaccard": 0.081,
+      "intents": [
+        "MEDICATION_CHANGE",
+        "MEDICATION_ADMINISTRATION_HISTORY",
+        "MEDICATION_DUE",
+        "UNKNOWN_QUESTION"
+      ]
+    },
+    "APPOINTMENTS": {
+      "n": 5,
+      "unique_fps": 4,
+      "avg_pairwise_jaccard": 0.512,
+      "intents": [
+        "APPOINTMENT_LOGISTICS",
+        "MEDICATION_ADMINISTRATION_HISTORY",
+        "APPOINTMENT_NEXT"
+      ]
+    },
+    "MESSAGES": {
+      "n": 5,
+      "unique_fps": 2,
+      "avg_pairwise_jaccard": 0.647,
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ]
+    },
+    "ESCALATION": {
+      "n": 4,
+      "unique_fps": 3,
+      "avg_pairwise_jaccard": 0.275,
+      "intents": [
+        "TASKS_REMAINING",
+        "ESCALATION",
+        "UNKNOWN_QUESTION"
+      ]
+    },
+    "HANDOFF": {
+      "n": 4,
+      "unique_fps": 3,
+      "avg_pairwise_jaccard": 0.219,
+      "intents": [
+        "MEDICATION_ADMINISTRATION_HISTORY",
+        "HANDOFF_PREP",
+        "UNKNOWN_QUESTION"
+      ]
+    },
+    "META": {
+      "n": 5,
+      "unique_fps": 4,
+      "avg_pairwise_jaccard": 0.152,
+      "intents": [
+        "META_CONVERSATION",
+        "UNKNOWN_QUESTION"
+      ]
+    }
+  },
+  "high_overlap_cross_family_pairs": [
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "TODAY_OPERATING_PLAN",
+      "b_q": "What should I focus on first?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "CURRENT_SHIFT",
+      "b_q": "What am I responsible for?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "CURRENT_SHIFT",
+      "b_q": "What is assigned to me?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "PREVIOUS_SHIFT",
+      "b_q": "What did they leave open?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "NEXT_SHIFT",
+      "b_q": "What do I need to tell them?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "NEXT_SHIFT",
+      "b_q": "What happens if no one comes next?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "UNFINISHED",
+      "b_q": "What was left open?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "MESSAGES",
+      "b_q": "Has she opened it?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "MESSAGES",
+      "b_q": "Did she reply?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "MESSAGES",
+      "b_q": "Who was contacted?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "MESSAGES",
+      "b_q": "Who is responsible now?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "ESCALATION",
+      "b_q": "What happens if Maya does not respond?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "ESCALATION",
+      "b_q": "Who is contacted next?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "HANDOFF",
+      "b_q": "What did I receive?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "HANDOFF",
+      "b_q": "What needs clarification?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Give me the current picture.",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "META",
+      "b_q": "What did I just ask you?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Is anything urgent right now?",
+      "a_intent": "TASKS_REMAINING",
+      "b_family": "TODAY_OPERATING_PLAN",
+      "b_q": "What is left for today?",
+      "b_intent": "TASKS_REMAINING",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "Here's what is still open for Evelyn Carter:  Waiting on: Maya Bennett, Marcus Carter. \u2022 Handoff still needs attention: ",
+      "b_preview": "Here's what is still open for Evelyn Carter:  Waiting on: Maya Bennett, Marcus Carter. \u2022 Handoff still needs attention: "
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Is anything urgent right now?",
+      "a_intent": "TASKS_REMAINING",
+      "b_family": "UNFINISHED",
+      "b_q": "What is unfinished?",
+      "b_intent": "TASKS_REMAINING",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "Here's what is still open for Evelyn Carter:  Waiting on: Maya Bennett, Marcus Carter. \u2022 Handoff still needs attention: ",
+      "b_preview": "Here's what is still open for Evelyn Carter:  Waiting on: Maya Bennett, Marcus Carter. \u2022 Handoff still needs attention: "
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Is anything urgent right now?",
+      "a_intent": "TASKS_REMAINING",
+      "b_family": "UNFINISHED",
+      "b_q": "What still needs attention?",
+      "b_intent": "TASKS_REMAINING",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "Here's what is still open for Evelyn Carter:  Waiting on: Maya Bennett, Marcus Carter. \u2022 Handoff still needs attention: ",
+      "b_preview": "Here's what is still open for Evelyn Carter:  Waiting on: Maya Bennett, Marcus Carter. \u2022 Handoff still needs attention: "
+    },
+    {
+      "a_family": "CURRENT_STATUS",
+      "a_q": "Is anything urgent right now?",
+      "a_intent": "TASKS_REMAINING",
+      "b_family": "ESCALATION",
+      "b_q": "Is anyone still waiting?",
+      "b_intent": "TASKS_REMAINING",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "Here's what is still open for Evelyn Carter:  Waiting on: Maya Bennett, Marcus Carter. \u2022 Handoff still needs attention: ",
+      "b_preview": "Here's what is still open for Evelyn Carter:  Waiting on: Maya Bennett, Marcus Carter. \u2022 Handoff still needs attention: "
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What am I doing today?",
+      "a_intent": "CHANGES_TODAY",
+      "b_family": "CURRENT_SHIFT",
+      "b_q": "What is on my shift?",
+      "b_intent": "CHANGES_TODAY",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "Still unfinished from the last handoff: \u2022 Mobility concern needs monitoring  Also needs review: \u2022 The reported amount do",
+      "b_preview": "Still unfinished from the last handoff: \u2022 Mobility concern needs monitoring  Also needs review: \u2022 The reported amount do"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What needs me today?",
+      "a_intent": "CHANGES_TODAY",
+      "b_family": "CURRENT_SHIFT",
+      "b_q": "What is on my shift?",
+      "b_intent": "CHANGES_TODAY",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "Still unfinished from the last handoff: \u2022 Mobility concern needs monitoring  Also needs review: \u2022 The reported amount do",
+      "b_preview": "Still unfinished from the last handoff: \u2022 Mobility concern needs monitoring  Also needs review: \u2022 The reported amount do"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What should I focus on first?",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "CURRENT_SHIFT",
+      "b_q": "What am I responsible for?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What should I focus on first?",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "CURRENT_SHIFT",
+      "b_q": "What is assigned to me?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What should I focus on first?",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "PREVIOUS_SHIFT",
+      "b_q": "What did they leave open?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What should I focus on first?",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "NEXT_SHIFT",
+      "b_q": "What do I need to tell them?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What should I focus on first?",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "NEXT_SHIFT",
+      "b_q": "What happens if no one comes next?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What should I focus on first?",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "UNFINISHED",
+      "b_q": "What was left open?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What should I focus on first?",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "MESSAGES",
+      "b_q": "Has she opened it?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What should I focus on first?",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "MESSAGES",
+      "b_q": "Did she reply?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What should I focus on first?",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "MESSAGES",
+      "b_q": "Who was contacted?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What should I focus on first?",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "MESSAGES",
+      "b_q": "Who is responsible now?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What should I focus on first?",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "ESCALATION",
+      "b_q": "What happens if Maya does not respond?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What should I focus on first?",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "ESCALATION",
+      "b_q": "Who is contacted next?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What should I focus on first?",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "HANDOFF",
+      "b_q": "What did I receive?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What should I focus on first?",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "HANDOFF",
+      "b_q": "What needs clarification?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What should I focus on first?",
+      "a_intent": "UNKNOWN_QUESTION",
+      "b_family": "META",
+      "b_q": "What did I just ask you?",
+      "b_intent": "UNKNOWN_QUESTION",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm",
+      "b_preview": "I don't have a matching record for that specific ask about Evelyn Carter.  I can help with status, medications, appointm"
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What is left for today?",
+      "a_intent": "TASKS_REMAINING",
+      "b_family": "UNFINISHED",
+      "b_q": "What is unfinished?",
+      "b_intent": "TASKS_REMAINING",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "Here's what is still open for Evelyn Carter:  Waiting on: Maya Bennett, Marcus Carter. \u2022 Handoff still needs attention: ",
+      "b_preview": "Here's what is still open for Evelyn Carter:  Waiting on: Maya Bennett, Marcus Carter. \u2022 Handoff still needs attention: "
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What is left for today?",
+      "a_intent": "TASKS_REMAINING",
+      "b_family": "UNFINISHED",
+      "b_q": "What still needs attention?",
+      "b_intent": "TASKS_REMAINING",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "Here's what is still open for Evelyn Carter:  Waiting on: Maya Bennett, Marcus Carter. \u2022 Handoff still needs attention: ",
+      "b_preview": "Here's what is still open for Evelyn Carter:  Waiting on: Maya Bennett, Marcus Carter. \u2022 Handoff still needs attention: "
+    },
+    {
+      "a_family": "TODAY_OPERATING_PLAN",
+      "a_q": "What is left for today?",
+      "a_intent": "TASKS_REMAINING",
+      "b_family": "ESCALATION",
+      "b_q": "Is anyone still waiting?",
+      "b_intent": "TASKS_REMAINING",
+      "jaccard": 1.0,
+      "bigram": 1.0,
+      "same_fingerprint": true,
+      "a_preview": "Here's what is still open for Evelyn Carter:  Waiting on: Maya Bennett, Marcus Carter. \u2022 Handoff still needs attention: ",
+      "b_preview": "Here's what is still open for Evelyn Carter:  Waiting on: Maya Bennett, Marcus Carter. \u2022 Handoff still needs attention: "
+    }
+  ],
+  "high_overlap_count": 162,
+  "identical_answer_pairs": 147,
+  "results": [
+    {
+      "family": "CURRENT_STATUS",
+      "q": "How is Evelyn right now?",
+      "intent": "STATUS_SYNTHESIS",
+      "intents": [
+        "STATUS_SYNTHESIS"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "RECENT_CHANGES",
+        "RECENT_OBSERVATION_CLUSTERS",
+        "CURRENT_MEDICATIONS",
+        "NEXT_APPOINTMENT",
+        "OPEN_UNCERTAINTIES",
+        "ACTIVE_HANDOFF"
+      ],
+      "model_path": "deterministic",
+      "chars": 266,
+      "sentences": 4,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "6caa4201dfdb",
+      "answer_preview": "Evelyn Carter's most recent report on file is fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT). The main item needing attention is Mobility concern needs monitoring. Metformin 500 mg remains scheduled for 12:00 PM. Physical therapy is Friday 4:30 PM PDT."
+    },
+    {
+      "family": "CURRENT_STATUS",
+      "q": "How is she today?",
+      "intent": "STATUS_SYNTHESIS",
+      "intents": [
+        "STATUS_SYNTHESIS"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "RECENT_CHANGES",
+        "RECENT_OBSERVATION_CLUSTERS",
+        "CURRENT_MEDICATIONS",
+        "NEXT_APPOINTMENT",
+        "OPEN_UNCERTAINTIES",
+        "ACTIVE_HANDOFF"
+      ],
+      "model_path": "deterministic",
+      "chars": 266,
+      "sentences": 4,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "6caa4201dfdb",
+      "answer_preview": "Evelyn Carter's most recent report on file is fatigue (last noted Saturday, July 25, 2026 at 10:21 PM PDT). The main item needing attention is Mobility concern needs monitoring. Metformin 500 mg remains scheduled for 12:00 PM. Physical therapy is Friday 4:30 PM PDT."
+    },
+    {
+      "family": "CURRENT_STATUS",
+      "q": "Give me the current picture.",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "CURRENT_STATUS",
+      "q": "Is anything urgent right now?",
+      "intent": "TASKS_REMAINING",
+      "intents": [
+        "TASKS_REMAINING",
+        "OPEN_LOOP_STATUS",
+        "WAITING_ON"
+      ],
+      "source_refs": [
+        "orchestration:open_loops"
+      ],
+      "projections_used": [
+        "OPEN_LOOPS"
+      ],
+      "model_path": "deterministic",
+      "chars": 372,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "27fb6990bbf6",
+      "answer_preview": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Maya Bennett, Marcus Carter.\n\u2022 Handoff still needs attention: Mobility concern needs monitoring\n\u2022 Waiting on Maya Bennett: Clarification path hello 679edc\n\u2022 Needs your review: a prior Metformin-with-lunch confirmation is s"
+    },
+    {
+      "family": "TODAY_OPERATING_PLAN",
+      "q": "What am I doing today?",
+      "intent": "CHANGES_TODAY",
+      "intents": [
+        "TASKS_NOW",
+        "CHANGES_TODAY"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "OPEN_UNCERTAINTIES",
+        "NEXT_24H_TASKS",
+        "REMINDERS",
+        "ACTIVE_HANDOFF"
+      ],
+      "model_path": "deterministic",
+      "chars": 1219,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "dde2a4007d63",
+      "answer_preview": "Still unfinished from the last handoff:\n\u2022 Mobility concern needs monitoring\n\nAlso needs review:\n\u2022 The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team before marking this complet"
+    },
+    {
+      "family": "TODAY_OPERATING_PLAN",
+      "q": "What needs me today?",
+      "intent": "CHANGES_TODAY",
+      "intents": [
+        "TASKS_NOW",
+        "CHANGES_TODAY"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "OPEN_UNCERTAINTIES",
+        "NEXT_24H_TASKS",
+        "REMINDERS",
+        "ACTIVE_HANDOFF"
+      ],
+      "model_path": "deterministic",
+      "chars": 1219,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "dde2a4007d63",
+      "answer_preview": "Still unfinished from the last handoff:\n\u2022 Mobility concern needs monitoring\n\nAlso needs review:\n\u2022 The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team before marking this complet"
+    },
+    {
+      "family": "TODAY_OPERATING_PLAN",
+      "q": "What should I focus on first?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "TODAY_OPERATING_PLAN",
+      "q": "What is left for today?",
+      "intent": "TASKS_REMAINING",
+      "intents": [
+        "TASKS_REMAINING",
+        "OPEN_LOOP_STATUS",
+        "WAITING_ON"
+      ],
+      "source_refs": [
+        "orchestration:open_loops"
+      ],
+      "projections_used": [
+        "OPEN_LOOPS"
+      ],
+      "model_path": "deterministic",
+      "chars": 372,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "27fb6990bbf6",
+      "answer_preview": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Maya Bennett, Marcus Carter.\n\u2022 Handoff still needs attention: Mobility concern needs monitoring\n\u2022 Waiting on Maya Bennett: Clarification path hello 679edc\n\u2022 Needs your review: a prior Metformin-with-lunch confirmation is s"
+    },
+    {
+      "family": "CURRENT_SHIFT",
+      "q": "What is on my shift?",
+      "intent": "CHANGES_TODAY",
+      "intents": [
+        "TASKS_NOW",
+        "CHANGES_TODAY",
+        "TASKS_REMAINING"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "OPEN_UNCERTAINTIES",
+        "NEXT_24H_TASKS",
+        "REMINDERS",
+        "ACTIVE_HANDOFF"
+      ],
+      "model_path": "deterministic",
+      "chars": 1219,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "dde2a4007d63",
+      "answer_preview": "Still unfinished from the last handoff:\n\u2022 Mobility concern needs monitoring\n\nAlso needs review:\n\u2022 The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team before marking this complet"
+    },
+    {
+      "family": "CURRENT_SHIFT",
+      "q": "What am I responsible for?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "CURRENT_SHIFT",
+      "q": "What must I finish before I leave?",
+      "intent": "HANDOFF_REVIEW",
+      "intents": [
+        "HANDOFF_REVIEW"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "ACTIVE_HANDOFF",
+        "RECENT_CHANGES",
+        "OPEN_UNCERTAINTIES"
+      ],
+      "model_path": "deterministic",
+      "chars": 175,
+      "sentences": 2,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "a54cf6668a38",
+      "answer_preview": "What Maya Bennett needs to know:\n\n\u2022 Medication administration was corrected: not administered.\n\u2022 Mood improved\n\u2022 Therapy rescheduled to later slot\n\u2022 New mobility concern noted"
+    },
+    {
+      "family": "CURRENT_SHIFT",
+      "q": "What is assigned to me?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "PREVIOUS_SHIFT",
+      "q": "What happened last shift?",
+      "intent": "PREVIOUS_SHIFT",
+      "intents": [
+        "PREVIOUS_SHIFT",
+        "HANDOFF_REVIEW",
+        "RECENT_ACTIVITY"
+      ],
+      "source_refs": [
+        "coverage_timeline",
+        "previous_shift",
+        "handoff"
+      ],
+      "projections_used": [
+        "CARE_COVERAGE_TIMELINE",
+        "ACTIVE_HANDOFF",
+        "RECENT_CHANGES"
+      ],
+      "model_path": "deterministic",
+      "chars": 282,
+      "sentences": 4,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "d499bf33ce16",
+      "answer_preview": "Daniel Kim covered Evelyn Carter before you from recently to recently. They completed or recorded: Medication administration was corrected: not administered.; Mood improved; Therapy rescheduled to later slot. They left open: Mobility concern needs monitoring. Their handoff is sen"
+    },
+    {
+      "family": "PREVIOUS_SHIFT",
+      "q": "What did the previous caregiver do?",
+      "intent": "CARE_COVERAGE",
+      "intents": [
+        "CARE_COVERAGE"
+      ],
+      "source_refs": [
+        "coverage_timeline",
+        "previous"
+      ],
+      "projections_used": [
+        "COVERAGE_TIMELINE"
+      ],
+      "model_path": "deterministic",
+      "chars": 159,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab11079c12b8",
+      "answer_preview": "Daniel Kim covered Evelyn Carter before you from Jul 29, 6:45 PM to Jul 29, 10:55 PM. Their handoff is sent. They left open: Mobility concern needs monitoring."
+    },
+    {
+      "family": "PREVIOUS_SHIFT",
+      "q": "What did they leave open?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "PREVIOUS_SHIFT",
+      "q": "Who worked before me?",
+      "intent": "CARE_COVERAGE",
+      "intents": [
+        "CARE_COVERAGE"
+      ],
+      "source_refs": [
+        "coverage_timeline",
+        "previous"
+      ],
+      "projections_used": [
+        "COVERAGE_TIMELINE"
+      ],
+      "model_path": "deterministic",
+      "chars": 159,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab11079c12b8",
+      "answer_preview": "Daniel Kim covered Evelyn Carter before you from Jul 29, 6:45 PM to Jul 29, 10:55 PM. Their handoff is sent. They left open: Mobility concern needs monitoring."
+    },
+    {
+      "family": "NEXT_SHIFT",
+      "q": "Who works after me?",
+      "intent": "CARE_COVERAGE",
+      "intents": [
+        "CARE_COVERAGE"
+      ],
+      "source_refs": [
+        "coverage_timeline",
+        "next"
+      ],
+      "projections_used": [
+        "COVERAGE_TIMELINE"
+      ],
+      "model_path": "deterministic",
+      "chars": 102,
+      "sentences": 1,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "484b5908e0a9",
+      "answer_preview": "Maya Bennett is listed as next coverage for Evelyn Carter, but an exact start time is not on file yet."
+    },
+    {
+      "family": "NEXT_SHIFT",
+      "q": "What do I need to tell them?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "NEXT_SHIFT",
+      "q": "Did they receive my handoff?",
+      "intent": "HANDOFF_PREP",
+      "intents": [
+        "HANDOFF_PREP"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "ACTIVE_HANDOFF",
+        "RECENT_CHANGES",
+        "OPEN_UNCERTAINTIES"
+      ],
+      "model_path": "deterministic",
+      "chars": 175,
+      "sentences": 2,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "a54cf6668a38",
+      "answer_preview": "What Maya Bennett needs to know:\n\n\u2022 Medication administration was corrected: not administered.\n\u2022 Mood improved\n\u2022 Therapy rescheduled to later slot\n\u2022 New mobility concern noted"
+    },
+    {
+      "family": "NEXT_SHIFT",
+      "q": "What happens if no one comes next?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "CHANGES",
+      "q": "What changed today?",
+      "intent": "CHANGES_TODAY",
+      "intents": [
+        "CHANGES_TODAY"
+      ],
+      "source_refs": [
+        "changes_today"
+      ],
+      "projections_used": [
+        "RECENT_CHANGES",
+        "ACTIVE_HANDOFF"
+      ],
+      "model_path": "deterministic",
+      "chars": 362,
+      "sentences": 4,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "358bf2fdd6f8",
+      "answer_preview": "Care updates recorded for Evelyn Carter today:\n\u2022 Tylenol was reported as a proposed medication change for fever (pending review, not active plan).\n\u2022 A fever observation was recorded.\n\u2022 Zyrtec was reported as a proposed medication change (pending review, not active plan).\n\u2022 Clarit"
+    },
+    {
+      "family": "CHANGES",
+      "q": "What changed since I arrived?",
+      "intent": "CHANGE_SINCE",
+      "intents": [
+        "CHANGE_SINCE"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "RECENT_CHANGES",
+        "RECENT_OBSERVATION_CLUSTERS",
+        "ACTIVE_HANDOFF"
+      ],
+      "model_path": "deterministic",
+      "chars": 906,
+      "sentences": 9,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "650210769189",
+      "answer_preview": "Here's what changed for Evelyn Carter:\n\nLatest handoff:\n\u2022 Medication administration was corrected: not administered.\n\u2022 Mood improved\n\u2022 Therapy rescheduled to later slot\n\u2022 New mobility concern noted\n\n\u2022 Medication change needs verification: Tylenol \u00b7 reported dose 300mg \u00b7 reason: f"
+    },
+    {
+      "family": "CHANGES",
+      "q": "What changed since the last handoff?",
+      "intent": "HANDOFF_REVIEW",
+      "intents": [
+        "CHANGE_SINCE",
+        "HANDOFF_REVIEW"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "ACTIVE_HANDOFF",
+        "RECENT_CHANGES",
+        "OPEN_UNCERTAINTIES"
+      ],
+      "model_path": "deterministic",
+      "chars": 175,
+      "sentences": 2,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "a54cf6668a38",
+      "answer_preview": "What Maya Bennett needs to know:\n\n\u2022 Medication administration was corrected: not administered.\n\u2022 Mood improved\n\u2022 Therapy rescheduled to later slot\n\u2022 New mobility concern noted"
+    },
+    {
+      "family": "CHANGES",
+      "q": "What is different from yesterday?",
+      "intent": "CHANGES_SINCE_YESTERDAY",
+      "intents": [
+        "CHANGES_SINCE_YESTERDAY"
+      ],
+      "source_refs": [
+        "changes_since_yesterday"
+      ],
+      "projections_used": [
+        "RECENT_CHANGES",
+        "ACTIVE_HANDOFF"
+      ],
+      "model_path": "deterministic",
+      "chars": 84,
+      "sentences": 1,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "4043a3871271",
+      "answer_preview": "Since yesterday for Evelyn Carter: a fever report remains on the recent care record."
+    },
+    {
+      "family": "YESTERDAY",
+      "q": "How was Evelyn yesterday?",
+      "intent": "YESTERDAY_WELLBEING",
+      "intents": [
+        "YESTERDAY_WELLBEING",
+        "OBSERVATION_HISTORY"
+      ],
+      "source_refs": [
+        "yesterday_wellbeing"
+      ],
+      "projections_used": [
+        "RECENT_CHANGES",
+        "RECENT_OBSERVATION_CLUSTERS"
+      ],
+      "model_path": "deterministic",
+      "chars": 237,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "59c85a79a900",
+      "answer_preview": "Yesterday, Evelyn Carter was reported as having a fever. I do not have a separate mood or energy report for that day. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan."
+    },
+    {
+      "family": "YESTERDAY",
+      "q": "Did anything happen yesterday?",
+      "intent": "YESTERDAY_WELLBEING",
+      "intents": [
+        "YESTERDAY_WELLBEING",
+        "RECENT_ACTIVITY"
+      ],
+      "source_refs": [
+        "yesterday_wellbeing"
+      ],
+      "projections_used": [
+        "RECENT_CHANGES",
+        "RECENT_OBSERVATION_CLUSTERS"
+      ],
+      "model_path": "deterministic",
+      "chars": 237,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "59c85a79a900",
+      "answer_preview": "Yesterday, Evelyn Carter was reported as having a fever. I do not have a separate mood or energy report for that day. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan."
+    },
+    {
+      "family": "YESTERDAY",
+      "q": "How did she feel yesterday?",
+      "intent": "YESTERDAY_WELLBEING",
+      "intents": [
+        "YESTERDAY_WELLBEING",
+        "OBSERVATION_HISTORY"
+      ],
+      "source_refs": [
+        "yesterday_wellbeing"
+      ],
+      "projections_used": [
+        "RECENT_CHANGES",
+        "RECENT_OBSERVATION_CLUSTERS"
+      ],
+      "model_path": "deterministic",
+      "chars": 237,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "59c85a79a900",
+      "answer_preview": "Yesterday, Evelyn Carter was reported as having a fever. I do not have a separate mood or energy report for that day. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan."
+    },
+    {
+      "family": "YESTERDAY",
+      "q": "What was reported yesterday?",
+      "intent": "YESTERDAY_WELLBEING",
+      "intents": [
+        "YESTERDAY_WELLBEING",
+        "RECENT_ACTIVITY"
+      ],
+      "source_refs": [
+        "yesterday_wellbeing"
+      ],
+      "projections_used": [
+        "RECENT_CHANGES",
+        "RECENT_OBSERVATION_CLUSTERS"
+      ],
+      "model_path": "deterministic",
+      "chars": 237,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "59c85a79a900",
+      "answer_preview": "Yesterday, Evelyn Carter was reported as having a fever. I do not have a separate mood or energy report for that day. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan."
+    },
+    {
+      "family": "UNFINISHED",
+      "q": "What is unfinished?",
+      "intent": "TASKS_REMAINING",
+      "intents": [
+        "TASKS_REMAINING",
+        "OPEN_LOOP_STATUS",
+        "WAITING_ON"
+      ],
+      "source_refs": [
+        "orchestration:open_loops"
+      ],
+      "projections_used": [
+        "OPEN_LOOPS"
+      ],
+      "model_path": "deterministic",
+      "chars": 372,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "27fb6990bbf6",
+      "answer_preview": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Maya Bennett, Marcus Carter.\n\u2022 Handoff still needs attention: Mobility concern needs monitoring\n\u2022 Waiting on Maya Bennett: Clarification path hello 679edc\n\u2022 Needs your review: a prior Metformin-with-lunch confirmation is s"
+    },
+    {
+      "family": "UNFINISHED",
+      "q": "What still needs attention?",
+      "intent": "TASKS_REMAINING",
+      "intents": [
+        "TASKS_REMAINING",
+        "OPEN_LOOP_STATUS",
+        "WAITING_ON"
+      ],
+      "source_refs": [
+        "orchestration:open_loops"
+      ],
+      "projections_used": [
+        "OPEN_LOOPS"
+      ],
+      "model_path": "deterministic",
+      "chars": 372,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "27fb6990bbf6",
+      "answer_preview": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Maya Bennett, Marcus Carter.\n\u2022 Handoff still needs attention: Mobility concern needs monitoring\n\u2022 Waiting on Maya Bennett: Clarification path hello 679edc\n\u2022 Needs your review: a prior Metformin-with-lunch confirmation is s"
+    },
+    {
+      "family": "UNFINISHED",
+      "q": "What was left open?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "UNFINISHED",
+      "q": "What is overdue?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 148,
+      "sentences": 2,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "3ba029f69d90",
+      "answer_preview": "No matching reminder/coverage/message acknowledgment is on file for that ask. Check People for coverage and Today for open work that needs an owner."
+    },
+    {
+      "family": "MEDICATION",
+      "q": "What medication is due next?",
+      "intent": "MEDICATION_DUE",
+      "intents": [
+        "MEDICATION_DUE"
+      ],
+      "source_refs": [
+        "provider_instruction"
+      ],
+      "projections_used": [
+        "NEXT_24H_TASKS",
+        "CURRENT_MEDICATIONS"
+      ],
+      "model_path": "deterministic",
+      "chars": 104,
+      "sentences": 2,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "a67e70745855",
+      "answer_preview": "Metformin 500 mg\nTake at 12:00 PM\nWindow 11:30 AM \u2013 12:30 PM\nTake with food\nAuthorized by Dr. Priya Shah"
+    },
+    {
+      "family": "MEDICATION",
+      "q": "Was medication administered?",
+      "intent": "MEDICATION_ADMINISTRATION_HISTORY",
+      "intents": [
+        "MEDICATION_ADMINISTRATION_HISTORY"
+      ],
+      "source_refs": [
+        "administration_record"
+      ],
+      "projections_used": [
+        "ACTIVE_HANDOFF",
+        "LAST_MEDICATION_ADMINISTRATIONS"
+      ],
+      "model_path": "deterministic",
+      "chars": 291,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "2e8976080589",
+      "answer_preview": "Last recorded: unidentified tablet(s) \u00b7 Thursday, July 23, 2026 at 1:56 PM PDT \u00b7 by Marcus Carter (CONFLICTED)\n\nRelated caregiver handoff note:\n\u2022 Medication administration was corrected: not administered.\n\nThat handoff note is caregiver-reported. It is not automatically clinician"
+    },
+    {
+      "family": "MEDICATION",
+      "q": "What medication change is waiting?",
+      "intent": "MEDICATION_CHANGE",
+      "intents": [
+        "MEDICATION_CHANGE"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "LATEST_PROVIDER_INSTRUCTIONS",
+        "ACTIVE_HANDOFF",
+        "RECENT_CHANGES"
+      ],
+      "model_path": "deterministic",
+      "chars": 624,
+      "sentences": 9,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "f6276d469a11",
+      "answer_preview": "6 medication changes are waiting for review for Evelyn Carter:\n1. Allegra 60 mg for allergies (reported by caregiver)\n2. Allegra 180mg for allergies for Evelyn Carter (reported by caregiver)\n3. Allegra 60mg for allergies for Evelyn Carter (reported by caregiver)\n4. Claritin 10mg "
+    },
+    {
+      "family": "MEDICATION",
+      "q": "Is Allegra active?",
+      "intent": "MEDICATION_CHANGE",
+      "intents": [
+        "MEDICATION_CHANGE"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "LATEST_PROVIDER_INSTRUCTIONS",
+        "ACTIVE_HANDOFF",
+        "RECENT_CHANGES"
+      ],
+      "model_path": "deterministic",
+      "chars": 188,
+      "sentences": 2,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "d7e6b1c15f3f",
+      "answer_preview": "Allegra is not an active authorized medication on the plan. A caregiver-reported Allegra 60 mg change is waiting for medication-plan verification and is not active until authorized review."
+    },
+    {
+      "family": "MEDICATION",
+      "q": "What was corrected?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 172,
+      "sentences": 2,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "a521910c83a5",
+      "answer_preview": "I don't have a linked document extraction for that ask on file. Open Documents to review authorized summaries, or upload text for proposed actions (human confirm required)."
+    },
+    {
+      "family": "APPOINTMENTS",
+      "q": "What appointment is next?",
+      "intent": "APPOINTMENT_NEXT",
+      "intents": [
+        "APPOINTMENT_NEXT"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "NEXT_APPOINTMENT",
+        "REMINDERS",
+        "FACILITY_CONTEXT"
+      ],
+      "model_path": "deterministic",
+      "chars": 1087,
+      "sentences": 4,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "28f11b4c8739",
+      "answer_preview": "Physical therapy\nFriday 4:30 PM PDT\nLocation: Coastal PT\nStatus: scheduled\nTravel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship.\nPhone: +1-555-0140\n\nComing up:\n\u2022 Medication \u00b7 Metformin 500 "
+    },
+    {
+      "family": "APPOINTMENTS",
+      "q": "What time is Personal Training?",
+      "intent": "APPOINTMENT_NEXT",
+      "intents": [
+        "APPOINTMENT_NEXT"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "NEXT_APPOINTMENT",
+        "REMINDERS",
+        "FACILITY_CONTEXT"
+      ],
+      "model_path": "deterministic",
+      "chars": 1088,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "d04330fa8900",
+      "answer_preview": "Personal Training\nTomorrow 2:30 PM\nLocation: 1234 Coastal Care Way, Oceanside, CA 92054\nStatus: scheduled\nTravel: about 22 minutes. Public facility information used with a synthetic care relationship for evaluation only.\nPhone: +1-555-0199\n\nComing up:\n\u2022 Medication \u00b7 Metformin 500"
+    },
+    {
+      "family": "APPOINTMENTS",
+      "q": "Where is the appointment?",
+      "intent": "APPOINTMENT_LOGISTICS",
+      "intents": [
+        "APPOINTMENT_LOGISTICS"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "NEXT_APPOINTMENT",
+        "REMINDERS",
+        "FACILITY_CONTEXT"
+      ],
+      "model_path": "deterministic",
+      "chars": 1223,
+      "sentences": 5,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "6e870c975a19",
+      "answer_preview": "Physical therapy\nFriday 4:30 PM PDT\nLocation: Coastal PT\nStatus: scheduled\nTravel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship.\nPhone: +1-555-0140\n\nMaps: https://maps.google.com/?q=Oceansi"
+    },
+    {
+      "family": "APPOINTMENTS",
+      "q": "When do we need to leave?",
+      "intent": "MEDICATION_ADMINISTRATION_HISTORY",
+      "intents": [
+        "MEDICATION_ADMINISTRATION_HISTORY",
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "administration_record"
+      ],
+      "projections_used": [
+        "ACTIVE_HANDOFF",
+        "LAST_MEDICATION_ADMINISTRATIONS"
+      ],
+      "model_path": "deterministic",
+      "chars": 291,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "2e8976080589",
+      "answer_preview": "Last recorded: unidentified tablet(s) \u00b7 Thursday, July 23, 2026 at 1:56 PM PDT \u00b7 by Marcus Carter (CONFLICTED)\n\nRelated caregiver handoff note:\n\u2022 Medication administration was corrected: not administered.\n\nThat handoff note is caregiver-reported. It is not automatically clinician"
+    },
+    {
+      "family": "APPOINTMENTS",
+      "q": "What was the old appointment time?",
+      "intent": "APPOINTMENT_NEXT",
+      "intents": [
+        "APPOINTMENT_NEXT"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "NEXT_APPOINTMENT",
+        "REMINDERS",
+        "FACILITY_CONTEXT"
+      ],
+      "model_path": "deterministic",
+      "chars": 1087,
+      "sentences": 4,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "28f11b4c8739",
+      "answer_preview": "Physical therapy\nFriday 4:30 PM PDT\nLocation: Coastal PT\nStatus: scheduled\nTravel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship.\nPhone: +1-555-0140\n\nComing up:\n\u2022 Medication \u00b7 Metformin 500 "
+    },
+    {
+      "family": "MESSAGES",
+      "q": "Did Maya get my message?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 148,
+      "sentences": 2,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "3ba029f69d90",
+      "answer_preview": "No matching reminder/coverage/message acknowledgment is on file for that ask. Check People for coverage and Today for open work that needs an owner."
+    },
+    {
+      "family": "MESSAGES",
+      "q": "Has she opened it?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "MESSAGES",
+      "q": "Did she reply?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "MESSAGES",
+      "q": "Who was contacted?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "MESSAGES",
+      "q": "Who is responsible now?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "ESCALATION",
+      "q": "What happens if Maya does not respond?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "ESCALATION",
+      "q": "Has this been escalated?",
+      "intent": "ESCALATION",
+      "intents": [
+        "ESCALATION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "OPEN_UNCERTAINTIES",
+        "NEXT_24H_TASKS",
+        "REMINDERS",
+        "ACTIVE_HANDOFF"
+      ],
+      "model_path": "deterministic",
+      "chars": 370,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "7d36e210266a",
+      "answer_preview": "Still unfinished from the last handoff:\n\u2022 Mobility concern needs monitoring\n\nAlso needs review:\n\u2022 The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team before marking this complet"
+    },
+    {
+      "family": "ESCALATION",
+      "q": "Who is contacted next?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "ESCALATION",
+      "q": "Is anyone still waiting?",
+      "intent": "TASKS_REMAINING",
+      "intents": [
+        "TASKS_REMAINING",
+        "OPEN_LOOP_STATUS",
+        "WAITING_ON"
+      ],
+      "source_refs": [
+        "orchestration:open_loops"
+      ],
+      "projections_used": [
+        "OPEN_LOOPS"
+      ],
+      "model_path": "deterministic",
+      "chars": 372,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "27fb6990bbf6",
+      "answer_preview": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Maya Bennett, Marcus Carter.\n\u2022 Handoff still needs attention: Mobility concern needs monitoring\n\u2022 Waiting on Maya Bennett: Clarification path hello 679edc\n\u2022 Needs your review: a prior Metformin-with-lunch confirmation is s"
+    },
+    {
+      "family": "HANDOFF",
+      "q": "What is in my handoff?",
+      "intent": "HANDOFF_PREP",
+      "intents": [
+        "HANDOFF_PREP"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "ACTIVE_HANDOFF",
+        "RECENT_CHANGES",
+        "OPEN_UNCERTAINTIES"
+      ],
+      "model_path": "deterministic",
+      "chars": 175,
+      "sentences": 2,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "a54cf6668a38",
+      "answer_preview": "What Maya Bennett needs to know:\n\n\u2022 Medication administration was corrected: not administered.\n\u2022 Mood improved\n\u2022 Therapy rescheduled to later slot\n\u2022 New mobility concern noted"
+    },
+    {
+      "family": "HANDOFF",
+      "q": "What did I receive?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "HANDOFF",
+      "q": "What needs clarification?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    },
+    {
+      "family": "HANDOFF",
+      "q": "What should I add before sending?",
+      "intent": "MEDICATION_ADMINISTRATION_HISTORY",
+      "intents": [
+        "MEDICATION_ADMINISTRATION_HISTORY",
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "administration_record"
+      ],
+      "projections_used": [
+        "ACTIVE_HANDOFF",
+        "LAST_MEDICATION_ADMINISTRATIONS"
+      ],
+      "model_path": "deterministic",
+      "chars": 291,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "2e8976080589",
+      "answer_preview": "Last recorded: unidentified tablet(s) \u00b7 Thursday, July 23, 2026 at 1:56 PM PDT \u00b7 by Marcus Carter (CONFLICTED)\n\nRelated caregiver handoff note:\n\u2022 Medication administration was corrected: not administered.\n\nThat handoff note is caregiver-reported. It is not automatically clinician"
+    },
+    {
+      "family": "META",
+      "q": "Are you giving me the same answer?",
+      "intent": "META_CONVERSATION",
+      "intents": [
+        "META_CONVERSATION"
+      ],
+      "source_refs": [
+        "meta_conversation"
+      ],
+      "projections_used": [
+        "META_CONVERSATION"
+      ],
+      "model_path": "deterministic",
+      "chars": 105,
+      "sentences": 2,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "640bafdf70ec",
+      "answer_preview": "That is about how I answer, not a new care event. I did not create a care candidate or confirmation card."
+    },
+    {
+      "family": "META",
+      "q": "That did not answer my question.",
+      "intent": "META_CONVERSATION",
+      "intents": [
+        "META_CONVERSATION"
+      ],
+      "source_refs": [
+        "meta_conversation"
+      ],
+      "projections_used": [
+        "META_CONVERSATION"
+      ],
+      "model_path": "deterministic",
+      "chars": 206,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "bb60a0376403",
+      "answer_preview": "You're right if I drifted into a general status wall. Ask again with the timeframe you care about (today, previous shift, or a specific medication), and I'll stay on that question. No care record was filed."
+    },
+    {
+      "family": "META",
+      "q": "Make that shorter.",
+      "intent": "META_CONVERSATION",
+      "intents": [
+        "META_CONVERSATION"
+      ],
+      "source_refs": [
+        "meta_conversation"
+      ],
+      "projections_used": [
+        "META_CONVERSATION"
+      ],
+      "model_path": "deterministic",
+      "chars": 169,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "e2848b54c50e",
+      "answer_preview": "Main item needing attention: Mobility concern needs monitoring. Metformin 500 mg remains scheduled for 12:00 PM. Next appointment: Physical therapy \u00b7 Friday 4:30 PM PDT."
+    },
+    {
+      "family": "META",
+      "q": "Why did you include that?",
+      "intent": "META_CONVERSATION",
+      "intents": [
+        "META_CONVERSATION"
+      ],
+      "source_refs": [
+        "meta_conversation"
+      ],
+      "projections_used": [
+        "META_CONVERSATION"
+      ],
+      "model_path": "deterministic",
+      "chars": 105,
+      "sentences": 2,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "640bafdf70ec",
+      "answer_preview": "That is about how I answer, not a new care event. I did not create a care candidate or confirmation card."
+    },
+    {
+      "family": "META",
+      "q": "What did I just ask you?",
+      "intent": "UNKNOWN_QUESTION",
+      "intents": [
+        "UNKNOWN_QUESTION"
+      ],
+      "source_refs": [
+        "care_projections"
+      ],
+      "projections_used": [
+        "UNKNOWN_CLEAN"
+      ],
+      "model_path": "deterministic",
+      "chars": 309,
+      "sentences": 3,
+      "iso": 0,
+      "ids": 0,
+      "fingerprint": "ab956ef4b6b0",
+      "answer_preview": "I don't have a matching record for that specific ask about Evelyn Carter.\n\nI can help with status, medications, appointments, what changed, the care team, handoffs, meals/mobility when noted, and what is waiting \u2014 when those are authorized.\n\nWhat domain should we check next, or w"
+    }
+  ],
+  "gates_before": {
+    "identical_cross_family": 147,
+    "high_overlap_pairs": 162,
+    "families_with_single_fp": 1
+  }
+}

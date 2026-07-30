@@ -1,0 +1,24 @@
+{
+  "recorded_at": "2026-07-30T02:34:19Z",
+  "api": "77d91bb",
+  "identical_cross_family": 19,
+  "high_overlap_pairs": 29,
+  "old_wall": 0,
+  "unique_fps": 33,
+  "before": {
+    "identical": 147,
+    "overlap": 162
+  },
+  "after_e006e03": {
+    "identical": 32,
+    "overlap": 39
+  },
+  "gates": {
+    "IDENTICAL_CROSS_FAMILY_LT_20": true,
+    "HIGH_OVERLAP_LT_80": true,
+    "OLD_WALL_ZERO": true,
+    "UNIQUE_FPS_GE_25": true,
+    "IMPROVEMENT_VS_BEFORE": true
+  },
+  "all_pass": true
+}
