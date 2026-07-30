@@ -1,0 +1,83 @@
+{
+  "at": "2026-07-30T21:51:39.800Z",
+  "cases": [
+    {
+      "id": "R01_olivia_meds_no_robert_plan_dump",
+      "pass": true,
+      "detail": "Metformin 500 mg\nTake at 12:00 PM\nWindow 11:30 AM – 12:30 PM\nTake with food\nAuthorized by Dr. Priya Shah"
+    },
+    {
+      "id": "R02_robert_context_switches",
+      "pass": true,
+      "detail": "Lisinopril 10 mg\nTake at 8:00 AM\nWith or without food\nAuthorized by Dr. Amara Cole"
+    },
+    {
+      "id": "R03_no_cross_recipient_med_leak",
+      "pass": true,
+      "detail": "You're asking about Robert while Evelyn Carter's care context is active. I won't answer from the wrong recipient's records. Switch to Robert's care space for hi"
+    },
+    {
+      "id": "R04_chart_olivia_ok",
+      "pass": true,
+      "detail": "true"
+    },
+    {
+      "id": "R05_olivia_projection_independent",
+      "pass": true,
+      "detail": "oOpen=1"
+    },
+    {
+      "id": "R06_robert_no_olivia_simethicone_due",
+      "pass": true,
+      "detail": "rHas=false oHas=true"
+    },
+    {
+      "id": "R07_stale_episode_wrong_recipient",
+      "pass": true,
+      "detail": "{\"ok\":false,\"code\":\"NOT_FOUND\",\"message\":\"No open as-needed follow-up episode is on file to update.\",\"correlation_id\":\"5f0007aa-34d8-4fae-8b9d-98db9c7aeb32\"}"
+    },
+    {
+      "id": "R08_same_key_different_recipients_not_merged_across_spaces",
+      "pass": true,
+      "detail": "c1=true/prn-ep-fsy5wqzt-ms7fbukr c2=true/prn-ep-j9p7a5e7-ms81tgdu"
+    },
+    {
+      "id": "R09_today_olivia",
+      "pass": true,
+      "detail": "ok=true"
+    },
+    {
+      "id": "R10_today_robert",
+      "pass": true,
+      "detail": "ok=true"
+    },
+    {
+      "id": "R11_today_needs_not_identical_forced",
+      "pass": true,
+      "detail": "o=1 r=1"
+    },
+    {
+      "id": "R12_status_olivia",
+      "pass": true,
+      "detail": "Evelyn Carter's most recent report on file is caregiver reported: ate (last note"
+    },
+    {
+      "id": "R13_status_robert",
+      "pass": true,
+      "detail": "Recent reports on file for Robert Hale:\n• Scheduled: ALPHA Podiatry — Robert Hal"
+    },
+    {
+      "id": "R14_robert_answer_not_evelyn_only",
+      "pass": true,
+      "detail": "Recent reports on file for Robert Hale:\n• Scheduled: ALPHA Podiatry — Robert Hale only at Thu 11:00 AM PDT · ALPHA (from"
+    },
+    {
+      "id": "R15_foreign_org_denied",
+      "pass": true,
+      "detail": "cr-a-evelyn 403 verified in baseline"
+    }
+  ],
+  "passed": 15,
+  "total": 15,
+  "all_pass": true
+}

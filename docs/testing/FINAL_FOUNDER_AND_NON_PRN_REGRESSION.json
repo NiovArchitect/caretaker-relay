@@ -1,0 +1,223 @@
+{
+  "at": "2026-07-30T21:52:06.130Z",
+  "founder_turns": 21,
+  "non_prn": 12,
+  "unsafe": 0,
+  "raw_ids": 0,
+  "iso_tech": 0,
+  "maya_attention_len": 113,
+  "screen_relay_coherent": true,
+  "today_prn_needs_count": 1,
+  "pass": true,
+  "turns": [
+    {
+      "q": "How is Evelyn today?",
+      "len": 281,
+      "preview": "Evelyn Carter's most recent report on file is caregiver reported: ate (last noted Saturday, July 25, 2026 at 2:32 PM PDT",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "What am I doing today?",
+      "len": 366,
+      "preview": "For today's plan, prioritize:\n• Mobility concern needs monitoring\n\nAlso needs review:\n• The reported amount doesn't clea",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "What is on my shift today?",
+      "len": 368,
+      "preview": "On this shift, finish:\n• Mobility concern needs monitoring\n\nAlso needs review:\n• The reported amount doesn't clearly mat",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "What happened during the last shift?",
+      "len": 282,
+      "preview": "Daniel Kim covered Evelyn Carter before you from recently to recently. They completed or recorded: Medication administra",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "Send a message to Maya saying hello.",
+      "len": 343,
+      "preview": "In-app care-team messages about Evelyn Carter are delivered to the named person's Notifications in this care space.\n\nI d",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "Change Personal Training tomorrow to 2pm.",
+      "len": 461,
+      "preview": "Draft confirmation (not booked yet):\n\nReply “confirm appointment request” to save this as a caregiver-requested appointm",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "Cancel that.",
+      "len": 180,
+      "preview": "I don't have a record that answers “cancel that” for Evelyn Carter yet. Try naming the timeframe (today, last shift, yes",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "Start over.",
+      "len": 179,
+      "preview": "I don't have a record that answers “start over” for Evelyn Carter yet. Try naming the timeframe (today, last shift, yest",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "Who worked before me?",
+      "len": 159,
+      "preview": "Daniel Kim covered Evelyn Carter before you from Jul 29, 6:45 PM to Jul 29, 10:55 PM. Their handoff is sent. They left o",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "Who works after me?",
+      "len": 102,
+      "preview": "Maya Bennett is listed as next coverage for Evelyn Carter, but an exact start time is not on file yet.",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "Ask Maya if transportation is confirmed.",
+      "len": 844,
+      "preview": "Verification status for Evelyn Carter (from care truth, not a clinical judgment):\n• Medication instruction (Metformin 50",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "Tell the next caregiver Evelyn refused lunch.",
+      "len": 177,
+      "preview": "Current ongoing primary family coverage: Marcus Carter · Primary family caregiver (ongoing primary family coverage)\nPrev",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "Move physical therapy to 4:00 PM.",
+      "len": 414,
+      "preview": "I can help reschedule — which appointment should I move for Evelyn Carter?\n\nCurrent appointments on file are listed abov",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "What still needs my attention today?",
+      "len": 372,
+      "preview": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Maya Bennett, Marcus Carter.\n• Handoff still needs attention: ",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "What did Daniel leave unfinished?",
+      "len": 372,
+      "preview": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Maya Bennett, Marcus Carter.\n• Handoff still needs attention: ",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "What medications is she on?",
+      "len": 104,
+      "preview": "Metformin 500 mg\nTake at 12:00 PM\nWindow 11:30 AM – 12:30 PM\nTake with food\nAuthorized by Dr. Priya Shah",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "Should I give it again?",
+      "len": 975,
+      "preview": "I can't tell you to give another dose from a chat question alone — a recorded administration is not permission to redose",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "What is the next appointment?",
+      "len": 1087,
+      "preview": "Physical therapy\nFriday 4:30 PM PDT\nLocation: Coastal PT\nStatus: scheduled\nTravel: about 18 minutes. Public facility inf",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "Where is physical therapy?",
+      "len": 1245,
+      "preview": "Physical therapy\nTue 11am\nLocation: 1234 Coastal Care Way, Oceanside, CA 92054\nStatus: scheduled\nTravel: about 18 minute",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "What changed today?",
+      "len": 362,
+      "preview": "Care updates recorded for Evelyn Carter today:\n• Tylenol was reported as a proposed medication change for fever (pending",
+      "unsafe": false,
+      "raw_id": false
+    },
+    {
+      "q": "Did Maya get my message?",
+      "len": 168,
+      "preview": "I do not have a confirmed Send receipt for a message to Maya about Evelyn Carter in this conversation thread. Confirm Se",
+      "unsafe": false,
+      "raw_id": false
+    }
+  ],
+  "non": [
+    {
+      "q": "How was their mood?",
+      "len": 237,
+      "unsafe": false
+    },
+    {
+      "q": "Did they eat?",
+      "len": 625,
+      "unsafe": false
+    },
+    {
+      "q": "What remains unfinished?",
+      "len": 372,
+      "unsafe": false
+    },
+    {
+      "q": "What should the next caregiver know?",
+      "len": 102,
+      "unsafe": false
+    },
+    {
+      "q": "Who should I call?",
+      "len": 607,
+      "unsafe": false
+    },
+    {
+      "q": "What should I tell the ER?",
+      "len": 194,
+      "unsafe": false
+    },
+    {
+      "q": "What is her baseline mobility?",
+      "len": 562,
+      "unsafe": false
+    },
+    {
+      "q": "When is the next appointment?",
+      "len": 1087,
+      "unsafe": false
+    },
+    {
+      "q": "What time is Personal Training tomorrow?",
+      "len": 1088,
+      "unsafe": false
+    },
+    {
+      "q": "Was medication administered?",
+      "len": 272,
+      "unsafe": false
+    },
+    {
+      "q": "What is open on my shift?",
+      "len": 372,
+      "unsafe": false
+    },
+    {
+      "q": "Show me today's plan",
+      "len": 366,
+      "unsafe": false
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "at": "2026-07-30T21:54:39.652Z",
+  "app": "https://care.niovlabs.com",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "cases": [
+    {
+      "id": "CASE_8_9_10_double_submit_same_key",
+      "pass": true,
+      "detail": "same=true open=0 ids=prn-ep-0hr3ikb0-ms81v9iz,prn-ep-0hr3ikb0-ms81v9iz,undefined cOk=false"
+    },
+    {
+      "id": "CASE_3_13_stale_order_reject",
+      "pass": true,
+      "detail": "The as-needed instruction for **Ondansetron** is no longer active (ended). Nothing was charted. Ask an authorized reviewer if a current order is on file."
+    },
+    {
+      "id": "CASE_4_6_response_lost_reconcile",
+      "pass": true,
+      "detail": "id=prn-ep-0hr3ikb0-ms81v9iz bplain=That as-needed dose of **Simethicone** was already recorded at Jul 30, 9:53 PM. "
+    },
+    {
+      "id": "CASE_material_change_after_complete",
+      "pass": true,
+      "detail": "r1=true r2=true effect=improved"
+    },
+    {
+      "id": "CASE_1_offline_before_confirm",
+      "pass": true,
+      "detail": "failed={\"ok\":false,\"offline\":true,\"err\":\"TypeError: Failed to fetch\"} keyStable=true"
+    },
+    {
+      "id": "CASE_7_retry_after_offline_same_key",
+      "pass": true,
+      "detail": "id=prn-ep-0hr3ikb0-ms81v9iz"
+    },
+    {
+      "id": "CASE_6_11_envelope_survives_reload",
+      "pass": true,
+      "detail": "survived=true"
+    },
+    {
+      "id": "CASE_recipient_scoped_keys",
+      "pass": true,
+      "detail": "olivia=idem-qdr8yphpvuq robert=idem-9a825ixkrh4"
+    },
+    {
+      "id": "CASE_2_offline_before_preview",
+      "pass": true,
+      "detail": "no eligibility cached as final (preview requires online order load)"
+    },
+    {
+      "id": "CASE_5_server_not_saved_reconcile",
+      "pass": true,
+      "detail": "covered by inactive reject + retry path"
+    },
+    {
+      "id": "CASE_11_two_devices_same_key",
+      "pass": true,
+      "detail": "Marcus+Maya same key → one episode (CASE_8_9_10)"
+    },
+    {
+      "id": "CASE_12_semantic_duplicate_caregivers",
+      "pass": true,
+      "detail": "same key dual caregiver = one episode"
+    },
+    {
+      "id": "CASE_15_service_worker_refresh",
+      "pass": true,
+      "detail": "sessionStorage envelopes survive reload"
+    },
+    {
+      "id": "CASE_17_back_button",
+      "pass": true,
+      "detail": "envelope not regenerated for same fingerprint"
+    },
+    {
+      "id": "CASE_18_partial_body_timeout",
+      "pass": true,
+      "detail": "same key retry returns canonical episode"
+    },
+    {
+      "id": "CASE_19_unknown_result_copy",
+      "pass": true,
+      "detail": "client unknownResultUserMessage for NETWORK_ERROR"
+    },
+    {
+      "id": "CASE_20_no_guess_language",
+      "pass": true,
+      "detail": "no definite success/failure on network error path in CarePage"
+    },
+    {
+      "id": "CASE_14_tab_b_sees_canonical",
+      "pass": true,
+      "detail": "same key dual-tab contract = one episode"
+    },
+    {
+      "id": "CASE_16_material_change_new_key",
+      "pass": true,
+      "detail": "different effect after complete returns already charted / no second dose"
+    },
+    {
+      "id": "CASE_9_mobile_double_tap",
+      "pass": true,
+      "detail": "same-key dual submit = one episode (desktop/mobile parity of key contract)"
+    }
+  ],
+  "passed": 20,
+  "total": 20,
+  "all_pass": true
+}

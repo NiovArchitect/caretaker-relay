@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-07-30T12:00:00Z",
+  "app_repo_head": "d4c6a58f690431adf764e3be264561bb5b3605cd",
+  "app_product_deploy": "398ddfc7940db7796fbe9fa0dfbdc15202c62056",
+  "app_bundle": "index-DeFzy-q2.js",
+  "api_repo_head": "0a72492271bbb1a295f08e04bc342435cbb6e66f",
+  "api_product_deploy": "cc41d057fb84d51abbb81b872c1526500b459936",
+  "public_recipients_for_marcus": ["cr-olivia", "cr-robert"],
+  "public_dual_org_principals": false,
+  "product_code_before_baseline": false,
+  "open_gates": [
+    "offline_20_matrix",
+    "dual_org_public",
+    "multi_recipient_stale",
+    "founder_21_non_prn",
+    "second_red_team",
+    "founder_devices"
+  ]
+}
