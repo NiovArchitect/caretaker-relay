@@ -1,0 +1,62 @@
+{
+  "recorded_at": "2026-07-30T06:30:00Z",
+  "api_source_sha": "f1dbeea7139a01340312fd48f262d2643e03e663",
+  "api_deploy_id": "dep-d9lespflk1mc738l6rp0",
+  "app_source_sha": "c5dea925de33da101bc81a38ca861b8611e01edf",
+  "app_deploy_id": "dep-d9lespad0e5s73ccvd70",
+  "app_asset": "index-DciNDcpz.js",
+  "api_url": "https://caretaker-relay-care-api.onrender.com",
+  "app_url": "https://care.niovlabs.com",
+  "store_backend": "prisma",
+  "journey": {
+    "1_inventory": "PASS — authorized PRN orders listed; no dose recommendation",
+    "2_preview_ondansetron": "PASS — reason, dose, route, interval, confirm PRN",
+    "3_confirm_chart": "PASS — Charted Ondansetron 4 mg for nausea; reassessment due",
+    "4_projection_due": "PASS — reassessmentDue includes Ondansetron; orders=2",
+    "5_today_fields": "PASS — prn_needs + prn_attention present while open",
+    "5b_handoff_line": "PASS — stillNeedsAttention includes as-needed follow-up line",
+    "6_maya_reassess": "PASS — Maya charted effect helped (Relay effectiveness path); some later Maya Relay turns blocked by operational shift documentation window",
+    "7_surfaces_clear": "PASS — prn_needs/attention empty after complete; handoff as-needed lines cleared",
+    "8_history": "PASS — completedRecent keeps reason · dose · result (helped)",
+    "9_retrieval": "PASS — Marcus Relay: Latest as-needed chart entry Ondansetron … helped",
+    "10_unauthorized_otc": "PASS — Benadryl flagged, not plan-activated",
+    "11_interval_acetaminophen": "PASS — confirm blocked with remaining hours",
+    "12_browser_care_as_needed": "PASS — care-prn-heading, Acetaminophen, Ondansetron, history",
+    "13_browser_today_no_stale": "PASS — no open Ondansetron follow-up on Today after complete"
+  },
+  "gates": {
+    "inventory": true,
+    "preview": true,
+    "charted": true,
+    "projection_due": true,
+    "today_has_prn_fields": true,
+    "today_actionable_while_open": true,
+    "handoff_continuity_line": true,
+    "cross_caregiver_reassess": true,
+    "surfaces_clear_after_complete": true,
+    "history_reason_result": true,
+    "relay_retrieval": true,
+    "unauthorized_otc": true,
+    "interval_enforcement": true,
+    "no_dose_invention_sample": true,
+    "browser_as_needed_ui": true,
+    "deployment_parity": true
+  },
+  "browser_smoke": {
+    "shell": true,
+    "headingVisible": true,
+    "hasAsNeeded": true,
+    "hasAcetaminophen": true,
+    "hasOndansetron": true,
+    "hasHistory": true,
+    "hasScheduled": true,
+    "todayClearedOfOpenPrn": true,
+    "asset": "index-DciNDcpz.js"
+  },
+  "disclosures": [
+    "Acetaminophen chart path was interval-blocked from prior lab dose; Ondansetron used as second authorized order class (per-order interval safety retained).",
+    "Maya operational shift documentation window blocked some non-documentation Relay questions after reassess; reassess itself succeeded; Marcus retrieval succeeded.",
+    "30 compound browser journeys, chaos/concurrency matrix, and independent visual red-team not completed this pass.",
+    "Founder desktop and physical phone remain PENDING without explicit founder confirmation."
+  ]
+}
