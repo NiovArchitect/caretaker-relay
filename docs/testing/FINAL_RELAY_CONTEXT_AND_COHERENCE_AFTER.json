@@ -1,0 +1,251 @@
+{
+  "recorded_at": "2026-07-30T05:12:01Z",
+  "api": "ee7142d",
+  "gates": {
+    "ordinal_not_care_report": true,
+    "ordinal_selects_second": true,
+    "active_uses_selected": true,
+    "taken_uses_selected": true,
+    "daniel_complete_not_generic": true,
+    "maya_handling_not_generic": true,
+    "where_not_generic": true,
+    "leave_not_med_admin": true,
+    "yesterday_affects_linked": true,
+    "generic_no_match_le_2": true
+  },
+  "all_pass": true,
+  "results": [
+    {
+      "turn": 1,
+      "q": "How was Evelyn yesterday?",
+      "intent": "YESTERDAY_WELLBEING",
+      "preview": "Yesterday, Evelyn Carter was reported as having a fever. I do not have a separate mood or energy report for that day. A Tylenol medication change for fever was also reported for review, but it was not added to the active medication plan.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 2,
+      "q": "At what time?",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "Tylenol was reported for Evelyn Carter; a precise clock time is not on file beyond the recent care record.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 3,
+      "q": "Who reported it?",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "I do not have a clear reporter name on the prior answer for Evelyn Carter. The note is on the care record, but the actor field is incomplete.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 4,
+      "q": "Does anything from that still affect today?",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "fever still matters for Evelyn Carter today as context for monitoring and any pending medication-plan review (for example Tylenol for fever if still listed). Separately, current open work is not the same as yesterday\u2019s report \u2014 prioritize open handoff and medication-review items.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 5,
+      "q": "Who worked before me?",
+      "intent": "CARE_COVERAGE",
+      "preview": "Daniel Kim covered Evelyn Carter before you from Jul 29, 6:45 PM to Jul 29, 10:55 PM. Their handoff is sent. They left open: Mobility concern needs monitoring.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 6,
+      "q": "What did Daniel complete?",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "I do not have a completion list for daniel in the immediately prior coverage answer. Ask \u201cwhat happened last shift?\u201d first, then follow up.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 7,
+      "q": "What did he leave open?",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "They left open: Mobility concern needs monitoring.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 8,
+      "q": "Is Maya handling that?",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "I do not have an explicit work assignment that Maya Bennett owns \u201cMobility concern needs monitoring\u201d for Evelyn Carter in the last exchange. Open work still needs an owner \u2014 check Today / Work for assignment, or ask who is responsible now.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 9,
+      "q": "Who works after me?",
+      "intent": "CARE_COVERAGE",
+      "preview": "Maya Bennett is listed as next coverage for Evelyn Carter, but an exact start time is not on file yet.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 10,
+      "q": "What medication changes are waiting?",
+      "intent": "MEDICATION_CHANGE",
+      "preview": "6 medication changes are waiting for review for Evelyn Carter: / 1. Allegra 60 mg for allergies (reported by caregiver) / 2. Allegra 180mg for allergies for Evelyn Carter (reported by caregiver) / 3. Allegra 60mg for allergies for Evelyn Carter (reported by caregiver) / 4. Claritin 10mg ",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 11,
+      "q": "The second one.",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "Understood \u2014 focusing on #2: Allegra 180mg for allergies for Evelyn Carter (reported by caregiver). Ask when it was reported, who reported it, whether it is active, or if the recipient took it.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 12,
+      "q": "Is it active?",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "No \u2014 Allegra 180mg is not confirmed as active plan instruction for Evelyn Carter. It remains pending authorized review.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 13,
+      "q": "Has she taken it?",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "Allegra 180mg is a pending medication-plan change for Evelyn Carter, not an authorized administration instruction. Relay does not treat a pending plan request as something already given. Check Care \u2192 medication administration for administration history.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 14,
+      "q": "What appointment is next?",
+      "intent": "APPOINTMENT_NEXT",
+      "preview": "Physical therapy / Friday 4:30 PM PDT / Location: Coastal PT / Status: scheduled / Travel: about 18 minutes. Public facility information used with a synthetic appointment for product evaluation. Not a real patient relationship. / Phone: +1-555-0140 /  / Coming up: / \u2022 Medication \u00b7 Metformin 500 ",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 15,
+      "q": "Where is it?",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "Physical therapy is at Coastal PT \u00b7 Friday 4:30 PM PDT.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 16,
+      "q": "When should we leave?",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "For Physical therapy (Friday 4:30 PM PDT.), plan to leave about 30 minutes before the start time for travel and parking. Travel estimate on file is about 18 minutes.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 17,
+      "q": "What was its previous time?",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "I do not have a prior version time labeled for Physical therapy in the last answer. Open Schedule history for lineage, or ask after a reschedule receipt.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 18,
+      "q": "Did Maya receive my message?",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "I do not have a confirmed Send receipt for a message to Maya about Evelyn Carter in this conversation thread. Confirm Send on the message preview first, then ask again.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 19,
+      "q": "Did she open it?",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "I do not see a confirmed open/ack on file for a recent message to Maya about Evelyn Carter in this conversation. After you Confirm Send on an in-app message, ack state appears in Notifications.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 20,
+      "q": "Did she reply?",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "I do not invent replies. If Maya replied in this care space, her note appears in coordination for Evelyn Carter. No reply text is attached to the prior message status turn in this conversation.",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    },
+    {
+      "turn": 21,
+      "q": "What happens if she does not respond?",
+      "intent": "UNKNOWN_QUESTION",
+      "preview": "If someone does not respond in this care space, Relay can escalate: / \u2022 notify an **alternate owner** / \u2022 open a **follow-up work item** / \u2022 keep the original notification visible until acknowledged /  / Something still open right now: Mobility concern needs monitoring. /  / Use Notifications ",
+      "generic_no_match": false,
+      "empty_recorded": false,
+      "care_report_smell": false,
+      "wrong_med_for_leave": false,
+      "policy_only_message": false
+    }
+  ],
+  "generic_count": 0
+}
