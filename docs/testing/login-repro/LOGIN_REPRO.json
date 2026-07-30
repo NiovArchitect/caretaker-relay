@@ -1,0 +1,218 @@
+[
+  {
+    "viewport": "390x844",
+    "consoleErrors": [],
+    "url": "https://care.niovlabs.com/",
+    "title": "Caretaker Relay",
+    "bodyText": "Caretaker Relay\n\nShared care, verified\n\nCare service warm\n\nCare continuity\n\nCreate an account or sign in. Access to someone’s care requires an invitation or approval — not a role selection alone.\n\nSign in\nReturn to care you already have access to\nCreate account\nCreate a private account with no care access\n\nSECURE PATHS\n\nAccept invitation\nUse a secure invitation from an authorized person\nSet up care for someone new\nCreate a new provisional care profile\n\nCare service is ready.\n\nLab demo sign-in uses seeded principals. Create account never opens an existing care record. “Someone new” never searches for people already in the system.",
+    "inputCount": 3,
+    "visibleInputs": [
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-sign-in",
+        "placeholder": null,
+        "text": "Sign in\nReturn to care you already have ",
+        "aria": null
+      },
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-create",
+        "placeholder": null,
+        "text": "Create account\nCreate a private account ",
+        "aria": null
+      },
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-invite",
+        "placeholder": null,
+        "text": "Accept invitation\nUse a secure invitatio",
+        "aria": null
+      },
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-setup-care",
+        "placeholder": null,
+        "text": "Set up care for someone new\nCreate a new",
+        "aria": null
+      }
+    ],
+    "hasPassword": false,
+    "hasEmail": false,
+    "rootHTML": "<div class=\"cr-login-viewport\" data-testid=\"login-gate\"><div class=\"cr-login-ambient\" aria-hidden=\"true\"></div><div class=\"cr-login-panel\" data-testid=\"login-panel\"><div class=\"cr-login-panel-inner\"><div class=\"cr-login-brand\"><span class=\"cr-logo cr-logo-stacked\" data-testid=\"login-brand-logo\" data-logo-layout=\"stacked\" data-logo-tone=\"color\" data-logo-mode=\"soft-translucent-production\" role=\"img\" aria-label=\"Caretaker Relay\"><svg class=\"cr-logo-orb\" width=\"56\" height=\"56\" viewBox=\"0 0 128 128\"",
+    "sw": false
+  },
+  {
+    "viewport": "768x1024",
+    "consoleErrors": [],
+    "url": "https://care.niovlabs.com/",
+    "title": "Caretaker Relay",
+    "bodyText": "Caretaker Relay\n\nShared care, verified\n\nCare service warm\n\nCare continuity\n\nCreate an account or sign in. Access to someone’s care requires an invitation or approval — not a role selection alone.\n\nSign in\nReturn to care you already have access to\nCreate account\nCreate a private account with no care access\n\nSECURE PATHS\n\nAccept invitation\nUse a secure invitation from an authorized person\nSet up care for someone new\nCreate a new provisional care profile\n\nCare service is ready.\n\nLab demo sign-in uses seeded principals. Create account never opens an existing care record. “Someone new” never searches for people already in the system.",
+    "inputCount": 3,
+    "visibleInputs": [
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-sign-in",
+        "placeholder": null,
+        "text": "Sign in\nReturn to care you already have ",
+        "aria": null
+      },
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-create",
+        "placeholder": null,
+        "text": "Create account\nCreate a private account ",
+        "aria": null
+      },
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-invite",
+        "placeholder": null,
+        "text": "Accept invitation\nUse a secure invitatio",
+        "aria": null
+      },
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-setup-care",
+        "placeholder": null,
+        "text": "Set up care for someone new\nCreate a new",
+        "aria": null
+      }
+    ],
+    "hasPassword": false,
+    "hasEmail": false,
+    "rootHTML": "<div class=\"cr-login-viewport\" data-testid=\"login-gate\"><div class=\"cr-login-ambient\" aria-hidden=\"true\"></div><div class=\"cr-login-panel\" data-testid=\"login-panel\"><div class=\"cr-login-panel-inner\"><div class=\"cr-login-brand\"><span class=\"cr-logo cr-logo-stacked\" data-testid=\"login-brand-logo\" data-logo-layout=\"stacked\" data-logo-tone=\"color\" data-logo-mode=\"soft-translucent-production\" role=\"img\" aria-label=\"Caretaker Relay\"><svg class=\"cr-logo-orb\" width=\"56\" height=\"56\" viewBox=\"0 0 128 128\"",
+    "sw": false
+  },
+  {
+    "viewport": "1280x720",
+    "consoleErrors": [],
+    "url": "https://care.niovlabs.com/",
+    "title": "Caretaker Relay",
+    "bodyText": "Caretaker Relay\n\nShared care, verified\n\nCare service warm\n\nCare continuity\n\nCreate an account or sign in. Access to someone’s care requires an invitation or approval — not a role selection alone.\n\nSign in\nReturn to care you already have access to\nCreate account\nCreate a private account with no care access\n\nSECURE PATHS\n\nAccept invitation\nUse a secure invitation from an authorized person\nSet up care for someone new\nCreate a new provisional care profile\n\nCare service is ready.\n\nLab demo sign-in uses seeded principals. Create account never opens an existing care record. “Someone new” never searches for people already in the system.",
+    "inputCount": 3,
+    "visibleInputs": [
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-sign-in",
+        "placeholder": null,
+        "text": "Sign in\nReturn to care you already have ",
+        "aria": null
+      },
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-create",
+        "placeholder": null,
+        "text": "Create account\nCreate a private account ",
+        "aria": null
+      },
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-invite",
+        "placeholder": null,
+        "text": "Accept invitation\nUse a secure invitatio",
+        "aria": null
+      },
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-setup-care",
+        "placeholder": null,
+        "text": "Set up care for someone new\nCreate a new",
+        "aria": null
+      }
+    ],
+    "hasPassword": false,
+    "hasEmail": false,
+    "rootHTML": "<div class=\"cr-login-viewport\" data-testid=\"login-gate\"><div class=\"cr-login-ambient\" aria-hidden=\"true\"></div><div class=\"cr-login-panel\" data-testid=\"login-panel\"><div class=\"cr-login-panel-inner\"><div class=\"cr-login-brand\"><span class=\"cr-logo cr-logo-stacked\" data-testid=\"login-brand-logo\" data-logo-layout=\"stacked\" data-logo-tone=\"color\" data-logo-mode=\"soft-translucent-production\" role=\"img\" aria-label=\"Caretaker Relay\"><svg class=\"cr-logo-orb\" width=\"56\" height=\"56\" viewBox=\"0 0 128 128\"",
+    "sw": false
+  },
+  {
+    "viewport": "1366x768",
+    "consoleErrors": [],
+    "url": "https://care.niovlabs.com/",
+    "title": "Caretaker Relay",
+    "bodyText": "Caretaker Relay\n\nShared care, verified\n\nCare service warm\n\nCare continuity\n\nCreate an account or sign in. Access to someone’s care requires an invitation or approval — not a role selection alone.\n\nSign in\nReturn to care you already have access to\nCreate account\nCreate a private account with no care access\n\nSECURE PATHS\n\nAccept invitation\nUse a secure invitation from an authorized person\nSet up care for someone new\nCreate a new provisional care profile\n\nCare service is ready.\n\nLab demo sign-in uses seeded principals. Create account never opens an existing care record. “Someone new” never searches for people already in the system.",
+    "inputCount": 3,
+    "visibleInputs": [
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-sign-in",
+        "placeholder": null,
+        "text": "Sign in\nReturn to care you already have ",
+        "aria": null
+      },
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-create",
+        "placeholder": null,
+        "text": "Create account\nCreate a private account ",
+        "aria": null
+      },
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-invite",
+        "placeholder": null,
+        "text": "Accept invitation\nUse a secure invitatio",
+        "aria": null
+      },
+      {
+        "tag": "BUTTON",
+        "type": "button",
+        "name": null,
+        "id": "",
+        "testid": "entry-setup-care",
+        "placeholder": null,
+        "text": "Set up care for someone new\nCreate a new",
+        "aria": null
+      }
+    ],
+    "hasPassword": false,
+    "hasEmail": false,
+    "rootHTML": "<div class=\"cr-login-viewport\" data-testid=\"login-gate\"><div class=\"cr-login-ambient\" aria-hidden=\"true\"></div><div class=\"cr-login-panel\" data-testid=\"login-panel\"><div class=\"cr-login-panel-inner\"><div class=\"cr-login-brand\"><span class=\"cr-logo cr-logo-stacked\" data-testid=\"login-brand-logo\" data-logo-layout=\"stacked\" data-logo-tone=\"color\" data-logo-mode=\"soft-translucent-production\" role=\"img\" aria-label=\"Caretaker Relay\"><svg class=\"cr-logo-orb\" width=\"56\" height=\"56\" viewBox=\"0 0 128 128\"",
+    "sw": false
+  }
+]

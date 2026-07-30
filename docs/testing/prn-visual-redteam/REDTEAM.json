@@ -1,5 +1,5 @@
 {
-  "asset": "index-DciNDcpz.js",
+  "asset": "index-DeFzy-q2.js",
   "passed": 10,
   "total": 10,
   "findings": [
@@ -31,12 +31,12 @@
     {
       "id": "order_cards_present",
       "ok": true,
-      "detail": "orders=2"
+      "detail": "orders=4"
     },
     {
       "id": "history_or_empty_ok",
       "ok": true,
-      "detail": "history=2"
+      "detail": "history=5"
     },
     {
       "id": "single_as_needed_section",

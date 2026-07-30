@@ -1,0 +1,630 @@
+{
+  "screens": [
+    {
+      "screen": "Today",
+      "button_count": 40,
+      "buttons": [
+        {
+          "text": "Relay",
+          "testid": "relay-open-mobile",
+          "disabled": false
+        },
+        {
+          "text": "M\nAccount",
+          "testid": "profile-menu-btn",
+          "disabled": false
+        },
+        {
+          "text": "7 new",
+          "testid": "unread-count",
+          "disabled": false
+        },
+        {
+          "text": "Today",
+          "testid": "nav-today",
+          "disabled": false
+        },
+        {
+          "text": "Care",
+          "testid": "nav-care",
+          "disabled": false
+        },
+        {
+          "text": "People",
+          "testid": "nav-people",
+          "disabled": false
+        },
+        {
+          "text": "Documents",
+          "testid": "nav-documents",
+          "disabled": false
+        },
+        {
+          "text": "What needs you today · 3\nDose unit needs review\n▾",
+          "testid": "today-accordion-trigger-needs",
+          "disabled": false
+        },
+        {
+          "text": "Appointments & transport · 1\nMedication change needs verific",
+          "testid": "today-accordion-trigger-appointments",
+          "disabled": false
+        },
+        {
+          "text": "Meals, mobility, mood · 8\nCorrection: medication was not adm",
+          "testid": "today-accordion-trigger-wellbeing",
+          "disabled": false
+        },
+        {
+          "text": "Who is helping next · 1\nMarcus Carter now · Maya Bennett Exp",
+          "testid": "today-accordion-trigger-helpers",
+          "disabled": false
+        },
+        {
+          "text": "I can help",
+          "testid": "claim-work-work-5hrwrai4-ms6ilb8a",
+          "disabled": false
+        },
+        {
+          "text": "I can help",
+          "testid": "claim-work-work-0pxd0jnd-ms51ki47",
+          "disabled": false
+        },
+        {
+          "text": "I can help",
+          "testid": "claim-work-work-q1ai1zix-ms3ekhpo",
+          "disabled": false
+        },
+        {
+          "text": "Open current handoff",
+          "testid": "review-handoff",
+          "disabled": false
+        },
+        {
+          "text": "Incoming & shift handoffs",
+          "testid": "open-handoff-inbox",
+          "disabled": false
+        },
+        {
+          "text": "✦\nAsk or update Relay",
+          "testid": "try-care-update-top",
+          "disabled": false
+        },
+        {
+          "text": "⚠\nEssential / emergency info",
+          "testid": "open-emergency-snapshot",
+          "disabled": false
+        },
+        {
+          "text": "Mark all read",
+          "testid": "notifications-mark-all-seen",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "Show more (24 hidden)",
+          "testid": "notifications-show-more",
+          "disabled": false
+        },
+        {
+          "text": "◎\nOpen medication",
+          "testid": "attention-review",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "attention-ack",
+          "disabled": false
+        },
+        {
+          "text": "◎\nOpen medication",
+          "testid": "attention-review",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "attention-ack",
+          "disabled": false
+        }
+      ],
+      "has_raw": false,
+      "has_as_needed": false
+    },
+    {
+      "screen": "Care",
+      "button_count": 40,
+      "buttons": [
+        {
+          "text": "Relay",
+          "testid": "relay-open-mobile",
+          "disabled": false
+        },
+        {
+          "text": "M\nAccount",
+          "testid": "profile-menu-btn",
+          "disabled": false
+        },
+        {
+          "text": "7 new",
+          "testid": "unread-count",
+          "disabled": false
+        },
+        {
+          "text": "Today",
+          "testid": "nav-today",
+          "disabled": false
+        },
+        {
+          "text": "Care",
+          "testid": "nav-care",
+          "disabled": false
+        },
+        {
+          "text": "People",
+          "testid": "nav-people",
+          "disabled": false
+        },
+        {
+          "text": "Documents",
+          "testid": "nav-documents",
+          "disabled": false
+        },
+        {
+          "text": "What needs you today · 3\nDose unit needs review\n▾",
+          "testid": "today-accordion-trigger-needs",
+          "disabled": false
+        },
+        {
+          "text": "Appointments & transport · 1\nMedication change needs verific",
+          "testid": "today-accordion-trigger-appointments",
+          "disabled": false
+        },
+        {
+          "text": "Meals, mobility, mood · 8\nCorrection: medication was not adm",
+          "testid": "today-accordion-trigger-wellbeing",
+          "disabled": false
+        },
+        {
+          "text": "Who is helping next · 1\nMarcus Carter now · Maya Bennett Exp",
+          "testid": "today-accordion-trigger-helpers",
+          "disabled": false
+        },
+        {
+          "text": "I can help",
+          "testid": "claim-work-work-5hrwrai4-ms6ilb8a",
+          "disabled": false
+        },
+        {
+          "text": "I can help",
+          "testid": "claim-work-work-0pxd0jnd-ms51ki47",
+          "disabled": false
+        },
+        {
+          "text": "I can help",
+          "testid": "claim-work-work-q1ai1zix-ms3ekhpo",
+          "disabled": false
+        },
+        {
+          "text": "Open current handoff",
+          "testid": "review-handoff",
+          "disabled": false
+        },
+        {
+          "text": "Incoming & shift handoffs",
+          "testid": "open-handoff-inbox",
+          "disabled": false
+        },
+        {
+          "text": "✦\nAsk or update Relay",
+          "testid": "try-care-update-top",
+          "disabled": false
+        },
+        {
+          "text": "⚠\nEssential / emergency info",
+          "testid": "open-emergency-snapshot",
+          "disabled": false
+        },
+        {
+          "text": "Mark all read",
+          "testid": "notifications-mark-all-seen",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "Show more (24 hidden)",
+          "testid": "notifications-show-more",
+          "disabled": false
+        },
+        {
+          "text": "◎\nOpen medication",
+          "testid": "attention-review",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "attention-ack",
+          "disabled": false
+        },
+        {
+          "text": "◎\nOpen medication",
+          "testid": "attention-review",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "attention-ack",
+          "disabled": false
+        }
+      ],
+      "has_raw": false,
+      "has_as_needed": false
+    },
+    {
+      "screen": "Care-Meds",
+      "button_count": 40,
+      "buttons": [
+        {
+          "text": "Relay",
+          "testid": "relay-open-mobile",
+          "disabled": false
+        },
+        {
+          "text": "M\nAccount",
+          "testid": "profile-menu-btn",
+          "disabled": false
+        },
+        {
+          "text": "7 new",
+          "testid": "unread-count",
+          "disabled": false
+        },
+        {
+          "text": "Today",
+          "testid": "nav-today",
+          "disabled": false
+        },
+        {
+          "text": "Care",
+          "testid": "nav-care",
+          "disabled": false
+        },
+        {
+          "text": "People",
+          "testid": "nav-people",
+          "disabled": false
+        },
+        {
+          "text": "Documents",
+          "testid": "nav-documents",
+          "disabled": false
+        },
+        {
+          "text": "What needs you today · 3\nDose unit needs review\n▾",
+          "testid": "today-accordion-trigger-needs",
+          "disabled": false
+        },
+        {
+          "text": "Appointments & transport · 1\nMedication change needs verific",
+          "testid": "today-accordion-trigger-appointments",
+          "disabled": false
+        },
+        {
+          "text": "Meals, mobility, mood · 8\nCorrection: medication was not adm",
+          "testid": "today-accordion-trigger-wellbeing",
+          "disabled": false
+        },
+        {
+          "text": "Who is helping next · 1\nMarcus Carter now · Maya Bennett Exp",
+          "testid": "today-accordion-trigger-helpers",
+          "disabled": false
+        },
+        {
+          "text": "I can help",
+          "testid": "claim-work-work-5hrwrai4-ms6ilb8a",
+          "disabled": false
+        },
+        {
+          "text": "I can help",
+          "testid": "claim-work-work-0pxd0jnd-ms51ki47",
+          "disabled": false
+        },
+        {
+          "text": "I can help",
+          "testid": "claim-work-work-q1ai1zix-ms3ekhpo",
+          "disabled": false
+        },
+        {
+          "text": "Open current handoff",
+          "testid": "review-handoff",
+          "disabled": false
+        },
+        {
+          "text": "Incoming & shift handoffs",
+          "testid": "open-handoff-inbox",
+          "disabled": false
+        },
+        {
+          "text": "✦\nAsk or update Relay",
+          "testid": "try-care-update-top",
+          "disabled": false
+        },
+        {
+          "text": "⚠\nEssential / emergency info",
+          "testid": "open-emergency-snapshot",
+          "disabled": false
+        },
+        {
+          "text": "Mark all read",
+          "testid": "notifications-mark-all-seen",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "notification-seen",
+          "disabled": false
+        },
+        {
+          "text": "Resolve",
+          "testid": "notification-resolve",
+          "disabled": false
+        },
+        {
+          "text": "Show more (24 hidden)",
+          "testid": "notifications-show-more",
+          "disabled": false
+        },
+        {
+          "text": "◎\nOpen medication",
+          "testid": "attention-review",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "attention-ack",
+          "disabled": false
+        },
+        {
+          "text": "◎\nOpen medication",
+          "testid": "attention-review",
+          "disabled": false
+        },
+        {
+          "text": "✓\nMark seen",
+          "testid": "attention-ack",
+          "disabled": false
+        }
+      ],
+      "has_raw": false,
+      "has_as_needed": false
+    }
+  ],
+  "pass": true,
+  "note": "Census of visible buttons; durable journey proven for PRN reassess when present"
+}

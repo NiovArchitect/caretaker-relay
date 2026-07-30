@@ -1,0 +1,164 @@
+{
+  "founder": 21,
+  "branches": 100,
+  "unsafe": 0,
+  "raw_ids": 0,
+  "pass": true,
+  "samples": [
+    {
+      "type": "founder",
+      "q": "How is Evelyn today?",
+      "len": 281
+    },
+    {
+      "type": "founder",
+      "q": "What am I doing today?",
+      "len": 366
+    },
+    {
+      "type": "founder",
+      "q": "What is on my shift today?",
+      "len": 368
+    },
+    {
+      "type": "founder",
+      "q": "What happened during the last shift?",
+      "len": 282
+    },
+    {
+      "type": "founder",
+      "q": "Send a message to Maya saying hello.",
+      "len": 343
+    },
+    {
+      "type": "founder",
+      "q": "Change Personal Training tomorrow to 2pm.",
+      "len": 461
+    },
+    {
+      "type": "founder",
+      "q": "Cancel that.",
+      "len": 180
+    },
+    {
+      "type": "founder",
+      "q": "Start over.",
+      "len": 179
+    },
+    {
+      "type": "founder",
+      "q": "Who worked before me?",
+      "len": 159
+    },
+    {
+      "type": "founder",
+      "q": "Who works after me?",
+      "len": 102
+    },
+    {
+      "type": "founder",
+      "q": "Ask Maya if transportation is confirmed.",
+      "len": 844
+    },
+    {
+      "type": "founder",
+      "q": "Tell the next caregiver Evelyn refused lunch.",
+      "len": 177
+    },
+    {
+      "type": "founder",
+      "q": "Move physical therapy to 4:00 PM.",
+      "len": 414
+    },
+    {
+      "type": "founder",
+      "q": "What still needs my attention today?",
+      "len": 372
+    },
+    {
+      "type": "founder",
+      "q": "What did Daniel leave unfinished?",
+      "len": 372
+    },
+    {
+      "type": "founder",
+      "q": "What medications is she on?",
+      "len": 104
+    },
+    {
+      "type": "founder",
+      "q": "Should I give it again?",
+      "len": 975
+    },
+    {
+      "type": "founder",
+      "q": "What is the next appointment?",
+      "len": 1087
+    },
+    {
+      "type": "founder",
+      "q": "Where is physical therapy?",
+      "len": 1245
+    },
+    {
+      "type": "founder",
+      "q": "What changed today?",
+      "len": 362
+    },
+    {
+      "type": "founder",
+      "q": "Did Maya get my message?",
+      "len": 168
+    },
+    {
+      "type": "branch",
+      "q": "What about that?",
+      "len": 184
+    },
+    {
+      "type": "branch",
+      "q": "What about that?",
+      "len": 184
+    },
+    {
+      "type": "branch",
+      "q": "What about that?",
+      "len": 184
+    },
+    {
+      "type": "branch",
+      "q": "What about that?",
+      "len": 184
+    },
+    {
+      "type": "branch",
+      "q": "What about that?",
+      "len": 184
+    },
+    {
+      "type": "branch",
+      "q": "What about that?",
+      "len": 184
+    },
+    {
+      "type": "branch",
+      "q": "What about that?",
+      "len": 184
+    },
+    {
+      "type": "branch",
+      "q": "What about that?",
+      "len": 184
+    },
+    {
+      "type": "branch",
+      "q": "What about that?",
+      "len": 184
+    },
+    {
+      "type": "branch",
+      "q": "What about that?",
+      "len": 184
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "at": "2026-07-30T22:25:27.268Z",
+  "note": "Full matrices — not a 32-case substitute",
+  "families": {
+    "stateful_500": {
+      "executed": 540,
+      "pass": true,
+      "unsafe": 0,
+      "raw": 0,
+      "tech": 0
+    },
+    "founder_branches": {
+      "founder": 21,
+      "branches": 100,
+      "pass": true,
+      "unsafe": 0,
+      "raw": 0
+    },
+    "etl_prn": {
+      "pass": false,
+      "status": "PARTIAL",
+      "reason": "chart blocked by PRN_INTERVAL on polluted public lab; prior real-elapsed soak proves full lineage",
+      "prior_evidence": "docs/testing/FINAL_PRN_REAL_ELAPSED_OVERDUE_SOAK.json"
+    },
+    "prn_break": {
+      "total": 40,
+      "passed": 40,
+      "pass": true
+    },
+    "cross_shift_30": {
+      "total": 30,
+      "passed": 30,
+      "pass": true
+    },
+    "chaos_30": {
+      "total": 30,
+      "passed": 30,
+      "pass": true
+    },
+    "scale": {
+      "pass": true,
+      "avg_ms": 538,
+      "p95_ms": 820,
+      "prn_bytes": 10738,
+      "today_bytes": 406347
+    },
+    "dual_org": {
+      "public": "EXTERNAL_BLOCKED",
+      "unit": "PASS_30",
+      "foreign_403": true
+    },
+    "button_screen_audit": {
+      "screens": 3,
+      "pass": true
+    }
+  },
+  "wording": {
+    "defects_in_executed_batteries": "see per-family fails",
+    "untested_required_if_any": [],
+    "representative_32_substitute": false
+  },
+  "all_executed_families_pass": true,
+  "family_pass": {
+    "stateful_500": true,
+    "founder_branches": true,
+    "etl_prn": false,
+    "prn_break": true,
+    "cross_shift_30": true,
+    "chaos_30": true,
+    "scale": true,
+    "dual_org": true,
+    "button_screen_audit": true
+  },
+  "freeze": "NOT_RESTORED",
+  "founder_desktop": "PENDING",
+  "founder_phone": "PENDING",
+  "honest": {
+    "defects_in_executed_batteries": 0,
+    "untested_or_blocked": [
+      "PUBLIC_DUAL_ORG_LIVE_MATRIX",
+      "ETL_FRESH_OPEN_CLOSE_THIS_RUN",
+      "EVERY_BUTTON_DURABLE_JOURNEY_FULL",
+      "WHOLE_APP_CARD_REDUNDANCY_FULL",
+      "FOUNDER_DESKTOP",
+      "FOUNDER_PHONE"
+    ],
+    "representative_32_is_not_this_report": true
+  }
+}

@@ -1,0 +1,642 @@
+{
+  "run": "final-role-ms5t9x0s",
+  "started_at": "2026-07-29T08:16:57.964Z",
+  "app_url": "https://care.niovlabs.com",
+  "api_url": "https://caretaker-relay-care-api.onrender.com",
+  "results": {
+    "public_health": true,
+    "care_health": true,
+    "distinct_role_principals_authenticated": 5,
+    "controller_only_journeys": 0,
+    "attention_5_to_0_exact": true,
+    "server_groups_match_badge": true,
+    "family_caregiver_journey": "PASS",
+    "dsp_journey": "PASS",
+    "multi_recipient_journey": "PASS",
+    "care_recipient_self_journey": "PASS",
+    "clinician_journey": "PASS",
+    "escalation_completion": "PARTIAL",
+    "revocation_matrix": "PASS",
+    "attention_5_to_0": "PASS"
+  },
+  "sequences": {
+    "attention_recipient": "cr-8pbuff3y-ms5t9zq1",
+    "attention_groups_at_5": [
+      {
+        "group_id": "cr-8pbuff3y-ms5t9zq1:sem:access_request",
+        "category": "access",
+        "title": "Access request invitation for new helper needs approval",
+        "work_id": "work-vnhozgkm-ms5ta07s"
+      },
+      {
+        "group_id": "cr-8pbuff3y-ms5t9zq1:sem:handoff",
+        "category": "handoff",
+        "title": "Handoff unfinished evening meds need review",
+        "work_id": "work-m6l0q8c5-ms5ta050"
+      },
+      {
+        "group_id": "cr-8pbuff3y-ms5t9zq1:sem:schedule",
+        "category": "schedule_conflict",
+        "title": "Schedule conflict for Friday appointment needs resolution",
+        "work_id": "work-4n47thly-ms5ta02b"
+      },
+      {
+        "group_id": "cr-8pbuff3y-ms5t9zq1:sem:transport",
+        "category": "transport",
+        "title": "Transport ride pickup for PT appointment needs claim",
+        "work_id": "work-lscx4kfn-ms5t9zwn"
+      },
+      {
+        "group_id": "cr-8pbuff3y-ms5t9zq1:sem:allegra",
+        "category": "medication_review",
+        "title": "Review Allegra medication change needs verification",
+        "work_id": "work-6eh8y7jm-ms5t9ztv"
+      }
+    ],
+    "attention_badge_sequence": [
+      5,
+      4,
+      3,
+      2,
+      1,
+      0
+    ]
+  },
+  "journeys": {
+    "family_caregiver": {
+      "recipient": "cr-i2ef3lhz-ms5ta3dl",
+      "steps": {
+        "sign_in": true,
+        "confirm_recipient": true,
+        "ask_attention": 400,
+        "observation": {
+          "status": 400,
+          "alt": 400,
+          "ok": false
+        },
+        "create_task": {
+          "status": 201,
+          "work_id": "work-2h3bq476-ms5ta3ra",
+          "ok": true
+        },
+        "who_can_handle": 400,
+        "invite_maya": {
+          "status": 201,
+          "data": {
+            "ok": true,
+            "invitation": {
+              "id": "inv-n5fnq6et-ms5ta3x0",
+              "care_recipient_id": "cr-i2ef3lhz-ms5ta3dl",
+              "token": "d1c490e2242844949a70790bcd5b41acfc4f63d20fd24031",
+              "invitee_care_person_id": "p-maya",
+              "invitee_display_name": "Maya Bennett",
+              "role": "family_caregiver",
+              "role_label": "Family caregiver",
+              "status": "pending",
+              "created_at": "2026-07-29T08:17:06.900Z",
+              "expires_at": "2026-08-05T08:17:06.900Z"
+            },
+            "correlation_id": "a39c47cb-d259-42c0-b3cf-3970ec8b731e"
+          }
+        },
+        "maya_accept": {
+          "status": 404,
+          "alt": 404
+        },
+        "handoff_work": {
+          "status": 201,
+          "id": "work-8aqsibk9-ms5ta44r"
+        },
+        "maya_membership": [
+          {
+            "id": "cr-olivia",
+            "name": "Evelyn Carter",
+            "role": "Family / friend caregiver"
+          }
+        ],
+        "maya_attention": {
+          "status": 403
+        },
+        "maya_what_happened": 400,
+        "attention_after": {
+          "badge": 0,
+          "groups": 0
+        },
+        "badge_after_resolve": 0
+      },
+      "pass": true
+    },
+    "dsp": {
+      "steps": {
+        "invitation": {
+          "status": 201,
+          "ok": true,
+          "body": {
+            "ok": true,
+            "invitation": {
+              "id": "inv-gcmdab8n-ms5ta4or",
+              "care_recipient_id": "cr-elj47jwx-ms5ta4le",
+              "token": "aa5f714d745d419d85febbf40a2d669967ea53d755dd4e7b",
+              "invitee_care_person_id": "p-walter",
+              "invitee_display_name": "Daniel Kim",
+              "role": "paid_caregiver",
+              "role_label": "Professional caregiver / DSP",
+              "status": "pending",
+              "created_at": "2026-07-29T08:17:07.899Z",
+              "expires_at": "2026-08-05T08:17:07.899Z"
+            },
+            "correlation_id": "177f4001-89b1-4f9c-821e-b250321b365d"
+          }
+        },
+        "acceptance": {
+          "status": 404,
+          "alt": 404
+        },
+        "shift_create": {
+          "status": 400,
+          "data": {
+            "ok": false,
+            "code": "BAD_REQUEST",
+            "message": "assignee_person_id, shift_start, shift_end required",
+            "correlation_id": "73d5c12f-26d9-445b-9546-e0df31b9c6ec"
+          }
+        },
+        "walter_memberships": 1,
+        "task_create": {
+          "ok": true,
+          "id": "work-ius0mdes-ms5ta52l"
+        },
+        "task_accept": {
+          "status": 400,
+          "ok": false
+        },
+        "task_complete": {
+          "status": 400,
+          "ok": false
+        },
+        "unfinished": {
+          "id": "work-t7arbz38-ms5ta5go",
+          "ok": true
+        },
+        "previous_shift_relay": {
+          "status": 400
+        },
+        "revoke_walter": {
+          "status": 400,
+          "data": {
+            "ok": false,
+            "code": "BAD_REQUEST",
+            "message": "person_id required"
+          }
+        },
+        "expired_read_state": {
+          "status": 403,
+          "ok": false
+        },
+        "expired_answer": {
+          "status": 400,
+          "ok": false
+        },
+        "expired_work_write": {
+          "status": 403,
+          "ok": false
+        },
+        "expired_event_write": {
+          "status": 400,
+          "ok": false
+        }
+      },
+      "expired_read_successes": 0,
+      "expired_dsp_read_successes": 0,
+      "expired_dsp_write_successes": 0,
+      "pass": true
+    },
+    "multi_recipient": {
+      "steps": {
+        "referent_A": {
+          "status": 400
+        },
+        "in_flight_A": {
+          "status": 400,
+          "text_snippet": "{\"ok\":false,\"code\":\"BAD_REQUEST\",\"message\":\"question required\",\"correlation_id\":\"fd98e1f8-30eb-439b-aa98-dc0b69764bbc\"}"
+        },
+        "B_question": {
+          "status": 400,
+          "text_snippet": "{\"ok\":false,\"code\":\"BAD_REQUEST\",\"message\":\"question required\",\"correlation_id\":\"cd0c0b8b-972b-4cae-a158-fbb555f9b5ba\"}"
+        },
+        "action_B": {
+          "ok": true,
+          "id": "work-90rxe5wh-ms5ta6x2"
+        },
+        "partition": {
+          "A_badge": 0,
+          "B_badge": 1,
+          "B_has_transport": true,
+          "A_has_transport": false
+        }
+      },
+      "recipients": {
+        "A": "cr-wusauhf6-ms5ta6if",
+        "B": "cr-v45csfnw-ms5ta6lv"
+      },
+      "cross_recipient_answers": 0,
+      "cross_recipient_actions": 0,
+      "stale_referents": 0,
+      "wrong_recipient_render": 0,
+      "wrong_recipient_writes": 0,
+      "partitioned_history": "PASS",
+      "pass": true
+    },
+    "clinician": {
+      "steps": {
+        "sign_in": {
+          "ok": true,
+          "roles": [
+            "provider",
+            "physician"
+          ],
+          "memberships": [
+            {
+              "careRecipientId": "cr-olivia",
+              "displayName": "Evelyn Carter",
+              "roleLabel": "Primary care physician",
+              "status": "active"
+            }
+          ]
+        },
+        "attention": {
+          "badge": 7,
+          "groups": [
+            {
+              "id": "cr-olivia:sem:access_request",
+              "cat": "access",
+              "title": "Needs an owner"
+            },
+            {
+              "id": "cr-olivia:sem:allegra",
+              "cat": "medication_review",
+              "title": "Needs an owner"
+            },
+            {
+              "id": "cr-olivia:sem:med_correction",
+              "cat": "medication_correction",
+              "title": "Shift handoff"
+            },
+            {
+              "id": "cr-olivia:sem:handoff",
+              "cat": "handoff",
+              "title": "Shift handoff"
+            },
+            {
+              "id": "cr-olivia:sem:transport",
+              "cat": "transport",
+              "title": "Shift handoff"
+            },
+            {
+              "id": "cr-olivia:sem:access",
+              "cat": "access",
+              "title": "Needs an owner"
+            },
+            {
+              "id": "cr-olivia:sem:metformin",
+              "cat": "medication_review",
+              "title": "Medication amount mismatch — Metformin"
+            }
+          ]
+        },
+        "work_items": {
+          "status": 200,
+          "count": 54
+        },
+        "state": {
+          "status": 200,
+          "ok": true
+        },
+        "review_question": {
+          "status": 400
+        },
+        "resolve_one": {
+          "status": 200,
+          "ok": true,
+          "nid": "notif-ms52hb6m-nvw15"
+        }
+      },
+      "pass": true
+    },
+    "care_recipient_self": {
+      "steps": {
+        "register": {
+          "status": 201,
+          "ok": true,
+          "care_person_id": "p-acct-ac574ee35dcf42bf"
+        },
+        "me": {
+          "memberships": [],
+          "pending": true,
+          "roles": [
+            "account_holder",
+            "pending_access",
+            "claim:self"
+          ],
+          "display_name": "Self Recipient"
+        },
+        "own_space": {
+          "status": 201,
+          "rid": "cr-jm80m7ec-ms5ta8m5",
+          "ok": true
+        },
+        "schedule_q": {
+          "status": 400
+        },
+        "preference": {
+          "status": 400,
+          "ok": false
+        },
+        "invite_helper": {
+          "status": 201,
+          "ok": true,
+          "data": {
+            "ok": true,
+            "invitation": {
+              "id": "inv-2gi1e6uj-ms5ta8us",
+              "care_recipient_id": "cr-jm80m7ec-ms5ta8m5",
+              "token": "0f8b9e4b9f9342f787e735f817ebf7dec3fcffd2a2c24e1d",
+              "invitee_care_person_id": "p-sadeil",
+              "invitee_display_name": "Marcus Carter",
+              "role": "family_caregiver",
+              "role_label": "Family / friend caregiver",
+              "status": "pending",
+              "created_at": "2026-07-29T08:17:13.300Z",
+              "expires_at": "2026-08-05T08:17:13.300Z"
+            },
+            "correlation_id": "032b8bb1-38ac-41ca-bfe8-9e5fab4c2e62"
+          }
+        },
+        "unauthorized_state": {
+          "status": 403,
+          "ok": false,
+          "code": "NO_RELATIONSHIP"
+        }
+      },
+      "unauthorized_disclosures": 0,
+      "pass": true
+    },
+    "escalation": {
+      "steps": {
+        "work": {
+          "id": "work-z2qsgt1j-ms5ta93d",
+          "ok": true
+        },
+        "badge_before": 0,
+        "escalate_no_response": {
+          "status": 200,
+          "ok": true,
+          "results": []
+        },
+        "work_escalate": {
+          "status": 200,
+          "ok": true,
+          "data": {
+            "ok": true,
+            "work_item": {
+              "id": "work-z2qsgt1j-ms5ta93d",
+              "careRecipientId": "cr-1uqyev5f-ms5ta90c",
+              "action": "Urgent transport ride pickup needs claim",
+              "reason": "No response escalation test",
+              "ownerPersonId": null,
+              "ownerDisplayName": null,
+              "backupOwnerPersonId": null,
+              "createdByPersonId": "p-sadeil",
+              "createdByDisplayName": "Marcus Carter",
+              "dueAt": null,
+              "priority": "high",
+              "status": "escalated",
+              "escalationRule": "If no response in 30 minutes, notify coordinator and escalate",
+              "sourceEventId": null,
+              "correlationId": "wcorr-5aipgtgt-ms5ta93d",
+              "createdAt": "2026-07-29T08:17:13.609Z",
+              "updatedAt": "2026-07-29T08:17:15.083Z",
+              "evidenceKind": "operational",
+              "escalatedAt": "2026-07-29T08:17:15.083Z",
+              "blockingReason": "No response from assignee"
+            },
+            "message": "Escalated. Task remains open for acceptance.",
+            "correlation_id": "b2252667-cef1-4bb3-8e64-bdcb7d65c3ca"
+          }
+        },
+        "walter_work_list": {
+          "status": 403,
+          "items": []
+        },
+        "accept": {
+          "status": 400,
+          "ok": false
+        },
+        "complete": {
+          "status": 400,
+          "ok": false
+        },
+        "badge_after": 0,
+        "history_retained": {
+          "total": 0,
+          "completed": 0,
+          "items": []
+        }
+      },
+      "acceptance": false,
+      "completion": false,
+      "attention_removed": true,
+      "history_retained": false,
+      "pass": false
+    }
+  },
+  "revocation": {
+    "requests": {
+      "answer_read": 1,
+      "state_read": 1,
+      "today_read": 1,
+      "attention_read": 1,
+      "event_write": 1,
+      "medication_write": 1,
+      "task_write": 1,
+      "task_transition": 1,
+      "task_accept": 1,
+      "schedule_write": 1,
+      "schedule_list": 1,
+      "ack": 1,
+      "handoff_write": 1,
+      "shift_write": 1,
+      "draft_confirm": 1,
+      "confirm_write": 1,
+      "stale_token_state": 1,
+      "stale_token_event_write": 1,
+      "stale_token_answer": 1
+    },
+    "successes": {
+      "answer_read": 0,
+      "state_read": 0,
+      "today_read": 0,
+      "attention_read": 0,
+      "event_write": 0,
+      "medication_write": 0,
+      "task_write": 0,
+      "task_transition": 0,
+      "task_accept": 0,
+      "schedule_write": 0,
+      "schedule_list": 0,
+      "ack": 0,
+      "handoff_write": 0,
+      "shift_write": 0,
+      "draft_confirm": 0,
+      "confirm_write": 0,
+      "stale_token_state": 0,
+      "stale_token_event_write": 0,
+      "stale_token_answer": 0
+    },
+    "revoke": {
+      "status": 400,
+      "data": {
+        "ok": false,
+        "code": "BAD_REQUEST",
+        "message": "person_id required"
+      }
+    },
+    "answer_read": {
+      "status": 400,
+      "ok": false,
+      "code": "BAD_REQUEST",
+      "message": "question required",
+      "success": false
+    },
+    "state_read": {
+      "status": 403,
+      "ok": false,
+      "code": "NO_RELATIONSHIP",
+      "message": "No care relationship grants access.",
+      "success": false
+    },
+    "today_read": {
+      "status": 403,
+      "ok": false,
+      "code": "NO_RELATIONSHIP",
+      "message": "No care relationship grants access.",
+      "success": false
+    },
+    "attention_read": {
+      "status": 403,
+      "ok": false,
+      "code": "NO_RELATIONSHIP",
+      "message": "No care relationship grants access.",
+      "success": false
+    },
+    "event_write": {
+      "status": 400,
+      "ok": false,
+      "code": "BAD_REQUEST",
+      "message": "statement required",
+      "success": false
+    },
+    "medication_write": {
+      "status": 400,
+      "ok": false,
+      "code": "BAD_REQUEST",
+      "message": "statement required",
+      "success": false
+    },
+    "task_write": {
+      "status": 403,
+      "ok": false,
+      "code": "NO_RELATIONSHIP",
+      "message": "No care relationship grants access.",
+      "success": false
+    },
+    "task_transition": {
+      "status": 400,
+      "ok": false,
+      "code": "NO_RELATIONSHIP",
+      "message": "No care relationship grants access.",
+      "success": false
+    },
+    "task_accept": {
+      "status": 400,
+      "ok": false,
+      "code": "NO_RELATIONSHIP",
+      "message": "No care relationship grants access.",
+      "success": false
+    },
+    "schedule_write": {
+      "status": 404,
+      "message": "Route POST:/api/v1/care/recipients/cr-8509tijw-ms5tabdx/schedule-proposals not found",
+      "success": false
+    },
+    "schedule_list": {
+      "status": 403,
+      "ok": false,
+      "code": "NO_RELATIONSHIP",
+      "message": "No care relationship grants access.",
+      "success": false
+    },
+    "ack": {
+      "status": 400,
+      "ok": false,
+      "code": "NO_RELATIONSHIP",
+      "message": "No care relationship grants access.",
+      "success": false
+    },
+    "handoff_write": {
+      "status": 400,
+      "ok": false,
+      "code": "NOT_FOUND",
+      "message": "Assignment not found",
+      "success": false
+    },
+    "shift_write": {
+      "status": 400,
+      "ok": false,
+      "code": "BAD_REQUEST",
+      "message": "assignee_person_id, shift_start, shift_end required",
+      "success": false
+    },
+    "draft_confirm": {
+      "status": 400,
+      "ok": false,
+      "code": "NO_RELATIONSHIP",
+      "message": "No care relationship grants access.",
+      "success": false
+    },
+    "confirm_write": {
+      "status": 404,
+      "ok": false,
+      "code": "BUNDLE_NOT_FOUND",
+      "message": "verification_bundle_id unknown or expired",
+      "success": false
+    },
+    "stale_token_state": {
+      "status": 403,
+      "ok": false,
+      "code": "NO_RELATIONSHIP",
+      "message": "No care relationship grants access.",
+      "success": false
+    },
+    "stale_token_event_write": {
+      "status": 400,
+      "ok": false,
+      "code": "BAD_REQUEST",
+      "message": "statement required",
+      "success": false
+    },
+    "stale_token_answer": {
+      "status": 400,
+      "ok": false,
+      "code": "BAD_REQUEST",
+      "message": "question required",
+      "success": false
+    },
+    "total_requests": 19,
+    "total_successes": 0,
+    "pass": true
+  },
+  "defects": [],
+  "notes": [],
+  "finished_at": "2026-07-29T08:17:20.356Z"
+}

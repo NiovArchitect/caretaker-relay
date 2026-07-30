@@ -1,0 +1,207 @@
+{
+  "total": 40,
+  "passed": 40,
+  "pass": true,
+  "breaks": [
+    {
+      "id": "B01_otc_not_plan",
+      "pass": true,
+      "detail": "I can record that **Benadryl** was reported as given for **itching**, but I do **not** see it as an authorized as-needed medication in the current plan. Please verify the medication, dose, and time. R"
+    },
+    {
+      "id": "B02_no_dose_invention_chat",
+      "pass": true,
+      "detail": "Metformin 500 mg\nTake at 12:00 PM\nWindow 11:30 AM – 12:30 PM\nTake with food\nAuthorized by Dr. Priya Shah"
+    },
+    {
+      "id": "B03_idempotent_or_interval",
+      "pass": true,
+      "detail": "PRN_INTERVAL/PRN_INTERVAL"
+    },
+    {
+      "id": "B04_wrong_recipient_reassess",
+      "pass": true,
+      "detail": "no open — skip"
+    },
+    {
+      "id": "B05_no_plan_activation",
+      "pass": true,
+      "detail": "As-needed summary for Evelyn Carter:\nNo open PRN follow-ups.\n• Acetaminophen 500 mg by by mouth as needed for pain (min "
+    },
+    {
+      "id": "B06_open_have_no_effect",
+      "pass": true,
+      "detail": "due=0"
+    },
+    {
+      "id": "B07_stale_order",
+      "pass": true,
+      "detail": "PRN_ORDER_INACTIVE"
+    },
+    {
+      "id": "B08_chat_0",
+      "pass": true,
+      "detail": "Latest as-needed chart entry: Simethicone 80 mg given Jul 30, 9:53 PM for gas · helped."
+    },
+    {
+      "id": "B09_chat_1",
+      "pass": true,
+      "detail": "As-needed summary for Evelyn Carter:\nNo open PRN follow-ups.\n• Acetaminophen 500 mg by by mouth as n"
+    },
+    {
+      "id": "B10_chat_2",
+      "pass": true,
+      "detail": "Yesterday, Evelyn Carter was reported as having a fever. I do not have a separate mood or energy rep"
+    },
+    {
+      "id": "B11_chat_3",
+      "pass": true,
+      "detail": "I only answer from the active care recipient's authorized records (Evelyn Carter). I won't mix medic"
+    },
+    {
+      "id": "B12_chat_4",
+      "pass": true,
+      "detail": "No overdue as-needed follow-up is open for Evelyn Carter."
+    },
+    {
+      "id": "B13_chat_5",
+      "pass": true,
+      "detail": "Charted as-needed **Acetaminophen 500 mg** by by mouth for **pain** at Jul 30, 10:32 PM.\nFollow-up: "
+    },
+    {
+      "id": "B14_chat_6",
+      "pass": true,
+      "detail": "I don't have a record that answers “what if i already gave it twice” for Evelyn Carter yet. Try nami"
+    },
+    {
+      "id": "B15_chat_7",
+      "pass": true,
+      "detail": "I don't guess about care. If something isn't on file, I'll say so and help you verify or ask the rig"
+    },
+    {
+      "id": "B16_chat_8",
+      "pass": true,
+      "detail": "As-needed summary for Evelyn Carter:\nOpen follow-ups:\n• Acetaminophen 500 mg by by mouth as needed f"
+    },
+    {
+      "id": "B17_chat_9",
+      "pass": true,
+      "detail": "As-needed follow-up still open for Evelyn Carter:\nTell me how they are feeling now (better, unchange"
+    },
+    {
+      "id": "B18_parallel3",
+      "pass": true,
+      "detail": "unique=0"
+    },
+    {
+      "id": "B19_parallel3",
+      "pass": true,
+      "detail": "unique=0"
+    },
+    {
+      "id": "B20_parallel3",
+      "pass": true,
+      "detail": "unique=0"
+    },
+    {
+      "id": "B21_parallel3",
+      "pass": true,
+      "detail": "unique=0"
+    },
+    {
+      "id": "B22_parallel3",
+      "pass": true,
+      "detail": "unique=0"
+    },
+    {
+      "id": "B23_parallel3",
+      "pass": true,
+      "detail": "unique=0"
+    },
+    {
+      "id": "B24_parallel3",
+      "pass": true,
+      "detail": "unique=0"
+    },
+    {
+      "id": "B25_parallel3",
+      "pass": true,
+      "detail": "unique=0"
+    },
+    {
+      "id": "B26_parallel3",
+      "pass": true,
+      "detail": "unique=0"
+    },
+    {
+      "id": "B27_parallel3",
+      "pass": true,
+      "detail": "unique=0"
+    },
+    {
+      "id": "B28_parallel3",
+      "pass": true,
+      "detail": "unique=0"
+    },
+    {
+      "id": "B29_parallel3",
+      "pass": true,
+      "detail": "unique=0"
+    },
+    {
+      "id": "B30_parallel3",
+      "pass": true,
+      "detail": "unique=0"
+    },
+    {
+      "id": "B31_parallel3",
+      "pass": true,
+      "detail": "unique=0"
+    },
+    {
+      "id": "B32_parallel3",
+      "pass": true,
+      "detail": "unique=0"
+    },
+    {
+      "id": "B33_followup_probe",
+      "pass": true,
+      "detail": "Latest as-needed chart entry: Simethicone 80 mg given Jul 30, 9:53 PM for gas · "
+    },
+    {
+      "id": "B34_followup_probe",
+      "pass": true,
+      "detail": "Latest as-needed chart entry: Simethicone 80 mg given Jul 30, 9:53 PM for gas · "
+    },
+    {
+      "id": "B35_followup_probe",
+      "pass": true,
+      "detail": "Latest as-needed chart entry: Simethicone 80 mg given Jul 30, 9:53 PM for gas · "
+    },
+    {
+      "id": "B36_followup_probe",
+      "pass": true,
+      "detail": "Latest as-needed chart entry: Simethicone 80 mg given Jul 30, 9:53 PM for gas · "
+    },
+    {
+      "id": "B37_followup_probe",
+      "pass": true,
+      "detail": "Latest as-needed chart entry: Simethicone 80 mg given Jul 30, 9:53 PM for gas · "
+    },
+    {
+      "id": "B38_followup_probe",
+      "pass": true,
+      "detail": "Latest as-needed chart entry: Simethicone 80 mg given Jul 30, 9:53 PM for gas · "
+    },
+    {
+      "id": "B39_followup_probe",
+      "pass": true,
+      "detail": "Latest as-needed chart entry: Simethicone 80 mg given Jul 30, 9:53 PM for gas · "
+    },
+    {
+      "id": "B40_followup_probe",
+      "pass": true,
+      "detail": "Latest as-needed chart entry: Simethicone 80 mg given Jul 30, 9:53 PM for gas · "
+    }
+  ]
+}

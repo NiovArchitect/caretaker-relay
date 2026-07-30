@@ -1,0 +1,51 @@
+{
+  "family": {
+    "login": true,
+    "name": "Marcus Carter",
+    "timeline": true,
+    "current": "ongoing_primary_family_coverage",
+    "previous": "Daniel Kim",
+    "handoff_primary": 2,
+    "badge": 7
+  },
+  "dsp": {
+    "login": true,
+    "name": "Daniel Kim",
+    "timeline": true,
+    "current": "temporary_family_coverage",
+    "previous": "Daniel Kim",
+    "handoff_primary": 1,
+    "badge": 6
+  },
+  "clinician": {
+    "login": true,
+    "name": "Dr. Priya Shah",
+    "timeline": true,
+    "current": "ongoing_primary_family_coverage",
+    "previous": "Daniel Kim",
+    "handoff_primary": 1,
+    "badge": 7
+  },
+  "maya": {
+    "login": true,
+    "name": "Maya Bennett",
+    "timeline": true,
+    "current": "ongoing_primary_family_coverage",
+    "previous": "Daniel Kim",
+    "handoff_primary": 2,
+    "badge": 9
+  },
+  "self": {
+    "register": true,
+    "id": "p-acct-e5a70300e16841bb"
+  },
+  "multi": {
+    "A": "cr-yn5u39ha-ms5xyfpz",
+    "B": "cr-l49rdoaw-ms5xyfst",
+    "tlA": 200,
+    "tlB": 200,
+    "curA": "Marcus Carter",
+    "curB": "Marcus Carter",
+    "partitioned": true
+  }
+}

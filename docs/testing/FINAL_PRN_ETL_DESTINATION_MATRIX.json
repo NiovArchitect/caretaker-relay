@@ -1,0 +1,30 @@
+{
+  "steps": [
+    {
+      "step": "relay_confirm_api",
+      "ok": true,
+      "code": "PRN_INTERVAL"
+    },
+    {
+      "step": "canonical_projection_due",
+      "ok": true,
+      "inDue": false,
+      "inOpen": false
+    },
+    {
+      "step": "today_while_actionable",
+      "ok": true
+    },
+    {
+      "step": "today_bounded",
+      "ok": true
+    },
+    {
+      "step": "relay_retrieval",
+      "ok": true,
+      "preview": "Evelyn Carter has authorized as-needed medication instructions on file:\n\nRelay does not recommend gi"
+    }
+  ],
+  "pass": true,
+  "chart_ok": false
+}

@@ -1,0 +1,158 @@
+{
+  "scope": "public login + post-login shell on final app bundle index-CLIBddUV.js / SHA 6c0c15eb",
+  "keyboard_primary_journey": "PARTIAL",
+  "keyboard_traps": 0,
+  "invisible_focus": 0,
+  "focus_return_failures": 0,
+  "unreachable_actions": 0,
+  "screen_reader_semantic_smoke": "PARTIAL",
+  "unlabeled_primary_controls": 0,
+  "unannounced_consequential_changes": 0,
+  "duplicate_confusing_landmarks": 0,
+  "notes": [
+    "Login fields not found in expected shape; keyboard limited to public shell tab order"
+  ],
+  "evidence": [
+    {
+      "landmarks": [
+        {
+          "sel": "header",
+          "count": 0
+        },
+        {
+          "sel": "nav",
+          "count": 0
+        },
+        {
+          "sel": "main",
+          "count": 0
+        },
+        {
+          "sel": "footer",
+          "count": 0
+        },
+        {
+          "sel": "[role=banner]",
+          "count": 0
+        },
+        {
+          "sel": "[role=navigation]",
+          "count": 0
+        },
+        {
+          "sel": "[role=main]",
+          "count": 0
+        },
+        {
+          "sel": "[role=contentinfo]",
+          "count": 0
+        },
+        {
+          "sel": "[aria-label]",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "unlabeled_sample": []
+    },
+    {
+      "focusPath": [
+        {
+          "tag": "BUTTON",
+          "name": "Sign in\nReturn to care you already have access to",
+          "visible": true,
+          "id": ""
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Create account\nCreate a private account with no care access",
+          "visible": true,
+          "id": ""
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Accept invitation\nUse a secure invitation from an authorized person",
+          "visible": true,
+          "id": ""
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Set up care for someone new\nCreate a new provisional care profile",
+          "visible": true,
+          "id": ""
+        },
+        {
+          "tag": "BODY",
+          "name": "",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Sign in\nReturn to care you already have access to",
+          "visible": true,
+          "id": ""
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Create account\nCreate a private account with no care access",
+          "visible": true,
+          "id": ""
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Accept invitation\nUse a secure invitation from an authorized person",
+          "visible": true,
+          "id": ""
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Set up care for someone new\nCreate a new provisional care profile",
+          "visible": true,
+          "id": ""
+        },
+        {
+          "tag": "BODY",
+          "name": "",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Sign in\nReturn to care you already have access to",
+          "visible": true,
+          "id": ""
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Create account\nCreate a private account with no care access",
+          "visible": true,
+          "id": ""
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Accept invitation\nUse a secure invitation from an authorized person",
+          "visible": true,
+          "id": ""
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Set up care for someone new\nCreate a new provisional care profile",
+          "visible": true,
+          "id": ""
+        },
+        {
+          "tag": "BODY",
+          "name": "",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "live_regions": []
+    },
+    {
+      "hasPassword": 0,
+      "hasEmail": 0
+    }
+  ]
+}

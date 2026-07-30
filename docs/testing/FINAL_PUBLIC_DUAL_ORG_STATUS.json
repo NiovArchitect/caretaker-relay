@@ -1,0 +1,23 @@
+{
+  "attempted_logins": {
+    "p-a-marcus": {
+      "status": 400,
+      "ok": false,
+      "code": "BAD_REQUEST"
+    },
+    "p-b-marcus": {
+      "status": 400,
+      "ok": false,
+      "code": "BAD_REQUEST"
+    }
+  },
+  "foreign_recipient": {
+    "status": 403,
+    "code": "UNKNOWN_RECIPIENT"
+  },
+  "status": "EXTERNAL_BLOCKED",
+  "reason": "Public lab does not seed dual-organization principals (p-a-marcus/p-b-marcus) or recipients (cr-a-evelyn/cr-b-evelyn). Unit matrix 30/30 exists in foundation tests. Foreign IDs return 403 UNKNOWN_RECIPIENT.",
+  "unit_matrix": "tests/unit/care/prn-dual-org-attack-matrix.test.ts PASS 30/30",
+  "pass_public_matrix": false,
+  "terminal": "EXTERNAL_BLOCKED"
+}

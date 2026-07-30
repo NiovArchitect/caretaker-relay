@@ -1,0 +1,218 @@
+{
+  "finished_at": "2026-07-29T08:35:11.345Z",
+  "results": {
+    "attention_seq": [
+      5,
+      4,
+      3,
+      2,
+      1,
+      0
+    ],
+    "attention_5_to_0": "PASS",
+    "escalation_completion": "PASS",
+    "revocation_matrix": "PASS",
+    "distinct_role_principals": 5,
+    "family_caregiver_journey": "PASS",
+    "dsp_journey": "PASS",
+    "multi_recipient_journey": "PASS",
+    "care_recipient_self_journey": "PASS",
+    "clinician_journey": "PASS"
+  },
+  "details": {
+    "escalation": {
+      "enr": 200,
+      "we": 200,
+      "acc": 200,
+      "accOk": true,
+      "comp": 200,
+      "compOk": true,
+      "badge": 0,
+      "hist": [
+        {
+          "id": "work-op9fj6j0-ms5tx50w",
+          "status": "completed"
+        },
+        {
+          "id": "work-y1odlvqt-ms5tx4xy",
+          "status": "completed"
+        }
+      ],
+      "include_terminal": true
+    },
+    "revocation": {
+      "revoke_ok": true,
+      "attempts": [
+        {
+          "label": "answer_read",
+          "status": 403,
+          "code": "REVOKED",
+          "success": false
+        },
+        {
+          "label": "state_read",
+          "status": 403,
+          "code": "REVOKED",
+          "success": false
+        },
+        {
+          "label": "today_read",
+          "status": 403,
+          "code": "REVOKED",
+          "success": false
+        },
+        {
+          "label": "attention_read",
+          "status": 403,
+          "code": "REVOKED",
+          "success": false
+        },
+        {
+          "label": "event_write",
+          "status": 400,
+          "code": "BAD_REQUEST",
+          "success": false
+        },
+        {
+          "label": "medication_write",
+          "status": 400,
+          "code": "BAD_REQUEST",
+          "success": false
+        },
+        {
+          "label": "task_write",
+          "status": 403,
+          "code": "REVOKED",
+          "success": false
+        },
+        {
+          "label": "task_transition",
+          "status": 400,
+          "code": "REVOKED",
+          "success": false
+        },
+        {
+          "label": "task_accept",
+          "status": 400,
+          "code": "REVOKED",
+          "success": false
+        },
+        {
+          "label": "ack",
+          "status": 400,
+          "code": "REVOKED",
+          "success": false
+        },
+        {
+          "label": "schedule_list",
+          "status": 403,
+          "code": "REVOKED",
+          "success": false
+        },
+        {
+          "label": "schedule_write",
+          "status": 404,
+          "success": false
+        },
+        {
+          "label": "handoff_write",
+          "status": 400,
+          "code": "NOT_FOUND",
+          "success": false
+        },
+        {
+          "label": "shift_write",
+          "status": 400,
+          "code": "BAD_REQUEST",
+          "success": false
+        },
+        {
+          "label": "draft_confirm",
+          "status": 400,
+          "code": "REVOKED",
+          "success": false
+        },
+        {
+          "label": "confirm_write",
+          "status": 404,
+          "code": "BUNDLE_NOT_FOUND",
+          "success": false
+        },
+        {
+          "label": "stale_token_state",
+          "status": 403,
+          "code": "REVOKED",
+          "success": false
+        },
+        {
+          "label": "stale_token_event_write",
+          "status": 400,
+          "code": "BAD_REQUEST",
+          "success": false
+        },
+        {
+          "label": "stale_token_answer",
+          "status": 403,
+          "code": "REVOKED",
+          "success": false
+        }
+      ],
+      "total": 19,
+      "successes": 0
+    },
+    "principals": [
+      {
+        "id": "p-sadeil",
+        "role": "family",
+        "ok": true,
+        "display": "Marcus Carter",
+        "roles": [
+          "family_caregiver",
+          "primary"
+        ],
+        "n": 43
+      },
+      {
+        "id": "p-maya",
+        "role": "family_secondary",
+        "ok": true,
+        "display": "Maya Bennett",
+        "roles": [
+          "family_caregiver",
+          "adult_child"
+        ],
+        "n": 5
+      },
+      {
+        "id": "p-walter",
+        "role": "dsp",
+        "ok": true,
+        "display": "Daniel Kim",
+        "roles": [
+          "professional",
+          "paid_caregiver"
+        ],
+        "n": 4
+      },
+      {
+        "id": "p-dr-shah",
+        "role": "clinician",
+        "ok": true,
+        "display": "Dr. Priya Shah",
+        "roles": [
+          "provider",
+          "physician"
+        ],
+        "n": 1
+      },
+      {
+        "id": "p-acct-610e5644824f4be4",
+        "role": "self",
+        "ok": true,
+        "display": "SelfFinal"
+      }
+    ]
+  },
+  "api_sha": "a7d10d7e97c988318872dd61948d026540e9909b",
+  "app_sha": "6c0c15ebc5288660acfb01d8bdc7dceea319c4e0"
+}

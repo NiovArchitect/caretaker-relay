@@ -1,0 +1,10 @@
+{
+  "sequential_answers": 40,
+  "avg_ms": 538,
+  "p95_ms": 820,
+  "wall_ms": 21503,
+  "prn_payload_bytes": 10738,
+  "today_payload_bytes": 406347,
+  "prn_attention_count": 0,
+  "pass": true
+}

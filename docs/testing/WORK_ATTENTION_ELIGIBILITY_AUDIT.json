@@ -1,0 +1,167 @@
+{
+  "work": [
+    {
+      "id": "work-iy0e02hv-ms3fm8x8",
+      "action": "Follow up: Medication amount mismatch — Metformin",
+      "owner": "p-maya",
+      "status": "assigned",
+      "belongs_evelyn": true,
+      "unresolved": true,
+      "marcus_relevant": true,
+      "resolver": "Maya",
+      "due": "when_able",
+      "keep": true,
+      "reason": "eligible"
+    },
+    {
+      "id": "work-7jecw0w2-ms52hakg",
+      "action": "Medication change needs verification: Allegra · reported dose 60mg · reason: all",
+      "owner": null,
+      "status": "available_to_claim",
+      "belongs_evelyn": true,
+      "unresolved": true,
+      "marcus_relevant": true,
+      "resolver": "unassigned_claimable",
+      "due": "when_able",
+      "keep": true,
+      "reason": "eligible"
+    },
+    {
+      "id": "work-314edptt-ms5sfmsh",
+      "action": "Follow up: Needs an owner",
+      "owner": "p-sadeil",
+      "status": "assigned",
+      "belongs_evelyn": true,
+      "unresolved": true,
+      "marcus_relevant": true,
+      "resolver": "Marcus",
+      "due": "when_able",
+      "keep": false,
+      "reason": "low_value_generic_owner"
+    },
+    {
+      "id": "work-542wmiv5-ms3fm7x2",
+      "action": "Follow up: Shift declined — coverage needed",
+      "owner": "p-maya",
+      "status": "assigned",
+      "belongs_evelyn": true,
+      "unresolved": true,
+      "marcus_relevant": true,
+      "resolver": "Maya",
+      "due": "when_able",
+      "keep": true,
+      "reason": "eligible"
+    },
+    {
+      "id": "work-typbr57f-ms3fm9g1",
+      "action": "Follow up: Therapy today",
+      "owner": "p-maya",
+      "status": "assigned",
+      "belongs_evelyn": true,
+      "unresolved": true,
+      "marcus_relevant": true,
+      "resolver": "Maya",
+      "due": "when_able",
+      "keep": true,
+      "reason": "eligible"
+    },
+    {
+      "id": "work-8pg2jfs0-ms3fm8ft",
+      "action": "Follow up: Conflict resolution",
+      "owner": "p-maya",
+      "status": "assigned",
+      "belongs_evelyn": true,
+      "unresolved": true,
+      "marcus_relevant": true,
+      "resolver": "Maya",
+      "due": "when_able",
+      "keep": true,
+      "reason": "eligible"
+    },
+    {
+      "id": "work-q1ai1zix-ms3ekhpo",
+      "action": "Pick up prescription refill",
+      "owner": null,
+      "status": "available_to_claim",
+      "belongs_evelyn": true,
+      "unresolved": true,
+      "marcus_relevant": true,
+      "resolver": "unassigned_claimable",
+      "due": "when_able",
+      "keep": true,
+      "reason": "eligible"
+    },
+    {
+      "id": "work-0pxd0jnd-ms51ki47",
+      "action": "Review who can access care for Evelyn Carter",
+      "owner": null,
+      "status": "available_to_claim",
+      "belongs_evelyn": true,
+      "unresolved": true,
+      "marcus_relevant": true,
+      "resolver": "unassigned_claimable",
+      "due": "when_able",
+      "keep": true,
+      "reason": "eligible"
+    }
+  ],
+  "attention": [
+    {
+      "group_id": "cr-olivia:sem:access_request",
+      "category": "access",
+      "title": "Needs an owner",
+      "marcus_act_or_know": true,
+      "keep": true,
+      "note": "open care signal"
+    },
+    {
+      "group_id": "cr-olivia:sem:allegra",
+      "category": "medication_review",
+      "title": "Needs an owner",
+      "marcus_act_or_know": true,
+      "keep": true,
+      "note": "family primary should know/act"
+    },
+    {
+      "group_id": "cr-olivia:sem:med_correction",
+      "category": "medication_correction",
+      "title": "Shift handoff",
+      "marcus_act_or_know": true,
+      "keep": true,
+      "note": "open care signal"
+    },
+    {
+      "group_id": "cr-olivia:sem:transport",
+      "category": "transport",
+      "title": "Shift handoff",
+      "marcus_act_or_know": true,
+      "keep": true,
+      "note": "open care signal"
+    },
+    {
+      "group_id": "cr-olivia:sem:handoff",
+      "category": "handoff",
+      "title": "Care handoff ready for you",
+      "marcus_act_or_know": true,
+      "keep": true,
+      "note": "incoming handoff awareness"
+    },
+    {
+      "group_id": "cr-olivia:sem:access",
+      "category": "access",
+      "title": "No response: Needs an owner",
+      "marcus_act_or_know": true,
+      "keep": true,
+      "note": "open care signal"
+    },
+    {
+      "group_id": "cr-olivia:sem:metformin",
+      "category": "medication_review",
+      "title": "Conflict resolution",
+      "marcus_act_or_know": true,
+      "keep": true,
+      "note": "family primary should know/act"
+    }
+  ],
+  "badge_should_equal_groups": true
+}

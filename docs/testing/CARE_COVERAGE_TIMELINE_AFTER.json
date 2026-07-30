@@ -1,0 +1,171 @@
+{
+  "roles": {
+    "family": {
+      "login": false,
+      "state": 502,
+      "timeline": 502
+    },
+    "dsp": {
+      "login": false,
+      "state": 502,
+      "timeline": 401
+    },
+    "clinician": {
+      "login": false,
+      "state": 401,
+      "timeline": 502
+    },
+    "family2": {
+      "login": false,
+      "state": 401,
+      "timeline": 401
+    },
+    "self": {
+      "register": 502
+    }
+  },
+  "timeline": {
+    "status": 200,
+    "ok": true,
+    "tl": {
+      "tenant_id": "hh-olivia",
+      "care_space_id": "cr-olivia",
+      "recipient_id": "cr-olivia",
+      "recipient_timezone": "America/Los_Angeles",
+      "principal_id": "p-sadeil",
+      "previous": {
+        "coverage_id": "shift-2da3mvd3-ms3ztapl",
+        "shift_id": "shift-2da3mvd3-ms3ztapl",
+        "caregiver_id": "p-walter",
+        "caregiver_name": "Daniel Kim",
+        "role": "professional_caregiver",
+        "start": "2026-07-28T01:39:09.552Z",
+        "end": "2026-07-28T06:44:09.552Z",
+        "status": "completed",
+        "coverage_type": "professional_assignment",
+        "handoff_id": "ho-yyy11mze-ms3z2nm5",
+        "handoff_status": "seen"
+      },
+      "current": {
+        "coverage_id": "ongoing-cr-olivia-p-sadeil",
+        "caregiver_id": "p-sadeil",
+        "caregiver_name": "Marcus Carter",
+        "role": "Primary family caregiver",
+        "start": null,
+        "end": null,
+        "status": "active",
+        "coverage_type": "ongoing_primary_family_coverage",
+        "is_ongoing_primary_coverage": true
+      },
+      "next": {
+        "coverage_id": "cover-maya-next",
+        "caregiver_id": "p-maya",
+        "caregiver_name": "Maya Bennett",
+        "role": "Family / friend caregiver",
+        "start": null,
+        "end": null,
+        "status": "planned",
+        "coverage_type": "temporary_family_coverage"
+      },
+      "collaboration": {
+        "previous_contact_option": "Ask Daniel Kim about the prior coverage",
+        "next_contact_option": "Notify Maya Bennett before coverage starts",
+        "current_outgoing_handoff_id": "ho-fd9055ew-ms5qypuo",
+        "current_outgoing_handoff_status": "ready",
+        "next_acknowledgment_state": "pending",
+        "next_handoff_deadline": "2026-07-29T10:53:28.623Z"
+      },
+      "authority": "server",
+      "built_at": "2026-07-29T10:23:29.948Z"
+    }
+  },
+  "handoffs": {
+    "total": 55,
+    "primary": 2,
+    "incoming": 2,
+    "sent": 35,
+    "history": 6,
+    "withLifecycle": 55,
+    "ownInIncoming": 0
+  },
+  "appts": {
+    "status": 200,
+    "active": 2,
+    "history": 37,
+    "activeTitles": [
+      "Physical therapy",
+      "Care appointment (caregiver-requested)"
+    ]
+  },
+  "work": {
+    "n": 8,
+    "items": [
+      {
+        "action": "Follow up: Medication amount mismatch — Metformin",
+        "owner": "p-maya",
+        "status": "assigned"
+      },
+      {
+        "action": "Medication change needs verification: Allegra · re",
+        "owner": null,
+        "status": "available_to_claim"
+      },
+      {
+        "action": "Follow up: Needs an owner",
+        "owner": "p-sadeil",
+        "status": "assigned"
+      },
+      {
+        "action": "Follow up: Shift declined — coverage needed",
+        "owner": "p-maya",
+        "status": "assigned"
+      },
+      {
+        "action": "Follow up: Therapy today",
+        "owner": "p-maya",
+        "status": "assigned"
+      },
+      {
+        "action": "Follow up: Conflict resolution",
+        "owner": "p-maya",
+        "status": "assigned"
+      },
+      {
+        "action": "Pick up prescription refill",
+        "owner": null,
+        "status": "available_to_claim"
+      },
+      {
+        "action": "Review who can access care for Evelyn Carter",
+        "owner": null,
+        "status": "available_to_claim"
+      }
+    ]
+  },
+  "attention": {
+    "badge": 7,
+    "groups": 7,
+    "exact": true
+  },
+  "answers": {
+    "previous": {
+      "answer": "",
+      "teamWall": false
+    },
+    "next": {
+      "intent": "CARE_COVERAGE",
+      "answer": "Helping now: Marcus Carter · Primary family caregiver\nUntil about 4:00 PM\n\nNext: Maya Bennett\nExpected around 4:30 PM\n\nI can prepare a handoff for the next helper before they arrive.\n\nWhat the next caregiver should know (latest handoff):\n\nStill open:\n• Medication administration was corrected: not ad"
+    }
+  },
+  "browsers": {},
+  "identity": {
+    "rawIdHitsInBuckets": 155,
+    "sampleLabels": [
+      "Maya Bennett Marcus Carter",
+      "Maya Bennett Marcus Carter",
+      "Maya Bennett Marcus Carter",
+      "Marcus Carter Maya Bennett"
+    ]
+  },
+  "app_bundle": "assets/index-DM_ZNZ0M.js"
+}

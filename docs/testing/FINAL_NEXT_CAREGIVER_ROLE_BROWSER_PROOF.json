@@ -1,0 +1,95 @@
+{
+  "questions": {
+    "Who works after me?": {
+      "intent": "CARE_COVERAGE",
+      "seedProse": false,
+      "answer": "Helping now: Marcus Carter · Primary family caregiver | Until about 4:00 PM |  | Next: Maya Bennett | Expected around 4:30 PM |  | I can prepare a handoff for the next helper before they arrive. |  | What the next caregiver should know ",
+      "projections": [
+        "CONTINUITY"
+      ]
+    },
+    "Who is taking over?": {
+      "seedProse": false,
+      "answer": ""
+    },
+    "When does the next caregiver arrive?": {
+      "seedProse": false,
+      "answer": ""
+    },
+    "Who should receive my handoff?": {
+      "intent": "HANDOFF_PREP",
+      "seedProse": false,
+      "answer": "What Maya Bennett needs to know: |  | • Medication administration was corrected: not administered. | • Medication marked as given (as scheduled) for Evelyn Carter",
+      "projections": [
+        "ACTIVE_HANDOFF",
+        "RECENT_CHANGES",
+        "OPEN_UNCERTAINTIES"
+      ]
+    },
+    "Is anyone covering tonight?": {
+      "seedProse": false,
+      "answer": ""
+    },
+    "Has the next caregiver accepted?": {
+      "intent": "CARE_COVERAGE",
+      "seedProse": false,
+      "answer": "Helping now: Marcus Carter · Primary family caregiver | Until about 4:00 PM |  | Next: Maya Bennett | Expected around 4:30 PM |  | I can prepare a handoff for the next helper before they arrive. |  | What the next caregiver should know ",
+      "projections": [
+        "CONTINUITY"
+      ]
+    },
+    "What caretaker helped Evelyn before my shift?": {
+      "seedProse": false,
+      "answer": ""
+    }
+  },
+  "roles": {
+    "clinician": {
+      "login": true,
+      "type": "clinical_oversight",
+      "previous": "Daniel Kim"
+    },
+    "dsp": {
+      "login": true,
+      "type": "temporary_family_coverage",
+      "previous": "Daniel Kim"
+    },
+    "family": {
+      "login": true,
+      "name": "Marcus Carter"
+    },
+    "maya": {
+      "login": true,
+      "type": "ongoing_primary_family_coverage",
+      "previous": "Daniel Kim"
+    }
+  },
+  "work": {
+    "n": 0,
+    "actions": []
+  },
+  "att": {
+    "groups": 0,
+    "exact": false
+  },
+  "appts": {
+    "active": 0,
+    "history": 0
+  },
+  "handoffs": {
+    "primary": 0,
+    "lifecycle": 0
+  },
+  "seedProse": 0,
+  "multi": {
+    "rA": "cr-boapncvv-ms5ycedu",
+    "ansA": 200,
+    "ansB": 401,
+    "cross": false
+  },
+  "browser": {
+    "title": "Caretaker Relay",
+    "root": 1,
+    "inputs": 0
+  }
+}

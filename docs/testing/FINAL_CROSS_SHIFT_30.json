@@ -1,0 +1,157 @@
+{
+  "total": 30,
+  "passed": 30,
+  "pass": true,
+  "journeys": [
+    {
+      "i": 0,
+      "ok": true,
+      "open": true
+    },
+    {
+      "i": 1,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 2,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 3,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 4,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 5,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 6,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 7,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 8,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 9,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 10,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 11,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 12,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 13,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 14,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 15,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 16,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 17,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 18,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 19,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 20,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 21,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 22,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 23,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 24,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 25,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 26,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 27,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 28,
+      "ok": true,
+      "open": false
+    },
+    {
+      "i": 29,
+      "ok": true,
+      "open": false
+    }
+  ]
+}

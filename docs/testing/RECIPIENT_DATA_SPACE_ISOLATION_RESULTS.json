@@ -1,0 +1,16 @@
+{
+  "recipient_id": "cr-olivia",
+  "principal_id": "p-sadeil",
+  "work_open": 8,
+  "probe_in_open_work": 0,
+  "max_duplicate_action": 1,
+  "handoffs_deduped": 55,
+  "handoffs_incoming": 2,
+  "own_sent_in_incoming": 0,
+  "prior_shift_answer_intent": "PREVIOUS_SHIFT",
+  "care_team_wall": false,
+  "cross_recipient_visible": 0,
+  "cross_tenant_visible": 0,
+  "app_sha": "ab1c871eeca5e46550a42141622bec1dcb8eff02",
+  "api_sha": "750f3823941a344a8f2b9aaf1e66de3add570552"
+}
