@@ -1,0 +1,57 @@
+{
+  "asset": "index-DciNDcpz.js",
+  "passed": 10,
+  "total": 10,
+  "findings": [
+    {
+      "id": "no_raw_today",
+      "ok": true,
+      "detail": "Today body raw scan"
+    },
+    {
+      "id": "today_followup_count_le_3",
+      "ok": true,
+      "detail": "count=0"
+    },
+    {
+      "id": "as_needed_heading",
+      "ok": true,
+      "detail": "testid"
+    },
+    {
+      "id": "scheduled_separated",
+      "ok": true,
+      "detail": "label"
+    },
+    {
+      "id": "no_raw_care",
+      "ok": true,
+      "detail": "Care raw scan"
+    },
+    {
+      "id": "order_cards_present",
+      "ok": true,
+      "detail": "orders=2"
+    },
+    {
+      "id": "history_or_empty_ok",
+      "ok": true,
+      "detail": "history=2"
+    },
+    {
+      "id": "single_as_needed_section",
+      "ok": true,
+      "detail": "headings=1"
+    },
+    {
+      "id": "mobile_no_raw",
+      "ok": true,
+      "detail": "mobile raw"
+    },
+    {
+      "id": "zoom_shell_visible",
+      "ok": true,
+      "detail": "shell at zoom"
+    }
+  ]
+}
