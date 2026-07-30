@@ -1,0 +1,106 @@
+{
+  "at": "2026-07-30T23:52:35.104Z",
+  "expected_api_sha": "c511f12",
+  "public_api": "https://caretaker-relay-care-api.onrender.com",
+  "app": "https://care.niovlabs.com",
+  "checks": {
+    "health": {
+      "http": 200,
+      "ok": true,
+      "service": "caretaker-relay-care-api",
+      "config_ok": true,
+      "pass": true
+    },
+    "today_payload": {
+      "total_bytes_uncompressed": 57566,
+      "sizes": {
+        "events": 23962,
+        "tasks": 12756,
+        "appointments": 8330,
+        "observations": 7833,
+        "open_safety_reviews": 2435,
+        "latest_handoff": 1290,
+        "last_updated_at": 26,
+        "prn_attention": 2,
+        "prn_needs": 2,
+        "prn": 781
+      },
+      "events_count": 12,
+      "pass_size": true,
+      "semantic": {
+        "has_prn_projection": true,
+        "prn_attention_present": true,
+        "prn_needs_present": true,
+        "latest_handoff_present": true,
+        "appointments_count": 20,
+        "open_safety_reviews": 8,
+        "overdue_count": 0,
+        "due_count": 0,
+        "overdue_omitted": false,
+        "events_count": 12,
+        "history_only_unbounded": false
+      },
+      "pass_semantic_sample": true,
+      "note": "Size target <120KB; semantic sample checks actionable fields still present"
+    },
+    "clarification_lifecycle": {
+      "open_total": 6,
+      "unauthorized_open": 6,
+      "unauthorized_meds": [
+        "Benadryl",
+        "Benadryl",
+        "Benadryl",
+        "Benadryl",
+        "Benadryl",
+        "Benadryl"
+      ],
+      "open_lifecycles": {
+        "needs_clarification": 6
+      },
+      "completed_recent": 6,
+      "archived_lineage_visible": 0,
+      "due": 0,
+      "overdue": 0,
+      "aged_low_risk_in_open": 6,
+      "pass_pollution": false,
+      "history_retained_sample": [],
+      "pass_history_retained": true,
+      "safety_relevant_archive": "NEEDS_VALIDATION — age-only rule in c511f12; no adverse-signal fixture this run",
+      "note": "Required: AGED LOW-RISK OPEN=0; SAFETY SILENT ARCHIVE=0; HISTORY NOT LOST"
+    },
+    "deploy_parity": {
+      "expected_source_sha": "c511f12",
+      "public_behavior_matches_repair": false,
+      "sha_endpoint": "not_exposed",
+      "note": "Confirm on Render dashboard that live commit is exactly c511f12; behavior match is necessary but not sufficient alone",
+      "pass": false
+    },
+    "notification_action_duplication": {
+      "resolve_buttons": 0,
+      "mark_seen_buttons": 0,
+      "pass": true,
+      "defect": null,
+      "note": "c511f12 does not fix this; expect FAIL until client/action model change"
+    }
+  },
+  "score": {
+    "PUBLIC_HEALTH": "PASS",
+    "TODAY_PAYLOAD_SIZE": "PASS",
+    "TODAY_SEMANTIC_SAMPLE": "PASS",
+    "CLARIFICATION_POLLUTION": "FAIL",
+    "SAFETY_RELEVANT_ARCHIVE": "NEEDS_VALIDATION",
+    "DEPLOY_BEHAVIOR_MATCH": "FAIL",
+    "DEPLOY_SHA_PARITY": "PENDING_RENDER_CONFIRM",
+    "NOTIFICATION_ACTION_DUPLICATION": "PASS",
+    "PRODUCT_FREEZE": "NOT_RESTORED"
+  },
+  "required_post_deploy": {
+    "AGED_LOW_RISK_CLARIFICATIONS_IN_OPEN_EPISODES": 6,
+    "SAFETY_RELEVANT_UNRESOLVED_REPORTS_SILENTLY_ARCHIVED": "NEEDS_VALIDATION",
+    "DUPLICATE_CLARIFICATIONS_ACTIVE": "NOT_MEASURED_THIS_SCRIPT",
+    "ARCHIVED_ITEMS_LOST_FROM_HISTORY": 0,
+    "TODAY_PAYLOAD_SIZE_BYTES": 57566,
+    "CURRENT_ACTIONABLE_ITEMS_OMITTED": 0,
+    "HISTORY_ONLY_EVENTS_IN_PRIMARY_PAYLOAD": 0
+  }
+}

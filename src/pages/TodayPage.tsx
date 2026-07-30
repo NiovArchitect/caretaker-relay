@@ -995,6 +995,11 @@ export function TodayPage({
                     {String(n.actor_display_name ?? "Care team")}
                   </p>
                   <div className="btn-row">
+                    {/*
+                      Delivery rows: Mark seen acknowledges THIS viewer's
+                      notification only. Resolve belongs on the canonical care
+                      issue / primary operational surface — not every delivery.
+                    */}
                     <button
                       type="button"
                       className="btn-success btn-with-icon"
@@ -1024,32 +1029,6 @@ export function TodayPage({
                         ✓
                       </span>
                       Mark seen
-                    </button>
-                    <button
-                      type="button"
-                      className="secondary-btn"
-                      data-testid="notification-resolve"
-                      onClick={() => {
-                        void notificationAction(String(n.id), "resolve").then(
-                          () => {
-                            void fetchServerNotifications().then((r) => {
-                              if (r.ok) {
-                                setInbox(
-                                  r.notifications.filter(
-                                    (x) =>
-                                      !x.resolved_at &&
-                                      !x.seen_at &&
-                                      String(x.care_recipient_id ?? "") ===
-                                        space.careRecipientId,
-                                  ),
-                                );
-                              }
-                            });
-                          },
-                        );
-                      }}
-                    >
-                      Resolve
                     </button>
                   </div>
                 </article>

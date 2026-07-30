@@ -1,0 +1,162 @@
+{
+  "at": "2026-07-30T23:44:53.827Z",
+  "deploy": {
+    "service": "srv-d9h0ku3bc2fs739eo660",
+    "live_deploy_id": "dep-d9lu2pv10e5c73ecs2sg",
+    "commit": "c511f12fccab31470acf2834205b01017389b714",
+    "trigger": "api",
+    "finishedAt": "2026-07-30T23:43:11.893982Z",
+    "source_sha": "c511f12fccab31470acf2834205b01017389b714",
+    "parity": "YES"
+  },
+  "health": {
+    "http": 200,
+    "ok": true,
+    "config_ok": true
+  },
+  "today": {
+    "uncompressed_bytes": 57634,
+    "gzip_bytes": 7547,
+    "prior_uncompressed": 406347,
+    "reduction_pct": 85.8,
+    "counts": {
+      "events": 12,
+      "tasks": 20,
+      "observations": 12,
+      "appointments": 20,
+      "open_safety_reviews": 8
+    },
+    "bounds_ok": true,
+    "semantic_presence": {
+      "latest_handoff": true,
+      "appointments": 20,
+      "open_safety_reviews": 8,
+      "tasks": 20,
+      "events": 12,
+      "observations": 12,
+      "prn_orders": 4,
+      "prn_due": 0,
+      "prn_overdue": 0,
+      "events_bounded": true,
+      "tasks_bounded": true,
+      "obs_bounded": true,
+      "appt_bounded": true,
+      "safety_bounded": true
+    }
+  },
+  "clarification": {
+    "open_total": 6,
+    "fresh_unauth_open": 6,
+    "aged_low_risk_open": 0,
+    "open_detail": [
+      {
+        "id": "prn-ep-e215pwf6-ms839wi9",
+        "medication": "Benadryl",
+        "lifecycle": "needs_clarification",
+        "unauthorizedReport": true,
+        "age_hours": 1.21,
+        "classification": "FRESH_UNAUTHORIZED_CLARIFICATION"
+      },
+      {
+        "id": "prn-ep-jr5g7upu-ms839v7p",
+        "medication": "Benadryl",
+        "lifecycle": "needs_clarification",
+        "unauthorizedReport": true,
+        "age_hours": 1.21,
+        "classification": "FRESH_UNAUTHORIZED_CLARIFICATION"
+      },
+      {
+        "id": "prn-ep-jlhn7an3-ms75xfih",
+        "medication": "Benadryl",
+        "lifecycle": "needs_clarification",
+        "unauthorizedReport": true,
+        "age_hours": 16.77,
+        "classification": "FRESH_UNAUTHORIZED_CLARIFICATION"
+      },
+      {
+        "id": "prn-ep-s2pecdxl-ms75t5ql",
+        "medication": "Benadryl",
+        "lifecycle": "needs_clarification",
+        "unauthorizedReport": true,
+        "age_hours": 16.82,
+        "classification": "FRESH_UNAUTHORIZED_CLARIFICATION"
+      },
+      {
+        "id": "prn-ep-u1mhw8c4-ms74t5fl",
+        "medication": "Benadryl",
+        "lifecycle": "needs_clarification",
+        "unauthorizedReport": true,
+        "age_hours": 17.29,
+        "classification": "FRESH_UNAUTHORIZED_CLARIFICATION"
+      },
+      {
+        "id": "prn-ep-swkb2bdm-ms73xdaf",
+        "medication": "Benadryl",
+        "lifecycle": "needs_clarification",
+        "unauthorizedReport": true,
+        "age_hours": 17.7,
+        "classification": "FRESH_UNAUTHORIZED_CLARIFICATION"
+      }
+    ],
+    "med_counts": {
+      "Benadryl": 6
+    },
+    "duplicate_meds_active": [
+      [
+        "Benadryl",
+        6
+      ]
+    ],
+    "completed_recent": 6,
+    "archived_with_lifecycle_note": 0,
+    "aged_low_risk_open_pass": true,
+    "zero_unauth_open_pass": false,
+    "duplicate_active_pass": false
+  },
+  "relay_sample": [
+    {
+      "q": "What matters today?",
+      "http": 404,
+      "ok": true,
+      "snippet": "Route POST:/api/v1/care/recipients/cr-olivia/answer not found",
+      "raw_leak": false
+    },
+    {
+      "q": "Any PRN follow-up due?",
+      "http": 404,
+      "ok": true,
+      "snippet": "Route POST:/api/v1/care/recipients/cr-olivia/answer not found",
+      "raw_leak": false
+    },
+    {
+      "q": "Who has the next shift?",
+      "http": 404,
+      "ok": true,
+      "snippet": "Route POST:/api/v1/care/recipients/cr-olivia/answer not found",
+      "raw_leak": false
+    },
+    {
+      "q": "What is her next appointment?",
+      "http": 404,
+      "ok": true,
+      "snippet": "Route POST:/api/v1/care/recipients/cr-olivia/answer not found",
+      "raw_leak": false
+    }
+  ],
+  "safety_relevant_silent_archives": "NEEDS_VALIDATION — age-only classifier in c511f12; no adverse/admin fixtures exercised",
+  "architecture_changed": false,
+  "score": {
+    "PUBLIC_API_HEALTH": "PASS",
+    "API_SOURCE_DEPLOY": "c511f12 / c511f12",
+    "DEPLOYMENT_PARITY": "YES",
+    "TODAY_SIZE": "PASS",
+    "TODAY_BOUNDS": "PASS",
+    "TODAY_SEMANTIC_SAMPLE": "PASS",
+    "AGED_LOW_RISK_OPEN": "PASS",
+    "FRESH_UNAUTH_OPEN_COUNT": 6,
+    "DUPLICATE_ACTIVE_CLARIFICATIONS": "FAIL",
+    "SAFETY_SILENT_ARCHIVE": "NEEDS_VALIDATION",
+    "NOTIFICATION_ACTION_UI": "INCONCLUSIVE_LOGIN_GATE",
+    "PRODUCT_FREEZE": "NOT_RESTORED"
+  }
+}
