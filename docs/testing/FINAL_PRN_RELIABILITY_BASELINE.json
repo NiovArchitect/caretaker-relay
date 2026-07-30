@@ -1,0 +1,24 @@
+{
+  "recorded_at": "2026-07-30T07:05:00Z",
+  "app_url": "https://care.niovlabs.com",
+  "api_url": "https://caretaker-relay-care-api.onrender.com",
+  "app_repo_head": "d26d4dcb0e6bc07dbb02c9737124964611c8b9d8",
+  "app_product_deploy_sha": "c5dea925de33da101bc81a38ca861b8611e01edf",
+  "app_bundle": "index-DciNDcpz.js",
+  "api_repo_head": "505d432416a41ef6f971ae984dbde206cd2bc8ea",
+  "api_product_deploy_sha": "48ad56bf45bea90668119305f41e9173c54c5d5d",
+  "store_backend": "prisma",
+  "deployment_mode": "regulated_restricted",
+  "lab_login_enabled": false,
+  "background_workers": 0,
+  "product_code_modified_before_baseline": false,
+  "open_gates": [
+    "J29_stale_order_confirm",
+    "J30_offline_idempotency",
+    "overdue_timed_soak",
+    "multi_tenant_attack_matrix",
+    "full_non_prn_regression",
+    "founder_desktop",
+    "founder_phone"
+  ]
+}
