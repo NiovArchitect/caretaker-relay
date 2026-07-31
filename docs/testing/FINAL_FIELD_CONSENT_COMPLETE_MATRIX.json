@@ -1,0 +1,124 @@
+{
+  "at": "2026-07-31T05:46:40.717Z",
+  "roles": [
+    {
+      "role": "Marcus primary",
+      "api": {
+        "status": 200,
+        "redacted": [],
+        "has_profile": true,
+        "allergies": true
+      },
+      "ui_strip": true
+    },
+    {
+      "role": "Maya family",
+      "api": {
+        "status": 200,
+        "redacted": [
+          "dateOfBirth",
+          "confirmedConditions",
+          "healthConcerns",
+          "primaryProviderName",
+          "emergencyContacts",
+          "safetyConsiderations"
+        ],
+        "has_profile": true,
+        "allergies": true
+      },
+      "ui_strip": true
+    },
+    {
+      "role": "Daniel DSP",
+      "api": {
+        "status": 200,
+        "redacted": [
+          "dateOfBirth",
+          "confirmedConditions",
+          "healthConcerns",
+          "primaryProviderName",
+          "emergencyContacts",
+          "safetyConsiderations"
+        ],
+        "has_profile": true,
+        "allergies": true
+      },
+      "ui_strip": true
+    },
+    {
+      "role": "Dr Shah",
+      "api": {
+        "status": 200,
+        "redacted": [
+          "dateOfBirth",
+          "confirmedConditions",
+          "healthConcerns",
+          "primaryProviderName",
+          "emergencyContacts",
+          "safetyConsiderations"
+        ],
+        "has_profile": true,
+        "allergies": true
+      },
+      "ui_strip": true
+    },
+    {
+      "role": "Coordinator",
+      "api": {
+        "status": 200,
+        "redacted": [
+          "dateOfBirth",
+          "confirmedConditions",
+          "healthConcerns",
+          "primaryProviderName",
+          "emergencyContacts",
+          "safetyConsiderations"
+        ],
+        "has_profile": true,
+        "allergies": true
+      },
+      "ui_strip": false
+    },
+    {
+      "role": "Temp active",
+      "api": {
+        "status": 200,
+        "redacted": [
+          "dateOfBirth",
+          "confirmedConditions",
+          "healthConcerns",
+          "primaryProviderName",
+          "emergencyContacts",
+          "safetyConsiderations"
+        ],
+        "has_profile": true,
+        "allergies": true
+      },
+      "ui_strip": false
+    },
+    {
+      "role": "Temp revoked",
+      "api": {
+        "status": 403,
+        "code": "REVOKED",
+        "redacted": [],
+        "has_profile": false,
+        "allergies": false
+      },
+      "ui_strip": false
+    },
+    {
+      "role": "Unauthorized",
+      "api": {
+        "status": 403,
+        "code": "NO_RELATIONSHIP",
+        "redacted": [],
+        "has_profile": false,
+        "allergies": false
+      },
+      "ui_strip": false
+    }
+  ],
+  "unauthorized": 0,
+  "status": "PASS_EXECUTED_SET"
+}

@@ -1,0 +1,25 @@
+{
+  "at": "2026-07-31T05:46:40.717Z",
+  "controller": "Agent Zero",
+  "result": "ROLE_FIXTURES_EXPANDED_BROWSER_PARTIAL_INTERNAL_GATES_REMAIN",
+  "summary": {
+    "roles_executed": 8,
+    "strips": 4,
+    "hp": 4,
+    "unauthorized_disclosures": 0,
+    "clinical_30": "30/30",
+    "shift_plan": "PASS",
+    "refill_api": {
+      "status": 200,
+      "ok": true,
+      "message": "You accepted this task. It is not marked complete.",
+      "work_status": "accepted",
+      "raw_json_error": false
+    },
+    "product_gaps": [
+      "care_recipient_self_bound_to_cr_olivia"
+    ]
+  },
+  "product_freeze": "NOT_RESTORED",
+  "founder_only": false
+}

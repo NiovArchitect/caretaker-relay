@@ -76,7 +76,49 @@ export function listAuthorizedCareSpaces(
     return [];
   }
 
-  // Durable registered accounts (p-acct-*) never receive client seed memberships
+  // Server-authorized memberships from login/session (invited registered accounts)
+  try {
+    const raw = sessionStorage.getItem("cr_care_session_v1");
+    if (raw) {
+      const parsed = JSON.parse(raw) as {
+        memberships?: Array<{
+          careRecipientId?: string;
+          care_recipient_id?: string;
+          displayName?: string;
+          display_name?: string;
+          roleLabel?: string;
+          role_label?: string;
+          status?: string;
+        }>;
+        identity?: { carePersonId?: string };
+      };
+      const mem = (parsed.memberships || []).filter(
+        (m) => !m.status || m.status === "active",
+      );
+      if (mem.length > 0) {
+        return mem.map((m) => {
+          const rid = m.careRecipientId || m.care_recipient_id || "";
+          const known = CARE_SPACES.find((s) => s.careRecipientId === rid);
+          return (
+            known || {
+              careRecipientId: rid,
+              displayName:
+                m.displayName || m.display_name || "Care recipient",
+              preferredName:
+                m.displayName || m.display_name || "Care recipient",
+              relationshipHint:
+                m.roleLabel || m.role_label || "Authorized care access",
+              depth: "full" as const,
+            }
+          );
+        }).filter((s) => s.careRecipientId && s.careRecipientId !== "cr-none");
+      }
+    }
+  } catch {
+    /* ignore */
+  }
+
+  // Durable registered accounts without membership payload: zero seed invent
   if (id.startsWith("p-acct-")) {
     return [];
   }

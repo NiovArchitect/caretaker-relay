@@ -287,11 +287,19 @@ function roleLabelFromRoles(roles: string[]): string {
   return "Caregiver";
 }
 
-function persistSession(token: string, identity: SessionIdentity) {
+function persistSession(
+  token: string,
+  identity: SessionIdentity,
+  memberships?: Array<Record<string, unknown>>,
+) {
   try {
     sessionStorage.setItem(
       SESSION_KEY,
-      JSON.stringify({ token, identity }),
+      JSON.stringify({
+        token,
+        identity,
+        memberships: memberships ?? undefined,
+      }),
     );
   } catch {
     /* ignore */
@@ -554,7 +562,26 @@ export async function loginAsPrincipal(
     identity.roleLabel = roleLabelFromRoles(roles);
   }
   sessionIdentity = identity;
-  persistSession(httpToken, identity);
+  const memberships = (
+    res.data as { memberships?: Array<Record<string, unknown>> }
+  ).memberships;
+  persistSession(httpToken, identity, memberships);
+  // Align active recipient with first server membership when present
+  if (Array.isArray(memberships) && memberships.length > 0) {
+    const rid = String(
+      memberships[0]?.careRecipientId ||
+        memberships[0]?.care_recipient_id ||
+        "",
+    );
+    if (rid) {
+      activeCareRecipientId = rid;
+      try {
+        sessionStorage.setItem("cr.activeCareRecipientId", rid);
+      } catch {
+        /* ignore */
+      }
+    }
+  }
   return { ok: true, session: identity };
 }
 

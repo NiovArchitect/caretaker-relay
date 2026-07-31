@@ -1,0 +1,71 @@
+{
+  "at": "2026-07-31T05:46:49.398Z",
+  "recipient": "cr-olivia",
+  "creation_method": "POST /auth/register + invitations + accept + revoke",
+  "roles": {
+    "primary_family": {
+      "care_person_id": "p-sadeil",
+      "password": "sadeil-lab-password",
+      "auth": "lab_principal",
+      "status": "ACTIVE"
+    },
+    "family_friend": {
+      "care_person_id": "p-maya",
+      "password": "maya-lab-password",
+      "auth": "lab_principal",
+      "status": "ACTIVE_OR_EXPIRED_SEED"
+    },
+    "professional_dsp": {
+      "care_person_id": "p-walter",
+      "password": "walter-lab-password",
+      "auth": "lab_principal",
+      "status": "ACTIVE_OR_EXPIRED_SEED"
+    },
+    "clinician": {
+      "care_person_id": "p-dr-shah",
+      "password": "drshah-lab-password",
+      "auth": "lab_principal",
+      "status": "ACTIVE"
+    },
+    "coordinator": {
+      "care_person_id": "p-acct-2c4857e407014e43",
+      "email": "coord.complete.801551@caretaker-relay.test",
+      "password": "Coord-Lab-Pass-1!",
+      "auth": "register+invite+accept",
+      "status": "ACTIVE"
+    },
+    "temporary_active": {
+      "care_person_id": "p-acct-5bbc17d80ed848a2",
+      "email": "tempactive.complete.801551@caretaker-relay.test",
+      "password": "Temp-Active-Pass-1!",
+      "auth": "register+invite+accept",
+      "status": "ACTIVE"
+    },
+    "temporary_revoked": {
+      "care_person_id": "p-acct-b2a2101a680b4edb",
+      "email": "temp.complete.801551@caretaker-relay.test",
+      "password": "Temp-Lab-Pass-1!",
+      "auth": "register+invite+accept+revoke",
+      "status": "REVOKED"
+    },
+    "no_relationship": {
+      "care_person_id": "p-unauthorized",
+      "password": "unauth-lab-password",
+      "auth": "lab_principal",
+      "status": "NO_RELATIONSHIP"
+    },
+    "care_recipient_self": {
+      "care_person_id": "p-acct-0b81d4fe8d6c421b",
+      "email": "evelyn.self.complete.801551@caretaker-relay.test",
+      "password": "Evelyn-Self-Pass-1!",
+      "auth": "register_only_pending_access",
+      "status": "PRODUCT_GAP",
+      "note": "Self account created with claim:self but no product path binds it as the care-recipient principal for cr-olivia without additional set-up-care ownership transfer. Classified PRODUCT_GAP for full self-access matrix."
+    }
+  },
+  "required_count": 8,
+  "available_executable": 7,
+  "product_gaps": [
+    "care_recipient_self_bound_to_cr_olivia"
+  ]
+}

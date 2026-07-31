@@ -1,0 +1,10 @@
+{
+  "at": "2026-07-31T05:46:40.717Z",
+  "api": {
+    "status": 200,
+    "ok": true,
+    "message": "You accepted this task. It is not marked complete.",
+    "work_status": "accepted",
+    "raw_json_error": false
+  }
+}

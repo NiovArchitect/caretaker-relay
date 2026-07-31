@@ -99,6 +99,7 @@ export async function careLogin(
     auth_mode?: string;
     entity_id?: string;
     authorized_recipients?: number;
+    memberships?: Array<Record<string, unknown>>;
   }>("/api/v1/care/auth/login", {
     method: "POST",
     body: { care_person_id: carePersonId, password },

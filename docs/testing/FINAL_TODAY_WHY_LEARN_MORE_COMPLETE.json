@@ -1,0 +1,46 @@
+{
+  "at": "2026-07-31T05:46:40.717Z",
+  "roles": [
+    {
+      "role": "Marcus primary",
+      "why": true,
+      "learn": true,
+      "hp": true
+    },
+    {
+      "role": "Maya family",
+      "why": true,
+      "learn": true,
+      "hp": true
+    },
+    {
+      "role": "Daniel DSP",
+      "why": true,
+      "learn": true,
+      "hp": true
+    },
+    {
+      "role": "Dr Shah",
+      "why": true,
+      "learn": true,
+      "hp": true
+    },
+    {
+      "role": "Coordinator",
+      "why": false
+    },
+    {
+      "role": "Temp active",
+      "why": false
+    },
+    {
+      "role": "Temp revoked",
+      "why": false
+    },
+    {
+      "role": "Unauthorized",
+      "why": false
+    }
+  ],
+  "status": "PARTIAL_PASS"
+}

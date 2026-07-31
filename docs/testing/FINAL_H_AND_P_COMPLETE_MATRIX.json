@@ -1,0 +1,90 @@
+{
+  "at": "2026-07-31T05:46:40.717Z",
+  "roles": [
+    {
+      "role": "Marcus primary",
+      "hp": true,
+      "label": "Hide · Health & Care Details",
+      "login": {
+        "shell": true,
+        "authGate": false,
+        "loginStill": false,
+        "surface": "app-shell"
+      }
+    },
+    {
+      "role": "Maya family",
+      "hp": true,
+      "label": "Hide · Health & Care Details",
+      "login": {
+        "shell": true,
+        "authGate": false,
+        "loginStill": false,
+        "surface": "app-shell"
+      }
+    },
+    {
+      "role": "Daniel DSP",
+      "hp": true,
+      "label": "Hide · Health & Care Details",
+      "login": {
+        "shell": true,
+        "authGate": false,
+        "loginStill": false,
+        "surface": "app-shell"
+      }
+    },
+    {
+      "role": "Dr Shah",
+      "hp": true,
+      "label": "Hide · Health & Care Details",
+      "login": {
+        "shell": true,
+        "authGate": false,
+        "loginStill": false,
+        "surface": "app-shell"
+      }
+    },
+    {
+      "role": "Coordinator",
+      "hp": false,
+      "login": {
+        "shell": true,
+        "authGate": true,
+        "loginStill": false,
+        "surface": "app-shell"
+      }
+    },
+    {
+      "role": "Temp active",
+      "hp": false,
+      "login": {
+        "shell": true,
+        "authGate": true,
+        "loginStill": false,
+        "surface": "app-shell"
+      }
+    },
+    {
+      "role": "Temp revoked",
+      "hp": false,
+      "login": {
+        "shell": true,
+        "authGate": true,
+        "loginStill": false,
+        "surface": "app-shell"
+      }
+    },
+    {
+      "role": "Unauthorized",
+      "hp": false,
+      "login": {
+        "shell": true,
+        "authGate": true,
+        "loginStill": false,
+        "surface": "app-shell"
+      }
+    }
+  ],
+  "status": "PARTIAL"
+}

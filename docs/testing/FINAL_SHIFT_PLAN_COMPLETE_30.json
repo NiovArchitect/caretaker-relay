@@ -1,0 +1,8 @@
+{
+  "at": "2026-07-31T05:46:40.717Z",
+  "template": {
+    "status": "PASS",
+    "sample": "It is 5:47 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern needs monitoring\n\nComing up\n• Metformin 500 mg · 12:00 PM today\n• Physical therapy · Friday 4:30 PM PDT\n\nWatch for\n• The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team b"
+  },
+  "scenarios_30": "TEMPLATE_PASS_FULL_TIME_MATRIX_PARTIAL"
+}
