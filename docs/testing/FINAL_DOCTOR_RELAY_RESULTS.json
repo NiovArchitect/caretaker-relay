@@ -1,0 +1,23 @@
+{
+  "at": "2026-07-31T02:30:00.000Z",
+  "controller": "Agent Zero",
+  "scope": "local_classification_and_answer_templates",
+  "public_live_relay": "BLOCKED_LAB_LOGIN_DISABLED",
+  "retrieve_bank": {
+    "last vitals": "INFORMATION_QUERY",
+    "vital signs": "INFORMATION_QUERY",
+    "orientation status": "INFORMATION_QUERY",
+    "any therapies": "INFORMATION_QUERY",
+    "surgeries": "INFORMATION_QUERY",
+    "other comorbidities": "INFORMATION_QUERY",
+    "ambulation or mobility status": "INFORMATION_QUERY",
+    "Is the patient on oxygen?": "INFORMATION_QUERY",
+    "What medications is she on?": "INFORMATION_QUERY",
+    "I gave her metformin": "CARE_REPORT"
+  },
+  "retrieve_bank_pass": "10/10 local",
+  "answer_templates_no_med_entry_language": "PASS",
+  "generic_fallback_med_entry_on_retrieve": "BLOCKED_BY_LOCAL_REPAIR",
+  "oxygen_not_appointments": "LOCAL_PASS_SERVER_SHORT_CIRCUIT",
+  "public_parity": "FAIL_NOT_DEPLOYED"
+}

@@ -160,24 +160,39 @@ export function classifyRequestClass(raw: string): ClassifiedRequest {
   }
 
   // Information queries (including without ?)
+  // Clinical retrieve phrases must NEVER fall through to care-update extract
+  // (doctor validation: "last vitals", "surgeries", "therapies", etc.)
+  const clinicalRetrieve =
+    /\b(vital|vitals|blood pressure|heart rate|temperature|spo2|o2 sat|oxygen|on oxygen|orientation|oriented|ambulat|weight[- ]?bearing|mobility status|walk(s|ing)? by (her|him|them)self|adls?|diet|swallow|texture|allergy|allergies|code status|dnr|dni|polst|advance directive|comorbidit|diagnos(es|is)|surger(y|ies)|surgical history|therap(y|ies)|pt\b|ot\b|speech therapy|labs?|imaging|vaccin|device|trache|feeding tube|catheter|glucose monitor|baseline|history & physical|h&p)\b/i.test(
+      q,
+    ) &&
+    !/\b(gave|took|administered|refused|missed|withheld|charted|recorded that)\b/i.test(
+      q,
+    );
+
   const info =
     /\?$/.test(text) ||
-    /^(what|when|where|who|how|why|did|does|do|is|are|am|was|were|can|should|has|have|show|tell|summarize|give)\b/i.test(
+    /^(what|when|where|who|how|why|did|does|do|is|are|am|was|were|can|should|has|have|show|tell|summarize|give|list|any|last)\b/i.test(
       text,
     ) ||
     /\b(what am i (doing|handling)|on my (shift|plate)|doing today|need to (do|handle)|happened (during|on) the last|last shift|previous (shift|caregiver)|who (is|works|takes)|coming up|still need|need me)\b/i.test(
       q,
-    );
+    ) ||
+    clinicalRetrieve ||
+    /^(last|recent|current|any|other)\s+\w+/i.test(text);
 
   if (info) {
     return { requestClass: "INFORMATION_QUERY", actionFamily: "NONE" };
   }
 
-  // Care report cues
+  // New factual reports → care report (after retrieve failed to match)
+  // "She now needs help walking" must not create silent observation without confirmation,
+  // but it IS a CARE_REPORT class (not INFORMATION_QUERY).
   if (
-    /\b(gave|took|seemed|noticed|ate|eaten|dizzy|tired|slept|refused|fell|observed|reported)\b/i.test(
+    /\b(gave|took|seemed|noticed|ate|eaten|dizzy|tired|slept|refused|fell|observed|reported|now needs|started needing|no longer can|cannot walk|can't walk)\b/i.test(
       q,
-    )
+    ) ||
+    /\b(she|he|they)\s+now\s+(needs|requires|uses)\b/i.test(q)
   ) {
     return { requestClass: "CARE_REPORT", actionFamily: "NONE" };
   }
@@ -239,21 +254,22 @@ export async function answerInformationQuery(question: string): Promise<string> 
     );
 
   if (isTodayPlan || isShiftPlan) {
+    const nowLabel = new Date().toLocaleTimeString(undefined, {
+      hour: "numeric",
+      minute: "2-digit",
+    });
     const lines: string[] = [];
+    lines.push(`It is ${nowLabel}. Here is ${name}'s current plan:`);
     lines.push(
-      isShiftPlan
-        ? `For your current coverage with ${name}:`
-        : `Here is what matters for ${name} today:`,
+      `Now\n` +
+        (priorities.length
+          ? priorities.map((p) => `• ${p}`).join("\n")
+          : "• No urgent open priorities are listed right now."),
     );
-    if (priorities.length) {
-      lines.push(priorities.map((p) => `• ${p}`).join("\n"));
-    } else {
-      lines.push("• No urgent open priorities are listed right now.");
-    }
     if (today.next?.length) {
       lines.push(
-        `Coming up:\n${today.next
-          .slice(0, 3)
+        `Coming up\n${today.next
+          .slice(0, 4)
           .map((x) => `• ${humanCareLine(x)}`)
           .join("\n")}`,
       );
@@ -261,15 +277,25 @@ export async function answerInformationQuery(question: string): Promise<string> 
     if (apts.ok && apts.active.length) {
       const a = apts.active[0]!;
       lines.push(
-        `Current appointment: ${humanCareLine(a.title || "Appointment")}${
+        `Appointments\n• ${humanCareLine(a.title || "Appointment")}${
           a.starts_at_label ? ` · ${humanCareLine(String(a.starts_at_label))}` : ""
         }${a.location ? ` · ${humanCareLine(String(a.location))}` : ""}`,
+      );
+    }
+    if (today.whatChanged?.length) {
+      lines.push(
+        `Watch for\n${today.whatChanged
+          .slice(0, 3)
+          .map((c) => `• ${humanCareLine(c)}`)
+          .join("\n")}`,
       );
     }
     if (coverage.summary) {
       lines.push(`Coverage: ${humanCareLine(coverage.summary)}`);
     }
-    lines.push("Open Today for the full compact plan, or Care for details.");
+    lines.push(
+      "Every item above is drawn from the care plan, appointments, medications, or confirmed observations on file — not invented instructions. Open Today for the compact view or Health & Care Details for the full picture.",
+    );
     return lines.join("\n\n");
   }
 

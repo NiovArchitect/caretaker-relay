@@ -1,0 +1,13 @@
+{
+  "at": "2026-07-31T03:10:00.000Z",
+  "required": 75,
+  "executed_local_classification": 75,
+  "executed_public": 0,
+  "status": "LOCAL_CLASSIFICATION_ONLY",
+  "note": "All 75 prompts map to INFORMATION_QUERY or shared clinical retrieve domains; public answer parity pending deploy",
+  "layperson_n": 25,
+  "caregiver_n": 25,
+  "professional_n": 25,
+  "language_layer_disagreements_local": 0,
+  "public_75_75": "NOT_PROVEN"
+}

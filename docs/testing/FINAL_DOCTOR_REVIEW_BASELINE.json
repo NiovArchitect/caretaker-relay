@@ -1,0 +1,15 @@
+{
+  "at": "2026-07-31T02:30:00.000Z",
+  "controller": "Agent Zero",
+  "app_url": "https://care.niovlabs.com",
+  "api_url": "https://caretaker-relay-care-api.onrender.com",
+  "app_bundle": "index-BoPQZ519.js",
+  "app_sha_target": "eb3262b08e62c291c8f6e0bbe1346dfa4af2b008",
+  "api_sha_target": "7d648374a2c4e89f8f441b5384487d4b509daf4e",
+  "api_health": "ok",
+  "lab_login_enabled": false,
+  "doctor_review_1": "INGESTED",
+  "doctor_review_2": "INGESTED_CLARIFICATION_SAME_PHYSICIAN",
+  "total_atomic_findings": 42,
+  "product_freeze": "NOT_RESTORED"
+}

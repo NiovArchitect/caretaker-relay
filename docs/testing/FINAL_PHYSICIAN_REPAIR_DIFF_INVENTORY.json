@@ -1,0 +1,60 @@
+{
+  "at": "2026-07-31T03:00:00.000Z",
+  "controller": "Agent Zero",
+  "public_pre_repair": {
+    "app": "eb3262b08e62c291c8f6e0bbe1346dfa4af2b008",
+    "bundle": "index-BoPQZ519.js",
+    "api": "7d648374a2c4e89f8f441b5384487d4b509daf4e"
+  },
+  "included_app_paths": [
+    "src/App.tsx",
+    "src/foundation/careClient.ts",
+    "src/lib/relay/requestClass.ts",
+    "src/pages/TodayPage.tsx",
+    "src/styles/global.css",
+    "vendor/care-domain/src/types.ts",
+    "vendor/care-domain/src/relay/intents.ts",
+    "vendor/care-domain/src/relay/answer-engine.ts",
+    "vendor/care-domain/src/services/recipient-profile.ts",
+    "vendor/care-domain/src/services/relay-answer.ts",
+    "docs/clinical/",
+    "docs/product/FINAL_CLINICAL_RETRIEVAL_CONTRACT.md",
+    "docs/product/FINAL_HEALTH_AND_CARE_DETAILS_CONTRACT.md",
+    "docs/product/FINAL_MEDICATION_ANSWER_COMPLETENESS_CONTRACT.md",
+    "docs/product/FINAL_SHIFT_PLAN_TRACEABILITY_CONTRACT.md",
+    "docs/product/FINAL_CODE_STATUS_PROVENANCE_CONTRACT.md",
+    "docs/product/FINAL_DOCTOR_REVIEW_PRODUCT_CONTRACT.md",
+    "docs/product/FINAL_CLINICAL_CHARTING_COMPLETENESS_CONTRACT.md",
+    "docs/testing/FINAL_PHYSICIAN_*",
+    "docs/testing/FINAL_CLINICAL_*",
+    "docs/testing/FINAL_THREE_*",
+    "docs/testing/FINAL_MEDICATION_*",
+    "docs/testing/FINAL_SHIFT_*",
+    "docs/testing/FINAL_REFILL_*",
+    "docs/testing/FINAL_DOCTOR_*",
+    "docs/testing/FINAL_ROLE_*",
+    "docs/testing/AGENT_ZERO_FINAL_PHYSICIAN_*",
+    "docs/reviews/FINAL_PHYSICIAN_*",
+    "docs/reviews/FINAL_DOCTOR_*",
+    "docs/reviews/CARETAKER_RELAY_FINAL_PHYSICIAN_*",
+    "docs/reviews/AGENT_ZERO_FINAL_PHYSICIAN_*",
+    "docs/reviews/AGENT_ZERO_FINAL_CLINICAL_*",
+    "docs/research/FINAL_*",
+    "docs/incidents/FINAL_DOCTOR_*"
+  ],
+  "included_api_paths": [
+    "packages/care-domain/src/types.ts",
+    "packages/care-domain/src/relay/intents.ts",
+    "packages/care-domain/src/relay/answer-engine.ts",
+    "packages/care-domain/src/services/recipient-profile.ts",
+    "packages/care-domain/src/services/relay-answer.ts"
+  ],
+  "excluded": [
+    "docs/design/screenshots/**",
+    "unrelated freeze scorecards",
+    "e2e/jump-latest-torture.spec.ts",
+    "AGENTS.md incidental"
+  ],
+  "unexplained_file_changes_in_commit": 0,
+  "unrelated_in_commit": 0
+}

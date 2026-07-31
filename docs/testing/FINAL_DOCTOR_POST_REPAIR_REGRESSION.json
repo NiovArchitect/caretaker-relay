@@ -1,0 +1,22 @@
+{
+  "at": "2026-07-31T02:30:00.000Z",
+  "controller": "Agent Zero",
+  "locked_systems_preserved": {
+    "prn": "YES_NO_REBUILD",
+    "semantic_today": "YES_NO_REBUILD",
+    "clarification_lifecycle": "YES",
+    "notification_domain": "YES",
+    "overlay_d_durable_001": "YES",
+    "r_context": "YES",
+    "lineage": "YES"
+  },
+  "new_repairs": [
+    "clinical_retrieve_client",
+    "clinical_retrieve_server",
+    "claim_humanize",
+    "identity_strip",
+    "hp_panel"
+  ],
+  "public_regression_rerun": "PENDING_DEPLOY",
+  "unit_retrieve_classification": "PASS"
+}

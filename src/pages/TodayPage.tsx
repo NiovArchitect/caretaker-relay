@@ -141,7 +141,8 @@ export function TodayPage({
   const [acked, setAcked] = useState<Set<string>>(new Set());
   const [inbox, setInbox] = useState<Array<Record<string, unknown>>>([]);
   const [showAllNotifs, setShowAllNotifs] = useState(false);
-  const [, setProfile] = useState<RecipientProfilePayload | null>(null);
+  const [profile, setProfile] = useState<RecipientProfilePayload | null>(null);
+  const [hpOpen, setHpOpen] = useState(false);
   const [coverageSummary, setCoverageSummary] = useState("");
   const [serverProjection, setServerProjection] = useState<{
     orientation?: string;
@@ -418,7 +419,271 @@ export function TodayPage({
         </div>
         <h1 data-testid="today-greeting" className="today-hero-recipient">
           <span data-testid="care-recipient-label">{recipientName}</span>
+          {(() => {
+            const p = profile?.profile as Record<string, unknown> | null | undefined;
+            const dob = p && typeof p.dateOfBirth === "string" ? p.dateOfBirth : null;
+            let age: number | null = null;
+            if (dob && /^\d{4}-\d{2}-\d{2}$/.test(dob)) {
+              const [y, mo, d] = dob.split("-").map(Number);
+              const now = new Date();
+              age = now.getFullYear() - (y ?? 0);
+              if (
+                now.getMonth() + 1 < (mo ?? 0) ||
+                (now.getMonth() + 1 === (mo ?? 0) && now.getDate() < (d ?? 0))
+              ) {
+                age -= 1;
+              }
+              if (age < 0 || age > 130) age = null;
+            }
+            return age != null ? (
+              <span className="today-hero-age" data-testid="care-recipient-age">
+                {" "}
+                · Age {age}
+              </span>
+            ) : null;
+          })()}
         </h1>
+        {/* Physician validation: identity + immediate safety stay visible; full picture one tap away */}
+        {(() => {
+          const p = (profile?.profile ?? null) as Record<string, unknown> | null;
+          const dob =
+            p && typeof p.dateOfBirth === "string" ? String(p.dateOfBirth) : null;
+          const allergies = Array.isArray(p?.allergies)
+            ? (p!.allergies as Array<{ label?: string } | string>)
+                .map((a) => (typeof a === "string" ? a : a?.label))
+                .filter(Boolean)
+            : [];
+          const contacts = Array.isArray(p?.emergencyContacts)
+            ? (p!.emergencyContacts as Array<{
+                name?: string;
+                relationship?: string;
+              }>)
+            : [];
+          const ec = contacts[0];
+          // Never display free-text healthConcerns as verified code status (physician validation)
+          const advDocs = Array.isArray(p?.advanceCareDocuments)
+            ? (p!.advanceCareDocuments as Array<{
+                documentType?: string;
+                verificationState?: string;
+                currentStatusSummary?: string;
+                signer?: string;
+                effectiveDate?: string;
+              }>)
+            : [];
+          const verifiedCode = advDocs.find(
+            (d) =>
+              d.verificationState === "verified_medical_order" &&
+              (d.documentType === "POLST" ||
+                d.documentType === "CODE_STATUS_ORDER"),
+          );
+          const reportedCode = advDocs.find(
+            (d) =>
+              d.verificationState === "reported_unverified" ||
+              d.documentType === "CAREGIVER_REPORT",
+          );
+          const codeStatusLabel = verifiedCode
+            ? `${verifiedCode.currentStatusSummary || verifiedCode.documentType || "Order"} · verified`
+            : reportedCode
+              ? `${reportedCode.currentStatusSummary || "Reported"} · unverified`
+              : "Not verified on file";
+          const hpLabel =
+            /clinician|nurse|rn|np|md|doctor|provider/i.test(
+              session.roleLabel || roleXp.badge || "",
+            )
+              ? "History & Physical"
+              : "Health & Care Details";
+          return (
+            <div
+              className="today-identity-strip"
+              data-testid="today-identity-strip"
+              aria-label="Care recipient identity and safety"
+            >
+              <div className="today-identity-safety">
+                {dob ? (
+                  <div className="today-identity-row" data-testid="identity-dob">
+                    <span className="label">DOB</span>
+                    <span className="value">{humanCareLine(dob)}</span>
+                  </div>
+                ) : null}
+                <div className="today-identity-row" data-testid="identity-allergies">
+                  <span className="label">Allergies</span>
+                  <span className="value">
+                    {allergies.length
+                      ? allergies.map((a) => humanCareLine(String(a))).join("; ")
+                      : "None verified on file"}
+                  </span>
+                </div>
+                <div className="today-identity-row" data-testid="identity-code-status">
+                  <span className="label">Code status</span>
+                  <span className="value">{humanCareLine(codeStatusLabel)}</span>
+                </div>
+                <div
+                  className="today-identity-row"
+                  data-testid="identity-emergency-contact"
+                >
+                  <span className="label">Emergency</span>
+                  <span className="value">
+                    {ec?.name
+                      ? `${humanCareLine(ec.name)}${
+                          ec.relationship
+                            ? ` · ${humanCareLine(ec.relationship)}`
+                            : ""
+                        }`
+                      : "Not on file"}
+                  </span>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="link-btn today-hp-toggle"
+                data-testid="open-health-care-details"
+                aria-expanded={hpOpen}
+                onClick={() => setHpOpen((v) => !v)}
+              >
+                {hpOpen ? "Hide" : "Learn more"} · {hpLabel}
+              </button>
+              {hpOpen ? (
+                <div
+                  className="today-hp-panel surface-known"
+                  data-testid="health-care-details-panel"
+                >
+                  <p className="muted" style={{ marginTop: 0 }}>
+                    Organized care picture for {recipientName}. Verified fields
+                    only — missing items are gaps, not invented orders.
+                  </p>
+                  <details open>
+                    <summary>Medical history</summary>
+                    <ul className="list-plain">
+                      <li>
+                        Diagnoses:{" "}
+                        {Array.isArray(p?.confirmedConditions) &&
+                        (p!.confirmedConditions as unknown[]).length
+                          ? (p!.confirmedConditions as Array<{ label?: string }>)
+                              .map((c) => humanCareLine(c.label || "Condition"))
+                              .join("; ")
+                          : "None verified on file"}
+                      </li>
+                      <li>
+                        Allergies:{" "}
+                        {allergies.length
+                          ? allergies.map((a) => humanCareLine(String(a))).join("; ")
+                          : "None verified on file"}
+                      </li>
+                      <li>Surgeries: Not verified on file (add via authorized record)</li>
+                      <li>
+                        Advance directives / POLST:{" "}
+                        {advDocs.length
+                          ? advDocs
+                              .map((d) =>
+                                humanCareLine(
+                                  `${d.documentType || "Document"} · ${
+                                    d.verificationState || "unknown"
+                                  }${
+                                    d.currentStatusSummary
+                                      ? ` · ${d.currentStatusSummary}`
+                                      : ""
+                                  }${d.signer ? ` · signer ${d.signer}` : ""}${
+                                    d.effectiveDate
+                                      ? ` · effective ${d.effectiveDate}`
+                                      : ""
+                                  }`,
+                                ),
+                              )
+                              .join("; ")
+                          : "Document missing — not a verified order"}
+                      </li>
+                    </ul>
+                  </details>
+                  <details>
+                    <summary>Function &amp; daily living</summary>
+                    <ul className="list-plain">
+                      <li>
+                        Mobility:{" "}
+                        {typeof p?.mobilityBaseline === "string"
+                          ? humanCareLine(p.mobilityBaseline)
+                          : "Not on file"}
+                      </li>
+                      <li>
+                        Assistive devices:{" "}
+                        {Array.isArray(p?.assistiveDevices) &&
+                        (p!.assistiveDevices as unknown[]).length
+                          ? (p!.assistiveDevices as string[])
+                              .map((d) => humanCareLine(d))
+                              .join("; ")
+                          : "None listed"}
+                      </li>
+                      <li>
+                        Support needs:{" "}
+                        {Array.isArray(p?.supportNeeds) &&
+                        (p!.supportNeeds as unknown[]).length
+                          ? (p!.supportNeeds as string[])
+                              .slice(0, 4)
+                              .map((s) => humanCareLine(s))
+                              .join("; ")
+                          : "Not on file"}
+                      </li>
+                    </ul>
+                  </details>
+                  <details>
+                    <summary>Baseline status</summary>
+                    <ul className="list-plain">
+                      <li>
+                        Communication:{" "}
+                        {Array.isArray(p?.communicationNeeds) &&
+                        (p!.communicationNeeds as unknown[]).length
+                          ? (p!.communicationNeeds as string[])
+                              .map((s) => humanCareLine(s))
+                              .join("; ")
+                          : "Not on file"}
+                      </li>
+                      <li>
+                        Routine:{" "}
+                        {typeof p?.dailyRoutineSummary === "string"
+                          ? humanCareLine(p.dailyRoutineSummary)
+                          : "Not on file"}
+                      </li>
+                      <li>
+                        Care setting:{" "}
+                        {typeof p?.careLocationSummary === "string"
+                          ? humanCareLine(p.careLocationSummary)
+                          : "Not on file"}
+                      </li>
+                    </ul>
+                  </details>
+                  <details>
+                    <summary>Therapies &amp; recent clinical</summary>
+                    <ul className="list-plain">
+                      <li>
+                        Care goals:{" "}
+                        {Array.isArray(p?.careGoals) &&
+                        (p!.careGoals as unknown[]).length
+                          ? (p!.careGoals as string[])
+                              .slice(0, 4)
+                              .map((g) => humanCareLine(g))
+                              .join("; ")
+                          : "Not on file"}
+                      </li>
+                      <li>
+                        Primary provider:{" "}
+                        {typeof p?.primaryProviderName === "string"
+                          ? humanCareLine(p.primaryProviderName)
+                          : "Not on file"}
+                      </li>
+                      <li>
+                        Recent vitals / labs / imaging: open Care history when
+                        documented — no invented measurements here.
+                      </li>
+                    </ul>
+                  </details>
+                  <p className="muted" style={{ marginBottom: 0, fontSize: "0.85rem" }}>
+                    Sensitive sections remain role- and consent-controlled. Relay
+                    retrieves verified data; it does not invent orders or diagnoses.
+                  </p>
+                </div>
+              ) : null}
+            </div>
+          );
+        })()}
         <p
           className="muted today-hero-lead"
           data-testid="today-role-orientation"
@@ -775,6 +1040,13 @@ export function TodayPage({
                                 setWorkError(r.message ?? "Could not take this work");
                                 return;
                               }
+                              setWorkError(null);
+                              // Next step after claim — never silent success (doctor validation)
+                              const nextHint =
+                                /refill|prescription|rx/i.test(action)
+                                  ? "Next: open Care → medications or the pharmacy workflow to complete this refill."
+                                  : "Next: this work is assigned to you — complete it from Care or mark it done when finished.";
+                              setSyncLabel(`You're on it · ${nextHint}`);
                               reloadWork();
                             });
                           }}

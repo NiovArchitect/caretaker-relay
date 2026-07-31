@@ -1,0 +1,66 @@
+{
+  "at": "2026-07-30",
+  "controller": "Agent Zero",
+  "rows": [
+    {
+      "finding_id": "DR1-F19",
+      "layer": "SOFTWARE",
+      "reproducible": true,
+      "action": "REPAIR"
+    },
+    {
+      "finding_id": "DR1-F22",
+      "layer": "SOFTWARE",
+      "reproducible": true,
+      "action": "REPAIR"
+    },
+    {
+      "finding_id": "DR1-F23",
+      "layer": "SOFTWARE",
+      "reproducible": true,
+      "action": "REPAIR"
+    },
+    {
+      "finding_id": "DR1-F07",
+      "layer": "LEGAL_PLUS_DATA_MODEL",
+      "reproducible": false,
+      "action": "SCHEMA_PLUS_STATE_FORMS"
+    },
+    {
+      "finding_id": "DR1-F35",
+      "layer": "LEGAL_LICENSING",
+      "reproducible": false,
+      "action": "EXTERNAL"
+    },
+    {
+      "finding_id": "DR1-F36",
+      "layer": "JURISDICTION_POLICY",
+      "reproducible": false,
+      "action": "EXTERNAL"
+    },
+    {
+      "finding_id": "DR1-F12",
+      "layer": "SAFETY_SOFTWARE_BOUNDARY",
+      "reproducible": true,
+      "action": "ENFORCE_NO_INVENTION"
+    },
+    {
+      "finding_id": "DR1-F13",
+      "layer": "QUALIFIED_HUMAN_PROCESS",
+      "reproducible": false,
+      "action": "SUPPORT_NOT_AUTOMATE"
+    },
+    {
+      "finding_id": "DR2-F01",
+      "layer": "SOFTWARE_UI",
+      "reproducible": true,
+      "action": "REPAIR"
+    },
+    {
+      "finding_id": "DR1-F08",
+      "layer": "ORG_POLICY_PLUS_AUTHZ",
+      "reproducible": "partial",
+      "action": "FIELD_LEVEL_VISIBILITY"
+    }
+  ]
+}

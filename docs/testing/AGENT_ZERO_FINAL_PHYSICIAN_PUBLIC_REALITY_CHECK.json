@@ -1,0 +1,16 @@
+{
+  "at": "2026-07-31T03:10:00.000Z",
+  "controller": "Agent Zero",
+  "result": "LOCAL_COMMIT_CANDIDATE_PUBLIC_NOT_CLOSED",
+  "physician_repairs_public": false,
+  "public_app_bundle": "index-BoPQZ519.js",
+  "public_app_sha": "eb3262b08e62c291c8f6e0bbe1346dfa4af2b008",
+  "public_api_sha": "7d648374a2c4e89f8f441b5384487d4b509daf4e",
+  "deploy_blocked": "RENDER_API_UNAUTHORIZED",
+  "clinical_journeys_public": 0,
+  "clinical_journeys_required": 30,
+  "product_freeze": "NOT_RESTORED",
+  "submission_readiness": "NOT READY",
+  "ai_as_clinical_authority": 0,
+  "july_26_freeze": "HISTORICAL_ONLY_d8d56c13_api_45eebba"
+}

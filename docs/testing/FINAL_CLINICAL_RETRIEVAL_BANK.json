@@ -1,0 +1,24 @@
+{
+  "at": "2026-07-31T03:10:00.000Z",
+  "scope": "local_requestClass",
+  "public": "NOT_DEPLOYED",
+  "prompts": {
+    "last vitals": "INFORMATION_QUERY",
+    "vital signs": "INFORMATION_QUERY",
+    "orientation status": "INFORMATION_QUERY",
+    "any therapies": "INFORMATION_QUERY",
+    "surgeries": "INFORMATION_QUERY",
+    "other comorbidities": "INFORMATION_QUERY",
+    "ambulation or mobility status": "INFORMATION_QUERY",
+    "Is the patient on oxygen?": "INFORMATION_QUERY",
+    "Can she walk by herself?": "INFORMATION_QUERY",
+    "What is her code?": "INFORMATION_QUERY",
+    "What can she eat?": "INFORMATION_QUERY",
+    "What machines does she use?": "INFORMATION_QUERY",
+    "She now needs help walking": "CARE_REPORT",
+    "I gave her metformin": "CARE_REPORT"
+  },
+  "read_query_to_care_update": 0,
+  "pass": "local_classification",
+  "public_pass": false
+}

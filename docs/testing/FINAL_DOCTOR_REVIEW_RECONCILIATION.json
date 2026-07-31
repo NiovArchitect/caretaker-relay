@@ -1,0 +1,36 @@
+{
+  "at": "2026-07-31T02:30:00.000Z",
+  "controller": "Agent Zero",
+  "already_implemented": [
+    "Semantic Today essentials structure",
+    "PRN reason/result architecture (locked)",
+    "Profile model with diagnoses vs concerns separation (partial)",
+    "Emergency snapshot helper",
+    "Mobility answer helper",
+    "Clinical authority boundary document"
+  ],
+  "partially_implemented": [
+    "Medication completeness fields",
+    "Shift plan time buckets",
+    "Three language layers",
+    "Field-level privacy",
+    "Traceability on Today items",
+    "Code status understanding without full POLST schema"
+  ],
+  "verified_product_defects_local_repair": [
+    "DR1-F19 retrieve vs update",
+    "DR1-F20 missing data language",
+    "DR1-F21 mobility retrieve first",
+    "DR1-F22 I can help JSON humanize",
+    "DR1-F23 oxygen domain",
+    "DR2-F01 identity safety strip",
+    "DR2-F02 role-adaptive H&P label",
+    "DR2-F03 H&P expandable surface"
+  ],
+  "public_post_repair": "NOT_DEPLOYED",
+  "external_gaps": [
+    "interRAI licensing",
+    "State POLST forms",
+    "Public lab login for dual-org automation"
+  ]
+}

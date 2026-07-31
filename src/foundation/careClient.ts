@@ -1855,11 +1855,48 @@ export async function claimCareWorkItem(
   if (!useHttp || !httpToken || rid() === NO_RECIPIENT_ID) {
     return { ok: false, message: "Not signed in" };
   }
-  const res = await careClaimWorkItem(httpToken, rid(), workItemId);
-  if (!res.ok) {
-    return { ok: false, message: res.message };
+  try {
+    const res = await careClaimWorkItem(httpToken, rid(), workItemId);
+    if (!res.ok) {
+      const code = String(res.code || "");
+      const raw = String(res.message || "");
+      // Never surface raw JSON or opaque codes to caregivers (doctor validation)
+      if (code === "ALREADY_OWNED" || /already owned/i.test(raw)) {
+        const owner =
+          raw.replace(/^Already owned by\s*/i, "").trim() || "another helper";
+        return {
+          ok: false,
+          message: `Someone already has this work (${owner}). Open Care → work details or ask them to complete or reassign it.`,
+        };
+      }
+      if (code === "NOT_FOUND") {
+        return {
+          ok: false,
+          message: "That work item is no longer available. Refresh Today and try again.",
+        };
+      }
+      if (/^\{[\s\S]*\}$/.test(raw) || /"ok"\s*:/.test(raw)) {
+        return {
+          ok: false,
+          message:
+            "Could not take this work right now. Refresh the page and try again — nothing was assigned to you.",
+        };
+      }
+      return {
+        ok: false,
+        message: raw || "Could not take this work. Nothing was assigned to you.",
+      };
+    }
+    return { ok: true, workItem: res.data.work_item };
+  } catch (err) {
+    return {
+      ok: false,
+      message:
+        err instanceof Error
+          ? `Could not take this work (${err.message}). Nothing was assigned to you.`
+          : "Could not take this work. Nothing was assigned to you.",
+    };
   }
-  return { ok: true, workItem: res.data.work_item };
 }
 
 export async function transitionCareWorkItem(

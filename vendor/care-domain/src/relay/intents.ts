@@ -618,6 +618,42 @@ export function classifyIntent(
     intents.push("RECIPIENT_MOBILITY");
   }
 
+  // Clinical retrieve — read-only profile domains (never care-update extract)
+  if (
+    !intents.includes("META_CONVERSATION") &&
+    !/\b(gave|took|administered|refused|missed|withheld|charted)\b/.test(q)
+  ) {
+    if (/\b(vital|vitals|blood pressure|heart rate|temperature|spo2|o2 sat)\b/.test(q)) {
+      intents.push("RECIPIENT_PROFILE");
+      intents.push("OBSERVATION_HISTORY");
+    }
+    if (/\b(oxygen|on oxygen|o2\b|airway|trache|ventilat)\b/.test(q)) {
+      intents.push("RECIPIENT_PROFILE");
+    }
+    if (/\b(surger|surgical history|operation|procedure)\b/.test(q)) {
+      intents.push("RECIPIENT_PROFILE");
+      intents.push("RECIPIENT_DIAGNOSIS");
+    }
+    if (/\b(therap(y|ies)|physical therapy|\bot\b|occupational|speech therapy)\b/.test(q)) {
+      intents.push("RECIPIENT_PROFILE");
+    }
+    if (/\b(comorbid|diagnos|condition|disease)\b/.test(q)) {
+      intents.push("RECIPIENT_DIAGNOSIS");
+    }
+    if (/\b(code status|dnr|dni|polst|advance directive|do not resuscitat|do not intubat|full code|comfort[- ]focused)\b/.test(q)) {
+      intents.push("EMERGENCY_SNAPSHOT");
+      intents.push("RECIPIENT_PROFILE");
+    }
+    if (/\b(diet|swallow|texture|feeding|nutrition|puree|minced)\b/.test(q)) {
+      intents.push("RECIPIENT_PROFILE");
+      intents.push("RECIPIENT_ROUTINE");
+    }
+    if (/\b(orientation|oriented|acting like herself|acting like himself|baseline cognition)\b/.test(q)) {
+      intents.push("OBSERVATION_HISTORY");
+      intents.push("STATUS_SYNTHESIS");
+    }
+  }
+
   // Coverage / next helper — before identity (avoid "who is" → profile dump)
   if (
     /who is helping|helping now|who comes after|next caregiver|next helper|who is next|when is maya|how much longer am i|tak(es|ing) over|who (takes|is taking) over|who is covering|who is with|tonight.*(help|cover)|who is responsible after|after i leave|after me\b|who comes next|who takes over after/.test(

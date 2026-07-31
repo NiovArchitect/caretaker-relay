@@ -1,0 +1,478 @@
+{
+  "campaign": "CARETAKER_RELAY_DOCTOR_REVIEW_CLINICAL_WORKFLOW_CHARTING_SYSTEM_COHERENCE",
+  "controller": "Agent Zero",
+  "ingested_at": "2026-07-30T00:00:00Z",
+  "sources": {
+    "doctor_review_1": "docs/clinical/DOCTOR_REVIEW_1_VERBATIM.md",
+    "doctor_review_2": "docs/clinical/DOCTOR_REVIEW_2_VERBATIM.md",
+    "doctor_review_2_note": "Same physician lineage — layout supersession clarification; not a second independent physician paste"
+  },
+  "public_baseline_targets": {
+    "app_sha_expected": "eb3262b08e62c291c8f6e0bbe1346dfa4af2b008",
+    "api_sha_expected": "7d648374a2c4e89f8f441b5384487d4b509daf4e",
+    "app_url": "https://care.niovlabs.com",
+    "api_url": "https://caretaker-relay-care-api.onrender.com",
+    "app_bundle_observed_pre_repair": "index-BoPQZ519.js"
+  },
+  "total_atomic_findings": 42,
+  "findings": [
+    {
+      "id": "DR1-F01",
+      "source": "DR1",
+      "text": "Today is strong; do not crowd with full EMR; progressive disclosure",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "UI_IA"
+    },
+    {
+      "id": "DR1-F02",
+      "source": "DR1",
+      "text": "Identity strip: Name · Age beside care-recipient name",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "REPAIRED_LOCAL_NOT_DEPLOYED",
+      "repair_layer": "UI_TODAY"
+    },
+    {
+      "id": "DR1-F03",
+      "source": "DR1+DR2",
+      "text": "Visible DOB on main identity area",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "REPAIRED_LOCAL_NOT_DEPLOYED",
+      "repair_layer": "UI_TODAY"
+    },
+    {
+      "id": "DR1-F04",
+      "source": "DR1+DR2",
+      "text": "Allergies highly visible on main page",
+      "class": "SAFETY_PRODUCT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "REPAIRED_LOCAL_NOT_DEPLOYED",
+      "repair_layer": "UI_TODAY"
+    },
+    {
+      "id": "DR1-F05",
+      "source": "DR1+DR2",
+      "text": "Emergency contact visible on main page",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "REPAIRED_LOCAL_NOT_DEPLOYED",
+      "repair_layer": "UI_TODAY"
+    },
+    {
+      "id": "DR1-F06",
+      "source": "DR1+DR2",
+      "text": "Code status visible when verified; never invent",
+      "class": "SAFETY_PRODUCT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "UI_PLUS_PROFILE_SCHEMA"
+    },
+    {
+      "id": "DR1-F07",
+      "source": "DR1",
+      "text": "POLST vs advance directive distinction with source, signer, effective date, verification state",
+      "class": "CLINICAL_LEGAL",
+      "applicability": "JURISDICTION_DEPENDENT",
+      "runtime_status": "RESEARCH_REQUIRED_SCHEMA_GAP",
+      "repair_layer": "DATA_MODEL_PLUS_STATE_FORMS"
+    },
+    {
+      "id": "DR1-F08",
+      "source": "DR1",
+      "text": "Sensitive fields visibility-controlled by role and consent (per section)",
+      "class": "PRIVACY",
+      "applicability": "ORGANIZATION_POLICY_PLUS_CONSENT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "AUTHZ_FIELD_LEVEL"
+    },
+    {
+      "id": "DR1-F09",
+      "source": "DR1",
+      "text": "Today essentials only (attention, next, meds, checks, appointments, ADLs, meals, refills, engagement, baseline changes)",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "MOSTLY_IMPLEMENTED",
+      "repair_layer": "SEMANTIC_TODAY"
+    },
+    {
+      "id": "DR1-F10",
+      "source": "DR1",
+      "text": "Why?/Learn more on meaningful Today items",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "UI_TODAY"
+    },
+    {
+      "id": "DR1-F11",
+      "source": "DR1",
+      "text": "Complete medication answer fields (strength, dose, route, frequency, times, food, reason, checks, last/next, prescriber, refill, source, verification)",
+      "class": "CLINICAL_CHARTING",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "RELAY_ANSWER_MEDS"
+    },
+    {
+      "id": "DR1-F12",
+      "source": "DR1",
+      "text": "Do not invent pre-dose checks (BG before metformin, BP before antihypertensives) unless ordered",
+      "class": "SAFETY_BOUNDARY",
+      "applicability": "UNIVERSAL_CLINICAL_SAFETY",
+      "runtime_status": "BOUNDARY_DOCUMENTED_ENFORCEMENT_PARTIAL",
+      "repair_layer": "CLINICAL_AUTHORITY_BOUNDARY"
+    },
+    {
+      "id": "DR1-F13",
+      "source": "DR1",
+      "text": "Medication reconciliation vs silent inference",
+      "class": "CLINICAL_PROCESS",
+      "applicability": "QUALIFIED_HUMAN_PLUS_AHRQ",
+      "runtime_status": "RESEARCH_REQUIRED",
+      "repair_layer": "WORKFLOW_NOT_AI_ENGINE"
+    },
+    {
+      "id": "DR1-F14",
+      "source": "DR1",
+      "text": "Complete clinical picture domains in Learn more / H&P (health, baseline systems, personal context)",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "REPAIRED_LOCAL_SKELETON_NOT_DEPLOYED",
+      "repair_layer": "UI_H_AND_P"
+    },
+    {
+      "id": "DR1-F15",
+      "source": "DR1",
+      "text": "Reproductive history only when clinically relevant and authorized",
+      "class": "PRIVACY_CLINICAL",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "POLICY_ACCEPTED_NO_BLANKET_FIELD",
+      "repair_layer": "IA_BOUNDARY"
+    },
+    {
+      "id": "DR1-F16",
+      "source": "DR1",
+      "text": "What should I do today? → time-aware shift plan with Now / time buckets / Watch for",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "RELAY_SHIFT_PLAN"
+    },
+    {
+      "id": "DR1-F17",
+      "source": "DR1",
+      "text": "Every Today instruction traceable to care plan / order / preference / appointment / observation",
+      "class": "PROVENANCE",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "LINEAGE"
+    },
+    {
+      "id": "DR1-F18",
+      "source": "DR1",
+      "text": "Three language layers resolve to same structured model",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "INTENT_EQUIVALENCE"
+    },
+    {
+      "id": "DR1-F19",
+      "source": "DR1",
+      "text": "Retrieve vs record intent separation — read-only never med-entry language",
+      "class": "VERIFIED_PRODUCT_DEFECT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "REPRODUCED_PUBLIC_PRE_REPAIR; REPAIRED_LOCAL_NOT_DEPLOYED",
+      "repair_layer": "REQUEST_CLASS_PLUS_SERVER_RETRIEVE",
+      "reproduction_prompts": [
+        "last vitals",
+        "vital signs",
+        "orientation status",
+        "any therapies",
+        "surgeries",
+        "other comorbidities",
+        "ambulation or mobility status",
+        "Is the patient on oxygen?"
+      ]
+    },
+    {
+      "id": "DR1-F20",
+      "source": "DR1",
+      "text": "Missing data response: gap language + authorized add path, not taken/refused/missed",
+      "class": "VERIFIED_PRODUCT_DEFECT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "REPAIRED_LOCAL_NOT_DEPLOYED",
+      "repair_layer": "ANSWER_TEMPLATES"
+    },
+    {
+      "id": "DR1-F21",
+      "source": "DR1",
+      "text": "Mobility: retrieve verified first; only then observation documentation",
+      "class": "VERIFIED_PRODUCT_DEFECT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "REPAIRED_LOCAL_NOT_DEPLOYED",
+      "repair_layer": "RELAY_ANSWER"
+    },
+    {
+      "id": "DR1-F22",
+      "source": "DR1",
+      "text": "I can help on prescription refill returns JSON body error",
+      "class": "VERIFIED_PRODUCT_DEFECT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "REPRODUCED_CLASS; REPAIRED_CLIENT_HUMANIZE_LOCAL_NOT_DEPLOYED",
+      "repair_layer": "CLAIM_WORK_ITEM_UX",
+      "release_blocking": true
+    },
+    {
+      "id": "DR1-F23",
+      "source": "DR1",
+      "text": "Oxygen question must not return appointments",
+      "class": "VERIFIED_PRODUCT_DEFECT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "REPAIRED_LOCAL_NOT_DEPLOYED",
+      "repair_layer": "CLINICAL_RETRIEVE_PRIORITY"
+    },
+    {
+      "id": "DR1-F24",
+      "source": "DR1",
+      "text": "Reference stack: CMS OASIS-E2, interRAI HC (license), AHRQ med-rec, National POLST + state forms",
+      "class": "RESEARCH_REQUIRED",
+      "applicability": "REFERENCE_ARCHITECTURE",
+      "runtime_status": "RESEARCH_DOCUMENTED",
+      "repair_layer": "IA_TERMINOLOGY_NOT_DIAGNOSTIC_ENGINE"
+    },
+    {
+      "id": "DR1-F25",
+      "source": "DR1",
+      "text": "Not task list only; not miniature hospital chart — care command center principle",
+      "class": "PRODUCT_PRINCIPLE",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "ACCEPTED_AS_GATE",
+      "repair_layer": "PRODUCT_CONTRACT"
+    },
+    {
+      "id": "DR1-F26",
+      "source": "DR1",
+      "text": "Convert physician feedback to acceptance criteria, regression prompts, release gates",
+      "class": "PROCESS",
+      "applicability": "PROGRAM",
+      "runtime_status": "IN_PROGRESS",
+      "repair_layer": "AGENT_ZERO_ARTIFACTS"
+    },
+    {
+      "id": "DR2-F01",
+      "source": "DR2",
+      "text": "Main page may show Name·Age, DOB, Code status, Emergency, Allergies directly",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "REPAIRED_LOCAL_NOT_DEPLOYED",
+      "repair_layer": "UI_TODAY",
+      "supersedes": "DR1-F01 narrow Learn-more-only for safety fields"
+    },
+    {
+      "id": "DR2-F02",
+      "source": "DR2",
+      "text": "Role-adaptive H&P label: Health & Care Details / History & Physical / Mixed",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "REPAIRED_LOCAL_NOT_DEPLOYED",
+      "repair_layer": "UI_TODAY"
+    },
+    {
+      "id": "DR2-F03",
+      "source": "DR2",
+      "text": "One H&P surface with expandable sections — no navigation sprawl of separate tabs",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "REPAIRED_LOCAL_SKELETON",
+      "repair_layer": "UI_IA"
+    },
+    {
+      "id": "DR2-F04",
+      "source": "DR2",
+      "text": "Multiple contextual entry points; one canonical truth",
+      "class": "ARCHITECTURE",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "PROJECTION_MODEL"
+    },
+    {
+      "id": "DR2-F05",
+      "source": "DR2",
+      "text": "Identity and immediate safety visible; full medical/functional history one tap away",
+      "class": "PRODUCT_PRINCIPLE",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "REPAIRED_LOCAL_NOT_DEPLOYED",
+      "repair_layer": "UI_TODAY"
+    },
+    {
+      "id": "DR1-F27",
+      "source": "DR1",
+      "text": "Seven distinct intents: retrieve, observe, report occurred, plan change, what to do today, clarify missing, care team communication",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "REQUEST_CLASS"
+    },
+    {
+      "id": "DR1-F28",
+      "source": "DR1",
+      "text": "Code-status phrase understanding without treating as verified order unless provenance present",
+      "class": "SAFETY_PRODUCT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "RELAY_ANSWER"
+    },
+    {
+      "id": "DR1-F29",
+      "source": "DR1",
+      "text": "Structured Learn more summary fields (legal name, preferred, age/DOB, allergies, EC, diagnoses, code, AD/HCPOA/POLST, orientation, mobility, diet, devices, living, clinical contacts)",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "PROFILE_PLUS_UI"
+    },
+    {
+      "id": "DR1-F30",
+      "source": "DR1",
+      "text": "Claim work: assign to user, preserve refill context, show next step",
+      "class": "VERIFIED_PRODUCT_DEFECT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_REPAIRED_LOCAL",
+      "repair_layer": "WORK_ITEMS"
+    },
+    {
+      "id": "DR1-F31",
+      "source": "DR1",
+      "text": "Never expose raw API/JSON errors to caregiver",
+      "class": "UX_SAFETY",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "REPAIRED_LOCAL_NOT_DEPLOYED",
+      "repair_layer": "CLIENT_ERROR_HUMANIZE"
+    },
+    {
+      "id": "DR1-F32",
+      "source": "DR1",
+      "text": "References shape IA/terminology/provenance — not unsupervised diagnosis/treatment",
+      "class": "CLINICAL_AUTHORITY_BOUNDARY",
+      "applicability": "UNIVERSAL",
+      "runtime_status": "DOCUMENTED",
+      "repair_layer": "POLICY"
+    },
+    {
+      "id": "DR1-F33",
+      "source": "DR1",
+      "text": "Diagnoses clearly separated from caregiver observations",
+      "class": "CLINICAL_CHARTING",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "PROFILE_MODEL"
+    },
+    {
+      "id": "DR1-F34",
+      "source": "DR1",
+      "text": "Frequency required for complete med list",
+      "class": "CLINICAL_CHARTING",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "MED_ANSWER"
+    },
+    {
+      "id": "DR1-F35",
+      "source": "DR1",
+      "text": "interRAI licensing review before instrument language/scoring",
+      "class": "ORGANIZATION_POLICY_LEGAL",
+      "applicability": "LICENSING",
+      "runtime_status": "EXTERNAL_GAP",
+      "repair_layer": "LEGAL"
+    },
+    {
+      "id": "DR1-F36",
+      "source": "DR1",
+      "text": "State-applicable POLST form — not universal invented structure",
+      "class": "LEGAL_CLINICAL",
+      "applicability": "JURISDICTION_DEPENDENT",
+      "runtime_status": "EXTERNAL_GAP",
+      "repair_layer": "STATE_CONFIG"
+    },
+    {
+      "id": "DR1-F37",
+      "source": "DR1",
+      "text": "Personal engagement / preferences in downtime section of shift plan",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "SHIFT_PLAN"
+    },
+    {
+      "id": "DR1-F38",
+      "source": "DR1",
+      "text": "Watch-for items from verified observations / safety considerations only",
+      "class": "SAFETY_PRODUCT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "SHIFT_PLAN"
+    },
+    {
+      "id": "DR1-F39",
+      "source": "DR1",
+      "text": "Absent vs unverified vs unauthorized missing-data distinctions",
+      "class": "PRODUCT_REQUIREMENT",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "ANSWER_TEMPLATES"
+    },
+    {
+      "id": "DR1-F40",
+      "source": "DR1",
+      "text": "Optional next action after missing data is clear and non-annoying",
+      "class": "UX",
+      "applicability": "UNIVERSAL_PRODUCT",
+      "runtime_status": "PARTIALLY_IMPLEMENTED",
+      "repair_layer": "COPY"
+    },
+    {
+      "id": "DR1-F41",
+      "source": "DR1",
+      "text": "Semantic regression suite must include oxygen + clinical retrieve bank",
+      "class": "QA_GATE",
+      "applicability": "PROGRAM",
+      "runtime_status": "IN_PROGRESS",
+      "repair_layer": "REGRESSION"
+    },
+    {
+      "id": "DR1-F42",
+      "source": "DR1+DR2",
+      "text": "Freeze not restored while doctor findings or founder device gates unresolved",
+      "class": "RELEASE_GATE",
+      "applicability": "PROGRAM",
+      "runtime_status": "ENFORCED_NOT_RESTORED",
+      "repair_layer": "AGENT_ZERO"
+    }
+  ],
+  "classification_counts": {
+    "PRODUCT_REQUIREMENT": 18,
+    "VERIFIED_PRODUCT_DEFECT": 5,
+    "SAFETY_PRODUCT": 4,
+    "SAFETY_BOUNDARY": 1,
+    "CLINICAL_CHARTING": 3,
+    "CLINICAL_PROCESS": 1,
+    "CLINICAL_LEGAL": 1,
+    "LEGAL_CLINICAL": 1,
+    "PRIVACY": 1,
+    "PRIVACY_CLINICAL": 1,
+    "PROVENANCE": 1,
+    "ARCHITECTURE": 1,
+    "PRODUCT_PRINCIPLE": 2,
+    "PROCESS": 1,
+    "RESEARCH_REQUIRED": 1,
+    "CLINICAL_AUTHORITY_BOUNDARY": 1,
+    "ORGANIZATION_POLICY_LEGAL": 1,
+    "UX": 1,
+    "UX_SAFETY": 1,
+    "QA_GATE": 1,
+    "RELEASE_GATE": 1
+  }
+}

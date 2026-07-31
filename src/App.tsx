@@ -837,9 +837,25 @@ export function App() {
               i.safetyClass !== "high",
           );
         if (onlyUncertain) {
-          fillReply(
-            `I heard you, but I could not form a durable care item yet for ${activeSpace.displayName}.\n\n${unc.map((u) => `• ${u.label}`).join("\n")}\n\nPlease restate with the medication name, dose, and whether this is something already given or a change to the medication plan. Nothing has been added to the active plan.`,
-          );
+          // Doctor validation: retrieval-like phrases must not look like medication entry
+          const looksLikeRetrieve =
+            /\b(vital|oxygen|therap|surger|comorbid|orientation|diagnos|history|status|what|when|who|how|is |are |any |last )\b/i.test(
+              trimmed,
+            ) &&
+            !/\b(gave|took|administered|refused|missed|withheld|chart)\b/i.test(
+              trimmed,
+            );
+          if (looksLikeRetrieve) {
+            fillReply(
+              `I treated that as a question about ${activeSpace.displayName}'s care record, not a new medication or plan update.\n\n` +
+                `Nothing verified matches that request on file yet. That is an information gap — not a charting action.\n\n` +
+                `An authorized person can add verified details, or you can rephrase (for example: “What are her last vital signs?” or “Is she on oxygen?”).`,
+            );
+          } else {
+            fillReply(
+              `I heard you, but I could not form a durable care item yet for ${activeSpace.displayName}.\n\n${unc.map((u) => `• ${u.label}`).join("\n")}\n\nPlease restate with the medication name, dose, and whether this is something already given or a change to the medication plan. Nothing has been added to the active plan.`,
+            );
+          }
         } else if (planChange) {
           fillReply(
             `I heard a possible medication change for ${activeSpace.displayName}:\n${lines}${unc.length ? `\n\nAlso note:\n${unc.map((u) => `• ${u.label}`).join("\n")}` : ""}\n\nI can save this as a medication-change report that needs verification. It will NOT be added to the active medication plan until an authorized reviewer confirms.\n\nUse Confirm my report to save the pending request (not “confirm medication order”).`,
