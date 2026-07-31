@@ -2476,8 +2476,9 @@ p {
     bottom: 0;
     width: 100% !important;
     max-width: 100vw !important;
-    height: min(72dvh, 640px) !important;
-    max-height: min(72dvh, 640px) !important;
+    /* Leave upper viewport free for care actions (Mark seen, etc.) */
+    height: min(52dvh, 480px) !important;
+    max-height: min(52dvh, 480px) !important;
     z-index: 50;
     transform: translateY(110%);
     transition:
