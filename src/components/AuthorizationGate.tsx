@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import {
   bindInviteToken,
+  emptyAuthorizationState,
   loadAuthorizationState,
+  saveAuthorizationState,
   submitAccessRequest,
 } from "../lib/authorization";
 import { loadOnboardingDraft, saveOnboardingDraft } from "../lib/onboarding";
 import {
   careCreateProvisional,
+  careRecipientSelfSetup,
   careSubmitAccessRequest,
 } from "../foundation/careHttpClient";
 import {
@@ -376,9 +379,63 @@ export function AuthorizationGate({
             try {
               const raw = sessionStorage.getItem("cr_care_session_v1");
               const parsed = raw
-                ? (JSON.parse(raw) as { token?: string | null })
+                ? (JSON.parse(raw) as {
+                    token?: string | null;
+                    identity?: { carePersonId?: string; displayName?: string };
+                  })
                 : null;
-              if (parsed?.token) {
+              if (parsed?.token && isSelfCare) {
+                // Journey 1: create own care-recipient record + self relationship
+                const res = await careRecipientSelfSetup(parsed.token, {
+                  preferred_name: recipientName.trim(),
+                  confirmation:
+                    relationship.trim() ||
+                    "I am creating a care space for myself",
+                });
+                if (res.ok) {
+                  const memberships =
+                    res.data.memberships ||
+                    [
+                      {
+                        careRecipientId: res.data.care_recipient_id,
+                        displayName: recipientName.trim(),
+                        roleLabel: "Care recipient (self)",
+                        status: "active",
+                      },
+                    ];
+                  try {
+                    sessionStorage.setItem(
+                      "cr_care_session_v1",
+                      JSON.stringify({
+                        token: parsed.token,
+                        identity: parsed.identity,
+                        memberships,
+                      }),
+                    );
+                    sessionStorage.setItem(
+                      "cr.activeCareRecipientId",
+                      res.data.care_recipient_id,
+                    );
+                    saveAuthorizationState({
+                      ...emptyAuthorizationState(),
+                      pendingRecipientAccess: false,
+                      labPrincipalAuthorized: false,
+                      displayName: displayName,
+                      pathway: "create_provisional",
+                    });
+                  } catch {
+                    /* ignore */
+                  }
+                  setStatus(
+                    `Your care profile “${recipientName.trim()}” is ready. Opening your care space…`,
+                  );
+                  window.setTimeout(() => {
+                    window.location.reload();
+                  }, 400);
+                  return;
+                }
+                setStatus(res.message || "Could not create your care profile.");
+              } else if (parsed?.token) {
                 const res = await careCreateProvisional(parsed.token, {
                   preferred_name: recipientName.trim(),
                   claimed_authority: relationship.trim(),
@@ -408,7 +465,7 @@ export function AuthorizationGate({
           </h2>
           <p className="muted section-lead">
             {isSelfCare
-              ? "This is your private draft. Helpers only join when you invite them or approve a request. Nothing is shared by default."
+              ? "Creates your own care space under the name you choose. Helpers only join when you invite them or approve a request. This never matches an existing person by name alone."
               : "Starting a circle for someone requires their consent or lawful authority (for example, an authorized representative). A provisional draft is not full access and is never linked to an existing person by name alone."}
           </p>
           <label className="cr-field">
@@ -426,18 +483,27 @@ export function AuthorizationGate({
             />
           </label>
           <label className="cr-field">
-            <span>Claimed authority</span>
+            <span>
+              {isSelfCare
+                ? "Confirm this profile is for you"
+                : "Claimed authority"}
+            </span>
             <input
               data-testid="provisional-authority"
               value={relationship}
               onChange={(e) => setRelationship(e.target.value)}
-              placeholder="e.g. adult child, personal representative"
+              placeholder={
+                isSelfCare
+                  ? "I am the person receiving care (self)"
+                  : "e.g. adult child, personal representative"
+              }
               required
             />
           </label>
           <p className="attention-limit" role="note">
-            No automatic match to existing people. Provider approval is only used
-            when an organization assignment applies — not for private family circles.
+            {isSelfCare
+              ? "To join an existing care record, use an invitation from an authorized caregiver. Name alone never grants access."
+              : "No automatic match to existing people. Provider approval is only used when an organization assignment applies — not for private family circles."}
           </p>
           <div className="btn-row">
             <button type="button" className="ghost-btn" onClick={() => setMode("home")}>

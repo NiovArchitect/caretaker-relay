@@ -180,6 +180,36 @@ export async function careCreateProvisional(
   });
 }
 
+/**
+ * JOURNEY 1 — Create recipient-self care space for any preferred name.
+ * Does not bind to an existing recipient; use invitation for that.
+ */
+export async function careRecipientSelfSetup(
+  token: string,
+  input: {
+    preferred_name: string;
+    confirmation?: string;
+  },
+  baseUrl?: string,
+) {
+  return request<{
+    ok: boolean;
+    care_recipient_id: string;
+    relationship_id: string;
+    relationship_type: string;
+    verification_method: string;
+    created: boolean;
+    authorized_recipients: number;
+    memberships?: Array<Record<string, unknown>>;
+    note?: string;
+  }>("/api/v1/care/recipient-self/setup", {
+    method: "POST",
+    token,
+    body: input,
+    baseUrl,
+  });
+}
+
 export async function careLogout(token: string, baseUrl?: string) {
   return request<{ ok: boolean }>("/api/v1/care/auth/logout", {
     method: "POST",
