@@ -1,0 +1,9 @@
+{
+  "at": "2026-07-31T03:05:00.000Z",
+  "implementation": "Today attention cards always show Why?; Learn more opens H&P or review; work items show Why?",
+  "bundle_markers": ["attention-why", "Why?", "Learn more"],
+  "public_bundle": "index-teUSKxuJ.js",
+  "browser_card_audit": "PARTIAL_NOT_FULL_PLAYWRIGHT",
+  "untraceable_why_text": 0,
+  "status": "IMPLEMENTED_PUBLIC_MARKERS_BROWSER_AUDIT_PARTIAL"
+}

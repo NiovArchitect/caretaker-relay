@@ -1,0 +1,11 @@
+{
+  "at": "2026-07-31T03:05:00.000Z",
+  "server_shape": "It is {time}. Now / Coming up / Before leaving / Watch for / traceability footer",
+  "public_sample_pass": true,
+  "public_answer_head": "It is 3:03 AM. Here is Evelyn Carter's current plan: Now · Coming up · Watch for · traceability",
+  "client_server_disagreements": 0,
+  "scenarios_scripted": 30,
+  "scenarios_publicly_executed": 1,
+  "status": "TEMPLATE_PUBLIC_PASS_FULL_30_PARTIAL",
+  "note": "Canonical server template proven live; full 30 time-window matrix not exhaustively re-run this session"
+}

@@ -1,0 +1,6 @@
+{
+  "at": "2026-07-31T03:05:00.000Z",
+  "bundle_markers": ["open-health-care-details", "Health & Care Details", "today-identity-strip"],
+  "playwright_full": false,
+  "status": "IMPLEMENTED_PUBLIC_BROWSER_DEEP_AUDIT_OPEN"
+}

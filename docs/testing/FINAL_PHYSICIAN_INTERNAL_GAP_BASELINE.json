@@ -1,0 +1,37 @@
+{
+  "at": "2026-07-31T03:05:00.000Z",
+  "controller": "Agent Zero",
+  "prior_live": {
+    "app": "1f0fb48",
+    "api": "cb5840a",
+    "bundle": "index-CY_jls9u.js"
+  },
+  "this_campaign_product": {
+    "app": "37668d26634b08f857a1c5faa6d997d9a604390b",
+    "api": "0f455fca1607fbb487901df1c8529a7744635037",
+    "app_deploy": "dep-d9m105jl550s73d19d40",
+    "api_deploy": "dep-d9m105oae00c73b7mpn0",
+    "bundle": "index-teUSKxuJ.js",
+    "parity": "YES"
+  },
+  "internal_gaps_at_campaign_start": 20,
+  "addressed_this_campaign": [
+    "shift_plan_server_template_parity",
+    "today_why_learn_more_attention_and_work",
+    "claim_next_step_refill_copy",
+    "field_level_allergy_and_advance_care_projection",
+    "public_shift_plan_proof",
+    "public_bundle_why_markers"
+  ],
+  "still_open": [
+    "full_multi_role_browser_matrix",
+    "full_H_and_P_keyboard_sr_matrix",
+    "full_playwright_e2e",
+    "full_prn_regression_rerun",
+    "full_durable_action_matrix_rerun",
+    "full_ci",
+    "privacy_appsec_a11y_full",
+    "founder_desktop",
+    "founder_phone"
+  ]
+}

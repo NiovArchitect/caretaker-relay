@@ -1,0 +1,37 @@
+{
+  "at": "2026-07-31T03:05:00.000Z",
+  "server_enforcement": "projectRecipientProfile + resolveDomainCapabilities",
+  "public_roles_tested": [
+    {
+      "role": "Marcus primary",
+      "profile_ok": true,
+      "allergies": true,
+      "dob": true,
+      "emergency": true,
+      "diagnoses": true,
+      "meds": 1
+    },
+    {
+      "role": "Maya friend",
+      "profile_ok": true,
+      "note": "Relay reports access no longer active for clinical answer; profile redacts sensitive fields",
+      "relay_denied_on_clinical": true
+    },
+    {
+      "role": "Daniel DSP",
+      "profile_ok": true,
+      "note": "Relay access no longer active for cr-olivia membership state on public seed",
+      "relay_denied_on_clinical": true
+    },
+    {
+      "role": "Clinician Dr Shah",
+      "profile_ok": true,
+      "meds": 1,
+      "code_status_gap_language": true
+    }
+  ],
+  "revoked_field_disclosures_on_relay": 0,
+  "client_only_filtering": false,
+  "status": "SERVER_ENFORCED_PASS_BROWSER_MATRIX_PARTIAL",
+  "unauthorized_field_disclosures": 0
+}

@@ -1,0 +1,19 @@
+{
+  "at": "2026-07-31T03:05:00.000Z",
+  "controller": "Agent Zero",
+  "result": "INTERNAL_GATES_REDUCED_NOT_ZERO",
+  "app_source_deploy": "37668d2 / 37668d2",
+  "api_source_deploy": "0f455fc / 0f455fc",
+  "bundle": "index-teUSKxuJ.js",
+  "shift_plan_public": "PASS",
+  "why_learn_more_bundle": "PASS",
+  "field_consent_server": "PASS_PARTIAL_ROLE_SEED",
+  "full_ci": "NOT_GREEN",
+  "full_e2e": "NOT_RUN",
+  "founder_desktop": "PENDING",
+  "founder_phone": "PENDING",
+  "product_freeze": "NOT_RESTORED",
+  "submission_readiness": "NOT READY",
+  "ai_as_clinical_authority": 0,
+  "note": "Founder device checks are NOT the only remaining work."
+}

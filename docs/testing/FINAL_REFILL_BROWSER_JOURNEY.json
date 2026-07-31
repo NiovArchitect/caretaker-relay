@@ -1,0 +1,8 @@
+{
+  "at": "2026-07-31T03:05:00.000Z",
+  "api_claim": "PRIOR_PASS",
+  "ui_claim_humanize": "DEPLOYED",
+  "playwright_full_browser": false,
+  "raw_json_errors_api": 0,
+  "status": "API_PASS_BROWSER_PARTIAL"
+}
