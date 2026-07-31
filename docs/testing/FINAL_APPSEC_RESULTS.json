@@ -1,0 +1,15 @@
+{
+  "cases": [
+    {
+      "id": "no_token_profile",
+      "status": 401,
+      "pass": true
+    },
+    {
+      "id": "unauth_meds",
+      "status": 403,
+      "pass": true
+    }
+  ],
+  "pass": true
+}

@@ -634,18 +634,37 @@ export async function restoreSession(): Promise<SessionIdentity | null> {
     const { saveAuthorizationState, emptyAuthorizationState } = await import(
       "../lib/authorization"
     );
+    const labIds = new Set([
+      "p-sadeil",
+      "p-maya",
+      "p-walter",
+      "p-dr-shah",
+      "p-unauthorized",
+    ]);
+    const isLab = labIds.has(meData.care_person_id);
     saveAuthorizationState({
       ...emptyAuthorizationState(),
       pendingRecipientAccess: false,
-      labPrincipalAuthorized: false,
+      labPrincipalAuthorized: isLab,
       displayName: meData.display_name,
-      pathway: "invitation",
+      pathway: isLab ? "lab_demo_sign_in" : "invitation",
     });
-    const rid = String(
-      memberships[0]?.careRecipientId ||
-        memberships[0]?.care_recipient_id ||
-        "",
-    );
+    // Preserve explicit active recipient when still authorized (do not force first membership)
+    const memberIds = memberships
+      .map((m) =>
+        String(m.careRecipientId || m.care_recipient_id || ""),
+      )
+      .filter(Boolean);
+    let preferred: string | null = null;
+    try {
+      preferred = sessionStorage.getItem("cr.activeCareRecipientId");
+    } catch {
+      preferred = null;
+    }
+    const rid =
+      preferred && memberIds.includes(preferred)
+        ? preferred
+        : memberIds[0] || "";
     if (rid) {
       setActiveCareRecipientId(rid);
       try {

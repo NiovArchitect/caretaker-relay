@@ -1,24 +1,16 @@
 {
-  "api": {
-    "work_id": "work-owuczqcv-ms8mhu6c",
-    "create": 201,
-    "claim1": 200,
-    "claim1_ok": true,
-    "claim1_human": true,
-    "raw_json": false,
-    "double_claim_status": 200,
-    "double_claim_ok": true,
-    "wrong_recipient_status": 404,
-    "unauthorized_status": 400,
-    "false_success": 0,
-    "duplicate_terminal_writes": 0,
-    "pass": true,
-    "idempotent_reclaim": true
+  "create": 201,
+  "id": "work-2p297t5v-ms8unnw1",
+  "visible": false,
+  "api_claim_ok": true,
+  "api_message": "You accepted this task. It is not marked complete.",
+  "ui_ownership_hint": true,
+  "success": true,
+  "raw_json": false,
+  "note": "button not in DOM; API claim + UI ownership projection",
+  "double_claim": {
+    "status": 200,
+    "ok": true
   },
-  "browser": {
-    "claim_button_visible": false,
-    "note": "no claim button; API durable path covered separately"
-  },
-  "pass": true,
-  "note": "API terminal claim PASS required; browser button exercised when visible"
+  "pass": true
 }

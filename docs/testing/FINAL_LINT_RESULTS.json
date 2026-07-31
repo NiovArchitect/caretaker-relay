@@ -1,0 +1,9 @@
+{
+  "at": "2026-07-31T11:31:47.463Z",
+  "command": "npm run lint",
+  "config": "eslint.config.js (minimal)",
+  "errors": 0,
+  "warnings": 12,
+  "max_warnings": 50,
+  "status": "PASS"
+}

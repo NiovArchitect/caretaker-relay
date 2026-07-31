@@ -14,7 +14,10 @@
     "test:e2e": "playwright test --config=playwright.config.ts",
     "test:browser-campaign": "npx tsx scripts/run-real-browser-campaign.mts",
     "probe:live-model": "npx tsx scripts/live-model-probe.mts",
-    "vendor:care-packages": "bash scripts/vendor-care-packages.sh"
+    "vendor:care-packages": "bash scripts/vendor-care-packages.sh",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" \"tests/**/*.{ts,tsx}\" \"e2e/**/*.{ts,tsx}\" --max-warnings 50",
+    "test:integration": "vitest run tests/integration --passWithNoTests",
+    "test:contract": "vitest run tests/contract --passWithNoTests"
   },
   "dependencies": {
     "@caretaker-relay/care-domain": "file:./vendor/care-domain",
@@ -27,7 +30,10 @@
     "@types/node": "^22.20.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.65.0",
+    "@typescript-eslint/parser": "^8.65.0",
     "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^10.8.0",
     "jsdom": "^25.0.1",
     "typescript": "^5.7.2",
     "vite": "^6.0.3",

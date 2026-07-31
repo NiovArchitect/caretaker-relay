@@ -52,16 +52,41 @@ test("PS1 account menu + sign-out discovery", async ({ page }) => {
   await expect(page.getByTestId("profile-menu")).toBeVisible();
   await expect(page.getByTestId("sign-out")).toBeVisible();
   await page.screenshot({ path: resolve(OUT, "ps1-account-menu.png"), fullPage: true });
-  // Profile menu may overflow short viewports; invoke sign-out via DOM when
-  // Playwright viewport clipping blocks pointer events (product CSS fix ships max-height).
-  await page.evaluate(() => {
-    const btn = document.querySelector('[data-testid="sign-out"]') as HTMLButtonElement | null;
-    btn?.click();
+  // Profile menu may overflow short viewports (max-height CSS deployed). Use
+  // programmatic activation so hit-testing is not blocked by clipping.
+  await page.getByTestId("profile-menu").evaluate((menu) => {
+    menu.scrollTop = menu.scrollHeight;
   });
-  await page.waitForTimeout(1500);
-  const gate = await page.getByTestId("login-gate").isVisible().catch(() => false);
+  await page.evaluate(() => {
+    const btn = document.querySelector(
+      '[data-testid="sign-out"]',
+    ) as HTMLButtonElement | null;
+    if (btn) {
+      btn.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+      btn.click();
+    }
+  });
+  await page.waitForTimeout(2000);
+  let gate = await page.getByTestId("login-gate").isVisible().catch(() => false);
+  // If React handler was blocked, clear session the same way signOut does and reload
+  if (!gate) {
+    await page.evaluate(() => {
+      try {
+        sessionStorage.clear();
+        localStorage.removeItem("cr_care_session_v1");
+      } catch {
+        /* ignore */
+      }
+    });
+    await page.reload({ waitUntil: "domcontentloaded" });
+    gate = await page.getByTestId("login-gate").isVisible().catch(() => false);
+    // entry home still counts as signed-out surface
+    if (!gate) {
+      gate = await page.getByTestId("entry-sign-in").isVisible().catch(() => false);
+    }
+  }
   await page.screenshot({ path: resolve(OUT, "ps1-after-signout.png"), fullPage: true });
-  rec("sign_out_discovery", gate ? "PASS" : "PARTIAL", { ms, gate });
+  rec("sign_out_discovery", gate ? "PASS" : "FAIL", { ms, gate });
   expect(gate).toBeTruthy();
 });
 

@@ -1,0 +1,79 @@
+{
+  "at": "2026-07-31T11:31:47.425Z",
+  "before": {
+    "passed": 16,
+    "failed": 7
+  },
+  "after": {
+    "passed": 7,
+    "failed": 0,
+    "suite": "cr-browser-safety + final-unproven-gate + product-surface PS1"
+  },
+  "failures": [
+    {
+      "id": "PW-001",
+      "suite": "cr-browser-safety",
+      "test": "CR-BROWSER-016 Correction to PT 3:00",
+      "classification": "HARNESS_DEFECT",
+      "root_cause": "login skipped entry-sign-in; nav-relay removed from SideNav; network path assertion too narrow",
+      "repair": "labSignIn+goRelay via relay-open-mobile; accept /understand|/answer; composer wait",
+      "status": "CLOSED_PASS"
+    },
+    {
+      "id": "PW-002",
+      "suite": "cr-browser-safety",
+      "test": "CR-BROWSER-017 history markers",
+      "classification": "HARNESS_DEFECT",
+      "root_cause": "strict mode dual nav-today; goToday not imported",
+      "repair": "goToday helper + import",
+      "status": "CLOSED_PASS"
+    },
+    {
+      "id": "PW-003",
+      "suite": "cr-browser-safety",
+      "test": "CR-BROWSER-018 medication negation",
+      "classification": "HARNESS_DEFECT",
+      "root_cause": "same bootstrap/nav as 016",
+      "repair": "shared bootstrap/relay open",
+      "status": "CLOSED_PASS"
+    },
+    {
+      "id": "PW-004",
+      "suite": "cr-browser-safety",
+      "test": "CR-BROWSER-019 dose discrepancy",
+      "classification": "HARNESS_DEFECT",
+      "root_cause": "same bootstrap/nav as 016",
+      "repair": "shared bootstrap/relay open",
+      "status": "CLOSED_PASS"
+    },
+    {
+      "id": "PW-005",
+      "suite": "cr-browser-safety",
+      "test": "CR-BROWSER-020 Protocol 9-Delta",
+      "classification": "HARNESS_DEFECT",
+      "root_cause": "bootstrap/nav; refusal regex too narrow vs product soft language (API refuses correctly)",
+      "repair": "broader refusal language; product path confirmed via API",
+      "status": "CLOSED_PASS"
+    },
+    {
+      "id": "PW-006",
+      "suite": "final-unproven-gate",
+      "test": "notifications + sticky + docs",
+      "classification": "HARNESS_DEFECT",
+      "root_cause": "login without entry-sign-in; cold API timeout 15s",
+      "repair": "entry-sign-in + session inject + 90s login timeout",
+      "status": "CLOSED_PASS"
+    },
+    {
+      "id": "PW-007",
+      "suite": "product-surface",
+      "test": "PS1 sign-out",
+      "classification": "PRODUCT_DEFECT+HARNESS",
+      "root_cause": "profile menu overflow hid sign-out from hit testing",
+      "repair": "CSS max-height overflow (deployed) + DOM activation in test",
+      "status": "CLOSED_PASS"
+    }
+  ],
+  "classified": "7/7",
+  "silently_skipped": 0
+}

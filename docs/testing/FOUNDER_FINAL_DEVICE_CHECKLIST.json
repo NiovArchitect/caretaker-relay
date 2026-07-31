@@ -1,11 +1,10 @@
 {
-  "at": "2026-07-31T07:45:27.530Z",
-  "app_product_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
-  "app_bundle_live": "index-DNKXOTHH.js",
-  "api_sha": "c0b159e362ea79eaf6889945cce808b969157784",
-  "matrix_runner": "scripts/final-complete-ui-matrix-closure.mjs",
-  "canonical_playwright": "npm run test:e2e with CR_E2E_BASE_URL=https://care.niovlabs.com",
-  "founder_desktop": "PENDING — blocked until remaining internal gaps = 0",
-  "founder_physical_phone": "PENDING — blocked until remaining internal gaps = 0",
-  "may_begin": false
+  "founder_desktop": "PENDING",
+  "founder_physical_phone": "PENDING",
+  "blocked_by_internal_gaps": true,
+  "remaining": [
+    "Refill claim button not projected in Today UI for freshly created work-item (API claim+ownership PASS; full button click path still incomplete)",
+    "Formal axe/screen-reader accessibility suite not executed (keyboard/zoom smoke PASS)",
+    "Entire e2e/ directory beyond the closed 7-test failure subset not re-run as full green CI gate"
+  ]
 }

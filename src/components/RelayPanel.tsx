@@ -176,7 +176,7 @@ export function RelayPanel({
     if (followActiveExchangeRef.current) {
       window.requestAnimationFrame(() => anchorToUserMessage(lastUser.id));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- deliberate on message/busy identity
+    // Deliberate deps: message/busy identity only (react-hooks plugin not in eslint gate)
   }, [messages, busy]);
 
   // Recipient switch clears AI thread pin state

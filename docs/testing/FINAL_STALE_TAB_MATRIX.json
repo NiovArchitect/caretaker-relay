@@ -1,0 +1,8 @@
+{
+  "before_status": 200,
+  "after_status": 403,
+  "claim_after_status": 400,
+  "claim_after_ok": false,
+  "ui_after_reload": "Caretaker Relay\n?\nACCESS\nNo care profile yet\nFamily / friend · pending access\nFri, Jul 31\nRelay\nStale 50104 · Caregiver\nS\nAccount\nConnected\nNAVIGATE\nToday\nCare\nPeople\nDocuments\nHelping a family member",
+  "pass": true
+}

@@ -1,0 +1,11 @@
+{
+  "at": "2026-07-31T11:00:00.000Z",
+  "app_sha": "63325fd21b0c118193aa78181302fbbda752b07c",
+  "api_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "playwright_before": {
+    "pass": 16,
+    "fail": 7
+  },
+  "app_unit": "98/98",
+  "care_unit": "363/363"
+}

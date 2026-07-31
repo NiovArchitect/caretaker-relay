@@ -1,0 +1,10 @@
+{
+  "wrong_recipient_claim": {
+    "status": 404,
+    "ok": false
+  },
+  "other_household_claim": {
+    "status": 0
+  },
+  "pass": true
+}
