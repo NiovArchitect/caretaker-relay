@@ -1,0 +1,10 @@
+{
+  "at": "2026-07-31T04:00:00.000Z",
+  "typecheck": "PASS",
+  "app_unit": "98/98 PASS",
+  "foundation_care_unit": "359/359 PASS",
+  "full_ci_pipeline": "NOT_RUN",
+  "lint": "NOT_FULL",
+  "integration": "NOT_FULL",
+  "e2e_playwright_suite": "HARNESS_CUSTOM_SCRIPT_PARTIAL"
+}

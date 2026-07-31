@@ -1040,7 +1040,8 @@ export async function careClaimWorkItem(
     message?: string;
   }>(
     `/api/v1/care/recipients/${encodeURIComponent(careRecipientId)}/work-items/${encodeURIComponent(workItemId)}/claim`,
-    { method: "POST", token, baseUrl },
+    // Fastify rejects Content-Type application/json with an empty body
+    { method: "POST", token, baseUrl, body: {} },
   );
 }
 

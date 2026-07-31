@@ -1,0 +1,188 @@
+{
+  "n": 30,
+  "pass": 30,
+  "fail": 0,
+  "rows": [
+    {
+      "q": "What were her last vital signs?",
+      "ok": true,
+      "issues": [],
+      "head": "No verified recent vital signs are currently on file for Evelyn. This is an information gap — not a new charting action."
+    },
+    {
+      "q": "Is she on oxygen?",
+      "ok": true,
+      "issues": [],
+      "head": "No verified oxygen or airway-support device is currently listed for Evelyn. That is not the same as “not on oxygen” if a"
+    },
+    {
+      "q": "Has she had any surgeries?",
+      "ok": true,
+      "issues": [],
+      "head": "I don't have a record that answers “has she had any surgeries” for Evelyn Carter yet. Try naming the timeframe (today, l"
+    },
+    {
+      "q": "What therapies is she receiving?",
+      "ok": true,
+      "issues": [],
+      "head": "Therapy-related goals on file for Evelyn:\n\nUpcoming therapy appointments appear on Today / Schedule when scheduled.\n• Sa"
+    },
+    {
+      "q": "What other comorbidities does she have?",
+      "ok": true,
+      "issues": [],
+      "head": "I don't have a record that answers “what other comorbidities does she have” for Evelyn Carter yet. Try naming the timefr"
+    },
+    {
+      "q": "What is her orientation status?",
+      "ok": true,
+      "issues": [],
+      "head": "No verified orientation or cognitive baseline is currently on file for Evelyn. This is an information gap — not a charti"
+    },
+    {
+      "q": "What is her mobility status?",
+      "ok": true,
+      "issues": [],
+      "head": "Transfer / mobility support for Evelyn (authorized care profile):\nSupport needs on file:\nSafety considerations:\nRelated "
+    },
+    {
+      "q": "Can she walk by herself?",
+      "ok": true,
+      "issues": [],
+      "head": "Transfer / mobility support for Evelyn (authorized care profile):\nSupport needs on file:\nSafety considerations:\nRelated "
+    },
+    {
+      "q": "What medications is she on?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take with food at lunch\n Time: 12:00"
+    },
+    {
+      "q": "What should I do today?",
+      "ok": true,
+      "issues": [],
+      "head": "It is 3:33 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern needs monitoring\n\nComing up\n• Metformin 500"
+    },
+    {
+      "q": "What is her ambulatory status?",
+      "ok": true,
+      "issues": [],
+      "head": "Evelyn Carter's most recent report on file is caregiver reported: ate (last noted Saturday, July 25, 2026 at 2:32 PM PDT"
+    },
+    {
+      "q": "What is her code status?",
+      "ok": true,
+      "issues": [],
+      "head": "No verified code-status order (Full Code, DNR/DNI, POLST, or comfort-focused treatment) is currently on file for Evelyn."
+    },
+    {
+      "q": "What diet is she on?",
+      "ok": true,
+      "issues": [],
+      "head": "No verified diet, texture, or swallowing instruction is currently on file for Evelyn. Check the care plan or ask the cli"
+    },
+    {
+      "q": "What devices does she use?",
+      "ok": true,
+      "issues": [],
+      "head": "I don't have a record that answers “what devices does she use” for Evelyn Carter yet. Try naming the timeframe (today, l"
+    },
+    {
+      "q": "Can she take care of herself?",
+      "ok": true,
+      "issues": [],
+      "head": "I can't tell you to give another dose from a chat question alone — a recorded administration is not permission to redose"
+    },
+    {
+      "q": "What health problems does she have?",
+      "ok": true,
+      "issues": [],
+      "head": "I don't have a record that answers “what health problems does she have” for Evelyn Carter yet. Try naming the timeframe "
+    },
+    {
+      "q": "Is there a blood sugar check before metformin?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take with food at lunch\n Time: 12:00"
+    },
+    {
+      "q": "How often does she take metformin?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take with food at lunch\n Time: 12:00"
+    },
+    {
+      "q": "When was metformin last given?",
+      "ok": true,
+      "issues": [],
+      "head": "Last recorded: unidentified tablet(s) · Thursday, July 23, 2026 at 1:56 PM PDT · by Marcus Carter (CONFLICTED)\n\nRelated "
+    },
+    {
+      "q": "Does she have an advance directive?",
+      "ok": true,
+      "issues": [],
+      "head": "No verified code-status order (Full Code, DNR/DNI, POLST, or comfort-focused treatment) is currently on file for Evelyn."
+    },
+    {
+      "q": "Does she have a POLST?",
+      "ok": true,
+      "issues": [],
+      "head": "No verified code-status order (Full Code, DNR/DNI, POLST, or comfort-focused treatment) is currently on file for Evelyn."
+    },
+    {
+      "q": "What is her weight-bearing status?",
+      "ok": true,
+      "issues": [],
+      "head": "Transfer / mobility support for Evelyn (authorized care profile):\nSupport needs on file:\nSafety considerations:\nRelated "
+    },
+    {
+      "q": "Is she acting like herself?",
+      "ok": true,
+      "issues": [],
+      "head": "No verified orientation or cognitive baseline is currently on file for Evelyn. This is an information gap — not a charti"
+    },
+    {
+      "q": "What help does she need with daily living?",
+      "ok": true,
+      "issues": [],
+      "head": "I don't have a record that answers “what help does she need with daily living” for Evelyn Carter yet. Try naming the tim"
+    },
+    {
+      "q": "What machines does she use?",
+      "ok": true,
+      "issues": [],
+      "head": "I don't have a record that answers “what machines does she use” for Evelyn Carter yet. Try naming the timeframe (today, "
+    },
+    {
+      "q": "What is her cognitive baseline?",
+      "ok": true,
+      "issues": [],
+      "head": "No verified orientation or cognitive baseline is currently on file for Evelyn. This is an information gap — not a charti"
+    },
+    {
+      "q": "What is her prescribed diet texture?",
+      "ok": true,
+      "issues": [],
+      "head": "No verified diet, texture, or swallowing instruction is currently on file for Evelyn. Check the care plan or ask the cli"
+    },
+    {
+      "q": "What is her respiratory support?",
+      "ok": true,
+      "issues": [],
+      "head": "I don't have a record that answers “what is her respiratory support” for Evelyn Carter yet. Try naming the timeframe (to"
+    },
+    {
+      "q": "What is her ADL functional status?",
+      "ok": true,
+      "issues": [],
+      "head": "Evelyn Carter's most recent report on file is caregiver reported: ate (last noted Saturday, July 25, 2026 at 2:32 PM PDT"
+    },
+    {
+      "q": "What were her latest vitals?",
+      "ok": true,
+      "issues": [],
+      "head": "No verified recent vital signs are currently on file for Evelyn. This is an information gap — not a new charting action."
+    }
+  ],
+  "result": "30/30"
+}

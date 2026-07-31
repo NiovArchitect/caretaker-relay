@@ -1,0 +1,13 @@
+{
+  "at": "2026-07-31T04:00:00.000Z",
+  "desktop": "PENDING_FOUNDER",
+  "physical_phone": "PENDING_FOUNDER",
+  "presented_as_sole_remaining_gate": false,
+  "prerequisites_still_open": [
+    "claim empty-body deploy + retest",
+    "full durable-action matrix",
+    "full CI",
+    "privacy/AppSec/a11y full",
+    "missing role fixtures (recipient, coordinator, temporary)"
+  ]
+}

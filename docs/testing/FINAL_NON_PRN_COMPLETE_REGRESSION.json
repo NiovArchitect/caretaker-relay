@@ -1,0 +1,8 @@
+{
+  "at": "2026-07-31T04:00:00.000Z",
+  "clinical_30_api": "30/30 PASS",
+  "shift_plan_template": "PASS",
+  "identity_browser_roles": "6 role/viewport runs",
+  "full_non_prn_bank": "PARTIAL",
+  "read_journeys_creating_writes": 0
+}

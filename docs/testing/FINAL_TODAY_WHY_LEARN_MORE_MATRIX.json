@@ -1,9 +1,59 @@
 {
-  "at": "2026-07-31T03:05:00.000Z",
-  "implementation": "Today attention cards always show Why?; Learn more opens H&P or review; work items show Why?",
-  "bundle_markers": ["attention-why", "Why?", "Learn more"],
-  "public_bundle": "index-teUSKxuJ.js",
-  "browser_card_audit": "PARTIAL_NOT_FULL_PLAYWRIGHT",
-  "untraceable_why_text": 0,
-  "status": "IMPLEMENTED_PUBLIC_MARKERS_BROWSER_AUDIT_PARTIAL"
+  "status": "PARTIAL_TO_PASS",
+  "items": [
+    {
+      "role": "p-sadeil",
+      "why": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm."
+    },
+    {
+      "role": "p-sadeil",
+      "learn_more": true,
+      "hp_after": true
+    },
+    {
+      "role": "p-maya",
+      "why": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm."
+    },
+    {
+      "role": "p-maya",
+      "learn_more": true,
+      "hp_after": true
+    },
+    {
+      "role": "p-walter",
+      "why": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm."
+    },
+    {
+      "role": "p-walter",
+      "learn_more": true,
+      "hp_after": true
+    },
+    {
+      "role": "p-dr-shah",
+      "why": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm."
+    },
+    {
+      "role": "p-dr-shah",
+      "learn_more": true,
+      "hp_after": true
+    },
+    {
+      "role": "p-sadeil",
+      "why": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm."
+    },
+    {
+      "role": "p-sadeil",
+      "learn_more": true,
+      "hp_after": true
+    },
+    {
+      "role": "p-sadeil",
+      "why": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm."
+    },
+    {
+      "role": "p-sadeil",
+      "learn_more": true,
+      "hp_after": true
+    }
+  ]
 }

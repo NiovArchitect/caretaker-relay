@@ -1,0 +1,11 @@
+{
+  "at": "2026-07-31T03:33:40.277Z",
+  "app_product_sha": "b4f64b6a3848f40e719d7f9331115622417f3e45",
+  "api_product_sha": "340c546a0cd74f99c9022c576e88e786b6d05bc9",
+  "bundle": "index-BvraZTm4.js",
+  "public": "https://care.niovlabs.com",
+  "unit_baseline": {
+    "foundation_care": "359/359 PASS (prior campaign)",
+    "app": "98/98 PASS (prior campaign)"
+  }
+}

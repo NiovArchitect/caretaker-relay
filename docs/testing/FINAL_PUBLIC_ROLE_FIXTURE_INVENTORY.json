@@ -1,0 +1,39 @@
+{
+  "at": "2026-07-31T03:33:40.277Z",
+  "roles": [
+    {
+      "principal": "p-sadeil",
+      "label": "Marcus primary family",
+      "password_source": "lab synthetic (not production secrets)",
+      "recipient": "cr-olivia",
+      "auth_path": "POST /api/v1/care/auth/login + UI lab principal select"
+    },
+    {
+      "principal": "p-maya",
+      "label": "Maya family/friend",
+      "password_source": "lab synthetic (not production secrets)",
+      "recipient": "cr-olivia",
+      "auth_path": "POST /api/v1/care/auth/login + UI lab principal select"
+    },
+    {
+      "principal": "p-walter",
+      "label": "Daniel DSP",
+      "password_source": "lab synthetic (not production secrets)",
+      "recipient": "cr-olivia",
+      "auth_path": "POST /api/v1/care/auth/login + UI lab principal select"
+    },
+    {
+      "principal": "p-dr-shah",
+      "label": "Clinician Shah",
+      "password_source": "lab synthetic (not production secrets)",
+      "recipient": "cr-olivia",
+      "auth_path": "POST /api/v1/care/auth/login + UI lab principal select"
+    }
+  ],
+  "missing_required_roles": [
+    "coordinator dedicated",
+    "care recipient self",
+    "temporary caregiver",
+    "explicitly revoked fixture (Maya/Daniel may be expired)"
+  ]
+}

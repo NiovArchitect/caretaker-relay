@@ -1,0 +1,237 @@
+{
+  "at": "2026-07-31T03:33:40.277Z",
+  "cases": [
+    {
+      "role": "Marcus primary family",
+      "id": "p-sadeil",
+      "viewport": {
+        "width": 1366,
+        "height": 900
+      },
+      "login": {
+        "ok": true,
+        "surface": "app-shell"
+      },
+      "identity_strip_visible": true,
+      "allergies": "ALLERGIES\nNo known drug allergies on file",
+      "dob": "DOB\n1948-03-12",
+      "code": "CODE STATUS\nNot verified on file",
+      "emergency": "EMERGENCY\nMarcus Carter · Primary family caregiver",
+      "age": " · Age 78",
+      "hp_open": true,
+      "hp_label": "Hide · Health & Care Details",
+      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+      "learn_more_clicked": true,
+      "refill_claim": {
+        "control": "claim-work-work-0pxd0jnd-ms51ki47",
+        "error": "Body cannot be empty when content-type is set to 'application/json'",
+        "feedback": "",
+        "raw_json": false
+      },
+      "relay_last_vitals_snippet": "n observed effect, or something else for Evelyn Carter? After you confirm, I will save the right kind of record and show where it appears.\nAction\nI understand a care update about Evelyn Carter. Was this taken, refused, missed, newly added to the plan, discontinued, an observed effect, or something else for Evelyn Carter? After you confirm, I will save the right kind of record and show where it appears.\nTime\nAs you described\nSource\nYou · caregiver update for Evelyn Carter\nStatus\nNeeds checking\n✓\nLooks right\n✎\nCorrect something\n✕\nCancel\n\nCancel discards this draft. Nothing is saved to care truth.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend\nMarcus Carter · caring for Evelyn Carter\nNot medical advice · you verify care truth",
+      "api_login": true,
+      "api_profile_status": 200,
+      "api_fields": {
+        "dob": true,
+        "allergies": true,
+        "emergency": true,
+        "diagnoses": true,
+        "redacted": []
+      }
+    },
+    {
+      "role": "Maya family/friend",
+      "id": "p-maya",
+      "viewport": {
+        "width": 1366,
+        "height": 900
+      },
+      "login": {
+        "ok": true,
+        "surface": "app-shell"
+      },
+      "identity_strip_visible": true,
+      "allergies": "ALLERGIES\nNo known drug allergies on file",
+      "dob": "",
+      "code": "CODE STATUS\nNot verified on file",
+      "emergency": "EMERGENCY\nNot on file",
+      "age": "",
+      "hp_open": true,
+      "hp_label": "Hide · Health & Care Details",
+      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+      "learn_more_clicked": true,
+      "relay_last_vitals_snippet": "an observed effect, or something else for Evelyn Carter? After you confirm, I will save the right kind of record and show where it appears.\nAction\nI understand a care update about Evelyn Carter. Was this taken, refused, missed, newly added to the plan, discontinued, an observed effect, or something else for Evelyn Carter? After you confirm, I will save the right kind of record and show where it appears.\nTime\nAs you described\nSource\nYou · caregiver update for Evelyn Carter\nStatus\nNeeds checking\n✓\nLooks right\n✎\nCorrect something\n✕\nCancel\n\nCancel discards this draft. Nothing is saved to care truth.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend\nMaya Bennett · caring for Evelyn Carter\nNot medical advice · you verify care truth",
+      "api_login": true,
+      "api_profile_status": 200,
+      "api_fields": {
+        "dob": false,
+        "allergies": true,
+        "emergency": false,
+        "diagnoses": false,
+        "redacted": [
+          "dateOfBirth",
+          "confirmedConditions",
+          "healthConcerns",
+          "primaryProviderName",
+          "emergencyContacts",
+          "safetyConsiderations"
+        ]
+      }
+    },
+    {
+      "role": "Daniel DSP",
+      "id": "p-walter",
+      "viewport": {
+        "width": 1366,
+        "height": 900
+      },
+      "login": {
+        "ok": true,
+        "surface": "app-shell"
+      },
+      "identity_strip_visible": true,
+      "allergies": "ALLERGIES\nNo known drug allergies on file",
+      "dob": "",
+      "code": "CODE STATUS\nNot verified on file",
+      "emergency": "EMERGENCY\nNot on file",
+      "age": "",
+      "hp_open": true,
+      "hp_label": "Hide · Health & Care Details",
+      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+      "learn_more_clicked": true,
+      "relay_last_vitals_snippet": ", an observed effect, or something else for Evelyn Carter? After you confirm, I will save the right kind of record and show where it appears.\nAction\nI understand a care update about Evelyn Carter. Was this taken, refused, missed, newly added to the plan, discontinued, an observed effect, or something else for Evelyn Carter? After you confirm, I will save the right kind of record and show where it appears.\nTime\nAs you described\nSource\nYou · caregiver update for Evelyn Carter\nStatus\nNeeds checking\n✓\nLooks right\n✎\nCorrect something\n✕\nCancel\n\nCancel discards this draft. Nothing is saved to care truth.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend\nDaniel Kim · caring for Evelyn Carter\nNot medical advice · you verify care truth",
+      "api_login": true,
+      "api_profile_status": 200,
+      "api_fields": {
+        "dob": false,
+        "allergies": true,
+        "emergency": false,
+        "diagnoses": false,
+        "redacted": [
+          "dateOfBirth",
+          "confirmedConditions",
+          "healthConcerns",
+          "primaryProviderName",
+          "emergencyContacts",
+          "safetyConsiderations"
+        ]
+      }
+    },
+    {
+      "role": "Clinician Shah",
+      "id": "p-dr-shah",
+      "viewport": {
+        "width": 1366,
+        "height": 900
+      },
+      "login": {
+        "ok": true,
+        "surface": "app-shell"
+      },
+      "identity_strip_visible": true,
+      "allergies": "ALLERGIES\nNo known drug allergies on file",
+      "dob": "",
+      "code": "CODE STATUS\nNot verified on file",
+      "emergency": "EMERGENCY\nNot on file",
+      "age": "",
+      "hp_open": true,
+      "hp_label": "Hide · Health & Care Details",
+      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+      "learn_more_clicked": true,
+      "relay_last_vitals_snippet": " observed effect, or something else for Evelyn Carter? After you confirm, I will save the right kind of record and show where it appears.\nAction\nI understand a care update about Evelyn Carter. Was this taken, refused, missed, newly added to the plan, discontinued, an observed effect, or something else for Evelyn Carter? After you confirm, I will save the right kind of record and show where it appears.\nTime\nAs you described\nSource\nYou · caregiver update for Evelyn Carter\nStatus\nNeeds checking\n✓\nLooks right\n✎\nCorrect something\n✕\nCancel\n\nCancel discards this draft. Nothing is saved to care truth.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend\nDr. Priya Shah · caring for Evelyn Carter\nNot medical advice · you verify care truth",
+      "api_login": true,
+      "api_profile_status": 200,
+      "api_fields": {
+        "dob": false,
+        "allergies": true,
+        "emergency": false,
+        "diagnoses": false,
+        "redacted": [
+          "dateOfBirth",
+          "confirmedConditions",
+          "healthConcerns",
+          "primaryProviderName",
+          "emergencyContacts",
+          "safetyConsiderations"
+        ]
+      }
+    },
+    {
+      "role": "Marcus primary family",
+      "id": "p-sadeil",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "login": {
+        "ok": true,
+        "surface": "app-shell"
+      },
+      "identity_strip_visible": true,
+      "allergies": "ALLERGIES\nNo known drug allergies on file",
+      "dob": "DOB\n1948-03-12",
+      "code": "CODE STATUS\nNot verified on file",
+      "emergency": "EMERGENCY\nMarcus Carter · Primary family caregiver",
+      "age": " · Age 78",
+      "hp_open": true,
+      "hp_label": "Hide · Health & Care Details",
+      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+      "learn_more_clicked": true,
+      "refill_claim": {
+        "control": "claim-work-work-0pxd0jnd-ms51ki47",
+        "error": "Body cannot be empty when content-type is set to 'application/json'",
+        "feedback": "",
+        "raw_json": false
+      },
+      "relay_last_vitals_snippet": ", missed, newly added to the plan, discontinued, an observed effect, or something else for Evelyn Carter? After you confirm, I will save the right kind of record and show where it appears.\nAction\nI understand a care update about Evelyn Carter. Was this taken, refused, missed, newly added to the plan, discontinued, an observed effect, or something else for Evelyn Carter? After you confirm, I will save the right kind of record and show where it appears.\nTime\nAs you described\nSource\nYou · caregiver update for Evelyn Carter\nStatus\nNeeds checking\n✓\nLooks right\n✎\nCorrect something\n✕\nCancel\n\nCancel discards this draft. Nothing is saved to care truth.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend\nToday\nCare\nPeople\nDocuments\nRelay",
+      "api_login": true,
+      "api_profile_status": 200,
+      "api_fields": {
+        "dob": true,
+        "allergies": true,
+        "emergency": true,
+        "diagnoses": true,
+        "redacted": []
+      }
+    },
+    {
+      "role": "Marcus primary family",
+      "id": "p-sadeil",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "login": {
+        "ok": true,
+        "surface": "app-shell"
+      },
+      "identity_strip_visible": true,
+      "allergies": "ALLERGIES\nNone verified on file",
+      "dob": "DOB\n1948-03-12",
+      "code": "CODE STATUS\nNot verified on file",
+      "emergency": "EMERGENCY\nMarcus Carter · Primary family caregiver",
+      "age": " · Age 78",
+      "hp_open": true,
+      "hp_label": "Hide · Health & Care Details",
+      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+      "learn_more_clicked": true,
+      "refill_claim": {
+        "control": "claim-work-work-0pxd0jnd-ms51ki47",
+        "error": "Body cannot be empty when content-type is set to 'application/json'",
+        "feedback": "",
+        "raw_json": false
+      },
+      "relay_last_vitals_snippet": ", missed, newly added to the plan, discontinued, an observed effect, or something else for Evelyn Carter? After you confirm, I will save the right kind of record and show where it appears.\nAction\nI understand a care update about Evelyn Carter. Was this taken, refused, missed, newly added to the plan, discontinued, an observed effect, or something else for Evelyn Carter? After you confirm, I will save the right kind of record and show where it appears.\nTime\nAs you described\nSource\nYou · caregiver update for Evelyn Carter\nStatus\nNeeds checking\n✓\nLooks right\n✎\nCorrect something\n✕\nCancel\n\nCancel discards this draft. Nothing is saved to care truth.\n\nAsk a question or share what you observed. Relay organizes and asks you to verify anything consequential.\n\n↑\nSend\nToday\nCare\nPeople\nDocuments\nRelay",
+      "api_login": true,
+      "api_profile_status": 200,
+      "api_fields": {
+        "dob": true,
+        "allergies": true,
+        "emergency": true,
+        "diagnoses": true,
+        "redacted": []
+      }
+    }
+  ],
+  "status": "PARTIAL_PASS"
+}

@@ -1,6 +1,60 @@
 {
-  "at": "2026-07-31T03:05:00.000Z",
-  "bundle_markers": ["open-health-care-details", "Health & Care Details", "today-identity-strip"],
-  "playwright_full": false,
-  "status": "IMPLEMENTED_PUBLIC_BROWSER_DEEP_AUDIT_OPEN"
+  "at": "2026-07-31T03:33:40.277Z",
+  "cases": [
+    {
+      "role": "Marcus primary family",
+      "hp_open": true,
+      "hp_label": "Hide · Health & Care Details",
+      "login": {
+        "ok": true,
+        "surface": "app-shell"
+      }
+    },
+    {
+      "role": "Maya family/friend",
+      "hp_open": true,
+      "hp_label": "Hide · Health & Care Details",
+      "login": {
+        "ok": true,
+        "surface": "app-shell"
+      }
+    },
+    {
+      "role": "Daniel DSP",
+      "hp_open": true,
+      "hp_label": "Hide · Health & Care Details",
+      "login": {
+        "ok": true,
+        "surface": "app-shell"
+      }
+    },
+    {
+      "role": "Clinician Shah",
+      "hp_open": true,
+      "hp_label": "Hide · Health & Care Details",
+      "login": {
+        "ok": true,
+        "surface": "app-shell"
+      }
+    },
+    {
+      "role": "Marcus primary family",
+      "hp_open": true,
+      "hp_label": "Hide · Health & Care Details",
+      "login": {
+        "ok": true,
+        "surface": "app-shell"
+      }
+    },
+    {
+      "role": "Marcus primary family",
+      "hp_open": true,
+      "hp_label": "Hide · Health & Care Details",
+      "login": {
+        "ok": true,
+        "surface": "app-shell"
+      }
+    }
+  ],
+  "status": "PARTIAL"
 }

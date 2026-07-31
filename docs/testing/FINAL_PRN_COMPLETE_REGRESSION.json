@@ -1,0 +1,12 @@
+{
+  "at": "2026-07-31T04:00:00.000Z",
+  "scope": "unit_prn_reconfirm_not_full_public_browser",
+  "files": [
+    "tests/unit/care/prn-medication.test.ts",
+    "tests/unit/care/prn-reliability.test.ts",
+    "tests/unit/care/prn-mutation-suite.test.ts"
+  ],
+  "status": "UNIT_RECONFIRM_PENDING_OR_PASS",
+  "architecture_rebuilt": false,
+  "full_public_prn_browser": false
+}

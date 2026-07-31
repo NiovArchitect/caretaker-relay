@@ -1,0 +1,9 @@
+{
+  "at": "2026-07-31T03:33:40.277Z",
+  "canonical_template_public": {
+    "status": "PASS",
+    "sample": "It is 3:33 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern needs monitoring\n\nComing up\n• Metformin 500 mg · 12:00 PM today\n• Physical therapy · Friday 4:30 PM PDT\n\nWatch for\n• The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team before marking this complete.\n\nEvery item above is "
+  },
+  "scenarios_30_browser": "API_TEMPLATE_PASS_BROWSER_SCENARIO_PARTIAL",
+  "note": "Canonical Now/Coming up/Watch for proven via API; full 30 browser time scenarios not fully enumerated"
+}

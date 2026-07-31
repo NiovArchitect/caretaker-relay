@@ -1,0 +1,99 @@
+{
+  "at": "2026-07-31T03:33:40.277Z",
+  "cases": [
+    {
+      "role": "Marcus primary family",
+      "api": {
+        "dob": true,
+        "allergies": true,
+        "emergency": true,
+        "diagnoses": true,
+        "redacted": []
+      },
+      "ui_allergies": "ALLERGIES\nNo known drug allergies on file",
+      "ui_strip": true
+    },
+    {
+      "role": "Maya family/friend",
+      "api": {
+        "dob": false,
+        "allergies": true,
+        "emergency": false,
+        "diagnoses": false,
+        "redacted": [
+          "dateOfBirth",
+          "confirmedConditions",
+          "healthConcerns",
+          "primaryProviderName",
+          "emergencyContacts",
+          "safetyConsiderations"
+        ]
+      },
+      "ui_allergies": "ALLERGIES\nNo known drug allergies on file",
+      "ui_strip": true
+    },
+    {
+      "role": "Daniel DSP",
+      "api": {
+        "dob": false,
+        "allergies": true,
+        "emergency": false,
+        "diagnoses": false,
+        "redacted": [
+          "dateOfBirth",
+          "confirmedConditions",
+          "healthConcerns",
+          "primaryProviderName",
+          "emergencyContacts",
+          "safetyConsiderations"
+        ]
+      },
+      "ui_allergies": "ALLERGIES\nNo known drug allergies on file",
+      "ui_strip": true
+    },
+    {
+      "role": "Clinician Shah",
+      "api": {
+        "dob": false,
+        "allergies": true,
+        "emergency": false,
+        "diagnoses": false,
+        "redacted": [
+          "dateOfBirth",
+          "confirmedConditions",
+          "healthConcerns",
+          "primaryProviderName",
+          "emergencyContacts",
+          "safetyConsiderations"
+        ]
+      },
+      "ui_allergies": "ALLERGIES\nNo known drug allergies on file",
+      "ui_strip": true
+    },
+    {
+      "role": "Marcus primary family",
+      "api": {
+        "dob": true,
+        "allergies": true,
+        "emergency": true,
+        "diagnoses": true,
+        "redacted": []
+      },
+      "ui_allergies": "ALLERGIES\nNo known drug allergies on file",
+      "ui_strip": true
+    },
+    {
+      "role": "Marcus primary family",
+      "api": {
+        "dob": true,
+        "allergies": true,
+        "emergency": true,
+        "diagnoses": true,
+        "redacted": []
+      },
+      "ui_allergies": "ALLERGIES\nNone verified on file",
+      "ui_strip": true
+    }
+  ],
+  "status": "PARTIAL"
+}
