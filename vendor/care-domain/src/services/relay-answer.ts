@@ -846,6 +846,10 @@ function answerWithState(
     [
       "CARE_COVERAGE",
       "TRANSPORTATION",
+      "APPOINTMENT_REQUEST_NEW",
+      "APPOINTMENT_RESCHEDULE",
+      "APPOINTMENT_CANCEL",
+      "APPOINTMENT_CONFIRM_BOOK",
       "RECIPIENT_AGE",
       "RECIPIENT_DIAGNOSIS",
       "RECIPIENT_IDENTITY",
@@ -853,10 +857,6 @@ function answerWithState(
       "RECIPIENT_ALLERGIES",
       "RECIPIENT_MOBILITY",
       "EMERGENCY_SNAPSHOT",
-      "APPOINTMENT_REQUEST_NEW",
-      "APPOINTMENT_RESCHEDULE",
-      "APPOINTMENT_CANCEL",
-      "APPOINTMENT_CONFIRM_BOOK",
     ].includes(i),
   );
   if (personIntent) {

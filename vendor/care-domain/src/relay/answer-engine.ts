@@ -152,12 +152,27 @@ function exclusiveAnswerPlan(
   ) {
     return ["PREVIOUS_SHIFT"];
   }
+  // Medication administration history before yesterday-wellbeing steal
+  if (
+    primary === "MEDICATION_ADMINISTRATION_HISTORY" ||
+    classified.intents.includes("MEDICATION_ADMINISTRATION_HISTORY") ||
+    /\b(was medication administered|who gave|last (dose|med)|administration history)\b/i.test(
+      q,
+    ) ||
+    /\b(when did|did)\b.{0,40}\b(give|gave|administer)\b/i.test(q) ||
+    /\b(already give|already gave|anyone (already )?(give|gave)|give her lunch med)\b/i.test(
+      q,
+    )
+  ) {
+    return ["MEDICATION_ADMINISTRATION_HISTORY"];
+  }
   // Three distinct temporal plans — never share one CHANGE_SINCE composer
   if (
     primary === "YESTERDAY_WELLBEING" ||
     classified.intents.includes("YESTERDAY_WELLBEING") ||
     (/\byesterday\b/.test(q) &&
-      /\b(feel|feeling|mood|tired|fever|dizz|sleep|ate)\b/.test(q))
+      /\b(feel|feeling|mood|tired|fever|dizz|sleep|ate)\b/.test(q) &&
+      !/\b(give|gave|administer|medication|medicine|dose|metformin)\b/.test(q))
   ) {
     return ["YESTERDAY_WELLBEING"];
   }
@@ -488,10 +503,14 @@ function composeAnswer(ctx: {
         if (!body || /allegra/i.test(body)) return null;
         return body.charAt(0).toUpperCase() + body.slice(1);
       }
+      if (s && s.length > 8 && !/^event\b/i.test(s)) {
+        return s.charAt(0).toUpperCase() + s.slice(1);
+      }
       return null;
     };
+    const handoffChanged = proj.ACTIVE_HANDOFF?.whatChanged ?? [];
     const ranked = semanticDedupeLines(
-      cleanChanges
+      [...cleanChanges, ...handoffChanged]
         .map(naturalizeToday)
         .filter((x): x is string => !!x),
     );

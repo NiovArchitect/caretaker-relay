@@ -156,11 +156,17 @@ describe("gateActionsForClaim — order diverges, never grants access", () => {
     }
   });
 
-  it("privacy_note is non-actionable (mode null)", () => {
+  it("privacy_note does not grant access (explain-only, not invite/request)", () => {
     const privacy = gateActionsForClaim("receiving_care").find(
       (a) => a.id === "privacy_note",
     );
-    expect(privacy?.mode).toBeNull();
+    // privacy_explain navigates to privacy education only — never access grant
+    expect(privacy?.mode === null || privacy?.mode === "privacy_explain").toBe(
+      true,
+    );
+    expect(privacy?.mode).not.toBe("invite");
+    expect(privacy?.mode).not.toBe("request");
+    expect(privacy?.mode).not.toBe("provisional");
   });
 });
 

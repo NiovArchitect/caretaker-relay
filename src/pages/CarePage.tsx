@@ -635,7 +635,11 @@ function AboutRecipientPanel({
             Blood type:{" "}
             {typeof p.bloodType === "string" && p.bloodType.trim()
               ? `${p.bloodType.trim()} (on file · not inferred)`
-              : "O+ · synthetic demo only (not a clinical record)"}
+              : "Not on file — never guessed"}
+          </li>
+          <li data-testid="emergency-provenance" className="muted">
+            Emergency fields show only verified on-file values. Missing items are
+            gaps, not invented clinical facts.
           </li>
           {p.primaryProviderName ? (
             <li>Provider: {String(p.primaryProviderName)}</li>
