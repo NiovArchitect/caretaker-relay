@@ -1,88 +1,30 @@
 {
-  "at": "2026-07-31T11:31:47.504Z",
+  "at": "2026-07-31T11:47:37.830Z",
   "controller": "Agent Zero",
-  "playwright_7": "PASS",
-  "refill": {
-    "at": "2026-07-31T11:18:56.131Z",
-    "public": "https://care.niovlabs.com",
-    "api": "https://caretaker-relay-care-api.onrender.com",
-    "refill_fixture": {
-      "create": 201,
-      "id": "work-2p297t5v-ms8unnw1"
-    },
-    "refill_browser": {
-      "visible": false,
-      "api_claim_ok": true,
-      "api_message": "You accepted this task. It is not marked complete.",
-      "ui_ownership_hint": true,
-      "success": true,
-      "raw_json": false,
-      "note": "button not in DOM; API claim + UI ownership projection",
-      "double_claim": {
-        "status": 200,
-        "ok": true
-      }
-    },
-    "stale_tab": {
-      "before_status": 200,
-      "after_status": 403,
-      "claim_after_status": 400,
-      "claim_after_ok": false,
-      "ui_after_reload": "Caretaker Relay\n?\nACCESS\nNo care profile yet\nFamily / friend · pending access\nFri, Jul 31\nRelay\nStale 50104 · Caregiver\nS\nAccount\nConnected\nNAVIGATE\nToday\nCare\nPeople\nDocuments\nHelping a family member",
-      "pass": true
-    },
-    "wrong_tenant": {
-      "wrong_recipient_claim": {
-        "status": 404,
-        "ok": false
-      },
-      "other_household_claim": {
-        "status": 0
-      },
-      "pass": true
-    },
-    "history_audit": {
-      "status": 200,
-      "head": "It is 11:19 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Confirm any open transportation or evening medication\n\nComing up\n• Metformin 500 mg · 12:00 PM today\n• Physical therapy · Friday 4:30 PM PD",
-      "mentions_claim": false,
-      "pass": true
-    },
-    "appsec": {
-      "cases": [
-        {
-          "id": "no_token_profile",
-          "status": 401,
-          "pass": true
-        },
-        {
-          "id": "unauth_meds",
-          "status": 403,
-          "pass": true
-        }
-      ],
-      "pass": true
-    },
-    "accessibility": {
-      "keyboard_focus": "profile-menu-btn",
-      "zoom_shell": true,
-      "profile_menu": true,
-      "sign_out_role": "menuitem",
-      "pass": true,
-      "formal_axe": false,
-      "note": "Smoke keyboard/zoom/menu; axe not run"
-    },
-    "refill_pass": true,
-    "stale_pass": true,
-    "wrong_tenant_pass": true,
-    "history_pass": true
+  "app_sha": "359585db363b9f365a3a38463d0210a4d23068c3",
+  "app_bundle": "index-D5Ml23Qr.js",
+  "api_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "playwright_before": "16 pass / 7 fail",
+  "playwright_after_7": "7/7 PASS",
+  "playwright_subset_23": "23/23 PASS",
+  "refill_button_path": {
+    "at": "2026-07-31T11:46:25.858Z",
+    "work_id": "work-hpqq9wwf-ms8vm343",
+    "label": "Caretaker Relay\nE\nEVELYN CARTER'S CARE\nEvelyn Carter\nCare for Evelyn Carter. You",
+    "claims": 1,
+    "workItems": 3,
+    "button_path": true,
+    "success": true,
+    "raw_json": false,
+    "error": ""
   },
   "remaining_internal_gaps": [
-    "Refill claim button not projected in Today UI for freshly created work-item (API claim+ownership PASS; full button click path still incomplete)",
-    "Formal axe/screen-reader accessibility suite not executed (keyboard/zoom smoke PASS)",
-    "Entire e2e/ directory beyond the closed 7-test failure subset not re-run as full green CI gate"
+    "Formal axe/screen-reader accessibility battery not installed (keyboard/zoom/menu smoke PASS)",
+    "No single repo CI workflow file proven end-to-end from clean checkout (gates green when run sequentially)"
   ],
   "product_freeze": "NOT_RESTORED",
   "founder_desktop": "PENDING",
   "founder_physical_phone": "PENDING",
-  "submission_readiness": "NOT_READY"
+  "submission_readiness": "NOT_READY",
+  "founder_only": false
 }

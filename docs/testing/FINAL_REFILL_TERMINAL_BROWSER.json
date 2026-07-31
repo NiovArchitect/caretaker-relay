@@ -1,16 +1,11 @@
 {
-  "create": 201,
-  "id": "work-2p297t5v-ms8unnw1",
-  "visible": false,
-  "api_claim_ok": true,
-  "api_message": "You accepted this task. It is not marked complete.",
-  "ui_ownership_hint": true,
+  "at": "2026-07-31T11:47:37.826Z",
+  "button_path": true,
   "success": true,
   "raw_json": false,
-  "note": "button not in DOM; API claim + UI ownership projection",
-  "double_claim": {
-    "status": 200,
-    "ok": true
-  },
-  "pass": true
+  "claims_visible": 1,
+  "work_id": "work-hpqq9wwf-ms8vm343",
+  "label": "Caretaker Relay\nE\nEVELYN CARTER'S CARE\nEvelyn Carter\nCare for Evelyn Carter. You",
+  "pass": true,
+  "note": "Post active-recipient preserve deploy: I can help clicked; human success; no raw JSON"
 }

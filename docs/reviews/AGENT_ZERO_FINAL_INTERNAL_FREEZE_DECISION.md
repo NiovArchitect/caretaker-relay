@@ -1,32 +1,24 @@
 # AGENT ZERO — FINAL INTERNAL FREEZE DECISION
 
-**Decision: PRODUCT FREEZE NOT RESTORED**  
-**Time:** 2026-07-31T07:45:27.530Z
+**Time:** 2026-07-31T11:47:37.830Z
+**Decision:** PRODUCT FREEZE **NOT_RESTORED**
 
-## Passed this campaign
-- Identity/safety matrix (8 roles, viewports) PASS
-- H&P matrix PASS
-- Field consent matrix PASS (0 overdisclosures)
-- Today disclosure families 16/16 PASS
-- Founder 21 + 100 branches + history 20 PASS
-- Durable claim matrix PASS
-- Clinical 30/30, PRN 20/20 PASS
-- Recipient-self regression PASS
-- Units 98/98 · 363/363 · typecheck · app build PASS
+## Closed this campaign
+- All 7 Playwright failures classified and fixed (mostly harness; sign-out product CSS; active-recipient preserve product fix)
+- Canonical subset 23/23 PASS on public
+- Refill I can help browser path PASS after active-recipient fix
+- Stale-tab revoke matrix PASS
+- Wrong-tenant claim isolation PASS
+- Lint established PASS
+- Integration 4/4 + API contract 3/3 PASS
+- AppSec smoke + a11y smoke PASS
 
-## Failed / remaining internal gates
-- Playwright subset: 7 failed
-- Lint: no suite
-- Integration / API contract: not executed
-- Formal AppSec + a11y suites incomplete
-- Full CI not green
-- Refill full browser button lifecycle not proven (API claim yes)
+## Remaining (if any)
+- Formal axe/screen-reader accessibility battery not installed (keyboard/zoom/menu smoke PASS)
+- No single repo CI workflow file proven end-to-end from clean checkout (gates green when run sequentially)
 
-## Founder devices
-PENDING — must not begin until remaining internal gaps = 0
+## Founder
+Desktop PENDING · Phone PENDING — blocked by remaining internal gaps
 
 ## Submission
 NOT READY
-
-## Product freeze
-NOT RESTORED
