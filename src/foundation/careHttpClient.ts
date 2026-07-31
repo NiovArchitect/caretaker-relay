@@ -605,6 +605,7 @@ export async function careMe(token: string, baseUrl?: string) {
     session_id: string;
     auth_mode?: string;
     authorized_recipients?: number;
+    memberships?: Array<Record<string, unknown>>;
     pending_recipient_access?: boolean;
     contact_verified?: boolean;
   }>("/api/v1/care/me", { token, baseUrl });

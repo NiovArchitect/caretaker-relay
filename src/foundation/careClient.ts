@@ -610,24 +610,59 @@ export async function restoreSession(): Promise<SessionIdentity | null> {
     return null;
   }
   // Keep pendingAuthorization flag from server membership count — sync, not fire-and-forget
+  const meData = me.data as {
+    authorized_recipients?: number;
+    memberships?: Array<Record<string, unknown>>;
+    care_person_id: string;
+    display_name: string;
+    roles?: string[];
+    auth_mode: SessionIdentity["authMode"];
+  };
+  const memberships = Array.isArray(meData.memberships) ? meData.memberships : [];
   const zeroAccess =
-    typeof (me.data as { authorized_recipients?: number }).authorized_recipients ===
-      "number" &&
-    (me.data as { authorized_recipients: number }).authorized_recipients === 0;
+    typeof meData.authorized_recipients === "number" &&
+    meData.authorized_recipients === 0 &&
+    memberships.length === 0;
   if (zeroAccess) {
     const { markPendingAccount } = await import("../lib/authorization");
-    markPendingAccount(me.data.display_name, null);
+    markPendingAccount(meData.display_name, null);
     setActiveCareRecipientId(NO_RECIPIENT_ID);
     const { saveActiveCareRecipientId } = await import("../lib/careContext");
     saveActiveCareRecipientId("cr-none");
+  } else if (memberships.length > 0) {
+    // Invite accept / restored session: clear pending gate so UI reads memberships
+    const { saveAuthorizationState, emptyAuthorizationState } = await import(
+      "../lib/authorization"
+    );
+    saveAuthorizationState({
+      ...emptyAuthorizationState(),
+      pendingRecipientAccess: false,
+      labPrincipalAuthorized: false,
+      displayName: meData.display_name,
+      pathway: "invitation",
+    });
+    const rid = String(
+      memberships[0]?.careRecipientId ||
+        memberships[0]?.care_recipient_id ||
+        "",
+    );
+    if (rid) {
+      setActiveCareRecipientId(rid);
+      try {
+        sessionStorage.setItem("cr.activeCareRecipientId", rid);
+      } catch {
+        /* ignore */
+      }
+    }
   }
   sessionIdentity = {
-    carePersonId: me.data.care_person_id,
-    displayName: me.data.display_name,
-    roleLabel: roleLabelFromRoles(me.data.roles ?? []),
-    authMode: me.data.auth_mode,
+    carePersonId: meData.care_person_id,
+    displayName: meData.display_name,
+    roleLabel: roleLabelFromRoles(meData.roles ?? []),
+    authMode: meData.auth_mode,
   };
-  persistSession(persisted.token, sessionIdentity);
+  // Must re-persist memberships — dropping them forces p-acct-* invitees back to AuthorizationGate
+  persistSession(persisted.token, sessionIdentity, memberships);
   return sessionIdentity;
 }
 
