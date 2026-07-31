@@ -1416,16 +1416,22 @@ export function App() {
         </div>
       </main>
 
+      {/*
+        Relay scrim is visual-only on mobile (pointer-events: none in CSS).
+        Must not intercept Mark seen / care actions (D-DURABLE-001).
+        Profile scrim remains interactive modal dismiss.
+      */}
       {relayOpen && (
         <div
           className="overlay-scrim"
-          aria-hidden
-          onClick={() => setRelayOpen(false)}
+          data-testid="relay-scrim"
+          aria-hidden="true"
         />
       )}
       {profileOpen && (
         <div
           className="overlay-scrim profile-scrim"
+          data-testid="profile-scrim"
           aria-hidden
           onClick={() => setProfileOpen(false)}
         />

@@ -2462,39 +2462,45 @@ p {
     min-width: 0 !important;
   }
 
+  /*
+   * D-DURABLE-001: full-viewport fixed drawer + interactive scrim sat above
+   * Care/Notifications and stole Mark seen (and other) pointer events.
+   * Mobile/tablet Relay is a bottom sheet: only its visible bounds capture
+   * pointers. Main care content remains usable while Relay is open.
+   */
   .relay-panel {
     position: fixed;
-    top: 0;
+    left: 0;
     right: 0;
+    top: auto;
     bottom: 0;
-    left: auto;
-    width: min(100%, 100vw) !important;
+    width: 100% !important;
     max-width: 100vw !important;
-    max-height: none;
-    height: 100dvh !important;
-    height: 100svh !important;
+    height: min(72dvh, 640px) !important;
+    max-height: min(72dvh, 640px) !important;
     z-index: 50;
-    transform: translateX(100%);
+    transform: translateY(110%);
     transition:
       transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
       box-shadow 0.24s ease;
-    border-radius: 0;
+    border-radius: 20px 20px 0 0;
+    border-left: none;
+    border-top: 1px solid var(--cr-glass-edge);
     box-shadow: var(--cr-shadow-float);
-    /* Closed drawer must not intercept topbar / bottom-nav taps */
+    /* Closed sheet must not intercept topbar / bottom-nav taps */
     pointer-events: none;
     visibility: hidden;
   }
 
   .relay-panel.is-open {
-    transform: translateX(0);
+    transform: translateY(0);
     pointer-events: auto;
     visibility: visible;
     width: 100% !important;
     max-width: 100vw !important;
     box-shadow:
-      -12px 0 48px rgba(20, 60, 90, 0.16),
+      0 -12px 48px rgba(20, 60, 90, 0.16),
       var(--cr-shadow-float);
-    border-left: 1px solid var(--cr-glass-edge);
   }
 
   /* Landscape phones: keep single column; prevent horizontal shell */
@@ -2610,13 +2616,26 @@ p {
     display: none;
   }
 
+  /*
+   * Visual dim only — must NOT capture pointer events (D-DURABLE-001).
+   * Closing Relay remains via panel close control; caregivers can Mark seen
+   * and use Care while Relay stays open.
+   */
   .overlay-scrim {
     display: block;
     position: fixed;
     inset: 0;
+    background: rgba(10, 47, 60, 0.14);
+    backdrop-filter: blur(2px);
+    z-index: 40;
+    pointer-events: none;
+  }
+
+  .overlay-scrim.profile-scrim {
+    /* Profile remains a true modal — still receives clicks to dismiss */
+    pointer-events: auto;
     background: rgba(10, 47, 60, 0.28);
     backdrop-filter: blur(4px);
-    z-index: 40;
   }
 
   .pair-grid,

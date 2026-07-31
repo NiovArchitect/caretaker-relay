@@ -384,6 +384,8 @@ export function RelayPanel({
       className={`relay-panel${open ? " is-open" : ""}`}
       data-testid="relay-panel"
       aria-label="Relay intelligence"
+      aria-modal="false"
+      data-overlay-mode="sheet"
     >
       <div className="relay-panel-header">
         <div>
