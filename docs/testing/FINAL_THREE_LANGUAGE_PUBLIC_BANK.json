@@ -1,0 +1,30 @@
+{
+  "at": "2026-07-31T02:52:34Z",
+  "pass": 75,
+  "n": 75,
+  "result": "75/75 PASS",
+  "canonical_answer_disagreements_measured": "med_entry_and_false_record_score only",
+  "summaries": [
+    {
+      "label": "lay",
+      "n": 25,
+      "pass": 25,
+      "fail": 0,
+      "failures": []
+    },
+    {
+      "label": "caregiver",
+      "n": 25,
+      "pass": 25,
+      "fail": 0,
+      "failures": []
+    },
+    {
+      "label": "professional",
+      "n": 25,
+      "pass": 25,
+      "fail": 0,
+      "failures": []
+    }
+  ]
+}

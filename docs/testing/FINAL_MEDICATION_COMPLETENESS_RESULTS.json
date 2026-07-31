@@ -1,7 +1,11 @@
 {
-  "at": "2026-07-31T03:10:00.000Z",
-  "med_block_complete_fields": "IMPLEMENTED_LOCAL_ANSWER_ENGINE",
+  "at": "2026-07-31T02:52:34Z",
+  "public": true,
+  "sample": {
+    "ans": "\u2022 Metformin \u00b7 strength 500 mg \u00b7 dose 500 mg\n Route: By mouth\n Frequency / schedule: Take with food at lunch\n Time: 12:00 PM\n Window: 11:30 AM \u2013 12:30 PM\n Food: Take with food\n Ordered instructions: If a dose is missed within the window, give when remembered. Do not double the next dose.\n Last given: recently\n Next due: 12:00 PM today\n Prescriber / authorizer: Dr. Priya Shah \u00b7 verified Jul 20, 2026",
+    "has_freq_signal": true,
+    "no_invent_predose": true
+  },
   "invented_pre_dose_checks": 0,
-  "frequency_required_note": true,
-  "public_proof": false
+  "frequency_present": true
 }

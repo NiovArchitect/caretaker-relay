@@ -1,0 +1,12 @@
+{
+  "at": "2026-07-31T02:52:34Z",
+  "bundle_markers": [
+    "today-identity-strip",
+    "identity-allergies",
+    "Health & Care Details",
+    "Not verified on file"
+  ],
+  "public_bundle": "index-CY_jls9u.js",
+  "browser_role_matrix": "API_MARKERS_ONLY_NOT_FULL_MULTI_ROLE_BROWSER",
+  "status": "PARTIAL_PUBLIC_MARKER_PASS"
+}

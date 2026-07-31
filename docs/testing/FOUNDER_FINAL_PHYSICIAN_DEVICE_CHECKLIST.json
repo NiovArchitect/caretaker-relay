@@ -1,0 +1,20 @@
+{
+  "at": "2026-07-31T02:52:34Z",
+  "desktop": "PENDING_FOUNDER",
+  "physical_phone": "PENDING_FOUNDER",
+  "urls": {
+    "app": "https://care.niovlabs.com",
+    "api": "https://caretaker-relay-care-api.onrender.com"
+  },
+  "expected_app_sha": "1f0fb484cfb9c10964bc7e7216a98477df950688",
+  "expected_bundle": "index-CY_jls9u.js",
+  "checks": [
+    "Login as Marcus",
+    "See identity strip (age/DOB/allergies/emergency/code status)",
+    "Open Learn more / Health & Care Details",
+    "Ask: last vitals \u2014 no med-entry language",
+    "Ask: is she on oxygen \u2014 not appointments",
+    "Ask: what medications \u2014 frequency present",
+    "I can help on a work item \u2014 human message, no JSON"
+  ]
+}

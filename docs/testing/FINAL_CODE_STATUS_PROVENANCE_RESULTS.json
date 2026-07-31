@@ -1,0 +1,22 @@
+{
+  "at": "2026-07-31T02:52:34Z",
+  "public_answers": [
+    {
+      "q": "What is her code status?",
+      "ans": "No verified code-status order (Full Code, DNR/DNI, POLST, or comfort-focused treatment) is currently on file for Evelyn. Document missing \u2014 do not invent one. An authorized person can add the state-applicable form or req",
+      "issues": []
+    },
+    {
+      "q": "Does she have an advance directive?",
+      "ans": "No verified code-status order (Full Code, DNR/DNI, POLST, or comfort-focused treatment) is currently on file for Evelyn. Document missing \u2014 do not invent one. An authorized person can add the state-applicable form or req",
+      "issues": []
+    },
+    {
+      "q": "Does she have a POLST?",
+      "ans": "No verified code-status order (Full Code, DNR/DNI, POLST, or comfort-focused treatment) is currently on file for Evelyn. Document missing \u2014 do not invent one. An authorized person can add the state-applicable form or req",
+      "issues": []
+    }
+  ],
+  "caregiver_free_text_as_verified": 0,
+  "status": "PASS_GAP_LANGUAGE"
+}

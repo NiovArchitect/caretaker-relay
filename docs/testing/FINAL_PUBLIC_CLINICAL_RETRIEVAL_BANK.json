@@ -1,0 +1,184 @@
+{
+  "at": "2026-07-31T02:51:45Z",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "recipient": "cr-olivia",
+  "unique_questions": 89,
+  "summaries": [
+    {
+      "label": "retrieval",
+      "n": 18,
+      "pass": 18,
+      "fail": 0,
+      "failures": []
+    },
+    {
+      "label": "lay",
+      "n": 25,
+      "pass": 25,
+      "fail": 0,
+      "failures": []
+    },
+    {
+      "label": "caregiver",
+      "n": 25,
+      "pass": 25,
+      "fail": 0,
+      "failures": []
+    },
+    {
+      "label": "professional",
+      "n": 25,
+      "pass": 25,
+      "fail": 0,
+      "failures": []
+    },
+    {
+      "label": "journey30",
+      "n": 30,
+      "pass": 30,
+      "fail": 0,
+      "failures": []
+    }
+  ],
+  "retrieval_detail": [
+    {
+      "q": "What were her last vital signs?",
+      "ans": "No verified recent vital signs are currently on file for Evelyn. This is an information gap \u2014 not a new charting action. An authorized person can record measurements or request them from the clinical team.",
+      "issues": []
+    },
+    {
+      "q": "What are her latest vitals?",
+      "ans": "No verified recent vital signs are currently on file for Evelyn. This is an information gap \u2014 not a new charting action. An authorized person can record measurements or request them from the clinical team.",
+      "issues": []
+    },
+    {
+      "q": "What is her orientation status?",
+      "ans": "No verified orientation or cognitive baseline is currently on file for Evelyn. This is an information gap \u2014 not a charting action. An authorized person can add baseline notes or request them from the clinical team.",
+      "issues": []
+    },
+    {
+      "q": "Is she oriented?",
+      "ans": "Evelyn Carter's most recent report on file is caregiver reported: ate (last noted Saturday, July 25, 2026 at 2:32 PM PDT). The main item needing attention is Mobility concern needs monitoring. Metformin 500 mg remains sc",
+      "issues": []
+    },
+    {
+      "q": "What therapies is she receiving?",
+      "ans": "Therapy-related goals on file for Evelyn:\n\nUpcoming therapy appointments appear on Today / Schedule when scheduled.\n\u2022 Safe mobility and fewer post-meal dizziness episodes",
+      "issues": []
+    },
+    {
+      "q": "Has she had any surgeries?",
+      "ans": "I don't have a record that answers \u201chas she had any surgeries\u201d for Evelyn Carter yet. Try naming the timeframe (today, last shift, yesterday) or the domain (meds, appointment, handoff, message).",
+      "issues": []
+    },
+    {
+      "q": "What other comorbidities does she have?",
+      "ans": "I don't have a record that answers \u201cwhat other comorbidities does she have\u201d for Evelyn Carter yet. Try naming the timeframe (today, last shift, yesterday) or the domain (meds, appointment, handoff, message).",
+      "issues": []
+    },
+    {
+      "q": "What is her mobility status?",
+      "ans": "Transfer / mobility support for Evelyn (authorized care profile):\nSupport needs on file:\nSafety considerations:\nRelated care goals:\n\nThis is functional baseline on file \u2014 not a new clinical order. If transfer needs have ",
+      "issues": []
+    },
+    {
+      "q": "Can she walk by herself?",
+      "ans": "Transfer / mobility support for Evelyn (authorized care profile):\nSupport needs on file:\nSafety considerations:\nRelated care goals:\n\nThis is functional baseline on file \u2014 not a new clinical order. If transfer needs have ",
+      "issues": []
+    },
+    {
+      "q": "Is she on oxygen?",
+      "ans": "No verified oxygen or airway-support device is currently listed for Evelyn. That is not the same as \u201cnot on oxygen\u201d if a clinician has ordered it elsewhere \u2014 check Health & Care Details or confirm with the clinical team.",
+      "issues": []
+    },
+    {
+      "q": "Does she use oxygen at home?",
+      "ans": "No verified oxygen or airway-support device is currently listed for Evelyn. That is not the same as \u201cnot on oxygen\u201d if a clinician has ordered it elsewhere \u2014 check Health & Care Details or confirm with the clinical team.",
+      "issues": []
+    },
+    {
+      "q": "What diet is she on?",
+      "ans": "No verified diet, texture, or swallowing instruction is currently on file for Evelyn. Check the care plan or ask the clinical team before changing food or fluid texture.",
+      "issues": []
+    },
+    {
+      "q": "Does she have swallowing problems?",
+      "ans": "I don't have a record that answers \u201cdoes she have swallowing problems\u201d for Evelyn Carter yet. Try naming the timeframe (today, last shift, yesterday) or the domain (meds, appointment, handoff, message).",
+      "issues": []
+    },
+    {
+      "q": "What help does she need with daily living?",
+      "ans": "I don't have a record that answers \u201cwhat help does she need with daily living\u201d for Evelyn Carter yet. Try naming the timeframe (today, last shift, yesterday) or the domain (meds, appointment, handoff, message).",
+      "issues": []
+    },
+    {
+      "q": "What devices does she use?",
+      "ans": "I don't have a record that answers \u201cwhat devices does she use\u201d for Evelyn Carter yet. Try naming the timeframe (today, last shift, yesterday) or the domain (meds, appointment, handoff, message).",
+      "issues": []
+    },
+    {
+      "q": "What is her code status?",
+      "ans": "No verified code-status order (Full Code, DNR/DNI, POLST, or comfort-focused treatment) is currently on file for Evelyn. Document missing \u2014 do not invent one. An authorized person can add the state-applicable form or req",
+      "issues": []
+    },
+    {
+      "q": "Does she have an advance directive?",
+      "ans": "No verified code-status order (Full Code, DNR/DNI, POLST, or comfort-focused treatment) is currently on file for Evelyn. Document missing \u2014 do not invent one. An authorized person can add the state-applicable form or req",
+      "issues": []
+    },
+    {
+      "q": "Does she have a POLST?",
+      "ans": "No verified code-status order (Full Code, DNR/DNI, POLST, or comfort-focused treatment) is currently on file for Evelyn. Document missing \u2014 do not invent one. An authorized person can add the state-applicable form or req",
+      "issues": []
+    }
+  ],
+  "med_sample": {
+    "ans": "\u2022 Metformin \u00b7 strength 500 mg \u00b7 dose 500 mg\n Route: By mouth\n Frequency / schedule: Take with food at lunch\n Time: 12:00 PM\n Window: 11:30 AM \u2013 12:30 PM\n Food: Take with food\n Ordered instructions: If a dose is missed within the window, give when remembered. Do not double the next dose.\n Last given: recently\n Next due: 12:00 PM today\n Prescriber / authorizer: Dr. Priya Shah \u00b7 verified Jul 20, 2026",
+    "has_freq_signal": true,
+    "no_invent_predose": true
+  },
+  "shift_sample": {
+    "ans": "For today's plan, prioritize:\n\u2022 Mobility concern needs monitoring\n\nAlso needs review:\n\u2022 The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team before marking this complete.\n\nComing up today:\n\u2022 Metformin 500 mg \u00b7 12:00 PM today\n\u2022 Physical therapy \u00b7 Friday 4:30 PM PDT",
+    "shape_ok": true
+  },
+  "claim": {
+    "work_http": 200,
+    "claim_http": 200,
+    "body": {
+      "ok": true,
+      "work_item": {
+        "id": "work-5hrwrai4-ms6ilb8a",
+        "careRecipientId": "cr-olivia",
+        "action": "BETA-ONLY: Confirm Evelyn evening Allegra review",
+        "reason": "Multi-recipient isolation marker BETA",
+        "ownerPersonId": "p-sadeil",
+        "ownerDisplayName": "Marcus Carter",
+        "backupOwnerPersonId": null,
+        "createdByPersonId": "p-sadeil",
+        "createdByDisplayName": "Marcus Carter",
+        "dueAt": null,
+        "priority": "normal",
+        "status": "accepted",
+        "escalationRule": "If no response in 30 minutes, notify coordinator and escalate",
+        "sourceEventId": null,
+        "correlationId": "wcorr-ecancf1e-ms6ilb8a",
+        "createdAt": "2026-07-29T20:05:39.994Z",
+        "updatedAt": "2026-07-31T02:51:45.734Z",
+        "evidenceKind": "operational",
+        "previousOwnerPersonId": null,
+        "previousOwnerDisplayName": null,
+        "acceptedAt": "2026-07-31T02:51:45.734Z",
+        "claimExpiresAt": "2026-07-31T04:51:45.734Z"
+      },
+      "message": "You accepted this task. It is not marked complete.",
+      "correlation_id": "8488a78f-bc76-4024-8369-f4c5dd4aaaef"
+    },
+    "id": "work-5hrwrai4-ms6ilb8a"
+  },
+  "three_language_total_pass": 75,
+  "three_language_total_n": 75,
+  "journey30_pass": 30,
+  "journey30_n": 30,
+  "read_query_med_entry_failures": 0,
+  "oxygen_to_appt_failures": 0
+}

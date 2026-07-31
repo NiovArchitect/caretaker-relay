@@ -1,0 +1,9 @@
+{
+  "at": "2026-07-31T02:52:34Z",
+  "sample": {
+    "ans": "For today's plan, prioritize:\n\u2022 Mobility concern needs monitoring\n\nAlso needs review:\n\u2022 The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team before marking this complete.\n\nComing up today:\n\u2022 Metformin 500 mg \u00b7 12:00 PM today\n\u2022 Physical therapy \u00b7 Friday 4:30 PM PDT",
+    "shape_ok": true
+  },
+  "shape_note": "Public server path uses priority/coming-up shape; full Now/Watch-for client template may still differ",
+  "pass_partial": true
+}

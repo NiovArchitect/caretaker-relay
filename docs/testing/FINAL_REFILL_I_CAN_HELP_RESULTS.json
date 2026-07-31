@@ -1,0 +1,41 @@
+{
+  "at": "2026-07-31T02:52:34Z",
+  "public_claim": {
+    "work_http": 200,
+    "claim_http": 200,
+    "body": {
+      "ok": true,
+      "work_item": {
+        "id": "work-5hrwrai4-ms6ilb8a",
+        "careRecipientId": "cr-olivia",
+        "action": "BETA-ONLY: Confirm Evelyn evening Allegra review",
+        "reason": "Multi-recipient isolation marker BETA",
+        "ownerPersonId": "p-sadeil",
+        "ownerDisplayName": "Marcus Carter",
+        "backupOwnerPersonId": null,
+        "createdByPersonId": "p-sadeil",
+        "createdByDisplayName": "Marcus Carter",
+        "dueAt": null,
+        "priority": "normal",
+        "status": "accepted",
+        "escalationRule": "If no response in 30 minutes, notify coordinator and escalate",
+        "sourceEventId": null,
+        "correlationId": "wcorr-ecancf1e-ms6ilb8a",
+        "createdAt": "2026-07-29T20:05:39.994Z",
+        "updatedAt": "2026-07-31T02:51:45.734Z",
+        "evidenceKind": "operational",
+        "previousOwnerPersonId": null,
+        "previousOwnerDisplayName": null,
+        "acceptedAt": "2026-07-31T02:51:45.734Z",
+        "claimExpiresAt": "2026-07-31T04:51:45.734Z"
+      },
+      "message": "You accepted this task. It is not marked complete.",
+      "correlation_id": "8488a78f-bc76-4024-8369-f4c5dd4aaaef"
+    },
+    "id": "work-5hrwrai4-ms6ilb8a"
+  },
+  "claim_http": 200,
+  "raw_json_error_to_caregiver_api": 0,
+  "message": "You accepted this task. It is not marked complete.",
+  "note": "API claim returns human message; browser UI path not re-run with Playwright this session"
+}
