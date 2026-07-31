@@ -1,7 +1,14 @@
 {
-  "at": "2026-07-31T04:00:00.000Z",
-  "hp_toggle_aria_expanded": true,
-  "why_learn_more_buttons": true,
-  "full_sr_keyboard_audit": false,
-  "status": "PARTIAL"
+  "at": "2026-07-31T06:56:03.096Z",
+  "app_source_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy": "dep-d9m495nlk1mc739o1n00",
+  "app_bundle": "index-DNKXOTHH.js",
+  "api_source_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy": "dep-d9m4958ae00c73bdhc10",
+  "deployment_parity": true,
+  "status": "OPEN",
+  "mobile_marcus_strip": true,
+  "full_sr_keyboard_zoom": false
 }

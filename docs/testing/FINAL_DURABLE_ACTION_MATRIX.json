@@ -8,13 +8,8 @@
   "api_deploy_sha": "c0b159e362ea79eaf6889945cce808b969157784",
   "api_deploy": "dep-d9m4958ae00c73bdhc10",
   "deployment_parity": true,
-  "privacy": {
-    "status": "OPEN",
-    "unauthorized_disclosures_executed_set": 0,
-    "wrong_bind": "FORBIDDEN"
-  },
-  "appsec": {
-    "status": "OPEN",
-    "note": "Full AppSec battery not run"
-  }
+  "status": "OPEN",
+  "claim_body_empty_object": "PASS",
+  "full_consequential_button_matrix": "OPEN",
+  "false_success": 0
 }

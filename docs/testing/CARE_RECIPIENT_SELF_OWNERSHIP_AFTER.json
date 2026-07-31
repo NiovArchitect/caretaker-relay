@@ -1,0 +1,30 @@
+{
+  "at": "2026-07-31T06:56:18.808Z",
+  "api_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "app_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "journey1_any_name": {
+    "status": "PASS",
+    "example": "Alex Rivera → new cr-* + care_recipient membership"
+  },
+  "journey2_invite_existing": {
+    "status": "PASS",
+    "role": "care_recipient",
+    "meds_visible": true
+  },
+  "wrong_person_bind": {
+    "status": "PASS",
+    "http": 403,
+    "code": "FORBIDDEN"
+  },
+  "idempotent_setup": {
+    "status": "PASS"
+  },
+  "browser_recipient_self": {
+    "strip": true,
+    "hp": true
+  },
+  "name_only_merge": {
+    "status": "PASS",
+    "note": "no auto-merge by name"
+  }
+}

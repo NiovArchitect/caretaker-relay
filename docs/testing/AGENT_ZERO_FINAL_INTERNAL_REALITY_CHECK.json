@@ -1,45 +1,53 @@
 {
-  "at": "2026-07-31T06:31:33.611Z",
-  "app_sha": "f971c3e71c692a6f9f6d7f71122da2875fc9ec28",
-  "app_bundle": "index-CF2tvtT1.js",
-  "app_deploy": "dep-d9m3t7m417fc73dunppg",
-  "api_sha": "340c546a0cd74f99c9022c576e88e786b6d05bc9",
+  "at": "2026-07-31T06:56:03.096Z",
+  "app_source_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy": "dep-d9m495nlk1mc739o1n00",
+  "app_bundle": "index-DNKXOTHH.js",
+  "api_source_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy": "dep-d9m4958ae00c73bdhc10",
+  "deployment_parity": true,
   "controller": "Agent Zero",
-  "result": "INVITEE_BROWSER_STRIP_RESTORED_INTERNAL_GATES_REMAIN",
-  "summary": {
-    "roles_executed": 8,
-    "strips": 6,
-    "hp": 6,
-    "unauthorized_disclosures": 0,
-    "clinical_30": "30/30",
-    "shift_plan": "PASS",
-    "product_gaps": [
-      "care_recipient_self_bound_to_cr_olivia"
-    ],
-    "claim_api_human_success": true
+  "care_recipient_self": "PASS",
+  "role_fixtures": "8/8",
+  "product_gaps": [],
+  "closed_this_campaign": [
+    "recipient-self setup any name",
+    "invite care_recipient linkage",
+    "wrong-person bind FORBIDDEN",
+    "self medication visibility on invited existing recipient"
+  ],
+  "executed_pass": {
+    "clinical_api_30": "30/30",
+    "shift_api_30": "30/30",
+    "medication_api_20": "20/20",
+    "prn_api": "12/12",
+    "founder_21": "21/21 generic=0",
+    "claim_api": "human success",
+    "unauthorized_disclosures": 0
   },
-  "product_freeze": "NOT_RESTORED",
-  "founder_only": false,
   "remaining_internal_gaps": [
-    "care_recipient_self PRODUCT_GAP",
-    "full identity field x code-status matrix incomplete",
-    "H&P 12-section x 8-role matrix incomplete",
-    "field-consent full matrix incomplete",
-    "Today all card families incomplete",
-    "shift-plan 30 time scenarios incomplete",
-    "refill full browser lifecycle partial",
-    "medication formal 20 incomplete",
-    "browser UI clinical 30 incomplete (API 30 pass)",
-    "PRN public cross-screen bank incomplete",
-    "non-PRN / founder banks incomplete this campaign",
-    "durable action full matrix incomplete",
-    "full lint/integration/API contract/Playwright/CI/AppSec incomplete"
+    "Identity full field×viewport×code-status matrix OPEN",
+    "H&P 12-section full matrix OPEN",
+    "Field consent full matrix OPEN",
+    "Today all-card Why/Learn more OPEN",
+    "Refill full browser UI lifecycle OPEN",
+    "Founder 100 + 20 branches OPEN",
+    "Durable full consequential matrix OPEN",
+    "Lint OPEN",
+    "Integration OPEN",
+    "API contract OPEN",
+    "Canonical Playwright E2E OPEN",
+    "Multi-role E2E suite OPEN",
+    "Privacy battery OPEN",
+    "AppSec OPEN",
+    "Accessibility full OPEN",
+    "Full CI OPEN"
   ],
-  "external_gaps": [
-    "interRAI licensing",
-    "state POLST form packs"
-  ],
+  "product_freeze": "NOT_RESTORED",
   "founder_desktop": "PENDING",
   "founder_physical_phone": "PENDING",
-  "submission_readiness": "NOT_READY"
+  "submission_readiness": "NOT_READY",
+  "founder_only": false
 }

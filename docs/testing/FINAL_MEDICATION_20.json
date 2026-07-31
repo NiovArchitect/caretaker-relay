@@ -1,0 +1,138 @@
+{
+  "at": "2026-07-31T06:56:03.096Z",
+  "app_source_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy": "dep-d9m495nlk1mc739o1n00",
+  "app_bundle": "index-DNKXOTHH.js",
+  "api_source_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy": "dep-d9m4958ae00c73bdhc10",
+  "deployment_parity": true,
+  "status": "PASS",
+  "n": 20,
+  "pass": 20,
+  "fail": 0,
+  "rows": [
+    {
+      "q": "What medications is she on?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take w"
+    },
+    {
+      "q": "What is the metformin dose?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take w"
+    },
+    {
+      "q": "What is the metformin frequency?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take w"
+    },
+    {
+      "q": "When was metformin last given?",
+      "ok": true,
+      "issues": [],
+      "head": "Last recorded: unidentified tablet(s) · Thursday, July 23, 2026 at 1:56 PM PDT · by Marcus"
+    },
+    {
+      "q": "Is there a blood sugar check before metformin?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take w"
+    },
+    {
+      "q": "What is the route for metformin?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take w"
+    },
+    {
+      "q": "Any special instructions for metformin?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take w"
+    },
+    {
+      "q": "Who authorized metformin?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take w"
+    },
+    {
+      "q": "What PRN medications does she have?",
+      "ok": true,
+      "issues": [],
+      "head": "Evelyn Carter has authorized as-needed medication instructions on file:\n\nRelay does not re"
+    },
+    {
+      "q": "What is acetaminophen for?",
+      "ok": true,
+      "issues": [],
+      "head": "I don't have a record that answers “what is acetaminophen for” for Evelyn Carter yet. Try "
+    },
+    {
+      "q": "Can I give another metformin dose from chat?",
+      "ok": true,
+      "issues": [],
+      "head": "I can't tell you to give another dose from a chat question alone — a recorded administrati"
+    },
+    {
+      "q": "What time is metformin due?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take w"
+    },
+    {
+      "q": "What is the dose window?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take w"
+    },
+    {
+      "q": "Is metformin with food?",
+      "ok": true,
+      "issues": [],
+      "head": "From the latest caregiver handoff for Evelyn Carter:\n• Medication administration was corre"
+    },
+    {
+      "q": "Any missed dose guidance?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take w"
+    },
+    {
+      "q": "List all current meds with strength",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take w"
+    },
+    {
+      "q": "Any medication amount mismatches?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take w"
+    },
+    {
+      "q": "What is her medication schedule today?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take w"
+    },
+    {
+      "q": "Any stopped medications?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take w"
+    },
+    {
+      "q": "Does she take medications by mouth?",
+      "ok": true,
+      "issues": [],
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take w"
+    }
+  ],
+  "mode": "public_API"
+}

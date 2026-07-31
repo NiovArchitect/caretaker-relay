@@ -1,0 +1,12 @@
+{
+  "at": "2026-07-31T06:40:00.000Z",
+  "claim_self_register": {
+    "authorized_recipients": 0
+  },
+  "provisional": {
+    "status": "draft_only"
+  },
+  "activate_without_bind": "NOT_READY",
+  "bind_known_id_pre_repair": "ALLOWED_BUG",
+  "product_gap": true
+}

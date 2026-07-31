@@ -1,0 +1,79 @@
+{
+  "at": "2026-07-31T06:56:03.096Z",
+  "app_source_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy": "dep-d9m495nlk1mc739o1n00",
+  "app_bundle": "index-DNKXOTHH.js",
+  "api_source_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy": "dep-d9m4958ae00c73bdhc10",
+  "deployment_parity": true,
+  "status": "PASS",
+  "n": 12,
+  "pass": 12,
+  "fail": 0,
+  "rows": [
+    {
+      "q": "Is any PRN follow-up due?",
+      "ok": true,
+      "head": "No overdue as-needed follow-up is open for Evelyn Carter."
+    },
+    {
+      "q": "What PRN medications does she have?",
+      "ok": true,
+      "head": "Evelyn Carter has authorized as-needed medication instructions on file:\n\nRelay does not recommend gi"
+    },
+    {
+      "q": "Can I give PRN pain med?",
+      "ok": true,
+      "head": "As-needed summary for Evelyn Carter:\nNo open PRN follow-ups.\n• Acetaminophen 500 mg by by mouth as n"
+    },
+    {
+      "q": "Is acetaminophen as needed?",
+      "ok": true,
+      "head": "As-needed summary for Evelyn Carter:\nNo open PRN follow-ups.\n• Acetaminophen 500 mg by by mouth as n"
+    },
+    {
+      "q": "Any overdue as-needed follow-up?",
+      "ok": true,
+      "head": "No overdue as-needed follow-up is open for Evelyn Carter."
+    },
+    {
+      "q": "What is the min interval for acetaminophen?",
+      "ok": true,
+      "head": "I don't have a record that answers “what is the min interval for acetaminophen” for Evelyn Carter ye"
+    },
+    {
+      "q": "Who can authorize a PRN?",
+      "ok": true,
+      "head": "As-needed summary for Evelyn Carter:\nNo open PRN follow-ups.\n• Acetaminophen 500 mg by by mouth as n"
+    },
+    {
+      "q": "Record that PRN was given?",
+      "ok": true,
+      "head": "As-needed summary for Evelyn Carter:\nNo open PRN follow-ups.\n• Acetaminophen 500 mg by by mouth as n"
+    },
+    {
+      "q": "PRN reassessment due?",
+      "ok": true,
+      "head": "No overdue as-needed follow-up is open for Evelyn Carter."
+    },
+    {
+      "q": "Does she have PRN for sleep?",
+      "ok": true,
+      "head": "As-needed summary for Evelyn Carter:\nNo open PRN follow-ups.\n• Acetaminophen 500 mg by by mouth as n"
+    },
+    {
+      "q": "PRN vs scheduled difference?",
+      "ok": true,
+      "head": "As-needed summary for Evelyn Carter:\nNo open PRN follow-ups.\n• Acetaminophen 500 mg by by mouth as n"
+    },
+    {
+      "q": "Open PRN episodes?",
+      "ok": true,
+      "head": "As-needed summary for Evelyn Carter:\nNo open PRN follow-ups.\n• Acetaminophen 500 mg by by mouth as n"
+    }
+  ],
+  "mode": "public_API_12_cases",
+  "note": "API public PRN bank executed. Cross-screen browser PRN UI bank not fully separate."
+}

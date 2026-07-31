@@ -1,0 +1,147 @@
+{
+  "at": "2026-07-31T06:56:03.096Z",
+  "app_source_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy": "dep-d9m495nlk1mc739o1n00",
+  "app_bundle": "index-DNKXOTHH.js",
+  "api_source_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy": "dep-d9m4958ae00c73bdhc10",
+  "deployment_parity": true,
+  "status": "PASS_FOUNDER_21",
+  "founder_21": {
+    "n": 21,
+    "pass": 21,
+    "generic": 0,
+    "rows": [
+      {
+        "q": "How is Evelyn today?",
+        "pass": true,
+        "generic": false,
+        "head": "Evelyn Carter's most recent report on file is caregiver reported: ate (last note"
+      },
+      {
+        "q": "What am I doing today?",
+        "pass": true,
+        "generic": false,
+        "head": "It is 6:48 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern nee"
+      },
+      {
+        "q": "What medication is due?",
+        "pass": true,
+        "generic": false,
+        "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedu"
+      },
+      {
+        "q": "What needs attention?",
+        "pass": true,
+        "generic": false,
+        "head": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Maya Bennett, Marcus C"
+      },
+      {
+        "q": "What appointment is next?",
+        "pass": true,
+        "generic": false,
+        "head": "Physical therapy\nFriday 4:30 PM PDT\nLocation: Coastal PT\nStatus: scheduled\nTrave"
+      },
+      {
+        "q": "Where is it?",
+        "pass": true,
+        "generic": false,
+        "head": "I don't have a record that answers “where is it” for Evelyn Carter yet. Try nami"
+      },
+      {
+        "q": "When should we leave?",
+        "pass": true,
+        "generic": false,
+        "head": "For I don't have a record that answers “where is it” for Evelyn Carter yet. Try "
+      },
+      {
+        "q": "What changed today?",
+        "pass": true,
+        "generic": false,
+        "head": "Care updates recorded for Evelyn Carter today:\n• Medication administration was c"
+      },
+      {
+        "q": "What did the previous caregiver leave?",
+        "pass": true,
+        "generic": false,
+        "head": "Daniel Kim covered Evelyn Carter before you from Jul 29, 6:45 PM to Jul 29, 10:5"
+      },
+      {
+        "q": "Is any PRN follow-up due?",
+        "pass": true,
+        "generic": false,
+        "head": "No overdue as-needed follow-up is open for Evelyn Carter."
+      },
+      {
+        "q": "What remains open?",
+        "pass": true,
+        "generic": false,
+        "head": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Maya Bennett, Marcus C"
+      },
+      {
+        "q": "Who is on shift?",
+        "pass": true,
+        "generic": false,
+        "head": "It is 6:48 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern nee"
+      },
+      {
+        "q": "What is Maya handling?",
+        "pass": true,
+        "generic": false,
+        "head": "Current ongoing primary family coverage: Marcus Carter · Primary family caregive"
+      },
+      {
+        "q": "What is the diet?",
+        "pass": true,
+        "generic": false,
+        "head": "No verified diet, texture, or swallowing instruction is currently on file for Ev"
+      },
+      {
+        "q": "Any swallowing notes?",
+        "pass": true,
+        "generic": false,
+        "head": "I don't have a record that answers “any swallowing notes” for Evelyn Carter yet."
+      },
+      {
+        "q": "What is her code status?",
+        "pass": true,
+        "generic": false,
+        "head": "No verified code-status order (Full Code, DNR/DNI, POLST, or comfort-focused tre"
+      },
+      {
+        "q": "Any allergies?",
+        "pass": true,
+        "generic": false,
+        "head": "Allergy status for Evelyn Carter: **NO KNOWN ALLERGIES** on file.\n• No known dru"
+      },
+      {
+        "q": "What is her mobility status?",
+        "pass": true,
+        "generic": false,
+        "head": "Transfer / mobility support for Evelyn (authorized care profile):\nSupport needs "
+      },
+      {
+        "q": "Last vitals?",
+        "pass": true,
+        "generic": false,
+        "head": "No verified recent vital signs are currently on file for Evelyn. This is an info"
+      },
+      {
+        "q": "Does she have a POLST?",
+        "pass": true,
+        "generic": false,
+        "head": "No verified code-status order (Full Code, DNR/DNI, POLST, or comfort-focused tre"
+      },
+      {
+        "q": "What therapies?",
+        "pass": true,
+        "generic": false,
+        "head": "Therapy-related goals on file for Evelyn:\n\nUpcoming therapy appointments appear "
+      }
+    ]
+  },
+  "founder_100": "OPEN",
+  "founder_20_branches": "OPEN"
+}

@@ -1,0 +1,168 @@
+{
+  "at": "2026-07-31T06:56:03.096Z",
+  "app_source_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy": "dep-d9m495nlk1mc739o1n00",
+  "app_bundle": "index-DNKXOTHH.js",
+  "api_source_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy": "dep-d9m4958ae00c73bdhc10",
+  "deployment_parity": true,
+  "status": "PASS",
+  "n": 30,
+  "pass": 30,
+  "fail": 0,
+  "rows": [
+    {
+      "q": "What should I do today?",
+      "ok": true,
+      "head": "It is 6:47 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern needs monitoring\n\nComin"
+    },
+    {
+      "q": "What is the plan for this shift?",
+      "ok": true,
+      "head": "It is 6:47 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern needs monitoring\n\nComin"
+    },
+    {
+      "q": "What is coming up?",
+      "ok": true,
+      "head": "I don't have a record that answers “what is coming up” for Evelyn Carter yet. Try naming the timefra"
+    },
+    {
+      "q": "What should I do before leaving?",
+      "ok": true,
+      "head": "Last recorded: unidentified tablet(s) · Thursday, July 23, 2026 at 1:56 PM PDT · by Marcus Carter (C"
+    },
+    {
+      "q": "What can I do when there is time?",
+      "ok": true,
+      "head": "Last recorded: unidentified tablet(s) · Thursday, July 23, 2026 at 1:56 PM PDT · by Marcus Carter (C"
+    },
+    {
+      "q": "What should I watch for?",
+      "ok": true,
+      "head": "Yes. The recorded medication was at Thursday, July 23, 2026 at 1:56 PM PDT, and the dizziness report"
+    },
+    {
+      "q": "Is there anything overnight?",
+      "ok": true,
+      "head": "What Maya Bennett needs to know:\n\n• Medication administration was corrected: not administered.\n• Moo"
+    },
+    {
+      "q": "What happens at lunch?",
+      "ok": true,
+      "head": "Yes. The recorded medication was at Thursday, July 23, 2026 at 1:56 PM PDT, and the dizziness report"
+    },
+    {
+      "q": "What appointments are scheduled?",
+      "ok": true,
+      "head": "Physical therapy\nFriday 4:30 PM PDT\nLocation: Coastal PT\nStatus: scheduled\nTravel: about 18 minutes."
+    },
+    {
+      "q": "Is transport arranged?",
+      "ok": true,
+      "head": "Transportation notes on file for Evelyn Carter:\n\nNext relevant appointment: Physical therapy · Tue 1"
+    },
+    {
+      "q": "What about meals and diet?",
+      "ok": true,
+      "head": "No verified diet, texture, or swallowing instruction is currently on file for Evelyn. Check the care"
+    },
+    {
+      "q": "Any swallowing instructions?",
+      "ok": true,
+      "head": "I don't have a record that answers “any swallowing instructions” for Evelyn Carter yet. Try naming t"
+    },
+    {
+      "q": "Hydration plan?",
+      "ok": true,
+      "head": "I don't have a record that answers “hydration plan” for Evelyn Carter yet. Try naming the timeframe "
+    },
+    {
+      "q": "What ADL help is needed?",
+      "ok": true,
+      "head": "I don't have a record that answers “what adl help is needed” for Evelyn Carter yet. Try naming the t"
+    },
+    {
+      "q": "Mobility support today?",
+      "ok": true,
+      "head": "Transfer / mobility support for Evelyn (authorized care profile):\nSupport needs on file:\nSafety cons"
+    },
+    {
+      "q": "What medication is due?",
+      "ok": true,
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take with food a"
+    },
+    {
+      "q": "Any medication corrections?",
+      "ok": true,
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take with food a"
+    },
+    {
+      "q": "Is any PRN due?",
+      "ok": true,
+      "head": "As-needed summary for Evelyn Carter:\nNo open PRN follow-ups.\n• Acetaminophen 500 mg by by mouth as n"
+    },
+    {
+      "q": "Is any PRN overdue?",
+      "ok": true,
+      "head": "As-needed summary for Evelyn Carter:\nNo open PRN follow-ups.\n• Acetaminophen 500 mg by by mouth as n"
+    },
+    {
+      "q": "What remains open?",
+      "ok": true,
+      "head": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Maya Bennett, Marcus Carter.\n• Handoff sti"
+    },
+    {
+      "q": "Who is on shift?",
+      "ok": true,
+      "head": "It is 6:47 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern needs monitoring\n\nComin"
+    },
+    {
+      "q": "What did the previous caregiver leave?",
+      "ok": true,
+      "head": "Daniel Kim covered Evelyn Carter before you from Jul 29, 6:45 PM to Jul 29, 10:55 PM. Their handoff "
+    },
+    {
+      "q": "What changed today?",
+      "ok": true,
+      "head": "Care updates recorded for Evelyn Carter today:\n• Medication administration was corrected to not admi"
+    },
+    {
+      "q": "Any cancelled appointments?",
+      "ok": true,
+      "head": "Physical therapy\nFriday 4:30 PM PDT\nLocation: Coastal PT\nStatus: scheduled\nTravel: about 18 minutes."
+    },
+    {
+      "q": "Any rescheduled appointments?",
+      "ok": true,
+      "head": "Physical therapy\nFriday 4:30 PM PDT\nLocation: Coastal PT\nStatus: scheduled\nTravel: about 18 minutes."
+    },
+    {
+      "q": "Early morning priorities?",
+      "ok": true,
+      "head": "I don't have a record that answers “early morning priorities” for Evelyn Carter yet. Try naming the "
+    },
+    {
+      "q": "Evening priorities?",
+      "ok": true,
+      "head": "I don't have a record that answers “evening priorities” for Evelyn Carter yet. Try naming the timefr"
+    },
+    {
+      "q": "Overnight priorities?",
+      "ok": true,
+      "head": "What Maya Bennett needs to know:\n\n• Medication administration was corrected: not administered.\n• Moo"
+    },
+    {
+      "q": "Empty day check: is there anything open?",
+      "ok": true,
+      "head": "Here's what is still open for Evelyn Carter:\n\nWaiting on: Maya Bennett, Marcus Carter.\n• Handoff sti"
+    },
+    {
+      "q": "Shift ending: what to hand off?",
+      "ok": true,
+      "head": "What the next caregiver should know:\n• Medication administration was corrected: not administered.\n• "
+    }
+  ],
+  "mode": "public_API_scenario_questions"
+}

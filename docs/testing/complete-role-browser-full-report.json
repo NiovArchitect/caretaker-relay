@@ -1,5 +1,5 @@
 {
-  "at": "2026-07-31T06:26:24.185Z",
+  "at": "2026-07-31T06:47:44.844Z",
   "public": "https://care.niovlabs.com",
   "api": "https://caretaker-relay-care-api.onrender.com",
   "roles": [
@@ -14,16 +14,13 @@
         "surface": "app-shell"
       },
       "strip": true,
-      "allergies": "ALLERGIES\nNo known drug allergies on file",
+      "allergies": "ALLERGIES\nNone verified on file",
       "code": "CODE STATUS\nNot verified on file",
-      "dob": "DOB\n1948-03-12",
-      "emergency": "EMERGENCY\nMarcus Carter · Primary family caregiver",
+      "dob": "",
+      "emergency": "EMERGENCY\nNot on file",
       "hp": true,
       "hp_label": "Hide · Health & Care Details",
-      "why": true,
-      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
-      "learn_more": true,
-      "learn_opens_hp": true,
+      "why": false,
       "api_profile": {
         "status": 200,
         "redacted": [],
@@ -141,7 +138,7 @@
     {
       "role": "Coordinator",
       "key": "coordinator",
-      "id": "p-acct-28f3899840cc42d2",
+      "id": "p-acct-71600a8957a74a4a",
       "login": {
         "shell": true,
         "authGate": false,
@@ -178,7 +175,7 @@
     {
       "role": "Temp active",
       "key": "temporary_active",
-      "id": "p-acct-22d250babe384a57",
+      "id": "p-acct-56bc7ec8b00b4cdd",
       "login": {
         "shell": true,
         "authGate": false,
@@ -215,7 +212,7 @@
     {
       "role": "Temp revoked",
       "key": "temporary_revoked",
-      "id": "p-acct-85ea575b6658417d",
+      "id": "p-acct-ddd097d1d2374aec",
       "login": {
         "shell": true,
         "authGate": true,
@@ -257,6 +254,33 @@
       },
       "api_answer_status": 403,
       "api_answer_head": "No care relationship grants access."
+    },
+    {
+      "role": "Recipient self",
+      "key": "care_recipient_self",
+      "id": "p-acct-a6a87645704c461b",
+      "login": {
+        "shell": true,
+        "authGate": false,
+        "loginStill": false,
+        "surface": "app-shell"
+      },
+      "strip": true,
+      "allergies": "ALLERGIES\nNone verified on file",
+      "code": "CODE STATUS\nNot verified on file",
+      "dob": "",
+      "emergency": "EMERGENCY\nNot on file",
+      "hp": true,
+      "hp_label": "Hide · Health & Care Details",
+      "why": false,
+      "api_profile": {
+        "status": 200,
+        "redacted": [],
+        "has_profile": true,
+        "allergies": true
+      },
+      "api_answer_status": 200,
+      "api_answer_head": "No verified recent vital signs are currently on file for Evelyn. This is an information gap — not a new charting action."
     }
   ],
   "unauthorized_disclosures": 0,
@@ -324,7 +348,7 @@
         "q": "What should I do today?",
         "ok": true,
         "issues": [],
-        "head": "It is 6:26 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern needs monitoring\n\nComin"
+        "head": "It is 6:48 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern needs monitoring\n\nComin"
       },
       {
         "q": "What is her ambulatory status?",
@@ -452,11 +476,11 @@
   "refill": {},
   "shift_plan": {
     "status": "PASS",
-    "sample": "It is 6:26 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern needs monitoring\n\nComing up\n• Metformin 500 mg · 12:00 PM today\n• Physical therapy · Friday 4:30 PM PDT\n\nWatch for\n• The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team b"
+    "sample": "It is 6:48 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern needs monitoring\n\nComing up\n• Metformin 500 mg · 12:00 PM today\n• Physical therapy · Friday 4:30 PM PDT\n\nWatch for\n• The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team b"
   },
   "errors": [],
   "fixtures": {
-    "at": "2026-07-31T06:26:32.930Z",
+    "at": "2026-07-31T06:48:07.997Z",
     "recipient": "cr-olivia",
     "creation_method": "POST /auth/register + invitations + accept + revoke",
     "roles": {
@@ -485,22 +509,22 @@
         "status": "ACTIVE"
       },
       "coordinator": {
-        "care_person_id": "p-acct-28f3899840cc42d2",
-        "email": "coord.complete.185052@caretaker-relay.test",
+        "care_person_id": "p-acct-71600a8957a74a4a",
+        "email": "coord.complete.466733@caretaker-relay.test",
         "password": "Coord-Lab-Pass-1!",
         "auth": "register+invite+accept",
         "status": "ACTIVE"
       },
       "temporary_active": {
-        "care_person_id": "p-acct-22d250babe384a57",
-        "email": "tempactive.complete.185052@caretaker-relay.test",
+        "care_person_id": "p-acct-56bc7ec8b00b4cdd",
+        "email": "tempactive.complete.466733@caretaker-relay.test",
         "password": "Temp-Active-Pass-1!",
         "auth": "register+invite+accept",
         "status": "ACTIVE"
       },
       "temporary_revoked": {
-        "care_person_id": "p-acct-85ea575b6658417d",
-        "email": "temp.complete.185052@caretaker-relay.test",
+        "care_person_id": "p-acct-ddd097d1d2374aec",
+        "email": "temp.complete.466733@caretaker-relay.test",
         "password": "Temp-Lab-Pass-1!",
         "auth": "register+invite+accept+revoke",
         "status": "REVOKED"
@@ -512,19 +536,21 @@
         "status": "NO_RELATIONSHIP"
       },
       "care_recipient_self": {
-        "care_person_id": "p-acct-a113867625f7471f",
-        "email": "evelyn.self.complete.185052@caretaker-relay.test",
-        "password": "Evelyn-Self-Pass-1!",
-        "auth": "register_only_pending_access",
-        "status": "PRODUCT_GAP",
-        "note": "Self account created with claim:self but no product path binds it as the care-recipient principal for cr-olivia without additional set-up-care ownership transfer. Classified PRODUCT_GAP for full self-access matrix."
+        "care_person_id": "p-acct-a6a87645704c461b",
+        "email": "self.complete.466733@caretaker-relay.test",
+        "password": "Self-Lab-Pass-1!",
+        "auth": "register+recipient-self/setup+invite-accept",
+        "status": "ACTIVE",
+        "own_care_recipient_id": "cr-7yax15x7-ms8kz6yn",
+        "setup_status": 201,
+        "setup_created": true,
+        "existing_recipient_link": "invited_or_already_member",
+        "note": "Journey 1 creates own care space for any name; Journey 2 invitation links existing recipient when authorized."
       }
     },
     "required_count": 8,
-    "available_executable": 7,
-    "product_gaps": [
-      "care_recipient_self_bound_to_cr_olivia"
-    ]
+    "available_executable": 8,
+    "product_gaps": []
   },
   "medication": {
     "has_frequency": true,
@@ -548,9 +574,9 @@
     "strip": true
   },
   "summary": {
-    "roles_executed": 8,
-    "strips": 6,
-    "hp": 6,
+    "roles_executed": 9,
+    "strips": 7,
+    "hp": 7,
     "unauthorized_disclosures": 0,
     "clinical_30": "30/30",
     "shift_plan": "PASS",
@@ -562,8 +588,6 @@
       "raw_json_error": false,
       "human_success": false
     },
-    "product_gaps": [
-      "care_recipient_self_bound_to_cr_olivia"
-    ]
+    "product_gaps": []
   }
 }

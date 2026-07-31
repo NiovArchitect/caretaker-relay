@@ -1,0 +1,99 @@
+{
+  "at": "2026-07-31T06:56:03.096Z",
+  "app_source_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy": "dep-d9m495nlk1mc739o1n00",
+  "app_bundle": "index-DNKXOTHH.js",
+  "api_source_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy": "dep-d9m4958ae00c73bdhc10",
+  "deployment_parity": true,
+  "status": "OPEN",
+  "note": "7 authorized browser roles show identity strip including recipient-self; revoked/unauth blocked. Full field×viewport×code-status×a11y bank not executed end-to-end → OPEN not PASS.",
+  "roles_with_strip": 7,
+  "roles_executed": 9,
+  "unauthorized_disclosures": 0,
+  "rows": [
+    {
+      "role": "Marcus primary",
+      "strip": true,
+      "allergies": true,
+      "code": true,
+      "dob": false,
+      "emergency": true,
+      "api": 200
+    },
+    {
+      "role": "Maya family",
+      "strip": true,
+      "allergies": true,
+      "code": true,
+      "dob": false,
+      "emergency": true,
+      "api": 200
+    },
+    {
+      "role": "Daniel DSP",
+      "strip": true,
+      "allergies": true,
+      "code": true,
+      "dob": false,
+      "emergency": true,
+      "api": 200
+    },
+    {
+      "role": "Dr Shah",
+      "strip": true,
+      "allergies": true,
+      "code": true,
+      "dob": false,
+      "emergency": true,
+      "api": 200
+    },
+    {
+      "role": "Coordinator",
+      "strip": true,
+      "allergies": true,
+      "code": true,
+      "dob": false,
+      "emergency": true,
+      "api": 200
+    },
+    {
+      "role": "Temp active",
+      "strip": true,
+      "allergies": true,
+      "code": true,
+      "dob": false,
+      "emergency": true,
+      "api": 200
+    },
+    {
+      "role": "Temp revoked",
+      "strip": false,
+      "allergies": false,
+      "code": false,
+      "dob": false,
+      "emergency": false,
+      "api": 403
+    },
+    {
+      "role": "Unauthorized",
+      "strip": false,
+      "allergies": false,
+      "code": false,
+      "dob": false,
+      "emergency": false,
+      "api": 403
+    },
+    {
+      "role": "Recipient self",
+      "strip": true,
+      "allergies": true,
+      "code": true,
+      "dob": false,
+      "emergency": true,
+      "api": 200
+    }
+  ]
+}

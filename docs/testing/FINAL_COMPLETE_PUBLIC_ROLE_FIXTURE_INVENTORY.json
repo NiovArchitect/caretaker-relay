@@ -1,5 +1,5 @@
 {
-  "at": "2026-07-31T06:26:32.930Z",
+  "at": "2026-07-31T06:56:03.096Z",
   "recipient": "cr-olivia",
   "creation_method": "POST /auth/register + invitations + accept + revoke",
   "roles": {
@@ -28,22 +28,22 @@
       "status": "ACTIVE"
     },
     "coordinator": {
-      "care_person_id": "p-acct-28f3899840cc42d2",
-      "email": "coord.complete.185052@[redacted-domain]caretaker-relay.test",
+      "care_person_id": "p-acct-71600a8957a74a4a",
+      "email": "coord.complete.466733@caretaker-relay.test",
       "password": "[REDACTED]",
       "auth": "register+invite+accept",
       "status": "ACTIVE"
     },
     "temporary_active": {
-      "care_person_id": "p-acct-22d250babe384a57",
-      "email": "tempactive.complete.185052@[redacted-domain]caretaker-relay.test",
+      "care_person_id": "p-acct-56bc7ec8b00b4cdd",
+      "email": "tempactive.complete.466733@caretaker-relay.test",
       "password": "[REDACTED]",
       "auth": "register+invite+accept",
       "status": "ACTIVE"
     },
     "temporary_revoked": {
-      "care_person_id": "p-acct-85ea575b6658417d",
-      "email": "temp.complete.185052@[redacted-domain]caretaker-relay.test",
+      "care_person_id": "p-acct-ddd097d1d2374aec",
+      "email": "temp.complete.466733@caretaker-relay.test",
       "password": "[REDACTED]",
       "auth": "register+invite+accept+revoke",
       "status": "REVOKED"
@@ -55,28 +55,40 @@
       "status": "NO_RELATIONSHIP"
     },
     "care_recipient_self": {
-      "care_person_id": "p-acct-a113867625f7471f",
-      "email": "evelyn.self.complete.185052@[redacted-domain]caretaker-relay.test",
+      "care_person_id": "p-acct-a6a87645704c461b",
+      "email": "self.complete.466733@caretaker-relay.test",
       "password": "[REDACTED]",
-      "auth": "register_only_pending_access",
-      "status": "PRODUCT_GAP",
-      "note": "Self account created with claim:self but no product path binds it as the care-recipient principal for cr-olivia without additional set-up-care ownership transfer. Classified PRODUCT_GAP for full self-access matrix."
+      "auth": "register+recipient-self/setup+invite-accept",
+      "status": "ACTIVE",
+      "own_care_recipient_id": "cr-7yax15x7-ms8kz6yn",
+      "setup_status": 201,
+      "setup_created": true,
+      "existing_recipient_link": "invited_or_already_member",
+      "note": "Journey 1 creates own care space for any name; Journey 2 invitation links existing recipient when authorized."
     }
   },
   "required_count": 8,
-  "available_executable": 7,
-  "product_gaps": [
-    "care_recipient_self_bound_to_cr_olivia"
-  ],
-  "required_role_fixtures": "7/8 AVAILABLE + 1 PRODUCT_GAP",
-  "classifications": {
-    "coordinator": "AVAILABLE",
-    "temporary_active": "AVAILABLE",
-    "temporary_revoked": "AVAILABLE",
-    "care_recipient_self": "PRODUCT_GAP",
-    "primary_family": "AVAILABLE",
-    "family_friend": "AVAILABLE",
-    "professional_dsp": "AVAILABLE",
-    "clinician": "AVAILABLE"
+  "available_executable": 8,
+  "product_gaps": [],
+  "required_role_fixtures": "8/8 AVAILABLE",
+  "app_source_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_deploy": "dep-d9m495nlk1mc739o1n00",
+  "app_bundle": "index-DNKXOTHH.js",
+  "api_source_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "api_deploy": "dep-d9m4958ae00c73bdhc10",
+  "deployment_parity": true,
+  "care_recipient_self": {
+    "care_person_id": "p-acct-a6a87645704c461b",
+    "email": "self.complete.466733@caretaker-relay.test",
+    "password": "[REDACTED]",
+    "auth": "register+recipient-self/setup+invite-accept",
+    "status": "ACTIVE",
+    "own_care_recipient_id": "cr-7yax15x7-ms8kz6yn",
+    "setup_status": 201,
+    "setup_created": true,
+    "existing_recipient_link": "invited_or_already_member",
+    "note": "Journey 1 creates own care space for any name; Journey 2 invitation links existing recipient when authorized."
   }
 }

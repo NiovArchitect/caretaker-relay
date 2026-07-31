@@ -8,13 +8,18 @@
   "api_deploy_sha": "c0b159e362ea79eaf6889945cce808b969157784",
   "api_deploy": "dep-d9m4958ae00c73bdhc10",
   "deployment_parity": true,
-  "privacy": {
-    "status": "OPEN",
-    "unauthorized_disclosures_executed_set": 0,
-    "wrong_bind": "FORBIDDEN"
-  },
-  "appsec": {
-    "status": "OPEN",
-    "note": "Full AppSec battery not run"
-  }
+  "typecheck": "PASS",
+  "app_unit": "98/98 PASS",
+  "foundation_care_unit": "363/363 PASS",
+  "lint": "OPEN",
+  "integration": "OPEN",
+  "api_contract": "OPEN",
+  "e2e_playwright_canonical": "OPEN",
+  "multi_role_e2e": "OPEN",
+  "privacy": "OPEN",
+  "appsec": "OPEN",
+  "accessibility": "OPEN",
+  "full_ci": "OPEN",
+  "app_build": "PASS (render live)",
+  "api_build": "PASS (render live)"
 }

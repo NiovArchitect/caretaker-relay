@@ -63,12 +63,42 @@ async function ensureFixtures() {
     terms_version: "v1",
   });
   const selfReg = await api("POST", "/api/v1/care/auth/register", {
-    preferred_name: `Evelyn Self ${suf}`,
-    email: `evelyn.self.complete.${suf}@caretaker-relay.test`,
-    password: "Evelyn-Self-Pass-1!",
+    preferred_name: `Self Profile ${suf}`,
+    email: `self.complete.${suf}@caretaker-relay.test`,
+    password: "Self-Lab-Pass-1!",
     claimed_relationship: "self",
     terms_version: "v1",
   });
+  // Journey 1: create own care space for any preferred name (not bound to cr-olivia by name)
+  const selfSetup = await api(
+    "POST",
+    "/api/v1/care/recipient-self/setup",
+    {
+      preferred_name: `Self Profile ${suf}`,
+      confirmation: "I am creating a care space for myself",
+    },
+    selfReg.data.token,
+  );
+  // Journey 2 (optional secondary): invite self account onto existing lab recipient
+  const invSelf = await api(
+    "POST",
+    `/api/v1/care/recipients/${RID}/invitations`,
+    {
+      invitee_care_person_id: selfReg.data.care_person_id,
+      invitee_display_name: selfReg.data.display_name,
+      role: "care_recipient",
+      role_label: "Care recipient (self)",
+    },
+    mt,
+  );
+  if (invSelf.data?.invitation?.token) {
+    await api(
+      "POST",
+      `/api/v1/care/invitations/${invSelf.data.invitation.token}/accept`,
+      {},
+      selfReg.data.token,
+    );
+  }
 
   const invCoord = await api(
     "POST",
@@ -188,16 +218,26 @@ async function ensureFixtures() {
       },
       care_recipient_self: {
         care_person_id: selfReg.data.care_person_id,
-        email: `evelyn.self.complete.${suf}@caretaker-relay.test`,
-        password: "Evelyn-Self-Pass-1!",
-        auth: "register_only_pending_access",
-        status: "PRODUCT_GAP",
-        note: "Self account created with claim:self but no product path binds it as the care-recipient principal for cr-olivia without additional set-up-care ownership transfer. Classified PRODUCT_GAP for full self-access matrix.",
+        email: `self.complete.${suf}@caretaker-relay.test`,
+        password: "Self-Lab-Pass-1!",
+        auth: "register+recipient-self/setup+invite-accept",
+        status:
+          selfSetup.status < 300 && selfSetup.data?.care_recipient_id
+            ? "ACTIVE"
+            : "FAIL",
+        own_care_recipient_id: selfSetup.data?.care_recipient_id || null,
+        setup_status: selfSetup.status,
+        setup_created: selfSetup.data?.created,
+        existing_recipient_link:
+          invSelf.data?.invitation || invSelf.status === 409
+            ? "invited_or_already_member"
+            : "invite_attempted",
+        note: "Journey 1 creates own care space for any name; Journey 2 invitation links existing recipient when authorized.",
       },
     },
     required_count: 8,
-    available_executable: 7,
-    product_gaps: ["care_recipient_self_bound_to_cr_olivia"],
+    available_executable: 8,
+    product_gaps: [],
   };
   writeFileSync(fixturesPath, JSON.stringify(inventory, null, 2));
   return inventory;
@@ -485,6 +525,12 @@ async function main() {
     { key: "temporary_active", ...inventory.roles.temporary_active, label: "Temp active" },
     { key: "temporary_revoked", ...inventory.roles.temporary_revoked, label: "Temp revoked" },
     { key: "no_relationship", ...inventory.roles.no_relationship, label: "Unauthorized" },
+    {
+      key: "care_recipient_self",
+      ...inventory.roles.care_recipient_self,
+      label: "Recipient self",
+      display_name: inventory.roles.care_recipient_self.care_person_id,
+    },
   ];
 
   const browser = await chromium.launch({ headless: true });
