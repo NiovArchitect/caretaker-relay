@@ -1,0 +1,873 @@
+{
+  "cases": 96,
+  "overdisclosures": 0,
+  "disagreements": 0,
+  "pass": true,
+  "rows": [
+    {
+      "role": "primary_family",
+      "field": "dateOfBirth",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Evelyn is 78 years old (date of birth on file: Mar 12, 1948)"
+    },
+    {
+      "role": "primary_family",
+      "field": "allergies",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Allergy status for Evelyn Carter: **NO KNOWN ALLERGIES** on "
+    },
+    {
+      "role": "primary_family",
+      "field": "emergencyContacts",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Essential care snapshot — Evelyn Carter\nDOB: Mar 12, 1948 · "
+    },
+    {
+      "role": "primary_family",
+      "field": "confirmedConditions",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Evelyn has 2 confirmed conditions on file:\n\nSeparately, the "
+    },
+    {
+      "role": "primary_family",
+      "field": "healthConcerns",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "I don't have a record that answers “what health concerns doe"
+    },
+    {
+      "role": "primary_family",
+      "field": "advanceCareDocuments",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "No verified code-status order (Full Code, DNR/DNI, POLST, or"
+    },
+    {
+      "role": "primary_family",
+      "field": "medications",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth"
+    },
+    {
+      "role": "primary_family",
+      "field": "mobilityBaseline",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Transfer / mobility support for Evelyn (authorized care prof"
+    },
+    {
+      "role": "primary_family",
+      "field": "dietMealConsiderations",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "No verified diet, texture, or swallowing instruction is curr"
+    },
+    {
+      "role": "primary_family",
+      "field": "primaryProviderName",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Evelyn Carter (prefers Evelyn)\n78 years old\nshe/her\nPrimary "
+    },
+    {
+      "role": "primary_family",
+      "field": "carePreferences",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Around lunchtime for Evelyn Carter: medication support per p"
+    },
+    {
+      "role": "primary_family",
+      "field": "safetyConsiderations",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "From the latest caregiver handoff for Evelyn Carter:\n• Medic"
+    },
+    {
+      "role": "family_friend",
+      "field": "dateOfBirth",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "family_friend",
+      "field": "allergies",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "family_friend",
+      "field": "emergencyContacts",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "family_friend",
+      "field": "confirmedConditions",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "family_friend",
+      "field": "healthConcerns",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "family_friend",
+      "field": "advanceCareDocuments",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "family_friend",
+      "field": "medications",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "family_friend",
+      "field": "mobilityBaseline",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "family_friend",
+      "field": "dietMealConsiderations",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "family_friend",
+      "field": "primaryProviderName",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "family_friend",
+      "field": "carePreferences",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "family_friend",
+      "field": "safetyConsiderations",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "professional_dsp",
+      "field": "dateOfBirth",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "professional_dsp",
+      "field": "allergies",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "professional_dsp",
+      "field": "emergencyContacts",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "professional_dsp",
+      "field": "confirmedConditions",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "professional_dsp",
+      "field": "healthConcerns",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "professional_dsp",
+      "field": "advanceCareDocuments",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "professional_dsp",
+      "field": "medications",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "professional_dsp",
+      "field": "mobilityBaseline",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "professional_dsp",
+      "field": "dietMealConsiderations",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "professional_dsp",
+      "field": "primaryProviderName",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "professional_dsp",
+      "field": "carePreferences",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "professional_dsp",
+      "field": "safetyConsiderations",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": true,
+      "head": "Your care access for this person is no longer active. I cann"
+    },
+    {
+      "role": "clinician",
+      "field": "dateOfBirth",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Evelyn is 78 years old (date of birth on file: Mar 12, 1948)"
+    },
+    {
+      "role": "clinician",
+      "field": "allergies",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Allergy status for Evelyn Carter: **NO KNOWN ALLERGIES** on "
+    },
+    {
+      "role": "clinician",
+      "field": "emergencyContacts",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "I can't access that information with your current care permi"
+    },
+    {
+      "role": "clinician",
+      "field": "confirmedConditions",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Evelyn has 2 confirmed conditions on file:\n\nSeparately, the "
+    },
+    {
+      "role": "clinician",
+      "field": "healthConcerns",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "I don't have a record that answers “what health concerns doe"
+    },
+    {
+      "role": "clinician",
+      "field": "advanceCareDocuments",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "No verified code-status order (Full Code, DNR/DNI, POLST, or"
+    },
+    {
+      "role": "clinician",
+      "field": "medications",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Current authorized medications for Evelyn Carter:\n• Metformi"
+    },
+    {
+      "role": "clinician",
+      "field": "mobilityBaseline",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Transfer / mobility support for Evelyn (authorized care prof"
+    },
+    {
+      "role": "clinician",
+      "field": "dietMealConsiderations",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "No verified diet, texture, or swallowing instruction is curr"
+    },
+    {
+      "role": "clinician",
+      "field": "primaryProviderName",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Evelyn Carter (prefers Evelyn)\n78 years old\nshe/her\nPrimary "
+    },
+    {
+      "role": "clinician",
+      "field": "carePreferences",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Around lunchtime for Evelyn Carter: medication support per p"
+    },
+    {
+      "role": "clinician",
+      "field": "safetyConsiderations",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "From the latest caregiver handoff for Evelyn Carter:\n• Medic"
+    },
+    {
+      "role": "coordinator",
+      "field": "dateOfBirth",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Evelyn is 78 years old (date of birth on file: Mar 12, 1948)"
+    },
+    {
+      "role": "coordinator",
+      "field": "allergies",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Allergy status for Evelyn Carter: **NO KNOWN ALLERGIES** on "
+    },
+    {
+      "role": "coordinator",
+      "field": "emergencyContacts",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "I can't access that information with your current care permi"
+    },
+    {
+      "role": "coordinator",
+      "field": "confirmedConditions",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Evelyn has 2 confirmed conditions on file:\n\nSeparately, the "
+    },
+    {
+      "role": "coordinator",
+      "field": "healthConcerns",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "I don't have a record that answers “what health concerns doe"
+    },
+    {
+      "role": "coordinator",
+      "field": "advanceCareDocuments",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "No verified code-status order (Full Code, DNR/DNI, POLST, or"
+    },
+    {
+      "role": "coordinator",
+      "field": "medications",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "You can participate in this care space, but medication infor"
+    },
+    {
+      "role": "coordinator",
+      "field": "mobilityBaseline",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Transfer / mobility support for Evelyn (authorized care prof"
+    },
+    {
+      "role": "coordinator",
+      "field": "dietMealConsiderations",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "No verified diet, texture, or swallowing instruction is curr"
+    },
+    {
+      "role": "coordinator",
+      "field": "primaryProviderName",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Evelyn Carter (prefers Evelyn)\n78 years old\nshe/her\nPrimary "
+    },
+    {
+      "role": "coordinator",
+      "field": "carePreferences",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Around lunchtime for Evelyn Carter: medication support per p"
+    },
+    {
+      "role": "coordinator",
+      "field": "safetyConsiderations",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "From the latest caregiver handoff for Evelyn Carter:\n• Medic"
+    },
+    {
+      "role": "care_recipient_self",
+      "field": "dateOfBirth",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Evelyn is 78 years old (date of birth on file: Mar 12, 1948)"
+    },
+    {
+      "role": "care_recipient_self",
+      "field": "allergies",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Allergy status for Evelyn Carter: **NO KNOWN ALLERGIES** on "
+    },
+    {
+      "role": "care_recipient_self",
+      "field": "emergencyContacts",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Essential care snapshot — Evelyn Carter\nDOB: Mar 12, 1948 · "
+    },
+    {
+      "role": "care_recipient_self",
+      "field": "confirmedConditions",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Evelyn has 2 confirmed conditions on file:\n\nSeparately, the "
+    },
+    {
+      "role": "care_recipient_self",
+      "field": "healthConcerns",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "I don't have a record that answers “what health concerns doe"
+    },
+    {
+      "role": "care_recipient_self",
+      "field": "advanceCareDocuments",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "No verified code-status order (Full Code, DNR/DNI, POLST, or"
+    },
+    {
+      "role": "care_recipient_self",
+      "field": "medications",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth"
+    },
+    {
+      "role": "care_recipient_self",
+      "field": "mobilityBaseline",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Transfer / mobility support for Evelyn (authorized care prof"
+    },
+    {
+      "role": "care_recipient_self",
+      "field": "dietMealConsiderations",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "No verified diet, texture, or swallowing instruction is curr"
+    },
+    {
+      "role": "care_recipient_self",
+      "field": "primaryProviderName",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Evelyn Carter (prefers Evelyn)\n78 years old\nshe/her\nPrimary "
+    },
+    {
+      "role": "care_recipient_self",
+      "field": "carePreferences",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Around lunchtime for Evelyn Carter: medication support per p"
+    },
+    {
+      "role": "care_recipient_self",
+      "field": "safetyConsiderations",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "From the latest caregiver handoff for Evelyn Carter:\n• Medic"
+    },
+    {
+      "role": "temporary_active",
+      "field": "dateOfBirth",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Evelyn is 78 years old (date of birth on file: Mar 12, 1948)"
+    },
+    {
+      "role": "temporary_active",
+      "field": "allergies",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Allergy status for Evelyn Carter: **NO KNOWN ALLERGIES** on "
+    },
+    {
+      "role": "temporary_active",
+      "field": "emergencyContacts",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "I can't access that information with your current care permi"
+    },
+    {
+      "role": "temporary_active",
+      "field": "confirmedConditions",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Evelyn has 2 confirmed conditions on file:\n\nSeparately, the "
+    },
+    {
+      "role": "temporary_active",
+      "field": "healthConcerns",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "I don't have a record that answers “what health concerns doe"
+    },
+    {
+      "role": "temporary_active",
+      "field": "advanceCareDocuments",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "No verified code-status order (Full Code, DNR/DNI, POLST, or"
+    },
+    {
+      "role": "temporary_active",
+      "field": "medications",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "You can participate in this care space, but medication infor"
+    },
+    {
+      "role": "temporary_active",
+      "field": "mobilityBaseline",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Transfer / mobility support for Evelyn (authorized care prof"
+    },
+    {
+      "role": "temporary_active",
+      "field": "dietMealConsiderations",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "No verified diet, texture, or swallowing instruction is curr"
+    },
+    {
+      "role": "temporary_active",
+      "field": "primaryProviderName",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Evelyn Carter (prefers Evelyn)\n78 years old\nshe/her\nPrimary "
+    },
+    {
+      "role": "temporary_active",
+      "field": "carePreferences",
+      "profile_status": 200,
+      "redacted": false,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "Around lunchtime for Evelyn Carter: medication support per p"
+    },
+    {
+      "role": "temporary_active",
+      "field": "safetyConsiderations",
+      "profile_status": 200,
+      "redacted": true,
+      "relay_status": 200,
+      "relay_denied": false,
+      "head": "From the latest caregiver handoff for Evelyn Carter:\n• Medic"
+    },
+    {
+      "role": "temporary_revoked",
+      "field": "dateOfBirth",
+      "profile_status": 403,
+      "redacted": false,
+      "relay_status": 403,
+      "relay_denied": true,
+      "head": "Access was revoked and no longer functions."
+    },
+    {
+      "role": "temporary_revoked",
+      "field": "allergies",
+      "profile_status": 403,
+      "redacted": false,
+      "relay_status": 403,
+      "relay_denied": true,
+      "head": "Access was revoked and no longer functions."
+    },
+    {
+      "role": "temporary_revoked",
+      "field": "emergencyContacts",
+      "profile_status": 403,
+      "redacted": false,
+      "relay_status": 403,
+      "relay_denied": true,
+      "head": "Access was revoked and no longer functions."
+    },
+    {
+      "role": "temporary_revoked",
+      "field": "confirmedConditions",
+      "profile_status": 403,
+      "redacted": false,
+      "relay_status": 403,
+      "relay_denied": true,
+      "head": "Access was revoked and no longer functions."
+    },
+    {
+      "role": "temporary_revoked",
+      "field": "healthConcerns",
+      "profile_status": 403,
+      "redacted": false,
+      "relay_status": 403,
+      "relay_denied": true,
+      "head": "Access was revoked and no longer functions."
+    },
+    {
+      "role": "temporary_revoked",
+      "field": "advanceCareDocuments",
+      "profile_status": 403,
+      "redacted": false,
+      "relay_status": 403,
+      "relay_denied": true,
+      "head": "Access was revoked and no longer functions."
+    },
+    {
+      "role": "temporary_revoked",
+      "field": "medications",
+      "profile_status": 403,
+      "redacted": false,
+      "relay_status": 403,
+      "relay_denied": true,
+      "head": "Access was revoked and no longer functions."
+    },
+    {
+      "role": "temporary_revoked",
+      "field": "mobilityBaseline",
+      "profile_status": 403,
+      "redacted": false,
+      "relay_status": 403,
+      "relay_denied": true,
+      "head": "Access was revoked and no longer functions."
+    },
+    {
+      "role": "temporary_revoked",
+      "field": "dietMealConsiderations",
+      "profile_status": 403,
+      "redacted": false,
+      "relay_status": 403,
+      "relay_denied": true,
+      "head": "Access was revoked and no longer functions."
+    },
+    {
+      "role": "temporary_revoked",
+      "field": "primaryProviderName",
+      "profile_status": 403,
+      "redacted": false,
+      "relay_status": 403,
+      "relay_denied": true,
+      "head": "Access was revoked and no longer functions."
+    },
+    {
+      "role": "temporary_revoked",
+      "field": "carePreferences",
+      "profile_status": 403,
+      "redacted": false,
+      "relay_status": 403,
+      "relay_denied": true,
+      "head": "Access was revoked and no longer functions."
+    },
+    {
+      "role": "temporary_revoked",
+      "field": "safetyConsiderations",
+      "profile_status": 403,
+      "redacted": false,
+      "relay_status": 403,
+      "relay_denied": true,
+      "head": "Access was revoked and no longer functions."
+    }
+  ],
+  "at": "2026-07-31T07:27:47.183Z"
+}

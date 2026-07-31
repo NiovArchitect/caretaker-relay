@@ -1,0 +1,18 @@
+{
+  "founder": {
+    "base_21": 21,
+    "base_n": 21,
+    "branches_100": 100,
+    "history_20": 20,
+    "unsafe": 0,
+    "raw_ids": 0,
+    "empty": 0,
+    "generic": 0,
+    "pass": true
+  },
+  "clinical": {
+    "pass": 30,
+    "n": 30,
+    "result": "30/30"
+  }
+}

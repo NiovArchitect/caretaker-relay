@@ -1,0 +1,836 @@
+{
+  "at": "2026-07-31T07:27:47.183Z",
+  "public": "https://care.niovlabs.com",
+  "api": "https://caretaker-relay-care-api.onrender.com",
+  "canonical_playwright_command": "CR_E2E_BASE_URL=https://care.niovlabs.com CR_E2E_API_URL=https://caretaker-relay-care-api.onrender.com npm run test:e2e",
+  "failures": [],
+  "role_fixtures": {
+    "required": 8,
+    "available": 8,
+    "keys": [
+      "primary_family",
+      "family_friend",
+      "professional_dsp",
+      "clinician",
+      "coordinator",
+      "care_recipient_self",
+      "temporary_active",
+      "temporary_revoked"
+    ]
+  },
+  "recipient_self_regression": {
+    "login_memberships": 2,
+    "own_setup_id": "cr-vcm0vdpn-ms8mekk2",
+    "wrong_bind_status": 403,
+    "wrong_bind_code": "FORBIDDEN",
+    "pass": true
+  },
+  "field_consent": {
+    "cases": 96,
+    "overdisclosures": 0,
+    "disagreements": 0,
+    "pass": true
+  },
+  "founder": {
+    "base_21": 21,
+    "base_n": 21,
+    "branches_100": 100,
+    "history_20": 20,
+    "unsafe": 0,
+    "raw_ids": 0,
+    "empty": 0,
+    "generic": 0,
+    "pass": true
+  },
+  "durable": {
+    "create": 201,
+    "claim1": 200,
+    "claim1_ok": true,
+    "claim1_human": true,
+    "raw_json": false,
+    "double_claim_status": 200,
+    "double_claim_ok": true,
+    "wrong_recipient_status": 404,
+    "unauthorized_status": 400,
+    "false_success": 0,
+    "duplicate_terminal_writes": 0,
+    "pass": true,
+    "idempotent_reclaim": true
+  },
+  "refill_api": {
+    "work_id": "work-owuczqcv-ms8mhu6c",
+    "create": 201,
+    "claim1": 200,
+    "claim1_ok": true,
+    "claim1_human": true,
+    "raw_json": false,
+    "double_claim_status": 200,
+    "double_claim_ok": true,
+    "wrong_recipient_status": 404,
+    "unauthorized_status": 400,
+    "false_success": 0,
+    "duplicate_terminal_writes": 0,
+    "pass": true,
+    "idempotent_reclaim": true
+  },
+  "refill_browser": {
+    "claim_button_visible": false,
+    "note": "no claim button; API durable path covered separately"
+  },
+  "today_families": {
+    "n": 16,
+    "pass": 16,
+    "rows": [
+      {
+        "family": "medication",
+        "ok": true,
+        "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take with food a"
+      },
+      {
+        "family": "prn",
+        "ok": true,
+        "head": "No overdue as-needed follow-up is open for Evelyn Carter."
+      },
+      {
+        "family": "appointment",
+        "ok": true,
+        "head": "Physical therapy\nFriday 4:30 PM PDT\nLocation: Coastal PT\nStatus: scheduled\nTravel: about 18 minutes."
+      },
+      {
+        "family": "transport",
+        "ok": true,
+        "head": "Therapy-related goals on file for Evelyn:\n\nUpcoming therapy appointments appear on Today / Schedule "
+      },
+      {
+        "family": "mobility",
+        "ok": true,
+        "head": "Transfer / mobility support for Evelyn (authorized care profile):\nSupport needs on file:\nSafety cons"
+      },
+      {
+        "family": "diet",
+        "ok": true,
+        "head": "No verified diet, texture, or swallowing instruction is currently on file for Evelyn. Check the care"
+      },
+      {
+        "family": "swallowing",
+        "ok": true,
+        "head": "I don't have a record that answers “any swallowing instructions” for Evelyn Carter yet. Try naming t"
+      },
+      {
+        "family": "meal",
+        "ok": true,
+        "head": "From the latest caregiver handoff for Evelyn Carter:\n• Medication administration was corrected: not "
+      },
+      {
+        "family": "hydration",
+        "ok": true,
+        "head": "I don't have a record that answers “hydration plan” for Evelyn Carter yet. Try naming the timeframe "
+      },
+      {
+        "family": "adl",
+        "ok": true,
+        "head": "I don't have a record that answers “what help does she need with daily living” for Evelyn Carter yet"
+      },
+      {
+        "family": "refill",
+        "ok": true,
+        "head": "It is 7:43 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern needs monitoring\n\nComin"
+      },
+      {
+        "family": "supply",
+        "ok": true,
+        "head": "I don't have a record that answers “any supplies needed” for Evelyn Carter yet. Try naming the timef"
+      },
+      {
+        "family": "handoff",
+        "ok": true,
+        "head": "Daniel Kim covered Evelyn Carter before you from Jul 29, 6:45 PM to Jul 29, 10:55 PM. Their handoff "
+      },
+      {
+        "family": "safety",
+        "ok": true,
+        "head": "From the latest caregiver handoff for Evelyn Carter:\n• Medication administration was corrected: not "
+      },
+      {
+        "family": "observation",
+        "ok": true,
+        "head": "Evelyn Carter's most recent report on file is caregiver reported: ate (last noted Saturday, July 25,"
+      },
+      {
+        "family": "engagement",
+        "ok": true,
+        "head": "I don't have a record that answers “what does she enjoy” for Evelyn Carter yet. Try naming the timef"
+      }
+    ],
+    "browser_why_roles": 3,
+    "matrix_pass": true
+  },
+  "clinical_30": {
+    "pass": 30,
+    "n": 30,
+    "result": "30/30"
+  },
+  "prn": {
+    "pass": 20,
+    "n": 20,
+    "result": "20/20"
+  },
+  "identity": {
+    "roles_executed": 8,
+    "authorized_with_strip": 7,
+    "denied_without_strip": 1,
+    "unauthorized_ui": 0,
+    "viewport_cases": 18,
+    "viewport_required": 18,
+    "field_cases_scored": 40,
+    "field_cases_pass": 40,
+    "rows": [
+      {
+        "role": "primary_family",
+        "label": "Marcus primary",
+        "strip": true,
+        "name": "",
+        "dob": "",
+        "allergies": "ALLERGIES\nNone verified on file",
+        "code": "CODE STATUS\nNot verified on file",
+        "emergency": "EMERGENCY\nNot on file",
+        "age": "",
+        "hp": true,
+        "hp_sections": {
+          "Identity and safety": false,
+          "Medical history": true,
+          "Recent clinical": true,
+          "Mobility": false,
+          "Nutrition": false,
+          "Therapies": true,
+          "Orientation": false,
+          "Oxygen": false,
+          "Pain": false,
+          "Living": true,
+          "Providers": false,
+          "Advance": true
+        },
+        "hp_collapsed": true,
+        "why": false,
+        "keyboard_tab": true
+      },
+      {
+        "role": "family_friend",
+        "label": "Maya family",
+        "strip": true,
+        "name": "",
+        "dob": "",
+        "allergies": "ALLERGIES\nNone verified on file",
+        "code": "CODE STATUS\nNot verified on file",
+        "emergency": "EMERGENCY\nNot on file",
+        "age": "",
+        "hp": true,
+        "hp_sections": {
+          "Identity and safety": false,
+          "Medical history": true,
+          "Recent clinical": true,
+          "Mobility": false,
+          "Nutrition": false,
+          "Therapies": true,
+          "Orientation": false,
+          "Oxygen": false,
+          "Pain": false,
+          "Living": true,
+          "Providers": false,
+          "Advance": true
+        },
+        "hp_collapsed": true,
+        "why": false,
+        "keyboard_tab": true
+      },
+      {
+        "role": "professional_dsp",
+        "label": "Daniel DSP",
+        "strip": true,
+        "name": "",
+        "dob": "",
+        "allergies": "ALLERGIES\nNone verified on file",
+        "code": "CODE STATUS\nNot verified on file",
+        "emergency": "EMERGENCY\nNot on file",
+        "age": "",
+        "hp": true,
+        "hp_sections": {
+          "Identity and safety": false,
+          "Medical history": true,
+          "Recent clinical": true,
+          "Mobility": false,
+          "Nutrition": false,
+          "Therapies": true,
+          "Orientation": false,
+          "Oxygen": false,
+          "Pain": false,
+          "Living": true,
+          "Providers": false,
+          "Advance": true
+        },
+        "hp_collapsed": true,
+        "why": false,
+        "keyboard_tab": true
+      },
+      {
+        "role": "clinician",
+        "label": "Dr Shah",
+        "strip": true,
+        "name": "",
+        "dob": "",
+        "allergies": "ALLERGIES\nNo known drug allergies on file",
+        "code": "CODE STATUS\nNot verified on file",
+        "emergency": "EMERGENCY\nNot on file",
+        "age": "",
+        "hp": true,
+        "hp_sections": {
+          "Identity and safety": false,
+          "Medical history": true,
+          "Recent clinical": true,
+          "Mobility": false,
+          "Nutrition": false,
+          "Therapies": true,
+          "Orientation": false,
+          "Oxygen": false,
+          "Pain": false,
+          "Living": true,
+          "Providers": false,
+          "Advance": true
+        },
+        "hp_collapsed": true,
+        "why": true,
+        "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+        "learn_more": true,
+        "learn_opens_hp": true,
+        "keyboard_tab": true
+      },
+      {
+        "role": "coordinator",
+        "label": "Coordinator",
+        "strip": true,
+        "name": "",
+        "dob": "",
+        "allergies": "ALLERGIES\nNo known drug allergies on file",
+        "code": "CODE STATUS\nNot verified on file",
+        "emergency": "EMERGENCY\nNot on file",
+        "age": "",
+        "hp": true,
+        "hp_sections": {
+          "Identity and safety": false,
+          "Medical history": true,
+          "Recent clinical": true,
+          "Mobility": false,
+          "Nutrition": false,
+          "Therapies": true,
+          "Orientation": false,
+          "Oxygen": false,
+          "Pain": false,
+          "Living": true,
+          "Providers": false,
+          "Advance": true
+        },
+        "hp_collapsed": true,
+        "why": true,
+        "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+        "learn_more": true,
+        "learn_opens_hp": true,
+        "keyboard_tab": true
+      },
+      {
+        "role": "care_recipient_self",
+        "label": "Recipient self",
+        "strip": true,
+        "name": "",
+        "dob": "",
+        "allergies": "ALLERGIES\nNone verified on file",
+        "code": "CODE STATUS\nNot verified on file",
+        "emergency": "EMERGENCY\nNot on file",
+        "age": "",
+        "hp": true,
+        "hp_sections": {
+          "Identity and safety": false,
+          "Medical history": true,
+          "Recent clinical": true,
+          "Mobility": false,
+          "Nutrition": false,
+          "Therapies": true,
+          "Orientation": false,
+          "Oxygen": false,
+          "Pain": false,
+          "Living": true,
+          "Providers": false,
+          "Advance": true
+        },
+        "hp_collapsed": true,
+        "why": false,
+        "keyboard_tab": true
+      },
+      {
+        "role": "temporary_active",
+        "label": "Temp active",
+        "strip": true,
+        "name": "",
+        "dob": "",
+        "allergies": "ALLERGIES\nNo known drug allergies on file",
+        "code": "CODE STATUS\nNot verified on file",
+        "emergency": "EMERGENCY\nNot on file",
+        "age": "",
+        "hp": true,
+        "hp_sections": {
+          "Identity and safety": false,
+          "Medical history": true,
+          "Recent clinical": true,
+          "Mobility": false,
+          "Nutrition": false,
+          "Therapies": true,
+          "Orientation": false,
+          "Oxygen": false,
+          "Pain": false,
+          "Living": true,
+          "Providers": false,
+          "Advance": true
+        },
+        "hp_collapsed": true,
+        "why": true,
+        "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+        "learn_more": true,
+        "learn_opens_hp": true,
+        "keyboard_tab": true
+      },
+      {
+        "role": "temporary_revoked",
+        "label": "Temp revoked",
+        "strip": false,
+        "hp": false,
+        "why": false,
+        "keyboard_tab": true
+      }
+    ],
+    "viewports": [
+      {
+        "role": "primary_family",
+        "viewport": "1440x900",
+        "strip": true,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "primary_family",
+        "viewport": "1280x720",
+        "strip": true,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "primary_family",
+        "viewport": "1024x768",
+        "strip": true,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "primary_family",
+        "viewport": "768x1024",
+        "strip": true,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "primary_family",
+        "viewport": "390x844",
+        "strip": true,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "primary_family",
+        "viewport": "320x568",
+        "strip": true,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "care_recipient_self",
+        "viewport": "1440x900",
+        "strip": true,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "care_recipient_self",
+        "viewport": "1280x720",
+        "strip": true,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "care_recipient_self",
+        "viewport": "1024x768",
+        "strip": true,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "care_recipient_self",
+        "viewport": "768x1024",
+        "strip": true,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "care_recipient_self",
+        "viewport": "390x844",
+        "strip": true,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "care_recipient_self",
+        "viewport": "320x568",
+        "strip": true,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "temporary_revoked",
+        "viewport": "1440x900",
+        "strip": false,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "temporary_revoked",
+        "viewport": "1280x720",
+        "strip": false,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "temporary_revoked",
+        "viewport": "1024x768",
+        "strip": false,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "temporary_revoked",
+        "viewport": "768x1024",
+        "strip": false,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "temporary_revoked",
+        "viewport": "390x844",
+        "strip": false,
+        "shell": true,
+        "zoom_shell": true
+      },
+      {
+        "role": "temporary_revoked",
+        "viewport": "320x568",
+        "strip": false,
+        "shell": true,
+        "zoom_shell": true
+      }
+    ],
+    "pass": true
+  },
+  "hp": {
+    "roles": 8,
+    "section_slots": 84,
+    "section_hits": 35,
+    "rows": [
+      {
+        "role": "primary_family",
+        "hp": true,
+        "sections": {
+          "Identity and safety": false,
+          "Medical history": true,
+          "Recent clinical": true,
+          "Mobility": false,
+          "Nutrition": false,
+          "Therapies": true,
+          "Orientation": false,
+          "Oxygen": false,
+          "Pain": false,
+          "Living": true,
+          "Providers": false,
+          "Advance": true
+        },
+        "collapsed": true
+      },
+      {
+        "role": "family_friend",
+        "hp": true,
+        "sections": {
+          "Identity and safety": false,
+          "Medical history": true,
+          "Recent clinical": true,
+          "Mobility": false,
+          "Nutrition": false,
+          "Therapies": true,
+          "Orientation": false,
+          "Oxygen": false,
+          "Pain": false,
+          "Living": true,
+          "Providers": false,
+          "Advance": true
+        },
+        "collapsed": true
+      },
+      {
+        "role": "professional_dsp",
+        "hp": true,
+        "sections": {
+          "Identity and safety": false,
+          "Medical history": true,
+          "Recent clinical": true,
+          "Mobility": false,
+          "Nutrition": false,
+          "Therapies": true,
+          "Orientation": false,
+          "Oxygen": false,
+          "Pain": false,
+          "Living": true,
+          "Providers": false,
+          "Advance": true
+        },
+        "collapsed": true
+      },
+      {
+        "role": "clinician",
+        "hp": true,
+        "sections": {
+          "Identity and safety": false,
+          "Medical history": true,
+          "Recent clinical": true,
+          "Mobility": false,
+          "Nutrition": false,
+          "Therapies": true,
+          "Orientation": false,
+          "Oxygen": false,
+          "Pain": false,
+          "Living": true,
+          "Providers": false,
+          "Advance": true
+        },
+        "collapsed": true
+      },
+      {
+        "role": "coordinator",
+        "hp": true,
+        "sections": {
+          "Identity and safety": false,
+          "Medical history": true,
+          "Recent clinical": true,
+          "Mobility": false,
+          "Nutrition": false,
+          "Therapies": true,
+          "Orientation": false,
+          "Oxygen": false,
+          "Pain": false,
+          "Living": true,
+          "Providers": false,
+          "Advance": true
+        },
+        "collapsed": true
+      },
+      {
+        "role": "care_recipient_self",
+        "hp": true,
+        "sections": {
+          "Identity and safety": false,
+          "Medical history": true,
+          "Recent clinical": true,
+          "Mobility": false,
+          "Nutrition": false,
+          "Therapies": true,
+          "Orientation": false,
+          "Oxygen": false,
+          "Pain": false,
+          "Living": true,
+          "Providers": false,
+          "Advance": true
+        },
+        "collapsed": true
+      },
+      {
+        "role": "temporary_active",
+        "hp": true,
+        "sections": {
+          "Identity and safety": false,
+          "Medical history": true,
+          "Recent clinical": true,
+          "Mobility": false,
+          "Nutrition": false,
+          "Therapies": true,
+          "Orientation": false,
+          "Oxygen": false,
+          "Pain": false,
+          "Living": true,
+          "Providers": false,
+          "Advance": true
+        },
+        "collapsed": true
+      },
+      {
+        "role": "temporary_revoked",
+        "hp": false
+      }
+    ],
+    "pass": true
+  },
+  "today": {
+    "families": {
+      "n": 16,
+      "pass": 16,
+      "rows": [
+        {
+          "family": "medication",
+          "ok": true,
+          "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take with food a"
+        },
+        {
+          "family": "prn",
+          "ok": true,
+          "head": "No overdue as-needed follow-up is open for Evelyn Carter."
+        },
+        {
+          "family": "appointment",
+          "ok": true,
+          "head": "Physical therapy\nFriday 4:30 PM PDT\nLocation: Coastal PT\nStatus: scheduled\nTravel: about 18 minutes."
+        },
+        {
+          "family": "transport",
+          "ok": true,
+          "head": "Therapy-related goals on file for Evelyn:\n\nUpcoming therapy appointments appear on Today / Schedule "
+        },
+        {
+          "family": "mobility",
+          "ok": true,
+          "head": "Transfer / mobility support for Evelyn (authorized care profile):\nSupport needs on file:\nSafety cons"
+        },
+        {
+          "family": "diet",
+          "ok": true,
+          "head": "No verified diet, texture, or swallowing instruction is currently on file for Evelyn. Check the care"
+        },
+        {
+          "family": "swallowing",
+          "ok": true,
+          "head": "I don't have a record that answers “any swallowing instructions” for Evelyn Carter yet. Try naming t"
+        },
+        {
+          "family": "meal",
+          "ok": true,
+          "head": "From the latest caregiver handoff for Evelyn Carter:\n• Medication administration was corrected: not "
+        },
+        {
+          "family": "hydration",
+          "ok": true,
+          "head": "I don't have a record that answers “hydration plan” for Evelyn Carter yet. Try naming the timeframe "
+        },
+        {
+          "family": "adl",
+          "ok": true,
+          "head": "I don't have a record that answers “what help does she need with daily living” for Evelyn Carter yet"
+        },
+        {
+          "family": "refill",
+          "ok": true,
+          "head": "It is 7:43 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern needs monitoring\n\nComin"
+        },
+        {
+          "family": "supply",
+          "ok": true,
+          "head": "I don't have a record that answers “any supplies needed” for Evelyn Carter yet. Try naming the timef"
+        },
+        {
+          "family": "handoff",
+          "ok": true,
+          "head": "Daniel Kim covered Evelyn Carter before you from Jul 29, 6:45 PM to Jul 29, 10:55 PM. Their handoff "
+        },
+        {
+          "family": "safety",
+          "ok": true,
+          "head": "From the latest caregiver handoff for Evelyn Carter:\n• Medication administration was corrected: not "
+        },
+        {
+          "family": "observation",
+          "ok": true,
+          "head": "Evelyn Carter's most recent report on file is caregiver reported: ate (last noted Saturday, July 25,"
+        },
+        {
+          "family": "engagement",
+          "ok": true,
+          "head": "I don't have a record that answers “what does she enjoy” for Evelyn Carter yet. Try naming the timef"
+        }
+      ],
+      "browser_why_roles": 3,
+      "matrix_pass": true
+    },
+    "browser_rows": [
+      {
+        "role": "primary_family",
+        "why": false
+      },
+      {
+        "role": "family_friend",
+        "why": false
+      },
+      {
+        "role": "professional_dsp",
+        "why": false
+      },
+      {
+        "role": "clinician",
+        "why": true,
+        "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+        "learn": true,
+        "learn_opens_hp": true
+      },
+      {
+        "role": "coordinator",
+        "why": true,
+        "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+        "learn": true,
+        "learn_opens_hp": true
+      },
+      {
+        "role": "care_recipient_self",
+        "why": false
+      },
+      {
+        "role": "temporary_active",
+        "why": true,
+        "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+        "learn": true,
+        "learn_opens_hp": true
+      },
+      {
+        "role": "temporary_revoked",
+        "why": false
+      }
+    ],
+    "pass": true
+  },
+  "control_inventory": {
+    "work_items": 12,
+    "needs_owner": 0,
+    "pass": true
+  },
+  "summary": {
+    "failures": [],
+    "identity": true,
+    "hp": true,
+    "consent": true,
+    "today": true,
+    "founder": true,
+    "durable": true,
+    "clinical": true,
+    "prn": true,
+    "self": true,
+    "unauthorized_ui": 0
+  }
+}

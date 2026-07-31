@@ -1,0 +1,14 @@
+{
+  "at": "2026-07-31T07:25:36.984Z",
+  "app_product_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_repo_head": "f283bc709c62bc3431318b32d76b2e9a539d780e",
+  "app_bundle": "index-DNKXOTHH.js",
+  "api_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "app_unit": "98/98",
+  "care_unit": "363/363",
+  "self_ownership": "PASS",
+  "deployment_parity": true,
+  "background_workers": 0,
+  "canonical_playwright": "npm run test:e2e",
+  "public_base": "https://care.niovlabs.com"
+}

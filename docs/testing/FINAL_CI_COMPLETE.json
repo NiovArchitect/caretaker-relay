@@ -1,0 +1,35 @@
+{
+  "at": "2026-07-31T07:45:27.530Z",
+  "app_product_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_bundle_live": "index-DNKXOTHH.js",
+  "api_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "matrix_runner": "scripts/final-complete-ui-matrix-closure.mjs",
+  "canonical_playwright": "npm run test:e2e with CR_E2E_BASE_URL=https://care.niovlabs.com",
+  "typecheck": "PASS",
+  "app_unit": "98/98 PASS",
+  "care_unit": "363/363 PASS",
+  "app_build": "PASS",
+  "api_build": "PASS (live deploy)",
+  "lint": "FAIL",
+  "lint_reason": "No eslint config present in caretaker-relay package; lint suite not established",
+  "integration": "FAIL",
+  "integration_reason": "Dedicated integration suite not executed this campaign",
+  "api_contract": "FAIL",
+  "api_contract_reason": "Dedicated OpenAPI/contract suite not executed",
+  "playwright_subset": {
+    "files": [
+      "final-public-browser-closure.spec.ts",
+      "final-unproven-gate-closure.spec.ts",
+      "cr-browser-safety.spec.ts",
+      "product-surface-closure.spec.ts"
+    ],
+    "passed": 16,
+    "failed": 7,
+    "status": "FAIL"
+  },
+  "multi_role_e2e": {
+    "status": "PASS",
+    "note": "final-complete-ui-matrix-closure.mjs executed 8 roles + viewports + consent on public"
+  },
+  "full_ci_pipeline": "FAIL"
+}

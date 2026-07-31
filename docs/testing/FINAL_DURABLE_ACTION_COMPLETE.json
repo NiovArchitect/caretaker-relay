@@ -1,0 +1,15 @@
+{
+  "create": 201,
+  "claim1": 200,
+  "claim1_ok": true,
+  "claim1_human": true,
+  "raw_json": false,
+  "double_claim_status": 200,
+  "double_claim_ok": true,
+  "wrong_recipient_status": 404,
+  "unauthorized_status": 400,
+  "false_success": 0,
+  "duplicate_terminal_writes": 0,
+  "pass": true,
+  "idempotent_reclaim": true
+}

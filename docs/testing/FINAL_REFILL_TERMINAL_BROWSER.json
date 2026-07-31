@@ -1,0 +1,24 @@
+{
+  "api": {
+    "work_id": "work-owuczqcv-ms8mhu6c",
+    "create": 201,
+    "claim1": 200,
+    "claim1_ok": true,
+    "claim1_human": true,
+    "raw_json": false,
+    "double_claim_status": 200,
+    "double_claim_ok": true,
+    "wrong_recipient_status": 404,
+    "unauthorized_status": 400,
+    "false_success": 0,
+    "duplicate_terminal_writes": 0,
+    "pass": true,
+    "idempotent_reclaim": true
+  },
+  "browser": {
+    "claim_button_visible": false,
+    "note": "no claim button; API durable path covered separately"
+  },
+  "pass": true,
+  "note": "API terminal claim PASS required; browser button exercised when visible"
+}

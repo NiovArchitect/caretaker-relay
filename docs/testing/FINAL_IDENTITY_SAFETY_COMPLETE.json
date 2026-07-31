@@ -1,0 +1,361 @@
+{
+  "roles_executed": 8,
+  "authorized_with_strip": 7,
+  "denied_without_strip": 1,
+  "unauthorized_ui": 0,
+  "viewport_cases": 18,
+  "viewport_required": 18,
+  "field_cases_scored": 40,
+  "field_cases_pass": 40,
+  "rows": [
+    {
+      "role": "primary_family",
+      "label": "Marcus primary",
+      "strip": true,
+      "name": "",
+      "dob": "",
+      "allergies": "ALLERGIES\nNone verified on file",
+      "code": "CODE STATUS\nNot verified on file",
+      "emergency": "EMERGENCY\nNot on file",
+      "age": "",
+      "hp": true,
+      "hp_sections": {
+        "Identity and safety": false,
+        "Medical history": true,
+        "Recent clinical": true,
+        "Mobility": false,
+        "Nutrition": false,
+        "Therapies": true,
+        "Orientation": false,
+        "Oxygen": false,
+        "Pain": false,
+        "Living": true,
+        "Providers": false,
+        "Advance": true
+      },
+      "hp_collapsed": true,
+      "why": false,
+      "keyboard_tab": true
+    },
+    {
+      "role": "family_friend",
+      "label": "Maya family",
+      "strip": true,
+      "name": "",
+      "dob": "",
+      "allergies": "ALLERGIES\nNone verified on file",
+      "code": "CODE STATUS\nNot verified on file",
+      "emergency": "EMERGENCY\nNot on file",
+      "age": "",
+      "hp": true,
+      "hp_sections": {
+        "Identity and safety": false,
+        "Medical history": true,
+        "Recent clinical": true,
+        "Mobility": false,
+        "Nutrition": false,
+        "Therapies": true,
+        "Orientation": false,
+        "Oxygen": false,
+        "Pain": false,
+        "Living": true,
+        "Providers": false,
+        "Advance": true
+      },
+      "hp_collapsed": true,
+      "why": false,
+      "keyboard_tab": true
+    },
+    {
+      "role": "professional_dsp",
+      "label": "Daniel DSP",
+      "strip": true,
+      "name": "",
+      "dob": "",
+      "allergies": "ALLERGIES\nNone verified on file",
+      "code": "CODE STATUS\nNot verified on file",
+      "emergency": "EMERGENCY\nNot on file",
+      "age": "",
+      "hp": true,
+      "hp_sections": {
+        "Identity and safety": false,
+        "Medical history": true,
+        "Recent clinical": true,
+        "Mobility": false,
+        "Nutrition": false,
+        "Therapies": true,
+        "Orientation": false,
+        "Oxygen": false,
+        "Pain": false,
+        "Living": true,
+        "Providers": false,
+        "Advance": true
+      },
+      "hp_collapsed": true,
+      "why": false,
+      "keyboard_tab": true
+    },
+    {
+      "role": "clinician",
+      "label": "Dr Shah",
+      "strip": true,
+      "name": "",
+      "dob": "",
+      "allergies": "ALLERGIES\nNo known drug allergies on file",
+      "code": "CODE STATUS\nNot verified on file",
+      "emergency": "EMERGENCY\nNot on file",
+      "age": "",
+      "hp": true,
+      "hp_sections": {
+        "Identity and safety": false,
+        "Medical history": true,
+        "Recent clinical": true,
+        "Mobility": false,
+        "Nutrition": false,
+        "Therapies": true,
+        "Orientation": false,
+        "Oxygen": false,
+        "Pain": false,
+        "Living": true,
+        "Providers": false,
+        "Advance": true
+      },
+      "hp_collapsed": true,
+      "why": true,
+      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+      "learn_more": true,
+      "learn_opens_hp": true,
+      "keyboard_tab": true
+    },
+    {
+      "role": "coordinator",
+      "label": "Coordinator",
+      "strip": true,
+      "name": "",
+      "dob": "",
+      "allergies": "ALLERGIES\nNo known drug allergies on file",
+      "code": "CODE STATUS\nNot verified on file",
+      "emergency": "EMERGENCY\nNot on file",
+      "age": "",
+      "hp": true,
+      "hp_sections": {
+        "Identity and safety": false,
+        "Medical history": true,
+        "Recent clinical": true,
+        "Mobility": false,
+        "Nutrition": false,
+        "Therapies": true,
+        "Orientation": false,
+        "Oxygen": false,
+        "Pain": false,
+        "Living": true,
+        "Providers": false,
+        "Advance": true
+      },
+      "hp_collapsed": true,
+      "why": true,
+      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+      "learn_more": true,
+      "learn_opens_hp": true,
+      "keyboard_tab": true
+    },
+    {
+      "role": "care_recipient_self",
+      "label": "Recipient self",
+      "strip": true,
+      "name": "",
+      "dob": "",
+      "allergies": "ALLERGIES\nNone verified on file",
+      "code": "CODE STATUS\nNot verified on file",
+      "emergency": "EMERGENCY\nNot on file",
+      "age": "",
+      "hp": true,
+      "hp_sections": {
+        "Identity and safety": false,
+        "Medical history": true,
+        "Recent clinical": true,
+        "Mobility": false,
+        "Nutrition": false,
+        "Therapies": true,
+        "Orientation": false,
+        "Oxygen": false,
+        "Pain": false,
+        "Living": true,
+        "Providers": false,
+        "Advance": true
+      },
+      "hp_collapsed": true,
+      "why": false,
+      "keyboard_tab": true
+    },
+    {
+      "role": "temporary_active",
+      "label": "Temp active",
+      "strip": true,
+      "name": "",
+      "dob": "",
+      "allergies": "ALLERGIES\nNo known drug allergies on file",
+      "code": "CODE STATUS\nNot verified on file",
+      "emergency": "EMERGENCY\nNot on file",
+      "age": "",
+      "hp": true,
+      "hp_sections": {
+        "Identity and safety": false,
+        "Medical history": true,
+        "Recent clinical": true,
+        "Mobility": false,
+        "Nutrition": false,
+        "Therapies": true,
+        "Orientation": false,
+        "Oxygen": false,
+        "Pain": false,
+        "Living": true,
+        "Providers": false,
+        "Advance": true
+      },
+      "hp_collapsed": true,
+      "why": true,
+      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+      "learn_more": true,
+      "learn_opens_hp": true,
+      "keyboard_tab": true
+    },
+    {
+      "role": "temporary_revoked",
+      "label": "Temp revoked",
+      "strip": false,
+      "hp": false,
+      "why": false,
+      "keyboard_tab": true
+    }
+  ],
+  "viewports": [
+    {
+      "role": "primary_family",
+      "viewport": "1440x900",
+      "strip": true,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "primary_family",
+      "viewport": "1280x720",
+      "strip": true,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "primary_family",
+      "viewport": "1024x768",
+      "strip": true,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "primary_family",
+      "viewport": "768x1024",
+      "strip": true,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "primary_family",
+      "viewport": "390x844",
+      "strip": true,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "primary_family",
+      "viewport": "320x568",
+      "strip": true,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "care_recipient_self",
+      "viewport": "1440x900",
+      "strip": true,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "care_recipient_self",
+      "viewport": "1280x720",
+      "strip": true,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "care_recipient_self",
+      "viewport": "1024x768",
+      "strip": true,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "care_recipient_self",
+      "viewport": "768x1024",
+      "strip": true,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "care_recipient_self",
+      "viewport": "390x844",
+      "strip": true,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "care_recipient_self",
+      "viewport": "320x568",
+      "strip": true,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "temporary_revoked",
+      "viewport": "1440x900",
+      "strip": false,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "temporary_revoked",
+      "viewport": "1280x720",
+      "strip": false,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "temporary_revoked",
+      "viewport": "1024x768",
+      "strip": false,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "temporary_revoked",
+      "viewport": "768x1024",
+      "strip": false,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "temporary_revoked",
+      "viewport": "390x844",
+      "strip": false,
+      "shell": true,
+      "zoom_shell": true
+    },
+    {
+      "role": "temporary_revoked",
+      "viewport": "320x568",
+      "strip": false,
+      "shell": true,
+      "zoom_shell": true
+    }
+  ],
+  "pass": true
+}

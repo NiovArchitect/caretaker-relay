@@ -1,14 +1,14 @@
 {
-  "at": "2026-07-31T06:31:33.611Z",
-  "app_sha": "f971c3e71c692a6f9f6d7f71122da2875fc9ec28",
-  "app_bundle": "index-CF2tvtT1.js",
-  "app_deploy": "dep-d9m3t7m417fc73dunppg",
-  "api_sha": "340c546a0cd74f99c9022c576e88e786b6d05bc9",
-  "status": "PARTIAL",
-  "hp_toggle_aria_expanded": true,
-  "why_learn_more_buttons": true,
-  "mobile_marcus_strip": true,
-  "full_sr_keyboard_audit": false,
-  "zoom_200": false,
-  "tablet_matrix": false
+  "at": "2026-07-31T07:45:27.530Z",
+  "app_product_sha": "3af981bcec0cad5c45641f3539f9103268db90b6",
+  "app_bundle_live": "index-DNKXOTHH.js",
+  "api_sha": "c0b159e362ea79eaf6889945cce808b969157784",
+  "matrix_runner": "scripts/final-complete-ui-matrix-closure.mjs",
+  "canonical_playwright": "npm run test:e2e with CR_E2E_BASE_URL=https://care.niovlabs.com",
+  "status": "FAIL",
+  "reason": "Keyboard Tab smoke + viewport matrix executed; full SR/axe/200% audit incomplete as formal a11y suite",
+  "keyboard_tab_smoke": true,
+  "viewport_matrix_cases": 18,
+  "zoom_css_simulation": true,
+  "formal_axe_suite": false
 }

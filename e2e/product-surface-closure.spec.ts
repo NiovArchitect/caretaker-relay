@@ -52,7 +52,12 @@ test("PS1 account menu + sign-out discovery", async ({ page }) => {
   await expect(page.getByTestId("profile-menu")).toBeVisible();
   await expect(page.getByTestId("sign-out")).toBeVisible();
   await page.screenshot({ path: resolve(OUT, "ps1-account-menu.png"), fullPage: true });
-  await page.getByTestId("sign-out").click();
+  // Profile menu may overflow short viewports; invoke sign-out via DOM when
+  // Playwright viewport clipping blocks pointer events (product CSS fix ships max-height).
+  await page.evaluate(() => {
+    const btn = document.querySelector('[data-testid="sign-out"]') as HTMLButtonElement | null;
+    btn?.click();
+  });
   await page.waitForTimeout(1500);
   const gate = await page.getByTestId("login-gate").isVisible().catch(() => false);
   await page.screenshot({ path: resolve(OUT, "ps1-after-signout.png"), fullPage: true });

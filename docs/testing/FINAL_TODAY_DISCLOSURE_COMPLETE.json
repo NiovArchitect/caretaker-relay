@@ -1,0 +1,134 @@
+{
+  "families": {
+    "n": 16,
+    "pass": 16,
+    "rows": [
+      {
+        "family": "medication",
+        "ok": true,
+        "head": "• Metformin · strength 500 mg · dose 500 mg\n Route: By mouth\n Frequency / schedule: Take with food a"
+      },
+      {
+        "family": "prn",
+        "ok": true,
+        "head": "No overdue as-needed follow-up is open for Evelyn Carter."
+      },
+      {
+        "family": "appointment",
+        "ok": true,
+        "head": "Physical therapy\nFriday 4:30 PM PDT\nLocation: Coastal PT\nStatus: scheduled\nTravel: about 18 minutes."
+      },
+      {
+        "family": "transport",
+        "ok": true,
+        "head": "Therapy-related goals on file for Evelyn:\n\nUpcoming therapy appointments appear on Today / Schedule "
+      },
+      {
+        "family": "mobility",
+        "ok": true,
+        "head": "Transfer / mobility support for Evelyn (authorized care profile):\nSupport needs on file:\nSafety cons"
+      },
+      {
+        "family": "diet",
+        "ok": true,
+        "head": "No verified diet, texture, or swallowing instruction is currently on file for Evelyn. Check the care"
+      },
+      {
+        "family": "swallowing",
+        "ok": true,
+        "head": "I don't have a record that answers “any swallowing instructions” for Evelyn Carter yet. Try naming t"
+      },
+      {
+        "family": "meal",
+        "ok": true,
+        "head": "From the latest caregiver handoff for Evelyn Carter:\n• Medication administration was corrected: not "
+      },
+      {
+        "family": "hydration",
+        "ok": true,
+        "head": "I don't have a record that answers “hydration plan” for Evelyn Carter yet. Try naming the timeframe "
+      },
+      {
+        "family": "adl",
+        "ok": true,
+        "head": "I don't have a record that answers “what help does she need with daily living” for Evelyn Carter yet"
+      },
+      {
+        "family": "refill",
+        "ok": true,
+        "head": "It is 7:43 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern needs monitoring\n\nComin"
+      },
+      {
+        "family": "supply",
+        "ok": true,
+        "head": "I don't have a record that answers “any supplies needed” for Evelyn Carter yet. Try naming the timef"
+      },
+      {
+        "family": "handoff",
+        "ok": true,
+        "head": "Daniel Kim covered Evelyn Carter before you from Jul 29, 6:45 PM to Jul 29, 10:55 PM. Their handoff "
+      },
+      {
+        "family": "safety",
+        "ok": true,
+        "head": "From the latest caregiver handoff for Evelyn Carter:\n• Medication administration was corrected: not "
+      },
+      {
+        "family": "observation",
+        "ok": true,
+        "head": "Evelyn Carter's most recent report on file is caregiver reported: ate (last noted Saturday, July 25,"
+      },
+      {
+        "family": "engagement",
+        "ok": true,
+        "head": "I don't have a record that answers “what does she enjoy” for Evelyn Carter yet. Try naming the timef"
+      }
+    ],
+    "browser_why_roles": 3,
+    "matrix_pass": true
+  },
+  "browser_rows": [
+    {
+      "role": "primary_family",
+      "why": false
+    },
+    {
+      "role": "family_friend",
+      "why": false
+    },
+    {
+      "role": "professional_dsp",
+      "why": false
+    },
+    {
+      "role": "clinician",
+      "why": true,
+      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+      "learn": true,
+      "learn_opens_hp": true
+    },
+    {
+      "role": "coordinator",
+      "why": true,
+      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+      "learn": true,
+      "learn_opens_hp": true
+    },
+    {
+      "role": "care_recipient_self",
+      "why": false
+    },
+    {
+      "role": "temporary_active",
+      "why": true,
+      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
+      "learn": true,
+      "learn_opens_hp": true
+    },
+    {
+      "role": "temporary_revoked",
+      "why": false
+    }
+  ],
+  "pass": true
+}

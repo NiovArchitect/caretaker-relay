@@ -1,0 +1,145 @@
+{
+  "roles": 8,
+  "section_slots": 84,
+  "section_hits": 35,
+  "rows": [
+    {
+      "role": "primary_family",
+      "hp": true,
+      "sections": {
+        "Identity and safety": false,
+        "Medical history": true,
+        "Recent clinical": true,
+        "Mobility": false,
+        "Nutrition": false,
+        "Therapies": true,
+        "Orientation": false,
+        "Oxygen": false,
+        "Pain": false,
+        "Living": true,
+        "Providers": false,
+        "Advance": true
+      },
+      "collapsed": true
+    },
+    {
+      "role": "family_friend",
+      "hp": true,
+      "sections": {
+        "Identity and safety": false,
+        "Medical history": true,
+        "Recent clinical": true,
+        "Mobility": false,
+        "Nutrition": false,
+        "Therapies": true,
+        "Orientation": false,
+        "Oxygen": false,
+        "Pain": false,
+        "Living": true,
+        "Providers": false,
+        "Advance": true
+      },
+      "collapsed": true
+    },
+    {
+      "role": "professional_dsp",
+      "hp": true,
+      "sections": {
+        "Identity and safety": false,
+        "Medical history": true,
+        "Recent clinical": true,
+        "Mobility": false,
+        "Nutrition": false,
+        "Therapies": true,
+        "Orientation": false,
+        "Oxygen": false,
+        "Pain": false,
+        "Living": true,
+        "Providers": false,
+        "Advance": true
+      },
+      "collapsed": true
+    },
+    {
+      "role": "clinician",
+      "hp": true,
+      "sections": {
+        "Identity and safety": false,
+        "Medical history": true,
+        "Recent clinical": true,
+        "Mobility": false,
+        "Nutrition": false,
+        "Therapies": true,
+        "Orientation": false,
+        "Oxygen": false,
+        "Pain": false,
+        "Living": true,
+        "Providers": false,
+        "Advance": true
+      },
+      "collapsed": true
+    },
+    {
+      "role": "coordinator",
+      "hp": true,
+      "sections": {
+        "Identity and safety": false,
+        "Medical history": true,
+        "Recent clinical": true,
+        "Mobility": false,
+        "Nutrition": false,
+        "Therapies": true,
+        "Orientation": false,
+        "Oxygen": false,
+        "Pain": false,
+        "Living": true,
+        "Providers": false,
+        "Advance": true
+      },
+      "collapsed": true
+    },
+    {
+      "role": "care_recipient_self",
+      "hp": true,
+      "sections": {
+        "Identity and safety": false,
+        "Medical history": true,
+        "Recent clinical": true,
+        "Mobility": false,
+        "Nutrition": false,
+        "Therapies": true,
+        "Orientation": false,
+        "Oxygen": false,
+        "Pain": false,
+        "Living": true,
+        "Providers": false,
+        "Advance": true
+      },
+      "collapsed": true
+    },
+    {
+      "role": "temporary_active",
+      "hp": true,
+      "sections": {
+        "Identity and safety": false,
+        "Medical history": true,
+        "Recent clinical": true,
+        "Mobility": false,
+        "Nutrition": false,
+        "Therapies": true,
+        "Orientation": false,
+        "Oxygen": false,
+        "Pain": false,
+        "Living": true,
+        "Providers": false,
+        "Advance": true
+      },
+      "collapsed": true
+    },
+    {
+      "role": "temporary_revoked",
+      "hp": false
+    }
+  ],
+  "pass": true
+}
