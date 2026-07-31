@@ -1,0 +1,39 @@
+{
+  "at": "2026-07-31T06:20:00.000Z",
+  "controller": "Agent Zero",
+  "public_app": "https://care.niovlabs.com",
+  "public_api": "https://caretaker-relay-care-api.onrender.com",
+  "pre_repair": {
+    "app_source_sha": "0346e1787cfcc1d5dde43c535208ed4208e7f5f7",
+    "app_deploy_sha": "0346e1787cfcc1d5dde43c535208ed4208e7f5f7",
+    "app_bundle": "index-BJKEDyRH.js",
+    "api_source_sha": "340c546a0cd74f99c9022c576e88e786b6d05bc9",
+    "api_deploy_sha": "340c546a0cd74f99c9022c576e88e786b6d05bc9",
+    "deployment_parity": true,
+    "public_health": "PASS",
+    "background_workers": 0
+  },
+  "units": {
+    "care": "359/359 PASS",
+    "app": "98/98 PASS"
+  },
+  "defect": {
+    "id": "D-RESTORE-MEMBERSHIPS-001",
+    "summary": "restoreSession dropped memberships on re-persist",
+    "repair_sha": "f971c3e71c692a6f9f6d7f71122da2875fc9ec28",
+    "deploy_id": "dep-d9m3t7m417fc73dunppg"
+  },
+  "pre_repair_browser_summary": {
+    "roles_executed": 8,
+    "strips": 4,
+    "hp": 4,
+    "clinical_30": "30/30",
+    "shift_plan": "PASS",
+    "unauthorized_disclosures": 0,
+    "product_gaps": ["care_recipient_self_bound_to_cr_olivia"]
+  },
+  "product_freeze": "NOT_RESTORED",
+  "founder_desktop": "PENDING",
+  "founder_physical_phone": "PENDING",
+  "submission_readiness": "NOT_READY"
+}

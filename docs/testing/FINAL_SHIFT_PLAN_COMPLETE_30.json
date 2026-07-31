@@ -1,8 +1,15 @@
 {
-  "at": "2026-07-31T05:46:40.717Z",
+  "at": "2026-07-31T06:31:33.611Z",
+  "app_sha": "f971c3e71c692a6f9f6d7f71122da2875fc9ec28",
+  "app_bundle": "index-CF2tvtT1.js",
+  "app_deploy": "dep-d9m3t7m417fc73dunppg",
+  "api_sha": "340c546a0cd74f99c9022c576e88e786b6d05bc9",
+  "status": "TEMPLATE_PASS_FULL_TIME_MATRIX_PARTIAL",
   "template": {
     "status": "PASS",
-    "sample": "It is 5:47 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern needs monitoring\n\nComing up\n• Metformin 500 mg · 12:00 PM today\n• Physical therapy · Friday 4:30 PM PDT\n\nWatch for\n• The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team b"
+    "sample": "It is 6:26 AM. Here is Evelyn Carter's current plan:\n\nNow\n• Mobility concern needs monitoring\n\nComing up\n• Metformin 500 mg · 12:00 PM today\n• Physical therapy · Friday 4:30 PM PDT\n\nWatch for\n• The reported amount doesn't clearly match Evelyn Carter's current medication instructions. Please check the medication label or confirm with the care team b"
   },
-  "scenarios_30": "TEMPLATE_PASS_FULL_TIME_MATRIX_PARTIAL"
+  "scenarios_30_executed": 1,
+  "scenarios_30_required": 30,
+  "canonical_sections_present": true
 }

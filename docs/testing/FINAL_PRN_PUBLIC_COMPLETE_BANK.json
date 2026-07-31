@@ -1,0 +1,15 @@
+{
+  "at": "2026-07-31T06:31:33.611Z",
+  "app_sha": "f971c3e71c692a6f9f6d7f71122da2875fc9ec28",
+  "app_bundle": "index-CF2tvtT1.js",
+  "app_deploy": "dep-d9m3t7m417fc73dunppg",
+  "api_sha": "340c546a0cd74f99c9022c576e88e786b6d05bc9",
+  "status": "PARTIAL",
+  "api_samples": [
+    "Is any PRN follow-up due? → No overdue as-needed follow-up",
+    "What PRN medications does she have? → authorized as-needed instructions",
+    "Can I give PRN pain med? → Acetaminophen 500 mg as needed (no auto-dose from chat)"
+  ],
+  "public_cross_screen_bank": false,
+  "unit_prn_architecture": "prior green"
+}

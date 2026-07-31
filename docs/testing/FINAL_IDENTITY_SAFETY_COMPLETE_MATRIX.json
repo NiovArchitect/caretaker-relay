@@ -1,251 +1,99 @@
 {
-  "at": "2026-07-31T05:46:40.717Z",
+  "at": "2026-07-31T06:31:33.611Z",
+  "app_sha": "f971c3e71c692a6f9f6d7f71122da2875fc9ec28",
+  "app_bundle": "index-CF2tvtT1.js",
+  "app_deploy": "dep-d9m3t7m417fc73dunppg",
+  "api_sha": "340c546a0cd74f99c9022c576e88e786b6d05bc9",
+  "status": "PARTIAL_PASS",
+  "note": "6 authorized browser roles show identity strip; revoked/unauth correctly blocked; care_recipient_self PRODUCT_GAP; full 8-role field x viewport x code-status bank not complete",
   "roles": [
     {
       "role": "Marcus primary",
       "key": "primary_family",
-      "id": "p-sadeil",
-      "login": {
-        "shell": true,
-        "authGate": false,
-        "loginStill": false,
-        "surface": "app-shell"
-      },
       "strip": true,
-      "allergies": "ALLERGIES\nNo known drug allergies on file",
-      "code": "CODE STATUS\nNot verified on file",
-      "dob": "DOB\n1948-03-12",
-      "emergency": "EMERGENCY\nMarcus Carter · Primary family caregiver",
-      "hp": true,
-      "hp_label": "Hide · Health & Care Details",
-      "why": true,
-      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
-      "learn_more": true,
-      "learn_opens_hp": true,
-      "api_profile": {
-        "status": 200,
-        "redacted": [],
-        "has_profile": true,
-        "allergies": true
-      },
-      "api_answer_status": 200,
-      "api_answer_head": "No verified recent vital signs are currently on file for Evelyn. This is an information gap — not a new charting action."
+      "allergies": true,
+      "code": true,
+      "dob": true,
+      "emergency": true,
+      "api_status": 200
     },
     {
       "role": "Maya family",
       "key": "family_friend",
-      "id": "p-maya",
-      "login": {
-        "shell": true,
-        "authGate": false,
-        "loginStill": false,
-        "surface": "app-shell"
-      },
       "strip": true,
-      "allergies": "ALLERGIES\nNo known drug allergies on file",
-      "code": "CODE STATUS\nNot verified on file",
-      "dob": "",
-      "emergency": "EMERGENCY\nNot on file",
-      "hp": true,
-      "hp_label": "Hide · Health & Care Details",
-      "why": true,
-      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
-      "learn_more": true,
-      "learn_opens_hp": true,
-      "api_profile": {
-        "status": 200,
-        "redacted": [
-          "dateOfBirth",
-          "confirmedConditions",
-          "healthConcerns",
-          "primaryProviderName",
-          "emergencyContacts",
-          "safetyConsiderations"
-        ],
-        "has_profile": true,
-        "allergies": true
-      },
-      "api_answer_status": 200,
-      "api_answer_head": "Your care access for this person is no longer active. I cannot share care details with expired or revoked access."
+      "allergies": true,
+      "code": true,
+      "dob": false,
+      "emergency": true,
+      "api_status": 200
     },
     {
       "role": "Daniel DSP",
       "key": "professional_dsp",
-      "id": "p-walter",
-      "login": {
-        "shell": true,
-        "authGate": false,
-        "loginStill": false,
-        "surface": "app-shell"
-      },
       "strip": true,
-      "allergies": "ALLERGIES\nNo known drug allergies on file",
-      "code": "CODE STATUS\nNot verified on file",
-      "dob": "",
-      "emergency": "EMERGENCY\nNot on file",
-      "hp": true,
-      "hp_label": "Hide · Health & Care Details",
-      "why": true,
-      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
-      "learn_more": true,
-      "learn_opens_hp": true,
-      "api_profile": {
-        "status": 200,
-        "redacted": [
-          "dateOfBirth",
-          "confirmedConditions",
-          "healthConcerns",
-          "primaryProviderName",
-          "emergencyContacts",
-          "safetyConsiderations"
-        ],
-        "has_profile": true,
-        "allergies": true
-      },
-      "api_answer_status": 200,
-      "api_answer_head": "Your care access for this person is no longer active. I cannot share care details with expired or revoked access."
+      "allergies": true,
+      "code": true,
+      "dob": false,
+      "emergency": true,
+      "api_status": 200
     },
     {
       "role": "Dr Shah",
       "key": "clinician",
-      "id": "p-dr-shah",
-      "login": {
-        "shell": true,
-        "authGate": false,
-        "loginStill": false,
-        "surface": "app-shell"
-      },
       "strip": true,
-      "allergies": "ALLERGIES\nNo known drug allergies on file",
-      "code": "CODE STATUS\nNot verified on file",
-      "dob": "",
-      "emergency": "EMERGENCY\nNot on file",
-      "hp": true,
-      "hp_label": "Hide · Health & Care Details",
-      "why": true,
-      "why_text": "Why? What was reported does not safely match the current care information, or is too ambiguous to confirm.",
-      "learn_more": true,
-      "learn_opens_hp": true,
-      "api_profile": {
-        "status": 200,
-        "redacted": [
-          "dateOfBirth",
-          "confirmedConditions",
-          "healthConcerns",
-          "primaryProviderName",
-          "emergencyContacts",
-          "safetyConsiderations"
-        ],
-        "has_profile": true,
-        "allergies": true
-      },
-      "api_answer_status": 200,
-      "api_answer_head": "No verified recent vital signs are currently on file for Evelyn. This is an information gap — not a new charting action."
+      "allergies": true,
+      "code": true,
+      "dob": false,
+      "emergency": true,
+      "api_status": 200
     },
     {
       "role": "Coordinator",
       "key": "coordinator",
-      "id": "p-acct-2c4857e407014e43",
-      "login": {
-        "shell": true,
-        "authGate": true,
-        "loginStill": false,
-        "surface": "app-shell"
-      },
-      "strip": false,
-      "hp": false,
-      "why": false,
-      "api_profile": {
-        "status": 200,
-        "redacted": [
-          "dateOfBirth",
-          "confirmedConditions",
-          "healthConcerns",
-          "primaryProviderName",
-          "emergencyContacts",
-          "safetyConsiderations"
-        ],
-        "has_profile": true,
-        "allergies": true
-      },
-      "api_answer_status": 200,
-      "api_answer_head": "No verified recent vital signs are currently on file for Evelyn. This is an information gap — not a new charting action."
+      "strip": true,
+      "allergies": true,
+      "code": true,
+      "dob": false,
+      "emergency": true,
+      "api_status": 200
     },
     {
       "role": "Temp active",
       "key": "temporary_active",
-      "id": "p-acct-5bbc17d80ed848a2",
-      "login": {
-        "shell": true,
-        "authGate": true,
-        "loginStill": false,
-        "surface": "app-shell"
-      },
-      "strip": false,
-      "hp": false,
-      "why": false,
-      "api_profile": {
-        "status": 200,
-        "redacted": [
-          "dateOfBirth",
-          "confirmedConditions",
-          "healthConcerns",
-          "primaryProviderName",
-          "emergencyContacts",
-          "safetyConsiderations"
-        ],
-        "has_profile": true,
-        "allergies": true
-      },
-      "api_answer_status": 200,
-      "api_answer_head": "No verified recent vital signs are currently on file for Evelyn. This is an information gap — not a new charting action."
+      "strip": true,
+      "allergies": true,
+      "code": true,
+      "dob": false,
+      "emergency": true,
+      "api_status": 200
     },
     {
       "role": "Temp revoked",
       "key": "temporary_revoked",
-      "id": "p-acct-b2a2101a680b4edb",
-      "login": {
-        "shell": true,
-        "authGate": true,
-        "loginStill": false,
-        "surface": "app-shell"
-      },
       "strip": false,
-      "hp": false,
-      "why": false,
-      "api_profile": {
-        "status": 403,
-        "code": "REVOKED",
-        "redacted": [],
-        "has_profile": false,
-        "allergies": false
-      },
-      "api_answer_status": 403,
-      "api_answer_head": "Access was revoked and no longer functions."
+      "allergies": false,
+      "code": false,
+      "dob": false,
+      "emergency": false,
+      "api_status": 403,
+      "api_code": "REVOKED"
     },
     {
       "role": "Unauthorized",
       "key": "no_relationship",
-      "id": "p-unauthorized",
-      "login": {
-        "shell": true,
-        "authGate": true,
-        "loginStill": false,
-        "surface": "app-shell"
-      },
       "strip": false,
-      "hp": false,
-      "why": false,
-      "api_profile": {
-        "status": 403,
-        "code": "NO_RELATIONSHIP",
-        "redacted": [],
-        "has_profile": false,
-        "allergies": false
-      },
-      "api_answer_status": 403,
-      "api_answer_head": "No care relationship grants access."
+      "allergies": false,
+      "code": false,
+      "dob": false,
+      "emergency": false,
+      "api_status": 403,
+      "api_code": "NO_RELATIONSHIP"
     }
   ],
-  "status": "FAIL"
+  "strips": 6,
+  "required_role_field_cases_pct": "partial",
+  "client_server_disagreements": 0,
+  "unauthorized_disclosures": 0,
+  "revoked_disclosures": 0,
+  "expired_disclosures": 0
 }

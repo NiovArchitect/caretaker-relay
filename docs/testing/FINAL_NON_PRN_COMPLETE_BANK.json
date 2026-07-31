@@ -5,9 +5,8 @@
   "app_deploy": "dep-d9m3t7m417fc73dunppg",
   "api_sha": "340c546a0cd74f99c9022c576e88e786b6d05bc9",
   "status": "PARTIAL",
-  "claim_repair": "body:{} deployed and retested with human success message",
-  "full_consequential_matrix": false,
-  "false_success": 0,
-  "duplicate_terminal_writes": "not fully audited",
-  "wrong_recipient_writes": "not fully audited"
+  "founder_21": "PASS_PRIOR_API (docs/testing/FINAL_FOUNDER_21_100_20_RESULTS.json)",
+  "founder_100": "PARTIAL_PRIOR",
+  "founder_20": "PARTIAL_PRIOR",
+  "formal_non_prn_bank_this_campaign": false
 }

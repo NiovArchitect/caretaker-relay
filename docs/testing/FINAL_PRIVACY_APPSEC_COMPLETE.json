@@ -1,0 +1,19 @@
+{
+  "at": "2026-07-31T06:31:33.611Z",
+  "app_sha": "f971c3e71c692a6f9f6d7f71122da2875fc9ec28",
+  "app_bundle": "index-CF2tvtT1.js",
+  "app_deploy": "dep-d9m3t7m417fc73dunppg",
+  "api_sha": "340c546a0cd74f99c9022c576e88e786b6d05bc9",
+  "privacy": {
+    "status": "PARTIAL",
+    "unauthorized_disclosures": 0,
+    "revoked_api_403": true,
+    "field_redaction_executed_set": true,
+    "full_privacy_battery": false
+  },
+  "appsec": {
+    "status": "OPEN",
+    "full_appsec_battery": false,
+    "notes": "No full OWASP/AppSec suite executed this campaign"
+  }
+}

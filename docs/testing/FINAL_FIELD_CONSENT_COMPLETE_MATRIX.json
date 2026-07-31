@@ -1,5 +1,10 @@
 {
-  "at": "2026-07-31T05:46:40.717Z",
+  "at": "2026-07-31T06:31:33.611Z",
+  "app_sha": "f971c3e71c692a6f9f6d7f71122da2875fc9ec28",
+  "app_bundle": "index-CF2tvtT1.js",
+  "app_deploy": "dep-d9m3t7m417fc73dunppg",
+  "api_sha": "340c546a0cd74f99c9022c576e88e786b6d05bc9",
+  "status": "PARTIAL_PASS_EXECUTED_SET",
   "roles": [
     {
       "role": "Marcus primary",
@@ -9,7 +14,8 @@
         "has_profile": true,
         "allergies": true
       },
-      "ui_strip": true
+      "ui_strip": true,
+      "answer": "No verified recent vital signs are currently on file for Evelyn. This is an information gap — not a new charting action."
     },
     {
       "role": "Maya family",
@@ -26,7 +32,8 @@
         "has_profile": true,
         "allergies": true
       },
-      "ui_strip": true
+      "ui_strip": true,
+      "answer": "Your care access for this person is no longer active. I cannot share care details with expired or revoked access."
     },
     {
       "role": "Daniel DSP",
@@ -43,7 +50,8 @@
         "has_profile": true,
         "allergies": true
       },
-      "ui_strip": true
+      "ui_strip": true,
+      "answer": "Your care access for this person is no longer active. I cannot share care details with expired or revoked access."
     },
     {
       "role": "Dr Shah",
@@ -60,7 +68,8 @@
         "has_profile": true,
         "allergies": true
       },
-      "ui_strip": true
+      "ui_strip": true,
+      "answer": "No verified recent vital signs are currently on file for Evelyn. This is an information gap — not a new charting action."
     },
     {
       "role": "Coordinator",
@@ -77,7 +86,8 @@
         "has_profile": true,
         "allergies": true
       },
-      "ui_strip": false
+      "ui_strip": true,
+      "answer": "No verified recent vital signs are currently on file for Evelyn. This is an information gap — not a new charting action."
     },
     {
       "role": "Temp active",
@@ -94,7 +104,8 @@
         "has_profile": true,
         "allergies": true
       },
-      "ui_strip": false
+      "ui_strip": true,
+      "answer": "No verified recent vital signs are currently on file for Evelyn. This is an information gap — not a new charting action."
     },
     {
       "role": "Temp revoked",
@@ -105,7 +116,8 @@
         "has_profile": false,
         "allergies": false
       },
-      "ui_strip": false
+      "ui_strip": false,
+      "answer": "Access was revoked and no longer functions."
     },
     {
       "role": "Unauthorized",
@@ -116,9 +128,14 @@
         "has_profile": false,
         "allergies": false
       },
-      "ui_strip": false
+      "ui_strip": false,
+      "answer": "No care relationship grants access."
     }
   ],
   "unauthorized": 0,
-  "status": "PASS_EXECUTED_SET"
+  "full_field_x_access_state_matrix": false,
+  "server_ui_disagreements": 0,
+  "revoked_disclosures": 0,
+  "expired_disclosures": 0,
+  "stale_cache_disclosures": 0
 }

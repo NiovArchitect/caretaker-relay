@@ -1,13 +1,11 @@
 {
-  "at": "2026-07-31T04:00:00.000Z",
-  "desktop": "PENDING_FOUNDER",
-  "physical_phone": "PENDING_FOUNDER",
-  "presented_as_sole_remaining_gate": false,
-  "prerequisites_still_open": [
-    "claim empty-body deploy + retest",
-    "full durable-action matrix",
-    "full CI",
-    "privacy/AppSec/a11y full",
-    "missing role fixtures (recipient, coordinator, temporary)"
-  ]
+  "at": "2026-07-31T06:31:33.611Z",
+  "app_sha": "f971c3e71c692a6f9f6d7f71122da2875fc9ec28",
+  "app_bundle": "index-CF2tvtT1.js",
+  "app_deploy": "dep-d9m3t7m417fc73dunppg",
+  "api_sha": "340c546a0cd74f99c9022c576e88e786b6d05bc9",
+  "founder_desktop": "PENDING — not started; blocked until internal gaps = 0",
+  "founder_physical_phone": "PENDING — not started; blocked until internal gaps = 0",
+  "may_founder_begin": false,
+  "reason": "Internal product/validation gates remain open; Agent Zero will not hand off to founder-only verification yet"
 }

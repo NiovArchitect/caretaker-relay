@@ -434,26 +434,44 @@ async function main() {
     head: String(med.data.answer || "").slice(0, 250),
   };
 
-  // API claim post-deploy with {}
+  // API claim post-deploy with {} — prefer needs_owner, else any open work item
   const work = await api("GET", `/api/v1/care/recipients/${RID}/work-items`, undefined, mt);
-  const items =
-    work.data?.needs_owner ||
-    work.data?.needsOwner ||
-    work.data?.work_items ||
-    work.data?.workItems ||
-    [];
-  if (Array.isArray(items) && items[0]?.id) {
+  const needsOwner = work.data?.needs_owner || work.data?.needsOwner || [];
+  const allItems = work.data?.work_items || work.data?.workItems || [];
+  const claimTarget =
+    (Array.isArray(needsOwner) && needsOwner[0]) ||
+    (Array.isArray(allItems) &&
+      allItems.find(
+        (w) =>
+          !w.ownerPersonId ||
+          w.status === "open" ||
+          w.status === "needs_owner" ||
+          w.status === "unassigned",
+      )) ||
+    (Array.isArray(allItems) && allItems[0]) ||
+    null;
+  if (claimTarget?.id) {
     const claim = await api(
       "POST",
-      `/api/v1/care/recipients/${RID}/work-items/${items[0].id}/claim`,
+      `/api/v1/care/recipients/${RID}/work-items/${claimTarget.id}/claim`,
       {},
       mt,
     );
+    const msg = String(claim.data?.message || claim.data?.error || "");
     report.refill_api = {
       status: claim.status,
       ok: claim.data?.ok === true,
       message: claim.data?.message,
       work_status: claim.data?.work_item?.status,
+      work_id: claimTarget.id,
+      raw_json_error: /^\s*\{/.test(msg) || /Body cannot be empty/i.test(msg),
+      human_success: /on it|accepted|assigned|claimed/i.test(msg),
+    };
+  } else {
+    report.refill_api = {
+      status: work.status,
+      ok: false,
+      message: "no claimable work item found",
       raw_json_error: false,
     };
   }

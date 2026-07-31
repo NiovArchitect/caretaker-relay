@@ -1,63 +1,63 @@
 {
-  "at": "2026-07-31T05:46:49.398Z",
+  "at": "2026-07-31T06:26:32.930Z",
   "recipient": "cr-olivia",
   "creation_method": "POST /auth/register + invitations + accept + revoke",
   "roles": {
     "primary_family": {
       "care_person_id": "p-sadeil",
-      "password": "sadeil-lab-password",
+      "password": "[REDACTED]",
       "auth": "lab_principal",
       "status": "ACTIVE"
     },
     "family_friend": {
       "care_person_id": "p-maya",
-      "password": "maya-lab-password",
+      "password": "[REDACTED]",
       "auth": "lab_principal",
       "status": "ACTIVE_OR_EXPIRED_SEED"
     },
     "professional_dsp": {
       "care_person_id": "p-walter",
-      "password": "walter-lab-password",
+      "password": "[REDACTED]",
       "auth": "lab_principal",
       "status": "ACTIVE_OR_EXPIRED_SEED"
     },
     "clinician": {
       "care_person_id": "p-dr-shah",
-      "password": "drshah-lab-password",
+      "password": "[REDACTED]",
       "auth": "lab_principal",
       "status": "ACTIVE"
     },
     "coordinator": {
-      "care_person_id": "p-acct-2c4857e407014e43",
-      "email": "coord.complete.801551@caretaker-relay.test",
-      "password": "Coord-Lab-Pass-1!",
+      "care_person_id": "p-acct-28f3899840cc42d2",
+      "email": "coord.complete.185052@[redacted-domain]caretaker-relay.test",
+      "password": "[REDACTED]",
       "auth": "register+invite+accept",
       "status": "ACTIVE"
     },
     "temporary_active": {
-      "care_person_id": "p-acct-5bbc17d80ed848a2",
-      "email": "tempactive.complete.801551@caretaker-relay.test",
-      "password": "Temp-Active-Pass-1!",
+      "care_person_id": "p-acct-22d250babe384a57",
+      "email": "tempactive.complete.185052@[redacted-domain]caretaker-relay.test",
+      "password": "[REDACTED]",
       "auth": "register+invite+accept",
       "status": "ACTIVE"
     },
     "temporary_revoked": {
-      "care_person_id": "p-acct-b2a2101a680b4edb",
-      "email": "temp.complete.801551@caretaker-relay.test",
-      "password": "Temp-Lab-Pass-1!",
+      "care_person_id": "p-acct-85ea575b6658417d",
+      "email": "temp.complete.185052@[redacted-domain]caretaker-relay.test",
+      "password": "[REDACTED]",
       "auth": "register+invite+accept+revoke",
       "status": "REVOKED"
     },
     "no_relationship": {
       "care_person_id": "p-unauthorized",
-      "password": "unauth-lab-password",
+      "password": "[REDACTED]",
       "auth": "lab_principal",
       "status": "NO_RELATIONSHIP"
     },
     "care_recipient_self": {
-      "care_person_id": "p-acct-0b81d4fe8d6c421b",
-      "email": "evelyn.self.complete.801551@caretaker-relay.test",
-      "password": "Evelyn-Self-Pass-1!",
+      "care_person_id": "p-acct-a113867625f7471f",
+      "email": "evelyn.self.complete.185052@[redacted-domain]caretaker-relay.test",
+      "password": "[REDACTED]",
       "auth": "register_only_pending_access",
       "status": "PRODUCT_GAP",
       "note": "Self account created with claim:self but no product path binds it as the care-recipient principal for cr-olivia without additional set-up-care ownership transfer. Classified PRODUCT_GAP for full self-access matrix."
@@ -67,5 +67,16 @@
   "available_executable": 7,
   "product_gaps": [
     "care_recipient_self_bound_to_cr_olivia"
-  ]
+  ],
+  "required_role_fixtures": "7/8 AVAILABLE + 1 PRODUCT_GAP",
+  "classifications": {
+    "coordinator": "AVAILABLE",
+    "temporary_active": "AVAILABLE",
+    "temporary_revoked": "AVAILABLE",
+    "care_recipient_self": "PRODUCT_GAP",
+    "primary_family": "AVAILABLE",
+    "family_friend": "AVAILABLE",
+    "professional_dsp": "AVAILABLE",
+    "clinician": "AVAILABLE"
+  }
 }

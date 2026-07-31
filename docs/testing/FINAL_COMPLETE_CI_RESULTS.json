@@ -1,10 +1,22 @@
 {
-  "at": "2026-07-31T04:00:00.000Z",
+  "at": "2026-07-31T06:31:33.611Z",
+  "app_sha": "f971c3e71c692a6f9f6d7f71122da2875fc9ec28",
+  "app_bundle": "index-CF2tvtT1.js",
+  "app_deploy": "dep-d9m3t7m417fc73dunppg",
+  "api_sha": "340c546a0cd74f99c9022c576e88e786b6d05bc9",
   "typecheck": "PASS",
   "app_unit": "98/98 PASS",
   "foundation_care_unit": "359/359 PASS",
-  "full_ci_pipeline": "NOT_RUN",
   "lint": "NOT_FULL",
+  "app_build": "PASS (Render static deploy live)",
+  "api_build": "PASS (prior live)",
   "integration": "NOT_FULL",
-  "e2e_playwright_suite": "HARNESS_CUSTOM_SCRIPT_PARTIAL"
+  "api_contract": "NOT_FULL",
+  "e2e_playwright_suite": "HARNESS_CUSTOM_SCRIPT_PARTIAL",
+  "multi_role_e2e": "PARTIAL_CUSTOM_HARNESS",
+  "privacy": "PARTIAL",
+  "appsec": "NOT_FULL",
+  "accessibility": "PARTIAL",
+  "full_ci_pipeline": "NOT_RUN",
+  "status": "UNITS_GREEN_FULL_CI_UNPROVEN"
 }
