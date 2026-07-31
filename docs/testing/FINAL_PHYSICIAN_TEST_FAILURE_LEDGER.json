@@ -1,0 +1,113 @@
+{
+  "at": "2026-07-31T03:20:00.000Z",
+  "controller": "Agent Zero",
+  "before": {
+    "foundation_care": "7 failed / 352 passed",
+    "app": "5 failed / 93 passed"
+  },
+  "after": {
+    "foundation_care": "359 passed / 0 failed / 16 skipped",
+    "app": "98 passed / 0 failed"
+  },
+  "failures": [
+    {
+      "id": "F-CARE-01",
+      "file": "tests/unit/care/care-notes-coverage.test.ts",
+      "name": "confirm produces care note",
+      "classification": "OUTDATED_TEST_EXPECTATION",
+      "repair": "Accept human confirm copy I recorded / care record / Meal recorded",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F-CARE-02",
+      "file": "tests/unit/care/harmonized-ops.test.ts",
+      "name": "claim → complete",
+      "classification": "OUTDATED_TEST_EXPECTATION",
+      "repair": "Accept status accepted|claimed (product uses accepted)",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F-CARE-03",
+      "file": "tests/unit/care/orchestration.test.ts",
+      "name": "Marcus → Maya admin attribution",
+      "classification": "PRODUCT_DEFECT",
+      "repair": "MEDICATION_ADMINISTRATION_HISTORY exclusive before YESTERDAY_WELLBEING",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F-CARE-04",
+      "file": "tests/unit/care/recipient-profile.test.ts",
+      "name": "age DOB format",
+      "classification": "OUTDATED_TEST_EXPECTATION",
+      "repair": "Accept humanized Mar 12, 1948 or ISO",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F-CARE-05",
+      "file": "tests/unit/care/recipient-profile.test.ts",
+      "name": "reschedule path",
+      "classification": "PRODUCT_DEFECT",
+      "repair": "APPOINTMENT_RESCHEDULE before RECIPIENT_PROFILE; reschedule exclusive",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F-CARE-06",
+      "file": "tests/unit/care/relay-shift-evolution.test.ts",
+      "name": "shift-to-shift evolution",
+      "classification": "PRODUCT_DEFECT",
+      "repair": "CHANGES_TODAY includes handoff whatChanged + plain observations",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F-CARE-07",
+      "file": "tests/unit/care/wellbeing-observation.test.ts",
+      "name": "seemed more tired after lunch",
+      "classification": "PRODUCT_DEFECT",
+      "repair": "Stop treating lunch as med token; tired-after-meal not meal-only",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F-APP-01",
+      "file": "tests/care-experience.test.ts",
+      "name": "emergency blood type never invents",
+      "classification": "PRODUCT_DEFECT",
+      "repair": "Remove synthetic O+ placeholder; never guessed + provenance",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F-APP-02",
+      "file": "tests/coherence-answers.test.ts",
+      "name": "Maya admin attribution",
+      "classification": "PRODUCT_DEFECT",
+      "repair": "Vendor exclusive med admin history (same as F-CARE-03)",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F-APP-03",
+      "file": "tests/roleExperience.test.ts",
+      "name": "privacy_note mode",
+      "classification": "OUTDATED_TEST_EXPECTATION",
+      "repair": "Allow privacy_explain; forbid invite/request/provisional",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F-APP-04",
+      "file": "tests/server-authority.test.ts",
+      "name": "durable memory follow-up",
+      "classification": "PRODUCT_DEFECT",
+      "repair": "Same as F-CARE-03 via vendor",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F-APP-05",
+      "file": "tests/server-authority.test.ts",
+      "name": "MAR truth change",
+      "classification": "PRODUCT_DEFECT",
+      "repair": "Same med admin exclusive via vendor",
+      "status": "CLOSED"
+    }
+  ],
+  "failures_without_classification": 0,
+  "failures_silently_skipped": 0,
+  "failures_removed_without_replacement": 0
+}
