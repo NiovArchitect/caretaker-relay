@@ -1451,42 +1451,40 @@ function composeAnswer(ctx: {
     used.add("REMINDERS");
     used.add("ACTIVE_HANDOFF");
     const openFromHandoff = proj.ACTIVE_HANDOFF?.stillNeedsAttention ?? [];
-    if (persona === "family") {
-      // Prefer latest handoff open work over long-lived review queues so shift
-      // continuity answers advance when unfinished items change.
-      if (openFromHandoff.length) {
+    const nowClock = new Date().toLocaleTimeString(undefined, {
+      hour: "numeric",
+      minute: "2-digit",
+    });
+    const nowItems = (
+      openFromHandoff.length ? openFromHandoff : proj.OPEN_UNCERTAINTIES
+    ).slice(0, 4);
+    const coming = (proj.NEXT_24H_TASKS || []).slice(0, 4);
+    const watch = (proj.OPEN_UNCERTAINTIES || [])
+      .filter((u) => !nowItems.includes(u))
+      .slice(0, 3);
+    if (persona === "family" || persona === "professional_dsp") {
+      parts.push(`It is ${nowClock}. Here is ${recipientName}'s current plan:`);
+      parts.push(
+        nowItems.length
+          ? `Now\n${nowItems.map((x) => `• ${x}`).join("\n")}`
+          : "Now\n• No urgent open priorities are listed right now.",
+      );
+      if (coming.length) {
+        parts.push(`Coming up\n${coming.map((t) => `• ${t}`).join("\n")}`);
+      }
+      if (persona === "professional_dsp") {
         parts.push(
-          `Still unfinished from the last handoff:\n${openFromHandoff
-            .slice(0, 4)
-            .map((x) => `• ${x}`)
-            .join("\n")}`,
-        );
-        if (proj.OPEN_UNCERTAINTIES.length) {
-          parts.push(
-            `Also needs review:\n• ${proj.OPEN_UNCERTAINTIES[0]}`,
-          );
-        }
-      } else {
-        parts.push(
-          proj.OPEN_UNCERTAINTIES.length
-            ? `Right now:\n• ${proj.OPEN_UNCERTAINTIES[0]}\nYou're okay to take this one step at a time.`
-            : "Nothing urgent is flagged right now.",
+          `Before leaving\n${(proj.DSP_SUPPORT_NOTES || [])
+            .slice(0, 3)
+            .map((n) => `• ${n}`)
+            .join("\n") || "• Confirm open tasks are owned or handed off."}`,
         );
       }
-      parts.push(`Coming up:\n${proj.NEXT_24H_TASKS.slice(0, 3).map((t) => `• ${t}`).join("\n")}`);
-    } else if (persona === "professional_dsp") {
-      parts.push("During this visit, prioritize:");
-      parts.push(proj.NEXT_24H_TASKS.slice(0, 4).map((t) => `• ${t}`).join("\n"));
-      if (openFromHandoff.length) {
-        parts.push(
-          `From last handoff — still open:\n${openFromHandoff.slice(0, 4).map((x) => `• ${x}`).join("\n")}`,
-        );
-      }
-      if (proj.OPEN_UNCERTAINTIES.length) {
-        parts.push(`Escalation / verification:\n• ${proj.OPEN_UNCERTAINTIES[0]}`);
+      if (watch.length) {
+        parts.push(`Watch for\n${watch.map((x) => `• ${x}`).join("\n")}`);
       }
       parts.push(
-        `Unfinished before leave:\n${proj.DSP_SUPPORT_NOTES.slice(0, 3).map((n) => `• ${n}`).join("\n")}`,
+        "Every item above is drawn from the care plan, appointments, medications, handoff, or confirmed observations — not invented instructions.",
       );
     } else {
       parts.push(

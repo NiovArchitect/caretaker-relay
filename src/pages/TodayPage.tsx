@@ -1037,15 +1037,20 @@ export function TodayPage({
                             void claimCareWorkItem(id).then((r) => {
                               setWorkBusy(null);
                               if (!r.ok) {
-                                setWorkError(r.message ?? "Could not take this work");
+                                const msg = r.message ?? "Could not take this work";
+                                // Never surface raw JSON bodies
+                                setWorkError(
+                                  /^\{[\s\S]*\}$/.test(msg) || /"ok"\s*:/.test(msg)
+                                    ? "Could not take this work right now. Refresh and try again — nothing was assigned to you."
+                                    : msg,
+                                );
                                 return;
                               }
                               setWorkError(null);
-                              // Next step after claim — never silent success (doctor validation)
-                              const nextHint =
-                                /refill|prescription|rx/i.test(action)
-                                  ? "Next: open Care → medications or the pharmacy workflow to complete this refill."
-                                  : "Next: this work is assigned to you — complete it from Care or mark it done when finished.";
+                              const isRefill = /refill|prescription|rx/i.test(action);
+                              const nextHint = isRefill
+                                ? "Next: open Care → medications or the pharmacy workflow to complete this refill. History and collaborators will show you as owner."
+                                : "Next: this work is assigned to you — complete it from Care or mark it done when finished.";
                               setSyncLabel(`You're on it · ${nextHint}`);
                               reloadWork();
                             });
@@ -1054,6 +1059,12 @@ export function TodayPage({
                           I can help
                         </button>
                       )}
+                      <p className="muted" style={{ fontSize: "0.82rem", margin: "4px 0 0" }}>
+                        <strong>Why?</strong>{" "}
+                        {/refill|prescription|rx/i.test(action)
+                          ? "Open refill or supply work on the care record that still needs an owner."
+                          : "Open care work from the plan or handoff that still needs an owner."}
+                      </p>
                     </li>
                   );
                 })}
@@ -1368,9 +1379,24 @@ export function TodayPage({
                 </div>
                 <h3 className="item-title">{n.title}</h3>
                 <p className="attention-body">{n.description}</p>
-                {item?.whySurfaced && (
-                  <p className="muted attention-why">{item.whySurfaced}</p>
-                )}
+                <p
+                  className="muted attention-why"
+                  data-testid={`attention-why-${n.id}`}
+                >
+                  <strong>Why?</strong>{" "}
+                  {item?.whySurfaced
+                    ? humanCareLine(item.whySurfaced)
+                    : n.kind === "medication_due"
+                      ? "Verified scheduled medication order or due check on today's plan."
+                      : n.kind === "appointment_soon" ||
+                        /appointment|therapy|pt\b/i.test(n.title)
+                        ? "Verified appointment or therapy on the care schedule."
+                        : /refill|prescription|supply/i.test(n.title + n.description)
+                          ? "Open refill or supply work that still needs an owner."
+                          : /handoff/i.test(n.title + n.description)
+                            ? "Open handoff item that has not been closed."
+                            : "Surfaced from the current care plan, handoff, or attention list — not invented."}
+                </p>
                 {item?.relayDoesNotKnow && (
                   <p className="attention-limit" role="status">
                     {item.kind === "medication" ? (
@@ -1409,6 +1435,42 @@ export function TodayPage({
                       ◎
                     </span>
                     {n.actionLabel}
+                  </button>
+                  <button
+                    type="button"
+                    className="secondary-btn"
+                    data-testid={`attention-learn-more-${n.id}`}
+                    onClick={() => {
+                      // Progressive disclosure: open H&P or Relay review — not a second chart dump
+                      if (
+                        /medication|metformin|dose|refill/i.test(
+                          n.title + n.description,
+                        )
+                      ) {
+                        setHpOpen(true);
+                      } else if (onReviewAttention) {
+                        onReviewAttention(
+                          item ?? {
+                            id: n.id,
+                            title: n.title,
+                            whatHappened: n.description,
+                            whySurfaced:
+                              "Learn more from the care record for this attention item.",
+                            relayKnows: "",
+                            relayDoesNotKnow: "",
+                            nextStep: n.actionLabel,
+                            kind:
+                              n.kind === "medication_due"
+                                ? "medication"
+                                : "general",
+                          },
+                        );
+                      } else {
+                        setHpOpen(true);
+                      }
+                    }}
+                  >
+                    Learn more
                   </button>
                   <button
                     type="button"
